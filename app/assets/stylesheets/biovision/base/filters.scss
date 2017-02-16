@@ -1,0 +1,53 @@
+form.filter fieldset {
+  font-size: $small-font-size;
+  line-height: calc(#{$normal-font-size} * 1.5);
+
+  > div {
+    display: flex;
+    flex-wrap: wrap;
+
+    input {
+      font-size: $small-font-size;
+    }
+
+    > div {
+      font-weight: bold;
+      min-width: 6.4rem;
+
+      &:first-letter {
+        text-transform: uppercase;
+      }
+    }
+
+    > ul {
+      display: flex;
+      flex-wrap: wrap;
+      margin: 0;
+      padding: 0;
+
+      li {
+        list-style: none;
+        padding: 0 .4rem;
+
+        label {
+          padding: 0 .4rem;
+        }
+
+        input[type=radio],
+        input[type=checkbox]
+        {
+          display: none;
+
+          &:checked + label {
+            background: #afa;
+          }
+        }
+      }
+    }
+  }
+
+  button {
+    margin: .8rem 0 0 0;
+    font-size: $small-font-size;
+  }
+}

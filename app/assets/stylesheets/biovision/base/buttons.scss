@@ -1,0 +1,90 @@
+@mixin styled-button($bg-a, $bg-b, $bg-c, $bg-d, $border-a, $border-b, $text-a, $text-b) {
+  background: $bg-a linear-gradient(to top, $bg-a, $bg-b);
+  border: .1rem solid $border-a;
+  border-radius: .6rem;
+  box-sizing: border-box;
+  color: $text-a;
+  cursor: pointer;
+  display: inline-block;
+  font: $decreased-font-size $main-font-family;
+  line-height: calc(#{$normal-font-size} * 1.5);
+  margin: 0;
+  padding: 0 1.6rem;
+  text-decoration: none;
+
+  &:active,
+  &:hover,
+  &:focus {
+    background: $bg-c linear-gradient(to top, $bg-c, $bg-d);
+    border-color: $border-b;
+    color: $text-b;
+  }
+}
+
+@mixin action-button {
+  @include styled-button(
+                  $button-action-bg-a,
+                  $button-action-bg-b,
+                  $button-action-bg-c,
+                  $button-action-bg-d,
+                  $button-action-border-color-a,
+                  $button-action-border-color-b,
+                  $button-action-text-color-a,
+                  $button-action-text-color-b
+  );
+}
+
+@mixin nav-button {
+  @include styled-button(
+                  $button-nav-bg-a,
+                  $button-nav-bg-b,
+                  $button-nav-bg-c,
+                  $button-nav-bg-d,
+                  $button-nav-border-color-a,
+                  $button-nav-border-color-b,
+                  $button-nav-text-color-a,
+                  $button-nav-text-color-b
+  );
+}
+
+@mixin create-button {
+  @include styled-button(
+                  $button-create-bg-a,
+                  $button-create-bg-b,
+                  $button-create-bg-c,
+                  $button-create-bg-d,
+                  $button-create-border-color-a,
+                  $button-create-border-color-b,
+                  $button-create-text-color-a,
+                  $button-create-text-color-b
+  );
+}
+
+@mixin destroy-button {
+  @include styled-button(
+                  $button-destroy-bg-a,
+                  $button-destroy-bg-b,
+                  $button-destroy-bg-c,
+                  $button-destroy-bg-d,
+                  $button-destroy-border-color-a,
+                  $button-destroy-border-color-b,
+                  $button-destroy-text-color-a,
+                  $button-destroy-text-color-b
+  );
+}
+
+.action-button {
+  @include action-button;
+}
+
+.nav-button {
+  @include nav-button;
+}
+
+.create-button {
+  @include create-button;
+}
+
+.destroy-button {
+  @include destroy-button;
+}

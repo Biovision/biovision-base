@@ -1,0 +1,42 @@
+nav.pagination {
+  margin: 1.6rem 0 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  span {
+    display: inline-block;
+    padding: 0 0.4rem;
+    line-height: 2.4rem;
+    min-width: 1.6rem;
+    text-align: center;
+
+    &.current {
+      background: #f7f7f7;
+      color: #222;
+    }
+
+    &.gap {
+      border: none;
+    }
+  }
+}
+
+@media screen and (max-width: 320px) {
+  nav.pagination {
+    font-size: 2.4rem;
+
+    span {
+      padding: 0.4rem 0.8rem;
+      margin: 0 0.8rem;
+
+      &.page {
+        display: none;
+
+        &.current {
+          display: inline-block;
+        }
+      }
+    }
+  }
+}

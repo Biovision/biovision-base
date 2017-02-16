@@ -26,7 +26,7 @@ RSpec.describe Canonizer do
   describe '::transliterate' do
     pending
   end
-  
+
   describe '::urlize' do
     pending
   end
