@@ -1,0 +1,17 @@
+<div>
+  <div><%= title %></div>
+  <ul>
+    <li>
+      <%= radio_button_tag "filter[#{name}]", '', state.blank? %>
+      <%= label_tag "filter_#{name}_", t(:not_set) %>
+    </li>
+    <li>
+      <%= radio_button_tag "filter[#{name}]", '1', state.to_i == 1 %>
+      <%= label_tag "filter_#{name}_1", t(:yes) %>
+    </li>
+    <li>
+      <%= radio_button_tag "filter[#{name}]", '0', state == '0' %>
+      <%= label_tag "filter_#{name}_0", t(:no) %>
+    </li>
+  </ul>
+</div>

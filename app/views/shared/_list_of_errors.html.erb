@@ -1,0 +1,11 @@
+<% if entity.errors.any? %>
+    <section class="errors">
+      <h2><%= t(:error_count, count: entity.errors.count) %></h2>
+
+      <ol>
+        <% entity.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+        <% end %>
+      </ol>
+    </section>
+<% end %>

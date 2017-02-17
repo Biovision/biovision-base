@@ -1,0 +1,4 @@
+<li class="lock" data-url="<%= path %>">
+  <%= link_to image_tag('biovision/base/icons/lock-closed.svg'), '#', class: "unlock #{entity.locked? ? '' : 'hidden'}", data: { tootik: t(:locked) } %>
+  <%= link_to image_tag('biovision/base/icons/lock-open.svg'), '#', class: "lock #{entity.locked? ? 'hidden' : ''}", data: { tootik: t(:unlocked) } %>
+</li>
