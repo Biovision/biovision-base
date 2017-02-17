@@ -20,6 +20,8 @@ ru:
       - "октябрь"
       - "ноябрь"
       - "декабрь"
+  archive_year: " за %{year} год"
+  archive_month: " за %{month} %{year} года"
   nothing_found: "Ничего не нашлось"
   create: "Создать"
   view: "В просмотр"
