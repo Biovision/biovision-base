@@ -2,7 +2,7 @@ $toggleable-active: #34c749;
 $toggleable-inactive: #fc605c;
 $toggleable-switch: #fdbc40;
 $toggleable-unknown: #c0c0c0;
-$toggleable-background: #ffffff;
+$toggleable-background: #fff;
 
 .toggleable {
   font-size: $small-font-size;
@@ -278,7 +278,7 @@ ul.actions {
 
     .image {
       flex-basis: 8rem;
-      margin: 0 0.8rem 0 0;
+      margin: 0 .8rem 0 0;
       text-align: center;
 
       img {
@@ -311,12 +311,12 @@ ul.actions {
         flex-wrap: wrap;
 
         .toggleable, > span {
-          margin: 0 0.8rem;
+          margin: 0 .8rem;
         }
       }
 
       .children {
-        border-left: dotted 0.1rem;
+        border-left: .1rem dotted;
         margin-left: 1.6rem;
       }
     }
@@ -367,5 +367,9 @@ form {
       content: '\261E';
       margin-right: .4rem;
     }
+  }
+
+  button {
+    @include action-button;
   }
 }
