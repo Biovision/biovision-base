@@ -10,5 +10,8 @@ module Biovision
 
     require 'kaminari'
     require 'rails_i18n'
+    require 'carrierwave'
+    require 'mini_magick'
+    require 'carrierwave-bombshelter'
   end
 end
