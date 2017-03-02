@@ -1,0 +1,101 @@
+ru:
+  agent_count:
+    zero: "агентов пользователя нет"
+    one: "%{count} агент пользователя"
+    few: "%{count} агента пользователя"
+    many: "%{count} агентов пользователя"
+    other: "%{count} агентов пользователя"
+  activerecord:
+    models:
+      agent: "Агент пользователя"
+      browser: "Браузер"
+      metric: "Метрика"
+      metric_value: "Значение метрики"
+    attributes:
+      agent:
+        browser_id: "Браузер"
+        mobile: "Мобильный"
+        bot: "Бот"
+        active: "Активный"
+        name: "Название"
+      browser:
+        mobile: "Мобильный"
+        bot: "Бот"
+        active: "Активный"
+        name: "Название"
+      metric:
+        incremental: "Суммарная"
+        start_with_zero: "Начинать с нуля"
+        default_period: "Период по умолчанию"
+        show_on_dashboard: "Показывать на главной странице"
+        value: "Значение"
+        previous_value: "Предыдущее значение"
+        name: "Название"
+        description: "Описание"
+      metric_value:
+        metric: "Метрика"
+        quantity: "Количество"
+  admin:
+    agents:
+      index:
+        title: "Агенты пользователя, страница %{page}"
+        heading: "Агенты пользователя"
+        description: "Управление агентами пользователя"
+      show:
+        title: "Агент пользователя «%{name}»"
+    browsers:
+      index:
+        title: "Браузеры, страница %{page}"
+        heading: "Браузеры"
+        description: "Управление браузерами"
+      show:
+        title: "Браузер «%{name}»"
+    metrics:
+      index:
+        title: "Метрики"
+        heading: "Метрики"
+        description: "Анализ различных метрик"
+      show:
+        title: "Метрика «%{name}»"
+  application:
+    not_found:
+      title: "Страница не найдена"
+      heading: "Страница не найдена"
+      message: "Страница не существует или была удалена"
+    unauthorized:
+      title: "Доступ ограничен"
+      heading: "Доступ ограничен"
+      message: "У вас не хватает прав для доступа к этой странице"
+  agents:
+    new:
+      title: "Создание агента пользователя"
+      heading: "Новый агент пользователя"
+    edit:
+      title: "Редактирование агента пользователя"
+      heading: "Редактирование агента пользователя"
+      forbidden: "Редактирование этого агента пользователя запрещено"
+    update:
+      success: "Агент пользователя успешно изменён"
+    destroy:
+      success: "Агент пользователя успешно удалён"
+  browsers:
+    new:
+      title: "Создание браузера"
+      heading: "Новый браузер"
+    edit:
+      title: "Редактирование браузера"
+      heading: "Редактирование браузера"
+      forbidden: "Редактирование этого браузера запрещено"
+    update:
+      success: "Браузер успешно изменён"
+    destroy:
+      success: "Браузер успешно удалён"
+  metrics:
+    edit:
+      title: "Редактирование метрики"
+      heading: "Редактирование метрики"
+    update:
+      success: "Метрика успешно обновлена"
+  tracking:
+    ip: "IP"
+    agent: "АП"

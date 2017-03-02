@@ -10,10 +10,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170301000002) do
+ActiveRecord::Schema.define(version: 20170301000102) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "agents", force: :cascade do |t|
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.integer  "browser_id"
+    t.boolean  "bot",        default: false, null: false
+    t.boolean  "mobile",     default: false, null: false
+    t.boolean  "active",     default: true,  null: false
+    t.boolean  "locked",     default: false, null: false
+    t.boolean  "deleted",    default: false, null: false
+    t.string   "name",                       null: false
+    t.index ["browser_id"], name: "index_agents_on_browser_id", using: :btree
+    t.index ["name"], name: "index_agents_on_name", using: :btree
+  end
+
+  create_table "browsers", force: :cascade do |t|
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.boolean  "bot",          default: false, null: false
+    t.boolean  "mobile",       default: false, null: false
+    t.boolean  "active",       default: true,  null: false
+    t.boolean  "locked",       default: false, null: false
+    t.boolean  "deleted",      default: false, null: false
+    t.integer  "agents_count", default: 0,     null: false
+    t.string   "name",                         null: false
+  end
 
   create_table "metric_values", force: :cascade do |t|
     t.integer  "metric_id",             null: false
@@ -36,5 +62,6 @@ ActiveRecord::Schema.define(version: 20170301000002) do
     t.string   "description",                 default: "",    null: false
   end
 
+  add_foreign_key "agents", "browsers"
   add_foreign_key "metric_values", "metrics"
 end
