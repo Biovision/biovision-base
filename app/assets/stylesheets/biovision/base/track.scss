@@ -1,0 +1,27 @@
+#agents-filter {
+  .pages {
+    align-items: center;
+    display: flex;
+
+    button {
+      height: 1.2rem;
+      margin: 0;
+      padding: 0;
+      width: 2rem;
+    }
+  }
+}
+
+div.track {
+  border: .1rem dotted;
+  font-size: $small_font_size;
+  margin: .4rem;
+  padding: .4rem;
+
+  > div {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+  }
+}
