@@ -30,6 +30,11 @@ class Token < ApplicationRecord
     instance.user
   end
 
+  # @param [User] user
+  def editable_by?(user)
+    owned_by?(user) # || UserRole.user_has_role?(user, :administrator)
+  end
+
   def cookie_pair
     "#{user_id}:#{token}"
   end
