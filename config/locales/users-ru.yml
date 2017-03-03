@@ -1,0 +1,285 @@
+ru:
+  user_count:
+    zero: "пользователей нет"
+    one: "%{count} пользователь"
+    few: "%{count} пользователя"
+    many: "%{count} пользователей"
+    other: "%{count} пользователей"
+  code_activation_count:
+    zero: "активаций нет"
+    one: "%{count} активация"
+    few: "%{count} активации"
+    many: "%{count} активаций"
+    other: "%{count} активаций"
+  invalid_code: "Недействительный код"
+  insufficient_role: "Ваша роль не подходит для доступа к странице"
+  insufficient_rights: "Не хватает прав для доступа"
+  could_not_log_in: "Не удалось выполнить вход"
+  please_log_in: "Пожалуйста, выполните вход"
+  logout: "Выйти"
+  email_already_confirmed: "Электронная почта уже подтверждена"
+  anonymous: "Анонимно"
+  view_as_administrator: "Посмотреть в админке"
+  view_as_visitor: "Посмотреть как посетитель"
+  activerecord:
+    models:
+      user: "Пользователь"
+      code: "Код"
+      token: "Жетон доступа"
+      privilege: "Привилегия"
+      privilege_group: "Группа привилегий"
+      privilege_group_privilege: "Привилегия в группе привилегий"
+      user_privilege: "Привилегия у пользователя"
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              unreasonable: "не выглядит как email"
+            slug:
+              invalid: "должен содержать от 1 до 30 английских букв, цифр или знаков подчёркивания"
+    attributes:
+      user:
+        ip: "Адрес при регистрации"
+        agent: "Агент пользователя при регистрации"
+        slug: "Идентификатор"
+        gender: "Пол"
+        birthday: "Дата рождения"
+        bot: "Это бот"
+        allow_login: "Позволить вход"
+        email_confirmed: "Email подтверждён"
+        phone_confirmed: "Телефон подтверждён"
+        allow_mail: "Разрешить email-уведомления"
+        last_seen: "Последняя активность"
+        password: "Пароль"
+        password_confirmation: "Подтверждение пароля"
+        email: "Email"
+        phone: "Телефон"
+        screen_name: "Логин"
+        name: "Имя"
+        patronymic: "Отчество"
+        surname: "Фамилия"
+        notice: "Заметка"
+        image: "Картинка"
+        genders:
+          female: "Женский"
+          male: "Мужской"
+      token:
+        user: "Пользователь"
+        user_id: "Пользователь"
+        last_used: "Последнее использование"
+        active: "Активен"
+        token: "Жетон"
+      code:
+        user: "Пользователь"
+        user_id: "Пользователь"
+        category: "Категория"
+        body: "Код"
+        payload: "Полезная нагрузка"
+        quantity: "Количество активаций"
+        categories:
+          confirmation: "Подтверждение почты"
+          recovery: "Сброс пароля"
+          invitation: "Приглашение"
+      privilege:
+        parent_id: "Родительская категория"
+        priority: "Порядок сортировки"
+        name: "Название"
+        slug: "Идентификатор"
+        description: "Описание"
+        parents_cache: "Кеш родителей"
+        children_cache: "Кеш дочерей"
+      user_privilege:
+        privilege: "Привилегия"
+        user: "Пользователь"
+      privilege_group:
+        name: "Название"
+        slug: "Идентификатор"
+        description: "Описание"
+      privilege_group_privilege:
+        privilege: "Привилегия"
+        privilege_group: "Группа привилегий"
+  admin:
+    users:
+      index:
+        title: "Пользователи, страница %{page}"
+        heading: "Пользователи"
+        description: "Управление пользователями сайта"
+      show:
+        title: "Пользователь %{name}"
+        privileges: "Привилегии"
+      tokens:
+        title: "Жетоны пользователя %{user], страница %{page}"
+      codes:
+        title: "Коды пользователя %{user}, страница %{page}"
+      privileges:
+        title: "Привилегии пользователя %{user}"
+        heading: "Привилегии пользователя"
+    tokens:
+      index:
+        title: "Жетоны, страница %{page}"
+        heading: "Жетоны"
+      show:
+        title: "Жетон №%{id}"
+    codes:
+      index:
+        title: "Коды, страница %{page}"
+        heading: "Коды"
+      show:
+        title: "Код «%{body}»"
+    privileges:
+      index:
+        title: "Привилегии"
+        heading: "Привилегии пользователей"
+        description: "Управление привилегиями пользователей"
+      show:
+        title: "Привилегия «%{name}»"
+        children: "Дочерние привилегии"
+        add_child: "Добавить дочернюю привилегию"
+      users:
+        title: "Пользователи с привилегией «%{privilege}», страница %{page}"
+        heading: "Пользователи с привилегией"
+    privilege_groups:
+      index:
+        title: "Группы привилегий"
+        heading: "Группы привилегий"
+        description: "Управление группами привилегий"
+      show:
+        title: "Группа привилегий «%{name}»"
+  authentication:
+    info:
+      logout: "Выйти"
+    new:
+      title: "Вход"
+      breadcrumbs: "Вход"
+  users:
+    update:
+      success: "Пользователь успешно изменён"
+    destroy:
+      success: "Пользователь успешно удалён"
+    edit:
+      title: "Редактирование пользователя"
+    new:
+      title: "Добавить пользователя"
+    user:
+      account_data: "Данные аккаунта"
+    index:
+      title: "Пользователи сайта, страница %{page}"
+      heading: "Пользователи сайта"
+  profiles:
+    profile:
+      user_info: "Информация о пользователе"
+      registration_date: "Дата регистрации"
+  tokens:
+    update:
+      success: "Жетон успешно обновлён"
+    destroy:
+      success: "Жетон успешно удалён"
+    new:
+      title: "Добавить жетон"
+    edit:
+      title: "Редактирование жетона"
+  codes:
+    update:
+      success: "Код успешно обновлён"
+    destroy:
+      success: "Код успешно удалён"
+    edit:
+      title: "Редактирование кода"
+    new:
+      title: "Новый код"
+  code_sender:
+    email:
+      subject: "Подтверждение адреса электронной почты"
+    password:
+      subject: "Сброс пароля"
+  privileges:
+    new:
+      title: "Новая привилегия"
+    edit:
+      title: "Редактирование привилегии"
+      forbidden: "Редактирование этой привилегии запрещено"
+    update:
+      success: "Привилегия успешно изменена"
+    destroy:
+      success: "Привилегия успешно удалена"
+    form:
+      guidelines:
+        slug: "Используется в коде для определения наличия привилегии."
+        description: "Краткое пояснение сути привилегии. До 350 символов."
+      placeholders:
+        slug: "administrator"
+  privilege_groups:
+    new:
+      title: "Новая группа привилегий"
+    edit:
+      title: "Редактирование группы привилегий"
+    update:
+      success: "Группа успешно изменена"
+    destroy:
+      success: "Группа успешно удалена"
+    form:
+      guidelines:
+        slug: "Используется в коде для пользователей."
+        description: "Краткое пояснение сути группы. До 350 символов."
+      placeholders:
+        name: "Редакторы"
+        slug: "editors"
+  my:
+    index:
+      index:
+        title: "Личный кабинет"
+    recoveries:
+      create:
+        impossible: "Сброс пароля для этого пользователя недоступен"
+        completed: "Код сброса пароля отправлен на адрес вашей электронной почты"
+      update:
+        invalid_code: "Введён недействительный код"
+        success: "Пароль успешно сброшен. Вы вошли."
+      show:
+        title: "Сброс пароля"
+        got_code: "Есть код для сброса пароля?"
+        update_password: "Изменить пароль"
+        no_code: "Нет кода для сброса пароля?"
+        send_code: "Отправить код"
+    confirmations:
+      create:
+        set_email: "Пожалуйста, заполните адрес электронной почты"
+        success: "Код подтверждения выслан"
+      update:
+        invalid_code: "Недействительный код"
+      show:
+        title: "Подтвердить адрес электронной почты"
+        got_code: "Есть код подтверждения"
+        confirm: "Подтвердить адрес"
+        no_code: "Кода подтверждения нет?"
+        send_code: "Отправить код подтверждения"
+    profiles:
+      new:
+        title: "Регистрация"
+        form:
+          i_am_bot: "НЕ ОТМЕЧАЙТЕ эту галочку"
+          registration_form: "Форма регистрации"
+          you_accept_terms_of_service: "Регистрируясь на сайте, вы принимаете пользовательское соглашение."
+      create:
+        success: "Вы зарегистрировались и вошли"
+      update:
+        success: "Профиль успешно изменён"
+      show:
+        title: "Мой профиль"
+        heading: "Мой профиль"
+        description: "Просмотр и редактирование вашего профиля"
+      edit:
+        title: "Редактирование профиля"
+        form:
+          common_parameters: "Общие параметры"
+          update_image: "Загрузить новую картинку"
+          sensitive_parameters: "Связанные с безопасностью параметры"
+          sensitive_parameters_notice: "Для изменения этих данных нужно ввести текущий пароль."
+          current_password: "Текущий пароль"
+          leave_blank_if_necessary: "Если не будете менять пароль, оставьте эти поля пустыми."
+          new_password: "Новый пароль"
+          update: "Обновить данные"
+          contact: "Контактные данные"
+          about: "Кратко о себе"
+          stand_in_life: "Жизненная позиция"
