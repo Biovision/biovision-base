@@ -1,0 +1,13 @@
+<% if collection.any? %>
+    <ul class="list-of-entities">
+      <% collection.each do |browser| %>
+          <% if browser.deleted? %>
+              <li class="deleted"><%= t(:deleted_entity) %>, id: <%= browser.id %></li>
+          <% else %>
+              <li><%= render partial: 'admin/browsers/entity/in_list', locals: { browser: browser } %></li>
+          <% end %>
+      <% end %>
+    </ul>
+<% else %>
+    <%= render 'shared/nothing_found' %>
+<% end %>

@@ -7,6 +7,7 @@ Rails.application.routes.draw do
         delete 'lock', action: :unlock
       end
     end
+
     resources :metrics, only: [:index, :show]
   end
 

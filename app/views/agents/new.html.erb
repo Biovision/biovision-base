@@ -1,0 +1,11 @@
+<% content_for :meta_title, t('.title') %>
+
+<article class="entity-page">
+  <h1><%= t('.title') %></h1>
+
+  <ul class="actions">
+    <li><%= list_icon admin_agents_path %></li>
+  </ul>
+
+  <%= render partial: 'form', locals: { entity: @entity } %>
+</article>

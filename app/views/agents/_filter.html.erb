@@ -1,0 +1,53 @@
+<%= form_tag api_agents_path, method: :get, class: :filter, id: 'agents-filter' do %>
+    <fieldset>
+      <legend><%= t(:filter) %></legend>
+
+      <div>
+        <div><%= label_tag 'filter_name', t('activerecord.attributes.agent.name') %></div>
+        <div><%= search_field_tag 'filter[name]', filter[:name], size: 30, results: 5, autosave: 'agent_name' %></div>
+      </div>
+
+      <%= render partial: 'shared/filter/flag', locals: { title: t('activerecord.attributes.agent.bot'), name: 'bots', state: filter[:bots] } %>
+      <%= render partial: 'shared/filter/flag', locals: { title: t('activerecord.attributes.agent.mobile'), name: 'mobile', state: filter[:mobile] } %>
+      <%= render partial: 'shared/filter/flag', locals: { title: t('activerecord.attributes.agent.active'), name: 'active', state: filter[:active] } %>
+
+      <div>
+        <div><%= label_tag 'agent-filter-page', t(:page) %></div>
+        <div class="pages">
+          <%= button_tag '◀', type: :button, name: nil, class: 'previous-page' %>
+          <%= number_field_tag 'page', 1, min: 1, id: 'agent-filter-page' %>
+          <%= button_tag '▶', type: :button, name: nil, class: 'next-page' %>
+        </div>
+      </div>
+      <div class="button"><%= button_tag t(:submit), type: :submit, name: '' %></div>
+    </fieldset>
+<% end %>
+
+<script>/*<![CDATA[*/
+"use strict";
+
+$(function() {
+  var $pagination = $('#agents-filter').find('div.pages');
+
+  function change_page(delta) {
+    var $field = $('#agent-filter-page');
+    var value = parseInt($field.val());
+
+    value += delta;
+    if (value < 1) {
+      value = 1;
+    }
+
+    $field.val(value);
+    $field.closest('form').submit();
+  }
+
+  $pagination.find('.previous-page').on('click', function() {
+    change_page(-1);
+  });
+
+  $pagination.find('.next-page').on('click', function () {
+    change_page(1);
+  });
+});
+/*]]>*/</script>

@@ -1,0 +1,10 @@
+<% if current_user_has_role? :administrator %>
+    <div class="track">
+      <% if item.respond_to?(:agent) && !item.agent.nil? %>
+          <div class="agent"><%= item.agent.name %></div>
+      <% end %>
+      <% if item.respond_to?(:ip) && !item.ip.nil? %>
+          <div class="ip"><%= item.ip %></div>
+      <% end %>
+    </div>
+<% end %>

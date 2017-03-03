@@ -1,0 +1,16 @@
+<%= form_tag admin_agents_path, method: :get, class: :filter do %>
+    <fieldset>
+      <legend><%= t(:filter) %></legend>
+
+      <div>
+        <div><%= label_tag 'filter_name', t('activerecord.attributes.agent.name') %></div>
+        <div><%= search_field_tag 'filter[name]', filter[:name], size: 30, results: 5, autosave: 'agent_name' %></div>
+      </div>
+
+      <%= render partial: 'shared/filter/flag', locals: { title: t('activerecord.attributes.agent.bot'), name: 'bots', state: filter[:bots] } %>
+      <%= render partial: 'shared/filter/flag', locals: { title: t('activerecord.attributes.agent.mobile'), name: 'mobile', state: filter[:mobile] } %>
+      <%= render partial: 'shared/filter/flag', locals: { title: t('activerecord.attributes.agent.active'), name: 'active', state: filter[:active] } %>
+
+      <div class="button"><%= button_tag t(:submit), type: :submit, name: '' %></div>
+    </fieldset>
+<% end %>

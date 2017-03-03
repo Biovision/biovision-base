@@ -1,0 +1,43 @@
+<%= render partial: 'shared/list_of_errors', locals: { entity: entity } %>
+
+<%= form_for entity do |f| %>
+    <table>
+      <tbody>
+      <tr>
+        <th><%= t('activerecord.attributes.metric.name') %></th>
+        <td><%= entity.name %></td>
+      </tr>
+      <tr>
+        <th><%= f.label :description %></th>
+        <td><%= f.text_field :description %></td>
+      </tr>
+      <tr>
+        <th><%= f.label :default_period %></th>
+        <td><%= f.number_field :default_period, in: (1..365), size: 3, required: true %></td>
+      </tr>
+      <tr>
+        <td colspan="2" class="flags">
+          <ul>
+            <li>
+              <%= f.check_box :incremental %>
+              <%= f.label :incremental %>
+            </li>
+            <li>
+              <%= f.check_box :start_with_zero %>
+              <%= f.label :start_with_zero %>
+            </li>
+            <li>
+              <%= f.check_box :show_on_dashboard %>
+              <%= f.label :show_on_dashboard %>
+            </li>
+          </ul>
+        </td>
+      </tr>
+      </tbody>
+      <tfoot>
+      <tr>
+        <td colspan="2"><%= f.button t(:save), type: :submit %></td>
+      </tr>
+      </tfoot>
+    </table>
+<% end %>

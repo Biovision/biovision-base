@@ -1,0 +1,28 @@
+<% content_for :meta_title, t('.title', name: @entity.name) %>
+
+<article class="entity-page">
+  <h1><%= @entity.name %></h1>
+
+  <ul class="actions">
+    <li><%= create_icon new_agent_path %></li>
+    <li><%= list_icon admin_agents_path %></li>
+    <% unless @entity.locked? %>
+        <li><%= edit_icon edit_agent_path(@entity) %></li>
+        <li class="danger"><%= destroy_icon @entity %></li>
+    <% end %>
+  </ul>
+
+  <table>
+    <tbody>
+    <% unless @entity.browser.nil? %>
+        <tr>
+          <th><%= t('activerecord.attributes.agent.browser_id') %></th>
+          <td><%= link_to @entity.browser.name, admin_browser_path(@entity.browser) %></td>
+        </tr>
+    <% end %>
+    <tr>
+      <td colspan="2"><%= render partial: 'admin/agents/toggleable', locals: { agent: @entity} %></td>
+    </tr>
+    </tbody>
+  </table>
+</article>

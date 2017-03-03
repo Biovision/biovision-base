@@ -1,0 +1,28 @@
+<% content_for :meta_title, t('.title', name: @entity.name) %>
+
+<article class="entity-page">
+  <h1><%= @entity.name %></h1>
+  <ul class="actions">
+    <li><%= create_icon new_browser_path %></li>
+    <li><%= list_icon admin_browsers_path %></li>
+    <% unless @entity.locked? %>
+        <li><%= edit_icon edit_browser_path(@entity) %></li>
+        <li class="danger"><%= destroy_icon @entity %></li>
+    <% end %>
+  </ul>
+
+  <table>
+    <tbody>
+    <tr>
+      <td colspan="2">
+        <%= render partial: 'admin/browsers/toggleable', locals: { browser: @entity } %>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <%= link_to t(:agent, count: @entity.agents_count), agents_admin_browser_path(@entity) %>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</article>

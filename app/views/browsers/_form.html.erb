@@ -1,0 +1,35 @@
+<%= render partial: 'shared/list_of_errors', locals: { entity: entity } %>
+
+<%= form_for entity do |f| %>
+    <table>
+      <tbody>
+      <tr>
+        <th><%= f.label :name %></th>
+        <td><%= f.text_field :name %></td>
+      </tr>
+      <tr>
+        <td colspan="2" class="flags">
+          <ul>
+            <li>
+              <%= f.check_box :active %>
+              <%= f.label :active %>
+            </li>
+            <li>
+              <%= f.check_box :mobile %>
+              <%= f.label :mobile %>
+            </li>
+            <li>
+              <%= f.check_box :bot %>
+              <%= f.label :bot %>
+            </li>
+          </ul>
+        </td>
+      </tr>
+      </tbody>
+      <tfoot>
+      <tr>
+        <td colspan="2"><%= f.button t(:save), type: :submit %></td>
+      </tr>
+      </tfoot>
+    </table>
+<% end %>

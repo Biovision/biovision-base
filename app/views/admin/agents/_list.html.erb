@@ -1,0 +1,13 @@
+<% if collection.any? %>
+    <ul class="list-of-entities">
+      <% collection.each do |agent| %>
+          <% if agent.deleted? %>
+              <li class="deleted"><%= t(:deleted_entity) %>, id: <%= agent.id %></li>
+          <% else %>
+              <li><%= render partial: 'admin/agents/entity/in_list', locals: { agent: agent } %></li>
+          <% end %>
+      <% end %>
+    </ul>
+<% else %>
+    <%= render 'shared/nothing_found' %>
+<% end %>

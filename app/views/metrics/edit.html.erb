@@ -1,0 +1,11 @@
+<% content_for :meta_title, t('.title') %>
+
+<article class="entity-page">
+  <h1><%= t('.heading') %></h1>
+
+  <ul class="actions">
+    <li><%= back_icon(admin_metric_path(@entity.id)) %></li>
+  </ul>
+
+  <%= render partial: 'form', locals: { entity: @entity } %>
+</article>

@@ -1,0 +1,79 @@
+<section>
+  <h2><%= t('agents.new.title') %></h2>
+
+  <%= render partial: 'api/agents/filter', locals: { filter: Hash.new } %>
+
+  <ul id="found-agents" class="list-of-entities dynamic" data-browser-id="<%= browser.id %>">
+
+  </ul>
+</section>
+
+<script>/*<![CDATA[*/
+"use strict";
+
+$(function () {
+  var $container = $('#found-agents');
+
+  function show_found_agents(agents) {
+    $container.html('');
+
+    $(agents).each(function() {
+      var agent = $(this)[0]['agent'];
+      var $li = $('<li data-url="' + agent['url'] + '">');
+
+      $li.html('<div class="add"><button type="button">&plus;</button></div>' + agent['html']);
+
+      $container.append($li);
+    });
+  }
+
+  function add_agent(agent) {
+    var $section = $('#browser-agents');
+    var $notice = $section.find('div.warning');
+    var $container;
+    var $li = $('<li>');
+
+    if ($notice.hasOwnProperty(0)) {
+      $notice.remove();
+      $container = $('<ul class="list-of-entities">');
+      $section.append($container);
+    } else {
+      $container = $section.find('ul.list-of-entities');
+    }
+
+    $li.html(agent['html']);
+    $container.append($li);
+  }
+
+  $('#agents-filter').on('submit', function () {
+    $.get($(this).attr('action'), $(this).serialize(), function (response) {
+      if (response.hasOwnProperty('data') && response['data'].hasOwnProperty('agents')) {
+        show_found_agents(response['data']['agents']);
+      }
+    }).fail(handle_ajax_failure);
+
+    return false;
+  });
+
+  $(document).on('click', '#found-agents > li button', function () {
+    var $li = $(this).closest('li');
+    var url  = $li.data('url');
+    var data = {
+      agent: {
+        browser_id: $(this).closest('ul').data('browser-id')
+      }
+    };
+
+    $.ajax(url, {
+      method: 'patch',
+      data: data,
+      success: function(response) {
+        if (response.hasOwnProperty('data') && response['data'].hasOwnProperty('agent')) {
+          $li.addClass('hidden');
+          add_agent(response['data']['agent']);
+        }
+      }
+    }).fail(handle_ajax_failure);
+  });
+});
+/*]]>*/</script>

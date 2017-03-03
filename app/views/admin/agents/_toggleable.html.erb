@@ -1,0 +1,7 @@
+<div class="toggleable" data-url="<%= toggle_api_agent_path(agent) %>">
+  <% Browser.toggleable_attributes.each do |flag| %>
+  <span class="<%= agent.attributes[flag.to_s] ? 'active' : 'inactive' %>" data-flag="<%= flag %>">
+    <%= t("activerecord.attributes.agent.#{flag}") %>
+  </span>
+  <% end %>
+</div>

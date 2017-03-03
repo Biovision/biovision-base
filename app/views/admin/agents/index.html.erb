@@ -1,0 +1,15 @@
+<% content_for :meta_title, t('.title', page: current_page) %>
+
+<article class="entity-page">
+  <h1><%= t('.heading') %></h1>
+  <ul class="actions">
+    <li><%= back_icon(admin_path) %></li>
+    <li><%= create_icon(new_agent_path) %></li>
+  </ul>
+
+  <%= render partial: 'filter', locals: { filter: @filter } %>
+
+  <%= paginate @collection %>
+  <%= render partial: 'list', locals: { collection: @collection } %>
+  <%= paginate @collection %>
+</article>

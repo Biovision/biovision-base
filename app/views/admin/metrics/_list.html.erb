@@ -1,0 +1,26 @@
+<% if collection.any? %>
+    <table class="list-of-metrics">
+      <thead>
+      <tr>
+        <th scope="col"><%= t('activerecord.attributes.metric.name') %></th>
+        <th scope="col"><%= t('activerecord.attributes.metric.value') %></th>
+      </tr>
+      </thead>
+      <tbody>
+      <% collection.each do |entity| %>
+          <tr>
+            <td>
+              <% if entity.description.blank? %>
+                  <%= link_to entity.name, admin_metric_path(entity.id) %>
+              <% else %>
+                  <%= link_to entity.description, admin_metric_path(entity.id) %>
+              <% end %>
+            </td>
+            <td><%= entity.value %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+<% else %>
+    <%= render 'shared/nothing_found' %>
+<% end %>
