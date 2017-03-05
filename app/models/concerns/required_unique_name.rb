@@ -7,7 +7,7 @@ module RequiredUniqueName
     validates_uniqueness_of :name
 
     scope :ordered_by_name, -> { order('name asc') }
-    scope :with_name_like, -> (name) { where('name ilike ?', "%#{name}%") unless name.blank? }
-    scope :with_name, -> (name) { where('name ilike ?', name) unless name.blank? }
+    scope :with_name_like, ->(name) { where('name ilike ?', "%#{name}%") unless name.blank? }
+    scope :with_name, ->(name) { where('name ilike ?', name) unless name.blank? }
   end
 end

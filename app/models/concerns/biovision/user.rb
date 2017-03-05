@@ -17,6 +17,8 @@ module Biovision::User
     has_many :invitees, class_name: User.to_s, foreign_key: :inviter_id, dependent: :nullify
     has_many :tokens, dependent: :delete_all
     has_many :codes, dependent: :delete_all
+    has_many :user_privileges, dependent: :destroy
+    has_many :privileges, through: :user_privileges
 
     before_save { self.slug = screen_name.downcase unless screen_name.nil? }
 
@@ -25,6 +27,9 @@ module Biovision::User
     validates_format_of :email, with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z0-9][-a-z0-9]+)\z/i
     validates :screen_name, uniqueness: { case_sensitive: false }
     validates :email, uniqueness: { case_sensitive: false }
+  end
+
+  module ClassMethods
 
   end
 end
