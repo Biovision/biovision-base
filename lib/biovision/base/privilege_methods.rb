@@ -4,7 +4,7 @@ module Biovision
       extend ActiveSupport::Concern
 
       included do
-        :current_user_has_privilege?
+        helper_method :current_user_has_privilege?
       end
 
       # @param [Symbol] privilege_name

@@ -1,11 +1,11 @@
 require 'rails_helper'
 
-RSpec.shared_examples_for 'destroy_entity_with_required_roles' do
+RSpec.shared_examples_for 'destroy_entity_with_required_privilege' do
   describe 'delete destroy' do
     let(:action) { -> { delete :destroy, params: { id: entity.id } } }
 
     before :each do
-      allow(subject).to receive(:require_role)
+      allow(subject).to receive(:require_privilege)
       allow(entity.class).to receive(:find_by).and_return(entity)
     end
 
@@ -18,7 +18,7 @@ RSpec.shared_examples_for 'destroy_entity_with_required_roles' do
         action.call
       end
 
-      it_behaves_like 'required_roles'
+      it_behaves_like 'required_user_privilege'
       it_behaves_like 'entity_finder'
 
       it 'redirects to list of entities' do

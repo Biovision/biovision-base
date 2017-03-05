@@ -8,6 +8,6 @@
     <li class="lockable <%= agent.locked? ? 'hidden' : '' %>">
       <%= edit_icon edit_agent_path(agent) %>
     </li>
-    <%= render partial: 'shared/actions/locks', locals: { path: lock_api_agent_path(agent), entity: agent } %>
+    <%= render partial: 'shared/actions/locks', locals: { path: lock_admin_agent_path(agent), entity: agent } %>
   </ul>
 </div>

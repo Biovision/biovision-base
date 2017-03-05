@@ -1,9 +1,9 @@
 require 'rails_helper'
 
-RSpec.shared_examples_for 'create_entity_without_required_roles' do
+RSpec.shared_examples_for 'create_entity_with_required_privilege' do
   describe 'post create' do
     before :each do
-      allow(subject).to receive(:require_role)
+      allow(subject).to receive(:require_privilege)
     end
 
     context 'when parameters are valid' do
@@ -16,7 +16,7 @@ RSpec.shared_examples_for 'create_entity_without_required_roles' do
           action.call
         end
 
-        it_behaves_like 'no_roles_required'
+        it_behaves_like 'required_user_privilege'
 
         it 'redirects to created entity' do
           expect(response).to redirect_to(path_after_create)

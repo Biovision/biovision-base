@@ -1,9 +1,9 @@
 require 'rails_helper'
 
-RSpec.shared_examples_for 'update_lockable_entity_with_required_roles' do
+RSpec.shared_examples_for 'update_lockable_entity_with_required_privilege' do
   describe 'patch update' do
     before :each do
-      allow(subject).to receive(:require_role)
+      allow(subject).to receive(:require_privilege)
       allow(entity.class).to receive(:find_by).and_return(entity)
       allow(entity).to receive(:update).and_call_original
     end
@@ -14,7 +14,7 @@ RSpec.shared_examples_for 'update_lockable_entity_with_required_roles' do
         patch :update, params: valid_update_params
       end
 
-      it_behaves_like 'required_roles'
+      it_behaves_like 'required_user_privilege'
       it_behaves_like 'entity_finder'
 
       it 'does not update entity' do
@@ -36,7 +36,7 @@ RSpec.shared_examples_for 'update_lockable_entity_with_required_roles' do
           patch :update, params: valid_update_params
         end
 
-        it_behaves_like 'required_roles'
+        it_behaves_like 'required_user_privilege'
         it_behaves_like 'entity_finder'
 
         it 'tries to update entity' do
@@ -53,7 +53,7 @@ RSpec.shared_examples_for 'update_lockable_entity_with_required_roles' do
           patch :update, params: invalid_update_params
         end
 
-        it_behaves_like 'required_roles'
+        it_behaves_like 'required_user_privilege'
         it_behaves_like 'entity_finder'
         it_behaves_like 'http_bad_request'
 

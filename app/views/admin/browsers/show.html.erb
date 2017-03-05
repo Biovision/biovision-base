@@ -4,25 +4,22 @@
   <h1><%= @entity.name %></h1>
   <ul class="actions">
     <li><%= create_icon new_browser_path %></li>
-    <li><%= list_icon admin_browsers_path %></li>
+    <li><%= return_icon admin_browsers_path %></li>
     <% unless @entity.locked? %>
         <li><%= edit_icon edit_browser_path(@entity) %></li>
         <li class="danger"><%= destroy_icon @entity %></li>
     <% end %>
   </ul>
 
-  <table>
-    <tbody>
-    <tr>
-      <td colspan="2">
-        <%= render partial: 'admin/browsers/toggleable', locals: { browser: @entity } %>
-      </td>
-    </tr>
-    <tr>
-      <td colspan="2">
-        <%= link_to t(:agent, count: @entity.agents_count), agents_admin_browser_path(@entity) %>
-      </td>
-    </tr>
-    </tbody>
-  </table>
+  <%= render partial: 'admin/browsers/toggleable', locals: { browser: @entity } %>
+
+  <section id="browser-agents">
+    <h2><%= t('admin.agents.index.heading') %></h2>
+
+    <%= paginate @collection %>
+    <%= render partial: 'admin/agents/list', locals: { collection: @collection } %>
+    <%= paginate @collection %>
+  </section>
+
+  <%= render partial: 'admin/browsers/agents/add', locals: { browser: @entity } %>
 </article>

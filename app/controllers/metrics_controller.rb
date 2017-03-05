@@ -18,7 +18,7 @@ class MetricsController < ApplicationController
   private
 
   def restrict_access
-    require_role :administrator
+    require_privilege :metrics_manager
   end
 
   def set_entity

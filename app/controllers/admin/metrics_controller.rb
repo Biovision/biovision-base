@@ -14,10 +14,13 @@ class Admin::MetricsController < ApplicationController
   protected
 
   def restrict_access
-    require_role :administrator
+    require_privilege :metrics_manager
   end
 
   def set_entity
-    @entity = Metric.find params[:id]
+    @entity = Metric.find_by(id: params[:id])
+    if @entity.nil?
+      handle_http_404('Cannot find metric')
+    end
   end
 end

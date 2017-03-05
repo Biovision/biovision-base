@@ -1,14 +1,14 @@
 require 'rails_helper'
 
-RSpec.shared_examples_for 'index_entities_without_required_roles' do
+RSpec.shared_examples_for 'index_entities_without_required_privileges' do
   describe 'get index' do
     before :each do
-      allow(subject).to receive(:require_role)
+      allow(subject).to receive(:require_privilege)
       allow(entity.class).to receive(:page_for_visitors).and_call_original
       get :index
     end
 
-    it_behaves_like 'no_roles_required'
+    it_behaves_like 'no_privileges_required'
     it_behaves_like 'http_success'
 
     it 'sends :page_for_visitors to entity class' do
