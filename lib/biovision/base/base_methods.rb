@@ -56,9 +56,10 @@ module Biovision
         render view, status: :unauthorized
       end
 
-      # Restrict acces for anonymous users
+      # Restrict access for anonymous users
       def restrict_anonymous_access
-        redirect_to login_path, alert: t(:please_log_in) unless current_user.is_a? User
+        return if current_user.is_a?(User)
+        handle_http_401('Restricted anonymous access')
       end
 
       # Owner information for entity
