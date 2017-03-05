@@ -1,0 +1,14 @@
+<% content_for :meta_title, t('.title') %>
+<% content_for :hide_sidebar, '1' %>
+
+<article class="entity-page">
+  <h1><%= t('.title') %></h1>
+  <ul class="actions">
+    <li><%= back_icon(admin_privilege_path(@entity.id)) %></li>
+    <% if @entity.can_be_deleted? %>
+        <li class="danger"><%= destroy_icon(@entity) %></li>
+    <% end %>
+  </ul>
+
+  <%= render partial: 'form', locals: { entity: @entity } %>
+</article>

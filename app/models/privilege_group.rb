@@ -25,4 +25,22 @@ class PrivilegeGroup < ApplicationRecord
   def self.entity_parameters
     %i(name slug description)
   end
+
+  # @param [Privilege] privilege
+  def has_privilege?(privilege)
+    privilege_group_privileges.exists?(privilege: privilege)
+  end
+
+  # @param [Privilege] privilege
+  def add_privilege(privilege)
+    criteria = { privilege_group: self, privilege: privilege }
+    return if PrivilegeGroupPrivilege.exists?(criteria)
+    PrivilegeGroupPrivilege.create(criteria)
+  end
+
+  # @param [Privilege] privilege
+  def remove_privilege(privilege)
+    criteria = { privilege_group: self, privilege: privilege }
+    PrivilegeGroupPrivilege.where(criteria).destroy_all
+  end
 end

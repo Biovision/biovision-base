@@ -1,0 +1,25 @@
+<div class="data">
+  <div><%= admin_privilege_link(entity) %></div>
+  <div class="secondary info">
+    <div><%= entity.description %></div>
+  </div>
+  <div class="info">
+    <div><%= entity.slug %></div>
+    <div><%= entity.privilege_groups.map(&:name).join(', ') %></div>
+    <div><%= link_to t(:user_count, count: entity.users_count), users_admin_privilege_path(entity.id) %></div>
+  </div>
+
+  <ul class="actions">
+    <li class="lockable <%= entity.locked? ? 'hidden' : '' %>">
+      <%= edit_icon(edit_privilege_path(entity.id)) %>
+    </li>
+    <%= render partial: 'shared/actions/priority_changer', locals: { path: priority_admin_privilege_path(entity.id) } %>
+    <%= render partial: 'shared/actions/locks', locals: { entity: entity, path: lock_admin_privilege_path(entity.id) } %>
+  </ul>
+
+  <% if entity.children.any? %>
+      <div class="children">
+        <%= render partial: 'admin/privileges/list', locals: { collection: Privilege.for_tree(entity.id) } %>
+      </div>
+  <% end %>
+</div>

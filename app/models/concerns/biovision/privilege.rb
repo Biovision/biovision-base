@@ -8,6 +8,8 @@ module Biovision::Privilege
     has_many :children, class_name: Privilege.to_s, foreign_key: :parent_id
     has_many :user_privileges, dependent: :destroy
     has_many :users, through: :user_privileges
+    has_many :privilege_group_privileges, dependent: :destroy
+    has_many :privilege_groups, through: :privilege_group_privileges
 
     after_initialize :set_next_priority
 
@@ -22,6 +24,7 @@ module Biovision::Privilege
     validates_length_of :description, maximum: DESCRIPTION_LIMIT
 
     scope :ordered_by_priority, -> { order('priority asc, name asc') }
+    scope :ordered_by_name, -> { order('name asc, slug asc') }
     scope :visible, -> { where(visible: true, deleted: false) }
     scope :for_tree, ->(parent_id = nil) { where(parent_id: parent_id).ordered_by_priority }
     scope :siblings, ->(item) { where(parent_id: item.parent_id) }
@@ -109,6 +112,10 @@ module Biovision::Privilege
   end
 
   module ClassMethods
+    def page_for_administration
+      ordered_by_name
+    end
+
     def entity_parameters
       %i(name slug priority description)
     end

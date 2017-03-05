@@ -1,0 +1,34 @@
+<section>
+  <h2><%= t('.heading') %></h2>
+
+  <% if PrivilegeGroup.count > 0 %>
+      <ul class="list-of-entities privilege-groups">
+        <% PrivilegeGroup.page_for_administration.each do |privilege_group| %>
+            <li data-url="<%= privilege_admin_privilege_group_path(id: privilege_group.id, privilege_id: privilege.id) %>">
+              <% element_id = "privilege_group_#{privilege_group.id}" %>
+              <%= check_box_tag element_id, 1, privilege_group.has_privilege?(privilege) %>
+              <%= label_tag element_id, privilege_group.name %>
+            </li>
+        <% end %>
+      </ul>
+
+      <script>
+          'use strict';
+          $(function () {
+              $('ul.privilege-groups input[type=checkbox]').on('click', function () {
+                  var url = $(this).closest('li').data('url');
+                  var method = $(this).is(':checked') ? 'put' : 'delete';
+
+                  $.ajax(url, {
+                      method: method,
+                      success: function (response) {
+                          console.log(response);
+                      }
+                  }).fail(handle_ajax_failure);
+              });
+          });
+      </script>
+  <% else %>
+      <%= render 'shared/nothing_found' %>
+  <% end %>
+</section>

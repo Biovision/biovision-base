@@ -27,6 +27,8 @@ module Biovision::User
     validates_format_of :email, with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z0-9][-a-z0-9]+)\z/i
     validates :screen_name, uniqueness: { case_sensitive: false }
     validates :email, uniqueness: { case_sensitive: false }
+
+    scope :with_privilege, ->(privilege) { joins(:user_privileges).where(user_privileges: { privilege_id: privilege.ids }) }
   end
 
   module ClassMethods

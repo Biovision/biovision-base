@@ -16,10 +16,9 @@ Rails.application.routes.draw do
         delete 'lock', action: :unlock, defaults: { format: :json }
         post 'priority', defaults: { format: :json }
         post 'toggle', defaults: { format: :json }
-        get 'users', defaults: { format: :json }
+        get 'users'
         put 'users/:user_id' => :add_user, as: :user, defaults: { format: :json }
         delete 'users/:user_id' => :remove_user, defaults: { format: :json }
-        get 'groups'
       end
     end
     resources :privilege_groups, only: [:index, :show] do
@@ -34,6 +33,6 @@ Rails.application.routes.draw do
 
   resources :metrics, only: [:edit, :update]
 
-  resources :privileges, except: [:index, :new, :show]
+  resources :privileges, except: [:index, :show]
   resources :privilege_groups, except: [:index, :show]
 end

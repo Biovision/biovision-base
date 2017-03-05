@@ -139,6 +139,9 @@ ru:
       users:
         title: "Пользователи с привилегией «%{privilege}», страница %{page}"
         heading: "Пользователи с привилегией"
+      entity:
+        groups:
+          heading: "Группы привилегий"
     privilege_groups:
       index:
         title: "Группы привилегий"
@@ -146,6 +149,7 @@ ru:
         description: "Управление группами привилегий"
       show:
         title: "Группа привилегий «%{name}»"
+        privileges: "Привилегии"
   authentication:
     info:
       logout: "Выйти"

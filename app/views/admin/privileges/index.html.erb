@@ -1,0 +1,18 @@
+<% content_for :meta_title, t('.title') %>
+<% content_for :hide_sidebar, '1' %>
+
+<article class="entity-page">
+  <h1><%= t('.heading') %></h1>
+
+  <ul class="actions">
+    <li><%= back_icon(admin_path) %></li>
+  </ul>
+
+  <%= render partial: 'list', locals: { collection: @collection } %>
+
+  <section>
+    <h2><%= t('privileges.new.title') %></h2>
+
+    <%= render partial: 'privileges/form', locals: { entity: Privilege.new } %>
+  </section>
+</article>

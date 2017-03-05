@@ -1,0 +1,37 @@
+<%= render partial: 'shared/list_of_errors', locals: { entity: entity } %>
+
+<%= form_for entity do |f| %>
+    <table>
+      <tbody>
+      <tr>
+        <th>
+          <%= f.label :name %>
+        </th>
+        <td>
+          <%= f.text_field :name, size: nil, maxlenght: 250, required: true %>
+        </td>
+      </tr>
+      <tr>
+        <th>
+          <%= f.label :slug %>
+        </th>
+        <td>
+          <%= f.text_field :slug, size: nil, maxlenght: 250, required: true %>
+        </td>
+      </tr>
+      <tr>
+        <th>
+          <%= f.label :description %>
+        </th>
+        <td>
+          <%= f.text_area :description, cols: 80, rows: 3, maxlenght: PrivilegeGroup::DESCRIPTION_LIMIT %>
+        </td>
+      </tr>
+      </tbody>
+      <tfoot>
+      <tr>
+        <td colspan="2"><%= f.button t(:save), type: :submit %></td>
+      </tr>
+      </tfoot>
+    </table>
+<% end %>
