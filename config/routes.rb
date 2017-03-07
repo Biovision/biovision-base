@@ -1,4 +1,15 @@
 Rails.application.routes.draw do
+
+  controller :authentication do
+    get 'login' => :new
+    post 'login' => :create
+    delete 'logout' => :destroy
+  end
+
+  scope 'u/:slug', controller: :profiles do
+    get '/' => :show, as: :user_profile
+  end
+
   namespace :admin do
     resources :agents, :browsers, only: [:index, :show] do
       member do
@@ -29,7 +40,17 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :my do
+    get '/' => 'index#index'
+
+    resource :profile, except: [:destroy]
+    resource :confirmation, :recovery, only: [:show, :create, :update]
+  end
+
   resources :agents, :browsers, except: [:index, :show]
+
+  resources :users, except: [:index, :show]
+  resources :tokens, :codes, except: [:index, :show]
 
   resources :metrics, only: [:edit, :update]
 

@@ -8,10 +8,10 @@ class Agent < ApplicationRecord
 
   belongs_to :browser, optional: true, counter_cache: true
 
-  scope :bots, -> (flag) { where(bot: flag.to_i > 0) unless flag.blank? }
-  scope :mobile, -> (flag) { where(mobile: flag.to_i > 0) unless flag.blank? }
-  scope :active, -> (flag) { where(active: flag.to_i > 0) unless flag.blank? }
-  scope :filtered, -> (f) { with_name_like(f[:name]).bots(f[:bots]).mobile(f[:mobile]).active(f[:active]) }
+  scope :bots, ->(flag) { where(bot: flag.to_i > 0) unless flag.blank? }
+  scope :mobile, ->(flag) { where(mobile: flag.to_i > 0) unless flag.blank? }
+  scope :active, ->(flag) { where(active: flag.to_i > 0) unless flag.blank? }
+  scope :filtered, ->(f) { with_name_like(f[:name]).bots(f[:bots]).mobile(f[:mobile]).active(f[:active]) }
 
   # @param [Integer] page
   # @param [Hash] filter
@@ -30,7 +30,6 @@ class Agent < ApplicationRecord
   # @param [String] name
   # @return [Agent]
   def self.named(name)
-    criterion = { name: name[0..254] }
-    self.find_by(criterion) || self.create(criterion)
+    find_or_create_by(name: name[0..254])
   end
 end

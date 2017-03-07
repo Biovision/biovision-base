@@ -1,5 +1,4 @@
-class MetricsController < ApplicationController
-  before_action :restrict_access
+class MetricsController < AdminController
   before_action :set_entity, only: [:edit, :update]
 
   # get /metrics/:id/edit

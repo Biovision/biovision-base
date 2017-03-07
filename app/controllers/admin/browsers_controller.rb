@@ -1,4 +1,4 @@
-class Admin::BrowsersController < ApplicationController
+class Admin::BrowsersController < AdminController
   before_action :restrict_access
   before_action :set_entity, except: [:index]
 

@@ -1,13 +1,10 @@
 class Metric < ApplicationRecord
+  include RequiredUniqueName
 
   METRIC_HTTP_401 = 'errors.http.unauthorized.hit'
   METRIC_HTTP_404 = 'errors.http.not_found.hit'
 
   has_many :metric_values, dependent: :destroy
-
-  before_validation { self.name = name.strip unless name.nil? }
-  validates_presence_of :name
-  validates_uniqueness_of :name
 
   def self.page_for_administration
     order('name asc')

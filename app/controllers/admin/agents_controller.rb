@@ -1,4 +1,4 @@
-class Admin::AgentsController < ApplicationController
+class Admin::AgentsController < AdminController
   before_action :restrict_access
   before_action :set_entity, except: [:index]
 

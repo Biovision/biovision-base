@@ -2,15 +2,15 @@ namespace :agents do
   desc 'Load agents from YAML with deleting old data'
   task load: :environment do
     file_path = "#{Rails.root}/tmp/import/agents.yml"
-    if File.exists? file_path
+    if File.exist?(file_path)
       puts 'Deleting old agents...'
       Agent.destroy_all
       puts 'Done. Importing...'
-      File.open file_path, 'r' do |file|
+      File.open(file_path, 'r') do |file|
         YAML.load(file).each do |id, data|
-          agent = Agent.new id: id
-          agent.assign_attributes data
-          agent.save!
+          entity = Agent.new id: id
+          entity.assign_attributes data
+          entity.save!
           print "\r#{id}    "
         end
         puts

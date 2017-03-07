@@ -2,15 +2,15 @@ namespace :browsers do
   desc 'Load browsers from YAML with deleting old data'
   task load: :environment do
     file_path = "#{Rails.root}/tmp/import/browsers.yml"
-    if File.exists? file_path
+    if File.exist?(file_path)
       puts 'Deleting old browsers...'
       Browser.destroy_all
       puts 'Done. Importing...'
-      File.open file_path, 'r' do |file|
+      File.open(file_path, 'r') do |file|
         YAML.load(file).each do |id, data|
-          browser = Browser.new id: id
-          browser.assign_attributes data
-          browser.save!
+          entity = Browser.new id: id
+          entity.assign_attributes data
+          entity.save!
           print "\r#{id}    "
         end
         puts

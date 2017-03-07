@@ -1,4 +1,4 @@
-class PrivilegeGroupsController < ApplicationController
+class PrivilegeGroupsController < AdminController
   before_action :restrict_access
   before_action :set_entity, only: [:edit, :update, :destroy]
 
