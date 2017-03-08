@@ -1,0 +1,8 @@
+<div class="authentication">
+  <div class="plate">
+    <%= link_to current_user.profile_name, my_profile_path, class: "profile #{current_user.network}" %>
+    <div class="logout">
+      <%= link_to image_tag('icons/exit.png', alt: t(:logout)), logout_path, method: :delete, title: t(:logout) %>
+    </div>
+  </div>
+</div>

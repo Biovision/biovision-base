@@ -1,0 +1,7 @@
+<% content_for :meta_title, t('.title') %>
+
+<article class="new-profile">
+  <h1><%= t('.title') %></h1>
+
+  <%= render partial: 'my/profiles/new/form', locals: { entity: @user } %>
+</article>

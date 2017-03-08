@@ -1,0 +1,12 @@
+<% content_for :meta_title, @entity.profile_name %>
+<% content_for :meta_image, (request.protocol + request.host_with_port + @entity.image.url) unless @entity.image.blank? %>
+<% content_for :options do %>
+    <% if current_user_has_role? :administrator %>
+        <ul>
+          <li><%= link_to t(:view_as_administrator), user_path(@entity) %></li>
+          <li><%= link_to t(:edit), edit_user_path(@entity) %></li>
+        </ul>
+    <% end %>
+<% end %>
+
+<%= render partial: 'profile', locals: { user: @entity } %>

@@ -1,0 +1,16 @@
+<%= form_tag login_path, class: 'login' do %>
+    <div class="fields">
+      <div>
+        <%= label_tag :login, t('activerecord.attributes.user.screen_name') %>
+        <%= text_field_tag :login, '', required: true, size: 18 %>
+      </div>
+      <div>
+        <%= label_tag :password, t('activerecord.attributes.user.password') %>
+        <%= password_field_tag :password, '', required: true, size: 18 %>
+      </div>
+    </div>
+    <div class="actions">
+      <%= button_tag t('authentication.new.title'), type: 'submit' %>
+      <%= link_to t('my.profiles.new.title'), new_my_profile_path, class: 'nav-button' %>
+    </div>
+<% end %>

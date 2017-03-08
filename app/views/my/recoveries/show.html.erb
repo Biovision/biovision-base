@@ -1,0 +1,41 @@
+<% content_for :meta_title, t('.title') %>
+
+<article class="recovery">
+  <header>
+    <h1><%= t('.title') %></h1>
+  </header>
+
+  <section>
+    <h2><%= t('.got_code') %></h2>
+    <%= form_tag my_recovery_path, method: :patch do %>
+        <div>
+          <%= label_tag :code, t('activerecord.attributes.code.body') %>
+          <%= text_field_tag :code, param_from_request(:code), required: true, size: 25 %>
+        </div>
+        <div>
+          <%= label_tag :user_password, t('activerecord.attributes.user.password') %>
+          <%= password_field_tag 'user[password]', '', required: true, size: 25 %>
+        </div>
+        <div>
+          <%= label_tag :user_password_confirmation, t('activerecord.attributes.user.password_confirmation') %>
+          <%= password_field_tag 'user[password_confirmation]', '', required: true, size: 25 %>
+        </div>
+        <div>
+          <%= button_tag t('.update_password'), type: :submit %>
+        </div>
+    <% end %>
+  </section>
+
+  <section>
+    <h2><%= t('.no_code') %></h2>
+    <%= form_tag my_recovery_path, method: :post do %>
+        <div>
+          <%= label_tag :email, t('activerecord.attributes.user.email') %>
+          <%= text_field_tag :email, param_from_request(:email), required: true, size: 40 %>
+        </div>
+        <div>
+          <%= button_tag t('.send_code'), type: :submit %>
+        </div>
+    <% end %>
+  </section>
+</article>

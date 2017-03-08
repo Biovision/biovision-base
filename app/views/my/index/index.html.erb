@@ -1,0 +1,16 @@
+<% content_for :meta_title, t('.title') %>
+
+<article class="my-index">
+  <h1><%= t('.title') %></h1>
+
+  <div class="dashboard">
+    <nav>
+      <ul>
+        <li>
+          <div><%= link_to t('my.profiles.show.heading'), my_profile_path %></div>
+          <div class="description"><%= t('my.profiles.show.description') %></div>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</article>
