@@ -58,8 +58,7 @@ module Biovision
 
       # Restrict access for anonymous users
       def restrict_anonymous_access
-        return if current_user.is_a?(User)
-        handle_http_401('Restricted anonymous access')
+        handle_http_401('Restricted anonymous access') if current_user.nil?
       end
 
       # Owner information for entity

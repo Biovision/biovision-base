@@ -45,9 +45,9 @@ class PrivilegeGroupsController < AdminController
   end
 
   def set_entity
-    @entity = PrivilegeGroup.find_by(id: params[:id], deleted: false)
+    @entity = PrivilegeGroup.find_by(id: params[:id])
     if @entity.nil?
-      handle_http_404('PrivilegeGroup is not found or was deleted')
+      handle_http_404('PrivilegeGroup is not found')
     end
   end
 
