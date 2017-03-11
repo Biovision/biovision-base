@@ -1,0 +1,44 @@
+<%= render partial: 'shared/list_of_errors', locals: { entity: entity } %>
+
+<%= form_for entity do |f| %>
+    <table>
+      <tbody>
+      <% if entity.id.blank? %>
+          <tr>
+            <th><%= f.label :category %></th>
+            <td><%= f.select :category, code_categories_for_select %></td>
+          </tr>
+          <tr>
+            <th><%= f.label :user_id %></th>
+            <td><%= f.number_field :user_id, min: 1 %></td>
+          </tr>
+      <% else %>
+          <tr>
+            <th><%= t('activerecord.attributes.code.category') %></th>
+            <td><%= t("activerecord.attributes.code.categories.#{entity.category}") %></td>
+          </tr>
+          <tr>
+            <th><%= t('activerecord.attributes.code.user_id') %></th>
+            <td><%= admin_user_link entity.user %></td>
+          </tr>
+      <% end %>
+      <tr>
+        <th><%= f.label :body %></th>
+        <td><%= f.text_field :body, size: 25, required: true %></td>
+      </tr>
+      <tr>
+        <th><%= f.label :payload %></th>
+        <td><%= f.text_field :payload, size: 25 %></td>
+      </tr>
+      <tr>
+        <th><%= f.label :quantity %></th>
+        <td><%= f.number_field :quantity, min: 0 %></td>
+      </tr>
+      </tbody>
+      <tfoot>
+      <tr>
+        <td colspan="2"><%= f.button t(:save), type: :submit %></td>
+      </tr>
+      </tfoot>
+    </table>
+<% end %>

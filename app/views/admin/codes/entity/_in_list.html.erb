@@ -1,0 +1,14 @@
+<div class="data">
+  <div>
+    <%= t("activerecord.attributes.code.categories.#{code.category}") %>
+    <%= link_to code.body, admin_code_path(code) %>
+  </div>
+  <div class="info"><%= admin_user_link code.user %></div>
+  <div class="secondary info">
+    <div><%= t(:created_at) %>: <%= time_tag code.created_at %></div>
+    <div><%= t(:code_activation, count: code.quantity) %></div>
+  </div>
+  <ul class="actions">
+    <li><%= edit_icon edit_code_path(code) %></li>
+  </ul>
+</div>

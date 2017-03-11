@@ -19,6 +19,15 @@ Rails.application.routes.draw do
       end
     end
 
+    resources :codes, only: [:index, :show]
+    resources :tokens, only: [:index, :show] do
+      member do
+        post 'toggle'
+      end
+    end
+
+    resources :editable_pages, only: [:index, :show]
+
     resources :metrics, only: [:index, :show]
 
     resources :privileges, only: [:index, :show] do

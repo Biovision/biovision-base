@@ -1,0 +1,9 @@
+<% if collection.any? %>
+    <ul class="list-of-entities">
+      <% collection.each do |code| %>
+          <li><%= render partial: 'admin/codes/entity/in_list', locals: { code: code } %></li>
+      <% end %>
+    </ul>
+<% else %>
+    <%= render 'shared/nothing_found' %>
+<% end %>

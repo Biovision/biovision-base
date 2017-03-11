@@ -118,13 +118,15 @@ ru:
     tokens:
       index:
         title: "Жетоны, страница %{page}"
-        heading: "Жетоны"
+        heading: "Жетоны доступа (сессии пользователей)"
+        description: "Управление сессионными жетонами пользователей"
       show:
         title: "Жетон №%{id}"
     codes:
       index:
         title: "Коды, страница %{page}"
         heading: "Коды"
+        description: "Управление кодами сброса пароля, подтверждения и приглашения"
       show:
         title: "Код «%{body}»"
     privileges:

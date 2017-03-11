@@ -1,0 +1,109 @@
+<%= render partial: 'shared/list_of_errors', locals: { entity: entity } %>
+
+<%= form_for entity do |f| %>
+    <table>
+      <tbody>
+      <tr>
+        <td colspan="2">
+          <figure class="preview" id="editable_page-image">
+            <% if entity.image.blank? %>
+                <% image_path = 'biovision/base/placeholders/image.svg' %>
+            <% else %>
+                <% image_path = entity.image.url %>
+            <% end %>
+            <%= label_tag(:editable_page_image, image_tag(image_path, alt: t('activerecord.attributes.editable_page.image'))) %>
+            <figcaption>
+              <%= f.label :image %>
+              <%= f.file_field :image, accept: 'image/jpeg,image/png', data: { image: 'editable_page-image' } %>
+              <div class="guideline"><%= t('.guidelines.image') %></div>
+            </figcaption>
+          </figure>
+        </td>
+      </tr>
+      <% if entity.id.nil? %>
+          <tr>
+            <th>
+              <%= f.label :slug %>
+            </th>
+            <td>
+              <%= f.text_field :slug, required: true %>
+              <div class="guideline">
+                <%= t('.guidelines.slug') %>
+              </div>
+            </td>
+          </tr>
+      <% end %>
+      <tr>
+        <th>
+          <%= f.label :name %>
+        </th>
+        <td>
+          <%= f.text_field :name, required: true, size: nil, maxlength: 100 %>
+          <div class="guideline">
+            <%= t('.guidelines.name') %>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <th>
+          <%= f.label :title %>
+        </th>
+        <td>
+          <%= f.text_field :title, size: nil, maxlength: 200 %>
+          <div class="guideline">
+            <%= t('.guidelines.title') %>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <th>
+          <%= f.label :keywords %>
+        </th>
+        <td>
+          <%= f.text_field :keywords, size: nil, maxlength: 250 %>
+          <div class="guideline">
+            <%= t('.guidelines.keywords') %>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <th>
+          <%= f.label :description %>
+        </th>
+        <td>
+          <%= f.text_field :description, size: nil, maxlength: 250 %>
+          <div class="guideline">
+            <%= t('.guidelines.description') %>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <div><%= f.label :body %></div>
+          <%= f.text_area :body, cols: 80, rows: 25, required: true %>
+          <div class="guideline">
+            <%= t('.guidelines.body') %>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <%= f.button t(:save), type: :submit %>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+<% end %>
+
+<script src="/ckeditor/4-6-2/ckeditor.js"></script>
+<script>
+    $(function () {
+        var editor = document.getElementById('editable_page_body');
+
+        CKEDITOR.replace(editor, {
+            filebrowserUploadUrl: '/illustrations',
+            removePlugins: 'forms,save,preview,flash,bidi,language,print,templates,newpage',
+            extraPlugins: 'embed'
+        });
+    });
+</script>

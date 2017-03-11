@@ -1,0 +1,58 @@
+<% content_for :meta_title, t('.title', name: @entity.name) %>
+<% content_for :hide_sidebar, '1' %>
+
+<article class="entity-page">
+  <h1><%= @entity.name %></h1>
+
+  <ul class="actions">
+    <li><%= back_icon(admin_editable_pages_path) %></li>
+    <li><%= edit_icon(edit_editable_page_path(@entity.id)) %></li>
+  </ul>
+
+  <table>
+    <tbody>
+    <% unless @entity.image.blank? %>
+        <tr>
+          <td colspan="2">
+            <figure>
+              <%= editable_page_image_medium(@entity) %>
+              <figcaption><%= t(:current_image) %></figcaption>
+            </figure>
+          </td>
+        </tr>
+    <% end %>
+    <tr>
+      <th><%= t(:created_at) %></th>
+      <td><%= time_tag(@entity.created_at) %></td>
+    </tr>
+    <tr>
+      <th><%= t(:updated_at) %></th>
+      <td><%= time_tag(@entity.updated_at) %></td>
+    </tr>
+    <tr>
+      <th><%= t('activerecord.attributes.editable_page.slug') %></th>
+      <td><%= @entity.slug %></td>
+    </tr>
+    <% unless @entity.title.blank? %>
+        <tr>
+          <th><%= t('activerecord.attributes.editable_page.title') %></th>
+          <td><%= @entity.title %></td>
+        </tr>
+    <% end %>
+    <% unless @entity.keywords.blank? %>
+        <tr>
+          <th><%= t('activerecord.attributes.editable_page.keywords') %></th>
+          <td><%= @entity.keywords %></td>
+        </tr>
+    <% end %>
+    <% unless @entity.description.blank? %>
+        <tr>
+          <th><%= t('activerecord.attributes.editable_page.description') %></th>
+          <td><%= @entity.description %></td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+
+  <section><%= raw(@entity.body) %></section>
+</article>

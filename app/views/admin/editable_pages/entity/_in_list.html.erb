@@ -1,0 +1,13 @@
+<div class="image">
+  <%= editable_page_image_preview(entity) %>
+</div>
+<div class="data">
+  <div><%= admin_editable_page_link(entity) %></div>
+  <div class="info">
+    <%= entity.slug %>
+  </div>
+
+  <ul class="actions">
+    <li><%= edit_icon(edit_editable_page_path(entity)) %></li>
+  </ul>
+</div>

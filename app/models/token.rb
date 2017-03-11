@@ -2,6 +2,8 @@ class Token < ApplicationRecord
   include HasOwner
   include Toggleable
 
+  PER_PAGE = 25
+
   toggleable :active
 
   has_secure_token
@@ -10,6 +12,21 @@ class Token < ApplicationRecord
   belongs_to :agent, optional: true
 
   validates_uniqueness_of :token
+
+  scope :recent, -> { order 'last_used desc' }
+
+  # @param [Integer] page
+  def self.page_for_administration(page)
+    recent.page(page).per(PER_PAGE)
+  end
+
+  def self.entity_parameters
+    %i(active)
+  end
+
+  def self.creation_parameters
+    entity_parameters + %i(user_id)
+  end
 
   # @param [String] input
   # @param [Boolean] touch_user

@@ -1,0 +1,32 @@
+<% content_for :meta_title, t('.title', body: @entity.body) %>
+<% content_for :hide_sidebar, '1' %>
+
+<article class="entity-page">
+  <h1><%= @entity.body %></h1>
+  <ul class="actions">
+    <li><%= back_icon(admin_codes_path) %></li>
+    <li><%= edit_icon(edit_code_path(@entity.id)) %></li>
+  </ul>
+
+  <table>
+    <tbody>
+    <tr>
+      <th><%= t('activerecord.attributes.code.category') %></th>
+      <td><%= t("activerecord.attributes.code.categories.#{@entity.category}") %></td>
+    </tr>
+    <tr>
+      <th><%= t('activerecord.attributes.code.user') %></th>
+      <td><%= admin_user_link @entity.user %></td>
+    </tr>
+    <% unless @entity.payload.blank? %>
+        <tr>
+          <th><%= t('activerecord.attributes.code.payload') %></th>
+          <td><%= @entity.payload %></td>
+        </tr>
+    <% end %>
+    <tr>
+      <td colspan="2"><%= t(:code_activation, count: @entity.quantity) %></td>
+    </tr>
+    </tbody>
+  </table>
+</article>

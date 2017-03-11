@@ -1,0 +1,17 @@
+<div class="data">
+  <div><%= link_to entity.user.profile_name, admin_token_path(entity), class: "profile native" %></div>
+  <div class="secondary info">
+    <div><%= time_tag entity.created_at %>/<%= time_tag entity.updated_at %></div>
+    <% unless entity.last_used.nil? %>
+        <div><%= t('activerecord.attributes.token.last_used') %> <%= time_tag entity.last_used %></div>
+    <% end %>
+  </div>
+  <% unless entity.agent.blank? %>
+      <div class="truncate info"><%= link_to entity.agent.name, admin_agent_path(entity.agent) %></div>
+  <% end %>
+  <%= render partial: 'admin/tokens/toggleable', locals: { entity: entity } %>
+
+  <ul class="actions">
+    <li><%= edit_icon edit_token_path(entity) %></li>
+  </ul>
+</div>
