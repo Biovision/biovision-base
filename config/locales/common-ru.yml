@@ -5,6 +5,9 @@ ru:
     few: "%{count} ошибки"
     many: "%{count} ошибок"
     other: "%{count} ошибок"
+  errors:
+    messages:
+      extension_blacklist_error: "имеет недопустимое расширение файла"
   date:
     nominative_months:
       -
