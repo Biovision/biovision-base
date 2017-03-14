@@ -9,7 +9,7 @@ module Biovision
 
       # @param [Symbol] privilege_name
       def current_user_has_privilege?(privilege_name)
-        UserPrivilege.user_has_privilege?(current_user, privilege_name)
+        ::UserPrivilege.user_has_privilege?(current_user, privilege_name)
       end
 
       protected

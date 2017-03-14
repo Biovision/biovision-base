@@ -193,6 +193,47 @@ article.entity-page {
         }
       }
     }
+
+    .fields {
+      figure {
+        margin: 0 auto;
+        padding: 0;
+        max-width: 32rem;
+        text-align: center;
+
+        img {
+          max-width: 100%;
+        }
+      }
+
+      > div {
+        background: $row_background_odd;
+        padding: .4rem 0;
+
+        &:nth-of-type(even) {
+          background: $row_background_even;
+        }
+
+        > div {
+          padding: 0 .4rem;
+        }
+      }
+
+      ul.flags {
+        margin: 0;
+        padding: 0;
+
+        li {
+          list-style: none;
+          margin: 0;
+          padding: .4rem;
+        }
+      }
+
+      input:not([type=checkbox]):not([size]), textarea {
+        width: calc(100% - 1rem);
+      }
+    }
   }
 }
 
