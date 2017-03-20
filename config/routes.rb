@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
+    get '/' => 'index#index'
+
     resources :agents, :browsers, only: [:index, :show] do
       member do
         post 'toggle'
@@ -45,6 +47,14 @@ Rails.application.routes.draw do
       member do
         put 'privileges/:privilege_id' => :add_privilege, as: :privilege, defaults: { format: :json }
         delete 'privileges/:privilege_id' => :remove_privilege, defaults: { format: :json }
+      end
+    end
+
+    resources :users, only: [:index, :show] do
+      member do
+        get 'tokens'
+        get 'codes'
+        get 'privileges'
       end
     end
   end
