@@ -55,6 +55,8 @@ Rails.application.routes.draw do
         get 'tokens'
         get 'codes'
         get 'privileges'
+        put 'privileges/:privilege_id' => :grant_privilege, as: :privilege
+        delete 'privileges/:privilege_id' => :revoke_privilege
       end
     end
   end
