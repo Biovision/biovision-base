@@ -95,15 +95,4 @@
     </table>
 <% end %>
 
-<script src="/ckeditor/4-6-2/ckeditor.js"></script>
-<script>
-    $(function () {
-        var editor = document.getElementById('editable_page_body');
-
-        CKEDITOR.replace(editor, {
-            filebrowserUploadUrl: '/illustrations',
-            removePlugins: 'forms,save,preview,flash,bidi,language,print,templates,newpage',
-            extraPlugins: 'embed'
-        });
-    });
-</script>
+<%= render 'editable_pages/form/ckeditor' %>

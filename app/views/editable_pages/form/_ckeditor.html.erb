@@ -1,0 +1,11 @@
+<script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
+<script>
+    $(function () {
+        var editor = document.getElementById('editable_page_body');
+
+        CKEDITOR.replace(editor, {
+//            filebrowserUploadUrl: '/illustrations',
+            removePlugins: 'forms,save,preview,flash,bidi,language,print,templates,newpage'
+        });
+    });
+</script>

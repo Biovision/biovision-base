@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170302000104) do
+ActiveRecord::Schema.define(version: 20170320000000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,18 @@ ActiveRecord::Schema.define(version: 20170302000104) do
     t.index ["agent_id"], name: "index_codes_on_agent_id", using: :btree
     t.index ["body", "category", "quantity"], name: "index_codes_on_body_and_category_and_quantity", using: :btree
     t.index ["user_id"], name: "index_codes_on_user_id", using: :btree
+  end
+
+  create_table "editable_pages", force: :cascade do |t|
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.string   "slug",                     null: false
+    t.string   "name",                     null: false
+    t.string   "image"
+    t.string   "title",       default: "", null: false
+    t.string   "keywords",    default: "", null: false
+    t.string   "description", default: "", null: false
+    t.text     "body",        default: "", null: false
   end
 
   create_table "metric_values", force: :cascade do |t|

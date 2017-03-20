@@ -58,6 +58,8 @@ Rails.application.routes.draw do
 
   resources :agents, :browsers, except: [:index, :show]
 
+  resources :editable_pages, except: [:index, :show]
+
   resources :users, except: [:index, :show]
   resources :tokens, :codes, except: [:index, :show]
 
