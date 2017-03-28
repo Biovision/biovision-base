@@ -17,7 +17,7 @@ module Biovision::Admin::Privileges
 
   # get /admin/privileges/:id/users
   def users
-    @collection = @entity.users.distinct.page_for_administration(current_page)
+    @collection = @entity.users.page_for_administration(current_page)
   end
 
   # put /api/privileges/:id/lock
