@@ -1,10 +1,14 @@
 <% if collection.any? %>
     <ul class="list-of-entities">
-      <% collection.each do |agent| %>
-          <% if agent.deleted? %>
-              <li class="deleted"><%= t(:deleted_entity) %>, id: <%= agent.id %></li>
+      <% collection.each do |entity| %>
+          <% if entity.deleted? %>
+              <li class="deleted">
+                <%= t(:deleted_entity) %>, id: <%= entity.id %>
+              </li>
           <% else %>
-              <li><%= render partial: 'admin/agents/entity/in_list', locals: { agent: agent } %></li>
+              <li data-id="<%= entity.id %>">
+                <%= render partial: 'admin/agents/entity/in_list', locals: { entity: entity } %>
+              </li>
           <% end %>
       <% end %>
     </ul>

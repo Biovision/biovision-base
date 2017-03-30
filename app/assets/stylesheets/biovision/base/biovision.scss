@@ -69,6 +69,23 @@ $toggleable-background: #fff;
 article.entity-page {
   position: relative;
 
+  > nav {
+    ul {
+      margin: 1.6rem 0;
+      padding: 0;
+
+      li {
+        list-style: none;
+        display: inline-block;
+        margin: 0 1.6rem;
+
+        a {
+          @include nav-button;
+        }
+      }
+    }
+  }
+
   > section {
     border-top: .1rem solid $secondary-text-color;
     padding: .8rem 0 0 0;
@@ -414,4 +431,8 @@ form {
   button {
     @include action-button;
   }
+}
+
+.hidden {
+  display: none !important;
 }

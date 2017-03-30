@@ -1,13 +1,13 @@
 <div class="data">
-  <div class="truncate"><%= link_to agent.name, admin_agent_path(agent) %></div>
-  <% unless agent.browser.nil? %>
-      <div class="info"><%= link_to agent.browser.name, admin_browser_path(agent.browser) %></div>
+  <div class="truncate"><%= link_to entity.name, admin_agent_path(entity) %></div>
+  <% unless entity.browser.nil? %>
+      <div class="info"><%= link_to entity.browser.name, admin_browser_path(entity.browser) %></div>
   <% end %>
-  <%= render partial: 'admin/agents/toggleable', locals: { agent: agent } %>
+  <%= render partial: 'admin/agents/toggleable', locals: { entity: entity } %>
   <ul class="actions">
-    <li class="lockable <%= agent.locked? ? 'hidden' : '' %>">
-      <%= edit_icon edit_agent_path(agent) %>
+    <li class="lockable <%= entity.locked? ? 'hidden' : '' %>">
+      <%= edit_icon edit_agent_path(entity) %>
     </li>
-    <%= render partial: 'shared/actions/locks', locals: { path: lock_admin_agent_path(agent), entity: agent } %>
+    <%= render partial: 'shared/actions/locks', locals: { path: lock_admin_agent_path(entity), entity: entity } %>
   </ul>
 </div>
