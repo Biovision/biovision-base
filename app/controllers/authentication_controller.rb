@@ -1,7 +1,7 @@
 class AuthenticationController < ApplicationController
   include Authentication
 
-  before_action :redirect_authenticated_user, except: [:destroy]
+  before_action :redirect_authenticated_user, except: [:new, :destroy]
 
   # get /login
   def new
@@ -10,7 +10,7 @@ class AuthenticationController < ApplicationController
   # post /login
   def create
     user = User.find_by(slug: params[:login].to_s.downcase)
-    if user.is_a?(User) && user.authenticate(params[:password].to_s) && user.allow_login?
+    if user&.authenticate(params[:password].to_s) && user.allow_login?
       create_token_for_user(user, tracking_for_entity)
       Metric.register(User::METRIC_AUTHENTICATION_SUCCESS)
       redirect_to root_path

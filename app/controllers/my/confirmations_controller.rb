@@ -11,8 +11,8 @@ class My::ConfirmationsController < ApplicationController
     if current_user.email.blank?
       redirect_to edit_my_profile_path, notice: t('my.confirmations.create.set_email')
     else
-      code = Code.confirmation_for_user current_user
-      CodeSender.email(code).deliver_now unless code.nil?
+      code = Code.confirmation_for_user(current_user)
+      CodeSender.email(code.id).deliver_later unless code.nil?
       redirect_to my_confirmation_path, notice: t('my.confirmations.create.success')
     end
   end

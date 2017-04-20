@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    biovision-base (0.2.170328)
+    biovision-base (0.2.170420)
       bcrypt (~> 3.1.7)
       carrierwave
       carrierwave-bombshelter
@@ -71,8 +71,8 @@ GEM
       factory_girl (~> 4.8.0)
       railties (>= 3.0.0)
     fastimage (2.1.0)
-    globalid (0.3.7)
-      activesupport (>= 4.1.0)
+    globalid (0.4.0)
+      activesupport (>= 4.2.0)
     i18n (0.8.1)
     kaminari (1.0.1)
       activesupport (>= 4.1.0)

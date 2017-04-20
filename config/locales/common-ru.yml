@@ -63,3 +63,11 @@ ru:
       notice: "Замечание"
       warning: "Предупреждение"
       alert: "Внимание"
+  admin:
+    index:
+      index:
+        title: "Администрирование"
+        heading: "Администрирование"
+  index:
+    index:
+      title: "Главная страница"

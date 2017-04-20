@@ -43,7 +43,7 @@ class My::RecoveriesController < ApplicationController
     if code.nil?
       logger.warn { "Could not get recovery code for user #{@user.id}" }
     else
-      CodeSender.password(code).deliver_now
+      CodeSender.password(code.id).deliver_later
     end
   end
 

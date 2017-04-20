@@ -15,16 +15,16 @@ Rails.application.routes.draw do
 
     resources :agents, :browsers, only: [:index, :show] do
       member do
-        post 'toggle'
-        put 'lock'
-        delete 'lock', action: :unlock
+        post 'toggle', defaults: { format: :json }
+        put 'lock', defaults: { format: :json }
+        delete 'lock', action: :unlock, defaults: { format: :json }
       end
     end
 
     resources :codes, only: [:index, :show]
     resources :tokens, only: [:index, :show] do
       member do
-        post 'toggle'
+        post 'toggle', defaults: { format: :json }
       end
     end
 

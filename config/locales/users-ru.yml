@@ -159,6 +159,8 @@ ru:
       title: "Вход"
       breadcrumbs: "Вход"
   users:
+    create:
+      success: "Пользователь успешно создан"
     update:
       success: "Пользователь успешно изменён"
     destroy:

@@ -2,7 +2,7 @@ module Authentication
   extend ActiveSupport::Concern
 
   def redirect_authenticated_user
-    redirect_to root_path unless current_user.nil?
+    redirect_to my_path unless current_user.nil?
   end
 
   # @param [User] user
