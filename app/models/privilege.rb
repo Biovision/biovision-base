@@ -1,3 +1,3 @@
 class Privilege < ApplicationRecord
-  include Biovision::Privilege
+  include Biovision::PrivilegeBase
 end

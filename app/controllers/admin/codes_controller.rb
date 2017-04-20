@@ -1,5 +1,4 @@
-class Admin::CodesController < ApplicationController
-  before_action :restrict_access
+class Admin::CodesController < AdminController
   before_action :set_entity, except: [:index]
 
   # get /admin/codes

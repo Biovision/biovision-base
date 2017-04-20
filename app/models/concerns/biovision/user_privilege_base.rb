@@ -1,4 +1,4 @@
-module Biovision::UserPrivilege
+module Biovision::UserPrivilegeBase
   extend ActiveSupport::Concern
 
   included do

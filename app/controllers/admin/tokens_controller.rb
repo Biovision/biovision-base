@@ -1,4 +1,6 @@
 class Admin::TokensController < AdminController
+  include ToggleableEntity
+
   before_action :set_entity, except: [:index]
 
   # get /admin/tokens
@@ -8,11 +10,6 @@ class Admin::TokensController < AdminController
 
   # get /admin/tokens/:id
   def show
-  end
-
-  # post /admin/tokens/:id/toggle
-  def toggle
-    render json: { data: @entity.toggle_parameter(params[:parameter].to_s) }
   end
 
   protected

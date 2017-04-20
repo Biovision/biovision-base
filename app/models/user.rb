@@ -1,3 +1,3 @@
 class User < ApplicationRecord
-  include Biovision::User
+  include Biovision::UserBase
 end

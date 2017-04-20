@@ -1,4 +1,4 @@
-module Biovision::User
+module Biovision::UserBase
   extend ActiveSupport::Concern
 
   included do

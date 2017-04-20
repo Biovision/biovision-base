@@ -1,5 +1,4 @@
 class Admin::PrivilegeGroupsController < AdminController
-  before_action :restrict_access
   before_action :set_entity, except: [:index]
   before_action :set_privilege, only: [:add_privilege, :remove_privilege]
 

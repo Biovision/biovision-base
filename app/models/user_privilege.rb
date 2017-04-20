@@ -1,3 +1,3 @@
 class UserPrivilege < ApplicationRecord
-  include Biovision::UserPrivilege
+  include Biovision::UserPrivilegeBase
 end

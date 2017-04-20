@@ -2,7 +2,6 @@ module Biovision::Admin::Privileges
   extend ActiveSupport::Concern
 
   included do
-    before_action :restrict_access
     before_action :set_entity, except: [:index]
   end
 
@@ -18,25 +17,6 @@ module Biovision::Admin::Privileges
   # get /admin/privileges/:id/users
   def users
     @collection = @entity.users.page_for_administration(current_page)
-  end
-
-  # put /api/privileges/:id/lock
-  def lock
-    @entity.update! locked: true
-
-    render json: { data: { locked: @entity.locked? } }
-  end
-
-  # delete /api/privileges/:id/lock
-  def unlock
-    @entity.update! locked: false
-
-    render json: { data: { locked: @entity.locked? } }
-  end
-
-  # post /api/privileges/:id/priority
-  def priority
-    render json: { data: @entity.change_priority(params[:delta].to_s.to_i) }
   end
 
   protected

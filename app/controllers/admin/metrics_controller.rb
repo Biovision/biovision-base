@@ -1,5 +1,4 @@
 class Admin::MetricsController < AdminController
-  before_action :restrict_access
   before_action :set_entity, except: [:index]
 
   # get /admin/metrics

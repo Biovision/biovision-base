@@ -12,6 +12,9 @@ class CreateBiovisionUsers < ActiveRecord::Migration[5.0]
         t.integer :followee_count, default: 0, null: false
         t.integer :comments_count, default: 0, null: false
         t.integer :authority, default: 0, null: false
+        t.integer :upvote_count, default: 0, null: false
+        t.integer :downvote_count, default: 0, null: false
+        t.integer :vote_result, default: 0, null: false
         t.boolean :super_user, default: false, null: false
         t.boolean :deleted, default: false, null: false
         t.boolean :bot, default: false, null: false
