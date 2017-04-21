@@ -1,0 +1,24 @@
+<div class="image">
+  <%= user_image_preview(entity) %>
+</div>
+<div class="data">
+  <div><%= admin_user_link(entity) %></div>
+  <% unless entity.notice.blank? %>
+      <div><%= entity.notice %></div>
+  <% end %>
+  <% unless entity.email.blank? %>
+      <div class="info">
+        <div><%= t('activerecord.attributes.user.email') %>: <%= entity.email %></div>
+      </div>
+  <% end %>
+  <div class="secondary info">
+    <div><%= t(:created_at) %>: <%= time_tag entity.created_at %></div>
+    <% unless entity.last_seen.nil? %>
+        <div><%= t('activerecord.attributes.user.last_seen') %>: <%= time_tag entity.last_seen %></div>
+    <% end %>
+  </div>
+  <%= render partial: 'admin/users/toggleable', locals: { entity: entity } %>
+  <ul class="actions">
+    <li><%= edit_icon(edit_user_path(entity.id)) %></li>
+  </ul>
+</div>

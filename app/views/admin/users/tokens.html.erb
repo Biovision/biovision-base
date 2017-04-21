@@ -1,0 +1,19 @@
+<% content_for :meta_title, t('.title', user: @entity.screen_name, page: current_page) %>
+
+<article class="entity-page">
+  <h1><%= t('admin.tokens.index.heading') %></h1>
+
+  <ul class="actions">
+    <li><%= back_icon(admin_user_path(@entity.id)) %></li>
+  </ul>
+
+  <%= paginate @collection %>
+  <%= render partial: 'admin/tokens/list', locals: { collection: @collection } %>
+  <%= paginate @collection %>
+
+  <section>
+    <h2><%= t('tokens.new.title') %></h2>
+
+    <%= render partial: 'tokens/form', locals: { entity: @entity.tokens.new } %>
+  </section>
+</article>

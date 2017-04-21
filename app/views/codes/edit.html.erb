@@ -4,10 +4,8 @@
   <h1><%= t('.title') %></h1>
 
   <ul class="actions">
-    <li><%= create_icon new_code_path %></li>
-    <li><%= back_icon admin_codes_path %></li>
-    <li><%= detail_icon admin_code_path(@entity) %></li>
-    <li class="danger"><%= destroy_icon @entity %></li>
+    <li><%= return_icon(admin_code_path(@entity.id)) %></li>
+    <li class="danger"><%= destroy_icon(@entity) %></li>
   </ul>
 
   <%= render partial: 'form', locals: { entity: @entity } %>

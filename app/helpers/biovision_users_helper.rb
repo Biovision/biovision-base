@@ -5,18 +5,20 @@ module BiovisionUsersHelper
     genders + User.genders.keys.to_a.map { |o| [I18n.t("#{prefix}#{o}"), o] }
   end
 
-  # @param [User] user
-  def user_link(user)
-    return I18n.t(:anonymous) if user.nil? || user&.deleted?
-    text = user.profile_name
-    link_to(text, user_profile_path(slug: user.screen_name), class: 'profile')
+  # @param [User] entity
+  def user_link(entity)
+    return I18n.t(:anonymous) if entity.nil? || entity.deleted?
+
+    text = entity.profile_name
+    link_to(text, user_profile_path(slug: entity.screen_name), class: 'profile')
   end
 
-  # @param [User] user
-  def admin_user_link(user)
-    return I18n.t(:anonymous) if user.nil?
-    text = user.profile_name
-    link_to(text, admin_user_path(user), class: "profile")
+  # @param [User] entity
+  def admin_user_link(entity)
+    return I18n.t(:anonymous) if entity.nil?
+
+    text = entity.profile_name
+    link_to(text, admin_user_path(entity.id), class: 'profile')
   end
 
   # @param [User] user
@@ -26,5 +28,13 @@ module BiovisionUsersHelper
     else
       image_tag 'biovision/base/placeholders/user.svg'
     end
+  end
+
+  # @param [User] entity
+  def user_image_preview(entity)
+    return image_tag('biovision/base/placeholders/user.svg') if entity.image.blank?
+
+    versions = "#{entity.image.preview_2x.url} 2x"
+    image_tag(entity.image.preview.url, alt: entity.name, srcset: versions)
   end
 end

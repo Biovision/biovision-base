@@ -4,8 +4,7 @@
   <h1><%= t('.title') %></h1>
 
   <ul class="actions">
-    <li><%= return_icon(admin_agent_path(@entity.id)) %></li>
-    <li class="danger"><%= destroy_icon @entity %></li>
+    <li><%= back_icon(admin_users_path) %></li>
   </ul>
 
   <%= render partial: 'form', locals: { entity: @entity } %>

@@ -1,0 +1,10 @@
+<div class="data">
+  <div>
+    <% element_id = "user_privilege_#{privilege.id}" %>
+    <%= check_box_tag element_id, 1, privilege.has_user?(user), data: { url: privilege_admin_user_path(id: user.id, privilege_id: privilege.id) } %>
+    <%= label_tag element_id, privilege.name %>
+  </div>
+  <% if privilege.children.any? %>
+      <%= render partial: 'admin/users/entity/privilege_tree', locals: { privileges: Privilege.for_tree(privilege.id), user: user } %>
+  <% end %>
+</div>

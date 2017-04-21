@@ -1,0 +1,17 @@
+<meta property="og:title" content="<%= content_for :meta_title %>" />
+<meta property="og:type" content="<%= content_for?(:meta_type) ? (yield :meta_type) : 'website' %>" />
+<meta property="og:url" content="<%= url_for(only_path: false) %>" />
+<%= yield :meta_type_extension if content_for? :meta_type_extension %>
+<% if content_for? :meta_image %>
+    <meta property="og:image" content="<%= yield :meta_image %>" />
+    <meta name="twitter:image" content="<%= yield :meta_image %>" />
+<% end %>
+<% if content_for? :meta_description %>
+    <meta name="description" content="<%= yield :meta_description %>" />
+    <meta property="og:description" content="<%= yield :meta_description %>" />
+<% end %>
+<meta property="og:site_name" content="<%= t('.site_name') %>" />
+<meta property="twitter:title" content="<%= content_for :meta_title %>" />
+<meta name="twitter:site" content="<%= t('.twitter_site') %>" />
+<meta name="twitter:creator" content="<%= t('.twitter_creator') %>" />
+<%= yield :meta_twitter if content_for? :meta_twitter %>

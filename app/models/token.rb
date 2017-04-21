@@ -13,7 +13,7 @@ class Token < ApplicationRecord
 
   validates_uniqueness_of :token
 
-  scope :recent, -> { order 'last_used desc' }
+  scope :recent, -> { order('last_used desc') }
 
   # @param [Integer] page
   def self.page_for_administration(page)

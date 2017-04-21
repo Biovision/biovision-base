@@ -1,0 +1,17 @@
+<% if privileges.any? %>
+    <ul class="list-of-entities privileges">
+      <% privileges.each do |privilege| %>
+          <% if privilege.deleted? %>
+              <li class="deleted">
+                <%= t(:deleted_entity) %>, id: <%= privilege.id %> [<%= privilege.name %>]
+              </li>
+          <% else %>
+              <li>
+                <%= render partial: 'admin/users/entity/privilege', locals: { privilege: privilege, user: user } %>
+              </li>
+          <% end %>
+      <% end %>
+    </ul>
+<% else %>
+    <%= render 'shared/nothing_found' %>
+<% end %>

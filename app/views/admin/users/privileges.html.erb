@@ -1,0 +1,30 @@
+<% content_for :meta_title, t('.title', user: @entity.profile_name) %>
+
+<article class="entity-page">
+  <h1><%= @entity.profile_name %></h1>
+
+  <ul class="actions">
+    <li><%= return_icon(admin_user_path(@entity.id)) %></li>
+  </ul>
+
+  <section>
+    <h2><%= t('.heading') %></h2>
+
+    <%= render partial: 'admin/users/entity/privilege_tree', locals: { privileges: Privilege.for_tree, user: @entity } %>
+
+    <script>
+        $(function() {
+            $('ul.privileges input[type=checkbox]').on('click', function() {
+                var url = $(this).data('url');
+                var method = $(this).is(':checked') ? 'put' : 'delete';
+                $.ajax(url, {
+                    method: method,
+                    success: function(response) {
+                        console.log(response);
+                    }
+                }).fail(handle_ajax_failure);
+            });
+        });
+    </script>
+  </section>
+</article>

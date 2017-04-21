@@ -63,6 +63,10 @@ ru:
       notice: "Замечание"
       warning: "Предупреждение"
       alert: "Внимание"
+    meta_texts:
+      site_name: "example.com"
+      twitter_site: ""
+      twitter_creator: ""
   admin:
     index:
       index:

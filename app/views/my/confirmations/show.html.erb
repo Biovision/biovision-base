@@ -2,8 +2,8 @@
 
 <article>
   <h1><%= t('.title') %></h1>
-  <% if current_user && current_user.email_confirmed? %>
-      <div class="notice"><%= t('activerecord.attributes.user.email_confirmed') %></div>
+  <% if current_user&.email_confirmed? %>
+      <div class="message-box-notice"><%= t('activerecord.attributes.user.email_confirmed') %></div>
   <% else %>
       <section>
         <h2><%= t('.got_code') %></h2>
