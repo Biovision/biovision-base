@@ -12,18 +12,15 @@ ru:
     many: "%{count} активаций"
     other: "%{count} активаций"
   invalid_code: "Недействительный код"
-  insufficient_role: "Ваша роль не подходит для доступа к странице"
-  insufficient_rights: "Не хватает прав для доступа"
   could_not_log_in: "Не удалось выполнить вход"
-  please_log_in: "Пожалуйста, выполните вход"
   logout: "Выйти"
   email_already_confirmed: "Электронная почта уже подтверждена"
   anonymous: "Анонимно"
-  view_as_administrator: "Посмотреть в админке"
-  view_as_visitor: "Посмотреть как посетитель"
   activerecord:
     models:
       user: "Пользователь"
+      foreign_site: "Внешний сайт"
+      foreign_user: "Внешний пользователь"
       code: "Код"
       token: "Жетон доступа"
       privilege: "Привилегия"
@@ -37,10 +34,10 @@ ru:
             email:
               unreasonable: "не выглядит как email"
             slug:
-              invalid: "должен содержать от 1 до 30 английских букв, цифр или знаков подчёркивания"
+              invalid: "должен содержать от 1 до 30 латинских букв, цифр или знаков подчёркивания"
     attributes:
       user:
-        ip: "Адрес при регистрации"
+        ip: "IP-адрес при регистрации"
         agent: "Агент пользователя при регистрации"
         slug: "Идентификатор"
         gender: "Пол"
@@ -61,9 +58,22 @@ ru:
         surname: "Фамилия"
         notice: "Заметка"
         image: "Картинка"
+        foreign_slug: "Идентификатор пришёл извне"
         genders:
           female: "Женский"
           male: "Мужской"
+      foreign_site:
+        slug: "Идентификатор"
+        name: "Название"
+      foreign_user:
+        foreign_site: "Внешний сайт"
+        user: "Внутренний пользователь"
+        agent: "АП при регистрации"
+        ip: "IP-адрес при регистрации"
+        slug: "Идентификатор"
+        name: "Имя"
+        email: "Email"
+        data: "Данные"
       token:
         user: "Пользователь"
         user_id: "Пользователь"

@@ -25,11 +25,12 @@ module Biovision::UserBase
     has_many :codes, dependent: :delete_all
     has_many :user_privileges, dependent: :destroy
     has_many :privileges, through: :user_privileges
+    has_many :foreign_users, dependent: :delete_all
 
-    before_save { self.slug = screen_name.downcase unless screen_name.nil? }
+    before_save :normalize_slug
 
     validates_presence_of :screen_name, :email
-    validates_format_of :screen_name, with: /\A[a-z0-9_]{1,30}\z/i
+    validates_format_of :screen_name, with: /\A[a-z0-9_]{1,30}\z/i, if: :native_slug?
     validates_format_of :email, with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z0-9][-a-z0-9]+)\z/i
     validates :screen_name, uniqueness: { case_sensitive: false }
     validates :email, uniqueness: { case_sensitive: false }
@@ -79,5 +80,19 @@ module Biovision::UserBase
 
   def can_receive_letters?
     allow_mail? && !email.blank?
+  end
+
+  def native_slug?
+    !foreign_slug?
+  end
+
+  private
+
+  def normalize_slug
+    if native_slug?
+      self.slug = screen_name.downcase
+    else
+      self.slug = slug.downcase
+    end
   end
 end

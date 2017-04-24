@@ -21,6 +21,7 @@ class CreateBiovisionPrivileges < ActiveRecord::Migration[5.0]
 
       Privilege.create!(slug: 'administrator', name: 'Администратор')
       Privilege.create!(slug: 'metrics_manager', name: 'Аналитик метрик')
+      Privilege.create!(slug: 'moderator', name: 'Модератор')
       Privilege.create!(slug: 'chief_editor', name: 'Главный редактор')
     end
   end
