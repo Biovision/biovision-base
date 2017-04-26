@@ -1,4 +1,65 @@
-"use strict";
+'use strict';
+
+var Biovision = {
+    storage: {
+        available: function (type) {
+            try {
+                var storage = window[type],
+                    x = '__storage_test__';
+                storage.setItem(x, x);
+                storage.removeItem(x);
+                return true;
+            }
+            catch (e) {
+                return false;
+            }
+        },
+        set: function(type, key, value) {
+            if (Biovision.storage.available(type)) {
+                window[type].setItem(key, value);
+            } else {
+                console.log('set: Storage ' + type + ' is not available');
+            }
+        },
+        get: function(type, key) {
+            if (Biovision.storage.available(type)) {
+                return window[type].getItem(key);
+            } else {
+                console.log('get: Storage ' + type + ' is not available');
+                return null;
+            }
+        },
+        remove: function(type, key) {
+            if (Biovision.storage.available(type)) {
+                window[type].removeItem(key);
+            } else {
+                console.log('remove: Storage ' + type + ' is not available');
+            }
+        },
+        session: {
+            set: function(key, value) {
+                Biovision.storage.set('sessionStorage', key, value);
+            },
+            get: function(key) {
+                Biovision.storage.get('sessionStorage', key);
+            },
+            remove: function(key) {
+                Biovision.storage.remove('sessionStorage', key);
+            }
+        },
+        local: {
+            set: function(key, value) {
+                Biovision.storage.set('localStorage', key, value);
+            },
+            get: function(key) {
+                Biovision.storage.get('localStorage', key);
+            },
+            remove: function(key) {
+                Biovision.storage.remove('localStorage', key);
+            }
+        }
+    }
+};
 
 $(function () {
     $(document).on('change', 'input[type=file]', function () {
