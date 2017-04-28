@@ -41,7 +41,7 @@ var Biovision = {
                 Biovision.storage.set('sessionStorage', key, value);
             },
             get: function(key) {
-                Biovision.storage.get('sessionStorage', key);
+                return Biovision.storage.get('sessionStorage', key);
             },
             remove: function(key) {
                 Biovision.storage.remove('sessionStorage', key);
@@ -52,7 +52,7 @@ var Biovision = {
                 Biovision.storage.set('localStorage', key, value);
             },
             get: function(key) {
-                Biovision.storage.get('localStorage', key);
+                return Biovision.storage.get('localStorage', key);
             },
             remove: function(key) {
                 Biovision.storage.remove('localStorage', key);
