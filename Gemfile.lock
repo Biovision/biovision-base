@@ -100,7 +100,6 @@ GEM
     nio4r (2.0.0)
     nokogiri (1.7.1)
       mini_portile2 (~> 2.1.0)
-    openssl (2.0.3)
     pg (0.20.0)
     rack (2.0.1)
     rack-test (0.6.3)
@@ -171,7 +170,6 @@ DEPENDENCIES
   biovision-base!
   database_cleaner
   factory_girl_rails
-  openssl (~> 2.0.3)
   pg
   rspec-rails
 
