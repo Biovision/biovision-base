@@ -14,14 +14,14 @@ var Biovision = {
                 return false;
             }
         },
-        set: function(type, key, value) {
+        set: function (type, key, value) {
             if (Biovision.storage.available(type)) {
                 window[type].setItem(key, value);
             } else {
                 console.log('set: Storage ' + type + ' is not available');
             }
         },
-        get: function(type, key) {
+        get: function (type, key) {
             if (Biovision.storage.available(type)) {
                 return window[type].getItem(key);
             } else {
@@ -29,7 +29,7 @@ var Biovision = {
                 return null;
             }
         },
-        remove: function(type, key) {
+        remove: function (type, key) {
             if (Biovision.storage.available(type)) {
                 window[type].removeItem(key);
             } else {
@@ -37,24 +37,24 @@ var Biovision = {
             }
         },
         session: {
-            set: function(key, value) {
+            set: function (key, value) {
                 Biovision.storage.set('sessionStorage', key, value);
             },
-            get: function(key) {
+            get: function (key) {
                 return Biovision.storage.get('sessionStorage', key);
             },
-            remove: function(key) {
+            remove: function (key) {
                 Biovision.storage.remove('sessionStorage', key);
             }
         },
         local: {
-            set: function(key, value) {
+            set: function (key, value) {
                 Biovision.storage.set('localStorage', key, value);
             },
-            get: function(key) {
+            get: function (key) {
                 return Biovision.storage.get('localStorage', key);
             },
-            remove: function(key) {
+            remove: function (key) {
                 Biovision.storage.remove('localStorage', key);
             }
         }
@@ -211,3 +211,9 @@ function handle_ajax_failure(response) {
         console.log(response);
     }
 }
+
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+    }
+});
