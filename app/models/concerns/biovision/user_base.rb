@@ -8,6 +8,8 @@ module Biovision::UserBase
     METRIC_AUTHENTICATION_SUCCESS = 'users.authentication.success.hit'
     METRIC_AUTHENTICATION_FAILURE = 'users.authentication.failure.hit'
 
+    PER_PAGE = 20
+
     toggleable %i(allow_login bot email_confirmed phone_confirmed allow_mail)
 
     belongs_to :agent, optional: true
