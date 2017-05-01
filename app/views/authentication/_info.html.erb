@@ -1,6 +1,6 @@
 <div class="authentication">
   <div class="plate">
-    <%= link_to current_user.profile_name, my_profile_path, class: "profile #{current_user.network}" %>
+    <%= link_to current_user.profile_name, my_profile_path, class: "profile" %>
     <div class="logout">
       <%= link_to image_tag('biovision/base/icons/exit.svg', alt: t(:logout)), logout_path, method: :delete, title: t(:logout) %>
     </div>

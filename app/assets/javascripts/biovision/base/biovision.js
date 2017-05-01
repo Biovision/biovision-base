@@ -202,6 +202,12 @@ $(function () {
             }
         }).fail(handle_ajax_failure);
     });
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
 });
 
 function handle_ajax_failure(response) {
@@ -211,9 +217,3 @@ function handle_ajax_failure(response) {
         console.log(response);
     }
 }
-
-$.ajaxSetup({
-    headers: {
-        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-    }
-});
