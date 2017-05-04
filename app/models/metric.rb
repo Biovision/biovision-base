@@ -36,10 +36,16 @@ class Metric < ApplicationRecord
   # @param [Integer] period
   # @param [Integer] resolution
   def graph_data(period = default_period, resolution = 4)
-    result = Hash.new(0)
+    result        = Hash.new(0)
+    current_value = 0
     metric_values.since(period.days.ago).ordered_by_time.each do |v|
-      key         = v.time_for_graph(resolution).strftime('%d.%m.%Y %H:%M')
-      result[key] += v.quantity
+      key           = v.time_for_graph(resolution).strftime('%d.%m.%Y %H:%M')
+      current_value = incremental? ? current_value + v.quantity : v.quantity
+      if result.key?(key)
+        result[key] = current_value
+      else
+        result[key] += current_value
+      end
     end
     result
   end
