@@ -10,6 +10,10 @@ class Admin::MetricsController < AdminController
   def show
   end
 
+  # get /admin/metrics/:id/data
+  def data
+  end
+
   protected
 
   def restrict_access

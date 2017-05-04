@@ -32,4 +32,15 @@ class Metric < ApplicationRecord
       [v.time.strftime('%d.%m.%Y %H:%M'), current_value]
     end.to_h
   end
+
+  # @param [Integer] period
+  # @param [Integer] resolution
+  def graph_data(period = default_period, resolution = 4)
+    result = Hash.new(0)
+    metric_values.since(period.days.ago).ordered_by_time.each do |v|
+      key         = v.time_for_graph(resolution).strftime('%d.%m.%Y %H:%M')
+      result[key] += v.quantity
+    end
+    result
+  end
 end

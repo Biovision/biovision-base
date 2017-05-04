@@ -9,5 +9,41 @@
 
   <div><%= @entity.description %></div>
 
-  <%= render partial: 'admin/metrics/entity/values', locals: { metric: @entity, values: @entity.values(@entity.default_period) } %>
+  <canvas id="metric-chart" width="640" height="480" data-source="<%= data_admin_metric_path(@entity.id) %>"></canvas>
 </article>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.min.js"></script>
+<script>
+    'use strict';
+    $(function () {
+        var $canvas = $('#metric-chart');
+        $.get($canvas.data('source'), function (response) {
+            if (response.hasOwnProperty('data')) {
+                var metric = response['data'];
+                var labels = Object.keys(metric['graph_data']);
+                var myChart = new Chart($canvas[0], {
+                    type: 'line',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: metric['name'],
+                            data: labels.map(function(k) { return metric['graph_data'][k]; } ),
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: metric['start_with_zero']
+                                }
+                            }]
+                        }
+                    }
+                });
+            }
+            console.log(response.data);
+
+        }).fail(handle_ajax_failure);
+    });
+</script>

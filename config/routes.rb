@@ -30,7 +30,11 @@ Rails.application.routes.draw do
 
     resources :editable_pages, only: [:index, :show]
 
-    resources :metrics, only: [:index, :show]
+    resources :metrics, only: [:index, :show] do
+      member do
+        get 'data', defaults: { format: :json }
+      end
+    end
 
     resources :privileges, only: [:index, :show] do
       member do
