@@ -40,9 +40,9 @@ module Biovision
       # @param [String] metric
       # @param [Symbol|String] view
       def handle_http_404(message, metric = nil, view = :not_found)
-        logger.warn "#{message}\n\t#{request.method} #{request.original_url}"
-        Metric.register(metric || Metric::METRIC_HTTP_404)
-        render view, status: :not_found
+        status         = :not_found
+        default_metric = Metric::METRIC_HTTP_404
+        handle_http_error(message, metric || default_metric, view, status)
       end
 
       # Handle HTTP error with status 401 without raising exception
@@ -51,9 +51,21 @@ module Biovision
       # @param [String] metric
       # @param [Symbol|String] view
       def handle_http_401(message, metric = nil, view = :unauthorized)
+        status         = :unauthorized
+        default_metric = Metric::METRIC_HTTP_401
+        handle_http_error(message, metric || default_metric, view, status)
+      end
+
+      # Handle generic HTTP error without raising exception
+      #
+      # @param [String] message
+      # @param [String] metric
+      # @param [String|Symbol] view
+      # @param [Symbol] status
+      def handle_http_error(message, metric, view, status)
         logger.warn "#{message}\n\t#{request.method} #{request.original_url}"
-        Metric.register(metric || Metric::METRIC_HTTP_401)
-        render view, status: :unauthorized
+        Metric.register(metric)
+        render view, status: status
       end
 
       # Restrict access for anonymous users

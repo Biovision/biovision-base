@@ -3,6 +3,8 @@ class Metric < ApplicationRecord
 
   METRIC_HTTP_401 = 'errors.http.unauthorized.hit'
   METRIC_HTTP_404 = 'errors.http.not_found.hit'
+  METRIC_HTTP_503 = 'errors.http.service_unavailable.hit'
+  METRIC_HTTP_505 = 'errors.http.internal_server_error.hit'
 
   has_many :metric_values, dependent: :destroy
 

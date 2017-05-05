@@ -6,9 +6,8 @@ module Authentication
   end
 
   # @param [User] user
-  # @param [Hash] tracking
-  def create_token_for_user(user, tracking)
-    token = user.tokens.create!(tracking)
+  def create_token_for_user(user)
+    token = user.tokens.create!(tracking_for_entity)
 
     cookies['token'] = {
       value: token.cookie_pair,

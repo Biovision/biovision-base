@@ -4,9 +4,10 @@ module Biovision::UserBase
   included do
     include Toggleable
 
-    METRIC_REGISTRATION           = 'users.registration.hit'
-    METRIC_AUTHENTICATION_SUCCESS = 'users.authentication.success.hit'
-    METRIC_AUTHENTICATION_FAILURE = 'users.authentication.failure.hit'
+    METRIC_REGISTRATION            = 'users.registration.hit'
+    METRIC_AUTHENTICATION_SUCCESS  = 'users.authentication.success.hit'
+    METRIC_AUTHENTICATION_FAILURE  = 'users.authentication.failure.hit'
+    METRIC_AUTHENTICATION_EXTERNAL = 'users.authentication.external.hit'
 
     PER_PAGE = 20
 
@@ -41,7 +42,7 @@ module Biovision::UserBase
     scope :bots, ->(flag) { where(bot: flag.to_i > 0) unless flag.blank? }
     scope :name_like, ->(val) { where('name ilike ?', "%#{val}%") unless val.blank? }
     scope :email_like, ->(val) { where('email ilike ?', "%#{val}%") unless val.blank? }
-    scope :with_email, ->(email) { where('email ikike ?', email) }
+    scope :with_email, ->(email) { where('lower(email) = lower(?)', email) }
     scope :screen_name_like, ->(val) { where('screen_name ilike ?', "%#{val}%") unless val.blank? }
     scope :filtered, ->(f) { name_like(f[:name]).email_like(f[:email]).screen_name_like(f[:screen_name]) }
   end

@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     get 'login' => :new
     post 'login' => :create
     delete 'logout' => :destroy
+    get 'auth/:provider/callback' => :auth_callback, as: :auth_callback
   end
 
   scope 'u/:slug', controller: :profiles do

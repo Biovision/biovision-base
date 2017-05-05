@@ -45,7 +45,7 @@ class My::ProfilesController < ApplicationController
     @user = User.new creation_parameters
     if @user.save
       Metric.register(User::METRIC_REGISTRATION)
-      create_token_for_user(@user, tracking_for_entity)
+      create_token_for_user(@user)
       redirect_to my_profile_path, notice: t('my.profiles.create.success')
     else
       render :new, status: :bad_request
