@@ -73,6 +73,9 @@ ru:
         title: "Администрирование"
         heading: "Администрирование"
   index:
+    navigation:
+      index:
+        index: "Основной сайт"
     index:
       title: "Главная страница"
   application:
