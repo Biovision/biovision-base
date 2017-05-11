@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    biovision-base (0.3.170505)
+    biovision-base (0.4.170510)
       bcrypt (~> 3.1.7)
       carrierwave
       carrierwave-bombshelter
@@ -121,7 +121,7 @@ GEM
       nokogiri (~> 1.6)
     rails-html-sanitizer (1.0.3)
       loofah (~> 2.0)
-    rails-i18n (5.0.3)
+    rails-i18n (5.0.4)
       i18n (~> 0.7)
       railties (~> 5.0)
     railties (5.1.0)

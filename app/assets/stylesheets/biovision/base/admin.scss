@@ -1,4 +1,14 @@
 .entity-page {
+  figure.preview {
+    margin: 0;
+    max-height: 32rem;
+    max-width: 32rem;
+
+    img {
+      max-width: 100%;
+    }
+  }
+
   dl {
     margin: 0 0 1.6rem 0;
     padding: 0;
@@ -15,6 +25,21 @@
 
       input {
         font-size: $normal-font-size;
+      }
+    }
+  }
+
+  ul.flags {
+    margin: 0;
+    padding: 0;
+
+    > li {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+
+      label {
+        font-weight: normal;
       }
     }
   }

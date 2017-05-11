@@ -41,7 +41,7 @@ module BiovisionUsersHelper
   # @param [ForeignSite] foreign_site
   def foreign_login_link(foreign_site)
     image = "biovision/base/icons/foreign/#{foreign_site.slug}.svg"
-    path  = "auth/#{foreign_site.slug}"
+    path  = "/auth/#{foreign_site.slug}"
     link_to(image_tag(image, alt: foreign_site.name), path)
   end
 end
