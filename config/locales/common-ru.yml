@@ -51,6 +51,8 @@ ru:
   home: "Главная"
   untitled: "Без названия"
   hide: "Скрыть"
+  view_as_visitor: "Посмотреть на странице"
+  view_as_administrator: "Посмотреть в админке"
   views:
     pagination:
       first: "⇤"
