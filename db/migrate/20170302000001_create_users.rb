@@ -1,4 +1,4 @@
-class CreateBiovisionUsers < ActiveRecord::Migration[5.0]
+class CreateUsers < ActiveRecord::Migration[5.0]
   def up
     unless User.table_exists?
       create_table :users do |t|
