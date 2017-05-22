@@ -69,7 +69,9 @@ module Biovision::UserBase
 
     # Параметры для администрирования
     def entity_parameters
-      new_profile_parameters + %i(screen_name bot allow_login email_confirmed phone_confirmed notice)
+      flags = %i(bot allow_login email_confirmed phone_confirmed foreign_slug)
+
+      new_profile_parameters + flags + %i(screen_name notice)
     end
   end
 

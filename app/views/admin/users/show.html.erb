@@ -92,6 +92,7 @@
     <tr>
       <td colspan="2">
         <ul>
+          <li><%= link_to t('.privileges'), privileges_admin_user_path(@entity.id) %></li>
           <li><%= link_to t('admin.tokens.index.heading'), tokens_admin_user_path(@entity) %></li>
           <li><%= link_to t('admin.codes.index.heading'), codes_admin_user_path(@entity) %></li>
         </ul>
