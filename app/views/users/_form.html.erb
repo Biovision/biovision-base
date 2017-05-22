@@ -1,79 +1,78 @@
 <%= render partial: 'shared/list_of_errors', locals: { entity: entity } %>
 
 <%= form_for entity do |f| %>
-    <table>
-      <tbody>
-      <tr>
-        <td colspan="2">
-          <figure class="preview" id="user-image">
-            <%= label_tag(:user_image, image_tag(entity.image.profile.url, alt: t(:current_image))) %>
-            <figcaption>
-              <%= f.label :image %>
-              <%= f.file_field :image, accept: 'image/jpeg,image/png', data: { image: 'user-image' } %>
-            </figcaption>
-          </figure>
-        </td>
-      </tr>
-      <tr>
-        <th><%= f.label :screen_name %></th>
-        <td><%= f.text_field :screen_name, size: 30 %></td>
-      </tr>
-      <tr>
-        <th><%= f.label :name %></th>
-        <td><%= f.text_field :name, size: 30 %></td>
-      </tr>
-      <tr>
-        <th><%= f.label :patronymic %></th>
-        <td><%= f.text_field :patronymic, size: 30 %></td>
-      </tr>
-      <tr>
-        <th><%= f.label :surname %></th>
-        <td><%= f.text_field :surname, size: 30 %></td>
-      </tr>
-      <tr>
-        <th><%= f.label :email %></th>
-        <td><%= f.email_field :email, size: 30 %></td>
-      </tr>
-      <tr>
-        <th><%= f.label :phone %></th>
-        <td><%= f.phone_field :phone, size: 15 %></td>
-      </tr>
+
+    <figure class="preview" id="user-image">
+      <%= label_tag(:user_image, image_tag(entity.image.profile.url, alt: t(:current_image))) %>
+      <figcaption>
+        <%= f.label :image %>
+        <%= f.file_field :image, accept: 'image/jpeg,image/png', data: { image: 'user-image' } %>
+      </figcaption>
+    </figure>
+
+    <dl>
+      <dt><%= f.label :screen_name %></dt>
+      <dd>
+        <%= f.text_field :screen_name, size: 30 %>
+      </dd>
+
+      <dt><%= f.label :name %></dt>
+      <dd>
+        <%= f.text_field :name, size: 30 %>
+      </dd>
+
+      <dt><%= f.label :patronymic %></dt>
+      <dd>
+        <%= f.text_field :patronymic, size: 30 %>
+      </dd>
+
+      <dt><%= f.label :surname %></dt>
+      <dd>
+        <%= f.text_field :surname, size: 30 %>
+      </dd>
+
+      <dt><%= f.label :email %></dt>
+      <dd>
+        <%= f.email_field :email, size: 30 %>
+      </dd>
+
+      <dt><%= f.label :phone %></dt>
+      <dd>
+        <%= f.phone_field :phone, size: 15 %>
+      </dd>
+
       <% if entity.id.blank? %>
-          <tr>
-            <th><%= f.label :password %></th>
-            <td><%= f.text_field :password %></td>
-          </tr>
-          <tr>
-            <th><%= f.label :password_confirmation %></th>
-            <td><%= f.text_field :password_confirmation %></td>
-          </tr>
+          <dt><%= f.label :password %></dt>
+          <dd>
+            <%= f.text_field :password %>
+          </dd>
+
+          <dt><%= f.label :password_confirmation %></dt>
+          <dd>
+            <%= f.text_field :password_confirmation %>
+          </dd>
       <% end %>
-      <tr>
-        <th><%= f.label :gender %></th>
-        <td><%= f.select :gender, genders_for_select %></td>
-      </tr>
-      <tr>
-        <td colspan="2" class="flags">
-          <ul>
-            <li><%= f.check_box :bot %><%= f.label :bot %></li>
-            <li><%= f.check_box :allow_login %><%= f.label :allow_login %></li>
-            <li><%= f.check_box :email_confirmed %><%= f.label :email_confirmed %></li>
-            <li><%= f.check_box :phone_confirmed %><%= f.label :phone_confirmed %></li>
-            <li><%= f.check_box :allow_mail %><%= f.label :allow_mail %></li>
-          </ul>
-        </td>
-      </tr>
-      <tr>
-        <th><%= f.label :notice %></th>
-        <td><%= f.text_field :notice %></td>
-      </tr>
-      </tbody>
-      <tfoot>
-      <tr>
-        <td colspan="2">
-          <%= f.button t(:save), type: :submit %>
-        </td>
-      </tr>
-      </tfoot>
-    </table>
+
+      <dt><%= f.label :gender %></dt>
+      <dd>
+        <%= f.select :gender, genders_for_select %>
+      </dd>
+
+      <dt><%= f.label :notice %></dt>
+      <dd>
+        <%= f.text_field :notice %>
+      </dd>
+    </dl>
+
+    <ul class="flags">
+      <li><%= f.check_box :bot %><%= f.label :bot %></li>
+      <li><%= f.check_box :allow_login %><%= f.label :allow_login %></li>
+      <li><%= f.check_box :email_confirmed %><%= f.label :email_confirmed %></li>
+      <li><%= f.check_box :phone_confirmed %><%= f.label :phone_confirmed %></li>
+      <li><%= f.check_box :allow_mail %><%= f.label :allow_mail %></li>
+    </ul>
+
+    <div class="buttons">
+      <%= f.button t(:save), type: :submit %>
+    </div>
 <% end %>

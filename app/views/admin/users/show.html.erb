@@ -12,101 +12,76 @@
     <% end %>
   </ul>
 
-  <table>
-    <tbody>
-    <tr>
-      <td colspan="2">
-        <figure>
-          <%= profile_avatar @entity %>
-        </figure>
-      </td>
-    </tr>
+  <nav>
+    <ul>
+      <li><%= link_to t('.privileges'), privileges_admin_user_path(@entity.id) %></li>
+      <li><%= link_to t('admin.tokens.index.heading'), tokens_admin_user_path(@entity) %></li>
+      <li><%= link_to t('admin.codes.index.heading'), codes_admin_user_path(@entity) %></li>
+    </ul>
+  </nav>
+
+  <figure>
+    <%= profile_avatar @entity %>
+    <figcaption>
+      <%= @entity.slug %>
+    </figcaption>
+  </figure>
+
+  <dl>
     <% unless @entity.notice.blank? %>
-        <tr>
-          <th><%= t('activerecord.attributes.user.notice') %></th>
-          <td><%= @entity.notice %></td>
-        </tr>
+        <dt><%= t('activerecord.attributes.user.notice') %></dt>
+        <dd><%= @entity.notice %></dd>
     <% end %>
-    <tr>
-      <th><%= t('activerecord.attributes.user.slug') %></th>
-      <td><%= @entity.slug %></td>
-    </tr>
-    <tr>
-      <th><%= t('activerecord.attributes.user.screen_name') %></th>
-      <td><%= user_link @entity %></td>
-    </tr>
+
+    <dt><%= t('activerecord.attributes.user.screen_name') %></dt>
+    <dd><%= user_link @entity %></dd>
+
     <% unless @entity.name.blank? %>
-        <tr>
-          <th><%= t('activerecord.attributes.user.name') %></th>
-          <td><%= @entity.name %></td>
-        </tr>
+        <dt><%= t('activerecord.attributes.user.name') %></dt>
+        <dd><%= @entity.name %></dd>
     <% end %>
+
     <% unless @entity.patronymic.blank? %>
-        <tr>
-          <th><%= t('activerecord.attributes.user.patronymic') %></th>
-          <td><%= @entity.patronymic %></td>
-        </tr>
+        <dt><%= t('activerecord.attributes.user.patronymic') %></dt>
+        <dd><%= @entity.patronymic %></dd>
     <% end %>
+
     <% unless @entity.surname.blank? %>
-        <tr>
-          <th><%= t('activerecord.attributes.user.surname') %></th>
-          <td><%= @entity.surname %></td>
-        </tr>
+        <dt><%= t('activerecord.attributes.user.surname') %></dt>
+        <dd><%= @entity.surname %></dd>
     <% end %>
+
     <% unless @entity.email.blank? %>
-        <tr>
-          <th><%= t('activerecord.attributes.user.email') %></th>
-          <td><%= link_to @entity.email, "mailto:#{@entity.email}" %></td>
-        </tr>
+        <dt><%= t('activerecord.attributes.user.email') %></dt>
+        <dd><%= link_to @entity.email, "mailto:#{@entity.email}" %></dd>
     <% end %>
+
     <% unless @entity.phone.blank? %>
-        <tr>
-          <th><%= t('activerecord.attributes.user.phone') %></th>
-          <td><%= link_to @entity.phone, "tel:#{@entity.phone}" %></td>
-        </tr>
+        <dt><%= t('activerecord.attributes.user.phone') %></dt>
+        <dd><%= link_to @entity.phone, "tel:#{@entity.phone}" %></dd>
     <% end %>
-    <tr>
-      <th><%= t('activerecord.attributes.user.gender') %></th>
-      <td><%= @entity.gender.blank? ? t(:not_selected) : t("activerecord.attributes.user.genders.#{@entity.gender}") %></td>
-    </tr>
+
+    <dt><%= t('activerecord.attributes.user.gender') %></dt>
+    <dd><%= @entity.gender.blank? ? t(:not_selected) : t("activerecord.attributes.user.genders.#{@entity.gender}") %></dd>
+
     <% unless @entity.ip.blank? %>
-        <tr>
-          <th><%= t('activerecord.attributes.user.ip') %></th>
-          <td><%= @entity.ip %></td>
-        </tr>
+        <dt><%= t('activerecord.attributes.user.ip') %></dt>
+        <dd><%= @entity.ip %></dd>
     <% end %>
-    <tr>
-      <th><%= t(:created_at) %></th>
-      <td><%= time_tag @entity.created_at %></td>
-    </tr>
-    <tr>
-      <th><%= t(:updated_at) %></th>
-      <td><%= time_tag @entity.updated_at %></td>
-    </tr>
+
+    <dt><%= t(:created_at) %></dt>
+    <dd><%= time_tag @entity.created_at %></dd>
+
+    <dt><%= t(:updated_at) %></dt>
+    <dd><%= time_tag @entity.updated_at %></dd>
+
     <% unless @entity.last_seen.blank? %>
-        <tr>
-          <th><%= t('activerecord.attributes.user.last_seen') %></th>
-          <td><%= time_tag @entity.last_seen %></td>
-        </tr>
+        <dt><%= t('activerecord.attributes.user.last_seen') %></dt>
+        <dd><%= time_tag @entity.last_seen %></dd>
     <% end %>
-    <tr>
-      <td colspan="2">
-        <ul>
-          <li><%= link_to t('.privileges'), privileges_admin_user_path(@entity.id) %></li>
-          <li><%= link_to t('admin.tokens.index.heading'), tokens_admin_user_path(@entity) %></li>
-          <li><%= link_to t('admin.codes.index.heading'), codes_admin_user_path(@entity) %></li>
-        </ul>
-      </td>
-    </tr>
-    </tbody>
-    <% unless @entity.deleted? %>
-        <tfoot>
-        <tr>
-          <td colspan="2">
-            <%= render partial: 'admin/users/toggleable', locals: { entity: @entity } %>
-          </td>
-        </tr>
-        </tfoot>
-    <% end %>
-  </table>
+  </dl>
+
+  <% unless @entity.deleted? %>
+      <%= render partial: 'admin/users/toggleable', locals: { entity: @entity } %>
+  <% end %>
 </article>
