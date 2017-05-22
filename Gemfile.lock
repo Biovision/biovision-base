@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    biovision-base (0.4.170517)
+    biovision-base (0.4.170521)
       bcrypt (~> 3.1.7)
       carrierwave
       carrierwave-bombshelter
@@ -174,4 +174,4 @@ DEPENDENCIES
   rspec-rails
 
 BUNDLED WITH
-   1.14.6
+   1.15.0
