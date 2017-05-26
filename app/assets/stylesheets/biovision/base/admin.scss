@@ -26,7 +26,7 @@
         font-size: $normal-font-size;
       }
 
-      input:not([type=checkbox]):not([type=radio]):not([size]),
+      input:not([type=checkbox]):not([type=radio]):not([size]):not([max]),
       textarea {
         width: calc(100% - 1rem);
       }
