@@ -48,3 +48,11 @@
     }
   }
 }
+
+nav.admin-breadcrumbs {
+  a::after {
+    color: $primary-text-color;
+    content: ' / ';
+    text-decoration: none;
+  }
+}

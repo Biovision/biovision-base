@@ -1,4 +1,7 @@
 <% content_for :meta_title, t('.title') %>
+<% content_for :breadcrumbs do %>
+    <span><%= t('admin.editable_pages.nav_item.text') %></span>
+<% end %>
 
 <article class="entity-page">
   <h1><%= t('.heading') %></h1>

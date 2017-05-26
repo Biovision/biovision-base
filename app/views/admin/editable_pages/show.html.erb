@@ -1,4 +1,8 @@
 <% content_for :meta_title, t('.title', name: @entity.name) %>
+<% content_for :breadcrumbs do %>
+    <%= link_to(t('admin.editable_pages.nav_item.text'), admin_editable_pages_path) %>
+    <span><%= @entity.name %></span>
+<% end %>
 
 <article class="entity-page">
   <h1><%= @entity.name %></h1>
@@ -8,50 +12,36 @@
     <li><%= edit_icon(edit_editable_page_path(@entity.id)) %></li>
   </ul>
 
-  <table>
-    <tbody>
-    <% unless @entity.image.blank? %>
-        <tr>
-          <td colspan="2">
-            <figure>
-              <%= editable_page_image_medium(@entity) %>
-              <figcaption><%= t(:current_image) %></figcaption>
-            </figure>
-          </td>
-        </tr>
-    <% end %>
-    <tr>
-      <th><%= t(:created_at) %></th>
-      <td><%= time_tag(@entity.created_at) %></td>
-    </tr>
-    <tr>
-      <th><%= t(:updated_at) %></th>
-      <td><%= time_tag(@entity.updated_at) %></td>
-    </tr>
-    <tr>
-      <th><%= t('activerecord.attributes.editable_page.slug') %></th>
-      <td><%= @entity.slug %></td>
-    </tr>
+  <% unless @entity.image.blank? %>
+      <figure>
+        <%= editable_page_image_medium(@entity) %>
+        <figcaption><%= t(:current_image) %></figcaption>
+      </figure>
+  <% end %>
+
+  <dl>
+    <dt><%= t(:created_at) %></dt>
+    <dd><%= time_tag(@entity.created_at) %></dd>
+
+    <dt><%= t(:updated_at) %></dt>
+    <dd><%= time_tag(@entity.updated_at) %></dd>
+
+    <dt><%= t('activerecord.attributes.editable_page.slug') %></dt>
+    <dd><%= @entity.slug %></dd>
+
     <% unless @entity.title.blank? %>
-        <tr>
-          <th><%= t('activerecord.attributes.editable_page.title') %></th>
-          <td><%= @entity.title %></td>
-        </tr>
+        <dt><%= t('activerecord.attributes.editable_page.title') %></dt>
+        <dd><%= @entity.title %></dd>
     <% end %>
     <% unless @entity.keywords.blank? %>
-        <tr>
-          <th><%= t('activerecord.attributes.editable_page.keywords') %></th>
-          <td><%= @entity.keywords %></td>
-        </tr>
+        <dt><%= t('activerecord.attributes.editable_page.keywords') %></dt>
+        <dd><%= @entity.keywords %></dd>
     <% end %>
     <% unless @entity.description.blank? %>
-        <tr>
-          <th><%= t('activerecord.attributes.editable_page.description') %></th>
-          <td><%= @entity.description %></td>
-        </tr>
+        <dt><%= t('activerecord.attributes.editable_page.description') %></dt>
+        <dd><%= @entity.description %></dd>
     <% end %>
-    </tbody>
-  </table>
+  </dl>
 
   <section><%= raw(@entity.body) %></section>
 </article>
