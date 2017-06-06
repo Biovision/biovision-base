@@ -1,7 +1,11 @@
 <% content_for :meta_title, t('.title') %>
+<% content_for :breadcrumbs do %>
+    <%= link_to(t('admin.privilege_groups.nav_item.text'), admin_privilege_groups_path) %>
+    <span><%= t('.heading') %></span>
+<% end %>
 
 <article class="entity-page">
-  <h1><%= t('.title') %></h1>
+  <h1><%= t('.heading') %></h1>
 
   <ul class="actions">
     <li><%= back_icon(admin_privilege_groups_path) %></li>

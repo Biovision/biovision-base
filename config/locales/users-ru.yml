@@ -155,10 +155,12 @@ ru:
         groups:
           heading: "Группы привилегий"
     privilege_groups:
+      nav_item:
+        text: "Группы привилегий"
+        description: "Управление группами привилегий"
       index:
         title: "Группы привилегий"
         heading: "Группы привилегий"
-        description: "Управление группами привилегий"
       show:
         title: "Группа привилегий «%{name}»"
         privileges: "Привилегии"
@@ -230,8 +232,10 @@ ru:
   privilege_groups:
     new:
       title: "Новая группа привилегий"
+      heading: "Новая группа привилегий"
     edit:
       title: "Редактирование группы привилегий"
+      heading: "Редактирование группы привилегий"
     update:
       success: "Группа успешно изменена"
     destroy:

@@ -2,11 +2,15 @@ class PrivilegeGroup < ApplicationRecord
   include RequiredUniqueSlug
   include RequiredUniqueName
 
+  NAME_LIMIT        = 250
+  SLUG_LIMIT        = 50
   DESCRIPTION_LIMIT = 350
 
   has_many :privilege_group_privileges, dependent: :destroy
   has_many :privileges, through: :privilege_group_privileges
 
+  validates_length_of :name, maximum: NAME_LIMIT
+  validates_length_of :slug, maximum: SLUG_LIMIT
   validates_length_of :description, maximum: DESCRIPTION_LIMIT
 
   def self.page_for_administration
