@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    biovision-base (0.4.170526)
+    biovision-base (0.4.170607)
       bcrypt (~> 3.1.7)
       carrierwave
       carrierwave-bombshelter
@@ -97,7 +97,7 @@ GEM
     mini_magick (4.7.0)
     mini_portile2 (2.1.0)
     minitest (5.10.2)
-    nio4r (2.0.0)
+    nio4r (2.1.0)
     nokogiri (1.7.2)
       mini_portile2 (~> 2.1.0)
     pg (0.20.0)
@@ -174,4 +174,4 @@ DEPENDENCIES
   rspec-rails
 
 BUNDLED WITH
-   1.15.0
+   1.15.1
