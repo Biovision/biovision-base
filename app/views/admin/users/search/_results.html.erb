@@ -1,0 +1,11 @@
+<% if collection.any? %>
+    <ul>
+      <% collection.each do |entity| %>
+      <li data-id="<%= entity.id %>">
+        <%= entity.profile_name %> (<%= entity.slug %>)
+      </li>
+      <% end %>
+    </ul>
+<% else %>
+    <%= render 'shared/nothing_found' %>
+<% end %>

@@ -35,6 +35,7 @@ ru:
   submit: "Отправить"
   save: "Сохранить"
   back: "Назад"
+  find: "Найти"
   are_you_sure: "Вы уверены?"
   created_at: "Время создания"
   updated_at: "Время обновления"

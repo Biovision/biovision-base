@@ -1,0 +1,17 @@
+<%= form_tag url_for, method: :get, class: :filter do %>
+    <fieldset>
+      <legend><%= t(:filter) %></legend>
+
+      <div>
+        <div><%= label_tag 'filter_user_id', t('activerecord.attributes.token.user_id') %></div>
+        <div>
+          <%= number_field_tag 'filter[user_id]', filter[:user_id], min: 1 %>
+          <%= render partial: 'admin/users/search', locals: { target_id: 'filter_user_id' } %>
+        </div>
+      </div>
+
+      <%= render partial: 'shared/filter/flag', locals: { title: t('activerecord.attributes.token.active'), name: :active, state: filter[:active] } %>
+
+      <div class="button"><%= button_tag t(:submit), type: :submit, name: '' %></div>
+    </fieldset>
+<% end %>

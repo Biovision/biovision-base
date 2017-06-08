@@ -1,7 +1,7 @@
 class Admin::UsersController < AdminController
   include ToggleableEntity
 
-  before_action :set_entity, except: [:index]
+  before_action :set_entity, except: [:index, :search]
   before_action :set_privilege, only: [:grant_privilege, :revoke_privilege]
 
   # get /admin/users
@@ -40,6 +40,16 @@ class Admin::UsersController < AdminController
     @privilege.revoke(@entity)
 
     render json: { data: { user_privilege_ids: @entity.user_privilege_ids } }
+  end
+
+  # get /admin/users/search
+  def search
+    query = param_from_request(:q)
+    if query.blank?
+      @collection = []
+    else
+      @collection = User.search(query).order('slug asc').first(10)
+    end
   end
 
   protected

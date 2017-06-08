@@ -56,6 +56,9 @@ Rails.application.routes.draw do
     end
 
     resources :users, only: [:index, :show] do
+      collection do
+        get 'search', defaults: { format: :json }
+      end
       member do
         get 'tokens'
         get 'codes'

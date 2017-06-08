@@ -11,6 +11,8 @@
     <li><%= create_icon(new_token_path) %></li>
   </ul>
 
+  <%= render partial: 'admin/tokens/filter', locals: { filter: @filter } %>
+
   <%= paginate @collection %>
   <%= render partial: 'list', locals: { collection: @collection } %>
   <%= paginate @collection %>

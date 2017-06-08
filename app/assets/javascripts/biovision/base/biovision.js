@@ -203,6 +203,25 @@ $(function () {
         }).fail(handle_ajax_failure);
     });
 
+    $('.user-search button').on('click', function() {
+        var $container = $(this).closest('.user-search');
+        var $input = $container.find('input[type=search]');
+        var $results = $container.find('.results');
+
+        $.get($container.data('url'), {q: $input.val()}, function (response) {
+            if (response.hasOwnProperty('data')) {
+                $results.html(response['data']['html']);
+            }
+        }).fail(handle_ajax_failure);
+    });
+
+    $(document).on('click', '.user-search .results li', function() {
+        var $container = $(this).closest('.user-search');
+        var $target = $('#' + $container.data('target'));
+
+        $target.val($(this).data('id'));
+    });
+
     $.ajaxSetup({
         headers: {
             'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')

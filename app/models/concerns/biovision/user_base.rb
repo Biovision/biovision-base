@@ -44,6 +44,7 @@ module Biovision::UserBase
     scope :email_like, ->(val) { where('email ilike ?', "%#{val}%") unless val.blank? }
     scope :with_email, ->(email) { where('lower(email) = lower(?)', email) }
     scope :screen_name_like, ->(val) { where('screen_name ilike ?', "%#{val}%") unless val.blank? }
+    scope :search, ->(q) { where("lower(concat_ws(' ', slug, email, surname, name)) like ?", "%#{q.downcase}%") unless q.blank? }
     scope :filtered, ->(f) { name_like(f[:name]).email_like(f[:email]).screen_name_like(f[:screen_name]) }
   end
 
