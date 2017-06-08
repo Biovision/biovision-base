@@ -1,4 +1,7 @@
 <% content_for :meta_title, t('.title', page: current_page) %>
+<% content_for :breadcrumbs do %>
+    <span><%= t('admin.tokens.nav_item.text') %></span>
+<% end %>
 
 <article class="entity-page">
   <h1><%= t('.heading') %></h1>

@@ -5,7 +5,8 @@ class Admin::TokensController < AdminController
 
   # get /admin/tokens
   def index
-    @collection = Token.page_for_administration(current_page)
+    @filter     = params[:filter] || {}
+    @collection = Token.page_for_administration(current_page, @filter)
   end
 
   # get /admin/tokens/:id

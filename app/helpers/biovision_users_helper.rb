@@ -21,6 +21,11 @@ module BiovisionUsersHelper
     link_to(text, admin_user_path(entity.id), class: 'profile')
   end
 
+  # @param [Token] entity
+  def admin_token_link(entity)
+    link_to entity.name, admin_token_path(entity.id)
+  end
+
   # @param [User] user
   def profile_avatar(user)
     if user.is_a?(User) && !user.image.blank? && !user.deleted?

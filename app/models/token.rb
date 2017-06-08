@@ -13,11 +13,19 @@ class Token < ApplicationRecord
 
   validates_uniqueness_of :token
 
-  scope :recent, -> { order('last_used desc') }
+  scope :recent, -> { order('last_used desc nulls last') }
+  scope :active, ->(flag) { where(active: flag.to_i > 0) unless flag.blank? }
+  scope :filtered, ->(f) { with_user_id(f[:user_id]).active(f[:active]) }
 
   # @param [Integer] page
-  def self.page_for_administration(page)
-    recent.page(page).per(PER_PAGE)
+  def self.page_for_administration(page, filter = {})
+    filtered(filter).recent.page(page).per(PER_PAGE)
+  end
+
+  # @param [User] user
+  # @param [Integer] page
+  def self.page_for_owner(user, page)
+    owned_by(user).recent.page(page).per(PER_PAGE)
   end
 
   def self.entity_parameters
@@ -47,9 +55,13 @@ class Token < ApplicationRecord
     instance.user
   end
 
+  def name
+    "[#{id}] #{user.profile_name}"
+  end
+
   # @param [User] user
   def editable_by?(user)
-    owned_by?(user) # || UserRole.user_has_role?(user, :administrator)
+    owned_by?(user) || UserPrivilege.user_has_privilege?(user, :administrator)
   end
 
   def cookie_pair

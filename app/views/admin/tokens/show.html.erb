@@ -1,4 +1,8 @@
 <% content_for :meta_title, t('.title', id: @entity.id) %>
+<% content_for :breadcrumbs do %>
+    <%= link_to t('admin.tokens.nav_item.text'), admin_tokens_path %>
+    <span><%= @entity.name %></span>
+<% end %>
 
 <article class="entity-page">
   <h1><%= @entity.token %></h1>
