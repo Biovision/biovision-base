@@ -343,6 +343,10 @@ ul.actions {
         max-height: 8rem;
         max-width: 8rem;
       }
+
+      & + .data {
+        max-width: calc(100% - 8.8rem);
+      }
     }
 
     .data {

@@ -3,8 +3,7 @@
 </div>
 <div class="data">
   <div><%= admin_token_link(entity) %></div>
-  <div class="secondary info">
-    <div><%= time_tag entity.created_at %>/<%= time_tag entity.updated_at %></div>
+  <div class="info">
     <% unless entity.last_used.nil? %>
         <div>
           <%= t('activerecord.attributes.token.last_used') %>
@@ -12,9 +11,12 @@
         </div>
     <% end %>
   </div>
-  <% unless entity.agent.blank? %>
-      <div class="info"><%= link_to entity.agent.name, admin_agent_path(entity.agent) %></div>
-  <% end %>
+  <div class="secondary info">
+    <div><%= entity.ip %></div>
+    <% unless entity.agent.blank? %>
+        <div class="truncate"><%= entity.agent.name %></div>
+    <% end %>
+  </div>
   <%= render partial: 'admin/tokens/toggleable', locals: { entity: entity } %>
 
   <ul class="actions">

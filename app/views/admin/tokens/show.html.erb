@@ -13,43 +13,31 @@
     <li class="danger"><%= destroy_icon(@entity) %></li>
   </ul>
 
-  <table>
-    <tbody>
-    <tr>
-      <th><%= t('activerecord.attributes.token.user') %></th>
-      <td><%= admin_user_link(@entity.user) %></td>
-    </tr>
+  <dl>
+    <dt><%= t('activerecord.attributes.token.user') %></dt>
+    <dd><%= admin_user_link(@entity.user) %></dd>
+
     <% unless @entity.last_used.nil? %>
-        <tr>
-          <th><%= t('activerecord.attributes.token.last_used') %></th>
-          <td><%= time_tag @entity.last_used %></td>
-        </tr>
+        <dt><%= t('activerecord.attributes.token.last_used') %></dt>
+        <dd><%= time_tag @entity.last_used %></dd>
     <% end %>
-    <tr>
-      <th><%= t(:created_at) %></th>
-      <td><%= time_tag @entity.created_at %></td>
-    </tr>
-    <tr>
-      <th><%= t(:updated_at) %></th>
-      <td><%= time_tag @entity.updated_at %></td>
-    </tr>
+
+    <dt><%= t(:created_at) %></dt>
+    <dd><%= time_tag @entity.created_at %></dd>
+
+    <dt><%= t(:updated_at) %></dt>
+    <dd><%= time_tag @entity.updated_at %></dd>
+
     <% unless @entity.ip.blank? %>
-        <tr>
-          <th><%= t('tracking.ip') %></th>
-          <td><%= @entity.ip %></td>
-        </tr>
+        <dt><%= t('tracking.ip') %></dt>
+        <dd><%= @entity.ip %></dd>
     <% end %>
+
     <% unless @entity.agent.blank? %>
-        <tr>
-          <th><%= t('tracking.agent') %></th>
-          <td><%= @entity.agent.name %></td>
-        </tr>
+        <dt><%= t('tracking.agent') %></dt>
+        <dd><%= @entity.agent.name %></dd>
     <% end %>
-    <tr>
-      <td colspan="2">
-        <%= render partial: 'admin/tokens/toggleable', locals: { entity: @entity } %>
-      </td>
-    </tr>
-    </tbody>
-  </table>
+  </dl>
+
+  <%= render partial: 'admin/tokens/toggleable', locals: { entity: @entity } %>
 </article>

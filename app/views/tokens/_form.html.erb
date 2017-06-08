@@ -1,33 +1,29 @@
 <%= render partial: 'shared/list_of_errors', locals: { entity: entity } %>
 
 <%= form_for entity do |f| %>
-    <table>
-      <tbody>
+    <dl>
       <% if entity.id.blank? %>
-          <tr>
-            <th><%= f.label :user_id %></th>
-            <td><%= f.number_field :user_id, min: 1 %></td>
-          </tr>
+          <dt><%= f.label :user_id %></dt>
+          <dd>
+            <%= f.number_field :user_id, min: 1 %>
+          </dd>
       <% else %>
-          <tr>
-            <th><%= t('activerecord.attributes.token.user') %></th>
-            <td><%= admin_user_link entity.user %></td>
-          </tr>
+          <dt><%= t('activerecord.attributes.token.user') %></dt>
+          <dd>
+            <%= admin_user_link entity.user %>
+          </dd>
+
+          <dt><%= t('activerecord.attributes.token.token') %></dt>
+          <dd>
+            <%= entity.token %>
+          </dd>
       <% end %>
-      <tr>
-        <td colspan="2" class="flags">
-          <ul>
-            <li><%= f.check_box :active %><%= f.label :active %></li>
-          </ul>
-        </td>
-      </tr>
-      </tbody>
-      <tfoot>
-      <tr>
-        <td colspan="2">
-          <%= f.button t(:save), type: :submit %>
-        </td>
-      </tr>
-      </tfoot>
-    </table>
+    </dl>
+    <ul class="flags">
+      <li><%= f.check_box :active %><%= f.label :active %></li>
+    </ul>
+
+    <div class="buttons">
+      <%= f.button t(:save), type: :submit %>
+    </div>
 <% end %>
