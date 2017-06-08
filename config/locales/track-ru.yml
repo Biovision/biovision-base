@@ -51,10 +51,12 @@ ru:
       show:
         title: "Браузер «%{name}»"
     metrics:
+      nav_item:
+        text: "Метрики"
+        description: "Анализ различных метрик"
       index:
         title: "Метрики"
         heading: "Метрики"
-        description: "Анализ различных метрик"
       show:
         title: "Метрика «%{name}»"
   agents:
@@ -87,6 +89,10 @@ ru:
       heading: "Редактирование метрики"
     update:
       success: "Метрика успешно обновлена"
+    form:
+      guidelines:
+        description: "Максимум 250 символов."
+        default_period: "Количество дней на графике."
   tracking:
     ip: "IP"
     agent: "АП"

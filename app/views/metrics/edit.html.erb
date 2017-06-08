@@ -1,10 +1,16 @@
 <% content_for :meta_title, t('.title') %>
+<% content_for :breadcrumbs do %>
+    <%= link_to(t('admin.metrics.nav_item.text'), admin_metrics_path) %>
+    <%= link_to(@entity.name, admin_metric_path(@entity.id)) %>
+    <span><%= t(:edit) %></span>
+<% end %>
+
 
 <article class="entity-page">
   <h1><%= t('.heading') %></h1>
 
   <ul class="actions">
-    <li><%= back_icon(admin_metric_path(@entity.id)) %></li>
+    <li><%= return_icon(admin_metric_path(@entity.id)) %></li>
   </ul>
 
   <%= render partial: 'form', locals: { entity: @entity } %>

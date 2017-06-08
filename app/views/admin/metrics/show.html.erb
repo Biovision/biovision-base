@@ -1,7 +1,12 @@
 <% content_for :meta_title, t('.title', name: @entity.name) %>
+<% content_for :breadcrumbs do %>
+    <%= link_to(t('admin.metrics.nav_item.text'), admin_metrics_path) %>
+    <span><%= @entity.name %></span>
+<% end %>
 
 <article class="entity-page">
   <h1><%= @entity.name %></h1>
+
   <ul class="actions">
     <li><%= return_icon(admin_metrics_path) %></li>
     <li><%= edit_icon(edit_metric_path(@entity.id)) %></li>
@@ -16,12 +21,12 @@
 <script>
     'use strict';
     $(function () {
-        var $canvas = $('#metric-chart');
+        let $canvas = $('#metric-chart');
         $.get($canvas.data('source'), function (response) {
             if (response.hasOwnProperty('data')) {
-                var metric = response['data'];
-                var labels = Object.keys(metric['graph_data']);
-                var myChart = new Chart($canvas[0], {
+                let metric = response['data'];
+                let labels = Object.keys(metric['graph_data']);
+                let myChart = new Chart($canvas[0], {
                     type: 'line',
                     data: {
                         labels: labels,
@@ -42,8 +47,6 @@
                     }
                 });
             }
-            console.log(response.data);
-
         }).fail(handle_ajax_failure);
     });
 </script>

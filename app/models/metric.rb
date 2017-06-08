@@ -1,12 +1,18 @@
 class Metric < ApplicationRecord
   include RequiredUniqueName
 
+  DESCRIPTION_LIMIT = 250
+  PERIOD_RANGE      = (1..365)
+
   METRIC_HTTP_401 = 'errors.http.unauthorized.hit'
   METRIC_HTTP_404 = 'errors.http.not_found.hit'
   METRIC_HTTP_503 = 'errors.http.service_unavailable.hit'
   METRIC_HTTP_505 = 'errors.http.internal_server_error.hit'
 
   has_many :metric_values, dependent: :destroy
+
+  before_validation :normalize_period
+  validates_length_of :description, maximum: DESCRIPTION_LIMIT
 
   def self.page_for_administration
     order('name asc')
@@ -50,5 +56,12 @@ class Metric < ApplicationRecord
       end
     end
     result
+  end
+
+  private
+
+  def normalize_period
+    self.default_period = PERIOD_RANGE.first if default_period < PERIOD_RANGE.first
+    self.default_period = PERIOD_RANGE.last if default_period > PERIOD_RANGE.last
   end
 end
