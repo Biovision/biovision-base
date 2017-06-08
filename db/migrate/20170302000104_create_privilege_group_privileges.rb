@@ -7,8 +7,12 @@ class CreatePrivilegeGroupPrivileges < ActiveRecord::Migration[5.0]
         t.references :privilege, foreign_key: true, null: false, on_update: :cascade, on_delete: :cascade
       end
 
-      group = PrivilegeGroup.create(slug: 'editors', name: 'Редакторы')
+      group = PrivilegeGroup.find_by(slug: 'editors')
       group.add_privilege(Privilege.find_by(slug: 'chief_editor'))
+
+      group = PrivilegeGroup.find_by(slug: 'editorial_office')
+      group.add_privilege(Privilege.find_by(slug: 'chief_editor'))
+      group.add_privilege(Privilege.find_by(slug: 'moderator'))
     end
   end
 

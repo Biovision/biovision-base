@@ -9,6 +9,9 @@ class CreatePrivilegeGroups < ActiveRecord::Migration[5.0]
       end
 
       add_index :privilege_groups, :slug, unique: true
+
+      PrivilegeGroup.create(slug: 'editors', name: 'Редакторы')
+      PrivilegeGroup.create(slug: 'editorial_office', name: 'Члены редакции')
     end
   end
 
