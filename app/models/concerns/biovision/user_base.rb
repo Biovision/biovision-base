@@ -74,6 +74,12 @@ module Biovision::UserBase
 
       new_profile_parameters + flags + %i(screen_name notice)
     end
+
+    def ids_range
+      min = User.minimum(:id).to_i
+      max = User.maximum(:id).to_i
+      (min..max)
+    end
   end
 
   def profile_name

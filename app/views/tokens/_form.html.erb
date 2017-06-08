@@ -5,7 +5,7 @@
       <% if entity.id.blank? %>
           <dt><%= f.label :user_id %></dt>
           <dd>
-            <%= f.number_field :user_id, in: (1..User.maximum(:id).to_i) %>
+            <%= f.number_field :user_id, in: User.ids_range %>
             <%= render partial: 'admin/users/search', locals: { target_id: 'token_user_id' } %>
           </dd>
       <% else %>

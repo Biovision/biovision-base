@@ -5,7 +5,7 @@
       <div>
         <div><%= label_tag 'filter_user_id', t('activerecord.attributes.token.user_id') %></div>
         <div>
-          <%= number_field_tag 'filter[user_id]', filter[:user_id], min: 1 %>
+          <%= number_field_tag 'filter[user_id]', filter[:user_id], in: User.ids_range %>
           <%= render partial: 'admin/users/search', locals: { target_id: 'filter_user_id' } %>
         </div>
       </div>
