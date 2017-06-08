@@ -14,7 +14,7 @@ module Biovision::UserPrivilegeBase
     def ids(user)
       privileges = user&.privileges
       return [] if privileges.blank?
-      privileges.map(&:ids).flatten.uniq
+      privileges.map(&:branch_ids).flatten.uniq
     end
 
     # @param [User] user
