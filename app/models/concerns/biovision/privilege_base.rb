@@ -40,6 +40,11 @@ module Biovision::PrivilegeBase
     [id] + children_cache
   end
 
+  # @return [Array<Integer>]
+  def branch_ids
+    parents_cache.split(',').map(&:to_i).reject { |i| i < 1}.uniq + [id]
+  end
+
   def parents
     if parents_cache.blank?
       []

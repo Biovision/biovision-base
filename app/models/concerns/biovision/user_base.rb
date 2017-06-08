@@ -38,7 +38,7 @@ module Biovision::UserBase
     validates :screen_name, uniqueness: { case_sensitive: false }
     validates :email, uniqueness: { case_sensitive: false }
 
-    scope :with_privilege, ->(privilege) { joins(:user_privileges).where(user_privileges: { privilege_id: privilege.ids }) }
+    scope :with_privilege, ->(privilege) { joins(:user_privileges).where(user_privileges: { privilege_id: privilege.branch_ids }) }
     scope :bots, ->(flag) { where(bot: flag.to_i > 0) unless flag.blank? }
     scope :name_like, ->(val) { where('name ilike ?', "%#{val}%") unless val.blank? }
     scope :email_like, ->(val) { where('email ilike ?', "%#{val}%") unless val.blank? }
