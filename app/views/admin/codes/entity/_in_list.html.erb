@@ -1,14 +1,24 @@
+<div class="image">
+  <%= profile_avatar(entity.user) unless entity.user.nil? %>
+</div>
 <div class="data">
   <div>
-    <%= t("activerecord.attributes.code.categories.#{code.category}") %>
-    <%= link_to code.body, admin_code_path(code) %>
+    <%= t("activerecord.attributes.code.categories.#{entity.category}") %>
+    <%= admin_code_link(entity) %>
   </div>
-  <div class="info"><%= admin_user_link code.user %></div>
+  <div class="info"><%= admin_user_link(entity.user) %></div>
   <div class="secondary info">
-    <div><%= t(:created_at) %>: <%= time_tag code.created_at %></div>
-    <div><%= t(:code_activation, count: code.quantity) %></div>
+    <div><%= t(:created_at) %>: <%= time_tag(entity.created_at) %></div>
+    <div><%= t(:code_activation_count, count: entity.quantity) %></div>
+    <% unless entity.ip.nil? %>
+        <div><%= entity.ip %></div>
+    <% end %>
+    <% unless entity.agent.nil? %>
+        <div class="truncate"><%= entity.agent.name %></div>
+    <% end %>
   </div>
+
   <ul class="actions">
-    <li><%= edit_icon edit_code_path(code) %></li>
+    <li><%= edit_icon edit_code_path(entity.id) %></li>
   </ul>
 </div>

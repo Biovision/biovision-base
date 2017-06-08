@@ -1,4 +1,4 @@
-<% if current_user_has_privilege? :administrator %>
+<% if current_user_has_privilege?(:administrator) %>
     <div class="track">
       <% if item.respond_to?(:agent) && !item.agent.nil? %>
           <div class="agent"><%= item.agent.name %></div>

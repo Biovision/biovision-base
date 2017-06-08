@@ -1,7 +1,9 @@
 class Code < ApplicationRecord
   include HasOwner
 
-  PER_PAGE = 20
+  PER_PAGE      = 20
+  BODY_LIMIT    = 50
+  PAYLOAD_LIMIT = 250
 
   belongs_to :user, optional: true
   belongs_to :agent, optional: true
@@ -12,6 +14,8 @@ class Code < ApplicationRecord
 
   validates_presence_of :body
   validates_uniqueness_of :body
+  validates_length_of :body, maximum: BODY_LIMIT
+  validates_length_of :payload, maximum: PAYLOAD_LIMIT
 
   scope :recent, -> { order('id desc') }
   scope :active, -> { where('quantity > 0') }

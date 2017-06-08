@@ -1,44 +1,48 @@
 <%= render partial: 'shared/list_of_errors', locals: { entity: entity } %>
 
 <%= form_for entity do |f| %>
-    <table>
-      <tbody>
+    <dl>
       <% if entity.id.blank? %>
-          <tr>
-            <th><%= f.label :category %></th>
-            <td><%= f.select :category, code_categories_for_select %></td>
-          </tr>
-          <tr>
-            <th><%= f.label :user_id %></th>
-            <td><%= f.number_field :user_id, min: 1 %></td>
-          </tr>
+          <dt><%= f.label :category %></dt>
+          <dd>
+            <%= f.select :category, code_categories_for_select, required: true %>
+          </dd>
+
+          <dt><%= f.label :user_id %></dt>
+          <dd>
+            <%= f.number_field :user_id, in: User.ids_range %>
+            <%= render partial: 'admin/users/search', locals: { target_id: :code_user_id } %>
+          </dd>
       <% else %>
-          <tr>
-            <th><%= t('activerecord.attributes.code.category') %></th>
-            <td><%= t("activerecord.attributes.code.categories.#{entity.category}") %></td>
-          </tr>
-          <tr>
-            <th><%= t('activerecord.attributes.code.user_id') %></th>
-            <td><%= admin_user_link entity.user %></td>
-          </tr>
+          <dt><%= t('activerecord.attributes.code.category') %></dt>
+          <dd>
+            <%= t("activerecord.attributes.code.categories.#{entity.category}") %>
+          </dd>
+
+          <dt><%= t('activerecord.attributes.code.user_id') %></dt>
+          <dd>
+            <%= admin_user_link entity.user %>
+          </dd>
       <% end %>
-      <tr>
-        <th><%= f.label :body %></th>
-        <td><%= f.text_field :body, size: 25, required: true %></td>
-      </tr>
-      <tr>
-        <th><%= f.label :payload %></th>
-        <td><%= f.text_field :payload, size: 25 %></td>
-      </tr>
-      <tr>
-        <th><%= f.label :quantity %></th>
-        <td><%= f.number_field :quantity, min: 0 %></td>
-      </tr>
-      </tbody>
-      <tfoot>
-      <tr>
-        <td colspan="2"><%= f.button t(:save), type: :submit %></td>
-      </tr>
-      </tfoot>
-    </table>
+      <dt><%= f.label :body %></dt>
+      <dd>
+        <%= f.text_field :body, size: 25, maxlength: Code::BODY_LIMIT, required: true %>
+        <div class="guideline"><%= t('.guidelines.body') %></div>
+      </dd>
+
+      <dt><%= f.label :payload %></dt>
+      <dd>
+        <%= f.text_field :payload, size: 25, maxlength: Code::PAYLOAD_LIMIT %>
+        <div class="guideline"><%= t('.guidelines.payload') %></div>
+      </dd>
+
+      <dt><%= f.label :quantity %></dt>
+      <dd>
+        <%= f.number_field :quantity, in: (0..999999) %>
+      </dd>
+    </dl>
+
+    <div class="buttons">
+      <%= f.button t(:save), type: :submit %>
+    </div>
 <% end %>
