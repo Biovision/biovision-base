@@ -2,7 +2,13 @@ class ForeignSite < ApplicationRecord
   include RequiredUniqueName
   include RequiredUniqueSlug
 
+  NAME_LIMIT = 50
+  SLUG_LIMIT = 50
+
   has_many :foreign_users, dependent: :delete_all
+
+  validates_length_of :name, maximum: NAME_LIMIT
+  validates_length_of :slug, maximum: SLUG_LIMIT
 
   def self.page_for_administration
     ordered_by_name

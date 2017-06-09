@@ -9,7 +9,7 @@ class CreateBrowsers < ActiveRecord::Migration[5.0]
         t.boolean :locked, null: false, default: false
         t.boolean :deleted, null: false, default: false
         t.integer :agents_count, default: 0, null: false
-        t.string :name, null: false
+        t.string :name, index: true, null: false
       end
     end
   end
