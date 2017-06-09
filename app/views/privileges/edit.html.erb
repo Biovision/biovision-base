@@ -1,5 +1,12 @@
 <% content_for :meta_title, t('.title') %>
-<% content_for :hide_sidebar, '1' %>
+<% content_for :breadcrumbs do %>
+    <%= link_to(t('admin.privileges.nav_item.text'), admin_privileges_path) %>
+    <% @entity.parents.each do |parent| %>
+        <% admin_privilege_link(parent) %>
+    <% end %>
+    <%= admin_privilege_link(@entity) %>
+    <span><%= t(:edit) %></span>
+<% end %>
 
 <article class="entity-page">
   <h1><%= t('.title') %></h1>

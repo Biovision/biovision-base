@@ -1,50 +1,42 @@
 <%= render partial: 'shared/list_of_errors', locals: { entity: entity } %>
 
 <%= form_for entity do |f| %>
-    <table>
-      <tbody>
+    <dl>
       <% unless entity.id.nil? %>
           <% unless entity.parent_id.nil? %>
-              <tr>
-                <th><%= t('activerecord.attributes.privilege.parent_id') %></th>
-                <td><%= link_to entity.parent.name, admin_privilege_path(entity.parent) %></td>
-              </tr>
+              <dt><%= t('activerecord.attributes.privilege.parent_id') %></dt>
+              <dd>
+                <%= admin_privilege_link(entity.parent) %>
+              </dd>
           <% end %>
       <% end %>
-      <tr>
-        <th><%= f.label :name %></th>
-        <td><%= f.text_field :name, size: 25, required: true %></td>
-      </tr>
-      <tr>
-        <th>
-          <%= f.label :slug %>
-        </th>
-        <td>
-          <%= f.text_field :slug, size: 25, required: true, placeholder: t('.placeholders.slug') %>
-          <div class="guideline"><%= t('.guidelines.slug') %></div>
-        </td>
-      </tr>
-      <tr>
-        <th><%= f.label :priority %></th>
-        <td><%= f.number_field :priority, in: (1..32767), required: true %></td>
-      </tr>
-      <tr>
-        <th><%= f.label :description %></th>
-        <td>
-          <%= f.text_area :description, cols: 50, rows: 3, maxlength: Privilege::DESCRIPTION_LIMIT %>
-          <div class="guideline"><%= t('.guidelines.description') %></div>
-        </td>
-      </tr>
-      </tbody>
-      <tfoot>
-      <tr>
-        <td colspan="2">
-          <% if entity.id.nil? %>
-              <%= f.hidden_field :parent_id %>
-          <% end %>
-          <%= f.button t(:save), type: :submit %>
-        </td>
-      </tr>
-      </tfoot>
-    </table>
+
+      <dt><%= f.label :name %></dt>
+      <dd>
+        <%= f.text_field :name, size: nil, maxlength: Privilege::NAME_LIMIT, required: true %>
+        <div class="guideline"><%= t('.guidelines.name') %></div>
+      </dd>
+
+      <dt><%= f.label :slug %></dt>
+      <dd>
+        <%= f.text_field :slug, size: nil, maxlength: Privilege::SLUG_LIMIT, required: true, placeholder: t('.placeholders.slug') %>
+        <div class="guideline"><%= t('.guidelines.slug') %></div>
+      </dd>
+
+      <dt><%= f.label :priority %></dt>
+      <dd>
+        <%= f.number_field :priority, in: Privilege::PRIORITY_RANGE, required: true %>
+      </dd>
+
+      <dt><%= f.label :description %></dt>
+      <dd>
+        <%= f.text_area :description, cols: 50, rows: 3, maxlength: Privilege::DESCRIPTION_LIMIT %>
+        <div class="guideline"><%= t('.guidelines.description') %></div>
+      </dd>
+    </dl>
+
+    <div class="buttons">
+      <%= f.hidden_field :parent_id if entity.id.nil? %>
+      <%= f.button t(:save), type: :submit %>
+    </div>
 <% end %>

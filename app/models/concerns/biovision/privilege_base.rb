@@ -3,6 +3,9 @@ module Biovision::PrivilegeBase
 
   included do
     DESCRIPTION_LIMIT = 350
+    NAME_LIMIT        = 250
+    SLUG_LIMIT        = 250
+    PRIORITY_RANGE    = (1..32767)
 
     belongs_to :parent, class_name: Privilege.to_s, optional: true
     has_many :children, class_name: Privilege.to_s, foreign_key: :parent_id
@@ -15,12 +18,15 @@ module Biovision::PrivilegeBase
 
     before_validation { self.name = name.strip unless name.nil? }
     before_validation { self.slug = Canonizer.transliterate(name.to_s) if slug.blank? }
+    before_validation :normalize_priority
 
     before_save :compact_children_cache
 
     validates_presence_of :name, :slug, :priority
     validates :name, uniqueness: { case_sensitive: false, scope: [:parent_id] }
     validates :slug, uniqueness: { case_sensitive: false }
+    validates_length_of :name, maximum: NAME_LIMIT
+    validates_length_of :slug, maximum: SLUG_LIMIT
     validates_length_of :description, maximum: DESCRIPTION_LIMIT
 
     scope :ordered_by_priority, -> { order('priority asc, name asc') }
@@ -42,7 +48,7 @@ module Biovision::PrivilegeBase
 
   # @return [Array<Integer>]
   def branch_ids
-    parents_cache.split(',').map(&:to_i).reject { |i| i < 1}.uniq + [id]
+    parents_cache.split(',').map(&:to_i).reject { |i| i < 1 }.uniq + [id]
   end
 
   def parents
@@ -110,6 +116,11 @@ module Biovision::PrivilegeBase
     if id.nil? && priority == 1
       self.priority = Privilege.siblings(self).maximum(:priority).to_i + 1
     end
+  end
+
+  def normalize_priority
+    self.priority = PRIORITY_RANGE.first if priority < PRIORITY_RANGE.first
+    self.priority = PRIORITY_RANGE.last if priority > PRIORITY_RANGE.last
   end
 
   def compact_children_cache
