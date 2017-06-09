@@ -2,11 +2,14 @@ class Agent < ApplicationRecord
   include Toggleable
   include RequiredUniqueName
 
-  PER_PAGE = 20
+  PER_PAGE   = 20
+  NAME_LIMIT = 255
 
   toggleable :mobile, :bot, :active
 
   belongs_to :browser, optional: true, counter_cache: true
+
+  validates_length_of :name, maximum: NAME_LIMIT
 
   scope :bots, ->(flag) { where(bot: flag.to_i > 0) unless flag.blank? }
   scope :mobile, ->(flag) { where(mobile: flag.to_i > 0) unless flag.blank? }
