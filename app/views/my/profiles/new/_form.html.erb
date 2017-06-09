@@ -10,15 +10,15 @@
       </div>
       <div>
         <div><%= label_tag :user_password, t('activerecord.attributes.user.password') %></div>
-        <%= password_field_tag 'user[password]', '', required: true, size: 30 %>
+        <%= password_field_tag 'user[password]', '', required: true, size: 30, maxlength: 70 %>
       </div>
       <div>
         <div><%= label_tag :user_password_confirmation, t('activerecord.attributes.user.password_confirmation') %></div>
-        <%= password_field_tag 'user[password_confirmation]', '', required: true, size: 30 %>
+        <%= password_field_tag 'user[password_confirmation]', '', required: true, size: 30, maxlength: 70 %>
       </div>
       <div>
         <div><%= label_tag :user_email, t('activerecord.attributes.user.email') %></div>
-        <%= email_field_tag 'user[email]', entity.email, size: 50 %>
+        <%= email_field_tag 'user[email]', entity.email, size: 50, maxlength: User::EMAIL_LIMIT %>
       </div>
       <div>
         <%= check_box_tag :agree %>

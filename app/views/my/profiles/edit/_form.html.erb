@@ -20,7 +20,7 @@
       </tr>
       <tr>
         <th><%= label_tag :user_name, t('activerecord.attributes.user.name') %></th>
-        <td><%= text_field_tag 'user[name]', entity.name, size: 30 %></td>
+        <td><%= text_field_tag 'user[name]', entity.name, size: 30, maxlength: User::NAME_LIMIT %></td>
       </tr>
       <tr>
         <th><%= label_tag :user_gender, t('activerecord.attributes.user.gender') %></th>
@@ -30,6 +30,7 @@
       </tr>
       <tr>
         <td colspan="2">
+          <%= hidden_field_tag 'user[allow_mail]', '0' %>
           <%= check_box_tag 'user[allow_mail]', '1', entity.allow_mail %>
           <%= label_tag :user_allow_mail, t('activerecord.attributes.user.allow_mail') %>
         </td>
@@ -46,18 +47,18 @@
       </tr>
       <tr>
         <th><%= label_tag :user_email, t('activerecord.attributes.user.email') %></th>
-        <td><%= email_field_tag 'user[email]', entity.email, size: 30 %></td>
+        <td><%= email_field_tag 'user[email]', entity.email, size: 30, maxlength: User::EMAIL_LIMIT %></td>
       </tr>
       <tr>
         <td colspan="2"><p class="notice"><%= t('.leave_blank_if_necessary') %></p></td>
       </tr>
       <tr>
         <th><%= label_tag :profile_password, t('.new_password') %></th>
-        <td><%= password_field_tag 'user[password]', '', size: 30 %></td>
+        <td><%= password_field_tag 'user[password]', '', size: 30, maxlength: 70 %></td>
       </tr>
       <tr>
         <th><%= label_tag :profile_password_confirmation, t('activerecord.attributes.user.password_confirmation') %></th>
-        <td><%= password_field_tag 'user[password_confirmation]', '', size: 30 %></td>
+        <td><%= password_field_tag 'user[password_confirmation]', '', size: 30, maxlength: 70 %></td>
       </tr>
       </tbody>
       <tfoot>

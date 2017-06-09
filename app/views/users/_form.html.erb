@@ -13,43 +13,43 @@
     <dl>
       <dt><%= f.label :screen_name %></dt>
       <dd>
-        <%= f.text_field :screen_name, size: 30 %>
+        <%= f.text_field :screen_name, size: 30, maxlength: User::SLUG_LIMIT %>
       </dd>
 
       <dt><%= f.label :name %></dt>
       <dd>
-        <%= f.text_field :name, size: 30 %>
+        <%= f.text_field :name, size: 30, maxlength: User::NAME_LIMIT %>
       </dd>
 
       <dt><%= f.label :patronymic %></dt>
       <dd>
-        <%= f.text_field :patronymic, size: 30 %>
+        <%= f.text_field :patronymic, size: 30, maxlength: User::NAME_LIMIT %>
       </dd>
 
       <dt><%= f.label :surname %></dt>
       <dd>
-        <%= f.text_field :surname, size: 30 %>
+        <%= f.text_field :surname, size: 30, maxlength: User::NAME_LIMIT %>
       </dd>
 
       <dt><%= f.label :email %></dt>
       <dd>
-        <%= f.email_field :email, size: 30 %>
+        <%= f.email_field :email, size: 30, maxlength: User::EMAIL_LIMIT %>
       </dd>
 
       <dt><%= f.label :phone %></dt>
       <dd>
-        <%= f.phone_field :phone, size: 15 %>
+        <%= f.phone_field :phone, size: 15, maxlength: User::PHONE_LIMIT %>
       </dd>
 
       <% if entity.id.blank? %>
           <dt><%= f.label :password %></dt>
           <dd>
-            <%= f.text_field :password %>
+            <%= f.text_field :password, size: nil, maxlength: 70 %>
           </dd>
 
           <dt><%= f.label :password_confirmation %></dt>
           <dd>
-            <%= f.text_field :password_confirmation %>
+            <%= f.text_field :password_confirmation, size: nil, maxlength: 70 %>
           </dd>
       <% end %>
 
@@ -60,7 +60,7 @@
 
       <dt><%= f.label :notice %></dt>
       <dd>
-        <%= f.text_field :notice %>
+        <%= f.text_field :notice, size: nil, maxlength: User::NOTICE_LIMIT %>
       </dd>
     </dl>
 

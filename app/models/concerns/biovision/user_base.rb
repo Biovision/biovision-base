@@ -11,6 +11,12 @@ module Biovision::UserBase
 
     PER_PAGE = 20
 
+    SLUG_LIMIT   = 250
+    EMAIL_LIMIT  = 250
+    NAME_LIMIT   = 100
+    NOTICE_LIMIT = 255
+    PHONE_LIMIT  = 50
+
     toggleable %i(allow_login bot email_confirmed phone_confirmed allow_mail)
 
     belongs_to :agent, optional: true
@@ -37,6 +43,14 @@ module Biovision::UserBase
     validates_format_of :email, with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z0-9][-a-z0-9]+)\z/i
     validates :screen_name, uniqueness: { case_sensitive: false }
     validates :email, uniqueness: { case_sensitive: false }
+    validates_length_of :slug, maximum: SLUG_LIMIT
+    validates_length_of :screen_name, maximum: SLUG_LIMIT
+    validates_length_of :name, maximum: NAME_LIMIT
+    validates_length_of :patronymic, maximum: NAME_LIMIT
+    validates_length_of :surname, maximum: NAME_LIMIT
+    validates_length_of :email, maximum: EMAIL_LIMIT
+    validates_length_of :phone, maximum: PHONE_LIMIT
+    validates_length_of :notice, maximum: NOTICE_LIMIT
 
     scope :with_privilege, ->(privilege) { joins(:user_privileges).where(user_privileges: { privilege_id: privilege.branch_ids }) }
     scope :bots, ->(flag) { where(bot: flag.to_i > 0) unless flag.blank? }
