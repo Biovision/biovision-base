@@ -1,4 +1,9 @@
 <% content_for :meta_title, t('.title', user: @entity.profile_name) %>
+<% content_for :breadcrumbs do %>
+    <%= link_to(t('admin.users.nav_item.text'), admin_users_path) %>
+    <%= admin_user_link(@entity) %>
+    <span><%= t('.heading') %></span>
+<% end %>
 
 <article class="entity-page">
   <h1><%= @entity.profile_name %></h1>
@@ -15,8 +20,8 @@
     <script>
         $(function() {
             $('ul.privileges input[type=checkbox]').on('click', function() {
-                var url = $(this).data('url');
-                var method = $(this).is(':checked') ? 'put' : 'delete';
+                let url = $(this).data('url');
+                let method = $(this).is(':checked') ? 'put' : 'delete';
                 $.ajax(url, {
                     method: method,
                     success: function(response) {

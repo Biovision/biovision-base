@@ -111,17 +111,21 @@ ru:
         privilege_group: "Группа привилегий"
   admin:
     users:
+      nav_item:
+        text: "Пользователи"
+        description: "Управление пользователями сайта"
       index:
         title: "Пользователи, страница %{page}"
         heading: "Пользователи"
-        description: "Управление пользователями сайта"
       show:
         title: "Пользователь %{name}"
         privileges: "Привилегии"
       tokens:
         title: "Жетоны пользователя %{user], страница %{page}"
+        heading: "Жетоны доступа"
       codes:
         title: "Коды пользователя %{user}, страница %{page}"
+        heading: "Коды"
       privileges:
         title: "Привилегии пользователя %{user}"
         heading: "Привилегии пользователя"
@@ -185,8 +189,10 @@ ru:
       success: "Пользователь успешно удалён"
     edit:
       title: "Редактирование пользователя"
+      heading: "Редактирование пользователя"
     new:
       title: "Добавить пользователя"
+      heading: "Добавить пользователя"
     user:
       account_data: "Данные аккаунта"
     index:

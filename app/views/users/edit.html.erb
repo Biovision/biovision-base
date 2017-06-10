@@ -1,7 +1,12 @@
 <% content_for :meta_title, t('.title') %>
+<% content_for :breadcrumbs do %>
+    <%= link_to(t('admin.users.nav_item.text'), admin_users_path) %>
+    <%= admin_user_link(@entity) %>
+    <span><%= t(:edit) %></span>
+<% end %>
 
 <article class="entity-page">
-  <h1><%= t('.title') %></h1>
+  <h1><%= t('.heading') %></h1>
   <ul class="actions">
     <li><%= back_icon(admin_user_path(@entity.id)) %></li>
     <% unless @entity.deleted? %>
