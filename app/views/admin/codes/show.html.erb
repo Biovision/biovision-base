@@ -15,7 +15,7 @@
   <dl>
     <dt><%= t('activerecord.attributes.code.category') %></dt>
     <dd>
-      <%= t("activerecord.attributes.code.categories.#{@entity.category}") %>
+      <%= @entity.code_type.name %>
     </dd>
 
     <dt><%= t('activerecord.attributes.code.user') %></dt>
