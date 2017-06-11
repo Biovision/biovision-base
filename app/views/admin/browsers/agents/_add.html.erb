@@ -1,7 +1,7 @@
 <section>
   <h2><%= t('agents.new.title') %></h2>
 
-  <%= render partial: 'api/agents/filter', locals: { filter: Hash.new } %>
+  <%= render partial: 'admin/agents/filter', locals: { filter: Hash.new } %>
 
   <ul id="found-agents" class="list-of-entities dynamic" data-browser-id="<%= browser.id %>">
 
