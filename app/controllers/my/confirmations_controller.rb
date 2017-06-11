@@ -11,7 +11,7 @@ class My::ConfirmationsController < ApplicationController
     if current_user.email.blank?
       redirect_to edit_my_profile_path, notice: t('my.confirmations.create.set_email')
     else
-      code = Code.confirmation_for_user(current_user)
+      code = CodeManager::Confirmation.code_for_user(current_user)
       CodeSender.email(code.id).deliver_later unless code.nil?
       redirect_to my_confirmation_path, notice: t('my.confirmations.create.success')
     end
@@ -19,10 +19,11 @@ class My::ConfirmationsController < ApplicationController
 
   # patch /my/confirmation
   def update
-    @code = Code.active.find_by category: Code.categories[:confirmation], body: params[:code].to_s
-    if @code.is_a?(Code) && @code.owned_by?(current_user)
-      activate_code
-      redirect_to root_path
+    code    = Code.find_by(body: param_from_request(:code))
+    manager = CodeManager::Confirmation.new(code, current_user)
+    if manager.code_is_valid?
+      manager.activate
+      redirect_to my_path
     else
       redirect_to my_confirmation_path, alert: t('my.confirmations.update.invalid_code')
     end
@@ -32,10 +33,5 @@ class My::ConfirmationsController < ApplicationController
 
   def redirect_confirmed_user
     redirect_to my_confirmation_path, notice: t(:email_already_confirmed) if current_user.email_confirmed?
-  end
-
-  def activate_code
-    @code.decrement! :quantity
-    @code.user.update email_confirmed: true if @code.payload == @code.user.email
   end
 end

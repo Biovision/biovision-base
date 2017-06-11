@@ -3,7 +3,7 @@
 </div>
 <div class="data">
   <div>
-    <%= t("activerecord.attributes.code.categories.#{entity.category}") %>
+    <%= entity.code_type.name %>
     <%= admin_code_link(entity) %>
   </div>
   <div class="info"><%= admin_user_link(entity.user) %></div>

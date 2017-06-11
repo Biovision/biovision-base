@@ -1,5 +1,10 @@
 module CodesHelper
-  def code_categories_for_select
-    Code.categories.keys.map { |category| [t("activerecord.attributes.code.categories.#{category}"), category] }
+  # @param [Code] entity
+  def admin_code_link(entity)
+    link_to entity.body, admin_code_path(entity.id)
+  end
+
+  def code_types_for_select
+    CodeType.order('id asc').map { |c| [c.name, c.id] }
   end
 end

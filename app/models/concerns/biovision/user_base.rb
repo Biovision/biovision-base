@@ -66,7 +66,7 @@ module Biovision::UserBase
     # @param [Integer] page
     # @param [Hash] filter
     def page_for_administration(page, filter = {})
-      bots(filter[:bots]).filtered(filter).order('slug asc').page(page).per(PER_PAGE)
+      bots(filter[:bots]).filtered(filter).order('id desc').page(page).per(PER_PAGE)
     end
 
     def profile_parameters

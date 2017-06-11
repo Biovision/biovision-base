@@ -3,9 +3,9 @@
 <%= form_for entity do |f| %>
     <dl>
       <% if entity.id.blank? %>
-          <dt><%= f.label :category %></dt>
+          <dt><%= f.label :code_type_id %></dt>
           <dd>
-            <%= f.select :category, code_categories_for_select, required: true %>
+            <%= f.select :code_type_id, code_types_for_select, required: true %>
           </dd>
 
           <dt><%= f.label :user_id %></dt>
@@ -14,9 +14,9 @@
             <%= render partial: 'admin/users/search', locals: { target_id: :code_user_id } %>
           </dd>
       <% else %>
-          <dt><%= t('activerecord.attributes.code.category') %></dt>
+          <dt><%= t('activerecord.attributes.code.code_type') %></dt>
           <dd>
-            <%= t("activerecord.attributes.code.categories.#{entity.category}") %>
+            <%= entity.code_type.name %>
           </dd>
 
           <dt><%= t('activerecord.attributes.code.user_id') %></dt>
@@ -24,6 +24,7 @@
             <%= admin_user_link entity.user %>
           </dd>
       <% end %>
+
       <dt><%= f.label :body %></dt>
       <dd>
         <%= f.text_field :body, size: 25, maxlength: Code::BODY_LIMIT, required: true %>
@@ -38,7 +39,7 @@
 
       <dt><%= f.label :quantity %></dt>
       <dd>
-        <%= f.number_field :quantity, in: (0..999999) %>
+        <%= f.number_field :quantity, in: Code::QUANTITY_RANGE %>
       </dd>
     </dl>
 

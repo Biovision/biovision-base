@@ -20,26 +20,27 @@ class My::RecoveriesController < ApplicationController
 
   # patch /my/recovery
   def update
-    find_code
-    if @code.nil?
-      redirect_to my_recovery_path, alert: t('my.recoveries.update.invalid_code')
-    else
+    set_manager
+    if @manager.code_is_valid?
       reset_password
+    else
+      redirect_to my_recovery_path, alert: t('my.recoveries.update.invalid_code')
     end
   end
 
   protected
 
   def find_user
-    @user = User.find_by slug: params[:login].to_s.downcase, network: User.networks[:native]
+    @user = User.with_email(param_from_request(:email)).first
   end
 
-  def find_code
-    @code = Code.active.find_by user: @user, category: Code.categories[:recovery]
+  def set_manager
+    code     = Code.find_by(body: param_from_request(:code))
+    @manager = CodeManager::Recovery.new(code, @user)
   end
 
   def send_code
-    code = Code.recovery_for_user @user
+    code = CodeManager::Recovery.code_for_user(@user)
     if code.nil?
       logger.warn { "Could not get recovery code for user #{@user.id}" }
     else
@@ -50,17 +51,19 @@ class My::RecoveriesController < ApplicationController
   def reset_password
     if @user.update new_user_parameters
       create_token_for_user @user
-      @code.decrement! :quantity
-      redirect_to root_path, notice: t('my.recoveries.update.success')
+      @manager.activate
+      redirect_to my_path, notice: t('my.recoveries.update.success')
     else
       render :show, status: :bad_request
     end
   end
 
   def new_user_parameters
-    parameters = params.require(:user).permit(:password)
-    parameters[:password] = nil if parameters[:password].blank?
-    parameters[:email_confirmed] = true if @code.payload == @user.email
+    parameters = params.require(:user).permit(:password, :password_confirmation)
+    if parameters[:password].blank?
+      parameters[:password]              = nil
+      parameters[:password_confirmation] = nil
+    end
     parameters
   end
 end

@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    biovision-base (0.4.170609)
+    biovision-base (0.5.170611)
       bcrypt (~> 3.1.7)
       carrierwave
       carrierwave-bombshelter
@@ -88,7 +88,7 @@ GEM
     kaminari-core (1.0.1)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
-    mail (2.6.5)
+    mail (2.6.6)
       mime-types (>= 1.16, < 4)
     method_source (0.8.2)
     mime-types (3.1)

@@ -17,6 +17,7 @@ div.track {
   font-size: $small_font_size;
   margin: .4rem;
   padding: .4rem;
+  width: calc(100% - .8rem);
 
   > div {
     overflow: hidden;

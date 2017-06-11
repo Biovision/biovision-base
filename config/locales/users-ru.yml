@@ -21,6 +21,7 @@ ru:
       user: "Пользователь"
       foreign_site: "Внешний сайт"
       foreign_user: "Внешний пользователь"
+      code_type: "Тип кода"
       code: "Код"
       token: "Жетон доступа"
       privilege: "Привилегия"
@@ -81,16 +82,14 @@ ru:
         active: "Активен"
         token: "Жетон"
       code:
+        code_type: "Тип кода"
+        code_type_id: "Тип кода"
         user: "Пользователь"
         user_id: "Пользователь"
         category: "Категория"
         body: "Код"
         payload: "Полезная нагрузка"
         quantity: "Количество активаций"
-        categories:
-          confirmation: "Подтверждение почты"
-          recovery: "Сброс пароля"
-          invitation: "Приглашение"
       privilege:
         parent_id: "Родительская категория"
         priority: "Порядок сортировки"
