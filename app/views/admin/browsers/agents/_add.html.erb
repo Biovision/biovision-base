@@ -8,18 +8,18 @@
   </ul>
 </section>
 
-<script>/*<![CDATA[*/
+<script>
 "use strict";
 
 $(function () {
-  var $container = $('#found-agents');
+  let $container = $('#found-agents');
 
   function show_found_agents(agents) {
     $container.html('');
 
     $(agents).each(function() {
-      var agent = $(this)[0]['agent'];
-      var $li = $('<li data-url="' + agent['url'] + '">');
+      let agent = $(this)[0]['agent'];
+      let $li = $('<li data-url="' + agent['url'] + '">');
 
       $li.html('<div class="add"><button type="button">&plus;</button></div>' + agent['html']);
 
@@ -28,10 +28,10 @@ $(function () {
   }
 
   function add_agent(agent) {
-    var $section = $('#browser-agents');
-    var $notice = $section.find('div.warning');
-    var $container;
-    var $li = $('<li>');
+    let $section = $('#browser-agents');
+    let $notice = $section.find('div.warning');
+    let $container;
+    let $li = $('<li>');
 
     if ($notice.hasOwnProperty(0)) {
       $notice.remove();
@@ -56,9 +56,9 @@ $(function () {
   });
 
   $(document).on('click', '#found-agents > li button', function () {
-    var $li = $(this).closest('li');
-    var url  = $li.data('url');
-    var data = {
+    let $li = $(this).closest('li');
+    let url  = $li.data('url');
+    let data = {
       agent: {
         browser_id: $(this).closest('ul').data('browser-id')
       }
@@ -76,4 +76,4 @@ $(function () {
     }).fail(handle_ajax_failure);
   });
 });
-/*]]>*/</script>
+</script>

@@ -1,7 +1,7 @@
 <div class="data">
-  <div class="truncate"><%= link_to entity.name, admin_agent_path(entity) %></div>
+  <div class="truncate"><%= admin_agent_link(entity) %></div>
   <% unless entity.browser.nil? %>
-      <div class="info"><%= link_to entity.browser.name, admin_browser_path(entity.browser) %></div>
+      <div class="info"><%= admin_browser_link(entity.browser) %></div>
   <% end %>
   <%= render partial: 'admin/agents/toggleable', locals: { entity: entity } %>
   <ul class="actions">

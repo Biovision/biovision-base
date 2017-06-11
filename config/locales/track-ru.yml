@@ -37,17 +37,21 @@ ru:
         quantity: "Количество"
   admin:
     agents:
+      nav_item:
+        text: "Агенты пользователя"
+        description: "Управление агентами пользователя"
       index:
         title: "Агенты пользователя, страница %{page}"
         heading: "Агенты пользователя"
-        description: "Управление агентами пользователя"
       show:
         title: "Агент пользователя «%{name}»"
     browsers:
+      nav_item:
+        text: "Браузеры"
+        description: "Управление браузерами"
       index:
         title: "Браузеры, страница %{page}"
         heading: "Браузеры"
-        description: "Управление браузерами"
       show:
         title: "Браузер «%{name}»"
     metrics:

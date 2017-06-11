@@ -1,4 +1,8 @@
 <% content_for :meta_title, t('.title', name: @entity.name) %>
+<% content_for :breadcrumbs do %>
+    <%= link_to(t('admin.browsers.nav_item.text'), admin_browsers_path) %>
+    <span><%= @entity.name %></span>
+<% end %>
 
 <article class="entity-page">
   <h1><%= @entity.name %></h1>

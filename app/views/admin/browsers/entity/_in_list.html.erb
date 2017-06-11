@@ -1,13 +1,13 @@
 <div class="data">
-  <div><%= link_to browser.name, admin_browser_path(browser) %></div>
+  <div><%= admin_browser_link(entity) %></div>
   <div class="info">
-    <%= t(:agent_count, count: browser.agents_count) %>
+    <%= t(:agent_count, count: entity.agents_count) %>
   </div>
-  <%= render partial: 'admin/browsers/toggleable', locals: { browser: browser } %>
+  <%= render partial: 'admin/browsers/toggleable', locals: { entity: entity } %>
   <ul class="actions">
-    <li class="lockable <%= browser.locked? ? 'hidden' : '' %>">
-      <%= edit_icon edit_browser_path(browser) %>
+    <li class="lockable <%= entity.locked? ? 'hidden' : '' %>">
+      <%= edit_icon edit_browser_path(entity.id) %>
     </li>
-    <%= render partial: 'shared/actions/locks', locals: { entity: browser, path: lock_admin_browser_path(browser) } %>
+    <%= render partial: 'shared/actions/locks', locals: { entity: entity, path: lock_admin_browser_path(entity) } %>
   </ul>
 </div>

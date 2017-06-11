@@ -1,4 +1,8 @@
 <% content_for :meta_title, t('.title', name: @entity.name) %>
+<% content_for :breadcrumbs do %>
+    <%= link_to(t('admin.agents.nav_item.text'), admin_agents_path) %>
+    <span><%= @entity.name %></span>
+<% end %>
 
 <article class="entity-page">
   <h1><%= @entity.name %></h1>
@@ -6,22 +10,19 @@
   <ul class="actions">
     <li><%= return_icon(admin_agents_path) %></li>
     <% unless @entity.locked? %>
-        <li><%= edit_icon edit_agent_path(@entity) %></li>
+        <li><%= edit_icon edit_agent_path(@entity.id) %></li>
         <li class="danger"><%= destroy_icon @entity %></li>
     <% end %>
   </ul>
 
-  <table>
-    <tbody>
-    <% unless @entity.browser.nil? %>
-        <tr>
-          <th><%= t('activerecord.attributes.agent.browser_id') %></th>
-          <td><%= link_to @entity.browser.name, admin_browser_path(@entity.browser) %></td>
-        </tr>
-    <% end %>
-    <tr>
-      <td colspan="2"><%= render partial: 'admin/agents/toggleable', locals: { entity: @entity} %></td>
-    </tr>
-    </tbody>
-  </table>
+  <% unless @entity.browser.nil? %>
+      <dl>
+        <dt><%= t('activerecord.attributes.agent.browser_id') %></dt>
+        <dd>
+          <%= admin_browser_link(@entity.browser) %>
+        </dd>
+      </dl>
+  <% end %>
+
+  <%= render partial: 'admin/agents/toggleable', locals: { entity: @entity } %>
 </article>
