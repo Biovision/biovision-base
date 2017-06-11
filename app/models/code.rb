@@ -21,9 +21,6 @@ class Code < ApplicationRecord
 
   scope :recent, -> { order('id desc') }
   scope :active, -> { where('quantity > 0') }
-  scope :confirmations, -> { where(category: Code.categories[:confirmation]) }
-  scope :recoveries, -> { where(category: Code.categories[:recovery]) }
-  scope :invitations, -> { where(category: Code.categories[:invitation]) }
 
   # @param [Integer] page
   def self.page_for_administration(page = 1)
