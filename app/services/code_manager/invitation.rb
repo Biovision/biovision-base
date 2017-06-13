@@ -20,7 +20,7 @@ class CodeManager::Invitation < CodeManager
 
   # @param [User] invitee
   def activate(invitee)
-    return if invitee.nil?
+    return if invitee.nil? || @code.quantity < 1
     @code.decrement!(:quantity)
     invitee.update(inviter_id: @code.user_id)
   end

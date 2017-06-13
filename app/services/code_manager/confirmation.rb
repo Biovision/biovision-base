@@ -19,6 +19,7 @@ class CodeManager::Confirmation < CodeManager
   end
 
   def activate
+    return if @code.quantity < 1
     @code.decrement!(:quantity)
     @code.user.update email_confirmed: true if @code.payload == @code.user.email
   end
