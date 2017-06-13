@@ -66,6 +66,7 @@ Rails.application.routes.draw do
         put 'privileges/:privilege_id' => :grant_privilege, as: :privilege
         delete 'privileges/:privilege_id' => :revoke_privilege
         post 'toggle', defaults: { format: :json }
+        post 'authenticate'
       end
     end
   end

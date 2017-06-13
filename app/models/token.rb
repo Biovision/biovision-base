@@ -37,6 +37,11 @@ class Token < ApplicationRecord
   end
 
   # @param [String] input
+  def self.from_cookie(input)
+    find_by(token: input.to_s.split(':')[1].to_s)
+  end
+
+  # @param [String] input
   # @param [Boolean] touch_user
   def self.user_by_token(input, touch_user = false)
     return if input.blank?

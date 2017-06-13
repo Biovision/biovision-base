@@ -1,4 +1,5 @@
 class Admin::UsersController < AdminController
+  include Authentication
   include ToggleableEntity
 
   before_action :set_entity, except: [:index, :search]
@@ -50,6 +51,18 @@ class Admin::UsersController < AdminController
     else
       @collection = User.search(query).order('slug asc').first(10)
     end
+  end
+
+  # post /admin/users/:id/authenticate
+  def authenticate
+    cookies['pt'] = {
+      value: cookies['token'],
+      expires: 1.year.from_now,
+      domain: :all,
+      httponly: true
+    }
+    create_token_for_user(@entity)
+    redirect_to my_path
   end
 
   protected

@@ -30,7 +30,8 @@ class AuthenticationController < ApplicationController
 
   # get /auth/:provider/callback
   def auth_callback
-    user = @foreign_site.authenticate(request.env['omniauth.auth'], tracking_for_entity)
+    data = request.env['omniauth.auth']
+    user = @foreign_site.authenticate(data, tracking_for_entity)
     create_token_for_user(user) if user.allow_login?
 
     redirect_to my_path
@@ -41,7 +42,7 @@ class AuthenticationController < ApplicationController
   def deactivate_token
     token = Token.find_by token: cookies['token'].split(':').last
     token.update active: false
-    cookies['token'] = nil
+    pop_token
   end
 
   def set_foreign_site
@@ -50,6 +51,20 @@ class AuthenticationController < ApplicationController
       metric = Metric::METRIC_HTTP_503
       status = :service_unavailable
       handle_http_error('Cannot set foreign site', metric, status, status)
+    end
+  end
+
+  def pop_token
+    if cookies['pt']
+      cookies['token'] = {
+        value: cookies['pt'],
+        expires: 1.year.from_now,
+        domain: :all,
+        httponly: true
+      }
+      cookies['pt']    = nil
+    else
+      cookies['token'] = nil
     end
   end
 end

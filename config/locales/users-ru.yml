@@ -119,6 +119,7 @@ ru:
       show:
         title: "Пользователь %{name}"
         privileges: "Привилегии"
+        authenticate: "Зайти как этот пользователь"
       tokens:
         title: "Жетоны пользователя %{user], страница %{page}"
         heading: "Жетоны доступа"
