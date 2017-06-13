@@ -23,6 +23,18 @@
       <%= admin_user_link @entity.user %>
     </dd>
 
+    <dt><%= t(:created_at) %></dt>
+    <dd>
+      <%= time_tag(@entity.created_at) %>
+    </dd>
+
+    <% unless @entity.updated_at.nil? %>
+        <dt><%= t(:updated_at) %></dt>
+        <dd>
+          <%= time_tag(@entity.updated_at) %>
+        </dd>
+    <% end %>
+
     <% unless @entity.payload.blank? %>
         <dt><%= t('activerecord.attributes.code.payload') %></dt>
         <dd>
