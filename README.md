@@ -18,6 +18,18 @@ ToDo
 
 Описание необходимых и рекомендуемых действий находится в `biovision/snippets`
 
+Очистка устаревших сессий
+-------------------------
+
+Чтобы устаревшие жетоны пользователей очищались, нужно добавить задачу 
+`tokens:clean` в крон. Например (заменить `example.com` на актуальный домен):
+
+```
+0 4 * * * cd /var/www/example.com/current && /home/developer/.rbenv/shims/bundle exec rake RAILS_ENV=production tokens:clean
+```
+
+Каждый день в 4 часа ночи будут очищаться старые жетоны.
+
 ## Installation
 Add this line to your application's Gemfile:
 
