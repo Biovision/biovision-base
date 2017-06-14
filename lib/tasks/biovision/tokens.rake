@@ -46,4 +46,9 @@ namespace :tokens do
       puts
     end
   end
+
+  desc 'Clean obsolete tokens'
+  task clean: :environment do
+    CleanTokensJob.perform_now
+  end
 end
