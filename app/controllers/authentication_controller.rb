@@ -62,9 +62,9 @@ class AuthenticationController < ApplicationController
         domain: :all,
         httponly: true
       }
-      cookies['pt']    = nil
+      cookies.delete 'pt', domain: :all
     else
-      cookies['token'] = nil
+      cookies.delete 'token', domain: :all
     end
   end
 end
