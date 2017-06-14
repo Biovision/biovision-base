@@ -12,7 +12,7 @@ class My::ProfilesController < ApplicationController
   # post /my/profile
   def create
     if params[:agree]
-      redirect_to root_path, notice: t('my.profiles.create.success')
+      redirect_to root_path, alert: t('my.profiles.create.are_you_bot')
     else
       create_user
     end
