@@ -1,0 +1,18 @@
+<div class="data">
+  <div><%= "#{entity.ip}/#{entity.token}" %></div>
+  <div class="info">
+    <% unless entity.last_used.nil? %>
+        <div>
+          <%= t('activerecord.attributes.token.last_used') %>
+          <%= time_tag entity.last_used %>
+        </div>
+    <% end %>
+  </div>
+  <div class="secondary info">
+    <div><%= t(:created_at) %>: <%= time_tag(entity.created_at) %></div>
+    <% unless entity.agent.blank? %>
+        <div class="truncate"><%= entity.agent.name %></div>
+    <% end %>
+  </div>
+  <%= render partial: 'my/tokens/toggleable', locals: { entity: entity } %>
+</div>

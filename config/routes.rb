@@ -76,6 +76,11 @@ Rails.application.routes.draw do
 
     resource :profile, except: [:destroy]
     resource :confirmation, :recovery, only: [:show, :create, :update]
+    resources :tokens, only: [:index] do
+      member do
+        post 'toggle', defaults: { format: :json }
+      end
+    end
   end
 
   resources :agents, :browsers, except: [:index, :show]

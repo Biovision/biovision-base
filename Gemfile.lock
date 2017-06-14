@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    biovision-base (0.5.170614)
+    biovision-base (0.5.170615)
       bcrypt (~> 3.1.7)
       carrierwave
       carrierwave-bombshelter
