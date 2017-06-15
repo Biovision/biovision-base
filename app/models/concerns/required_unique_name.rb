@@ -8,6 +8,6 @@ module RequiredUniqueName
 
     scope :ordered_by_name, -> { order('name asc') }
     scope :with_name_like, ->(name) { where('name ilike ?', "%#{name}%") unless name.blank? }
-    scope :with_name, ->(name) { where('name ilike ?', name) unless name.blank? }
+    scope :with_name, ->(name) { where('lower(name) = lower(?)', name) unless name.blank? }
   end
 end

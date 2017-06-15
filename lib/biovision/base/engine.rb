@@ -6,6 +6,12 @@ module Biovision
           include Biovision::Base::BaseMethods
         end
       end
+
+      config.to_prepare do
+        Dir.glob(Rails.root + 'app/decorators/**/*_decorator*.rb').each do |c|
+          require_dependency(c)
+        end
+      end
     end
 
     require 'kaminari'

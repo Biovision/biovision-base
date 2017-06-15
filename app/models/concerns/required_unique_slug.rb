@@ -7,6 +7,6 @@ module RequiredUniqueSlug
 
     scope :ordered_by_slug, -> { order('slug asc') }
     scope :with_slug_like, ->(slug) { where('slug ilike ?', "%#{slug}%") unless slug.blank? }
-    scope :with_slug, ->(slug) { where('slug ilike ?', slug) unless slug.blank? }
+    scope :with_slug, ->(slug) { where('lower(slug) = lower(?)', slug) unless slug.blank? }
   end
 end
