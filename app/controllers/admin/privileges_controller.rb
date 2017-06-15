@@ -1,8 +1,10 @@
 class Admin::PrivilegesController < AdminController
   include LockableEntity
   include EntityPriority
+  include ToggleableEntity
 
   before_action :set_entity, except: [:index]
+  before_action :check_entity_lock, only: [:toggle]
 
   # get /admin/privileges
   def index
