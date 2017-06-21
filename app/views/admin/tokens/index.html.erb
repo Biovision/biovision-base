@@ -14,6 +14,6 @@
   <%= render partial: 'admin/tokens/filter', locals: { filter: @filter } %>
 
   <%= paginate @collection %>
-  <%= render partial: 'list', locals: { collection: @collection } %>
+  <%= render partial: 'shared/admin/list', locals: { collection: @collection } %>
   <%= paginate @collection %>
 </article>
