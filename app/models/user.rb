@@ -32,6 +32,7 @@ class User < ApplicationRecord
   has_many :user_privileges, dependent: :destroy
   has_many :privileges, through: :user_privileges
   has_many :foreign_users, dependent: :delete_all
+  has_many :login_attempts, dependent: :delete_all
 
   before_save :normalize_slug
 
