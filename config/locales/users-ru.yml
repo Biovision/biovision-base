@@ -178,6 +178,13 @@ ru:
       show:
         title: "Группа привилегий «%{name}»"
         privileges: "Привилегии"
+    login_attempts:
+      index:
+        title: "Попытки входа, страница %{page}"
+        heading: "Попытки входа пользователей"
+      nav_item:
+        text: "Попытки входа"
+        description: "Неудачные попытки входа пользователей"
   authentication:
     info:
       logout: "Выйти"

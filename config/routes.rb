@@ -69,6 +69,8 @@ Rails.application.routes.draw do
         post 'authenticate'
       end
     end
+
+    resources :login_attempts, only: [:index]
   end
 
   namespace :my do
@@ -81,6 +83,7 @@ Rails.application.routes.draw do
         post 'toggle', defaults: { format: :json }
       end
     end
+    resources :login_attempts, only: [:index]
   end
 
   resources :agents, :browsers, except: [:index, :show]

@@ -1,0 +1,16 @@
+<div class="image">
+  <%= profile_avatar(entity.user) unless entity.user.nil? %>
+</div>
+<div class="data">
+  <div><%= admin_user_link(entity.user) %></div>
+  <div class="info"><%= time_tag(entity.created_at) %></div>
+  <div class="secondary info">
+    <div><%= entity.password %></div>
+    <% unless entity.ip.nil? %>
+        <div><%= entity.ip %></div>
+    <% end %>
+    <% unless entity.agent.nil? %>
+        <div class="truncate"><%= entity.agent.name %></div>
+    <% end %>
+  </div>
+</div>
