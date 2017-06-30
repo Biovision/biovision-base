@@ -16,4 +16,24 @@ module Authentication
       httponly: true
     }
   end
+
+  def deactivate_token
+    token = Token.find_by token: cookies['token'].split(':').last
+    token.update active: false
+    pop_token
+  end
+
+  def pop_token
+    if cookies['pt']
+      cookies['token'] = {
+        value:    cookies['pt'],
+        expires:  1.year.from_now,
+        domain:   :all,
+        httponly: true
+      }
+      cookies.delete 'pt', domain: :all
+    else
+      cookies.delete 'token', domain: :all
+    end
+  end
 end
