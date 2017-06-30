@@ -10,6 +10,7 @@ class LoginAttempt < ApplicationRecord
   before_validate { self.password = password.to_s[0..254] }
 
   scope :recent, -> { order('id desc') }
+  scope :since, ->(time) { where('created_at > ?', time)}
 
   # @param [Integer] page
   def self.page_for_administration(page = 1)

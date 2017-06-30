@@ -1,0 +1,7 @@
+<h1><%= t('.greeting', name: @user.profile_name) %></h1>
+
+<p><%= t('.message') %></p>
+<p>
+  <%= t('.you_can_recover_password') %>:
+  <%= link_to(my_recovery_url, my_recovery_url) %>
+</p>

@@ -28,6 +28,7 @@ ru:
       privilege_group: "Группа привилегий"
       privilege_group_privilege: "Привилегия в группе привилегий"
       user_privilege: "Привилегия у пользователя"
+      login_attempt: "Попытка входа"
     errors:
       models:
         user:
@@ -108,6 +109,9 @@ ru:
       privilege_group_privilege:
         privilege: "Привилегия"
         privilege_group: "Группа привилегий"
+      login_attempt:
+        user: "Пользователь"
+        password: "Пароль"
   admin:
     users:
       nav_item:
@@ -332,3 +336,9 @@ ru:
       index:
         title: "Жетоны, страница %{page}"
         heading: "Жетоны доступа (сессии)"
+  user_mailer:
+    login_attempt:
+      subject: "Кто-то пытается войти от вашего имени"
+      greeting: "Здравствуйте, %{name}"
+      message: "Кто-то бесуспешно пытается войти от вашего имени. В целях безопасности возможность входа заблокирована на 15 минут."
+      you_can_recover_password: "Если это вы забыли свой пароль, его можно восстановить по этой ссылке"
