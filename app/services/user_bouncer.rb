@@ -1,16 +1,16 @@
 class UserBouncer
   # @param [User] user
-  def initialize(user)
-    @user = user
+  # @param [Hash] tracking
+  def initialize(user, tracking)
+    @user     = user
+    @tracking = tracking
   end
 
   # @param [String] password
-  # @param [Hash] tracking
-  def let_user_in?(password, tracking)
+  def let_user_in?(password)
     return false unless @user&.allow_login?
     @password = password
-    @tracking = tracking
-    excessive_attempts? ? log_attempt : try_password
+    excessive_attempts? ? (log_attempt && false) : try_password
   end
 
   private
@@ -22,17 +22,16 @@ class UserBouncer
   def log_attempt
     data = { user: @user, password: @password }
     LoginAttempt.create(data.merge(@tracking))
-    false
   end
 
   def try_password
-    @user.authenticate(@password) || count_attempt
+    @user.authenticate(@password) || (count_attempt && false)
   end
 
   def count_attempt
     log_attempt
     if excessive_attempts?
-
+      UserMailer.login_attempt(@user.id).deliver_later
     end
   end
 end

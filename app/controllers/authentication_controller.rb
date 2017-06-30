@@ -11,8 +11,8 @@ class AuthenticationController < ApplicationController
   # post /login
   def create
     user    = User.find_by(slug: params[:login].to_s.downcase)
-    bouncer = UserBouncer.new(user)
-    if bouncer.let_user_in?(params[:password].to_s, tracking_for_entity)
+    bouncer = UserBouncer.new(user, tracking_for_entity)
+    if bouncer.let_user_in?(params[:password].to_s)
       create_token_for_user(user)
       Metric.register(User::METRIC_AUTHENTICATION_SUCCESS)
       redirect_to my_path
