@@ -10,12 +10,12 @@ class UserBouncer
   def let_user_in?(password)
     return false unless @user&.allow_login?
     @password = password
-    excessive_attempts? ? (log_attempt && false) : try_password
+    too_many_attempts? ? (log_attempt && false) : try_password
   end
 
   private
 
-  def excessive_attempts?
+  def too_many_attempts?
     LoginAttempt.owned_by(@user).since(15.minutes.ago) > 4
   end
 
@@ -30,7 +30,7 @@ class UserBouncer
 
   def count_attempt
     log_attempt
-    if excessive_attempts?
+    if too_many_attempts?
       UserMailer.login_attempt(@user.id).deliver_later
     end
   end
