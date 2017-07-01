@@ -20,11 +20,9 @@ json.data @collection do |entity|
       end
     end
   end
-  json.included do
-    json.partial!('admin/user/entity/preview', locals: { entity: entity.user } )
-    unless entity.agent.nil?
-      json.partial!('admin/agents/entity/preview', locals: { entity: entity.agent } )
-    end
-  end
+end
+json.included do
+  json.partial! 'admin/login_attempts/included/users', locals: { collection: User.where(id: @collection.pluck(:user_id).uniq) }
+  json.partial! 'admin/login_attempts/included/agents', locals: { collection: Agent.where(id: @collection.pluck(:agent_id).uniq) }
 end
 json.partial! 'shared/pagination', locals: { collection: @collection }
