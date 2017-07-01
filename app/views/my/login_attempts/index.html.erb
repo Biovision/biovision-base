@@ -1,0 +1,13 @@
+<% content_for :meta_title, t('.title', page: current_page) %>
+<% content_for :breadcrumbs do %>
+    <%= link_to(t('my.profiles.nav_item.text'), my_profile_path) %>
+    <span><%= t('my.login_attempts.nav_item.text') %></span>
+<% end %>
+
+<article class="entity-page">
+  <h1><%= t('.heading') %></h1>
+
+  <%= paginate @collection %>
+  <%= render partial: 'list', locals: { collection: @collection } %>
+  <%= paginate @collection %>
+</article>

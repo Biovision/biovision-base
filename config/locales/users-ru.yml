@@ -343,6 +343,13 @@ ru:
       index:
         title: "Жетоны, страница %{page}"
         heading: "Жетоны доступа (сессии)"
+    login_attempts:
+      nav_item:
+        text: "Попытки входа"
+        description: "Попытки входа в ваш аккаунт"
+      index:
+        title: "Попытки входа в мой аккаунт, страница %{page}"
+        heading: "Попытки входа в мой аккаунт"
   user_mailer:
     login_attempt:
       subject: "Кто-то пытается войти от вашего имени"

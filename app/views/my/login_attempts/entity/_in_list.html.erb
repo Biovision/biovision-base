@@ -1,0 +1,13 @@
+<div class="data">
+  <div><%= tine_tag(entity.created_at) %></div>
+  <div class="info">
+    <%= t('activerecord.attributes.login_attempt.password') %>:
+    <%= entity.password %>
+  </div>
+  <div class="secondary info">
+    <div><%= entity.ip %></div>
+    <% unless entity.agent.blank? %>
+        <div class="truncate"><%= entity.agent.name %></div>
+    <% end %>
+  </div>
+</div>
