@@ -1,9 +1,9 @@
 <% content_for :meta_title, t('.title', page: current_page) %>
 <% content_for :breadcrumbs do %>
-    <span></span>
+    <span><%= t('admin.login_attempts.nav_item.text') %></span>
 <% end %>
 
-<article class="entity-page">
+<article>
   <h1><%= t('.heading') %></h1>
 
   <ul class="actions">

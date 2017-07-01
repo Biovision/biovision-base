@@ -5,9 +5,8 @@ class LoginAttempt < ApplicationRecord
 
   belongs_to :user
   belongs_to :agent, optional: true
-  belongs_to :ip
 
-  before_validate { self.password = password.to_s[0..254] }
+  before_validation { self.password = password.to_s[0..254] }
 
   scope :recent, -> { order('id desc') }
   scope :since, ->(time) { where('created_at > ?', time)}

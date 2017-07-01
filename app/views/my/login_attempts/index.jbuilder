@@ -2,7 +2,8 @@ json.data @collection do |entity|
   json.id entity.id
   json.type entity.class.table_name
   json.attributes do
-    json.(entity, :created_at, :password, :ip)
+    json.(entity, :created_at, :password)
+    json.ip entity.ip.to_s
   end
   unless entity.agent.nil?
     json.relationships do
@@ -13,13 +14,9 @@ json.data @collection do |entity|
         end
       end
     end
-    json.included do
-      json.id entity.agent.id
-      json.type entity.agent.class.table_name
-      json.attributes do
-        json.(entity.agent, :name)
-      end
-    end
   end
+end
+json.included do
+  json.partial! 'my/login_attempts/included/agents', locals: { agents: Agent.where(id: @collection.pluck(:agent_id).uniq) }
 end
 json.partial! 'shared/pagination', locals: { collection: @collection }

@@ -1,5 +1,7 @@
 $main-font-family: "PT Sans", sans-serif;
 
+$content-width: 100rem;
+
 $row_background_even: #f0f0f0;
 $row_background_odd: #fafafa;
 
@@ -7,6 +9,12 @@ $primary-text-color: #000;
 $secondary-text-color: #777;
 
 $block-shadow: 0 0 .2rem .2rem rgba(0, 0, 0, .25);
+
+$border-primary: .1rem solid rgb(192, 192, 192);
+
+$link-color: rgb(20, 127, 255);
+$link-color-visited: rgb(20, 77, 250);
+$link-color-hover: rgb(255, 77, 20);
 
 $button-action-bg-a: #2e3c8e;
 $button-action-bg-b: #515da3;

@@ -16,7 +16,7 @@ class UserBouncer
   private
 
   def too_many_attempts?
-    LoginAttempt.owned_by(@user).since(15.minutes.ago) > 4
+    LoginAttempt.owned_by(@user).since(15.minutes.ago).count > 4
   end
 
   def log_attempt
