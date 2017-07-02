@@ -1,0 +1,32 @@
+<div class="image">
+  <%= region_image_preview(entity) %>
+</div>
+<div class="data">
+  <div><%= admin_region_link(entity) %></div>
+  <div class="info">
+    <div><%= entity.long_slug %></div>
+    <% unless entity.parents_cache.blank? %>
+        <div>
+          <%= t('activerecord.attributes.region.parents_cache') %>:
+          <%= entity.parents_cache %>
+        </div>
+    <% end %>
+    <% unless entity.children_cache.blank? %>
+        <div>
+          <%= t('activerecord.attributes.region.children_cache') %>:
+          <%= entity.children_cache.join(', ') %>
+        </div>
+    <% end %>
+  </div>
+  <div class="secondary info">
+    <%= t(:user_count, count: entity.users_count) %>
+  </div>
+  <%= render partial: 'admin/regions/toggleable', locals: { entity: entity } %>
+
+  <ul class="actions">
+    <li class="lockable <%= entity.editable_by?(current_user) ? '' : 'hidden' %>">
+      <%= edit_icon edit_region_path(entity) %>
+    </li>
+    <%= render partial: 'shared/actions/locks', locals: { entity: entity, path: lock_admin_region_path(entity) } %>
+  </ul>
+</div>

@@ -1,0 +1,17 @@
+<% content_for :meta_title, t('.title') %>
+<% content_for :breadcrumbs do %>
+    <%= link_to(t('admin.regions.nav_item.text'), admin_regions_path) %>
+    <span><%= t(:create) %></span>
+<% end %>
+
+<article class="entity-page">
+  <h1><%= t('.heading') %></h1>
+
+  <% unless @entity.parent.nil? %>
+      <ul class="actions">
+        <li><%= return_icon(admin_region_path(@entity.parent_id)) %></li>
+      </ul>
+  <% end %>
+
+  <%= render partial: 'form', locals: { entity: @entity } %>
+</article>

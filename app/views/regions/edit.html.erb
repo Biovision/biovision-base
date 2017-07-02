@@ -1,0 +1,20 @@
+<% content_for :meta_title, t('.title') %>
+<% content_for :breadcrumbs do %>
+    <%= link_to(t('admin.regions.nav_item.text'), admin_regions_path) %>
+    <% @entity.parents.each do |parent| %>
+        <%= admin_region_link(parent) %>
+    <% end %>
+    <%= admin_region_link(@entity) %>
+    <span><%= t(:edit) %></span>
+<% end %>
+
+<article class="entity-page">
+  <h1><%= t('.title') %></h1>
+
+  <ul class="actions">
+    <li><%= return_icon(admin_region_path(@entity.id)) %></li>
+    <li class="danger"><%= destroy_icon(@entity) %></li>
+  </ul>
+
+  <%= render partial: 'form', locals: { entity: @entity } %>
+</article>

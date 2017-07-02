@@ -8,6 +8,7 @@
     <div><%= entity.privilege_groups.map(&:name).join(', ') %></div>
     <div><%= link_to t(:user_count, count: entity.users_count), users_admin_privilege_path(entity.id) %></div>
   </div>
+  <%= render partial: 'admin/privileges/toggleable', locals: { entity: entity } %>
 
   <ul class="actions">
     <li class="lockable <%= entity.locked? ? 'hidden' : '' %>">

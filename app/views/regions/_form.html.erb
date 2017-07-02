@@ -1,0 +1,73 @@
+<%= render partial: 'shared/list_of_errors', locals: { entity: entity } %>
+
+<%= form_for entity do |f| %>
+    <dl>
+      <dt><%= f.label :image %></dt>
+      <dd>
+        <figure class="preview" id="region-image">
+          <% if entity.image.blank? %>
+              <% image = image_tag('biovision/base/placeholders/region_image.svg') %>
+          <% else %>
+              <% image = image_tag(entity.image.url) %>
+          <% end %>
+          <%= label_tag('region_image', image) %>
+          <figcaption>
+            <%= f.file_field :image, accept: 'image/jpeg,image/png', data: { image: 'region-image' } %>
+          </figcaption>
+        </figure>
+      </dd>
+      <dt><%= f.label :header_image %></dt>
+      <dd>
+        <figure class="preview" id="region-header-image">
+          <% if entity.header_image.blank? %>
+              <% header_image = image_tag('biovision/base/placeholders/image.svg') %>
+          <% else %>
+              <% header_image = image_tag(entity.header_image.medium.url) %>
+          <% end %>
+          <%= label_tag('region_header_image', header_image) %>
+          <figcaption>
+            <%= f.file_field :header_image, accept: 'image/jpeg,image/png', data: { image: 'region-header-image' } %>
+            <div class="guideline"><%= t('.guidelines.header_image') %></div>
+          </figcaption>
+        </figure>
+      </dd>
+
+      <dt><%= f.label :name %></dt>
+      <dd>
+        <%= f.text_field :name, required: true, size: nil, maxlength: Region::NAME_LIMIT %>
+      </dd>
+
+      <dt><%= f.label :short_name %></dt>
+      <dd>
+        <%= f.text_field :short_name, required: true, size: nil, maxlength: Region::NAME_LIMIT %>
+        <div class="guideline">
+          <%= t('.guidelines.short_name') %>
+        </div>
+      </dd>
+
+      <dt><%= f.label :locative %></dt>
+      <dd>
+        <%= f.text_field :locative, required: true, size: nil, maxlength: Region::NAME_LIMIT, placeholder: t('.placeholders.locative') %>
+        <div class="guideline">
+          <%= t('.guidelines.locative') %>
+        </div>
+      </dd>
+
+      <dt><%= f.label :slug %></dt>
+      <dd>
+        <%= f.text_field :slug, required: true, size: nil, maxlength: Region::SLUG_LIMIT %>
+        <div class="guideline">
+          <%= t('.guidelines.slug') %>
+        </div>
+      </dd>
+    </dl>
+
+    <ul class="flags">
+      <li><%= f.check_box :visible %><%= f.label :visible %></li>
+    </ul>
+
+    <div class="buttons">
+      <%= f.hidden_field :parent_id if entity.id.nil? %>
+      <%= f.button t(:save), type: :submit %>
+    </div>
+<% end %>

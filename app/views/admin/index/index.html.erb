@@ -14,6 +14,9 @@
             <li><%= render 'admin/privileges/nav_item' %></li>
             <li><%= render 'admin/privilege_groups/nav_item' %></li>
         <% end %>
+        <% if current_user_in_group?(:region_managers) %>
+            <li><%= render 'admin/regions/nav_item' %></li>
+        <% end %>
         <% if current_user_has_privilege?(:metrics_manager) %>
             <li><%= render 'admin/metrics/nav_item' %></li>
         <% end %>

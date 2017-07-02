@@ -13,6 +13,10 @@ class CreatePrivilegeGroupPrivileges < ActiveRecord::Migration[5.0]
       group = PrivilegeGroup.find_by(slug: 'editorial_office')
       group.add_privilege(Privilege.find_by(slug: 'chief_editor'))
       group.add_privilege(Privilege.find_by(slug: 'moderator'))
+
+      group = PrivilegeGroup.find_by(slug: 'region_managers')
+      group.add_privilege(Privilege.find_by(slug: 'administrator'))
+      group.add_privilege(Privilege.find_by(slug: 'region_manager'))
     end
   end
 

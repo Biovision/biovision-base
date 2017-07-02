@@ -1,8 +1,12 @@
 class Privilege < ApplicationRecord
+  include Toggleable
+
   DESCRIPTION_LIMIT = 350
   NAME_LIMIT        = 250
   SLUG_LIMIT        = 250
   PRIORITY_RANGE    = (1..32767)
+
+  toggleable :regional
 
   belongs_to :parent, class_name: Privilege.to_s, optional: true
   has_many :children, class_name: Privilege.to_s, foreign_key: :parent_id
@@ -15,6 +19,7 @@ class Privilege < ApplicationRecord
 
   before_validation { self.name = name.strip unless name.nil? }
   before_validation { self.slug = Canonizer.transliterate(name.to_s) if slug.blank? }
+  before_validation { self.regional = true if parent&.regional? }
   before_validation :normalize_priority
 
   before_save :compact_children_cache
@@ -37,7 +42,7 @@ class Privilege < ApplicationRecord
   end
 
   def self.entity_parameters
-    %i(name slug priority description)
+    %i(name slug priority description regional)
   end
 
   def self.creation_parameters
@@ -68,11 +73,8 @@ class Privilege < ApplicationRecord
   end
 
   def cache_parents!
-    if parent.nil?
-      self.parents_cache = ''
-    else
-      self.parents_cache = parent.parents_cache + ",#{parent_id}"
-    end
+    return if parent.nil?
+    self.parents_cache = "#{parent.parents_cache},#{parent_id}".gsub(/\A,/, '')
     save!
   end
 
@@ -89,21 +91,30 @@ class Privilege < ApplicationRecord
   end
 
   # @param [User] user
-  def has_user?(user)
+  # @param [Region] region
+  def has_user?(user, region = nil)
     return false if user.nil?
-    user_privileges.exists?(user: user) || user.super_user?
+    criteria             = { user: user }
+    criteria[:region_id] = region&.id if regional?
+    user_privileges.exists?(criteria) || user.super_user?
   end
 
   # @param [User] user
-  def grant(user)
-    criteria = { privilege: self, user: user }
+  # @param [Region] region
+  def grant(user, region = nil)
+    return if user.nil?
+    criteria          = { privilege: self, user: user }
+    criteria[:region] = region if regional?
     UserPrivilege.create(criteria) unless UserPrivilege.exists?(criteria)
   end
 
   # @param [User] user
-  def revoke(user)
-    criteria = { privilege: self, user: user }
-    UserPrivilege.where(criteria).destroy_all
+  # @param [Region] region
+  def revoke(user, region = nil)
+    return if user.nil?
+    criteria          = { privilege: self, user: user }
+    criteria[:region] = region if regional?
+    UserPrivilege.where(criteria).delete_all
   end
 
   # @param [Integer] delta
