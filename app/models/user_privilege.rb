@@ -1,4 +1,6 @@
 class UserPrivilege < ApplicationRecord
+  include HasOwner
+
   belongs_to :user
   belongs_to :privilege, counter_cache: :users_count
   belongs_to :region, optional: true

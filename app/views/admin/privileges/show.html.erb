@@ -44,6 +44,8 @@
     <% end %>
   </dl>
 
+  <%= render partial: 'admin/privileges/toggleable', locals: { entity: @entity } %>
+
   <nav>
     <ul>
       <li><%= link_to t(:user_count, count: @entity.users_count), users_admin_privilege_path(@entity.id) %></li>

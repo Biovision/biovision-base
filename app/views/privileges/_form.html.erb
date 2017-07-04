@@ -35,6 +35,13 @@
       </dd>
     </dl>
 
+    <ul class="flags">
+      <li>
+        <%= f.check_box :regional %>
+        <%= f.label :regional %>
+      </li>
+    </ul>
+
     <div class="buttons">
       <%= f.hidden_field :parent_id if entity.id.nil? %>
       <%= f.button t(:save), type: :submit %>

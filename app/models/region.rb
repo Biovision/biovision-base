@@ -65,6 +65,11 @@ class Region < ApplicationRecord
     parent_ids.count
   end
 
+  def long_name
+    return name if parents.blank?
+    "#{parents.map(&:name).join('/')}/#{name}"
+  end
+
   def cache_parents!
     return if parent.nil?
     self.parents_cache = "#{parent.parents_cache},#{parent_id}".gsub(/\A,/, '')

@@ -86,6 +86,22 @@
         <dt><%= t('activerecord.attributes.user.last_seen') %></dt>
         <dd><%= time_tag @entity.last_seen %></dd>
     <% end %>
+
+    <% if @entity.user_privileges.any? %>
+        <dt><%= t('.privileges') %></dt>
+        <dd>
+          <ol>
+            <% @entity.user_privileges.order('privilege_id, region_id asc nulls first').each do |link| %>
+                <li>
+                  <%= link.privilege.name %>
+                  <% unless link.region.nil? %>
+                      (<%= link.region.long_name %>)
+                  <% end %>
+                </li>
+            <% end %>
+          </ol>
+        </dd>
+    <% end %>
   </dl>
 
   <% unless @entity.deleted? %>

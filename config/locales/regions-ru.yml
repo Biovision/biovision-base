@@ -32,6 +32,14 @@ ru:
       show:
         title: "Регион «%{name}»"
         children: "Дочерние регионы"
+    users:
+      entity:
+        privilege:
+          select_regions: "Выбрать регионы…"
+    privileges:
+      entity:
+        region:
+          deeper_level: "Уровни глубже…"
   regions:
     new:
       title: "Новый регион"

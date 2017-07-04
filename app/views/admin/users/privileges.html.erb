@@ -16,20 +16,57 @@
     <h2><%= t('.heading') %></h2>
 
     <%= render partial: 'admin/users/entity/privilege_tree', locals: { privileges: Privilege.for_tree, user: @entity } %>
-
-    <script>
-        $(function() {
-            $('ul.privileges input[type=checkbox]').on('click', function() {
-                let url = $(this).data('url');
-                let method = $(this).is(':checked') ? 'put' : 'delete';
-                $.ajax(url, {
-                    method: method,
-                    success: function(response) {
-                        console.log(response);
-                    }
-                }).fail(handle_ajax_failure);
-            });
-        });
-    </script>
   </section>
 </article>
+
+<script>
+    'use strict';
+
+    $(function () {
+        $('ul.privileges input[type=checkbox]').on('click', function () {
+            let url = $(this).closest('div.entity').data('url');
+            let method = $(this).is(':checked') ? 'put' : 'delete';
+            let region_id = $(this).data('region-id');
+            let data = region_id > 0 ? { region_id: region_id } : {};
+
+            $.ajax(url, {
+                method: method,
+                data: data,
+                success: function (response) {
+                    console.log(response);
+                }
+            }).fail(handle_ajax_failure);
+        });
+
+        $(document).on('click', 'button.add_regions', function () {
+            let $button = $(this);
+            let $container = $(this).closest('ul');
+
+            $.get($container.data('url'), function (response) {
+                if (response.hasOwnProperty('data')) {
+                    $(response['data']).each(function(i, data) {
+                        if (data.hasOwnProperty('meta')) {
+                            $container.append('<li>' + data['meta']['html_chunk'] + '</li>');
+                        }
+                    });
+                }
+                $button.closest('li').remove();
+            }).fail(handle_ajax_failure);
+        });
+
+        $(document).on('click', 'input[type=checkbox].privilege-adder', function () {
+            let url = $(this).closest('div.entity').data('url');
+            let $li = $(this).closest('li');
+            let data = {region_id: $(this).val()};
+
+            $.ajax(url, {
+                method: 'put',
+                data: data,
+                success: function(response) {
+                    console.log(response);
+                    $li.find('ul.regions').remove();
+                }
+            }).fail(handle_ajax_failure);
+        });
+    });
+</script>

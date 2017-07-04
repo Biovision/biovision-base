@@ -52,8 +52,7 @@ Rails.application.routes.draw do
         post 'priority', defaults: { format: :json }
         post 'toggle', defaults: { format: :json }
         get 'users'
-        put 'users/:user_id' => :add_user, as: :user, defaults: { format: :json }
-        delete 'users/:user_id' => :remove_user, defaults: { format: :json }
+        get 'regions', defaults: { format: :json }
       end
     end
     resources :privilege_groups, only: [:index, :show] do
