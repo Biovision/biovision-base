@@ -5,6 +5,7 @@ module Biovision
 
       included do
         helper_method :current_user_has_privilege?, :current_user_in_group?
+        helper_method :current_region
       end
 
       def current_region
