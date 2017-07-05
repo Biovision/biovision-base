@@ -85,9 +85,11 @@
       </section>
   <% end %>
 
-  <section>
-    <h2><%= t('regions.new.heading') %></h2>
+  <% if @entity.editable_by?(current_user) %>
+      <section>
+        <h2><%= t('regions.new.heading') %></h2>
 
-    <%= render partial: 'regions/form', locals: { entity: Region.new(parent: @entity) } %>
-  </section>
+        <%= render partial: 'regions/form', locals: { entity: Region.new(parent: @entity) } %>
+      </section>
+  <% end %>
 </article>

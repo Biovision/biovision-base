@@ -61,6 +61,11 @@ class Region < ApplicationRecord
     parents_cache.split(',').compact
   end
 
+  # @return [Array<Integer>]
+  def branch_ids
+    parents_cache.split(',').map(&:to_i).reject { |i| i < 1 }.uniq + [id]
+  end
+
   def depth
     parent_ids.count
   end

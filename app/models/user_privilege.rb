@@ -41,4 +41,14 @@ class UserPrivilege < ApplicationRecord
     return false if privilege_ids.blank?
     exists?(user: user, privilege_id: privilege_ids)
   end
+
+  private
+
+  def regional_ids(region)
+
+  end
+
+  def simple_ids
+
+  end
 end

@@ -94,9 +94,13 @@ class Privilege < ApplicationRecord
   # @param [Region] region
   def has_user?(user, region = nil)
     return false if user.nil?
-    criteria             = { user: user }
-    criteria[:region_id] = region&.id if regional?
-    user_privileges.exists?(criteria) || user.super_user?
+    return true if user.super_user?
+    result = user_in_non_regional_branch?(user)
+
+    if regional? && !region.nil? && !result
+      result = user_in_regional_branch?(user, region)
+    end
+    result
   end
 
   # @param [User] user
@@ -144,5 +148,31 @@ class Privilege < ApplicationRecord
 
   def compact_children_cache
     self.children_cache.uniq!
+  end
+
+  # @param [User] user
+  def user_in_non_regional_branch?(user)
+    selected_ids = Privilege.where(regional: false, id: branch_ids).pluck(:id)
+    if selected_ids.any?
+      UserPrivilege.exists?(privilege_id: selected_ids, user: user)
+    else
+      false
+    end
+  end
+
+  # @param [User] user
+  # @param [Region] region
+  def user_in_regional_branch?(user, region)
+    selected_ids = Privilege.where(regional: true, id: branch_ids).pluck(:id)
+    if selected_ids.any?
+      criteria = {
+        privilege_id: selected_ids,
+        region_id: region.branch_ids,
+        user: user
+      }
+      UserPrivilege.exists?(criteria)
+    else
+      false
+    end
   end
 end
