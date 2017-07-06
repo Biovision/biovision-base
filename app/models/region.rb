@@ -10,9 +10,7 @@ class Region < ApplicationRecord
 
   belongs_to :parent, class_name: Region.to_s, optional: true, touch: true
   has_many :child_regions, class_name: Region.to_s, foreign_key: :parent_id
-  has_many :news, dependent: :nullify
   has_many :users, dependent: :nullify
-  has_many :albums, dependent: :nullify
 
   mount_uploader :image, RegionImageUploader
   mount_uploader :header_image, HeaderImageUploader

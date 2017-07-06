@@ -6,8 +6,8 @@
   color: $text-a;
   cursor: pointer;
   display: inline-block;
-  font: $decreased-font-size $main-font-family;
-  line-height: calc(#{$normal-font-size} * 1.5);
+  font: $font-size-decreased $main-font-family;
+  line-height: calc(#{$font-size-normal} * 1.5);
   margin: 0;
   padding: 0 1.6rem;
   text-decoration: none;

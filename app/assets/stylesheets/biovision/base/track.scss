@@ -14,15 +14,16 @@
 
 div.track {
   border: .1rem dotted;
-  font-size: $small_font_size;
+  box-sizing: border-box;
+  font-size: $font-size-decreased;
   margin: .4rem;
   padding: .4rem;
-  width: calc(100% - .8rem);
+  width: 100%;
 
   > div {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    width: 100%;
+    //overflow: hidden;
+    //text-overflow: ellipsis;
+    //white-space: nowrap;
+    //width: 100%;
   }
 }

@@ -1,53 +1,59 @@
-$main-font-family: "PT Sans", sans-serif;
+$main-font-family: "PT Sans", sans-serif !default;
 
-$content-width: 100rem;
+$font-size-large: 2rem !default;
+$font-size-increased: 1.6rem !default;
+$font-size-normal: 1.4rem !default;
+$font-size-decreased: 1.2rem !default;
+$font-size-small: 1rem !default;
 
-$row_background_even: #f0f0f0;
-$row_background_odd: #fafafa;
+$content-width: 100rem !default;
 
-$text-color-primary: #000;
-$text-color-secondary: #777;
+$row_background_even: #f0f0f0 !default;
+$row_background_odd: #fafafa !default;
 
-$block-shadow: 0 0 .2rem .2rem rgba(0, 0, 0, .25);
+$text-color-primary: #000 !default;
+$text-color-secondary: #777 !default;
 
-$border-primary: .1rem solid rgb(192, 192, 192);
+$block-shadow: 0 0 .2rem .2rem rgba(0, 0, 0, .25) !default;
 
-$link-color: rgb(20, 127, 255);
-$link-color-visited: rgb(20, 77, 250);
-$link-color-hover: rgb(255, 77, 20);
+$border-primary: .1rem solid rgb(192, 192, 192) !default;
 
-$button-action-bg-a: #2e3c8e;
-$button-action-bg-b: #515da3;
-$button-action-bg-c: #3d94f6;
-$button-action-bg-d: #1e62d0;
-$button-action-border-color-a: #2e3c8e;
-$button-action-border-color-b: #515da3;
-$button-action-text-color-a: #fff;
-$button-action-text-color-b: #fff;
+$link-color: rgb(20, 127, 255) !default;
+$link-color-visited: rgb(20, 77, 250) !default;
+$link-color-hover: rgb(255, 77, 20) !default;
 
-$button-nav-bg-a: #fff;
-$button-nav-bg-b: #fafafa;
-$button-nav-bg-c: #1e62d0;
-$button-nav-bg-d: #3d94f6;
-$button-nav-border-color-a: #2e3c8e;
-$button-nav-border-color-b: #2e3c8e;
-$button-nav-text-color-a: #3d94f6;
-$button-nav-text-color-b: #fff;
+$button-action-bg-a: #2e3c8e !default;
+$button-action-bg-b: #515da3 !default;
+$button-action-bg-c: #3d94f6 !default;
+$button-action-bg-d: #1e62d0 !default;
+$button-action-border-color-a: #2e3c8e !default;
+$button-action-border-color-b: #515da3 !default;
+$button-action-text-color-a: #fff !default;
+$button-action-text-color-b: #fff !default;
 
-$button-create-bg-a: #68a54b;
-$button-create-bg-b: #74ad5a;
-$button-create-bg-c: #5ba337;
-$button-create-bg-d: #59ab33;
-$button-create-border-color-a: #3b6e22;
-$button-create-border-color-b: #3b6e22;
-$button-create-text-color-a: #fff;
-$button-create-text-color-b: #fff;
+$button-nav-bg-a: #fff !default;
+$button-nav-bg-b: #fafafa !default;
+$button-nav-bg-c: #1e62d0 !default;
+$button-nav-bg-d: #3d94f6 !default;
+$button-nav-border-color-a: #2e3c8e !default;
+$button-nav-border-color-b: #2e3c8e !default;
+$button-nav-text-color-a: #3d94f6 !default;
+$button-nav-text-color-b: #fff !default;
 
-$button-destroy-bg-a: #a54b68;
-$button-destroy-bg-b: #ad5a74;
-$button-destroy-bg-c: #a3375b;
-$button-destroy-bg-d: #ab3359;
-$button-destroy-border-color-a: #6e223b;
-$button-destroy-border-color-b: #6e223b;
-$button-destroy-text-color-a: #fff;
-$button-destroy-text-color-b: #fff;
+$button-create-bg-a: #68a54b !default;
+$button-create-bg-b: #74ad5a !default;
+$button-create-bg-c: #5ba337 !default;
+$button-create-bg-d: #59ab33 !default;
+$button-create-border-color-a: #3b6e22 !default;
+$button-create-border-color-b: #3b6e22 !default;
+$button-create-text-color-a: #fff !default;
+$button-create-text-color-b: #fff !default;
+
+$button-destroy-bg-a: #a54b68 !default;
+$button-destroy-bg-b: #ad5a74 !default;
+$button-destroy-bg-c: #a3375b !default;
+$button-destroy-bg-d: #ab3359 !default;
+$button-destroy-border-color-a: #6e223b !default;
+$button-destroy-border-color-b: #6e223b !default;
+$button-destroy-text-color-a: #fff !default;
+$button-destroy-text-color-b: #fff !default;

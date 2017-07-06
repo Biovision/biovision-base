@@ -1,11 +1,11 @@
 // https://eliorshalev.github.io/tootik/
 
-$tootik_background_color: #000000;
-$tootik_success_color: #8bc34a;
-$tootik_info_color: #29d2e4;
-$tootik_warning_color: #f87d09;
-$tootik_danger_color: #e91e63;
-$tootik_text_color: #ffffff;
+$tootik_background_color: #000000 !default;
+$tootik_success_color: #8bc34a !default;
+$tootik_info_color: #29d2e4 !default;
+$tootik_warning_color: #f87d09 !default;
+$tootik_danger_color: #e91e63 !default;
+$tootik_text_color: #ffffff !default;
 
 [data-tootik] {
   position: relative;

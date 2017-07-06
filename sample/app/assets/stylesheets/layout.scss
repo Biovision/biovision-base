@@ -1,0 +1,13 @@
+html {
+  font: 10px $main-font-family;
+  margin: 0;
+  padding: 0;
+  -webkit-text-size-adjust: none;
+  -moz-text-size-adjust: none;
+  -ms-text-size-adjust: none;
+}
+
+body {
+  color: $text-color-primary;
+  font-size: $font-size-normal;
+}

@@ -23,7 +23,7 @@ article.entity-page {
     padding: .8rem 0 0 0;
 
     > h2 {
-      font-size: $increased-font-size;
+      font-size: $font-size-large;
     }
   }
 
@@ -287,7 +287,7 @@ ul.actions {
       position: relative;
 
       .info {
-        font-size: $small-font-size;
+        font-size: $font-size-decreased;
       }
 
       .secondary {
@@ -345,7 +345,7 @@ ul.actions {
 
         .description {
           color: $text-color-secondary;
-          font-size: $decreased-font-size;
+          font-size: $font-size-decreased;
         }
       }
     }
@@ -355,7 +355,7 @@ ul.actions {
 form {
   .guideline {
     color: $text-color-secondary;
-    font-size: $decreased-font-size;
+    font-size: $font-size-decreased;
     margin: 0;
 
     &::before {

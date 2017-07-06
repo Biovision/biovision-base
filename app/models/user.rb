@@ -26,6 +26,7 @@ class User < ApplicationRecord
 
   belongs_to :agent, optional: true
   belongs_to :inviter, class_name: User.to_s, optional: true
+  belongs_to :region, optional: true, counter_cache: true
   has_many :invitees, class_name: User.to_s, foreign_key: :inviter_id, dependent: :nullify
   has_many :tokens, dependent: :delete_all
   has_many :codes, dependent: :delete_all

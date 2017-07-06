@@ -1,8 +1,8 @@
-$toggleable-active: #34c749;
-$toggleable-inactive: #fc605c;
-$toggleable-switch: #fdbc40;
-$toggleable-unknown: #c0c0c0;
-$toggleable-background: #fff;
+$toggleable-active: #34c749 !default;
+$toggleable-inactive: #fc605c !default;
+$toggleable-switch: #fdbc40 !default;
+$toggleable-unknown: #c0c0c0 !default;
+$toggleable-background: #fff !default;
 
 html {
   background-image: linear-gradient(#dedfe3 2%, #aeb3b9 95%), radial-gradient(33% 100%, rgba(255, 255, 255, 0.50) 0%, rgba(0, 0, 0, 0.50) 100%);
@@ -129,7 +129,7 @@ h1, h2 {
 
         input,
         textarea {
-          font-size: $normal-font-size;
+          font-size: $font-size-normal;
         }
 
         input:not([type=checkbox]):not([type=radio]):not([size]):not([max]),
@@ -170,7 +170,7 @@ nav.admin-breadcrumbs {
 }
 
 .toggleable {
-  font-size: $small-font-size;
+  font-size: $font-size-decreased;
   margin: .8rem;
 
   > span {
@@ -179,14 +179,14 @@ nav.admin-breadcrumbs {
     border-radius: .8rem;
     cursor: pointer;
     display: inline-block;
-    line-height: calc(#{$small-font-size} * 2);
+    line-height: #{$font-size-decreased * 2};
     margin: .4rem;
     padding: 0 .8rem 0 0;
 
     &::before {
       border-radius: .6rem 0 0 .6rem;
       display: inline-block;
-      line-height: calc(#{$small-font-size} * 2);
+      line-height: #{$font-size-decreased * 2};
       margin: 0 .4rem 0 0;
       text-align: center;
       width: 2.2rem;

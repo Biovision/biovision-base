@@ -1,13 +1,13 @@
 form.filter fieldset {
-  font-size: $small-font-size;
-  line-height: calc(#{$normal-font-size} * 1.5);
+  font-size: $font-size-decreased;
+  line-height: #{$font-size-normal * 1.5};
 
   > div {
     display: flex;
     flex-wrap: wrap;
 
     input {
-      font-size: $small-font-size;
+      font-size: $font-size-decreased;
     }
 
     > div {
@@ -48,6 +48,6 @@ form.filter fieldset {
 
   button {
     margin: .8rem 0 0 0;
-    font-size: $small-font-size;
+    font-size: $font-size-decreased;
   }
 }
