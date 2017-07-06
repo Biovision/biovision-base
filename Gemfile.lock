@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    biovision-base (0.6.170705)
+    biovision-base (0.6.170706)
       bcrypt (~> 3.1.7)
       carrierwave
       carrierwave-bombshelter
@@ -94,7 +94,7 @@ GEM
     mime-types (3.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0521)
-    mini_magick (4.7.2)
+    mini_magick (4.8.0)
     mini_portile2 (2.2.0)
     minitest (5.10.2)
     nio4r (2.1.0)

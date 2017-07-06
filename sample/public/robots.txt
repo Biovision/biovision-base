@@ -1,0 +1,16 @@
+User-Agent: *
+Disallow: /admin
+Disallow: /my
+Disallow: /auth
+Disallow: /agents
+Disallow: /browsers
+Disallow: /codes
+Disallow: /comments
+Disallow: /editable_pages
+Disallow: /login_attempts
+Disallow: /metrics
+Disallow: /privileges
+Disallow: /privilege_groups
+Disallow: /regions
+Disallow: /tokens
+Disallow: /users
