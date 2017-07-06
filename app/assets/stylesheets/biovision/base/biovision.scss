@@ -19,7 +19,7 @@ article.entity-page {
   }
 
   > section {
-    border-top: .1rem solid $secondary-text-color;
+    border-top: .1rem solid $text-color-secondary;
     padding: .8rem 0 0 0;
 
     > h2 {
@@ -79,7 +79,7 @@ article.entity-page {
         vertical-align: top;
 
         &[colspan] {
-          border-top: .1rem solid $secondary-text-color;
+          border-top: .1rem solid $text-color-secondary;
           font-weight: bold;
           padding-top: 1.6rem;
           text-align: center;
@@ -291,7 +291,7 @@ ul.actions {
       }
 
       .secondary {
-        color: $secondary-text-color;
+        color: $text-color-secondary;
       }
 
       .truncate {
@@ -344,7 +344,7 @@ ul.actions {
         }
 
         .description {
-          color: $secondary-text-color;
+          color: $text-color-secondary;
           font-size: $decreased-font-size;
         }
       }
@@ -354,7 +354,7 @@ ul.actions {
 
 form {
   .guideline {
-    color: $secondary-text-color;
+    color: $text-color-secondary;
     font-size: $decreased-font-size;
     margin: 0;
 

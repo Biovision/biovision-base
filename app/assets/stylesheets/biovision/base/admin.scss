@@ -26,9 +26,13 @@ a:hover {
   color: $link-color-hover;
 }
 
+img {
+  max-width: 100%;
+}
+
 body {
   background: #fff;
-  color: $primary-text-color;
+  color: $text-color-primary;
   font-size: $font-size-normal;
   margin: 0 auto;
   max-width: $content-width;
@@ -66,6 +70,25 @@ body {
         }
       }
     }
+  }
+
+  > footer {
+    margin: auto 0 0 0;
+    padding: .8rem 0;
+  }
+
+  > footer {
+    align-items: center;
+    border-top: $border-primary;
+    color: $text-color-secondary;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    font-size: $font-size-decreased;
+    justify-content: space-between;
+    margin: auto 0 0 0;
+    max-width: $content-width;
+    padding: .8rem;
   }
 }
 
@@ -134,13 +157,13 @@ h1, h2 {
 }
 
 nav.admin-breadcrumbs {
-  background: rgba(192, 230, 192, .125);
+  background: linear-gradient(to right, rgba(192, 230, 192, .125), rgba(255, 255, 255, 0));
   border-left: .2rem solid rgba(80, 230, 80, .5);
   margin-bottom: .8rem;
   padding: .4rem;
 
   a::after {
-    color: $primary-text-color;
+    color: $text-color-primary;
     content: ' / ';
     text-decoration: none;
   }
