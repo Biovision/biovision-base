@@ -5,6 +5,6 @@ json.data @collection do |entity|
     json.(entity, :name, :long_slug, :children_cache)
   end
   json.meta do
-    json.html_chunk render(partial: 'admin/privileges/entity/region', formats: [:html], locals: { privilege: @entity, region: entity })
+    json.html_chunk render(partial: 'admin/privileges/entity/region', formats: [:html], locals: { privilege: @entity, region: entity, user: @user })
   end
 end

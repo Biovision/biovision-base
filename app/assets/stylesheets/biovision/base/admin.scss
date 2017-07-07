@@ -138,6 +138,11 @@ h1, h2 {
         textarea {
           width: calc(100% - 1rem);
         }
+
+        input,
+        textarea {
+          max-width: calc(100% - 1rem);
+        }
       }
     }
 

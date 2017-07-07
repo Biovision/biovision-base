@@ -4,7 +4,7 @@
   <%= label_tag element_id, region.name %>
 </div>
 <% if region.children_cache.any? %>
-    <ul class="regions" data-url="<%= regions_admin_privilege_path(privilege.id, parent_id: region.id) %>">
+    <ul class="regions" data-url="<%= regions_admin_privilege_path(privilege.id, parent_id: region.id, user_id: user.id) %>">
       <li>
         <button class="add_regions" type="button"><%= t('.deeper_level') %></button>
       </li>

@@ -1,5 +1,5 @@
 <div class="user-search" data-target="<%= target_id %>" data-url="<%= search_admin_users_path %>">
-  <%= search_field_tag 'user_search', param_from_request(:user_search), id: "#{target_id}_user_search" %>
+  <%= search_field_tag 'user_search', param_from_request(:user_search), id: "#{target_id}_user_search", size: 24 %>
   <%= button_tag t(:find), type: :button %>
   <div class="results"></div>
 </div>

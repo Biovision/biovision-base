@@ -33,9 +33,6 @@
                 $.ajax(url, {
                     method: method,
                     data: data,
-                    success: function (response) {
-                        console.log(response);
-                    }
                 }).fail(handle_ajax_failure);
             }
         });
@@ -65,7 +62,6 @@
                 method: 'put',
                 data: data,
                 success: function(response) {
-                    console.log(response);
                     $li.find('ul.regions').remove();
                 }
             }).fail(handle_ajax_failure);
