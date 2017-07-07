@@ -5,7 +5,7 @@
     <span><%= t('.heading') %></span>
 <% end %>
 
-<article class="entity-page">
+<article>
   <h1><%= @entity.profile_name %></h1>
 
   <ul class="actions">
@@ -24,18 +24,20 @@
 
     $(function () {
         $('ul.privileges input[type=checkbox]').on('click', function () {
-            let url = $(this).closest('div.entity').data('url');
-            let method = $(this).is(':checked') ? 'put' : 'delete';
-            let region_id = $(this).data('region-id');
-            let data = region_id > 0 ? { region_id: region_id } : {};
+            if ($(this).is(':visible')) {
+                let url = $(this).closest('div.entity').data('url');
+                let method = $(this).is(':checked') ? 'put' : 'delete';
+                let region_id = $(this).data('region-id');
+                let data = region_id > 0 ? { region_id: region_id } : {};
 
-            $.ajax(url, {
-                method: method,
-                data: data,
-                success: function (response) {
-                    console.log(response);
-                }
-            }).fail(handle_ajax_failure);
+                $.ajax(url, {
+                    method: method,
+                    data: data,
+                    success: function (response) {
+                        console.log(response);
+                    }
+                }).fail(handle_ajax_failure);
+            }
         });
 
         $(document).on('click', 'button.add_regions', function () {

@@ -1,0 +1,12 @@
+.privileges {
+  .entity {
+    > input[type=checkbox] {
+      &:checked ~ ul {
+        button,
+        input[type=checkbox] {
+          display: none;
+        }
+      }
+    }
+  }
+}

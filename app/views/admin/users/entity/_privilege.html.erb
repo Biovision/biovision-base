@@ -19,8 +19,8 @@
         <%= check_box_tag element_id, 1, privilege.has_user?(user) %>
         <%= label_tag element_id, privilege.name %>
     <% end %>
+    <% if privilege.children.any? %>
+        <%= render partial: 'admin/users/entity/privilege_tree', locals: { privileges: Privilege.for_tree(privilege.id), user: user } %>
+    <% end %>
   </div>
-  <% if privilege.children.any? %>
-      <%= render partial: 'admin/users/entity/privilege_tree', locals: { privileges: Privilege.for_tree(privilege.id), user: user } %>
-  <% end %>
 </div>
