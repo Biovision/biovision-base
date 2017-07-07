@@ -1,5 +1,7 @@
 class My::ConfirmationsController < ApplicationController
-  before_action :restrict_anonymous_access, only: [:create, :update]
+  include Authentication
+
+  # before_action :restrict_anonymous_access, only: [:create, :update]
   before_action :redirect_confirmed_user, only: [:create, :update]
 
   # get /my/confirmation
@@ -20,9 +22,10 @@ class My::ConfirmationsController < ApplicationController
   # patch /my/confirmation
   def update
     code    = Code.find_by(body: param_from_request(:code))
-    manager = CodeManager::Confirmation.new(code, current_user)
+    manager = CodeManager::Confirmation.new(code)
     if manager.code_is_valid?
       manager.activate
+      create_token_for_user(code.user)
       redirect_to my_path
     else
       redirect_to my_confirmation_path, alert: t('my.confirmations.update.invalid_code')
@@ -32,6 +35,8 @@ class My::ConfirmationsController < ApplicationController
   protected
 
   def redirect_confirmed_user
-    redirect_to my_confirmation_path, notice: t(:email_already_confirmed) if current_user.email_confirmed?
+    if current_user&.email_confirmed?
+      redirect_to my_path
+    end
   end
 end

@@ -15,7 +15,7 @@ class CodeManager::Confirmation < CodeManager
 
   def code_is_valid?
     return false if @code.nil?
-    @code.owned_by?(@user) && @code.active? && @code.code_type == self.code_type
+    @code.active? && @code.code_type == self.class.code_type
   end
 
   def activate

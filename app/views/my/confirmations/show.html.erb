@@ -5,7 +5,7 @@
   <% if current_user&.email_confirmed? %>
       <div class="message-box-notice"><%= t('activerecord.attributes.user.email_confirmed') %></div>
   <% else %>
-      <section>
+      <section id="confirmation-container">
         <h2><%= t('.got_code') %></h2>
         <%= form_tag my_confirmation_path, method: :patch do %>
             <div>
@@ -17,6 +17,16 @@
             </div>
         <% end %>
       </section>
+
+      <% unless param_from_request(:instant).blank? %>
+          <script>
+              'use strict';
+
+              $(function () {
+                  $('#confirmation-container').find('form').submit();
+              });
+          </script>
+      <% end %>
 
       <section>
         <h2><%= t('.no_code') %></h2>
