@@ -52,12 +52,20 @@ class AuthenticationController < ApplicationController
   def successful_authentication
     create_token_for_user(@user)
     Metric.register(User::METRIC_AUTHENTICATION_SUCCESS)
-    redirect_to my_path
+    redirect_after_success
   end
 
   def failed_authentication
     Metric.register(User::METRIC_AUTHENTICATION_FAILURE)
     flash.now[:alert] = t(:could_not_log_in)
     render :new, status: :unauthorized
+  end
+
+  def redirect_after_success
+    return_path = cookies['return_path'].to_s
+    return_path = my_path unless return_path[0] == '/'
+    cookies.delete 'return_path', domain: :all
+
+    redirect_to return_path
   end
 end

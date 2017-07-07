@@ -46,7 +46,7 @@ class My::ProfilesController < ApplicationController
     if @user.save
       Metric.register(User::METRIC_REGISTRATION)
       create_token_for_user(@user)
-      redirect_to my_profile_path, notice: t('my.profiles.create.success')
+      redirect_after_creation
     else
       render :new, status: :bad_request
     end
@@ -77,5 +77,13 @@ class My::ProfilesController < ApplicationController
     parameters[:email_confirmed] = false if parameters[:email] && parameters[:email] != current_user.email
     parameters[:phone_confirmed] = false if parameters[:phone] && parameters[:phone] != current_user.phone
     parameters
+  end
+
+  def redirect_after_creation
+    return_path = cookies['return_path'].to_s
+    return_path = my_profile_path unless return_path[0] == '/'
+    cookies.delete 'return_path', domain: :all
+    
+    redirect_to return_path, notice: t('my.profiles.create.success')
   end
 end
