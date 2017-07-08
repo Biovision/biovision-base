@@ -40,3 +40,25 @@ div.user-search {
     }
   }
 }
+
+.my-profile-new {
+  > section {
+    dl {
+      input {
+        max-width: 32rem;
+
+        &:not([size]) {
+          width: calc(100% - 1rem);
+        }
+      }
+    }
+
+    .trap {
+      width: .01rem;
+      height: .01rem;
+      overflow: hidden;
+      position: absolute;
+      left: -300rem;
+    }
+  }
+}

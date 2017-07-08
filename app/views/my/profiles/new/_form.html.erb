@@ -1,32 +1,57 @@
-<section class="form">
-  <h2><%= t('.registration_form') %></h2>
-
+<section>
   <%= render partial: 'shared/list_of_errors', locals: { entity: entity } %>
 
   <%= form_tag my_profile_path do %>
-      <div>
-        <div><%= label_tag :user_screen_name, t('activerecord.attributes.user.screen_name') %></div>
-        <%= text_field_tag 'user[screen_name]', entity.screen_name, required: true, size: 30, maxlength: 30 %>
-      </div>
-      <div>
-        <div><%= label_tag :user_password, t('activerecord.attributes.user.password') %></div>
-        <%= password_field_tag 'user[password]', '', required: true, size: 30, maxlength: 70 %>
-      </div>
-      <div>
-        <div><%= label_tag :user_password_confirmation, t('activerecord.attributes.user.password_confirmation') %></div>
-        <%= password_field_tag 'user[password_confirmation]', '', required: true, size: 30, maxlength: 70 %>
-      </div>
-      <div>
-        <div><%= label_tag :user_email, t('activerecord.attributes.user.email') %></div>
-        <%= email_field_tag 'user[email]', entity.email, size: 50, maxlength: User::EMAIL_LIMIT %>
-      </div>
-      <div>
+      <dl>
+        <dt>
+          <%= label_tag :user_screen_name, t('activerecord.attributes.user.screen_name') %>
+        </dt>
+        <dd>
+          <%= text_field_tag 'user[screen_name]', entity.screen_name, required: true, size: 30, maxlength: 30 %>
+          <div class="guideline"><%= t('.guidelines.screen_name') %></div>
+        </dd>
+
+        <dt>
+          <%= label_tag :user_password, t('activerecord.attributes.user.password') %>
+        </dt>
+        <dd>
+          <%= password_field_tag 'user[password]', '', required: true, size: nil, maxlength: 70 %>
+          <div class="guideline"><%= t('.guidelines.password') %></div>
+        </dd>
+
+        <dt>
+          <%= label_tag :user_password_confirmation, t('activerecord.attributes.user.password_confirmation') %>
+        </dt>
+        <dd>
+          <%= password_field_tag 'user[password_confirmation]', '', required: true, size: nil, maxlength: 70 %>
+          <div class="guideline"><%= t('.guidelines.password_confirmation') %></div>
+        </dd>
+
+        <dt>
+          <%= label_tag :user_email, t('activerecord.attributes.user.email') %>
+        </dt>
+        <dd>
+          <%= email_field_tag 'user[email]', entity.email, size: nil, maxlength: User::EMAIL_LIMIT, required: true %>
+          <div class="guideline"><%= t('.guidelines.email') %></div>
+        </dd>
+      </dl>
+
+      <ul class="flags">
+        <li>
+          <%= check_box_tag 'user[consent]', '1', false, required: true %>
+          <%= label_tag :user_consent, t('.consent') %>
+        </li>
+        <li>
+          <%= check_box_tag 'user[allow_mail]', '1', entity.allow_mail %>
+          <%= label_tag :user_allow_mail, t('activerecord.attributes.user.allow_mail') %>
+        </li>
+      </ul>
+
+      <div class="trap">
         <%= check_box_tag :agree %>
         <%= label_tag :agree, t('.i_am_bot') %>
       </div>
-      <div>
-        <p><%= t('.you_accept_terms_of_service') %></p>
-      </div>
+
       <div>
         <%= button_tag t('my.profiles.new.title'), type: :submit, name: 'button' %>
       </div>

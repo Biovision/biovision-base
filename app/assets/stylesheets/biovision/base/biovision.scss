@@ -1,3 +1,13 @@
+article {
+  position: relative;
+}
+
+button,
+input,
+textarea {
+  font-size: $font-size-normal;
+}
+
 article.entity-page {
   position: relative;
 
@@ -353,6 +363,9 @@ ul.actions {
 }
 
 form {
+  margin: 0;
+  padding: 0;
+
   .guideline {
     color: $text-color-secondary;
     font-size: $font-size-decreased;
@@ -361,6 +374,32 @@ form {
     &::before {
       content: '\261E';
       margin-right: .4rem;
+    }
+  }
+
+  dl {
+    margin: 0;
+    padding: 0;
+
+    dd,
+    dt {
+      margin: 0;
+      padding: 0;
+    }
+
+    dt:not(:first-of-type) {
+      margin-top: .8rem;
+    }
+  }
+
+  ul.flags {
+    margin: .8rem 0;
+    padding: 0;
+
+    li {
+      list-style: none;
+      margin: 0;
+      padding: 0;
     }
   }
 
