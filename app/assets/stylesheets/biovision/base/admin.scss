@@ -8,7 +8,7 @@ html {
   background-image: linear-gradient(#dedfe3 2%, #aeb3b9 95%), radial-gradient(33% 100%, rgba(255, 255, 255, 0.50) 0%, rgba(0, 0, 0, 0.50) 100%);
   background-blend-mode: screen;
   background-attachment: fixed;
-  font: 10px $main-font-family;
+  font: 10px $font-family-main;
   margin: 0;
   padding: 0;
   -webkit-text-size-adjust: none;
@@ -92,11 +92,6 @@ body {
     max-width: $content-width;
     padding: .8rem;
   }
-}
-
-h1, h2 {
-  font-weight: normal;
-  margin: 0;
 }
 
 #main {

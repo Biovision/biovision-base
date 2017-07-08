@@ -6,11 +6,12 @@
   color: $text-a;
   cursor: pointer;
   display: inline-block;
-  font: $font-size-decreased $main-font-family;
+  font: $font-size-decreased $font-family-main;
   line-height: calc(#{$font-size-normal} * 1.5);
   margin: 0;
   padding: 0 1.6rem;
   text-decoration: none;
+  //transition: .25s;
 
   &:active,
   &:hover,

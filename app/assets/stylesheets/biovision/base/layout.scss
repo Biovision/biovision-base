@@ -1,0 +1,108 @@
+html {
+  font: 10px $font-family-main;
+  margin: 0;
+  padding: 0;
+  -webkit-text-size-adjust: none;
+  -moz-text-size-adjust: none;
+  -ms-text-size-adjust: none;
+}
+
+h1, h2, h3, h4, h6, h6 {
+  color: $text-color-heading;
+  font-family: $font-family-heading;
+  font-weight: 500;
+  margin: 0;
+}
+
+a:link {
+  color: $link-color;
+  text-decoration: none;
+  transition: color .125s;
+}
+
+a:visited {
+  color: $link-color-visited;
+}
+
+a:active,
+a:hover {
+  color: $link-color-hover;
+  text-decoration: underline;
+}
+
+body {
+  color: $text-color-primary;
+  display: flex;
+  flex-direction: column;
+  font-size: $font-size-normal;
+  justify-content: space-between;
+  margin: 0;
+  min-height: 100vh;
+  min-width: $content-width-min;
+  padding: 0;
+
+  > footer,
+  > header {
+    > div {
+      margin: 0 auto;
+      padding: .4rem;
+      max-width: $content-width;
+
+      .authentication {
+        > div {
+          display: flex;
+          align-items: center;
+
+          &.links {
+            a:link,
+            a:visited {
+              @include nav-button;
+              margin: 0 .4rem;
+            }
+          }
+
+          &.plate {
+            .logout {
+              @include action-button;
+              margin-left: 1rem;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  > header {
+    background: $background-header;
+    border-bottom: $border-primary;
+
+    > div {
+      align-items: center;
+      display: flex;
+      flex-wrap: wrap;
+
+      .logo {
+        margin-right: auto;
+      }
+    }
+  }
+
+  > footer {
+    background: $background-footer;
+    border-top: $border-primary;
+    margin: auto 0 0 0;
+
+    > div {
+      color: $text-color-secondary;
+      font-size: $font-size-decreased;
+    }
+  }
+}
+
+#main {
+  background: $background-main;
+  flex: 1;
+  margin: 0 auto;
+  max-width: $content-width;
+  padding: .8rem;
+}

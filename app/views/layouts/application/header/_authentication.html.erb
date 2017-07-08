@@ -1,0 +1,7 @@
+<div class="authentication">
+  <% if current_user.nil? %>
+      <%= render 'layouts/application/header/authentication/links' %>
+  <% else %>
+      <%= render 'layouts/application/header/authentication/plate' %>
+  <% end %>
+</div>

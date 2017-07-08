@@ -187,10 +187,15 @@ ru:
         text: "Попытки входа"
         description: "Неудачные попытки входа пользователей"
   authentication:
+    nav_item:
+      log_in: "Вход"
+      join: "Регистрация"
+      logout: "Выйти"
     info:
       logout: "Выйти"
     new:
       title: "Вход"
+      heading: "Вход"
       breadcrumbs: "Вход"
   users:
     create:

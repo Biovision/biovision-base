@@ -1,0 +1,10 @@
+ru:
+  copyright: "2017 example.com"
+  shared:
+    meta_texts:
+      site_name: "example.com"
+  index:
+    index:
+      title: "Главная страница"
+      heading: "Главная страница"
+      description: "Новый сайт на движке biovision-base"
