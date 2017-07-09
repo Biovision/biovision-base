@@ -37,6 +37,41 @@ namespace :regions do
     end
   end
 
+  desc 'Import regions from YAML without deleting old data'
+  task import: :environment do
+    file_path = "#{Rails.root}/tmp/import/regions.yml"
+    media_dir = "#{Rails.root}/tmp/import/regions"
+    ignored   = %w(image header_image)
+    if File.exists? file_path
+      File.open file_path, 'r' do |file|
+        YAML.load(file).each do |id, data|
+          attributes = data.reject { |key| ignored.include?(key) }
+          entity     = Region.find_by(id: id) || Region.new(id: id)
+          entity.assign_attributes(attributes)
+          if data.key?('image') && entity.image.blank?
+            image_file = "#{media_dir}/image/#{id}/#{data['image']}"
+            if File.exists?(image_file)
+              entity.image = Pathname.new(image_file).open
+            end
+          end
+          if data.key?('header_image') && entity.header_image.blank?
+            image_file = "#{media_dir}/header_image/#{id}/#{data['header_image']}"
+            if File.exists?(image_file)
+              entity.header_image = Pathname.new(image_file).open
+            end
+          end
+          entity.save!
+          print "\r#{id}    "
+        end
+        puts
+      end
+      Region.connection.execute "select setval('regions_id_seq', (select max(id) from regions));"
+      puts "Done. We have #{Region.count} regions now"
+    else
+      puts "Cannot find file #{file_path}"
+    end
+  end
+
   desc 'Dump regions to YAML'
   task dump: :environment do
     file_path = "#{Rails.root}/tmp/export/regions.yml"
