@@ -85,14 +85,14 @@ namespace :regions do
           file.puts "  #{attribute}: #{value.inspect}"
         end
         unless entity.image.blank?
-          image_name = "#{entity.long_slug}#{File.extension(File.basename(entity.image.path))}"
+          image_name = "#{entity.long_slug}#{File.extname(File.basename(entity.image.path))}"
           image_dir  = "#{media_dir}/image/#{entity.id}"
           FileUtils.mkdir_p(image_dir) unless Dir.exists?(image_dir)
           FileUtils.copy(entity.image.path, "#{image_dir}/#{image_name}")
           file.puts "  image: #{image_name.inspect}"
         end
         unless entity.header_image.blank?
-          image_name = "#{entity.long_slug}#{File.extension(File.basename(entity.header_image.path))}"
+          image_name = "#{entity.long_slug}#{File.extname(File.basename(entity.header_image.path))}"
           image_dir  = "#{media_dir}/header_image/#{entity.id}"
           FileUtils.mkdir_p(image_dir) unless Dir.exists?(image_dir)
           FileUtils.copy(entity.header_image.path, "#{image_dir}/#{image_name}")
