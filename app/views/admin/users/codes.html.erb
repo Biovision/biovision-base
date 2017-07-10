@@ -13,7 +13,7 @@
   </ul>
 
   <%= paginate @collection %>
-  <%= render partial: 'admin/codes/list', locals: { collection: @collection } %>
+  <%= render partial: 'shared/admin/list', locals: { collection: @collection } %>
   <%= paginate @collection %>
 
   <section>
