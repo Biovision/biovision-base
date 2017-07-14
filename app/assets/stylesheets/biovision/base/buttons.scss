@@ -6,12 +6,10 @@
   color: $text-a;
   cursor: pointer;
   display: inline-block;
-  font: $font-size-decreased $font-family-main;
-  line-height: calc(#{$font-size-normal} * 1.5);
-  margin: 0;
+  font: $font-size-normal $font-family-main;
+  line-height: 1.5;
   padding: 0 1.6rem;
   text-decoration: none;
-  //transition: .25s;
 
   &:active,
   &:hover,
@@ -74,18 +72,26 @@
   );
 }
 
-.action-button {
+.action-button,
+a:link.action-button,
+a:visited.action-button {
   @include action-button;
 }
 
-.nav-button {
+.nav-button,
+a:link.nav-button,
+a:visited.nav-button {
   @include nav-button;
 }
 
-.create-button {
+.create-button,
+a:link.create-button,
+a:visited.create-button {
   @include create-button;
 }
 
-.destroy-button {
+.destroy-button,
+a:link.destroy-button,
+a:visited.destroy-button {
   @include destroy-button;
 }
