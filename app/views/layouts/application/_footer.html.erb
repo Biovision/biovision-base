@@ -1,5 +1,10 @@
 <footer>
   <div>
     <div class="copyright">&copy; <%= t(:copyright) %></div>
+    <nav>
+      <% if UserPrivilege.user_has_any_privilege?(current_user) %>
+          <%= link_to(t('admin.index.index.heading'), admin_path) %>
+      <% end %>
+    </nav>
   </div>
 </footer>

@@ -98,8 +98,19 @@ body {
     margin: auto 0 0 0;
 
     > div {
+      align-items: center;
       color: $text-color-secondary;
+      display: flex;
+      flex-wrap: wrap;
       font-size: $font-size-decreased;
+
+      .copyright {
+        margin-right: auto;
+      }
+
+      nav {
+        margin: 0 auto;
+      }
     }
   }
 }
