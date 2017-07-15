@@ -22,7 +22,7 @@ article.entity-page {
         margin: 0 1.6rem;
 
         a {
-          @include nav-button;
+          @include button-nav;
         }
       }
     }
@@ -404,7 +404,7 @@ form {
   }
 
   button {
-    @include action-button;
+    @include button-action;
   }
 }
 

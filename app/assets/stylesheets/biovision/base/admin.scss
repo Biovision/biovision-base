@@ -67,7 +67,7 @@ body {
 
           a:link,
           a:visited {
-            @include nav-button;
+            @include button-nav;
           }
         }
       }
