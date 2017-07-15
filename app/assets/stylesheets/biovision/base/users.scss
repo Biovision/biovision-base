@@ -94,3 +94,14 @@ form.new-my-profile {
     justify-content: space-between;
   }
 }
+
+article.user {
+  figure {
+    max-width: 32rem;
+
+    figcaption {
+      font-size: $font-size-large;
+      text-align: center;
+    }
+  }
+}

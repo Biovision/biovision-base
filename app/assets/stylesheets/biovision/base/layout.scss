@@ -35,6 +35,14 @@ a:hover {
   text-decoration: underline;
 }
 
+figure {
+  margin: 0;
+}
+
+img {
+  max-width: 100%;
+}
+
 body {
   color: $text-color-primary;
   display: flex;

@@ -92,6 +92,12 @@ class User < ApplicationRecord
     (min..max)
   end
 
+  # Name to be shown as profile
+  #
+  # This can be redefined for cases when something other than screen name should
+  # be used.
+  #
+  # @return [String]
   def profile_name
     screen_name
   end
