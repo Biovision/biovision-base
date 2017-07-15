@@ -54,11 +54,43 @@ div.user-search {
     }
 
     .trap {
-      width: .01rem;
       height: .01rem;
+      left: -300rem;
       overflow: hidden;
       position: absolute;
-      left: -300rem;
+      width: .01rem;
     }
+  }
+}
+
+form.login {
+  margin: 0 auto;
+  max-width: 26rem;
+
+  .fields {
+    > div {
+      align-items: center;
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+
+  .actions {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin-top: .8rem;
+  }
+}
+
+form.new-my-profile {
+  margin: 0 auto;
+  max-width: 50rem;
+
+  .actions {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
   }
 }

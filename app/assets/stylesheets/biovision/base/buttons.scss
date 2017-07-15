@@ -51,28 +51,28 @@ $button-destroy-text-b: #fff !default;
 @mixin button-action {
   @include button(
                   $button-action-bg-a, $button-action-text-a, $button-action-border-a,
-                  $button-action-bg-b, $button-action-text-a, $button-action-border-a
+                  $button-action-bg-b, $button-action-text-b, $button-action-border-b
   )
 }
 
 @mixin button-nav {
   @include button(
                   $button-nav-bg-a, $button-nav-text-a, $button-nav-border-a,
-                  $button-nav-bg-b, $button-nav-text-a, $button-nav-border-a
+                  $button-nav-bg-b, $button-nav-text-b, $button-nav-border-b
   )
 }
 
 @mixin button-create {
   @include button(
                   $button-create-bg-a, $button-create-text-a, $button-create-border-a,
-                  $button-create-bg-b, $button-create-text-a, $button-create-border-a
+                  $button-create-bg-b, $button-create-text-b, $button-create-border-b
   )
 }
 
 @mixin button-destroy {
   @include button(
                   $button-destroy-bg-a, $button-destroy-text-a, $button-destroy-border-a,
-                  $button-destroy-bg-b, $button-destroy-text-a, $button-destroy-border-a
+                  $button-destroy-bg-b, $button-destroy-text-b, $button-destroy-border-b
   )
 }
 
@@ -155,77 +155,41 @@ $button-destroy-text-color-b: #fff !default;
 }
 
 @mixin action-button {
-  @include styled-button(
-                  $button-action-bg-a,
-                  $button-action-bg-b,
-                  $button-action-bg-c,
-                  $button-action-bg-d,
-                  $button-action-border-color-a,
-                  $button-action-border-color-b,
-                  $button-action-text-color-a,
-                  $button-action-text-color-b
-  );
+  @include button-action;
 }
 
 @mixin nav-button {
-  @include styled-button(
-                  $button-nav-bg-a,
-                  $button-nav-bg-b,
-                  $button-nav-bg-c,
-                  $button-nav-bg-d,
-                  $button-nav-border-color-a,
-                  $button-nav-border-color-b,
-                  $button-nav-text-color-a,
-                  $button-nav-text-color-b
-  );
+  @include button-nav;
 }
 
 @mixin create-button {
-  @include styled-button(
-                  $button-create-bg-a,
-                  $button-create-bg-b,
-                  $button-create-bg-c,
-                  $button-create-bg-d,
-                  $button-create-border-color-a,
-                  $button-create-border-color-b,
-                  $button-create-text-color-a,
-                  $button-create-text-color-b
-  );
+  @include button-create;
 }
 
 @mixin destroy-button {
-  @include styled-button(
-                  $button-destroy-bg-a,
-                  $button-destroy-bg-b,
-                  $button-destroy-bg-c,
-                  $button-destroy-bg-d,
-                  $button-destroy-border-color-a,
-                  $button-destroy-border-color-b,
-                  $button-destroy-text-color-a,
-                  $button-destroy-text-color-b
-  );
+  @include button-destroy;
 }
 
 .action-button,
 a:link.action-button,
 a:visited.action-button {
-  @include action-button;
+  @include button-action;
 }
 
 .nav-button,
 a:link.nav-button,
 a:visited.nav-button {
-  @include nav-button;
+  @include button-nav;
 }
 
 .create-button,
 a:link.create-button,
 a:visited.create-button {
-  @include create-button;
+  @include button-create;
 }
 
 .destroy-button,
 a:link.destroy-button,
 a:visited.destroy-button {
-  @include destroy-button;
+  @include button-destroy;
 }

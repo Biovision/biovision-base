@@ -1,7 +1,7 @@
 <section>
   <%= render partial: 'shared/list_of_errors', locals: { entity: entity } %>
 
-  <%= form_tag my_profile_path do %>
+  <%= form_tag my_profile_path, class: 'new-my-profile' do %>
       <dl>
         <dt>
           <%= label_tag :user_screen_name, t('activerecord.attributes.user.screen_name') %>
@@ -52,8 +52,8 @@
         <%= label_tag :agree, t('.i_am_bot') %>
       </div>
 
-      <div>
-        <%= button_tag t('my.profiles.new.title'), type: :submit, name: 'button' %>
+      <div class="actions">
+        <%= button_tag t('.join'), type: :submit, name: 'button' %>
         <%= link_to t('authentication.nav_item.log_in'), login_path, class: 'nav-button' %>
       </div>
   <% end %>

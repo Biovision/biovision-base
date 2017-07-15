@@ -61,14 +61,14 @@ body {
           &.links {
             a:link,
             a:visited {
-              @include nav-button;
+              @include button-nav;
               margin: 0 .4rem;
             }
           }
 
           &.plate {
             .logout {
-              @include action-button;
+              @include button-action;
               margin-left: 1rem;
             }
           }
