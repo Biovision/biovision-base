@@ -106,6 +106,14 @@ class User < ApplicationRecord
     name.blank? ? profile_name : name
   end
 
+  # @param [Boolean] include_patronymic
+  def full_name(include_patronymic = false)
+    result = [name_for_letter]
+    result << patronymic if include_patronymic && !patronymic.blank?
+    result << surname unless surname.blank?
+    result.join(' ')
+  end
+
   def can_receive_letters?
     allow_mail? && !email.blank?
   end

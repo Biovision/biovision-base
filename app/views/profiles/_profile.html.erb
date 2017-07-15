@@ -27,7 +27,7 @@
     <% end %>
     <% unless user.name.blank? %>
         <dt><%= t('activerecord.attributes.user.name') %></dt>
-        <dd><%= user.name %></dd>
+        <dd><%= user.full_name %></dd>
     <% end %>
     <% if current_user == user && !user.email.blank? %>
         <dt><%= t('activerecord.attributes.user.email') %></dt>
