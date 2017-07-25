@@ -46,4 +46,8 @@ class CentralRegion
   def child_regions
     []
   end
+
+  def subbranch_ids
+    []
+  end
 end
