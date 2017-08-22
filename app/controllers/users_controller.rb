@@ -10,6 +10,7 @@ class UsersController < AdminController
   def create
     @entity = User.new(creation_parameters)
     if @entity.save
+      @entity.user_profile.update(profile_parameters)
       redirect_to admin_user_path(@entity.id), notice: t('users.create.success')
     else
       render :new, status: :bad_request
@@ -23,6 +24,7 @@ class UsersController < AdminController
   # patch /users/:id
   def update
     if @entity.update(entity_parameters)
+      @entity.user_profile.update(profile_parameters)
       redirect_to admin_user_path(@entity.id), notice: t('users.update.success')
     else
       render :edit, status: :bad_request
@@ -53,5 +55,9 @@ class UsersController < AdminController
 
   def creation_parameters
     params.require(:user).permit(User.entity_parameters).merge(tracking_for_entity)
+  end
+
+  def profile_parameters
+    params.require(:user_profile).permit(UserProfile.entity_parameters)
   end
 end

@@ -5,6 +5,6 @@ ru:
       site_name: "example.com"
   index:
     index:
-      title: "Главная страница"
-      heading: "Главная страница"
       description: "Новый сайт на движке biovision-base"
+      heading: "Главная страница"
+      title: "Главная страница"

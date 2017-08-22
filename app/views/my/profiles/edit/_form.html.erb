@@ -19,14 +19,26 @@
         </td>
       </tr>
       <tr>
-        <th><%= label_tag :user_name, t('activerecord.attributes.user.name') %></th>
-        <td><%= text_field_tag 'user[name]', entity.name, size: 30, maxlength: User::NAME_LIMIT %></td>
+        <th><%= label_tag :user_profile_name, t('activerecord.attributes.user_profile.name') %></th>
+        <td><%= text_field_tag 'user_profile[name]', entity.user_profile.name, size: 30, maxlength: UserProfile::NAME_LIMIT %></td>
       </tr>
       <tr>
-        <th><%= label_tag :user_gender, t('activerecord.attributes.user.gender') %></th>
+        <th><%= label_tag :user_profile_patronymic, t('activerecord.attributes.user_profile.patronymic') %></th>
+        <td><%= text_field_tag 'user_profile[patronymic]', entity.user_profile.patronymic, size: 30, maxlength: UserProfile::NAME_LIMIT %></td>
+      </tr>
+      <tr>
+        <th><%= label_tag :user_profile_surname, t('activerecord.attributes.user_profile.surname') %></th>
+        <td><%= text_field_tag 'user_profile[surname]', entity.user_profile.surname, size: 30, maxlength: UserProfile::NAME_LIMIT %></td>
+      </tr>
+      <tr>
+        <th><%= label_tag :user_profile_gender, t('activerecord.attributes.user_profile.gender') %></th>
         <td>
-          <%= select_tag 'user[gender]', options_for_select(genders_for_select, selected: entity.gender) %>
+          <%= select_tag 'user_profile[gender]', options_for_select(genders_for_select, selected: entity.user_profile.gender) %>
         </td>
+      </tr>
+      <tr>
+        <th><%= label_tag :user_profile_birthday, t('activerecord.attributes.user_profile.birthday') %></th>
+        <td><%= date_field_tag 'user_profile[birthday]', entity.user_profile.birthday, size: 10 %></td>
       </tr>
       <tr>
         <td colspan="2">
@@ -47,7 +59,11 @@
       </tr>
       <tr>
         <th><%= label_tag :user_email, t('activerecord.attributes.user.email') %></th>
-        <td><%= email_field_tag 'user[email]', entity.email, size: 30, maxlength: User::EMAIL_LIMIT %></td>
+        <td><%= email_field_tag 'user[email]', entity.email, size: nil, maxlength: User::EMAIL_LIMIT %></td>
+      </tr>
+      <tr>
+        <th><%= label_tag :user_phone, t('activerecord.attributes.user.phone') %></th>
+        <td><%= telephone_field_tag 'user[phone]', entity.phone, size: nil, maxlength: User::PHONE_LIMIT %></td>
       </tr>
       <tr>
         <td colspan="2"><p class="notice"><%= t('.leave_blank_if_necessary') %></p></td>

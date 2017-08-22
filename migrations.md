@@ -1,6 +1,40 @@
 Миграции для обновления версий до 1.0
 =====================================
 
+Отдельный профиль (< 0.7.170822)
+-----------------
+
+Эту миграцию можно добавить сразу в `CreateUserProfiles`.
+
+```bash
+rails g migration add_profiles_data
+```
+
+```ruby
+class AddProfilesData < ActiveRecord::Migration[5.1]
+  def up
+    add_column :users, :search_string, :string
+    
+    User.order('id asc').each do |user|
+      if user.user_profile.nil?
+          UserProfile.create!({
+                                user:       user,
+                                gender:     user.gender,
+                                birthday:   user.birthday,
+                                name:       user.name,
+                                patronymic: user.patronymic,
+                                surname:    user.surname,
+                              })
+      end
+    end
+  end
+
+  def down
+    drop_column :users, :search_string
+  end
+end
+```
+
 Региональность (< 0.6.170702)
 --------------
 

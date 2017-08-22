@@ -43,19 +43,19 @@
     <dt><%= t('activerecord.attributes.user.screen_name') %></dt>
     <dd><%= user_link @entity %></dd>
 
-    <% unless @entity.name.blank? %>
-        <dt><%= t('activerecord.attributes.user.name') %></dt>
-        <dd><%= @entity.name %></dd>
+    <% unless @entity.user_profile.name.blank? %>
+        <dt><%= t('activerecord.attributes.user_profile.name') %></dt>
+        <dd><%= @entity.user_profile.name %></dd>
     <% end %>
 
-    <% unless @entity.patronymic.blank? %>
-        <dt><%= t('activerecord.attributes.user.patronymic') %></dt>
-        <dd><%= @entity.patronymic %></dd>
+    <% unless @entity.user_profile.patronymic.blank? %>
+        <dt><%= t('activerecord.attributes.user_profile.patronymic') %></dt>
+        <dd><%= @entity.user_profile.patronymic %></dd>
     <% end %>
 
-    <% unless @entity.surname.blank? %>
-        <dt><%= t('activerecord.attributes.user.surname') %></dt>
-        <dd><%= @entity.surname %></dd>
+    <% unless @entity.user_profile.surname.blank? %>
+        <dt><%= t('activerecord.attributes.user_profile.surname') %></dt>
+        <dd><%= @entity.user_profile.surname %></dd>
     <% end %>
 
     <% unless @entity.email.blank? %>
@@ -68,8 +68,8 @@
         <dd><%= link_to @entity.phone, "tel:#{@entity.phone}" %></dd>
     <% end %>
 
-    <dt><%= t('activerecord.attributes.user.gender') %></dt>
-    <dd><%= @entity.gender.blank? ? t(:not_selected) : t("activerecord.attributes.user.genders.#{@entity.gender}") %></dd>
+    <dt><%= t('activerecord.attributes.user_profile.gender') %></dt>
+    <dd><%= @entity.user_profile.gender.blank? ? t(:not_selected) : t("activerecord.attributes.user_profile.genders.#{@entity.user_profile.gender}") %></dd>
 
     <% unless @entity.ip.blank? %>
         <dt><%= t('activerecord.attributes.user.ip') %></dt>

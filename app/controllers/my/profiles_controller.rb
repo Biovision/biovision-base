@@ -28,7 +28,8 @@ class My::ProfilesController < ApplicationController
 
   # patch /my/profile
   def update
-    if current_user.update user_parameters
+    if current_user.update(user_parameters)
+      current_user.user_profile.update(profile_parameters)
       redirect_to my_profile_path, notice: t('my.profiles.update.success')
     else
       render :edit, status: :bad_request
@@ -70,6 +71,10 @@ class My::ProfilesController < ApplicationController
     else
       []
     end
+  end
+
+  def profile_parameters
+    params.require(:user_profile).permit(UserProfile.entity_parameters)
   end
 
   def filter_parameters(parameters, sensitive)

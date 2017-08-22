@@ -10,23 +10,19 @@ class User < ApplicationRecord
 
   SLUG_LIMIT   = 250
   EMAIL_LIMIT  = 250
-  NAME_LIMIT   = 100
   NOTICE_LIMIT = 255
   PHONE_LIMIT  = 50
 
   toggleable %i(allow_login bot email_confirmed phone_confirmed allow_mail)
 
-  belongs_to :agent, optional: true
-
   has_secure_password
 
   mount_uploader :image, AvatarUploader
 
-  enum gender: [:female, :male]
-
   belongs_to :agent, optional: true
   belongs_to :inviter, class_name: User.to_s, optional: true
   belongs_to :region, optional: true, counter_cache: true
+  has_one :user_profile, dependent: :destroy
   has_many :invitees, class_name: User.to_s, foreign_key: :inviter_id, dependent: :nullify
   has_many :tokens, dependent: :delete_all
   has_many :codes, dependent: :delete_all
@@ -36,6 +32,8 @@ class User < ApplicationRecord
   has_many :login_attempts, dependent: :delete_all
 
   before_save :normalize_slug
+  before_save :prepare_search_string
+  after_create { UserProfile.create(user: self) }
 
   validates_presence_of :screen_name, :email
   validates_format_of :screen_name, with: /\A[a-z0-9_]{1,30}\z/i, if: :native_slug?
@@ -44,21 +42,17 @@ class User < ApplicationRecord
   validates :email, uniqueness: { case_sensitive: false }
   validates_length_of :slug, maximum: SLUG_LIMIT
   validates_length_of :screen_name, maximum: SLUG_LIMIT
-  validates_length_of :name, maximum: NAME_LIMIT
-  validates_length_of :patronymic, maximum: NAME_LIMIT
-  validates_length_of :surname, maximum: NAME_LIMIT
   validates_length_of :email, maximum: EMAIL_LIMIT
   validates_length_of :phone, maximum: PHONE_LIMIT
   validates_length_of :notice, maximum: NOTICE_LIMIT
 
   scope :with_privilege, ->(privilege) { joins(:user_privileges).where(user_privileges: { privilege_id: privilege.branch_ids }) }
   scope :bots, ->(flag) { where(bot: flag.to_i > 0) unless flag.blank? }
-  scope :name_like, ->(val) { where('name ilike ?', "%#{val}%") unless val.blank? }
   scope :email_like, ->(val) { where('email ilike ?', "%#{val}%") unless val.blank? }
   scope :with_email, ->(email) { where('lower(email) = lower(?)', email) }
   scope :screen_name_like, ->(val) { where('screen_name ilike ?', "%#{val}%") unless val.blank? }
-  scope :search, ->(q) { where("lower(concat_ws(' ', slug, email, surname, name)) like ?", "%#{q.downcase}%") unless q.blank? }
-  scope :filtered, ->(f) { name_like(f[:name]).email_like(f[:email]).screen_name_like(f[:screen_name]) }
+  scope :search, ->(q) { where('search_string like ?', "%#{q.downcase}%") unless q.blank? }
+  scope :filtered, ->(f) { email_like(f[:email]).screen_name_like(f[:screen_name]) }
 
   # @param [Integer] page
   # @param [Hash] filter
@@ -67,7 +61,7 @@ class User < ApplicationRecord
   end
 
   def self.profile_parameters
-    %i(image name patronymic surname birthday gender allow_mail)
+    %i(image allow_mail)
   end
 
   def self.sensitive_parameters
@@ -92,6 +86,10 @@ class User < ApplicationRecord
     (min..max)
   end
 
+  def profile
+    user_profile
+  end
+
   # Name to be shown as profile
   #
   # This can be redefined for cases when something other than screen name should
@@ -103,15 +101,15 @@ class User < ApplicationRecord
   end
 
   def name_for_letter
-    name.blank? ? profile_name : name
+    user_profile&.name.blank? ? profile_name : user_profile.name
   end
 
   # @param [Boolean] include_patronymic
   def full_name(include_patronymic = false)
     result = [name_for_letter]
-    result << patronymic if include_patronymic && !patronymic.blank?
-    result << surname unless surname.blank?
-    result.join(' ')
+    result << user_profile&.patronymic.to_s.strip if include_patronymic
+    result << user_profile&.surname.to_s.strip
+    result.compact.join(' ')
   end
 
   def can_receive_letters?
@@ -130,5 +128,13 @@ class User < ApplicationRecord
     else
       self.slug = slug.downcase
     end
+  end
+
+  def prepare_search_string
+    new_string = "#{slug} #{email}"
+    unless user_profile.nil?
+      new_string << " #{user_profile.search_string}"
+    end
+    self.search_string = new_string.downcase
   end
 end

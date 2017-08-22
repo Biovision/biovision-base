@@ -8,7 +8,6 @@ class CreateUsers < ActiveRecord::Migration[5.0]
         t.inet :ip
         t.integer :inviter_id
         t.integer :native_id
-        t.integer :gender, limit: 2
         t.integer :follower_count, default: 0, null: false
         t.integer :followee_count, default: 0, null: false
         t.integer :comments_count, default: 0, null: false
@@ -25,17 +24,14 @@ class CreateUsers < ActiveRecord::Migration[5.0]
         t.boolean :allow_mail, default: true, null: false
         t.boolean :foreign_slug, default: false, null: false
         t.datetime :last_seen
-        t.date :birthday
         t.string :slug, null: false
         t.string :screen_name, index: true, null: false
         t.string :password_digest
         t.string :email, index: true
-        t.string :name
-        t.string :patronymic
-        t.string :surname
         t.string :phone
         t.string :image
         t.string :notice
+        t.string :search_string
       end
 
       add_foreign_key :users, :users, column: :inviter_id, on_update: :cascade, on_delete: :nullify

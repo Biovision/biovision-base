@@ -1,8 +1,8 @@
 module BiovisionUsersHelper
   def genders_for_select
     genders = [[t(:not_selected), '']]
-    prefix  = 'activerecord.attributes.user.genders.'
-    genders + User.genders.keys.to_a.map { |o| [I18n.t("#{prefix}#{o}"), o] }
+    prefix  = 'activerecord.attributes.user_profile.genders.'
+    genders + UserProfile.genders.keys.to_a.map { |o| [I18n.t("#{prefix}#{o}"), o] }
   end
 
   # @param [User] entity
