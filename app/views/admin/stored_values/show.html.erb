@@ -1,0 +1,37 @@
+<% content_for :meta_title, t('.title', slug: @entity.slug) %>
+<% content_for :breadcrumbs do %>
+    <%= link_to(t('admin.stored_values.nav_item.text'), admin_stored_values_path) %>
+    <span><%= @entity.slug %></span>
+<% end %>
+
+<article>
+  <h1><%= @entity.slug %></h1>
+
+  <ul class="actions">
+    <li><%= back_icon(admin_stored_values_path) %></li>
+    <li><%= edit_icon(edit_stored_value_path(@entity.id)) %></li>
+  </ul>
+
+  <dl>
+    <dt><%= t(:created_at) %></dt>
+    <dd><%= time_tag(@entity.created_at) %></dd>
+
+    <dt><%= t(:updated_at) %></dt>
+    <dd><%= time_tag(@entity.updated_at) %></dd>
+
+    <dt><%= t('activerecord.attributes.stored_value.slug') %></dt>
+    <dd><%= @entity.slug %></dd>
+
+    <dt><%= t('activerecord.attributes.stored_value.value') %></dt>
+    <dd><%= @entity.value %></dd>
+
+    <% unless @entity.name.blank? %>
+        <dt><%= t('activerecord.attributes.stored_value.name') %></dt>
+        <dd><%= @entity.name %></dd>
+    <% end %>
+    <% unless @entity.description.blank? %>
+        <dt><%= t('activerecord.attributes.stored_value.description') %></dt>
+        <dd><%= @entity.description %></dd>
+    <% end %>
+  </dl>
+</article>

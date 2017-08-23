@@ -1,0 +1,33 @@
+<%= render partial: 'shared/list_of_errors', locals: { entity: entity } %>
+
+<%= form_for entity do |f| %>
+    <dl>
+      <dt><%= f.label :slug %></dt>
+      <dd>
+        <%= f.text_field :slug, required: true, size: nil, maxlength: StoredValue::SLUG_LIMIT %>
+        <div class="guideline"><%= t('.guidelines.slug') %></div>
+      </dd>
+
+      <dt><%= f.label :value %></dt>
+      <dd>
+        <%= f.text_field :value, size: nil, maxlength: StoredValue::VALUE_LIMIT %>
+        <div class="guideline"><%= t('.guidelines.value') %></div>
+      </dd>
+
+      <dt><%= f.label :name %></dt>
+      <dd>
+        <%= f.text_field :name, size: nil, maxlength: StoredValue::NAME_LIMIT %>
+        <div class="guideline"><%= t('.guidelines.name') %></div>
+      </dd>
+
+      <dt><%= f.label :description %></dt>
+      <dd>
+        <%= f.text_field :description, size: nil, maxlength: StoredValue::DESCRIPTION_LIMIT %>
+        <div class="guideline"><%= t('.guidelines.description') %></div>
+      </dd>
+    </dl>
+
+    <div class="buttons">
+      <%= f.button t(:save), type: :submit %>
+    </div>
+<% end %>

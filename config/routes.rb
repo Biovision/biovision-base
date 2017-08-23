@@ -30,6 +30,7 @@ Rails.application.routes.draw do
     end
 
     resources :editable_pages, only: [:index, :show]
+    resources :stored_values, only: [:index, :show]
 
     resources :metrics, only: [:index, :show] do
       member do
@@ -96,6 +97,7 @@ Rails.application.routes.draw do
   resources :agents, :browsers, except: [:index, :show]
 
   resources :editable_pages, except: [:index, :show]
+  resources :stored_values, except: [:index, :show]
 
   resources :users, except: [:index, :show]
   resources :tokens, :codes, except: [:index, :show]
