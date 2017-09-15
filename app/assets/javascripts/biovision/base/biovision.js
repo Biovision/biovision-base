@@ -1,10 +1,10 @@
 'use strict';
 
-var Biovision = {
+let Biovision = {
     storage: {
         available: function (type) {
             try {
-                var storage = window[type],
+                const storage = window[type],
                     x = '__storage_test__';
                 storage.setItem(x, x);
                 storage.removeItem(x);
@@ -58,32 +58,41 @@ var Biovision = {
                 Biovision.storage.remove('localStorage', key);
             }
         }
-    }
-};
+    },
+    preview_file: function (input) {
+        const target_image = input.getAttribute('data-image');
 
-$(function () {
-    $(document).on('change', 'input[type=file]', function () {
-        if ($(this).data('image')) {
-            var target = $('#' + $(this).data('image')).find('img');
-            var input = this;
+        if (target_image) {
+            let target = document.querySelector('#' + target_image + ' img');
 
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
+            if (target && input.files && input.files[0]) {
+                let reader = new FileReader();
 
-                reader.onload = function (e) {
-                    target.attr('src', e.target.result);
+                reader.onload = function (event) {
+                    target.setAttribute('src', event.target.result);
                 };
 
                 reader.readAsDataURL(input.files[0]);
             }
         }
+    }
+};
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Предварительный просмотр картинки при выборе файла
+    document.addEventListener('change', function (event) {
+        const input = event.target;
+
+        if (input.matches('input[type=file]')) {
+            Biovision.preview_file(input);
+        }
     });
 
     $(document).on('click', 'div.toggleable > span', function () {
         if (!$(this).hasClass('switch')) {
-            var $flag = $(this);
-            var url = $(this).parent().data('url');
-            var parameter = $(this).data('flag');
+            let $flag = $(this);
+            let url = $(this).parent().data('url');
+            let parameter = $(this).data('flag');
 
             $.post({
                 url: url,
@@ -118,16 +127,16 @@ $(function () {
     });
 
     $(document).on('click', 'li.lock > a', function () {
-        var $container = $(this).closest('li');
-        var $edit = $container.parent().find('.lockable');
-        var url = $container.data('url');
+        let $container = $(this).closest('li');
+        let $edit = $container.parent().find('.lockable');
+        let url = $container.data('url');
 
         if (url.length > 1) {
             $.ajax(url, {
                 method: $(this).hasClass('lock') ? 'put' : 'delete',
                 success: function (response) {
                     if (response.hasOwnProperty('data') && response['data'].hasOwnProperty('locked')) {
-                        var locked = response['data']['locked'];
+                        let locked = response['data']['locked'];
 
                         locked ? $edit.addClass('hidden') : $edit.removeClass('hidden');
 
@@ -147,22 +156,22 @@ $(function () {
     });
 
     $(document).on('click', 'li.priority-changer > button', function () {
-        var $li = $(this).closest('li[data-number]');
-        var delta = parseInt($(this).data('delta'));
-        var url = $(this).parent().data('url');
+        let $li = $(this).closest('li[data-number]');
+        let delta = parseInt(this.getAttribute('data-delta'));
+        let url = $(this).parent().data('url');
 
         if (parseInt($li.data('number')) + delta > 0) {
             $.post(url, {delta: delta}, function (response) {
                 console.log(response);
                 if (response.hasOwnProperty('data')) {
-                    var $container = $li.parent();
-                    var $list = $container.children('li');
+                    let $container = $li.parent();
+                    let $list = $container.children('li');
 
                     if (response['data'].hasOwnProperty('priority')) {
                         $li.data('number', response['data']['priority']);
                         $li.attr('data-number', response['data']['priority']);
                     } else {
-                        for (var entity_id in response['data']) {
+                        for (let entity_id in response['data']) {
                             if (response['data'].hasOwnProperty(entity_id)) {
                                 $li = $container.find('li[data-id=' + entity_id + ']');
                                 $li.data('number', response['data'][entity_id]);
@@ -171,8 +180,8 @@ $(function () {
                         }
                     }
                     $list.sort(function (a, b) {
-                        var an = parseInt($(a).data('number'));
-                        var bn = parseInt($(b).data('number'));
+                        let an = parseInt($(a).data('number'));
+                        let bn = parseInt($(b).data('number'));
 
                         if (an > bn) {
                             return 1;
@@ -190,8 +199,8 @@ $(function () {
     });
 
     $('div[data-destroy-url] button.destroy').on('click', function () {
-        var $button = $(this);
-        var $container = $(this).closest('div[data-destroy-url]');
+        let $button = $(this);
+        let $container = $(this).closest('div[data-destroy-url]');
 
         $button.attr('disabled', true);
 
@@ -203,10 +212,10 @@ $(function () {
         }).fail(handle_ajax_failure);
     });
 
-    $('.user-search button').on('click', function() {
-        var $container = $(this).closest('.user-search');
-        var $input = $container.find('input[type=search]');
-        var $results = $container.find('.results');
+    $('.user-search button').on('click', function () {
+        let $container = $(this).closest('.user-search');
+        let $input = $container.find('input[type=search]');
+        let $results = $container.find('.results');
 
         $.get($container.data('url'), {q: $input.val()}, function (response) {
             if (response.hasOwnProperty('data')) {
@@ -215,9 +224,9 @@ $(function () {
         }).fail(handle_ajax_failure);
     });
 
-    $(document).on('click', '.user-search .results li', function() {
-        var $container = $(this).closest('.user-search');
-        var $target = $('#' + $container.data('target'));
+    $(document).on('click', '.user-search .results li', function () {
+        let $container = $(this).closest('.user-search');
+        let $target = $('#' + $container.data('target'));
 
         $target.val($(this).data('id'));
     });
@@ -235,4 +244,55 @@ function handle_ajax_failure(response) {
     } else {
         console.log(response);
     }
+}
+
+/*
+ *************
+ * Polyfills *
+ *************
+ */
+
+/**
+ * Element.closest()
+ *
+ * IE 9+
+ *
+ * @see https://developer.mozilla.org/en-US/docs/Web/API/Element/closest
+ */
+if (!Element.prototype.matches) {
+    Element.prototype.matches =
+        Element.prototype.msMatchesSelector ||
+        Element.prototype.webkitMatchesSelector;
+}
+
+if (!Element.prototype.closest) {
+    Element.prototype.closest = function (s) {
+        let el = this;
+        let ancestor = this;
+
+        if (!document.documentElement.contains(el)) {
+            return null;
+        }
+        do {
+            if (ancestor.matches(s)) {
+                return ancestor;
+            }
+            ancestor = ancestor.parentElement;
+        } while (ancestor !== null);
+
+        return null;
+    };
+}
+
+/**
+ * Element.matches()
+ *
+ * IE 9+
+ *
+ * @see https://developer.mozilla.org/en-US/docs/Web/API/Element/matches
+ */
+if (!Element.prototype.matches) {
+    Element.prototype.matches =
+        Element.prototype.msMatchesSelector ||
+        Element.prototype.webkitMatchesSelector;
 }
