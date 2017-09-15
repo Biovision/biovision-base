@@ -4,6 +4,7 @@ module Biovision
       initializer  "biovision_base.load_base_methods" do
         ActiveSupport.on_load(:action_controller) do
           include Biovision::Base::BaseMethods
+          include Biovision::Base::PrivilegeMethods
         end
       end
 

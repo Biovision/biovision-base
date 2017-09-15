@@ -1,7 +1,9 @@
 json.data do
   if @collection.any?
     json.users @collection do |user|
-      json.(user, :id, :slug, :email, :surname, :name)
+      json.(user, :id, :slug, :email)
+      json.surname user.user_profile&.surname
+      json.name user.user_profile&.name
     end
   else
     json.users []

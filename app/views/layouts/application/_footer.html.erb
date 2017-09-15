@@ -2,9 +2,13 @@
   <div>
     <div class="copyright">&copy; <%= t(:copyright) %></div>
     <nav>
-      <% if UserPrivilege.user_has_any_privilege?(current_user) %>
-          <%= link_to(t('admin.index.index.heading'), admin_path) %>
-      <% end %>
+      <ul>
+        <li><%= link_to(t('about.index.nav_text'), about_path) %></li>
+        <li><%= link_to(t('about.tos.nav_text'), tos_path) %></li>
+        <% if UserPrivilege.user_has_any_privilege?(current_user) %>
+            <li><%= link_to(t('admin.index.index.heading'), admin_path) %></li>
+        <% end %>
+      </ul>
     </nav>
   </div>
 </footer>

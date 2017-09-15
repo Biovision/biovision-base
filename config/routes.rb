@@ -7,6 +7,11 @@ Rails.application.routes.draw do
     get 'auth/:provider/callback' => :auth_callback, as: :auth_callback
   end
 
+  controller :about do
+    get 'about' => :index
+    get 'tos' => :tos
+  end
+
   scope 'u/:slug', controller: :profiles do
     get '/' => :show, as: :user_profile
   end

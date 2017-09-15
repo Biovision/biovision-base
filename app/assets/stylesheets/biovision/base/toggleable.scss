@@ -1,0 +1,71 @@
+$toggleable-active: #34c749 !default;
+$toggleable-inactive: #fc605c !default;
+$toggleable-switch: #fdbc40 !default;
+$toggleable-unknown: #c0c0c0 !default;
+$toggleable-background: #fff !default;
+
+.toggleable {
+  font-size: $font-size-decreased;
+  margin: .8rem;
+
+  /**
+   * Радиус границы в ::before должен быть чуть меньше, чтобы не было щелей,
+   * потому что span фактически толще на две толщины границы
+   */
+  > span {
+    background-color: $toggleable-background;
+    border: .1rem solid;
+    border-radius: #{$font-size-decreased / 3 * 2};
+    cursor: pointer;
+    display: inline-block;
+    line-height: #{$font-size-decreased * 2};
+    margin: .4rem;
+    padding: 0 #{$font-size-decreased / 3 * 2} 0 0;
+
+    &::before {
+      border-radius: #{$font-size-decreased / 2} 0 0 #{$font-size-decreased / 2};
+      display: inline-block;
+      line-height: #{$font-size-decreased * 2};
+      margin: 0 .4rem 0 0;
+      text-align: center;
+      width: 2.2rem;
+    }
+  }
+
+  .active {
+    border-color: $toggleable-active;
+
+    &::before {
+      background-color: $toggleable-active;
+      content: '\2611';
+    }
+  }
+
+  .inactive {
+    border-color: $toggleable-inactive;
+
+    &::before {
+      background-color: $toggleable-inactive;
+      content: '\2610';
+    }
+  }
+
+  .switch {
+    border-color: $toggleable-switch;
+    cursor: not-allowed;
+
+    &::before {
+      background-color: $toggleable-switch;
+      content: '\231B';
+    }
+  }
+
+  .unknown {
+    border-color: $toggleable-unknown;
+
+    &::before {
+      background-color: $toggleable-unknown;
+      content: '\26A0';
+    }
+  }
+}

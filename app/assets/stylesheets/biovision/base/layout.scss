@@ -7,6 +7,10 @@ html {
   -ms-text-size-adjust: none;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 h1, h2, h3, h4, h6, h6 {
   color: $text-color-heading;
   font-family: $font-family-heading;
@@ -129,4 +133,43 @@ body {
   margin: 0 auto;
   max-width: $content-width;
   padding: .8rem;
+}
+
+form {
+  dl {
+    dt {
+      font: 500 $font-size-increased $font-family-main;
+
+      &:not(:first-of-type) {
+        border-top: $border-secondary;
+        margin: .8rem 0 0 0;
+        padding: .4rem 0 0 0;
+      }
+    }
+
+    dd {
+      padding: .2rem 0;
+
+      ul {
+        margin: 0 auto;
+        padding: 0;
+
+        li {
+          list-style: none;
+          margin: 0;
+          padding: 0;
+          position: relative;
+        }
+      }
+    }
+  }
+
+  input {
+    font-size: $font-size-normal;
+  }
+
+  input:not([type=checkbox]):not([type=radio]):not([type=date]):not([size]),
+  textarea {
+    width: 100%;
+  }
 }

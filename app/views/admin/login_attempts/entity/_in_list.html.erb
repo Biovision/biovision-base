@@ -5,7 +5,7 @@
   <div><%= admin_user_link(entity.user) %></div>
   <div class="info"><%= time_tag(entity.created_at) %></div>
   <div class="secondary info">
-    <div><%= entity.password %></div>
+    <!-- <%= entity.password %> -->
     <% unless entity.ip.nil? %>
         <div><%= entity.ip %></div>
     <% end %>

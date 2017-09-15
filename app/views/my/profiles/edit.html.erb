@@ -1,10 +1,11 @@
 <% content_for :meta_title, t('.title') %>
 
-<article class="profile">
+<article class="user">
   <h1><%= current_user.profile_name %></h1>
-  <div>
-    <p><%= link_to t(:view), my_profile_path %></p>
-  </div>
+
+  <ul class="actions">
+    <li><%= world_icon(my_profile_path, t(:view)) %></li>
+  </ul>
 
   <%= render partial: 'my/profiles/edit/form', locals: { entity: current_user } %>
 </article>

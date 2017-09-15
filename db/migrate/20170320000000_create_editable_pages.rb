@@ -11,6 +11,10 @@ class CreateEditablePages < ActiveRecord::Migration[5.0]
         t.string :description, default: '', null: false
         t.text :body, default: '', null: false
       end
+
+      EditablePage.create(slug: 'index', name: 'Главная страница')
+      EditablePage.create(slug: 'about', name: 'О проекте')
+      EditablePage.create(slug: 'tos', name: 'Пользовательское соглашение')
     end
   end
 

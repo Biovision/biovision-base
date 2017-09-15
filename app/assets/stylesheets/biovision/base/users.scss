@@ -42,29 +42,54 @@ div.user-search {
 }
 
 .my-profile-new {
-  > section {
-    dl {
-      input {
-        max-width: 32rem;
+  form {
+    max-width: 50rem;
 
-        &:not([size]) {
-          width: calc(100% - 1rem);
-        }
+    .actions {
+      align-items: center;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+  }
+
+  dl {
+    input {
+      max-width: 32rem;
+
+      &:not([size]) {
+        width: calc(100% - 1rem);
       }
     }
+  }
 
-    .trap {
-      height: .01rem;
-      left: -300rem;
-      overflow: hidden;
-      position: absolute;
-      width: .01rem;
+  .trap {
+    height: .01rem;
+    left: -300rem;
+    overflow: hidden;
+    position: absolute;
+    width: .01rem;
+  }
+}
+
+.my-confirmation,
+.my-recovery {
+  section {
+    margin: 1.6rem 0;
+  }
+
+  form {
+    max-width: 32rem;
+
+    dl {
+      input {
+        width: calc(100% - 1rem);
+      }
     }
   }
 }
 
 form.login {
-  margin: 0 auto;
   max-width: 26rem;
 
   .fields {
@@ -83,18 +108,6 @@ form.login {
   }
 }
 
-form.new-my-profile {
-  margin: 0 auto;
-  max-width: 50rem;
-
-  .actions {
-    align-items: center;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-  }
-}
-
 article.user {
   figure {
     max-width: 32rem;
@@ -103,5 +116,13 @@ article.user {
       font-size: $font-size-large;
       text-align: center;
     }
+  }
+
+  form {
+    max-width: 40rem;
+  }
+
+  dl {
+    margin-bottom: 2.4rem;
   }
 }

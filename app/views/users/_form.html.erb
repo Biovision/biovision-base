@@ -2,15 +2,18 @@
 
 <%= form_for entity do |f| %>
 
-    <figure class="preview" id="user-image">
-      <%= label_tag(:user_image, image_tag(entity.image.profile.url, alt: t(:current_image))) %>
-      <figcaption>
-        <%= f.label :image %>
-        <%= f.file_field :image, accept: 'image/jpeg,image/png', data: { image: 'user-image' } %>
-      </figcaption>
-    </figure>
 
     <dl>
+      <dt><%= f.label :image %></dt>
+      <dd>
+        <figure id="user-image">
+          <%= f.label(:image, image_tag(entity.image.profile.url, alt: t(:current_image))) %>
+          <figcaption>
+            <%= f.file_field :image, accept: 'image/jpeg,image/png', data: { image: 'user-image' } %>
+          </figcaption>
+        </figure>
+      </dd>
+
       <dt><%= f.label :screen_name %></dt>
       <dd>
         <%= f.text_field :screen_name, size: 30, maxlength: User::SLUG_LIMIT %>
@@ -67,15 +70,18 @@
       <dd>
         <%= f.text_field :notice, size: nil, maxlength: User::NOTICE_LIMIT %>
       </dd>
-    </dl>
 
-    <ul class="flags">
-      <li><%= f.check_box :bot %><%= f.label :bot %></li>
-      <li><%= f.check_box :allow_login %><%= f.label :allow_login %></li>
-      <li><%= f.check_box :email_confirmed %><%= f.label :email_confirmed %></li>
-      <li><%= f.check_box :phone_confirmed %><%= f.label :phone_confirmed %></li>
-      <li><%= f.check_box :allow_mail %><%= f.label :allow_mail %></li>
-    </ul>
+      <dt><%= t(:flags) %></dt>
+      <dd>
+        <ul>
+          <li><%= f.check_box :bot %><%= f.label :bot %></li>
+          <li><%= f.check_box :allow_login %><%= f.label :allow_login %></li>
+          <li><%= f.check_box :email_confirmed %><%= f.label :email_confirmed %></li>
+          <li><%= f.check_box :phone_confirmed %><%= f.label :phone_confirmed %></li>
+          <li><%= f.check_box :allow_mail %><%= f.label :allow_mail %></li>
+        </ul>
+      </dd>
+    </dl>
 
     <div class="buttons">
       <%= f.button t(:save), type: :submit %>

@@ -1,19 +1,17 @@
-$toggleable-active: #34c749 !default;
-$toggleable-inactive: #fc605c !default;
-$toggleable-switch: #fdbc40 !default;
-$toggleable-unknown: #c0c0c0 !default;
-$toggleable-background: #fff !default;
-
 html {
-  background-image: linear-gradient(#dedfe3 2%, #aeb3b9 95%), radial-gradient(33% 100%, rgba(255, 255, 255, 0.50) 0%, rgba(0, 0, 0, 0.50) 100%);
+  background-image: linear-gradient(to bottom, #dedfe3 2%, #aeb3b9 95%), radial-gradient(33% 100%, rgba(255, 255, 255, 0.50) 0%, rgba(0, 0, 0, 0.50) 100%);
   background-blend-mode: screen;
   background-attachment: fixed;
-  font: 10px $font-family-main;
+  font: 400 10px $font-family-main;
   margin: 0;
   padding: 0;
   -webkit-text-size-adjust: none;
   -moz-text-size-adjust: none;
   -ms-text-size-adjust: none;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 a:link,
@@ -28,6 +26,22 @@ a:hover {
 
 img {
   max-width: 100%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-family-heading;
+  font-weight: 500;
+  margin: 0;
+}
+
+h1 {
+  font-size: 3.6rem;
+  margin-bottom: .8rem;
+}
+
+h2 {
+  font-size: 3rem;
+  margin-bottom: .4rem;
 }
 
 body {
@@ -96,65 +110,73 @@ body {
 
 #main {
   padding: 1rem;
+  width: 100%;
+}
 
-  article {
-    position: relative;
+article {
+  position: relative;
 
-    figure {
-      margin: 0;
+  figure {
+    margin: 0;
 
-      &.preview {
-        img {
-          max-width: 32rem;
-        }
+    &.preview {
+      img {
+        max-width: 32rem;
       }
     }
+  }
 
-    dl {
-      margin: 0 0 1.6rem 0;
+  dl {
+    margin: 0 0 1.6rem 0;
+    padding: 0;
+
+    dt {
+      border-top: $border-secondary;
+      font: 500 $font-size-increased $font-family-main;
+      margin: .8rem 0 0 0;
+      padding: .4rem 0;
+    }
+
+    dd {
+      margin: .2rem 0;
       padding: 0;
 
-      dt {
-        border-top: .1rem solid #f0f0f0;
-        margin: 1rem 0 0 0;
-        padding: 0;
+      input,
+      textarea {
+        font-size: $font-size-normal;
       }
 
-      dd {
-        margin: 0 0 0 .8rem;
-        padding: 0;
+      input:not([type=checkbox]):not([type=radio]):not([size]):not([max]),
+      textarea {
+        width: 100%;
+      }
 
-        input,
-        textarea {
-          font-size: $font-size-normal;
-        }
-
-        input:not([type=checkbox]):not([type=radio]):not([size]):not([max]),
-        textarea {
-          width: calc(100% - 1rem);
-        }
-
-        input,
-        textarea {
-          max-width: calc(100% - 1rem);
-        }
+      input,
+      textarea {
+        max-width: 100%;
       }
     }
 
-    ul.flags {
-      margin: 1.6rem 0;
+    ul {
+      margin: 0;
       padding: 0;
 
       > li {
         list-style: none;
         margin: 0;
         padding: 0;
+        position: relative;
 
         label {
           font-weight: normal;
         }
       }
     }
+  }
+
+  > section {
+    border-top: .1rem solid $text-color-secondary;
+    padding: .8rem 0 0 0;
   }
 }
 
@@ -168,72 +190,6 @@ nav.admin-breadcrumbs {
     color: $text-color-primary;
     content: ' / ';
     text-decoration: none;
-  }
-}
-
-.toggleable {
-  font-size: $font-size-decreased;
-  margin: .8rem;
-
-  /**
-   * Радиус границы в ::before должен быть чуть меньше, чтобы не было щелей,
-   * потому что span фактически толще на две толщины границы
-   */
-  > span {
-    background-color: $toggleable-background;
-    border: .1rem solid;
-    border-radius: #{$font-size-decreased / 3 * 2};
-    cursor: pointer;
-    display: inline-block;
-    line-height: #{$font-size-decreased * 2};
-    margin: .4rem;
-    padding: 0 #{$font-size-decreased / 3 * 2} 0 0;
-
-    &::before {
-      border-radius: #{$font-size-decreased / 2} 0 0 #{$font-size-decreased / 2};
-      display: inline-block;
-      line-height: #{$font-size-decreased * 2};
-      margin: 0 .4rem 0 0;
-      text-align: center;
-      width: 2.2rem;
-    }
-  }
-
-  .active {
-    border-color: $toggleable-active;
-
-    &::before {
-      background-color: $toggleable-active;
-      content: '\2611';
-    }
-  }
-
-  .inactive {
-    border-color: $toggleable-inactive;
-
-    &::before {
-      background-color: $toggleable-inactive;
-      content: '\2610';
-    }
-  }
-
-  .switch {
-    border-color: $toggleable-switch;
-    cursor: not-allowed;
-
-    &::before {
-      background-color: $toggleable-switch;
-      content: '\231B';
-    }
-  }
-
-  .unknown {
-    border-color: $toggleable-unknown;
-
-    &::before {
-      background-color: $toggleable-unknown;
-      content: '\26A0';
-    }
   }
 }
 

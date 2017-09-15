@@ -40,7 +40,7 @@ module BiovisionUsersHelper
     return image_tag('biovision/base/placeholders/user.svg') if entity.image.blank?
 
     versions = "#{entity.image.preview_2x.url} 2x"
-    image_tag(entity.image.preview.url, alt: entity.name, srcset: versions)
+    image_tag(entity.image.preview.url, alt: entity.profile_name, srcset: versions)
   end
 
   # @param [ForeignSite] foreign_site

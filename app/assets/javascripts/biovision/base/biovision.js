@@ -4,10 +4,11 @@ let Biovision = {
     storage: {
         available: function (type) {
             try {
-                const storage = window[type],
-                    x = '__storage_test__';
-                storage.setItem(x, x);
-                storage.removeItem(x);
+                const x = '__storage_test__';
+
+                window[type].setItem(x, x);
+                window[type].removeItem(x);
+
                 return true;
             }
             catch (e) {
@@ -63,10 +64,10 @@ let Biovision = {
         const target_image = input.getAttribute('data-image');
 
         if (target_image) {
-            let target = document.querySelector('#' + target_image + ' img');
+            const target = document.querySelector('#' + target_image + ' img');
 
             if (target && input.files && input.files[0]) {
-                let reader = new FileReader();
+                const reader = new FileReader();
 
                 reader.onload = function (event) {
                     target.setAttribute('src', event.target.result);
