@@ -77,7 +77,7 @@ let Biovision = {
             }
         }
     },
-    new_ajax_request: function(method, url, on_load, on_error) {
+    new_ajax_request: function (method, url, on_load, on_error) {
         const request = new XMLHttpRequest();
 
         request.addEventListener('load', on_load);
@@ -88,7 +88,7 @@ let Biovision = {
 
         return request;
     },
-    handle_ajax_failure: function(response) {
+    handle_ajax_failure: function (response) {
         if (response.hasOwnProperty('responseJSON')) {
             console.log(response['responseJSON']);
         } else {
@@ -106,6 +106,36 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (input.matches('input[type=file]')) {
             Biovision.preview_file(input);
+        }
+    });
+
+    document.addEventListener('click', function (event) {
+        const element = event.target;
+
+        // Кнопка поиска пользователя в админке
+        if (element.matches('.user-search button')) {
+            const container = element.closest('.user-search');
+            const input = container.querySelector('input[type=search]');
+            const url = container.getAttribute('data-url') + '?q=' + encodeURIComponent(input.value);
+
+            const request = Biovision.new_ajax_request('GET', url, function () {
+                const response = JSON.parse(this.response);
+                const results = container.querySelector('.results');
+
+                if (response.hasOwnProperty('data')) {
+                    results.innerHTML = response['data']['html'];
+                }
+            });
+
+            request.send();
+        }
+
+        // Выбор результата поиска пользователей в админке
+        if (element.matches('.user-search .results li')) {
+            const container = element.closest('.user-search');
+            const target = document.getElementById(container.getAttribute('data-target'));
+
+            target.value = element.getAttribute('data-id');
         }
     });
 
@@ -233,25 +263,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }).fail(handle_ajax_failure);
     });
 
-    $('.user-search button').on('click', function () {
-        let $container = $(this).closest('.user-search');
-        let $input = $container.find('input[type=search]');
-        let $results = $container.find('.results');
-
-        $.get($container.data('url'), {q: $input.val()}, function (response) {
-            if (response.hasOwnProperty('data')) {
-                $results.html(response['data']['html']);
-            }
-        }).fail(handle_ajax_failure);
-    });
-
-    $(document).on('click', '.user-search .results li', function () {
-        let $container = $(this).closest('.user-search');
-        let $target = $('#' + $container.data('target'));
-
-        $target.val($(this).data('id'));
-    });
-
     if (jQuery) {
         jQuery.ajaxSetup({
             headers: {
@@ -276,11 +287,11 @@ function handle_ajax_failure(response) {
  */
 
 /**
- * Element.closest()
+ * Element.matches()
  *
  * IE 9+
  *
- * @see https://developer.mozilla.org/en-US/docs/Web/API/Element/closest
+ * @see https://developer.mozilla.org/en-US/docs/Web/API/Element/matches
  */
 if (!Element.prototype.matches) {
     Element.prototype.matches =
@@ -288,6 +299,13 @@ if (!Element.prototype.matches) {
         Element.prototype.webkitMatchesSelector;
 }
 
+/**
+ * Element.closest()
+ *
+ * IE 9+
+ *
+ * @see https://developer.mozilla.org/en-US/docs/Web/API/Element/closest
+ */
 if (!Element.prototype.closest) {
     Element.prototype.closest = function (s) {
         let el = this;
@@ -305,17 +323,4 @@ if (!Element.prototype.closest) {
 
         return null;
     };
-}
-
-/**
- * Element.matches()
- *
- * IE 9+
- *
- * @see https://developer.mozilla.org/en-US/docs/Web/API/Element/matches
- */
-if (!Element.prototype.matches) {
-    Element.prototype.matches =
-        Element.prototype.msMatchesSelector ||
-        Element.prototype.webkitMatchesSelector;
 }
