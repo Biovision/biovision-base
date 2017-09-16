@@ -76,10 +76,30 @@ let Biovision = {
                 reader.readAsDataURL(input.files[0]);
             }
         }
+    },
+    new_ajax_request: function(method, url, on_load, on_error) {
+        const request = new XMLHttpRequest();
+
+        request.addEventListener('load', on_load);
+        request.addEventListener('error', on_error || Biovision.handle_ajax_failure);
+        request.open(method, url);
+        request.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+        request.setRequestHeader('X-CSRF-Token', Biovision.csrf_token);
+
+        return request;
+    },
+    handle_ajax_failure: function(response) {
+        if (response.hasOwnProperty('responseJSON')) {
+            console.log(response['responseJSON']);
+        } else {
+            console.log(response);
+        }
     }
 };
 
 document.addEventListener('DOMContentLoaded', function () {
+    Biovision.csrf_token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
     // Предварительный просмотр картинки при выборе файла
     document.addEventListener('change', function (event) {
         const input = event.target;
@@ -232,11 +252,13 @@ document.addEventListener('DOMContentLoaded', function () {
         $target.val($(this).data('id'));
     });
 
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
+    if (jQuery) {
+        jQuery.ajaxSetup({
+            headers: {
+                'X-CSRF-Token': Biovision.csrf_token
+            }
+        });
+    }
 });
 
 function handle_ajax_failure(response) {
