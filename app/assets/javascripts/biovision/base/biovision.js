@@ -112,9 +112,19 @@ document.addEventListener('DOMContentLoaded', function () {
     document.addEventListener('click', function (event) {
         const element = event.target;
 
-        // Кнопка поиска пользователя в админке
-        if (element.matches('.user-search button')) {
+        // Выбор результата поиска пользователей в админке
+        if (element.matches('.user-search .results li')) {
             const container = element.closest('.user-search');
+            const target = document.getElementById(container.getAttribute('data-target'));
+
+            target.value = element.getAttribute('data-id');
+        }
+    });
+
+    // Кнопка поиска пользователя в админке
+    document.querySelectorAll('.user-search button').forEach(function(element) {
+        element.addEventListener('click', function() {
+            const container = this.closest('.user-search');
             const input = container.querySelector('input[type=search]');
             const url = container.getAttribute('data-url') + '?q=' + encodeURIComponent(input.value);
 
@@ -128,15 +138,21 @@ document.addEventListener('DOMContentLoaded', function () {
             });
 
             request.send();
-        }
+        });
+    });
 
-        // Выбор результата поиска пользователей в админке
-        if (element.matches('.user-search .results li')) {
-            const container = element.closest('.user-search');
-            const target = document.getElementById(container.getAttribute('data-target'));
+    // Кнопка удаления элемента через AJAX
+    document.querySelectorAll('div[data-destroy-url] button.destroy').forEach(function (element) {
+        element.addEventListener('click', function () {
+            const container = this.closest('div[data-destroy-url]');
+            const url = container.getAttribute('data-destroy-url');
+            const request = Biovision.new_ajax_request('DELETE', url, function() {
+                container.remove();
+            });
 
-            target.value = element.getAttribute('data-id');
-        }
+            this.setAttribute('disabled', 'true');
+            request.send();
+        });
     });
 
     $(document).on('click', 'div.toggleable > span', function () {
@@ -249,20 +265,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    $('div[data-destroy-url] button.destroy').on('click', function () {
-        let $button = $(this);
-        let $container = $(this).closest('div[data-destroy-url]');
-
-        $button.attr('disabled', true);
-
-        $.ajax($container.data('destroy-url'), {
-            method: 'delete',
-            success: function (response) {
-                $container.remove();
-            }
-        }).fail(handle_ajax_failure);
-    });
-
     if (jQuery) {
         jQuery.ajaxSetup({
             headers: {
@@ -324,3 +326,28 @@ if (!Element.prototype.closest) {
         return null;
     };
 }
+
+/**
+ * ChildNode.remove()
+ *
+ * IE 9+
+ *
+ * @see https://developer.mozilla.org/en-US/docs/Web/API/ChildNode/remove
+ */
+(function (arr) {
+    arr.forEach(function (item) {
+        if (item.hasOwnProperty('remove')) {
+            return;
+        }
+        Object.defineProperty(item, 'remove', {
+            configurable: true,
+            enumerable: true,
+            writable: true,
+            value: function remove() {
+                if (this.parentNode !== null) {
+                    this.parentNode.removeChild(this);
+                }
+            }
+        });
+    });
+})([Element.prototype, CharacterData.prototype, DocumentType.prototype]);

@@ -22,7 +22,7 @@
 <script>
     'use strict';
 
-    $(function () {
+    document.addEventListener('DOMContentLoaded', function () {
         $('ul.privileges input[type=checkbox]').on('click', function () {
             if ($(this).is(':visible')) {
                 let url = $(this).closest('div.entity').data('url');
