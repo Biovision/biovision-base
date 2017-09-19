@@ -24,7 +24,7 @@
   <%= render partial: 'admin/regions/toggleable', locals: { entity: entity } %>
 
   <ul class="actions">
-    <li class="lockable <%= entity.editable_by?(current_user) ? '' : 'hidden' %>">
+    <li class="lockable <%= (entity.editable_by?(current_user) && !entity.locked?) ? '' : 'hidden' %>">
       <%= edit_icon edit_region_path(entity) %>
     </li>
     <%= render partial: 'shared/actions/locks', locals: { entity: entity, path: lock_admin_region_path(entity) } %>

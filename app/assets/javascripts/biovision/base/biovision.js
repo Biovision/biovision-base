@@ -121,6 +121,7 @@ document.addEventListener('DOMContentLoaded', function () {
             target.value = element.getAttribute('data-id');
         }
 
+        // Запирание/отпирание сущности (иконка с замком)
         if (element.matches('li.lock > a img')) {
             event.preventDefault();
 
@@ -131,10 +132,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
             if (url.length > 1) {
                 const method = button.classList.contains('lock') ? 'PUT' : 'DELETE';
-                console.log(method, url);
+
                 const request = Biovision.new_ajax_request(method, url, function() {
-                    const response = this.response;
-                    console.log(response);
+                    const response = JSON.parse(this.responseText);
+
                     if (response.hasOwnProperty('data') && response['data'].hasOwnProperty('locked')) {
                         const locked = response['data']['locked'];
 
@@ -165,7 +166,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const url = container.getAttribute('data-url') + '?q=' + encodeURIComponent(input.value);
 
             const request = Biovision.new_ajax_request('GET', url, function () {
-                const response = JSON.parse(this.response);
+                const response = JSON.parse(this.responseText);
                 const results = container.querySelector('.results');
 
                 if (response.hasOwnProperty('data')) {
