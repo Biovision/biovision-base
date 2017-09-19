@@ -11,6 +11,12 @@ ru:
     few: "%{count} активации"
     many: "%{count} активаций"
     other: "%{count} активаций"
+  age_year_count:
+    zero: "%{count} лет"
+    one: "%{count} год"
+    few: "%{count} года"
+    many: "%{count} лет"
+    other: "%{count} лет"
   invalid_code: "Недействительный код"
   could_not_log_in: "Не удалось выполнить вход"
   logout: "Выйти"
