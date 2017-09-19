@@ -47,7 +47,7 @@ class Region < ApplicationRecord
   def editable_by?(user)
     administrator = UserPrivilege.user_has_privilege?(user, :administrator)
     manager       = UserPrivilege.user_has_privilege?(user, :region_manager, self)
-    (administrator || manager) && !locked?
+    administrator || manager
   end
 
   def parents

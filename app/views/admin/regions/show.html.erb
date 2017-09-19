@@ -12,7 +12,7 @@
 
   <ul class="actions">
     <li><%= back_icon(admin_regions_path) %></li>
-    <% if @entity.editable_by?(current_user) %>
+    <% if @entity.editable_by?(current_user) && !@entity.locked? %>
         <li><%= edit_icon edit_region_path(@entity.id) %></li>
     <% end %>
   </ul>

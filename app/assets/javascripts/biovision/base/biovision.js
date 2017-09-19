@@ -82,13 +82,14 @@ let Biovision = {
 
         request.addEventListener('load', on_load);
         request.addEventListener('error', on_error || Biovision.handle_ajax_failure);
-        request.open(method, url);
+        request.open(method.toUpperCase(), url);
         request.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
         request.setRequestHeader('X-CSRF-Token', Biovision.csrf_token);
 
         return request;
     },
     handle_ajax_failure: function (response) {
+        console.log(this);
         if (response.hasOwnProperty('responseJSON')) {
             console.log(response['responseJSON']);
         } else {
@@ -118,6 +119,41 @@ document.addEventListener('DOMContentLoaded', function () {
             const target = document.getElementById(container.getAttribute('data-target'));
 
             target.value = element.getAttribute('data-id');
+        }
+
+        if (element.matches('li.lock > a img')) {
+            event.preventDefault();
+
+            const container = element.closest('li');
+            const button = element.closest('a');
+            const edit = container.parentNode.querySelector('.lockable');
+            const url = container.getAttribute('data-url');
+
+            if (url.length > 1) {
+                const method = button.classList.contains('lock') ? 'PUT' : 'DELETE';
+                console.log(method, url);
+                const request = Biovision.new_ajax_request(method, url, function() {
+                    const response = this.response;
+                    console.log(response);
+                    if (response.hasOwnProperty('data') && response['data'].hasOwnProperty('locked')) {
+                        const locked = response['data']['locked'];
+
+                        locked ? edit.classList.add('hidden') : edit.classList.remove('hidden');
+
+                        container.querySelectorAll('a').forEach(function (button) {
+                            const classes = button.classList;
+
+                            if (classes.contains('lock')) {
+                                locked ? classes.add('hidden') : classes.remove('hidden');
+                            } else {
+                                locked ? classes.remove('hidden') : classes.add('hidden');
+                            }
+                        });
+                    }
+                });
+
+                request.send();
+            }
         }
     });
 
@@ -191,35 +227,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 handle_ajax_failure(response);
             });
         }
-    });
-
-    $(document).on('click', 'li.lock > a', function () {
-        let $container = $(this).closest('li');
-        let $edit = $container.parent().find('.lockable');
-        let url = $container.data('url');
-
-        if (url.length > 1) {
-            $.ajax(url, {
-                method: $(this).hasClass('lock') ? 'put' : 'delete',
-                success: function (response) {
-                    if (response.hasOwnProperty('data') && response['data'].hasOwnProperty('locked')) {
-                        let locked = response['data']['locked'];
-
-                        locked ? $edit.addClass('hidden') : $edit.removeClass('hidden');
-
-                        $container.find('a').each(function () {
-                            if ($(this).hasClass('lock')) {
-                                locked ? $(this).addClass('hidden') : $(this).removeClass('hidden');
-                            } else {
-                                locked ? $(this).removeClass('hidden') : $(this).addClass('hidden');
-                            }
-                        });
-                    }
-                }
-            }).fail(handle_ajax_failure);
-        }
-
-        return false;
     });
 
     $(document).on('click', 'li.priority-changer > button', function () {

@@ -49,7 +49,7 @@ class RegionsController < AdminController
   end
 
   def restrict_editing
-    unless @entity.editable_by?(current_user)
+    if @entity.locked? || !@entity.editable_by?(current_user)
       redirect_to admin_region_path(@entity.id), alert: t('regions.edit.forbidden')
     end
   end
