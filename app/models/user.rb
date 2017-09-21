@@ -120,14 +120,6 @@ class User < ApplicationRecord
     !foreign_slug?
   end
 
-  def age
-    now    = Time.now
-    bd     = birthday || now
-    result = now.year - bd.year
-    result = result - 1 if (bd.month > now.month || (bd.month >= now.month && bd.day > now.day))
-    result
-  end
-
   private
 
   def normalize_slug

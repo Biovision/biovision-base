@@ -18,4 +18,12 @@ class UserProfile < ApplicationRecord
   def search_string
     "#{name} #{surname}"
   end
+
+  def age
+    now    = Time.now
+    bd     = birthday || now
+    result = now.year - bd.year
+    result = result - 1 if (bd.month > now.month || (bd.month >= now.month && bd.day > now.day))
+    result
+  end
 end
