@@ -166,6 +166,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
 
+        // Переключение флагов сущности
         if (element.matches('div.toggleable > span')) {
             if (!element.classList.contains('switch')) {
                 const url = element.parentNode.getAttribute('data-url');
@@ -204,6 +205,61 @@ document.addEventListener('DOMContentLoaded', function () {
                 request.send(data);
             }
         }
+
+        // Изменение порядка сортировки элементов
+        if (element.matches('li.priority-changer > button')) {
+            const delta = parseInt(element.getAttribute('data-delta'));
+            const url = element.parentNode.getAttribute('data-url');
+            let item = element.closest('li[data-number]');
+
+            if (parseInt(item.getAttribute('data-number')) + delta > 0) {
+                const on_success = function() {
+                    const response = JSON.parse(this.responseText);
+
+                    if (response.hasOwnProperty('data')) {
+                        const data = response.data;
+                        const container = item.parentNode;
+                        const list = Array.prototype.slice.call(container.children);
+
+                        if (data.hasOwnProperty('priority')) {
+                            item.setAttribute('data-number', data.priority);
+                        } else {
+                            for (let entity_id in data) {
+                                if (data.hasOwnProperty(entity_id)) {
+                                    item = container.querySelector('li[data-id="' + entity_id + '"]');
+                                    item.setAttribute('data-number', data[entity_id]);
+                                }
+                            }
+                        }
+
+                        list.sort(function (a, b) {
+                            let an = parseInt(a.getAttribute('data-number'));
+                            let bn = parseInt(b.getAttribute('data-number'));
+
+                            if (an > bn) {
+                                return 1;
+                            } else if (an < bn) {
+                                return -1;
+                            } else {
+                                return 0;
+                            }
+                        });
+
+                        list.forEach(function(item) {
+                            item.remove();
+                            container.appendChild(item);
+                        });
+                    }
+                };
+
+                const request = Biovision.new_ajax_request('POST', url, on_success);
+
+                const data = new FormData();
+                data.append('delta', delta);
+
+                request.send(data);
+            }
+        }
     });
 
     // Кнопка поиска пользователя в админке
@@ -238,49 +294,6 @@ document.addEventListener('DOMContentLoaded', function () {
             this.setAttribute('disabled', 'true');
             request.send();
         });
-    });
-
-    $(document).on('click', 'li.priority-changer > button', function () {
-        let $li = $(this).closest('li[data-number]');
-        let delta = parseInt(this.getAttribute('data-delta'));
-        let url = $(this).parent().data('url');
-
-        if (parseInt($li.data('number')) + delta > 0) {
-            $.post(url, {delta: delta}, function (response) {
-                console.log(response);
-                if (response.hasOwnProperty('data')) {
-                    let $container = $li.parent();
-                    let $list = $container.children('li');
-
-                    if (response['data'].hasOwnProperty('priority')) {
-                        $li.data('number', response['data']['priority']);
-                        $li.attr('data-number', response['data']['priority']);
-                    } else {
-                        for (let entity_id in response['data']) {
-                            if (response['data'].hasOwnProperty(entity_id)) {
-                                $li = $container.find('li[data-id=' + entity_id + ']');
-                                $li.data('number', response['data'][entity_id]);
-                                $li.attr('data-number', response['data'][entity_id]);
-                            }
-                        }
-                    }
-                    $list.sort(function (a, b) {
-                        let an = parseInt($(a).data('number'));
-                        let bn = parseInt($(b).data('number'));
-
-                        if (an > bn) {
-                            return 1;
-                        } else if (an < bn) {
-                            return -1;
-                        } else {
-                            return 0;
-                        }
-                    });
-
-                    $list.detach().appendTo($container);
-                }
-            }).fail(handle_ajax_failure);
-        }
     });
 
     if (jQuery) {
