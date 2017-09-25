@@ -243,10 +243,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             } else {
                                 return 0;
                             }
-                        });
-
-                        list.forEach(function(item) {
-                            item.remove();
+                        }).forEach(function(item) {
                             container.appendChild(item);
                         });
                     }
