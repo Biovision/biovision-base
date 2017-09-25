@@ -1,6 +1,6 @@
 'use strict';
 
-let Biovision = {
+const Biovision = {
     storage: {
         available: function (type) {
             try {
@@ -77,11 +77,20 @@ let Biovision = {
             }
         }
     },
-    new_ajax_request: function (method, url, on_load, on_error) {
+    new_ajax_request: function (method, url, on_success, on_failure) {
         const request = new XMLHttpRequest();
 
-        request.addEventListener('load', on_load);
-        request.addEventListener('error', on_error || Biovision.handle_ajax_failure);
+        request.addEventListener('load', function () {
+            if (this.status >= 200 && this.status < 400) {
+                on_success.call(this);
+            } else {
+                (on_failure || Biovision.handle_ajax_failure).call(this);
+            }
+        });
+        request.addEventListener('error', function () {
+            console.log(this);
+        });
+
         request.open(method.toUpperCase(), url);
         request.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
         request.setRequestHeader('X-CSRF-Token', Biovision.csrf_token);
@@ -133,7 +142,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (url.length > 1) {
                 const method = button.classList.contains('lock') ? 'PUT' : 'DELETE';
 
-                const request = Biovision.new_ajax_request(method, url, function() {
+                const request = Biovision.new_ajax_request(method, url, function () {
                     const response = JSON.parse(this.responseText);
 
                     if (response.hasOwnProperty('data') && response['data'].hasOwnProperty('locked')) {
@@ -156,11 +165,50 @@ document.addEventListener('DOMContentLoaded', function () {
                 request.send();
             }
         }
+
+        if (element.matches('div.toggleable > span')) {
+            if (!element.classList.contains('switch')) {
+                const url = element.parentNode.getAttribute('data-url');
+                const parameter = element.getAttribute('data-flag');
+
+                const on_success = function() {
+                    const response = JSON.parse(this.responseText);
+
+                    if (response.hasOwnProperty('data')) {
+                        switch (response['data'][parameter]) {
+                            case true:
+                                element.className = 'active';
+                                break;
+                            case false:
+                                element.className = 'inactive';
+                                break;
+                            default:
+                                element.className = 'unknown';
+                        }
+                    } else {
+                        element.className = 'unknown';
+                    }
+                };
+
+                const on_failure = function() {
+                    element.className = 'unknown';
+                    Biovision.handle_ajax_failure.call(this);
+                };
+
+                const request = Biovision.new_ajax_request('POST', url, on_success, on_failure);
+                const data = new FormData();
+                data.append('parameter', parameter);
+
+                element.className = 'switch';
+
+                request.send(data);
+            }
+        }
     });
 
     // Кнопка поиска пользователя в админке
-    document.querySelectorAll('.user-search button').forEach(function(element) {
-        element.addEventListener('click', function() {
+    document.querySelectorAll('.user-search button').forEach(function (element) {
+        element.addEventListener('click', function () {
             const container = this.closest('.user-search');
             const input = container.querySelector('input[type=search]');
             const url = container.getAttribute('data-url') + '?q=' + encodeURIComponent(input.value);
@@ -183,51 +231,13 @@ document.addEventListener('DOMContentLoaded', function () {
         element.addEventListener('click', function () {
             const container = this.closest('div[data-destroy-url]');
             const url = container.getAttribute('data-destroy-url');
-            const request = Biovision.new_ajax_request('DELETE', url, function() {
+            const request = Biovision.new_ajax_request('DELETE', url, function () {
                 container.remove();
             });
 
             this.setAttribute('disabled', 'true');
             request.send();
         });
-    });
-
-    $(document).on('click', 'div.toggleable > span', function () {
-        if (!$(this).hasClass('switch')) {
-            let $flag = $(this);
-            let url = $(this).parent().data('url');
-            let parameter = $(this).data('flag');
-
-            $.post({
-                url: url,
-                data: {parameter: parameter},
-                beforeSend: function () {
-                    $flag.removeClass();
-                    $flag.addClass('switch');
-                },
-                success: function (response) {
-                    $flag.removeClass();
-                    if (response.hasOwnProperty('data') && response['data'].hasOwnProperty(parameter)) {
-                        switch (response['data'][parameter]) {
-                            case true:
-                                $flag.addClass('active');
-                                break;
-                            case false:
-                                $flag.addClass('inactive');
-                                break;
-                            default:
-                                $flag.addClass('unknown');
-                        }
-                    } else {
-                        $flag.addClass('unknown');
-                    }
-                }
-            }).fail(function (response) {
-                $flag.removeClass();
-                $flag.addClass('unknown');
-                handle_ajax_failure(response);
-            });
-        }
     });
 
     $(document).on('click', 'li.priority-changer > button', function () {
