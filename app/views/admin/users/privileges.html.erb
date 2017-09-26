@@ -23,48 +23,63 @@
     'use strict';
 
     document.addEventListener('DOMContentLoaded', function () {
-        $('ul.privileges input[type=checkbox]').on('click', function () {
-            if ($(this).is(':visible')) {
-                let url = $(this).closest('div.entity').data('url');
-                let method = $(this).is(':checked') ? 'put' : 'delete';
-                let region_id = $(this).data('region-id');
-                let data = region_id > 0 ? { region_id: region_id } : {};
+        document.querySelectorAll('ul.privileges input[type=checkbox]').forEach(function (element) {
+            element.addEventListener('click', function () {
+                if (this.offsetParent !== null) {
+                    const url = this.closest('div.entity').getAttribute('data-url');
+                    const method = this.checked ? 'put' : 'delete';
+                    const region_id = this.getAttribute('data-region-id');
+                    const data = region_id > 0 ? {region_id: region_id} : {};
+                    const request = Biovision.new_ajax_request(method, url);
 
-                $.ajax(url, {
-                    method: method,
-                    data: data,
-                }).fail(handle_ajax_failure);
+                    request.setRequestHeader("Content-Type", "application/json");
+                    request.send(JSON.stringify(data));
+                }
+            });
+        });
+
+        document.addEventListener('click', function (event) {
+            const element = event.target;
+
+            if (element.matches('button.add_regions')) {
+                const container = element.closest('ul');
+                const url = container.getAttribute('data-url');
+                const request = Biovision.new_ajax_request('GET', url, function () {
+                    const response = JSON.parse(this.responseText);
+                    const li = element.closest('li');
+
+                    if (response.hasOwnProperty('data')) {
+                        response.data.forEach(function (data) {
+                            if (data.hasOwnProperty('meta')) {
+                                const item = document.createElement('li');
+
+                                item.innerHTML = data.meta.html_chunk;
+
+                                container.appendChild(item);
+                            }
+                        });
+                    }
+                    li.parentNode.removeChild(li);
+                });
+
+                request.send();
             }
-        });
 
-        $(document).on('click', 'button.add_regions', function () {
-            let $button = $(this);
-            let $container = $(this).closest('ul');
+            if (element.matches('input[type=checkbox].privilege-adder')) {
+                const url = element.closest('div.entity').getAttribute('data-url');
+                const li = element.closest('li');
+                const data = {region_id: element.value};
+                const list = li.querySelector('ul.regions');
 
-            $.get($container.data('url'), function (response) {
-                if (response.hasOwnProperty('data')) {
-                    $(response['data']).each(function(i, data) {
-                        if (data.hasOwnProperty('meta')) {
-                            $container.append('<li>' + data['meta']['html_chunk'] + '</li>');
-                        }
-                    });
-                }
-                $button.closest('li').remove();
-            }).fail(handle_ajax_failure);
-        });
+                const request = Biovision.new_ajax_request('put', url, function() {
+                    if (list) {
+                        list.parentNode.removeChild(list);
+                    }
+                });
 
-        $(document).on('click', 'input[type=checkbox].privilege-adder', function () {
-            let url = $(this).closest('div.entity').data('url');
-            let $li = $(this).closest('li');
-            let data = {region_id: $(this).val()};
-
-            $.ajax(url, {
-                method: 'put',
-                data: data,
-                success: function(response) {
-                    $li.find('ul.regions').remove();
-                }
-            }).fail(handle_ajax_failure);
+                request.setRequestHeader("Content-Type", "application/json");
+                request.send(JSON.stringify(data));
+            }
         });
     });
 </script>

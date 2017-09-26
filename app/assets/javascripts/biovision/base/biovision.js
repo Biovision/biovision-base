@@ -82,7 +82,9 @@ const Biovision = {
 
         request.addEventListener('load', function () {
             if (this.status >= 200 && this.status < 400) {
-                on_success.call(this);
+                if (on_success) {
+                    on_success.call(this);
+                }
             } else {
                 (on_failure || Biovision.handle_ajax_failure).call(this);
             }

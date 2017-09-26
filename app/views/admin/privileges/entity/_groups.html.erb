@@ -14,17 +14,19 @@
 
       <script>
           'use strict';
-          $(function () {
-              $('ul.privilege-groups input[type=checkbox]').on('click', function () {
-                  var url = $(this).closest('li').data('url');
-                  var method = $(this).is(':checked') ? 'put' : 'delete';
 
-                  $.ajax(url, {
-                      method: method,
-                      success: function (response) {
-                          console.log(response);
-                      }
-                  }).fail(handle_ajax_failure);
+          document.addEventListener('DOMContentLoaded', function () {
+              document.querySelectorAll('ul.privilege-groups input[type=checkbox]').forEach(function(element) {
+                  element.addEventListener('click', function () {
+                      const url = this.closest('li').getAttribute('data-url');
+                      const method = this.checked ? 'put' : 'delete';
+                      const request = Biovision.new_ajax_request(method, url, function() {
+                          console.log(JSON.parse(this.responseText));
+                      });
+
+                      request.send();
+                  });
+
               });
           });
       </script>
