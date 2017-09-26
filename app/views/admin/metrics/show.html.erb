@@ -17,22 +17,28 @@
   <canvas id="metric-chart" width="640" height="480" data-source="<%= data_admin_metric_path(@entity.id) %>"></canvas>
 </article>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js"></script>
 <script>
     'use strict';
-    $(function () {
-        let $canvas = $('#metric-chart');
-        $.get($canvas.data('source'), function (response) {
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const canvas = document.getElementById('metric-chart');
+        const url = canvas.getAttribute('data-source');
+        const request = Biovision.new_ajax_request('GET', url, function () {
+            const response = JSON.parse(this.responseText);
+
             if (response.hasOwnProperty('data')) {
-                let metric = response['data'];
-                let labels = Object.keys(metric['graph_data']);
-                let myChart = new Chart($canvas[0], {
+                const metric = response.data;
+                const labels = Object.keys(metric.graph_data);
+                const myChart = new Chart(canvas, {
                     type: 'line',
                     data: {
                         labels: labels,
                         datasets: [{
-                            label: metric['name'],
-                            data: labels.map(function(k) { return metric['graph_data'][k]; } ),
+                            label: metric.name,
+                            data: labels.map(function (k) {
+                                return metric.graph_data.k;
+                            }),
                             borderWidth: 1
                         }]
                     },
@@ -40,13 +46,15 @@
                         scales: {
                             yAxes: [{
                                 ticks: {
-                                    beginAtZero: metric['start_with_zero']
+                                    beginAtZero: metric.start_with_zero
                                 }
                             }]
                         }
                     }
                 });
             }
-        }).fail(handle_ajax_failure);
+        });
+
+        request.send();
     });
 </script>
