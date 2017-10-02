@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     get 'tos' => :tos
   end
 
-  scope 'u/:slug', controller: :profiles do
+  scope 'u/:slug', controller: :profiles, constraints: { slug: /[^\/]+/ } do
     get '/' => :show, as: :user_profile
   end
 

@@ -55,9 +55,9 @@ class User < ApplicationRecord
   scope :filtered, ->(f) { email_like(f[:email]).screen_name_like(f[:screen_name]) }
 
   # @param [Integer] page
-  # @param [Hash] filter
-  def self.page_for_administration(page, filter = {})
-    bots(filter[:bots]).filtered(filter).order('id desc').page(page).per(PER_PAGE)
+  # @param [String] search_query
+  def self.page_for_administration(page, search_query)
+    search(search_query).order('id desc').page(page).per(PER_PAGE)
   end
 
   def self.profile_parameters

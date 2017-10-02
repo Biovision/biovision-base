@@ -143,6 +143,8 @@ ru:
       privileges:
         title: "Привилегии пользователя %{user}"
         heading: "Привилегии пользователя"
+      filter:
+        search: "Искать"
     tokens:
       nav_item:
         text: "Жетоны доступа (сессии пользователей)"

@@ -11,7 +11,7 @@
     <li><%= create_icon(new_user_path) %></li>
   </ul>
 
-  <%= render partial: 'filter', locals: { filter: @filter } %>
+  <%= render partial: 'filter' %>
 
   <%= paginate @collection %>
   <%= render partial: 'list', locals: { collection: @collection } %>

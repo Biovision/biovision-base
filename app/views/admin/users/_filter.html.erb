@@ -3,20 +3,8 @@
       <legend><%= t(:filter) %></legend>
 
       <div>
-        <div><%= label_tag 'filter_screen_name', t('activerecord.attributes.user.screen_name') %></div>
-        <div><%= search_field_tag 'filter[screen_name]', filter[:screen_name], size: 30, results: 5, autosave: 'screen_name' %></div>
-      </div>
-
-<!--
-      <div>
-        <div><%= label_tag 'filter_name', t('activerecord.attributes.user.name') %></div>
-        <div><%= search_field_tag 'filter[name]', filter[:name], size: 30, results: 5, autosave: 'name' %></div>
-      </div>
--->
-
-      <div>
-        <div><%= label_tag 'filter_email', t('activerecord.attributes.user.email') %></div>
-        <div><%= search_field_tag 'filter[email]', filter[:email], size: 30, results: 5, autosave: 'email' %></div>
+        <div><%= label_tag 'q', t('.search') %></div>
+        <div><%= search_field_tag 'q', param_from_request(:q), size: 30, results: 5, autosave: 'user_search' %></div>
       </div>
 
       <div class="button"><%= button_tag t(:submit), type: :submit, name: '' %></div>

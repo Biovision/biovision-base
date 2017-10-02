@@ -7,8 +7,8 @@ class Admin::UsersController < AdminController
 
   # get /admin/users
   def index
-    @filter     = params[:filter] || Hash.new
-    @collection = User.page_for_administration current_page, @filter
+    @search     = param_from_request(:q)
+    @collection = User.page_for_administration current_page, @search
   end
 
   # get /admin/users/:id
