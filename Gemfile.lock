@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    biovision-base (0.8.171003)
+    biovision-base (0.8.171005)
       bcrypt (~> 3.1)
       carrierwave
       carrierwave-bombshelter
@@ -53,7 +53,7 @@ GEM
     arel (8.0.0)
     bcrypt (3.1.11)
     builder (3.2.3)
-    carrierwave (1.2.0)
+    carrierwave (1.2.1)
       activemodel (>= 4.0.0)
       activesupport (>= 4.0.0)
       mime-types (>= 1.16)

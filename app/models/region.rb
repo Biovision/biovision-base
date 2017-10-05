@@ -78,6 +78,11 @@ class Region < ApplicationRecord
     "#{parents.map(&:name).join('/')}/#{name}"
   end
 
+  def branch_name
+    return short_name if parents.blank?
+    "#{parents.map(&:short_name).join('/')}/#{short_name}"
+  end
+
   def cache_parents!
     return if parent.nil?
     self.parents_cache = "#{parent.parents_cache},#{parent_id}".gsub(/\A,/, '')
