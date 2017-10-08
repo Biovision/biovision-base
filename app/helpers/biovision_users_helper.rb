@@ -2,7 +2,7 @@ module BiovisionUsersHelper
   def genders_for_select
     genders = [[t(:not_selected), '']]
     prefix  = 'activerecord.attributes.user_profile.genders.'
-    genders + UserProfile.genders.keys.to_a.map { |o| [I18n.t("#{prefix}#{o}"), o] }
+    genders + UserProfile.genders.keys.to_a.map { |o| [t("#{prefix}#{o}"), o] }
   end
 
   # @param [User] entity
@@ -26,21 +26,31 @@ module BiovisionUsersHelper
     link_to entity.name, admin_token_path(entity.id)
   end
 
-  # @param [User] user
-  def profile_avatar(user)
-    if user.is_a?(User) && !user.image.blank? && !user.deleted?
-      image_tag user.image.profile.url
+  # @param [User] entity
+  def profile_avatar(entity)
+    if entity.is_a?(User) && !entity.image.blank? && !entity.deleted?
+      user_image_profile(entity)
     else
-      image_tag 'biovision/base/placeholders/user.svg'
+      image_tag('biovision/base/placeholders/user.svg')
     end
   end
 
   # @param [User] entity
   def user_image_preview(entity)
-    return image_tag('biovision/base/placeholders/user.svg') if entity.image.blank?
-
     versions = "#{entity.image.preview_2x.url} 2x"
     image_tag(entity.image.preview.url, alt: entity.profile_name, srcset: versions)
+  end
+
+  # @param [User] entity
+  def user_image_profile(entity)
+    versions = "#{entity.image.profile_2x.url} 2x"
+    image_tag(entity.image.profile.url, alt: entity.profile_name, srcset: versions)
+  end
+
+  # @param [User] entity
+  def user_image_big(entity)
+    versions = "#{entity.image.big_2x.url} 2x"
+    image_tag(entity.image.big.url, alt: entity.profile_name, srcset: versions)
   end
 
   # @param [ForeignSite] foreign_site
