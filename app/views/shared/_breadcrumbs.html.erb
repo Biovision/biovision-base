@@ -1,0 +1,6 @@
+<% if content_for? :breadcrumbs %>
+    <nav class="breadcrumbs">
+      <%= link_to(t(:home), root_path) %>
+      <%= yield :breadcrumbs %>
+    </nav>
+<% end %>

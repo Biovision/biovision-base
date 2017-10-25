@@ -1,4 +1,4 @@
-class CreatePrivileges < ActiveRecord::Migration[5.0]
+class CreatePrivileges < ActiveRecord::Migration[5.1]
   def up
     unless Privilege.table_exists?
       create_table :privileges do |t|

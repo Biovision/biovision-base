@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :browser do
     sequence(:name) { |n| "Browser #{n}" }
   end

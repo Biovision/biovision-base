@@ -1,4 +1,4 @@
-class CreateAgents < ActiveRecord::Migration[5.0]
+class CreateAgents < ActiveRecord::Migration[5.1]
   def up
     unless Agent.table_exists?
       create_table :agents do |t|

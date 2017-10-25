@@ -1,4 +1,4 @@
-class CreateCodes < ActiveRecord::Migration[5.0]
+class CreateCodes < ActiveRecord::Migration[5.1]
   def up
     unless Code.table_exists?
       create_table :codes do |t|

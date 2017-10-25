@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :metric do
     sequence(:name) { |n| "test.#{n}" }
   end

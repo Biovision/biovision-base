@@ -1,4 +1,4 @@
-class CreateUsers < ActiveRecord::Migration[5.0]
+class CreateUsers < ActiveRecord::Migration[5.1]
   def up
     unless User.table_exists?
       create_table :users do |t|
@@ -15,6 +15,7 @@ class CreateUsers < ActiveRecord::Migration[5.0]
         t.integer :upvote_count, default: 0, null: false
         t.integer :downvote_count, default: 0, null: false
         t.integer :vote_result, default: 0, null: false
+        t.integer :balance, default: 0, null: false
         t.boolean :super_user, default: false, null: false
         t.boolean :deleted, default: false, null: false
         t.boolean :bot, default: false, null: false

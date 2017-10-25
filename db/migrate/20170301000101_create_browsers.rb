@@ -1,4 +1,4 @@
-class CreateBrowsers < ActiveRecord::Migration[5.0]
+class CreateBrowsers < ActiveRecord::Migration[5.1]
   def up
     unless Browser.table_exists?
       create_table :browsers do |t|

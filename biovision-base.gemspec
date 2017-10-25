@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.email       = ["maxim.km@gmail.com"]
   s.homepage    = "https://github.com/Biovision/biovision-base"
   s.summary     = "Base components for Biovision applications"
-  s.description = "Base components for Biovision applications. Locales, some JS and SCSS"
+  s.description = "Base components for Biovision applications. Models, Controllers, locales, some JS and SCSS"
   s.license     = "MIT"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
@@ -28,6 +28,6 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency 'pg'
   s.add_development_dependency 'database_cleaner'
-  s.add_development_dependency 'factory_girl_rails'
+  s.add_development_dependency 'factory_bot_rails'
   s.add_development_dependency 'rspec-rails'
 end
