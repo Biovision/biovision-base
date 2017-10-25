@@ -12,7 +12,7 @@
 После установки приложения нужно накатить миграции:
 
  1. `$ rails railties:install:migrations`
- 2. `$ rake db:migrate`
+ 2. `$ rails db:migrate`
 
 Добавления в `.gitignore`
 -------------------------
@@ -29,11 +29,9 @@
 Добавления в `Gemfile`
 ----------------------
 
-Нужно раскомментировать `bcrypt`
-
 ```ruby
 gem 'dotenv-rails'
-gem 'jquery-rails'
+# gem 'jquery-rails' # Раскомментировать, если нужна поддержка jQuery
 
 gem 'autoprefixer-rails', group: :production
 
@@ -42,7 +40,7 @@ gem 'biovision-base', git: 'https://github.com/Biovision/biovision-base.git'
 
 group :development, :test do
   gem 'database_cleaner'
-  gem 'factory_girl_rails'
+  gem 'factory_bot_rails'
   gem 'rspec-rails'
 end
 
@@ -57,8 +55,14 @@ end
 Это добавляется перед `//= require tree .`
 
 ```js
-//= require jquery3
 //= require biovision/base/biovision.js
+```
+
+Если нужна поддержка jQuery, то добавить ещё и это, не забыв раскомментировать
+`gem 'jquery-rails'` в `Gemfile`:
+
+```js
+//= require jquery3
 ```
 
 Изменения в `config/environments/production.rb`
@@ -103,7 +107,7 @@ Rails.application.config.assets.precompile << %w(biovision/base/placeholders/*)
 
 ```ruby
 RSpec.configure do |config|
-  config.include FactoryGirl::Syntax::Methods
+  config.include FactoryBot::Syntax::Methods
 end
 ```
 
@@ -123,6 +127,8 @@ end
 Добавления в `config/routes.rb`
 -------------------------------
 
+По желанию:
+
 ```ruby
   concern :toggleable do
     post 'toggle', on: :member
@@ -138,12 +144,15 @@ end
   concern :changeable_priority do
     post 'priority', on: :member
   end
+```
 
+Обязательно:
+
+```ruby
   root 'index#index'
   
   mount Biovision::Base::Engine, at: '/'
 ```
-
 
 Дополнения в `config/environments/production.rb`
 ------------------------------------------------

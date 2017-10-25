@@ -1,13 +1,13 @@
 html {
-  background-image: linear-gradient(to bottom, #dedfe3 2%, #aeb3b9 95%), radial-gradient(33% 100%, rgba(255, 255, 255, 0.50) 0%, rgba(0, 0, 0, 0.50) 100%);
-  background-blend-mode: screen;
   background-attachment: fixed;
+  background-blend-mode: screen;
+  background-image: linear-gradient(to bottom, #dedfe3 2%, #aeb3b9 95%), radial-gradient(farthest-corner at 33% 100%, rgba(255, 255, 255, .5) 0%, rgba(0, 0, 0, .5) 100%);
   font: 400 10px $font-family-main;
   margin: 0;
   padding: 0;
-  -webkit-text-size-adjust: none;
   -moz-text-size-adjust: none;
   -ms-text-size-adjust: none;
+  -webkit-text-size-adjust: none;
 }
 
 * {
@@ -29,8 +29,8 @@ img {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: $font-family-heading;
-  font-weight: 500;
+  color: $text-color-heading;
+  font: 500 $font-family-heading;
   margin: 0;
 }
 
@@ -121,6 +121,7 @@ article {
 
     &.preview {
       img {
+        box-shadow: $block-shadow;
         max-width: 32rem;
       }
     }
