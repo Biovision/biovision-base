@@ -17,7 +17,7 @@ class AddNewFields171026 < ActiveRecord::Migration[5.1]
     end
 
     unless column_exists?(:users, :balance)
-      change_column :users do |t|
+      change_table :users do |t|
         t.integer :balance, default: 0, null: false
       end
     end
