@@ -11,7 +11,9 @@ class AddNewFields171026 < ActiveRecord::Migration[5.1]
 
     unless column_exists?(:editable_pages, :url)
       change_table :editable_pages do |t|
+        t.integer :priority, limit: 2, default: 1, null: false
         t.string :url
+        t.string :nav_group
       end
     end
 
