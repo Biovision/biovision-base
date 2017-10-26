@@ -2,7 +2,6 @@ class AddNewFields171026 < ActiveRecord::Migration[5.1]
   def up
     unless column_exists?(:regions, :image_url)
       change_table :regions do |t|
-        t.string :long_slug, null: false, index: true
         t.string :image_url
         t.text :map_geometry
         t.text :svg_geometry
