@@ -48,6 +48,7 @@ img {
 }
 
 body {
+  background: $background-body;
   color: $text-color-primary;
   display: flex;
   flex-direction: column;
@@ -60,8 +61,9 @@ body {
 
   > footer,
   > header {
+    padding: .4rem 0;
+
     > div {
-      align-items: center;
       display: flex;
       flex-wrap: wrap;
       margin: 0 auto;
@@ -97,6 +99,8 @@ body {
     border-bottom: $border-primary;
 
     > div {
+      align-items: center;
+
       .logo {
         margin-right: auto;
       }

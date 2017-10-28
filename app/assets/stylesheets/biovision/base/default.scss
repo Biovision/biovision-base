@@ -17,11 +17,12 @@ $text-color-heading: #000 !default;
 $text-color-primary: rgb(28, 28, 28) !default;
 $text-color-secondary: #777 !default;
 
-$block-shadow: 0 0 .2rem .2rem rgba(0, 0, 0, .25) !default;
+$block-shadow: .2rem .2rem .4rem .2rem rgba(0, 0, 0, .125) !default;
 
 $border-primary: .1rem solid rgb(192, 192, 192) !default;
 $border-secondary: .1rem solid rgb(230, 230, 230) !default;
 
+$background-body: #f4f4f4 linear-gradient(to top, #f4f4f4 0%, #dfdedc 100%) no-repeat center / cover !default;
 $background-header: #fff !default;
 $background-main: #fff !default;
 $background-footer: #fff !default;

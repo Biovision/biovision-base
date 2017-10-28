@@ -2,7 +2,7 @@ html {
   background-attachment: fixed;
   background-blend-mode: screen;
   background-image: linear-gradient(to bottom, #dedfe3 2%, #aeb3b9 95%), radial-gradient(farthest-corner at 33% 100%, rgba(255, 255, 255, .5) 0%, rgba(0, 0, 0, .5) 100%);
-  font: 400 10px $font-family-main;
+  font: 300 10px $font-family-main;
   margin: 0;
   padding: 0;
   -moz-text-size-adjust: none;
@@ -17,6 +17,7 @@ html {
 a:link,
 a:visited {
   color: $link-color;
+  font-weight: 400;
   text-decoration: none;
 }
 
@@ -30,7 +31,8 @@ img {
 
 h1, h2, h3, h4, h5, h6 {
   color: $text-color-heading;
-  font: 500 $font-family-heading;
+  font-family: $font-family-heading;
+  font-weight: 500;
   margin: 0;
 }
 
@@ -133,7 +135,7 @@ article {
 
     dt {
       border-top: $border-secondary;
-      font: 500 $font-size-increased $font-family-main;
+      font: 400 $font-size-increased $font-family-main;
       margin: .8rem 0 0 0;
       padding: .4rem 0;
     }
@@ -182,8 +184,6 @@ article {
 }
 
 nav.admin-breadcrumbs {
-  background: linear-gradient(to right, rgba(192, 230, 192, .125), rgba(255, 255, 255, 0));
-  border-left: .2rem solid rgba(80, 230, 80, .5);
   margin-bottom: .8rem;
   padding: .4rem;
 
