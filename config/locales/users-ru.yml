@@ -311,6 +311,7 @@ ru:
         update_password: "Изменить пароль"
         no_code: "Нет кода для сброса пароля?"
         send_code: "Отправить код"
+        receive_code: "Получить код"
     confirmations:
       create:
         set_email: "Пожалуйста, заполните адрес электронной почты"

@@ -295,7 +295,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    if (jQuery) {
+    if (typeof jQuery !== 'undefined') {
         jQuery.ajaxSetup({
             headers: {
                 'X-CSRF-Token': Biovision.csrf_token

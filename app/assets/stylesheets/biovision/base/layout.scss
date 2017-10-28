@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 html {
   font: 10px $font-family-main;
   margin: 0;
@@ -5,10 +9,6 @@ html {
   -webkit-text-size-adjust: none;
   -moz-text-size-adjust: none;
   -ms-text-size-adjust: none;
-}
-
-* {
-  box-sizing: border-box;
 }
 
 h1, h2, h3, h4, h6, h6 {
@@ -61,9 +61,12 @@ body {
   > footer,
   > header {
     > div {
+      align-items: center;
+      display: flex;
+      flex-wrap: wrap;
       margin: 0 auto;
-      padding: .4rem;
       max-width: $content-width;
+      padding: .4rem;
 
       .authentication {
         > div {
@@ -94,10 +97,6 @@ body {
     border-bottom: $border-primary;
 
     > div {
-      align-items: center;
-      display: flex;
-      flex-wrap: wrap;
-
       .logo {
         margin-right: auto;
       }
@@ -110,18 +109,22 @@ body {
     margin: auto 0 0 0;
 
     > div {
-      align-items: center;
       color: $text-color-secondary;
-      display: flex;
-      flex-wrap: wrap;
       font-size: $font-size-decreased;
-
-      .copyright {
-        margin-right: auto;
-      }
 
       nav {
         margin: 0 auto;
+
+        ul {
+          margin: 0;
+          padding: 0;
+
+          li {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+          }
+        }
       }
     }
   }
@@ -133,6 +136,7 @@ body {
   margin: 0 auto;
   max-width: $content-width;
   padding: .8rem;
+  width: 100%;
 }
 
 form {
