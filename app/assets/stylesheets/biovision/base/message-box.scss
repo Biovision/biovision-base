@@ -32,7 +32,6 @@ section.errors {
   padding: 1.6rem;
 
   > h2 {
-    background: #fee image_url('biovision/base/icons/alert.svg') no-repeat center left 1.6rem / 1.6rem 1.6rem;
     color: #400;
     font-size: $font-size-large;
     padding: 1.6rem 1.6rem 1.6rem 4.8rem;
@@ -41,6 +40,14 @@ section.errors {
   ol {
     color: #700;
   }
+}
+
+ol.errors {
+  background: #fee image_url('biovision/base/icons/alert.svg') no-repeat top 1rem left 1rem / 1.6rem 1.6rem;
+  box-shadow: .2rem .2rem .2rem 0 hsla(0, 75%, 50%, .5);
+  color: hsl(0, 75%, 50%);
+  margin: 1rem 1.6rem;
+  padding: 1rem 1rem 1rem 5.4rem;
 }
 
 .field_with_errors {
