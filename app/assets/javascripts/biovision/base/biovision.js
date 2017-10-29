@@ -106,6 +106,29 @@ const Biovision = {
         } else {
             console.log(response);
         }
+    },
+    transliterate: function(input) {
+        const char_map = {
+            'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd',
+            'е': 'e', 'ё': 'yo', 'ж': 'zh', 'з': 'z', 'и': 'i',
+            'й': 'j', 'к': 'k', 'л': 'l', 'м': 'm', 'н': 'n',
+            'о': 'o', 'п': 'p', 'р': 'r', 'с': 's', 'т': 't',
+            'у': 'u', 'ф': 'f', 'х': 'kh', 'ц': 'c', 'ч': 'ch',
+            'ш': 'sh', 'щ': 'shh', 'ъ': '', 'ы': 'y', 'ь': '',
+            'э': 'e', 'ю': 'yu', 'я': 'ya'
+        };
+        let string = input.toLowerCase();
+
+        for (let index in char_map) {
+            if (char_map.hasOwnProperty(index)) {
+                string = string.replace(new RegExp(index, 'g'), char_map[index]);
+            }
+        }
+        string = string.replace(/[^-a-z0-9_.]/g, '-');
+        string = string.replace(/^[-_.]*([-a-z0-9_.]*[a-z0-9]+)[-_.]*$/, '$1');
+        string = string.replace(/--+/g, '-');
+
+        return string;
     }
 };
 
@@ -292,6 +315,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
             this.setAttribute('disabled', 'true');
             request.send();
+        });
+    });
+
+    document.querySelectorAll('[data-transliterate]').forEach(function (element) {
+        element.addEventListener('blur', function () {
+            const target = document.getElementById(element.getAttribute('data-transliterate'));
+
+            if (target && target.value === '') {
+                target.value = Biovision.transliterate(element.value);
+                target.dispatchEvent(new Event('change'));
+            }
         });
     });
 
