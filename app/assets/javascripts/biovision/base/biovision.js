@@ -161,7 +161,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             const container = element.closest('li');
             const button = element.closest('a');
-            const edit = container.parentNode.querySelector('.lockable');
+            const lockable = container.parentNode.querySelectorAll('.lockable');
             const url = container.getAttribute('data-url');
 
             if (url.length > 1) {
@@ -173,7 +173,15 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (response.hasOwnProperty('data') && response['data'].hasOwnProperty('locked')) {
                         const locked = response['data']['locked'];
 
-                        locked ? edit.classList.add('hidden') : edit.classList.remove('hidden');
+                        if (locked) {
+                            lockable.forEach(function (button) {
+                                button.classList.add('hidden')
+                            });
+                        } else {
+                            lockable.forEach(function (button) {
+                                button.classList.remove('hidden')
+                            });
+                        }
 
                         container.querySelectorAll('a').forEach(function (button) {
                             const classes = button.classList;
