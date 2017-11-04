@@ -322,34 +322,39 @@ ul.actions {
 .dashboard {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
 
   nav {
+    margin: .4rem;
+    width: 31rem;
+  }
+
+  .heading {
+    display: block;
+    font: 500 1.8rem/1.5 $font-family-heading;
+    text-align: center;
+  }
+
+  ul {
     box-shadow: $block-shadow;
     margin: .4rem;
-    max-width: 32rem;
+    padding: 0;
+  }
 
-    ul {
-      margin: 0;
-      padding: 0;
+  li {
+    background: $row-background-odd;
+    list-style: none;
+    margin: 0;
+    padding: .8rem;
+    position: relative;
 
-      li {
-        background: $row-background-odd;
-        list-style: none;
-        margin: 0;
-        padding: .8rem;
-        position: relative;
-
-        &:nth-last-of-type(even) {
-          background: $row-background-even;
-        }
-
-        .description {
-          color: $text-color-secondary;
-          font-size: $font-size-decreased;
-        }
-      }
+    &:nth-last-of-type(even) {
+      background: $row-background-even;
     }
+  }
+
+  .description {
+    color: $text-color-secondary;
+    font-size: $font-size-decreased;
   }
 }
 
@@ -371,16 +376,16 @@ form {
   dl {
     margin: 0;
     padding: 0;
+  }
 
-    dd,
-    dt {
-      margin: 0;
-      padding: 0;
-    }
+  dd,
+  dt {
+    margin: 0;
+    padding: 0;
+  }
 
-    dt:not(:first-of-type) {
-      margin-top: .8rem;
-    }
+  dt:not(:first-of-type) {
+    margin-top: .8rem;
   }
 
   ul.flags {
