@@ -9,27 +9,6 @@
 и локаль `config/locales/en.yml`, если не планируется использование английской
 локали.
 
-В файле database.yml нужно поменять названия баз данных на актуальные:
-
-development:
-  <<: *default
-  database: <тут_актуальное_название_базыданных>
-test:
-  <<: *default
-  database: <тут_актуальное_название_базыданных_тест>
-
-production:
-  <<: *default
-  database: <тут_актуальное_название_базыданных>
-  username: <пользователь_базы_данных>
-  password: <%= ENV['AGENCYTM_BIOVISION_RU_DATABASE_PASSWORD'] %>  
-
-
-После установки приложения нужно накатить миграции:
-
- 1. `$ rails railties:install:migrations`
- 2. `$ rails db:migrate`
-
 Добавления в `.gitignore`
 -------------------------
 
@@ -105,6 +84,27 @@ end
       config.autoload_paths << config.root.join(path).to_s
     end
   end
+```
+
+Актуализация `config/database.yml`
+----------------------------------
+
+В файле database.yml нужно поменять названия баз данных на актуальные:
+
+```yaml
+development:
+  <<: *default
+  database: example # Поменять на актуальное название
+test:
+  <<: *default
+  database: example_test # Такое же, как в development, но с приставкой _test
+
+production:
+  <<: *default
+  database: example # Такое же, как в development, например
+  username: example # Поменять на актуального пользователя
+  password: <%= ENV['DATABASE_PASSWORD'] %>
+  host: localhost  
 ```
 
 Добавления в `config/initializers/assets.rb`
@@ -253,3 +253,11 @@ if ENV['RAILS_ENV'] == 'production'
   activate_control_app
 end
 ```
+
+Перед запуском:
+---------------
+
+После установки приложения нужно накатить миграции:
+
+ 1. `$ rails railties:install:migrations`
+ 2. `$ rails db:migrate`
