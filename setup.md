@@ -95,6 +95,7 @@ end
 development:
   <<: *default
   database: example # Поменять на актуальное название
+  
 test:
   <<: *default
   database: example_test # Такое же, как в development, но с приставкой _test
@@ -261,3 +262,7 @@ end
 
  1. `$ rails railties:install:migrations`
  2. `$ rails db:migrate`
+
+Для удобства запуска на сервере:
+
+`$ bundle binstub puma`
