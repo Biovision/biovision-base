@@ -9,6 +9,22 @@
 и локаль `config/locales/en.yml`, если не планируется использование английской
 локали.
 
+В файле database.yml нужно поменять названия баз данных на актуальные:
+
+development:
+  <<: *default
+  database: <тут_актуальное_название_базыданных>
+test:
+  <<: *default
+  database: <тут_актуальное_название_базыданных_тест>
+
+production:
+  <<: *default
+  database: <тут_актуальное_название_базыданных>
+  username: <пользователь_базы_данных>
+  password: <%= ENV['AGENCYTM_BIOVISION_RU_DATABASE_PASSWORD'] %>  
+
+
 После установки приложения нужно накатить миграции:
 
  1. `$ rails railties:install:migrations`
