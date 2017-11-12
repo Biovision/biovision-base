@@ -1,0 +1,13 @@
+<script>
+    'use strict';
+    document.addEventListener('DOMContentLoaded', function () {
+        const form = document.getElementById('<%= form_id %>');
+        const button = form.querySelector('button[type=submit]');
+        form.addEventListener('ajax:before', function() {
+            button.disabled = true;
+        });
+        form.addEventListener('ajax:complete', function() {
+            button.disabled = false;
+        });
+    });
+</script>
