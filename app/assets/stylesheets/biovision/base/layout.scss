@@ -181,3 +181,15 @@ form {
     width: 100%;
   }
 }
+
+.breadcrumbs {
+  a {
+    background: image_url('biovision/base/icons/breadcrumb.svg') no-repeat bottom .1rem right / .6rem 1.2rem;
+    padding-right: 1rem;
+    transition: background .25s;
+
+    &:hover {
+      background-image: image_url('biovision/base/icons/breadcrumb-hover.svg');
+    }
+  }
+}
