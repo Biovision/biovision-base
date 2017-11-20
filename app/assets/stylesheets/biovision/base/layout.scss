@@ -69,26 +69,26 @@ body {
       margin: 0 auto;
       max-width: $content-width;
       padding: .4rem;
+    }
 
-      .authentication {
-        > div {
-          display: flex;
-          align-items: center;
+    .authentication {
+      > div {
+        display: flex;
+        align-items: center;
+      }
 
-          &.links {
-            a:link,
-            a:visited {
-              @include button-nav;
-              margin: 0 .4rem;
-            }
-          }
+      .links {
+        a:link,
+        a:visited {
+          @include button-nav;
+          margin: 0 .4rem;
+        }
+      }
 
-          &.plate {
-            .logout {
-              @include button-action;
-              margin-left: 1rem;
-            }
-          }
+      .plate {
+        .logout {
+          @include button-action;
+          margin-left: 1rem;
         }
       }
     }
@@ -100,10 +100,10 @@ body {
 
     > div {
       align-items: center;
+    }
 
-      .logo {
-        margin-right: auto;
-      }
+    .logo {
+      margin-right: auto;
     }
   }
 
@@ -115,21 +115,21 @@ body {
     > div {
       color: $text-color-secondary;
       font-size: $font-size-decreased;
+    }
 
-      nav {
-        margin: 0 auto;
+    nav {
+      margin: 0 auto;
+    }
 
-        ul {
-          margin: 0;
-          padding: 0;
+    ul {
+      margin: 0;
+      padding: 0;
+    }
 
-          li {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-          }
-        }
-      }
+    li {
+      list-style: none;
+      margin: 0;
+      padding: 0;
     }
   }
 }
@@ -144,30 +144,28 @@ body {
 }
 
 form {
-  dl {
-    dt {
-      font: 500 $font-size-increased $font-family-main;
+  dt {
+    font: 500 $font-size-increased $font-family-main;
 
-      &:not(:first-of-type) {
-        border-top: $border-secondary;
-        margin: .8rem 0 0 0;
-        padding: .4rem 0 0 0;
-      }
+    &:not(:first-of-type) {
+      border-top: $border-secondary;
+      margin: .8rem 0 0 0;
+      padding: .4rem 0 0 0;
     }
+  }
 
-    dd {
-      padding: .2rem 0;
+  dd {
+    padding: .2rem 0;
 
-      ul {
-        margin: 0 auto;
+    ul {
+      margin: 0 auto;
+      padding: 0;
+
+      li {
+        list-style: none;
+        margin: 0;
         padding: 0;
-
-        li {
-          list-style: none;
-          margin: 0;
-          padding: 0;
-          position: relative;
-        }
+        position: relative;
       }
     }
   }

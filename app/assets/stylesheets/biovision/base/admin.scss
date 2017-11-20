@@ -74,18 +74,18 @@ body {
         flex-wrap: wrap;
         margin: 0;
         padding: 0;
+      }
 
-        li {
-          display: inline-block;
-          list-style: none;
-          margin: 0 .25rem;
-          text-align: center;
+      li {
+        display: inline-block;
+        list-style: none;
+        margin: 0 .25rem;
+        text-align: center;
+      }
 
-          a:link,
-          a:visited {
-            @include button-nav;
-          }
-        }
+      a:link,
+      a:visited {
+        @include button-nav;
       }
     }
   }
@@ -133,32 +133,6 @@ article {
     margin: 0 0 1.6rem 0;
     padding: 0;
 
-    dt {
-      border-top: $border-secondary;
-      font: 400 $font-size-increased $font-family-main;
-      margin: .8rem 0 0 0;
-      padding: .4rem 0;
-    }
-
-    dd {
-      margin: .2rem 0;
-      padding: 0;
-
-      input,
-      textarea {
-        font-size: $font-size-normal;
-      }
-
-      input:not([type=checkbox]):not([type=radio]):not([size]):not([max]),
-      textarea {
-        width: 100%;
-      }
-
-      input,
-      textarea {
-        max-width: 100%;
-      }
-    }
 
     ul {
       margin: 0;
@@ -169,11 +143,39 @@ article {
         margin: 0;
         padding: 0;
         position: relative;
-
-        label {
-          font-weight: normal;
-        }
       }
+
+      label {
+        font-weight: normal;
+      }
+    }
+  }
+
+  dt {
+    border-top: $border-secondary;
+    font: 400 $font-size-increased $font-family-main;
+    margin: .8rem 0 0 0;
+    padding: .4rem 0;
+  }
+
+  dd {
+    margin: .2rem 0;
+    padding: 0;
+
+    input,
+    textarea {
+      font-size: $font-size-normal;
+      min-width: 1ch;
+    }
+
+    input:not([type=checkbox]):not([type=radio]):not([size]):not([max]),
+    textarea {
+      width: 100%;
+    }
+
+    input,
+    textarea {
+      max-width: 100%;
     }
   }
 
