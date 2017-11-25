@@ -23,7 +23,7 @@ class PrivilegeGroup < ApplicationRecord
   def self.ids(slug)
     instance = find_by(slug: slug.to_s)
     return [] if instance.nil?
-    instance.privileges.map(&:ids).flatten.uniq
+    instance.privileges.map(&:branch_ids).flatten.uniq
   end
 
   def self.entity_parameters
