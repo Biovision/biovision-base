@@ -212,6 +212,7 @@ ul.actions {
     line-height: 1.6rem;
     list-style: none;
     margin: .4rem;
+    padding: 0;
 
     &.danger {
       margin-left: 3.2rem;
@@ -223,22 +224,23 @@ ul.actions {
       flex-basis: 3.6rem;
       justify-content: space-between;
     }
+  }
 
-    > a, button {
-      box-sizing: border-box;
-      display: inline-block;
-      font-size: 1.2rem;
-      height: 1.6rem;
-      line-height: 1.6rem;
-      margin: 0;
-      padding: 0;
-      width: 1.6rem;
-    }
+  a,
+  button {
+    box-sizing: border-box;
+    display: inline-block;
+    font-size: 1.2rem;
+    height: 1.6rem;
+    line-height: 1.6rem;
+    margin: 0;
+    padding: 0;
+    width: 1.6rem;
+  }
 
-    img {
-      max-height: 1.6rem;
-      max-width: 1.6rem;
-    }
+  img {
+    max-height: 1.6rem;
+    max-width: 1.6rem;
   }
 }
 
