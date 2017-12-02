@@ -1,0 +1,18 @@
+ru:
+  media_file_count:
+    zero: "файлов нет"
+    one: "%{count} файл"
+    few: "%{count} файла"
+    many: "%{count} файлов"
+    other: "%{count} файлов"
+  activerecord:
+    models:
+      media_folder: "Медиа-папка"
+      media_file: "Медиа-файл"
+    attributes:
+      media_folder:
+        name: "Название"
+        parent_id: "Родительская папка"
+        snapshot: "Картинка"
+        user: "Пользователь"
+        uuid: "UUID"
