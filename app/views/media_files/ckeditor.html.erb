@@ -1,0 +1,8 @@
+<!doctype html>
+<html lang="<%= locale %>">
+<body>
+<script>
+    window.parent.CKEDITOR.tools.callFunction('<%= param_from_request(:CKEditorFuncNum) %>','<%= request.protocol + request.host_with_port + @entity.file.medium.url %>');
+</script>
+</body>
+</html>

@@ -84,6 +84,14 @@ Rails.application.routes.draw do
     end
 
     resources :login_attempts, only: [:index]
+
+    resources :media_folders, only: [:index, :show]
+    resources :media_files, only: [:index, :show] do
+      member do
+        put 'lock', defaults: { format: :json }
+        delete 'lock', action: :unlock, defaults: { format: :json }
+      end
+    end
   end
 
   namespace :my do
@@ -113,4 +121,11 @@ Rails.application.routes.draw do
 
   resources :privileges, except: [:index, :show]
   resources :privilege_groups, except: [:index, :show]
+
+  resources :media_folders, except: [:index, :show]
+  resources :media_files, except: [:index, :show] do
+    collection do
+      post :ckeditor
+    end
+  end
 end
