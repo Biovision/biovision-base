@@ -2,7 +2,7 @@ class MediaFolder < ApplicationRecord
   include HasOwner
 
   NAME_LIMIT = 100
-  MAX_DEPTH  = 5
+  MAX_DEPTH  = 3
 
   mount_uploader :snapshot, MediaSnapshotUploader
 
@@ -38,6 +38,10 @@ class MediaFolder < ApplicationRecord
   # @return [Array<Symbol>]
   def self.creation_parameters
     entity_parameters + %i(parent_id)
+  end
+
+  def full_title
+    (parents.map { |parent| parent.name } + [name]).join ' / '
   end
 
   # @return [Array<Integer>]

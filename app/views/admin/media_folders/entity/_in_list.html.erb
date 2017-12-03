@@ -5,11 +5,12 @@
   <div><%= admin_media_folder_link(entity) %></div>
   <div class="info">
     <%= t(:created_at) %>:
-    <%= time_tag(entity.created_at) %>,
+    <%= time_tag(entity.created_at) %><br/>
+    <%= t('activerecord.attributes.media_folder.user') %>:
     <%= editor_user_link(entity.user) %>
   </div>
   <div class="secondary info">
-    <%= t(:media_file_count, count: entity.file_count) %>
+    <%= link_to(t(:media_file_count, count: entity.file_count), files_admin_media_folder_path(entity.id)) %>
   </div>
   <% if entity.children_cache.any? %>
     <div class="children">

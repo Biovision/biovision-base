@@ -8,7 +8,7 @@ ru:
   child_media_folder_count:
     zero: "дочерних папок нет"
     one: "%{count} дочерняя папка"
-    few: "%{count} дочерних папки"
+    few: "%{count} дочерниe папки"
     many: "%{count} дочерних папок"
     other: "%{count} дочерних папок"
   activerecord:
@@ -37,6 +37,11 @@ ru:
       index:
         title: "Медиапапки"
         heading: "Медиапапки"
+      show:
+        add_child: "Добавить дочернюю папку"
+        media_files: "Файлы"
+      files:
+        title: "Файлы в медиапапке «%{name}», страница %{page}"
     index:
       biovision_base:
         editorial_office: "Редакция"

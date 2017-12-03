@@ -8,6 +8,11 @@ class Admin::MediaFoldersController < AdminController
 
   # get /admin/media_folders/:id
   def show
+    @collection = MediaFolder.for_tree(@entity.id)
+  end
+
+  # get /admin/media_folders/:id/files
+  def files
     @collection = @entity.media_files.page_for_administration(current_page)
   end
 

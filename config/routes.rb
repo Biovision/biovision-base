@@ -85,7 +85,11 @@ Rails.application.routes.draw do
 
     resources :login_attempts, only: [:index]
 
-    resources :media_folders, only: [:index, :show]
+    resources :media_folders, only: [:index, :show] do
+      member do
+        get 'files'
+      end
+    end
     resources :media_files, only: [:index, :show] do
       member do
         put 'lock', defaults: { format: :json }

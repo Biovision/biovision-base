@@ -4,6 +4,11 @@ module MediaHelper
     link_to(entity.name, admin_media_folder_path(entity.id))
   end
 
+  # @param [MediaFile] entity
+  def admin_media_file_link(entity)
+    link_to(entity.name, admin_media_file_path(entity.id))
+  end
+
   # @param [MediaFolder|MediaFile] entity
   def media_snapshot_preview(entity)
     versions = "#{entity.snapshot.preview_2x.url} 2x"
