@@ -22,4 +22,9 @@ class MediaFile < ApplicationRecord
   validates_uniqueness_of :uuid
 
   scope :ordered_by_name, -> { order('name asc') }
+
+  # @param [Integer] page
+  def self.page_for_administration(page = 1)
+    ordered_by_name.page(page).per(PER_PAGE)
+  end
 end

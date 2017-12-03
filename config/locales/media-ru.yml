@@ -5,6 +5,12 @@ ru:
     few: "%{count} файла"
     many: "%{count} файлов"
     other: "%{count} файлов"
+  child_media_folder_count:
+    zero: "дочерних папок нет"
+    one: "%{count} дочерняя папка"
+    few: "%{count} дочерних папки"
+    many: "%{count} дочерних папок"
+    other: "%{count} дочерних папок"
   activerecord:
     models:
       media_folder: "Медиа-папка"
@@ -21,5 +27,20 @@ ru:
         parent: "Родительская папка"
         parent_id: "Родительская папка"
         snapshot: "Картинка"
-        user: "Пользователь"
+        user: "Владелец"
         uuid: "UUID"
+  admin:
+    media_folders:
+      nav_item:
+        text: "Медиапапки"
+        description: "Управление папками для медиафайлов"
+      index:
+        title: "Медиапапки"
+        heading: "Медиапапки"
+    index:
+      biovision_base:
+        editorial_office: "Редакция"
+    media_files:
+      nav_item:
+        text: "Медиафайлы"
+        description: "Управление загруженными файлами"

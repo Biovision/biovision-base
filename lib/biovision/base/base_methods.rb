@@ -62,7 +62,7 @@ module Biovision
       # @param [String] metric
       # @param [String|Symbol] view
       # @param [Symbol] status
-      def handle_http_error(message, metric, view, status)
+      def handle_http_error(message, metric, view = :error, status = 500)
         logger.warn "#{message}\n\t#{request.method} #{request.original_url}"
         Metric.register(metric)
         render view, status: status

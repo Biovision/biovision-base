@@ -1,0 +1,30 @@
+<div class="image">
+  <%= media_snapshot_preview(entity) %>
+</div>
+<div class="data">
+  <div><%= admin_media_file_link(entity) %></div>
+  <div class="info">
+    <%= t(:created_at) %>:
+    <%= time_tag(entity.created_at) %>,
+    <%= editor_user_link(entity.user) %>
+  </div>
+  <div class="secondary info">
+    <%= t(:media_file_count, count: entity.file_count) %>
+  </div>
+  <% if entity.children_cache.any? %>
+    <div class="children">
+      <%=
+        button_tag(t(:child_media_folder_count, count: entity.child_folders.count),
+                   type:  :button,
+                   class: 'button-action children-loader',
+                   data:  { url: admin_media_folders_path(parent_id: entity.id) })
+      %>
+    </div>
+  <% end %>
+
+  <% if entity.editable_by?(current_user) %>
+    <ul class="actions">
+      <li><%= edit_icon(edit_media_folder_path(entity.id)) %></li>
+    </ul>
+  <% end %>
+</div>

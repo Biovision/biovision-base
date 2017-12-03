@@ -21,6 +21,13 @@ module BiovisionUsersHelper
     link_to(text, admin_user_path(entity.id), class: 'profile')
   end
 
+  # @param [User] entity
+  def editor_user_link(entity)
+    return t(:anonymous) if entity.nil?
+
+    entity.profile_name
+  end
+
   # @param [Token] entity
   def admin_token_link(entity)
     link_to entity.name, admin_token_path(entity.id)

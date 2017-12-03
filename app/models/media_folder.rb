@@ -7,7 +7,7 @@ class MediaFolder < ApplicationRecord
   belongs_to :user, optional: true
   belongs_to :agent, optional: true
   belongs_to :parent, class_name: MediaFolder.to_s, optional: true, touch: true
-  has_many :child_categories, class_name: MediaFolder.to_s, foreign_key: :parent_id, dependent: :destroy
+  has_many :child_folders, class_name: MediaFolder.to_s, foreign_key: :parent_id, dependent: :destroy
   has_many :media_files, dependent: :destroy
 
   after_initialize { self.uuid = SecureRandom.uuid if uuid.nil? }
@@ -85,7 +85,7 @@ class MediaFolder < ApplicationRecord
   end
 
   def cache_children!
-    child_categories.order('id asc').each do |child|
+    child_folders.order('id asc').each do |child|
       self.children_cache += [child.id] + child.children_cache
     end
     save!
