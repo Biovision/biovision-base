@@ -1,4 +1,6 @@
 class MediaFolder < ApplicationRecord
+  include HasOwner
+
   NAME_LIMIT = 100
   MAX_DEPTH  = 5
 
@@ -19,15 +21,37 @@ class MediaFolder < ApplicationRecord
   validates_length_of :name, maximum: NAME_LIMIT
   validate :parent_is_not_too_deep
 
-  def parent_ids
-    parents_cache.split(',').compact
+  scope :ordered_by_name, -> { order('name asc') }
+  scope :for_tree, ->(parent_id = nil) { where(parent_id: parent_id).ordered_by_name }
+
+  # Allowed parameters for editing entity in controllers
+  #
+  # @return [Array<Symbol>]
+  def self.entity_parameters
+    %i(name)
   end
 
+  # Allowed parameters for creating in controllers
+  #
+  # @return [Array<Symbol>]
+  def self.creation_parameters
+    entity_parameters + %i(parent_id)
+  end
+
+  # @return [Array<Integer>]
+  def parent_ids
+    parents_cache.split(',').compact.map(&:to_i)
+  end
+
+  # Parent branch ids including current id
+  #
   # @return [Array<Integer>]
   def branch_ids
     parents_cache.split(',').map(&:to_i).reject { |i| i < 1 }.uniq + [id]
   end
 
+  # Child branch (with subbranches) ids starting with current id
+  #
   # @return [Array<Integer>]
   def subbranch_ids
     [id] + children_cache
@@ -35,7 +59,23 @@ class MediaFolder < ApplicationRecord
 
   def parents
     return [] if parents_cache.blank?
-    PostCategory.where(id: parent_ids).order('id asc')
+    MediaFolder.where(id: parent_ids).order('id asc')
+  end
+
+  # Total media file count for all children and current entity
+  #
+  # @return [Integer]
+  def file_count
+    MediaFolder.where(id: subbranch_ids).sum(:media_files_count)
+  end
+
+  def can_be_deleted?
+    file_count < 1
+  end
+
+  # @param [User] user
+  def editable_by?(user)
+    owned_by?(user) || UserPrivilege.user_has_privilege?(user, :chief_editor)
   end
 
   def cache_parents!
@@ -49,10 +89,6 @@ class MediaFolder < ApplicationRecord
       self.children_cache += [child.id] + child.children_cache
     end
     save!
-  end
-
-  def can_be_deleted?
-    child_categories.count < 1
   end
 
   private

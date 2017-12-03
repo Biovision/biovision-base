@@ -9,9 +9,16 @@ ru:
     models:
       media_folder: "Медиа-папка"
       media_file: "Медиа-файл"
+    errors:
+      models:
+        media_folder:
+          attributes:
+            parent:
+              is_too_deep: "имеет слишком глубокую вложенность"
     attributes:
       media_folder:
         name: "Название"
+        parent: "Родительская папка"
         parent_id: "Родительская папка"
         snapshot: "Картинка"
         user: "Пользователь"
