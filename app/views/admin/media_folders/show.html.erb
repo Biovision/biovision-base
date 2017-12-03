@@ -48,6 +48,9 @@
     <dt><%= t(:updated_at) %></dt>
     <dd><%= time_tag(@entity.updated_at) %></dd>
 
+    <dt><%= t('activerecord.attributes.media_folder.uuid') %></dt>
+    <dd><%= @entity.uuid %></dd>
+
     <dt><%= t('.media_files') %></dt>
     <dd>
       <%=

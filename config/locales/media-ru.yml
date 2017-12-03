@@ -22,6 +22,17 @@ ru:
             parent:
               is_too_deep: "имеет слишком глубокую вложенность"
     attributes:
+      media_file:
+        description: "Описание"
+        file: "Файл"
+        media_folder: "Папка"
+        media_folder_id: "Папка"
+        mime_type: "MIME-тип"
+        name: "Название"
+        original_name: "Оригинальное название"
+        snapshot: "Миниатюра"
+        user: "Владелец"
+        uuid: "UUID"
       media_folder:
         name: "Название"
         parent: "Родительская папка"
@@ -30,10 +41,17 @@ ru:
         user: "Владелец"
         uuid: "UUID"
   admin:
+    media_files:
+      nav_item:
+        description: "Управление загруженными файлами"
+        text: "Медиафайлы"
+      index:
+        title: "Медиафайлы, страница %{page}"
+        heading: "Медиафайлы"
     media_folders:
       nav_item:
-        text: "Медиапапки"
         description: "Управление папками для медиафайлов"
+        text: "Медиапапки"
       index:
         title: "Медиапапки"
         heading: "Медиапапки"
@@ -42,20 +60,30 @@ ru:
         media_files: "Файлы"
       files:
         title: "Файлы в медиапапке «%{name}», страница %{page}"
-    index:
-      biovision_base:
-        editorial_office: "Редакция"
-    media_files:
-      nav_item:
-        text: "Медиафайлы"
-        description: "Управление загруженными файлами"
+  media_files:
+    new:
+      heading: "Новый медиафайл"
+      title: "Добавление медиафайла"
+    edit:
+      heading: "Редактирование медиафайла"
+      forbidden: "Редактирование этого файла запрещено"
+      title: "Редактирование медиафайла"
+    destroy:
+      success: "Файл успешно удалён"
+    update:
+      success: "Файл успешно изменён"
+    form:
+      guidelines:
+        file: "Картинка размером до 3000×3000, формат — JPG или PNG."
+        name: "Максимум 250 символов."
+        description: "Максимум 250 символов."
   media_folders:
     new:
-      title: "Добавление медиапапки"
       heading: "Новая медиапапка"
+      title: "Добавление медиапапки"
     edit:
-      title: "Редактирование медиапапки"
       heading: "Редактирование медиапапки"
+      title: "Редактирование медиапапки"
     destroy:
       success: "Медиапапка успешно удалена"
     form:

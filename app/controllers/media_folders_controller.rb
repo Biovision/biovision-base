@@ -3,6 +3,11 @@ class MediaFoldersController < AdminController
   before_action :restrict_editing, only: [:edit, :update, :destroy]
   before_action :restrict_destroying, only: [:destroy]
 
+  # get /media_folders/new
+  def new
+    @entity = MediaFolder.new
+  end
+
   # post /media_folders
   def create
     @entity = MediaFolder.new(creation_parameters)

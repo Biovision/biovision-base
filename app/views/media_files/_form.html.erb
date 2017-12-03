@@ -1,0 +1,75 @@
+<%= form_with model: entity, html: { id: 'media-file-form' } do |f| %>
+  <%= render partial: 'shared/list_of_errors', locals: { entity: entity } %>
+
+  <dl>
+    <% unless entity.id.nil? %>
+      <% unless entity.media_folder.nil? %>
+        <dt><%= t('activerecord.attributes.media_file.media_folder') %></dt>
+        <dd>
+          <%= admin_media_folder_link(entity.media_folder) %>
+        </dd>
+      <% end %>
+    <% end %>
+
+    <% if entity.id.nil? %>
+      <dt><%= f.label :file %></dt>
+      <dd>
+        <figure class="preview" id="media-file-file">
+          <% if entity.file.blank? %>
+            <% image = image_tag('biovision/base/placeholders/image.svg') %>
+          <% else %>
+            <% image = image_tag(entity.file.medium.url) %>
+          <% end %>
+          <%= f.label :file, image %>
+          <figcaption>
+            <%=
+              f.file_field(:file,
+                           id:       :media_file_file,
+                           accept:   'image/jpeg,image/png,image/gif',
+                           data:     { image: 'media-file-file' },
+                           required: true)
+            %>
+          </figcaption>
+        </figure>
+        <div class="guideline"><%= t('.guidelines.file') %></div>
+      </dd>
+    <% else %>
+      <dt><%= t('activerecord.attributes.media_file.file') %></dt>
+      <dd>
+        <figure role="group">
+          <%= media_file_medium(entity) %>
+        </figure>
+      </dd>
+    <% end %>
+
+    <dt><%= f.label :name %></dt>
+    <dd>
+      <%=
+        f.text_field(:name,
+                     id:        :media_file_name,
+                     size:      nil,
+                     maxlength: MediaFile::NAME_LIMIT,
+                     required:  true)
+      %>
+      <div class="guideline"><%= t('.guidelines.name') %></div>
+    </dd>
+
+    <dt><%= f.label :description %></dt>
+    <dd>
+      <%=
+        f.text_field(:description,
+                     id:        :media_file_description,
+                     size:      nil,
+                     maxlength: MediaFile::DESCRIPTION_LIMIT)
+      %>
+      <div class="guideline"><%= t('.guidelines.description') %></div>
+    </dd>
+  </dl>
+
+  <div class="buttons">
+    <%= f.hidden_field(:media_folder_id) if entity.id.nil? %>
+    <%= f.button t(:save), type: :submit, class: 'button-save' %>
+  </div>
+<% end %>
+
+<%= render partial: 'shared/forms/default_ajax_handler', locals: { form_id: 'media-file-form' } %>

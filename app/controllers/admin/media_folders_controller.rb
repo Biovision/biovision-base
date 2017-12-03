@@ -26,6 +26,6 @@ class Admin::MediaFoldersController < AdminController
   end
 
   def restrict_access
-    require_privilege_group :editorial_office
+    require_privilege_group :editors
   end
 end

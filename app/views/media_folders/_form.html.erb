@@ -39,8 +39,7 @@
                      id:        :media_folder_name,
                      size:      nil,
                      maxlength: MediaFolder::NAME_LIMIT,
-                     required:  true,
-                     data:      { transliterate: 'media_folder_slug' })
+                     required:  true)
       %>
       <div class="guideline"><%= t('.guidelines.name') %></div>
     </dd>
@@ -48,7 +47,7 @@
 
   <div class="buttons">
     <%= f.hidden_field(:parent_id) if entity.id.nil? %>
-    <%= f.button t(:save), type: :submit %>
+    <%= f.button t(:save), type: :submit, class: 'button-save' %>
   </div>
 <% end %>
 

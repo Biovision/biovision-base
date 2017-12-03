@@ -80,6 +80,7 @@ ru:
       biovision_base:
         users: "Модуль пользователей"
         miscellaneous: "Различные настройки"
+        editorial_office: "Редакция"
   index:
     navigation:
       index:
@@ -116,3 +117,4 @@ ru:
       title: "Раздел в разработке"
       heading: "Раздел наполняется"
       message: "Информация ещё не готова, зайдите позже"
+  total: "Всего"

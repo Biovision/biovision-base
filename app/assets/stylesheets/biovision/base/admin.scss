@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 html {
   background-attachment: fixed;
   background-blend-mode: screen;
@@ -8,10 +12,6 @@ html {
   -moz-text-size-adjust: none;
   -ms-text-size-adjust: none;
   -webkit-text-size-adjust: none;
-}
-
-* {
-  box-sizing: border-box;
 }
 
 a:link,
@@ -88,11 +88,6 @@ body {
         @include button-nav;
       }
     }
-  }
-
-  > footer {
-    margin: auto 0 0 0;
-    padding: .8rem 0;
   }
 
   > footer {
@@ -185,6 +180,7 @@ article {
 
   > section {
     border-top: .1rem solid $text-color-secondary;
+    margin: 2.4rem auto;
     padding: .8rem 0 0 0;
   }
 }

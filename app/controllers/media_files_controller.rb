@@ -76,7 +76,7 @@ class MediaFilesController < ApplicationController
   end
 
   def restrict_editing
-    if @entity.locked?
+    unless @entity.editable_by?(current_user)
       redirect_to admin_media_file_path(@entity.id), alert: t('media_files.edit.forbidden')
     end
   end
@@ -93,6 +93,12 @@ class MediaFilesController < ApplicationController
   end
 
   def creation_parameters
-    params.require(:media_file).permit(MediaFile.creation_parameters)
+    media_file = params.require(:media_file)
+    parameters = media_file.permit(MediaFile.creation_parameters)
+    if media_file[:file]
+      file = media_file[:file]
+      parameters.merge!(snapshot: file, original_name: file.original_filename)
+    end
+    parameters.merge(owner_for_entity(true))
   end
 end

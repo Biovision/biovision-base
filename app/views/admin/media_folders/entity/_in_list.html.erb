@@ -10,14 +10,15 @@
     <%= editor_user_link(entity.user) %>
   </div>
   <div class="secondary info">
-    <%= link_to(t(:media_file_count, count: entity.file_count), files_admin_media_folder_path(entity.id)) %>
+    <%= link_to(t(:media_file_count, count: entity.media_files_count), files_admin_media_folder_path(entity.id)) %>
+    (<%= t(:total) %> <%= entity.file_count %>)
   </div>
   <% if entity.children_cache.any? %>
     <div class="children">
       <%=
         button_tag(t(:child_media_folder_count, count: entity.child_folders.count),
                    type:  :button,
-                   class: 'button-action children-loader',
+                   class: 'button-expand children-loader',
                    data:  { url: admin_media_folders_path(parent_id: entity.id) })
       %>
     </div>
