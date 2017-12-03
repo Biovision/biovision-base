@@ -1,0 +1,9 @@
+<% if current_user_has_privilege?(:administrator) %>
+  <nav>
+    <div class="heading"><%= t('.heading') %></div>
+
+    <ul>
+      <li><%= render 'admin/stored_values/nav_item' %></li>
+    </ul>
+  </nav>
+<% end %>

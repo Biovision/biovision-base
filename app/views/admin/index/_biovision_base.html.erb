@@ -1,39 +1,5 @@
-<% if current_user_has_privilege?(:administrator) %>
-    <nav>
-      <div class="heading"><%= t('.users') %></div>
-      <ul>
-        <li><%= render 'admin/users/nav_item' %></li>
-        <li><%= render 'admin/privileges/nav_item' %></li>
-        <li><%= render 'admin/privilege_groups/nav_item' %></li>
-        <li><%= render 'admin/login_attempts/nav_item' %></li>
-        <li><%= render 'admin/tokens/nav_item' %></li>
-        <li><%= render 'admin/codes/nav_item' %></li>
-      </ul>
-    </nav>
-<% end %>
-<nav>
-  <div class="heading"><%= t('.miscellaneous') %></div>
-  <ul>
-    <% if current_user_in_group?(:region_managers) %>
-      <li><%= render 'admin/regions/nav_item' %></li>
-    <% end %>
-    <% if current_user_has_privilege?(:administrator) %>
-      <li><%= render 'admin/stored_values/nav_item' %></li>
-    <% end %>
-    <% if current_user_has_privilege?(:metrics_manager) %>
-      <li><%= render 'admin/metrics/nav_item' %></li>
-    <% end %>
-  </ul>
-</nav>
-<% if current_user_in_group?(:editors) %>
-  <nav>
-    <div class="heading"><%= t('.editorial_office') %></div>
-    <ul>
-      <% if current_user_has_privilege?(:chief_editor) %>
-        <li><%= render 'admin/editable_pages/nav_item' %></li>
-      <% end %>
-      <li><%= render 'admin/media_folders/nav_item' %></li>
-      <li><%= render 'admin/media_files/nav_item' %></li>
-    </ul>
-  </nav>
-<% end %>
+<%= render 'admin/index/dashboard/settings' %>
+<%= render 'admin/index/dashboard/biovision_track' %>
+<%= render 'admin/index/dashboard/biovision_region' %>
+<%= render 'admin/index/dashboard/biovision_user' %>
+<%= render 'admin/index/dashboard/editorial' %>

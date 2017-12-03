@@ -1,0 +1,8 @@
+<% if current_user_in_group?(:region_managers) %>
+  <nav>
+    <div class="heading"><%= t('.heading') %></div>
+    <ul>
+      <li><%= render 'admin/regions/nav_item' %></li>
+    </ul>
+  </nav>
+<% end %>

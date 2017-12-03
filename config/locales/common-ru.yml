@@ -77,10 +77,17 @@ ru:
       index:
         title: "Администрирование"
         heading: "Администрирование"
-      biovision_base:
-        users: "Модуль пользователей"
-        miscellaneous: "Различные настройки"
-        editorial_office: "Редакция"
+      dashboard:
+        biovision_region:
+          heading: "Региональность"
+        biovision_user:
+          heading: "Модуль пользователей"
+        biovision_track:
+          heading: "Метрики"
+        editorial:
+          heading: "Редакция"
+        settings:
+          heading: "Настройки"
   index:
     navigation:
       index:

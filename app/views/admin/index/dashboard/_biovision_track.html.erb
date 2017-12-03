@@ -1,0 +1,8 @@
+<% if current_user_has_privilege?(:metrics_manager) %>
+  <nav>
+    <div class="heading"><%= t('.heading') %></div>
+    <ul>
+      <li><%= render 'admin/metrics/nav_item' %></li>
+    </ul>
+  </nav>
+<% end %>
