@@ -1,0 +1,19 @@
+<% content_for :meta_title, t('.title') %>
+<% content_for :breadcrumbs do %>
+  <%= link_to(t('admin.media_folders.nav_item.text'), admin_media_folders_path) %>
+  <span><%= t(:create) %></span>
+<% end %>
+
+<article>
+  <h1><%= t('.heading') %></h1>
+
+  <ul class="actions">
+    <% if @entity.parent.nil? %>
+      <li><%= return_icon(admin_media_folders_path) %></li>
+    <% else %>
+      <li><%= return_icon(admin_media_folder_path(@entity.parent_id)) %></li>
+    <% end %>
+  </ul>
+
+  <%= render partial: 'form', locals: { entity: @entity } %>
+</article>

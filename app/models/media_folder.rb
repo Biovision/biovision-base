@@ -4,6 +4,8 @@ class MediaFolder < ApplicationRecord
   NAME_LIMIT = 100
   MAX_DEPTH  = 5
 
+  mount_uploader :snapshot, MediaSnapshotUploader
+
   belongs_to :user, optional: true
   belongs_to :agent, optional: true
   belongs_to :parent, class_name: MediaFolder.to_s, optional: true, touch: true
@@ -28,7 +30,7 @@ class MediaFolder < ApplicationRecord
   #
   # @return [Array<Symbol>]
   def self.entity_parameters
-    %i(name)
+    %i(name snapshot)
   end
 
   # Allowed parameters for creating in controllers

@@ -11,7 +11,7 @@ class MediaSnapshotUploader < CarrierWave::Uploader::Base
   end
 
   def default_url(*args)
-    ActionController::Base.helpers.asset_path('comunit/base/placeholders/file.svg')
+    ActionController::Base.helpers.asset_path('biovision/base/placeholders/file.svg')
   end
 
   version :preview_2x do

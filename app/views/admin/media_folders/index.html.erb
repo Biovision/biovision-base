@@ -1,6 +1,6 @@
 <% content_for :meta_title, t('.title') %>
 <% content_for :breadcrumbs do %>
-    <span><%= t('admin.media_folders.nav_item.text') %></span>
+  <span><%= t('admin.media_folders.nav_item.text') %></span>
 <% end %>
 
 <article>
@@ -12,4 +12,10 @@
   </ul>
 
   <%= render partial: 'shared/admin/list', locals: { collection: @collection } %>
+
+  <section>
+    <h2><%= t('media_folders.new.heading') %></h2>
+
+    <%= render partial: 'media_folders/form', locals: { entity: MediaFolder.new } %>
+  </section>
 </article>
