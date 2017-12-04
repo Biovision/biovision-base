@@ -63,8 +63,10 @@ end
 Изменения в `config/environments/production.rb`
 -----------------------------------------------
 
-Если при развёртывании не компилируется JS, нужно закомментировать строку
-`config.assets.js_compressor = :uglifier` (в районе 27 строки).
+Если при развёртывании не компилируется JS, нужно заменить строку
+`config.assets.js_compressor = :uglifier` на 
+`config.assets.js_compressor = Uglifier.new(harmony: true)` 
+(в районе 27 строки).
 
 Нужно выставить уровень сообщения об ошибках в `:warn` 
 (`config.log_level = :warn` в районе 52 строки)
