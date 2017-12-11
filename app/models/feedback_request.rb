@@ -13,7 +13,7 @@ class FeedbackRequest < ApplicationRecord
   validates_length_of :name, maximum: NAME_LIMIT
   validates_length_of :phone, maximum: PHONE_LIMIT
   validates_length_of :email, maximum: EMAIL_LIMIT
-  validates_format_of :email, with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z0-9][-a-z0-9]+)\z/i
+  validates_format_of :email, with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z0-9][-a-z0-9]+)\z/i, allow_blank: true
 
   scope :recent, -> { order('id desc') }
   scope :unprocessed, -> { where(processed: false) }
