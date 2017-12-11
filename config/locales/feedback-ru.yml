@@ -1,0 +1,34 @@
+ru:
+  activerecord:
+    models:
+      feedback_request: "Запрос обратной связи"
+    attributes:
+      feedback_request:
+        email: "Почта"
+        name: "Имя"
+        phone: "Телефон"
+        processed: "Обработан"
+  admin:
+    feedback_requests:
+      nav_item:
+        description: "Список запросов обратной связи"
+        text: "Запросы обратной связи"
+      index:
+        heading: "Запросы обратной связи"
+        title: "Запросы обратной связи, страница %{page}"
+    index:
+      dashboard:
+        biovision_feedback:
+          heading: "Обратная связь"
+  index:
+    index:
+      contact:
+        heading: "Контакты"
+        or_use_form: "Или оставьте ваши контактные данные и мы очень быстро свяжемся с вами"
+  feedback_requests:
+    form:
+      result: "Спасибо, с Вами свяжутся"
+  feedback_mailer:
+    new_feedback_request:
+      subject: "Новый запрос обратной связи на agency.tm"
+      title: "Поступил новый запрос на обратную связь"

@@ -1,0 +1,47 @@
+<% form_id = 'feedback-request-form' unless local_assigns[:form_id] %>
+<%= form_with model: entity, html: { id: form_id } do |f| %>
+  <div class="fields">
+    <%=
+      f.text_field(
+          :name,
+          size:        nil,
+          maxlength:   FeedbackRequest::NAME_LIMIT,
+          placeholder: t('activerecord.attributes.feedback_request.name'),
+          aria:        { label: t('activerecord.attributes.feedback_request.name') },
+          required:    true
+      )
+    %>
+    <%=
+      f.phone_field(
+          :phone,
+          size:        nil,
+          maxlength:   FeedbackRequest::PHONE_LIMIT,
+          placeholder: t('activerecord.attributes.feedback_request.phone'),
+          aria:        {
+              label: t('activerecord.attributes.feedback_request.phone')
+          },
+          required:    true
+      )
+    %>
+    <%=
+      f.email_field(
+          :email,
+          size:        nil,
+          maxlength:   FeedbackRequest::EMAIL_LIMIT,
+          placeholder: t('activerecord.attributes.feedback_request.email'),
+          aria:        {
+              label: t('activerecord.attributes.feedback_request.email')
+          },
+          required:    true
+      )
+    %>
+    <%= hidden_field_tag 'form_id', form_id %>
+  </div>
+  <div class="button">
+    <%= button_tag(t(:submit), type: :submit) %>
+  </div>
+
+  <div class="result hidden"><%= t('.result') %></div>
+<% end %>
+
+<%= render partial: 'shared/forms/default_ajax_handler', locals: { form_id: form_id } %>

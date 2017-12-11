@@ -96,6 +96,12 @@ Rails.application.routes.draw do
         delete 'lock', action: :unlock, defaults: { format: :json }
       end
     end
+
+    resources :feedback_requests, only: [:index] do
+      member do
+        post 'toggle', defaults: { format: :json }
+      end
+    end
   end
 
   namespace :my do
@@ -132,4 +138,6 @@ Rails.application.routes.draw do
       post :ckeditor
     end
   end
+
+  resources :feedback_requests, only: [:create, :destroy]
 end

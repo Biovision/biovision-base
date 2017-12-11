@@ -1,0 +1,13 @@
+<div class="data">
+  <div><%= entity.name %></div>
+  <div class="info">
+    <%= entity.phone %>
+    <%= entity.email %>
+  </div>
+  <div class="secondary info">
+    <%= time_tag entity.created_at %><br/>
+    <%= entity.ip %>
+  </div>
+
+  <%= render partial: 'shared/admin/toggleable', locals: { entity: entity, url: toggle_admin_feedback_request_path(entity.id) } %>
+</div>

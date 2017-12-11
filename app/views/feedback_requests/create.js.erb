@@ -1,0 +1,10 @@
+{
+    const form = document.getElementById('<%= j(param_from_request(:form_id)) %>');
+    const fields = form.querySelector('.fields');
+    const button = form.querySelector('.button');
+    const result = form.querySelector('.result');
+
+    fields.classList.add('hidden');
+    button.classList.add('hidden')
+    result.classList.remove('hidden');
+}
