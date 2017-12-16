@@ -1,11 +1,4 @@
-<% content_for(:meta_title, entity.title) unless entity.title.blank? %>
-<% content_for(:meta_keywords, entity.keywords) unless entity.keywords.blank? %>
-<% content_for(:meta_description, entity.description) unless entity.description.blank? %>
-<% content_for(:meta_image, request.protocol + request.host_with_port + entity.image.medium.url) unless entity.image.blank? %>
-<% content_for :meta_twitter do %>
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:description" content="<%= entity.description %>" />
-<% end %>
+<%= render partial: 'editable_pages/entity/metadata', locals: { entity: entity } %>
 
 <article>
   <h1><%= entity.title %></h1>

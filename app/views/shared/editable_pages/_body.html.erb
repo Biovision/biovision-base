@@ -1,12 +1,3 @@
-<% content_for :meta_title, entity.title %>
-<% content_for :meta_description, entity.description %>
-<% content_for :meta_keywords, entity.keywords %>
-<% content_for :meta_type_extension do %>
-    <meta property="og:article:published_time" content="<%= entity.created_at.strftime('%Y-%m-%d') %>"/>
-    <meta property="og:article:modified_time" content="<%= entity.updated_at.strftime('%Y-%m-%d') %>"/>
-<% end %>
-<% unless entity.image.blank? %>
-    <% content_for :meta_image, (request.protocol + request.host_with_port + entity.image.url) %>
-<% end %>
+<%= render partial: 'editable_pages/entity/metadata', locals: { entity: entity } %>
 
 <%= raw entity.body %>

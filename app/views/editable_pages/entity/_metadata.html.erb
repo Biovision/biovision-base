@@ -1,0 +1,14 @@
+<% content_for(:meta_title, entity.title) unless entity.title.blank? %>
+<% content_for(:meta_keywords, entity.keywords) unless entity.keywords.blank? %>
+<% content_for(:meta_description, entity.description) unless entity.description.blank? %>
+<% unless entity.image.blank? %>
+  <% content_for :meta_image, (request.protocol + request.host_with_port + entity.image.url) %>
+<% end %>
+<% content_for :meta_type_extension do %>
+  <meta property="og:article:published_time" content="<%= entity.created_at.strftime('%F') %>"/>
+  <meta property="og:article:modified_time" content="<%= entity.updated_at.strftime('%F') %>"/>
+<% end %>
+<% content_for :meta_twitter do %>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:description" content="<%= entity.description %>"/>
+<% end %>
