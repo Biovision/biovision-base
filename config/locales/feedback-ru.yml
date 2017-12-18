@@ -4,7 +4,9 @@ ru:
       feedback_request: "Запрос обратной связи"
     attributes:
       feedback_request:
+        comment: "Комментарий"
         email: "Почта"
+        image: "Картинка"
         name: "Имя"
         phone: "Телефон"
         processed: "Обработан"

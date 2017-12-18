@@ -1,10 +1,11 @@
 class FeedbackRequest < ApplicationRecord
   include Toggleable
 
-  NAME_LIMIT  = 100
-  EMAIL_LIMIT = 250
-  PHONE_LIMIT = 30
-  PER_PAGE    = 20
+  NAME_LIMIT    = 100
+  EMAIL_LIMIT   = 250
+  PHONE_LIMIT   = 30
+  COMMENT_LIMIT = 5000
+  PER_PAGE      = 20
 
   toggleable :processed
 
@@ -12,6 +13,7 @@ class FeedbackRequest < ApplicationRecord
 
   validates_length_of :name, maximum: NAME_LIMIT
   validates_length_of :phone, maximum: PHONE_LIMIT
+  validates_length_of :comment, maximum: COMMENT_LIMIT
   validates_length_of :email, maximum: EMAIL_LIMIT
   validates_format_of :email, with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z0-9][-a-z0-9]+)\z/i, allow_blank: true
 
@@ -24,6 +26,6 @@ class FeedbackRequest < ApplicationRecord
   end
 
   def self.creation_parameters
-    %i(name email phone)
+    %i(name email phone comment)
   end
 end

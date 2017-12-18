@@ -27,5 +27,11 @@ RSpec.describe FeedbackRequest, type: :model do
       expect(subject).not_to be_valid
       expect(subject.errors.messages).to have_key(:phone)
     end
+
+    it 'fails with too long comment' do
+      subject.comment = 'A' * 5001
+      expect(subject).not_to be_valid
+      expect(subject.errors.messages).to have_key(:comment)
+    end
   end
 end
