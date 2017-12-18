@@ -35,6 +35,19 @@
           required:    true
       )
     %>
+    <% if local_assigns[:accept_comment] %>
+      <%= f.text_area(
+              :comment,
+              cols:        20,
+              rows:        5,
+              maxlength:   FeedbackRequest::COMMENT_LIMIT,
+              placeholder: t('activerecord.attributes.feedback_request.comment'),
+              aria:        {
+                  label: t('activerecord.attributes.feedback_request.comment')
+              }
+          )
+      %>
+    <% end %>
     <%= hidden_field_tag 'form_id', form_id %>
   </div>
   <div class="button">

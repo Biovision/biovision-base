@@ -8,6 +8,11 @@
     <%= time_tag entity.created_at %><br/>
     <%= entity.ip %>
   </div>
+  <% unless entity.comment.blank? %>
+    <div class="secondary info">
+      <%= simple_format entity.comment %>
+    </div>
+  <% end %>
 
   <%= render partial: 'shared/admin/toggleable', locals: { entity: entity, url: toggle_admin_feedback_request_path(entity.id) } %>
 </div>
