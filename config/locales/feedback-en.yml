@@ -1,0 +1,30 @@
+en:
+  activerecord:
+    models:
+      feedback_request: "Feedback request"
+    attributes:
+      feedback_request:
+        comment: "Comment"
+        email: "E-mail"
+        image: "Image"
+        name: "Name"
+        phone: "Phone number"
+        processed: "Processed"
+  admin:
+    feedback_requests:
+      nav_item:
+        description: "Feedback requests list"
+        text: "Feedback requests"
+      index:
+        heading: "Feedback requests"
+        title: "Feedback requests, page %{page}"
+    index:
+      feedback_requests:
+        heading: "Feedback"
+  feedback_requests:
+    form:
+      result: "Thank you, we will contact you"
+  feedback_mailer:
+    new_feedback_request:
+      subject: "New feedback request from agency.tm"
+      title: "New feebdack request came"

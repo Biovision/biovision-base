@@ -1,0 +1,127 @@
+en:
+  error_count:
+    zero: "no errors"
+    one: "%{count} error"
+    few: "%{count} errors"
+    many: "%{count} errors"
+    other: "%{count} errors"
+  errors:
+    messages:
+      extension_blacklist_error: "is blacklisted"
+  date:
+    nominative_months:
+      -
+      - "january"
+      - "february"
+      - "march"
+      - "april"
+      - "may"
+      - "june"
+      - "july"
+      - "august"
+      - "september"
+      - "october"
+      - "november"
+      - "december"
+  archive_year: " in year %{year}"
+  archive_month: " in %{month} of year %{year}"
+  are_you_sure: "Are you sure?"
+  back: "Back"
+  copyright: "2017"
+  create: "Create"
+  created_at: "Created at"
+  current_image: "Current image"
+  delete: "Delete"
+  deleted_entity: "Deleted entity"
+  edit: "Edit"
+  filter: "Filter"
+  find: "Find"
+  flags: "Flags"
+  hide: "Hide"
+  home: "Home"
+  list: "List"
+  locked: "Editing is forbidden"
+  "no": "No"
+  not_selected: "Not selected"
+  not_set: "Not send"
+  nothing_found: "Nothing was found"
+  page: "Page"
+  save: "Save"
+  submit: "Submit"
+  unlocked: "Editing is allowed"
+  untitled: "Untitled"
+  update: "Update"
+  updated_at: "Updated at"
+  view: "View"
+  view_as_administrator: "View as administrator"
+  view_as_visitor: "View as visitor"
+  "yes": "Yes"
+  views:
+    pagination:
+      first: "⇤"
+      last: "⇥"
+      previous: "←"
+      next: "→"
+      truncate: "…"
+  shared:
+    flash_messages:
+      notice: "Notice"
+      warning: "Warning"
+      alert: "Alert"
+    meta_texts:
+      site_name: "example.com"
+      twitter_site: ""
+      twitter_creator: ""
+  admin:
+    index:
+      index:
+        title: "Administration"
+        heading: "Administration"
+      dashboard:
+        biovision_region:
+          heading: "Regions"
+        biovision_user:
+          heading: "Users module"
+        biovision_track:
+          heading: "Metrics"
+        editorial:
+          heading: "Editorial"
+        settings:
+          heading: "Settings"
+  index:
+    navigation:
+      index:
+        index: "Main site"
+    index:
+      title: "Home page"
+  application:
+    not_found:
+      title: "Page not found"
+      heading: "Page is not found"
+      message: "Page does not exist or is deleted"
+    unauthorized:
+      title: "Unauthorized"
+      heading: "Unauthorized"
+      message: "You are not authorized to access this page."
+    service_unavailable:
+      title: "Service unavailable"
+      heading: "Service unavailable"
+      message: "Service is temporary unavailable. Try again later."
+    error:
+      title: "Server error"
+      heading: "Something went wrong"
+      message: "Internal server error has occurred. Try again later."
+  layouts:
+    admin:
+      footer:
+        support: "Support"
+  about:
+    index:
+      nav_text: "About us"
+    tos:
+      nav_text: "Terms of service"
+    editable:
+      title: "In progress"
+      heading: "Content is not ready"
+      message: "Page content is not ready, please come back later."
+  total: "Total"
