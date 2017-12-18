@@ -3,7 +3,7 @@ class CreateUserProfiles < ActiveRecord::Migration[5.1]
     unless UserProfile.table_exists?
       create_table :user_profiles do |t|
         t.timestamps
-        t.references :user, foreign_key: true, null: false, on_update: :cascade, on_delete: :cascade
+        t.references :user, null: false, foreign_key: { on_update: :cascade, on_delete: :cascade }
         t.integer :gender, limit: 2
         t.date :birthday
         t.string :name

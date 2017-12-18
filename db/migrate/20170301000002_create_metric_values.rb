@@ -2,7 +2,7 @@ class CreateMetricValues < ActiveRecord::Migration[5.1]
   def up
     unless MetricValue.table_exists?
       create_table :metric_values do |t|
-        t.references :metric, foreign_key: true, null: false, on_update: :cascade, on_delete: :cascade
+        t.references :metric, null: false, foreign_key: { on_update: :cascade, on_delete: :cascade }
         t.timestamp :time, null: false
         t.integer :quantity, null: false, default: 1
       end

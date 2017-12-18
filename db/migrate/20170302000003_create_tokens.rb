@@ -3,8 +3,8 @@ class CreateTokens < ActiveRecord::Migration[5.1]
     unless Token.table_exists?
       create_table :tokens do |t|
         t.timestamps
-        t.references :user, foreign_key: true, null: false, on_update: :cascade, on_delete: :cascade
-        t.references :agent, foreign_key: true, on_update: :cascade, on_delete: :nullify
+        t.references :user, null: false, foreign_key: { on_update: :cascade, on_delete: :cascade }
+        t.references :agent, foreign_key: { on_update: :cascade, on_delete: :nullify }
         t.inet :ip
         t.datetime :last_used, index: true
         t.boolean :active, default: true, null: false

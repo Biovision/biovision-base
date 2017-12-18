@@ -3,7 +3,7 @@ class CreateAgents < ActiveRecord::Migration[5.1]
     unless Agent.table_exists?
       create_table :agents do |t|
         t.timestamps
-        t.references :browser, foreign_key: true, on_update: :cascade, on_delete: :nullify
+        t.references :browser, foreign_key: { on_update: :cascade, on_delete: :cascade }
         t.boolean :bot, null: false, default: false
         t.boolean :mobile, null: false, default: false
         t.boolean :active, null: false, default: true

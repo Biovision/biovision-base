@@ -3,9 +3,9 @@ class CreateForeignUsers < ActiveRecord::Migration[5.1]
     unless ForeignUser.table_exists?
       create_table :foreign_users do |t|
         t.timestamps
-        t.references :foreign_site, foreign_key: true, null: false, on_update: :cascade, on_delete: :cascade
-        t.references :user, foreign_key: true, null: false, on_update: :cascade, on_delete: :cascade
-        t.references :agent, foreign_key: true, on_update: :cascade, on_delete: :nullify
+        t.references :foreign_site, null: false, foreign_key: { on_update: :cascade, on_delete: :cascade }
+        t.references :user, null: false, foreign_key: { on_update: :cascade, on_delete: :cascade }
+        t.references :agent, foreign_key: { on_update: :cascade, on_delete: :nullify }
         t.inet :ip
         t.string :slug, null: false
         t.string :email

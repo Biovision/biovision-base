@@ -3,8 +3,8 @@ class CreateMediaFolders < ActiveRecord::Migration[5.1]
     unless MediaFolder.table_exists?
       create_table :media_folders do |t|
         t.timestamps
-        t.references :user, foreign_key: true, on_update: :cascade, on_delete: :nullify
-        t.references :agent, foreign_key: true, on_update: :cascade, on_delete: :nullify
+        t.references :user, foreign_key: { on_update: :cascade, on_delete: :nullify }
+        t.references :agent, foreign_key: { on_update: :cascade, on_delete: :nullify }
         t.inet :ip
         t.integer :parent_id
         t.integer :media_files_count, default: 0, null: false
