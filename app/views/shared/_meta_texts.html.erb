@@ -10,6 +10,9 @@
     <meta name="description" content="<%= yield :meta_description %>" />
     <meta property="og:description" content="<%= yield :meta_description %>" />
 <% end %>
+<% if content_for? :meta_keywords %>
+  <meta name="keywords" content="<%= yield :meta_keywords %>" />
+<% end %>
 <meta property="og:site_name" content="<%= t('.site_name') %>" />
 <meta property="twitter:title" content="<%= content_for :meta_title %>" />
 <meta name="twitter:site" content="<%= t('.twitter_site') %>" />
