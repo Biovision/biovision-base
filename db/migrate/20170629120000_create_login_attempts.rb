@@ -3,7 +3,7 @@ class CreateLoginAttempts < ActiveRecord::Migration[5.1]
     unless LoginAttempt.table_exists?
       create_table :login_attempts do |t|
         t.timestamps
-        t.references :user, null: false, foreign_key: { on_update: :casacde, on_delete: :cascade }
+        t.references :user, null: false, foreign_key: { on_update: :cascade, on_delete: :cascade }
         t.references :agent, foreign_key: { on_update: :cascade, on_delete: :nullify }
         t.inet :ip
         t.string :password, default: '', null: false
