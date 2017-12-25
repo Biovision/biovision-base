@@ -32,5 +32,5 @@ ru:
       result: "Спасибо, с Вами свяжутся"
   feedback_mailer:
     new_feedback_request:
-      subject: "Новый запрос обратной связи на agency.tm"
+      subject: "Новый запрос обратной связи"
       title: "Поступил новый запрос на обратную связь"

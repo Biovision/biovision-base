@@ -8,6 +8,31 @@ en:
   errors:
     messages:
       extension_blacklist_error: "is blacklisted"
+    error:
+      bad_request:
+        title: "Bad request"
+        heading: "Bad request"
+        message: "You have performed a malformed request, please check and try again."
+      unauthorized:
+        title: "Unauthorized"
+        heading: "Unauthorized"
+        message: "You are not authorized to access this page."
+      forbidden:
+        title: "Forbidden"
+        heading: "Forbidden"
+        message: "This action is forbidden."
+      not_found:
+        title: "Not found"
+        heading: "Not found"
+        message: "Page was not found."
+      unprocessable_entity:
+        title: "Unprocessable entity"
+        heading: "Unprocessable entity"
+        message: "You request could not be processed."
+      internal_server_error:
+        title: "Internal server error"
+        heading: "Internal server error"
+        message: "Something went wrong. Please try again later."
   date:
     nominative_months:
       -

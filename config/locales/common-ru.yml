@@ -8,6 +8,31 @@ ru:
   errors:
     messages:
       extension_blacklist_error: "имеет недопустимое расширение файла"
+    error:
+      bad_request:
+        title: "Плохой запрос"
+        heading: "Плохой запрос"
+        message: "Запрос был сформирован некорректно. Проверьте данные и попробуйте снова."
+      unauthorized:
+        title: "В доступе отказано"
+        heading: "В доступе отказано"
+        message: "У вас не хватает прав для доступа к этой странице."
+      forbidden:
+        title: "Запрещено"
+        heading: "Запрещено"
+        message: "Данное дайствие запрещено."
+      not_found:
+        title: "Не найдено"
+        heading: "Страница не найдена"
+        message: "Страница не найдена или была удалена."
+      unprocessable_entity:
+        title: "Невозможно обработать"
+        heading: "Невозможно обработать"
+        message: "Ваш запрос не удалось обработать. Проверьте данные и попробуйте снова."
+      internal_server_error:
+        title: "Ошибка сервера"
+        heading: "Ошибка сервера"
+        message: "Что-то пошло не так. Попробуйте снова позже."
   date:
     nominative_months:
       -

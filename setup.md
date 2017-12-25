@@ -85,6 +85,8 @@ end
     %w(app/services lib).each do |path|
       config.autoload_paths << config.root.join(path).to_s
     end
+    
+    config.exceptions_app = self.routes
   end
 ```
 
