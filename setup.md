@@ -66,29 +66,10 @@ end
 Если при развёртывании не компилируется JS, нужно заменить строку
 `config.assets.js_compressor = :uglifier` на 
 `config.assets.js_compressor = Uglifier.new(harmony: true)` 
-(в районе 27 строки).
+(в районе `27` строки).
 
 Нужно выставить уровень сообщения об ошибках в `:warn` 
-(`config.log_level = :warn` в районе 52 строки)
-
-Добавления в `config/application.rb`
-------------------------------------
-
-```ruby
-  class Application < Rails::Application
-    config.time_zone = 'Moscow'
-
-    config.i18n.enforce_available_locales = true
-    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
-    config.i18n.default_locale = :ru
-
-    %w(app/services lib).each do |path|
-      config.autoload_paths << config.root.join(path).to_s
-    end
-    
-    config.exceptions_app = self.routes
-  end
-```
+(`config.log_level = :warn` в районе `52` строки)
 
 Актуализация `config/database.yml`
 ----------------------------------
@@ -117,8 +98,7 @@ production:
 
 ```ruby
 Rails.application.config.assets.precompile << %w(admin.scss)
-Rails.application.config.assets.precompile << %w(biovision/base/icons/*)
-Rails.application.config.assets.precompile << %w(biovision/base/placeholders/*)
+Rails.application.config.assets.precompile << %w(biovision/base/**/*)
 ```
 
 Добавления в `spec/rails_helper.rb` (`$ rails generate rspec:install`)
