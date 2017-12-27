@@ -4,10 +4,13 @@ class Metric < ApplicationRecord
   DESCRIPTION_LIMIT = 250
   PERIOD_RANGE      = (1..365)
 
+  METRIC_HTTP_400 = 'errors.http.bad_request.hit'
   METRIC_HTTP_401 = 'errors.http.unauthorized.hit'
+  METRIC_HTTP_403 = 'errors.http.forbidden.hit'
   METRIC_HTTP_404 = 'errors.http.not_found.hit'
+  METRIC_HTTP_422 = 'errors.http.unprocessable_entity.hit'
+  METRIC_HTTP_500 = 'errors.http.internal_server_error.hit'
   METRIC_HTTP_503 = 'errors.http.service_unavailable.hit'
-  METRIC_HTTP_505 = 'errors.http.internal_server_error.hit'
 
   has_many :metric_values, dependent: :destroy
 
