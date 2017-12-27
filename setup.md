@@ -51,6 +51,7 @@ end
 
 ```js
 //= require biovision/base/biovision.js
+//= require biovision/base/biovision-sliders.js
 ```
 
 Если нужна поддержка jQuery, то добавить ещё и это, не забыв раскомментировать

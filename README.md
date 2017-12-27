@@ -19,6 +19,55 @@ Biovision::Base
 
 Каждый день в 4 часа ночи будут очищаться старые жетоны.
 
+Использование листалок
+----------------------
+
+Если контейнеру задать класс `biovision-slider` и добавить в него кнопки
+с классами `prev` и `next`, а также список (`ul`), то при условии, что подгружен
+файл `biovision/base/biovision-sliders.js`, к этому контейнеру применится
+поведение листалки.
+
+Параметры, которые можно задать через data-атрибуты:
+
+ * `delay` — задержка перед пролистыванием. По умолчанию — `125` (мс)
+ * `type` — тип. По умолчанию — `opacity` (пока это единственный вариант)
+
+```html
+<div class="biovision-slider" data-delay="250" data-type="opacity">
+    <button class="prev"></button>
+    <ul>
+        <li>Slide 1</li>
+        <li>Slide 2</li>
+        <li>Slide 3</li>
+    </ul>
+    <button class="next"></button>
+</div>
+```
+
+```scss
+.biovision-slider {
+  display: flex;
+    
+  button {
+    background: lime;
+    flex: none;
+    width: 2rem;
+  }
+    
+  ul {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+  }
+    
+  li {
+    flex: none;
+    transition: .125s;
+    width: 20rem;
+  }
+}
+```
+
 ## Installation
 Add this line to your application's Gemfile:
 
