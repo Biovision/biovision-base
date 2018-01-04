@@ -72,20 +72,6 @@ end
 Нужно выставить уровень сообщения об ошибках в `:warn` 
 (`config.log_level = :warn` в районе `52` строки)
 
-Добавления в `config/application.rb`
-------------------------------------
-
-Инициализация локали и разруливания ошибок через `ErrorsController` находится
-в `config/initializers/biovision.rb`.
-
-```ruby
-  class Application < Rails::Application
-    %w(app/services lib).each do |path|
-      config.autoload_paths << config.root.join(path).to_s
-    end
-  end
-```
-
 Актуализация `config/database.yml`
 ----------------------------------
 

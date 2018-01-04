@@ -17,7 +17,7 @@ module Biovision
 
       # Get parameter from request and normalize it
       #
-      # Casts request parameter to UTF-8 string end removes invalid characters
+      # Casts request parameter to UTF-8 string and removes invalid characters
       #
       # @param [Symbol] param
       # @return [String]
