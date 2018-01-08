@@ -1,4 +1,4 @@
-Rails.application.routes.draw do
+Biovision::Base::Engine.routes.draw do
   # Handling errors
   match '/400' => 'errors#bad_request', via: :all
   match '/401' => 'errors#unauthorized', via: :all
