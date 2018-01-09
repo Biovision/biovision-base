@@ -21,7 +21,7 @@
   <div class="secondary info">
     <%= t(:user_count, count: entity.users_count) %>
   </div>
-  <%= render partial: 'admin/regions/toggleable', locals: { entity: entity } %>
+  <%= render partial: 'shared/admin/toggleable', locals: { entity: entity, url: toggle_admin_region_path(entity.id) } %>
 
   <ul class="actions">
     <li class="lockable <%= (entity.editable_by?(current_user) && !entity.locked?) ? '' : 'hidden' %>">

@@ -1,7 +1,0 @@
-<div class="toggleable" data-url="<%= toggle_admin_region_path(entity) %>">
-  <% Region.toggleable_attributes.each do |flag| %>
-  <span class="<%= entity.attributes[flag.to_s] ? 'active' : 'inactive' %>" data-flag="<%= flag %>">
-    <%= t("activerecord.attributes.region.#{flag}") %>
-  </span>
-  <% end %>
-</div>

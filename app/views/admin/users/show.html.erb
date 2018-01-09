@@ -4,7 +4,7 @@
     <span><%= @entity.profile_name %></span>
 <% end %>
 
-<article class="entity-page">
+<article>
   <h1><%= @entity.screen_name %></h1>
   <% if @entity.deleted? %>
       <div class="message-box-alert"><%= t(:deleted_entity) %></div>
@@ -105,6 +105,6 @@
   </dl>
 
   <% unless @entity.deleted? %>
-      <%= render partial: 'admin/users/toggleable', locals: { entity: @entity } %>
+    <%= render partial: 'shared/admin/toggleable', locals: { entity: @entity, url: toggle_admin_user_path(@entity.id) } %>
   <% end %>
 </article>

@@ -17,7 +17,7 @@
         <div class="truncate"><%= entity.agent.name %></div>
     <% end %>
   </div>
-  <%= render partial: 'admin/tokens/toggleable', locals: { entity: entity } %>
+  <%= render partial: 'shared/admin/toggleable', locals: { entity: entity, url: toggle_admin_token_path(entity.id) } %>
 
   <ul class="actions">
     <li><%= edit_icon edit_token_path(entity) %></li>

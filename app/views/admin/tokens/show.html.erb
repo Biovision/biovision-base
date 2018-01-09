@@ -4,7 +4,7 @@
     <span><%= @entity.name %></span>
 <% end %>
 
-<article class="entity-page">
+<article>
   <h1><%= @entity.token %></h1>
 
   <ul class="actions">
@@ -39,5 +39,5 @@
     <% end %>
   </dl>
 
-  <%= render partial: 'admin/tokens/toggleable', locals: { entity: @entity } %>
+  <%= render partial: 'shared/admin/toggleable', locals: { entity: @entity, url: toggle_admin_token_path(@entity.id) } %>
 </article>

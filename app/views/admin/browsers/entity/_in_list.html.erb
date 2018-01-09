@@ -3,7 +3,8 @@
   <div class="info">
     <%= t(:agent_count, count: entity.agents_count) %>
   </div>
-  <%= render partial: 'admin/browsers/toggleable', locals: { entity: entity } %>
+  <%= render partial: 'shared/admin/toggleable', locals: { entity: entity, url: toggle_admin_browser_path(entity.id) } %>
+
   <ul class="actions">
     <li class="lockable <%= entity.locked? ? 'hidden' : '' %>">
       <%= edit_icon edit_browser_path(entity.id) %>

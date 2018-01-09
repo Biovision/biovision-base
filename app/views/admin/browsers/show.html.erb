@@ -4,7 +4,7 @@
     <span><%= @entity.name %></span>
 <% end %>
 
-<article class="entity-page">
+<article>
   <h1><%= @entity.name %></h1>
   <ul class="actions">
     <li><%= create_icon new_browser_path %></li>
@@ -15,7 +15,7 @@
     <% end %>
   </ul>
 
-  <%= render partial: 'admin/browsers/toggleable', locals: { entity: @entity } %>
+  <%= render partial: 'shared/admin/toggleable', locals: { entity: @entity, url: toggle_admin_browser_path(@entity.id) } %>
 
   <section id="browser-agents">
     <h2><%= t('admin.agents.index.heading') %></h2>

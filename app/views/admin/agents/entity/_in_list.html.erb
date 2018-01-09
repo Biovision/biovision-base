@@ -3,7 +3,7 @@
   <% unless entity.browser.nil? %>
       <div class="info"><%= admin_browser_link(entity.browser) %></div>
   <% end %>
-  <%= render partial: 'admin/agents/toggleable', locals: { entity: entity } %>
+  <%= render partial: 'shared/admin/toggleable', locals: { entity: entity, url: toggle_admin_agent_path(entity.id) } %>
   <ul class="actions">
     <li class="lockable <%= entity.locked? ? 'hidden' : '' %>">
       <%= edit_icon edit_agent_path(entity) %>

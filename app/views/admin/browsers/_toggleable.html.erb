@@ -1,7 +1,0 @@
-<div class="toggleable" data-url="<%= toggle_admin_browser_path(entity) %>">
-  <% Browser.toggleable_attributes.each do |flag| %>
-  <span class="<%= entity.attributes[flag.to_s] ? 'active' : 'inactive' %>" data-flag="<%= flag %>">
-    <%= t("activerecord.attributes.browser.#{flag}") %>
-  </span>
-  <% end %>
-</div>
