@@ -1,4 +1,11 @@
 ru:
+  activerecord:
+    models:
+      language: "Язык"
+    attributes:
+      language:
+        slug: "Идентификатор"
+        code: "Код"
   error_count:
     zero: "ошибок нет"
     one: "%{count} ошибка"
@@ -64,6 +71,9 @@ ru:
   flags: "Флаги"
   hide: "Скрыть"
   home: "Главная"
+  languages:
+    english: "Английский"
+    russian: "Русский"
   list: "К списку"
   locked: "Редактирование зарещено"
   "no": "Нет"

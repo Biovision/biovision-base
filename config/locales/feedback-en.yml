@@ -7,6 +7,7 @@ en:
         comment: "Comment"
         email: "E-mail"
         image: "Image"
+        language: "Language"
         name: "Name"
         phone: "Phone number"
         processed: "Processed"

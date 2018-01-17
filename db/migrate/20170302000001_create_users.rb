@@ -4,6 +4,7 @@ class CreateUsers < ActiveRecord::Migration[5.1]
       create_table :users do |t|
         t.timestamps
         t.references :region, foreign_key: { on_update: :cascade, on_delete: :nullify }
+        t.references :language, foreign_key: { on_update: :cascade, on_delete: :nullify }
         t.references :agent, foreign_key: { on_update: :cascade, on_delete: :nullify }
         t.inet :ip
         t.integer :inviter_id

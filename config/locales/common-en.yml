@@ -1,4 +1,11 @@
 en:
+  activerecord:
+    models:
+      language: "Language"
+    attributes:
+      language:
+        slug: "Slug"
+        code: "Code"
   error_count:
     zero: "no errors"
     one: "%{count} error"
@@ -64,6 +71,9 @@ en:
   flags: "Flags"
   hide: "Hide"
   home: "Home"
+  languages:
+    english: "English"
+    russian: "Russian"
   list: "List"
   locked: "Editing is forbidden"
   "no": "No"

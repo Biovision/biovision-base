@@ -5,6 +5,7 @@ ru:
       stored_value: "Хранимое значение"
     attributes:
       editable_page:
+        language: "Язык"
         name: "Название"
         slug: "Идентификатор"
         image: "Картинка"

@@ -19,6 +19,7 @@ class User < ApplicationRecord
 
   mount_uploader :image, AvatarUploader
 
+  belongs_to :language, optional: true, counter_cache: true
   belongs_to :agent, optional: true
   belongs_to :inviter, class_name: User.to_s, optional: true
   belongs_to :region, optional: true, counter_cache: true
@@ -30,6 +31,7 @@ class User < ApplicationRecord
   has_many :privileges, through: :user_privileges
   has_many :foreign_users, dependent: :delete_all
   has_many :login_attempts, dependent: :delete_all
+  has_many :user_languages, dependent: :delete_all
 
   before_save :normalize_slug
   before_save :prepare_search_string

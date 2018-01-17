@@ -3,6 +3,7 @@ class CreateFeedbackRequests < ActiveRecord::Migration[5.1]
     unless FeedbackRequest.table_exists?
       create_table :feedback_requests do |t|
         t.timestamps
+        t.references :language, foreign_key: { on_update: :cascade, on_delete: :nullify }
         t.references :agent, foreign_key: { on_update: :cascade, on_delete: :nullify }
         t.inet :ip
         t.boolean :processed

@@ -7,6 +7,7 @@ ru:
         comment: "Комментарий"
         email: "Почта"
         image: "Картинка"
+        language: "Язык"
         name: "Имя"
         phone: "Телефон"
         processed: "Обработан"

@@ -9,6 +9,7 @@ class FeedbackRequest < ApplicationRecord
 
   toggleable :processed
 
+  belongs_to :language, optional: true
   belongs_to :agent, optional: true
 
   validates_length_of :name, maximum: NAME_LIMIT
