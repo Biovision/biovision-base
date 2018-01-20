@@ -1,6 +1,6 @@
 <%= render 'admin/index/dashboard/settings' %>
 <%= render 'admin/index/dashboard/biovision_track' %>
-<%= render 'admin/index/dashboard/biovision_region' %>
+<%= render 'admin/index/dashboard/biovision_regions' if Gem.loaded_specs.key?('biovision-regions') %>
 <%= render 'admin/index/dashboard/biovision_user' %>
 <%= render 'admin/index/dashboard/editorial' %>
 <%= render 'admin/index/dashboard/biovision_feedback' %>

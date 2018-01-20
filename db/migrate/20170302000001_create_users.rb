@@ -3,7 +3,7 @@ class CreateUsers < ActiveRecord::Migration[5.1]
     unless User.table_exists?
       create_table :users do |t|
         t.timestamps
-        t.references :region, foreign_key: { on_update: :cascade, on_delete: :nullify }
+        t.integer :region_id
         t.references :language, foreign_key: { on_update: :cascade, on_delete: :nullify }
         t.references :agent, foreign_key: { on_update: :cascade, on_delete: :nullify }
         t.inet :ip

@@ -3,7 +3,7 @@ class CreateUserPrivileges < ActiveRecord::Migration[5.1]
     unless UserPrivilege.table_exists?
       create_table :user_privileges do |t|
         t.timestamps
-        t.references :region, foreign_key: { on_update: :cascade, on_delete: :cascade }
+        t.integer :region_id
         t.references :user, null: false, foreign_key: { on_update: :cascade, on_delete: :cascade }
         t.references :privilege, null: false, foreign_key: { on_update: :cascade, on_delete: :cascade }
       end

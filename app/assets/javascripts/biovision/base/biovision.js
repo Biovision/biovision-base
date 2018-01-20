@@ -107,7 +107,7 @@ const Biovision = {
             console.log(response);
         }
     },
-    transliterate: function(input) {
+    transliterate: function (input) {
         const char_map = {
             'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd',
             'е': 'e', 'ё': 'yo', 'ж': 'zh', 'з': 'z', 'и': 'i',
@@ -205,7 +205,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 const url = element.parentNode.getAttribute('data-url');
                 const parameter = element.getAttribute('data-flag');
 
-                const on_success = function() {
+                const on_success = function () {
                     const response = JSON.parse(this.responseText);
 
                     if (response.hasOwnProperty('data')) {
@@ -224,7 +224,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     }
                 };
 
-                const on_failure = function() {
+                const on_failure = function () {
                     element.className = 'unknown';
                     Biovision.handle_ajax_failure.call(this);
                 };
@@ -246,7 +246,7 @@ document.addEventListener('DOMContentLoaded', function () {
             let item = element.closest('li[data-number]');
 
             if (parseInt(item.getAttribute('data-number')) + delta > 0) {
-                const on_success = function() {
+                const on_success = function () {
                     const response = JSON.parse(this.responseText);
 
                     if (response.hasOwnProperty('data')) {
@@ -276,7 +276,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             } else {
                                 return 0;
                             }
-                        }).forEach(function(item) {
+                        }).forEach(function (item) {
                             container.appendChild(item);
                         });
                     }
@@ -334,6 +334,18 @@ document.addEventListener('DOMContentLoaded', function () {
                 target.value = Biovision.transliterate(element.value);
                 target.dispatchEvent(new Event('change'));
             }
+        });
+    });
+
+    document.querySelectorAll('form[data-remote]').forEach(function (form) {
+        const button = form.querySelector('button[type=submit]');
+
+        form.addEventListener('ajax:before', function () {
+            button.disabled = true;
+        });
+
+        form.addEventListener('ajax:complete', function () {
+            button.disabled = false;
         });
     });
 

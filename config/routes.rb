@@ -50,14 +50,6 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :regions, only: [:index, :show] do
-      member do
-        post 'toggle', defaults: { format: :json }
-        put 'lock', defaults: { format: :json }
-        delete 'lock', action: :unlock, defaults: { format: :json }
-      end
-    end
-
     resources :privileges, only: [:index, :show] do
       member do
         put 'lock', defaults: { format: :json }
@@ -133,8 +125,6 @@ Rails.application.routes.draw do
   resources :tokens, :codes, except: [:index, :show]
 
   resources :metrics, only: [:edit, :update]
-
-  resources :regions, except: [:index, :show]
 
   resources :privileges, except: [:index, :show]
   resources :privilege_groups, except: [:index, :show]

@@ -204,18 +204,6 @@ nav.admin-breadcrumbs {
   ul {
     border-left: $border-primary;
     margin: .8rem 0 0 2.4rem;
-
-    &.regions {
-      margin: 0 0 0 1.2rem;
-      padding: 0;
-      border: none;
-
-      > li {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-      }
-    }
   }
 }
 

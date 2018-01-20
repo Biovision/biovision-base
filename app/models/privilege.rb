@@ -91,33 +91,33 @@ class Privilege < ApplicationRecord
   end
 
   # @param [User] user
-  # @param [Region] region
-  def has_user?(user, region = nil)
+  # @param [Array] region_ids
+  def has_user?(user, region_ids = [])
     return false if user.nil?
     return true if user.super_user?
     result = user_in_non_regional_branch?(user)
 
-    if regional? && !region.nil? && !result
-      result = user_in_regional_branch?(user, region)
+    if regional? && region_ids.any? && !result
+      result = user_in_regional_branch?(user, region_ids)
     end
     result
   end
 
   # @param [User] user
-  # @param [Region] region
-  def grant(user, region = nil)
+  # @param [Integer] region_id
+  def grant(user, region_id = nil)
     return if user.nil?
-    criteria          = { privilege: self, user: user }
-    criteria[:region] = region if regional?
+    criteria             = { privilege: self, user: user }
+    criteria[:region_id] = region_id if regional?
     UserPrivilege.create(criteria) unless UserPrivilege.exists?(criteria)
   end
 
   # @param [User] user
-  # @param [Region] region
-  def revoke(user, region = nil)
+  # @param [Integer] region_id
+  def revoke(user, region_id = nil)
     return if user.nil?
-    criteria          = { privilege: self, user: user }
-    criteria[:region] = region if regional?
+    criteria             = { privilege: self, user: user }
+    criteria[:region_id] = region_id if regional?
     UserPrivilege.where(criteria).delete_all
   end
 
@@ -161,14 +161,14 @@ class Privilege < ApplicationRecord
   end
 
   # @param [User] user
-  # @param [Region] region
-  def user_in_regional_branch?(user, region)
+  # @param [Array] region_ids
+  def user_in_regional_branch?(user, region_ids)
     selected_ids = Privilege.where(regional: true, id: branch_ids).pluck(:id)
     if selected_ids.any?
       criteria = {
         privilege_id: selected_ids,
-        region_id: region.branch_ids,
-        user: user
+        region_id:    region_ids,
+        user:         user
       }
       UserPrivilege.exists?(criteria)
     else

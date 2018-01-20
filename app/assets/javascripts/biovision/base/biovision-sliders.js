@@ -1,10 +1,9 @@
 'use strict';
 
 document.addEventListener('DOMContentLoaded', function () {
-    const sliders = document.querySelectorAll('.biovision-slider');
     const sliding = {
         opacity: {
-            left: function(list, delay) {
+            left: function (list, delay) {
                 const li = list.querySelector('li:last-of-type');
                 const restore_opacity = function () {
                     li.style.opacity = '';
@@ -14,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 list.prepend(li);
                 setTimeout(restore_opacity, delay);
             },
-            right: function(list, delay) {
+            right: function (list, delay) {
                 const li = list.querySelector('li:first-of-type');
                 const move = function () {
                     list.append(li);
@@ -27,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     };
 
-    Array.prototype.slice.call(sliders).forEach(function(slider) {
+    document.querySelectorAll('.biovision-slider').forEach(function (slider) {
         const delay = slider.getAttribute('data-delay') || 125;
         const list = slider.querySelector('ul');
         let type = slider.getAttribute('data-type') || 'opacity';
@@ -49,16 +48,3 @@ document.addEventListener('DOMContentLoaded', function () {
         slider.querySelector('button.next').addEventListener('click', slide_right);
     });
 });
-
-/*
-
-<script>
-    'use strict';
-
-    document.addEventListener('DOMContentLoaded', function () {
-        const slider = document.getElementById('crew-slider');
-    });
-</script>
-
-
- */

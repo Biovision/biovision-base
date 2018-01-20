@@ -3,7 +3,6 @@ class UserPrivilege < ApplicationRecord
 
   belongs_to :user
   belongs_to :privilege, counter_cache: :users_count
-  belongs_to :region, optional: true
 
   validates_uniqueness_of :privilege_id, scope: [:user_id, :region_id]
 
@@ -17,12 +16,12 @@ class UserPrivilege < ApplicationRecord
 
   # @param [User] user
   # @param [String|Symbol] privilege_name
-  # @param [Region] region
-  def self.user_has_privilege?(user, privilege_name, region = nil)
+  # @param [Array] region_ids
+  def self.user_has_privilege?(user, privilege_name, region_ids = [])
     return false if user.nil?
     return true if user.super_user?
     privilege = Privilege.find_by(slug: privilege_name)
-    privilege&.has_user?(user, region)
+    privilege&.has_user?(user, region_ids)
   end
 
   # @param [User] user
@@ -40,15 +39,5 @@ class UserPrivilege < ApplicationRecord
     privilege_ids = PrivilegeGroup.ids(group_name)
     return false if privilege_ids.blank?
     exists?(user: user, privilege_id: privilege_ids)
-  end
-
-  private
-
-  def regional_ids(region)
-
-  end
-
-  def simple_ids
-
   end
 end

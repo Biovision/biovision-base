@@ -113,8 +113,6 @@ ru:
         title: "Администрирование"
         heading: "Администрирование"
       dashboard:
-        biovision_region:
-          heading: "Региональность"
         biovision_user:
           heading: "Модуль пользователей"
         biovision_track:

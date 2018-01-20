@@ -113,8 +113,6 @@ en:
         title: "Administration"
         heading: "Administration"
       dashboard:
-        biovision_region:
-          heading: "Regions"
         biovision_user:
           heading: "Users module"
         biovision_track:

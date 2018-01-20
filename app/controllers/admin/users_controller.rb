@@ -31,14 +31,14 @@ class Admin::UsersController < AdminController
 
   # put /admin/users/:id/privileges/:privilege_id
   def grant_privilege
-    @privilege.grant(@entity, Region.find_by(id: params[:region_id]))
+    @privilege.grant(@entity, params[:region_id])
 
     render json: { data: { user_privilege_ids: @entity.user_privilege_ids } }
   end
 
   # delete /admin/users/:id/privileges/:privilege_id
   def revoke_privilege
-    @privilege.revoke(@entity, Region.find_by(id: params[:region_id]))
+    @privilege.revoke(@entity, params[:region_id])
 
     render json: { data: { user_privilege_ids: @entity.user_privilege_ids } }
   end

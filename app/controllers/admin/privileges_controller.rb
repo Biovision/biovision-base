@@ -20,12 +20,6 @@ class Admin::PrivilegesController < AdminController
     @collection = @entity.users.page_for_administration(current_page)
   end
 
-  # get /admin/privileges/:id/regions
-  def regions
-    @user       = User.find_by(id: params[:user_id])
-    @collection = Region.visible.for_tree(params[:parent_id]).reject { |r| @entity.has_user?(@user, r) }
-  end
-
   protected
 
   def restrict_access

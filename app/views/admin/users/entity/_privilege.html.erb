@@ -1,6 +1,6 @@
 <div class="data">
   <div data-url="<%= privilege_admin_user_path(id: user.id, privilege_id: privilege.id) %>" class="entity">
-    <% if privilege.regional? %>
+    <% if privilege.regional? && Gem.loaded_specs.key?('biovision-regions') %>
         <span><%= privilege.name %></span>
         <ul data-url="<%= regions_admin_privilege_path(privilege.id, user_id: user.id) %>" class="regions">
           <% user.user_privileges.where(privilege: privilege).order('region_id asc').each do |link| %>

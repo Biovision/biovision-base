@@ -129,32 +129,22 @@ end
 Добавления в `config/routes.rb`
 -------------------------------
 
-По желанию:
-
-```ruby
-  concern :toggleable do
-    post 'toggle', on: :member
-  end
-
-  concern :lockable do
-    member do
-      put 'lock'
-      delete 'lock', action: :unlock
-    end
-  end
-
-  concern :changeable_priority do
-    post 'priority', on: :member
-  end
-```
-
-Обязательно:
-
 ```ruby
   root 'index#index'
   
-  mount Biovision::Base::Engine, at: '/'
+  # mount Biovision::Base::Engine, at: '/', as: :biovision
 ```
+
+Добавления в `config/application_controller.rb`
+-----------------------------------------------
+
+Если не используются регионы, добавить это перед в начале класса.
+
+```ruby
+  include Biovision::Base::PrivilegeMethods
+```
+
+Если регионы используются, добавить вместо этого строку из модуля регионов.
 
 Дополнения в `config/environments/production.rb`
 ------------------------------------------------

@@ -94,8 +94,8 @@
             <% @entity.user_privileges.order('privilege_id, region_id asc nulls first').each do |link| %>
                 <li>
                   <%= link.privilege.name %>
-                  <% unless link.region.nil? %>
-                      (<%= link.region.long_name %>)
+                  <% unless link.region_id.nil? %>
+                      (<%= link.region_id %><%# link.region.long_name %>)
                   <% end %>
                 </li>
             <% end %>

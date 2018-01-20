@@ -8,8 +8,7 @@ class AmendForeignKeys < ActiveRecord::Migration[5.1]
         browsers: { on_update: :cascade, on_delete: :cascade }
       },
       users:                      {
-        regions: { on_update: :cascade, on_delete: :nullify },
-        agents:  { on_update: :cascade, on_delete: :nullify }
+        agents: { on_update: :cascade, on_delete: :nullify }
       },
       user_profiles:              {
         users: { on_update: :cascade, on_delete: :cascade }
@@ -24,7 +23,6 @@ class AmendForeignKeys < ActiveRecord::Migration[5.1]
         agents:     { on_update: :cascade, on_delete: :nullify }
       },
       user_privileges:            {
-        regions:    { on_update: :cascade, on_delete: :cascade },
         users:      { on_update: :cascade, on_delete: :cascade },
         privileges: { on_update: :cascade, on_delete: :cascade }
       },
