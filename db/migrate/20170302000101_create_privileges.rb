@@ -19,11 +19,6 @@ class CreatePrivileges < ActiveRecord::Migration[5.1]
       add_foreign_key :privileges, :privileges, column: :parent_id, on_update: :cascade, on_delete: :cascade
 
       add_index :privileges, :slug, unique: true
-
-      Privilege.create!(slug: 'administrator', name: 'Администратор')
-      Privilege.create!(slug: 'metrics_manager', name: 'Аналитик метрик')
-      Privilege.create!(slug: 'moderator', name: 'Модератор')
-      Privilege.create!(slug: 'chief_editor', name: 'Главный редактор')
     end
   end
 
@@ -31,5 +26,12 @@ class CreatePrivileges < ActiveRecord::Migration[5.1]
     if Privilege.table_exists?
       drop_table :privileges
     end
+  end
+
+  def create_privileges
+    Privilege.create!(slug: 'administrator', name: 'Администратор')
+    Privilege.create!(slug: 'metrics_manager', name: 'Аналитик метрик')
+    Privilege.create!(slug: 'moderator', name: 'Модератор')
+    Privilege.create!(slug: 'chief_editor', name: 'Главный редактор')
   end
 end

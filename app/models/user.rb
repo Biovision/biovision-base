@@ -57,7 +57,7 @@ class User < ApplicationRecord
 
   # @param [Integer] page
   # @param [String] search_query
-  def self.page_for_administration(page, search_query)
+  def self.page_for_administration(page, search_query = '')
     search(search_query).order('id desc').page(page).per(PER_PAGE)
   end
 
