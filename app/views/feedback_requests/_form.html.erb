@@ -50,11 +50,9 @@
     <% end %>
     <%= hidden_field_tag 'form_id', form_id %>
   </div>
-  <div class="button">
+  <div class="buttons">
     <%= button_tag(t(:submit), type: :submit) %>
   </div>
 
   <div class="result hidden"><%= t('.result') %></div>
 <% end %>
-
-<%= render partial: 'shared/forms/default_ajax_handler', locals: { form_id: form_id } %>
