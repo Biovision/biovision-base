@@ -2,9 +2,9 @@
   <%= render 'layouts/admin/header/logo' %>
   <nav>
     <ul>
-      <li><%= link_to(t('admin.index.index.heading'), admin_path) %></li>
       <% unless current_user.nil? %>
-          <li><%= link_to(t(:logout), logout_path, method: :delete) %></li>
+        <li><%= current_user.screen_name %></li>
+        <li><%= link_to(t(:logout), logout_path, method: :delete) %></li>
       <% end %>
     </ul>
   </nav>

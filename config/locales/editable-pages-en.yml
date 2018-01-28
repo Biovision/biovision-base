@@ -1,0 +1,76 @@
+en:
+  activerecord:
+    models:
+      editable_page: "Editable page"
+      stored_value: "Stored value"
+    attributes:
+      editable_page:
+        language: "Language"
+        name: "Name"
+        slug: "Slug"
+        image: "Image"
+        title: "Title"
+        keywords: "Keywords"
+        description: "Description"
+        body: "Body"
+      stored_value:
+        description: "Description"
+        name: "Name"
+        slug: "Slug"
+        value: "Value"
+  admin:
+    editable_pages:
+      nav_item:
+        description: "Managing editable pages"
+        text: "Editable pages"
+      index:
+        heading: "Editable pages"
+        title: "Editable pages"
+      show:
+        title: "Editable page \"%{name}\""
+    stored_values:
+      nav_item:
+        description: "Managing stored values"
+        text: "Stored values (Registry)"
+      index:
+        heading: "Stored values"
+        title: "Stored values"
+      show:
+        title: "Stored value \"%{slug}\""
+  editable_pages:
+    new:
+      title: "New editable page"
+      heading: "New editable page"
+    edit:
+      title: "Editing editable page"
+      heading: "Editing editable page"
+    update:
+      success: "Editable page has been updated"
+    destroy:
+      success: "Editable page has been deleted"
+    form:
+      guidelines:
+        image: "Image in JPG or PNG format of size about 640×640 for sharing preview."
+        slug: "Used for insertion inside site. Maximum 100 characters."
+        name: "Internal name for convenience. Maximum 100 characters."
+        title: "Shown as window header. Maximum 250 characters."
+        keywords: "Value for meta keywords (for search robots). Maximum 250 characters."
+        description: "Meta description for search robots, search results and sharing. Maximum 250 characters."
+        body: "HTML for insertion inside the site. Maximum 64kiB of text."
+  stored_values:
+    new:
+      heading: "New stored value"
+      title: "New stored value"
+    edit:
+      title: "Editing stored value"
+      heading: "Editing stored value"
+    update:
+      success: "Stored value has been updated"
+    destroy:
+      success: "Stored value has been deleted"
+    form:
+      guidelines:
+        slug: "Used as identifier in code. Maximum 50 characters."
+        value: "Shown when needed. Maximum 255 characters."
+        name: "Internal name for convenience. Maximum 100 characters."
+        description: "Description for convenience. Maximum 250 characters."
