@@ -23,7 +23,7 @@ class CreateEditablePages < ActiveRecord::Migration[5.1]
       }
 
       pages.each do |slug, names|
-        Language.each do |language|
+        Language.all.each do |language|
           EditablePage.create(slug: slug, name: names[language.code.to_sym], language: language)
         end
       end
