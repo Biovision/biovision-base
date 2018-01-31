@@ -1,5 +1,5 @@
 <div>
-  <%= link_to t('.text'), my_profile_path %>
+  <%= link_to t('.text'), user_profile_path(current_user.screen_name) %>
 </div>
 <div class="description">
   <%= t('.description') %>

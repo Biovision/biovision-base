@@ -299,6 +299,7 @@ ru:
     index:
       index:
         title: "Личный кабинет"
+        heading: "Личный кабинет"
     recoveries:
       create:
         impossible: "Сброс пароля для этого пользователя недоступен"
@@ -327,7 +328,7 @@ ru:
         send_code: "Отправить код подтверждения"
     profiles:
       nav_item:
-        text: "Мой профиль"
+        text: "Личный кабинет"
         description: "Просмотр и редактирование вашего профиля"
       new:
         title: "Регистрация"

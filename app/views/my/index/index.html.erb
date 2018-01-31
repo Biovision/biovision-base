@@ -1,19 +1,14 @@
 <% content_for :meta_title, t('.title') %>
+<% content_for :breadcrumbs do %>
+  <span><%= t('.heading') %></span>
+<% end %>
 
-<article class="my-index">
-  <h1><%= t('.title') %></h1>
+<article id="my-index">
+  <div class="sidebar dashboard">
+    <%= render 'my/index/index/sidebar' %>
+  </div>
 
-  <div class="dashboard">
-    <nav>
-      <ul>
-        <li><%= render 'my/profiles/nav_item' %></li>
-        <li><%= render 'my/tokens/nav_item' %></li>
-        <li><%= render 'my/login_attempts/nav_item' %></li>
-        <% if UserPrivilege.user_has_any_privilege?(current_user) %>
-            <li><%= link_to t('admin.index.index.heading'), admin_path %></li>
-        <% end %>
-        <li><%= link_to t(:logout), logout_path, method: :delete %></li>
-      </ul>
-    </nav>
+  <div class="content">
+    <%= render 'my/index/index/dashboard' %>
   </div>
 </article>

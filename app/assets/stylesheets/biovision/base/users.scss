@@ -126,3 +126,18 @@ article.user {
     margin-bottom: 2.4rem;
   }
 }
+
+#my-index {
+  display: flex;
+  flex-wrap: wrap;
+
+  .sidebar {
+    flex: none;
+    width: 30rem;
+  }
+
+  .content {
+    flex: 1;
+    padding: 0 1.6rem;
+  }
+}
