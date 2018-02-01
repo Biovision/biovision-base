@@ -43,6 +43,12 @@ module BiovisionUsersHelper
   end
 
   # @param [User] entity
+  def user_image_tiny(entity)
+    versions = "#{entity.image.tiny_2x.url} 2x"
+    image_tag(entity.image.tiny.url, alt: entity.profile_name, srcset: versions)
+  end
+
+  # @param [User] entity
   def user_image_preview(entity)
     versions = "#{entity.image.preview_2x.url} 2x"
     image_tag(entity.image.preview.url, alt: entity.profile_name, srcset: versions)
@@ -50,7 +56,7 @@ module BiovisionUsersHelper
 
   # @param [User] entity
   def user_image_profile(entity)
-    versions = "#{entity.image.profile_2x.url} 2x"
+    versions = "#{entity.image.big.url} 2x"
     image_tag(entity.image.profile.url, alt: entity.profile_name, srcset: versions)
   end
 

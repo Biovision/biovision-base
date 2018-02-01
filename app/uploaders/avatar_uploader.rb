@@ -32,11 +32,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
     resize_to_fit(640, 640)
   end
 
-  version :profile_2x, from_version: :big do
-    resize_to_fit(640, 640)
-  end
-
-  version :profile, from_version: :profile_2x do
+  version :profile, from_version: :big do
     resize_to_fit(320, 320)
   end
 
