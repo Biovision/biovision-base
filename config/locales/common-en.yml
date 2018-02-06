@@ -127,6 +127,8 @@ en:
         index: "Main site"
     index:
       title: "Home page"
+      description: "New site on Biovision CMS"
+      heading: "Welcome"
   application:
     not_found:
       title: "Page not found"

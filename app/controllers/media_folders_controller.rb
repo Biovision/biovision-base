@@ -54,7 +54,7 @@ class MediaFoldersController < AdminController
   def set_entity
     @entity = MediaFolder.find_by(id: params[:id])
     if @entity.nil?
-      handle_http_404('Cannot find post')
+      handle_http_404('Cannot find media_folder')
     end
   end
 

@@ -127,6 +127,8 @@ ru:
         index: "Основной сайт"
     index:
       title: "Главная страница"
+      description: "Новый сайт на Biovision CMS"
+      heading: "Добро пожаловать"
   application:
     not_found:
       title: "Страница не найдена"
