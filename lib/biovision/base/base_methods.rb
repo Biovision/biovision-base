@@ -6,6 +6,7 @@ module Biovision
       included do
         helper_method :current_page, :param_from_request
         helper_method :current_user
+        helper_method :agent
       end
 
       # Get current page number from request
@@ -30,6 +31,11 @@ module Biovision
       # @return [User|nil]
       def current_user
         @current_user ||= Token.user_by_token cookies['token'], true
+      end
+
+      # @return [Agent]
+      def agent
+        @agent ||= Agent.named(request.user_agent || 'n/a')
       end
 
       protected
@@ -80,11 +86,6 @@ module Biovision
         result = { user: current_user }
         result.merge!(tracking_for_entity) if track
         result
-      end
-
-      # @return [Agent]
-      def agent
-        @agent ||= Agent.named(request.user_agent || 'n/a')
       end
 
       # @return [Hash]
