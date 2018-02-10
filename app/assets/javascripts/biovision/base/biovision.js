@@ -1,6 +1,7 @@
 'use strict';
 
 const Biovision = {
+    locale: document.querySelector('html').getAttribute('lang'),
     storage: {
         available: function (type) {
             try {
@@ -129,6 +130,27 @@ const Biovision = {
         string = string.replace(/--+/g, '-');
 
         return string;
+    },
+    ajax_delete_button: function(element) {
+        const messages = {
+            ru: 'Вы уверены?',
+            en: 'Are you sure?'
+        };
+        const message = messages.hasOwnProperty(Biovision.locale) ? messages[Biovision.locale] : 'Are you sure?';
+        const url = element.getAttribute('data-url');
+        const request = Biovision.new_ajax_request('delete', url, function() {
+            element.closest('li[data-id]').remove();
+        });
+
+        element.addEventListener('click', function() {
+            element.disabled = true;
+
+            if (confirm(message)) {
+                request.send();
+            }
+
+            element.disabled = false;
+        });
     }
 };
 
@@ -325,6 +347,8 @@ document.addEventListener('DOMContentLoaded', function () {
             request.send();
         });
     });
+
+    document.querySelectorAll('button.destroy[data-url]').forEach(Biovision.ajax_delete_button);
 
     document.querySelectorAll('[data-transliterate]').forEach(function (element) {
         element.addEventListener('blur', function () {
