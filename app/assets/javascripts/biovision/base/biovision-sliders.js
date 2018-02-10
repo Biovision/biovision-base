@@ -1,7 +1,7 @@
 'use strict';
 
-document.addEventListener('DOMContentLoaded', function () {
-    const sliding = {
+Biovision.sliders = {
+    behavior: {
         opacity: {
             left: function (list, delay) {
                 const li = list.querySelector('li:last-of-type');
@@ -24,27 +24,30 @@ document.addEventListener('DOMContentLoaded', function () {
                 setTimeout(move, delay);
             }
         }
-    };
-
-    document.querySelectorAll('.biovision-slider').forEach(function (slider) {
+    },
+    initialize: function (slider) {
         const delay = slider.getAttribute('data-delay') || 125;
         const list = slider.querySelector('ul');
         let type = slider.getAttribute('data-type') || 'opacity';
 
-        if (!sliding.hasOwnProperty(type)) {
+        if (!Biovision.sliders.behavior.hasOwnProperty(type)) {
             console.log('Invalid sliding type: ' + type);
             type = 'opacity';
         }
 
         const slide_right = function () {
-            sliding[type].right(list, delay << 1);
+            Biovision.sliders.behavior[type].right(list, delay << 1);
         };
 
         const slide_left = function () {
-            sliding[type].left(list, delay);
+            Biovision.sliders.behavior[type].left(list, delay);
         };
 
         slider.querySelector('button.prev').addEventListener('click', slide_left);
         slider.querySelector('button.next').addEventListener('click', slide_right);
-    });
+    }
+};
+
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.biovision-slider').forEach(Biovision.sliders.initialize);
 });
