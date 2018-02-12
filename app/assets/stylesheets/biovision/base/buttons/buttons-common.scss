@@ -1,0 +1,85 @@
+$button-action-bg-a: #2e3c8e !default;
+$button-action-bg-b: #3d94f6 !default;
+$button-action-border-a: #515de3 !default;
+$button-action-border-b: $button-action-border-a !default;
+$button-action-text-a: #fff !default;
+$button-action-text-b: $button-action-text-a !default;
+
+$button-nav-bg-a: $button-action-text-a !default;
+$button-nav-bg-b: #1e62d0 !default;
+$button-nav-border-a: $button-action-border-a !default;
+$button-nav-border-b: $button-nav-border-a !default;
+$button-nav-text-a: $button-action-bg-b !default;
+$button-nav-text-b: $button-nav-bg-a !default;
+
+$button-create-bg-a: #68a54b !default;
+$button-create-bg-b: #5ba337 !default;
+$button-create-border-a: #3b6e22 !default;
+$button-create-border-b: $button-create-border-a !default;
+$button-create-text-a: $button-action-text-a !default;
+$button-create-text-b: $button-create-text-a !default;
+
+$button-destroy-bg-a: #a54b68 !default;
+$button-destroy-bg-b: #a3375b !default;
+$button-destroy-border-a: #6e223b !default;
+$button-destroy-border-b: $button-destroy-border-a !default;
+$button-destroy-text-a: $button-action-text-a !default;
+$button-destroy-text-b: $button-destroy-text-a !default;
+
+[class|=button],
+[class|=button]:link,
+[class|=button]:visited {
+  box-sizing: border-box;
+  cursor: pointer;
+  display: inline-block;
+  font: #{$font-size-normal}/1.5 $font-family-main;
+  padding: 0 1.2rem;
+  text-decoration: none;
+  transition: .125s;
+}
+
+@mixin button($bg-a, $text-a, $bg-b, $text-b) {
+  background: $bg-a;
+  color: $text-a;
+
+  &:active,
+  &:focus,
+  &:hover {
+    background: $bg-b;
+    color: $text-b;
+  }
+}
+
+@mixin border-button($border-a, $border-b) {
+  border-color: $border-a;
+
+  &:active,
+  &:focus,
+  &:hover {
+    border-color: $border-b;
+  }
+}
+
+.button-action,
+.button-action:link,
+.button-action:visited {
+  @include button($button-action-bg-a, $button-action-text-a, $button-action-bg-b, $button-action-text-b);
+}
+
+.button-nav,
+.button-nav:link,
+.button-nav:visited {
+  @include button($button-nav-bg-a, $button-nav-text-a, $button-nav-bg-b, $button-nav-text-b);
+}
+
+.button-create,
+.button-create:link,
+.button-create:visited {
+  @include button($button-create-bg-a, $button-create-text-a, $button-create-bg-b, $button-create-text-b);
+}
+
+.button-destroy,
+.button-destroy:link,
+.button-destroy:visited {
+  @include button($button-destroy-bg-a, $button-destroy-text-a, $button-destroy-bg-b, $button-destroy-text-b);
+}

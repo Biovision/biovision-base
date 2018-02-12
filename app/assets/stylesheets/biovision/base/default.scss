@@ -1,5 +1,5 @@
-$font-family-heading: "Cormorant Garamond", serif !default;
 $font-family-main: "Roboto", sans-serif !default;
+$font-family-heading: $font-family-main !default;
 
 $font-size-large: 2rem !default;
 $font-size-increased: 1.6rem !default;
@@ -24,7 +24,7 @@ $border-color-secondary: rgb(230, 230, 230) !default;
 $border-primary: .1rem solid $border-color-primary !default;
 $border-secondary: .1rem solid $border-color-secondary !default;
 
-$background-body: #f4f4f4 linear-gradient(to top, #f4f4f4 0%, #dfdedc 100%) no-repeat center / cover !default;
+$background-body: #f4f4f4 linear-gradient(to top, #f4f4f4, #dfdedc) no-repeat center / cover !default;
 $background-header: #fff !default;
 $background-main: #fff !default;
 $background-footer: #fff !default;

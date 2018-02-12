@@ -1,0 +1,32 @@
+@import "buttons-common";
+
+[class|=button],
+[class|=button]:link,
+[class|=button]:visited {
+  border-radius: .4rem;
+  border: .1rem solid;
+}
+
+.button-action,
+.button-action:link,
+.button-action:visited {
+  @include border-button($button-action-border-a, $button-action-border-b);
+}
+
+.button-nav,
+.button-nav:link,
+.button-nav:visited {
+  @include border-button($button-nav-border-a, $button-nav-border-b);
+}
+
+.button-create,
+.button-create:link,
+.button-create:visited {
+  @include border-button($button-create-border-a, $button-create-border-b);
+}
+
+.button-destroy,
+.button-destroy:link,
+.button-destroy:visited {
+  @include border-button($button-destroy-border-a, $button-destroy-border-b);
+}

@@ -82,11 +82,6 @@ body {
         margin: 0 .25rem;
         text-align: center;
       }
-
-      a:link,
-      a:visited {
-        @include button-nav;
-      }
     }
   }
 

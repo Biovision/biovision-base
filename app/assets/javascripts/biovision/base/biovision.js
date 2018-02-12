@@ -91,7 +91,7 @@ const Biovision = {
             }
         });
         request.addEventListener('error', function () {
-            console.log(this);
+            console.log('AJAX error:', this);
         });
 
         request.open(method.toUpperCase(), url);
@@ -101,7 +101,7 @@ const Biovision = {
         return request;
     },
     handle_ajax_failure: function (response) {
-        console.log(this);
+        console.log('AJAX failed', this);
         if (response.hasOwnProperty('responseJSON')) {
             console.log(response['responseJSON']);
         } else {
