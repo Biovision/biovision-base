@@ -15,12 +15,12 @@ $button-nav-border-b: $button-nav-border-a !default;
 $button-nav-text-a: $button-action-bg-b !default;
 $button-nav-text-b: $button-nav-bg-a !default;
 
-$button-create-bg-a: #68a54b !default;
-$button-create-bg-b: #5ba337 !default;
-$button-create-border-a: #3b6e22 !default;
-$button-create-border-b: $button-create-border-a !default;
-$button-create-text-a: $button-action-text-a !default;
-$button-create-text-b: $button-create-text-a !default;
+$button-save-bg-a: #68a54b !default;
+$button-save-bg-b: #5ba337 !default;
+$button-save-border-a: #3b6e22 !default;
+$button-save-border-b: $button-save-border-a !default;
+$button-save-text-a: $button-action-text-a !default;
+$button-save-text-b: $button-save-text-a !default;
 
 $button-destroy-bg-a: #a54b68 !default;
 $button-destroy-bg-b: #a3375b !default;
@@ -32,6 +32,7 @@ $button-destroy-text-b: $button-destroy-text-a !default;
 [class|=button],
 [class|=button]:link,
 [class|=button]:visited {
+  border: .1rem solid transparent;
   box-sizing: border-box;
   cursor: pointer;
   display: inline-block;
@@ -39,6 +40,11 @@ $button-destroy-text-b: $button-destroy-text-a !default;
   padding: 0 1.2rem;
   text-decoration: none;
   transition: .125s;
+
+  &:disabled {
+    cursor: default;
+    filter: grayscale(75%);
+  }
 }
 
 @mixin button($bg-a, $text-a, $bg-b, $text-b) {
@@ -73,12 +79,13 @@ $button-destroy-text-b: $button-destroy-text-a !default;
 .button-nav:link,
 .button-nav:visited {
   @include button($button-nav-bg-a, $button-nav-text-a, $button-nav-bg-b, $button-nav-text-b);
+  @include border-button($button-nav-border-a, $button-nav-border-b);
 }
 
-.button-create,
-.button-create:link,
-.button-create:visited {
-  @include button($button-create-bg-a, $button-create-text-a, $button-create-bg-b, $button-create-text-b);
+.button-save,
+.button-save:link,
+.button-save:visited {
+  @include button($button-save-bg-a, $button-save-text-a, $button-save-bg-b, $button-save-text-b);
 }
 
 .button-destroy,

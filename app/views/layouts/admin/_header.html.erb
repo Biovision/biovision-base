@@ -4,7 +4,7 @@
     <ul>
       <% unless current_user.nil? %>
         <li><%= current_user.screen_name %></li>
-        <li><%= link_to(t(:logout), logout_path, method: :delete) %></li>
+        <li><%= link_to(t(:logout), logout_path, method: :delete, class: 'button-action') %></li>
       <% end %>
     </ul>
   </nav>

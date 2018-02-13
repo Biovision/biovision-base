@@ -13,16 +13,10 @@
   @include border-button($button-action-border-a, $button-action-border-b);
 }
 
-.button-nav,
-.button-nav:link,
-.button-nav:visited {
-  @include border-button($button-nav-border-a, $button-nav-border-b);
-}
-
-.button-create,
-.button-create:link,
-.button-create:visited {
-  @include border-button($button-create-border-a, $button-create-border-b);
+.button-save,
+.button-save:link,
+.button-save:visited {
+  @include border-button($button-save-border-a, $button-save-border-b);
 }
 
 .button-destroy,
