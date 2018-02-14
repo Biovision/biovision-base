@@ -1,3 +1,52 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font: 10px $font-family-main;
+  margin: 0;
+  padding: 0;
+  -webkit-text-size-adjust: none;
+  -moz-text-size-adjust: none;
+  -ms-text-size-adjust: none;
+}
+
+h1, h2, h3, h4, h6, h6 {
+  color: $text-color-heading;
+  font-family: $font-family-heading;
+  font-weight: 500;
+  margin: 0;
+}
+
+h1 {
+  font-size: 3rem;
+  line-height: 4.2rem;
+}
+
+a:link {
+  color: $link-color;
+  text-decoration: none;
+  transition: color .125s;
+}
+
+a:visited {
+  color: $link-color-visited;
+}
+
+a:active,
+a:hover {
+  color: $link-color-hover;
+  text-decoration: underline;
+}
+
+figure {
+  margin: 0;
+}
+
+img {
+  max-width: 100%;
+}
+
 article {
   position: relative;
 }
@@ -181,6 +230,18 @@ ul.actions {
   }
 }
 
+.breadcrumbs {
+  a {
+    background: image_url('biovision/base/icons/breadcrumb.svg') no-repeat bottom .1rem right / .6rem 1.2rem;
+    padding-right: 1rem;
+    transition: background .25s;
+
+    &:hover {
+      background-image: image_url('biovision/base/icons/breadcrumb-hover.svg');
+    }
+  }
+}
+
 form {
   margin: 0;
   padding: 0;
@@ -201,14 +262,39 @@ form {
     padding: 0;
   }
 
-  dd,
   dt {
-    margin: 0;
-    padding: 0;
+    font: 500 $font-size-increased $font-family-main;
+
+    &:not(:first-of-type) {
+      border-top: $border-secondary;
+      margin: .8rem 0 0 0;
+      padding: .4rem 0 0 0;
+    }
   }
 
-  dt:not(:first-of-type) {
-    margin-top: .8rem;
+  dd {
+    padding: .2rem 0;
+
+    ul {
+      margin: 0 auto;
+      padding: 0;
+
+      li {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        position: relative;
+      }
+    }
+  }
+
+  input {
+    font-size: $font-size-normal;
+  }
+
+  input:not([type=checkbox]):not([type=radio]):not([type=date]):not([size]),
+  textarea {
+    width: 100%;
   }
 
   ul.flags {

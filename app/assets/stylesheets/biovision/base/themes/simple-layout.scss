@@ -1,0 +1,99 @@
+@import "biovision/base/default";
+
+body {
+  background: $background-body;
+  color: $text-color-primary;
+  font-size: $font-size-normal;
+  margin: 0;
+  min-height: 100vh;
+  min-width: $content-width-min;
+  padding: 0;
+
+  > footer,
+  > header {
+    padding: .4rem 0;
+
+    > div {
+      display: flex;
+      flex-wrap: wrap;
+      margin: 0 auto;
+      max-width: $content-width;
+      padding: .4rem;
+    }
+
+    .authentication {
+      > div {
+        display: flex;
+        align-items: center;
+      }
+
+      .links {
+        a:link,
+        a:visited {
+          margin: 0 .4rem;
+        }
+      }
+
+      .plate {
+        .logout {
+          margin-left: 1rem;
+        }
+      }
+    }
+  }
+
+  > header {
+    background: $background-header;
+    border-bottom: $border-primary;
+
+    > div {
+      align-items: center;
+    }
+
+    .logo {
+      margin-right: auto;
+    }
+  }
+
+  > footer {
+    background: $background-footer;
+    border-top: $border-primary;
+    margin: auto 0 0 0;
+
+    > div {
+      color: $text-color-secondary;
+      font-size: $font-size-decreased;
+    }
+
+    nav {
+      margin: 0 auto;
+    }
+
+    ul {
+      margin: 0;
+      padding: 0;
+    }
+
+    li {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+  }
+}
+
+@supports (display: flex) {
+  body {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+#main {
+  background: $background-main;
+  flex: 1;
+  margin: 0 auto;
+  max-width: $content-width;
+  padding: .8rem;
+  width: 100%;
+}
