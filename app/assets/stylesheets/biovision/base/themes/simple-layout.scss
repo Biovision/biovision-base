@@ -101,3 +101,10 @@ body {
   padding: .8rem;
   width: 100%;
 }
+
+form {
+  input:not([type=checkbox]):not([type=radio]):not([type=date]):not([size]),
+  textarea {
+    width: 100%;
+  }
+}

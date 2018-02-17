@@ -291,11 +291,6 @@ form {
     font-size: $font-size-normal;
   }
 
-  input:not([type=checkbox]):not([type=radio]):not([type=date]):not([size]),
-  textarea {
-    width: 100%;
-  }
-
   ul.flags {
     margin: .8rem 0;
     padding: 0;
