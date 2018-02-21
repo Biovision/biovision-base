@@ -127,7 +127,7 @@ article {
       min-width: 1ch;
     }
 
-    input:not([type=checkbox]):not([type=radio]):not([size]):not([max]),
+    input:not([type=checkbox]):not([type=radio]):not([size]):not([type=date]):not([max]),
     textarea {
       width: 100%;
     }

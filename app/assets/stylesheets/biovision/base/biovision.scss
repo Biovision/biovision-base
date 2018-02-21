@@ -118,7 +118,7 @@ ul.actions {
   padding: 0;
 
   > li {
-    align-items: center;
+    align-items: flex-start;
     background: $row-background-odd;
     display: flex;
     flex-wrap: wrap;
@@ -128,14 +128,6 @@ ul.actions {
 
     &:nth-of-type(even) {
       background: $row-background-even;
-    }
-
-    &[data-number]::before {
-      content: attr(data-number) ":";
-      display: inline-block;
-      margin: 0 .8rem 0 0;
-      text-align: right;
-      width: 2.4rem;
     }
 
     .image {
@@ -187,6 +179,24 @@ ul.actions {
         margin-left: 1.6rem;
       }
     }
+  }
+}
+
+ul.list-of-entities {
+  ul.actions {
+    > li.priority-changer {
+      display: none;
+    }
+  }
+}
+
+ol.list-of-entities {
+  > li[data-number]::before {
+    content: attr(data-number) ":";
+    display: inline-block;
+    margin: 0 .8rem 0 0;
+    text-align: right;
+    width: 2.4rem;
   }
 }
 
