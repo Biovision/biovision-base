@@ -1,3 +1,7 @@
+:root {
+  --content-width: #{$content-width};
+}
+
 html {
   background-attachment: fixed;
   background-blend-mode: screen;
@@ -27,7 +31,7 @@ body {
   flex-direction: column;
   font-size: $font-size-normal;
   margin: 0 auto;
-  max-width: $content-width;
+  max-width: var(--content-width);
   min-height: 100vh;
 
   > header {
@@ -69,7 +73,6 @@ body {
     font-size: $font-size-decreased;
     justify-content: space-between;
     margin: auto 0 0 0;
-    max-width: $content-width;
     padding: .8rem;
   }
 }
