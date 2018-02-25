@@ -131,18 +131,18 @@ const Biovision = {
 
         return string;
     },
-    ajax_delete_button: function(element) {
+    ajax_delete_button: function (element) {
         const messages = {
             ru: 'Вы уверены?',
             en: 'Are you sure?'
         };
         const message = messages.hasOwnProperty(Biovision.locale) ? messages[Biovision.locale] : 'Are you sure?';
         const url = element.getAttribute('data-url');
-        const request = Biovision.new_ajax_request('delete', url, function() {
+        const request = Biovision.new_ajax_request('delete', url, function () {
             element.closest('li[data-id]').remove();
         });
 
-        element.addEventListener('click', function() {
+        element.addEventListener('click', function () {
             element.disabled = true;
 
             if (confirm(message)) {
@@ -151,6 +151,17 @@ const Biovision = {
 
             element.disabled = false;
         });
+    },
+    entity_link_changer: function () {
+        const url = this.getAttribute('data-url');
+
+        if (url && !this.disabled) {
+            const method = this.checked ? 'put' : 'delete';
+
+            this.disabled = true;
+
+            Biovision.new_ajax_request(method, url, () => this.disabled = false).send();
+        }
     }
 };
 
@@ -332,6 +343,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
             request.send();
         });
+    });
+
+    document.querySelectorAll('.entity-links input[type=checkbox]').forEach(function (element) {
+        element.addEventListener('click', Biovision.entity_link_changer);
     });
 
     // Кнопка удаления элемента через AJAX

@@ -180,3 +180,39 @@ nav.admin-breadcrumbs {
     max-width: 8rem;
   }
 }
+
+.entity-links {
+  margin: 0;
+  padding: 0;
+
+  li {
+    list-style: none;
+    margin: 0;
+    padding: .4rem;
+    position: relative;
+  }
+
+  label {
+    cursor: pointer;
+    display: inline-block;
+    padding: .2rem 1.6rem;
+    transition: .125s;
+  }
+
+  input[type=checkbox] {
+    &:not(:checked) + label {
+      background: #fafafa;
+      color: $text-color-secondary;
+    }
+
+    &:checked + label {
+      background: rgb(200, 255, 200);
+      box-shadow: 0 0 .3rem .1rem rgba(0, 127, 0, .25);
+    }
+
+    &:disabled + label {
+      opacity: .5;
+      filter: grayscale(75%);
+    }
+  }
+}
