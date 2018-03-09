@@ -68,6 +68,29 @@ Biovision::Base
 }
 ```
 
+Проверка данных до отправки всей формы
+--------------------------------------
+
+Например, при регистрации нового пользователя нужно проверить, что почта или
+логин не заняты. Для этого нужно сделать несколько шагов.
+
+1. Маршрут и ответная часть в контроллере, обрабатывающая post-запрос.
+   В ответе должен быть JSON с параметром `meta.valid` (boolean) и `meta.errors`
+   (array), где ключ для `meta.errors` — это поле, а значение — текст ошибки.
+
+2. Для формы нужно задать атрибут `data-check-url` с указанием на URL проверки
+   правильности ввода.
+   
+3. Для элементов формы нужно задать атибут `data-check` со значением ключа,
+   который проверяется.
+   
+4. Рядом с элементом нужно добавить `div` с атрибутом `data-field` и таким же
+   значением, а также классом `check-result-error hidden`.
+   
+Пример — [app/views/my/profiles/new/_form.html.erb](https://github.com/Biovision/biovision-base/blob/master/app/views/my/profiles/new/_form.html.erb),
+[app/controllers/users_controller.rb#check](https://github.com/Biovision/biovision-base/blob/master/app/controllers/users_controller.rb#L8),
+[app/views/users/check.jbuilder](https://github.com/Biovision/biovision-base/blob/master/app/views/users/check.jbuilder)
+
 ## Installation
 Add this line to your application's Gemfile:
 
