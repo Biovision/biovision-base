@@ -1,0 +1,384 @@
+en:
+  user_count:
+    zero: "no users"
+    one: "%{count} user"
+    few: "%{count} users"
+    many: "%{count} users"
+    other: "%{count} users"
+  code_activation_count:
+    zero: "no activations"
+    one: "%{count} activation"
+    few: "%{count} activations"
+    many: "%{count} activations"
+    other: "%{count} activations"
+  age_year_count:
+    zero: "%{count} years"
+    one: "%{count} year"
+    few: "%{count} years"
+    many: "%{count} years"
+    other: "%{count} years"
+  invalid_code: "Invalid code"
+  could_not_log_in: "Could not log in"
+  logout: "Log out"
+  email_already_confirmed: "Email is already confirmed"
+  anonymous: "Anonymous"
+  activerecord:
+    models:
+      user: "User"
+      user_profile: "User profile"
+      foreign_site: "Foreign site"
+      foreign_user: "Foreign user"
+      code_type: "Code type"
+      code: "Code"
+      token: "Access token"
+      privilege: "Privilege"
+      privilege_group: "Privilege group"
+      privilege_group_privilege: "Privilege in group"
+      user_privilege: "Privilege for user"
+      login_attempt: "Login attempt"
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              unreasonable: "does not look like email"
+            slug:
+              invalid: "must contain 1 to 30 latin letters, numbers of underscores"
+    attributes:
+      user:
+        agent: "User agent at the time if registration"
+        allow_login: "Allow logging in"
+        allow_mail: "Allow email notifications"
+        bot: "It is bot"
+        email: "Email"
+        email_confirmed: "Email is confirmed"
+        foreign_slug: "Foreign slug"
+        image: "Image"
+        ip: "IP-address at the time of registration"
+        language: "Language"
+        last_seen: "Last seen"
+        notice: "Notice"
+        password: "Password"
+        password_confirmation: "Password confirmation"
+        phone: "Phone"
+        phone_confirmed: "Phone is confirmed"
+        screen_name: "Screen name"
+        search_string: "Search string"
+        slug: "Slug"
+      user_profile:
+        birthday: "Birthday"
+        gender: "Gender"
+        name: "Name"
+        patronymic: "Patronymic"
+        surname: "Surname"
+        genders:
+          female: "Female"
+          male: "Male"
+      foreign_site:
+        slug: "Slug"
+        name: "Name"
+      foreign_user:
+        foreign_site: "Foreign site"
+        user: "Inner user"
+        agent: "User agent at the time of registration"
+        ip: "IP-address at the time of registration"
+        slug: "Slug"
+        name: "Name"
+        email: "Email"
+        data: "Data"
+      token:
+        user: "User"
+        user_id: "User"
+        last_used: "Last used"
+        active: "Active"
+        token: "Token"
+      code:
+        code_type: "Code type"
+        code_type_id: "Code type"
+        user: "User"
+        user_id: "User"
+        category: "Category"
+        body: "Code"
+        payload: "Payload"
+        quantity: "Number of activations"
+      privilege:
+        parent_id: "Parent category"
+        priority: "Sorting order"
+        regional: "Regional"
+        name: "Name"
+        slug: "Slug"
+        description: "Description"
+        parents_cache: "Parents cache"
+        children_cache: "Children cache"
+      user_privilege:
+        privilege: "Privilege"
+        user: "User"
+      privilege_group:
+        name: "Name"
+        slug: "Slug"
+        description: "Description"
+      privilege_group_privilege:
+        privilege: "Privilege"
+        privilege_group: "Privilege group"
+      login_attempt:
+        user: "User"
+        password: "Password"
+  admin:
+    users:
+      nav_item:
+        text: "Users"
+        description: "Managing site users"
+      index:
+        title: "Users, page %{page}"
+        heading: "Users"
+      show:
+        title: "User %{name}"
+        privileges: "Privileges"
+        authenticate: "Log in as this user"
+      tokens:
+        title: "Tokens of user %{user], page %{page}"
+        heading: "Access tokens"
+      codes:
+        title: "Codes of user %{user}, page %{page}"
+        heading: "Codes"
+      privileges:
+        title: "Privileges of user %{user}"
+        heading: "Privileges of user"
+      filter:
+        search: "Search"
+    tokens:
+      nav_item:
+        text: "Access tokens (user sessions)"
+        description: "Managing session tokens"
+      index:
+        title: "Access tokens, page %{page}"
+        heading: "Access tokens (user sessions)"
+      show:
+        title: "Token №%{id}"
+    codes:
+      nav_item:
+        text: "Codes"
+        description: "Managing codes for resetting password, email confirmation, invitations, etc."
+      index:
+        title: "Codes, page %{page}"
+        heading: "Codes"
+      show:
+        title: "Code \"%{body}\""
+    privileges:
+      nav_item:
+        text: "Privileges of users"
+        description: "Managing privileges of users"
+      index:
+        title: "Privileges"
+        heading: "Privileges of users"
+      show:
+        title: "Privilege \"%{name}\""
+        children: "Child privileges"
+        add_child: "Add child privilege"
+      users:
+        title: "Users with privilege \"%{privilege}\", page %{page}"
+        heading: "Users with privilege"
+      entity:
+        groups:
+          heading: "Privilege groups"
+    privilege_groups:
+      nav_item:
+        text: "Privilege groups"
+        description: "Managing privilege groups"
+      index:
+        title: "Privilege groups"
+        heading: "Privilege groups"
+      show:
+        title: "Privilege group \"%{name}\""
+        privileges: "Privileges"
+    login_attempts:
+      index:
+        title: "Login attempts, page %{page}"
+        heading: "Login attempts for users"
+      nav_item:
+        text: "Login attempts"
+        description: "Failed user login attempts"
+  authentication:
+    nav_item:
+      log_in: "Log in"
+      join: "Join"
+      logout: "Log out"
+    info:
+      logout: "Log out"
+    new:
+      title: "Log in"
+      heading: "Log in"
+      breadcrumbs: "Log in"
+    form:
+      log_in: "Log in"
+  users:
+    create:
+      success: "User has been created successfully"
+    update:
+      success: "User has been updated successfully"
+    destroy:
+      success: "User has been deleted successfully"
+    edit:
+      title: "Editing user"
+      heading: "Editing user"
+    new:
+      title: "Adding user"
+      heading: "Adding user"
+    user:
+      account_data: "Account data"
+    index:
+      title: "Site users, page %{page}"
+      heading: "Site users"
+  profiles:
+    profile:
+      user_info: "User info"
+      registration_date: "Registration date"
+  tokens:
+    update:
+      success: "Token had been updated successfully"
+    destroy:
+      success: "Token has been deleted successfully"
+    new:
+      title: "Adding token"
+    edit:
+      title: "Editing token"
+  codes:
+    update:
+      success: "Code had been updated successfully"
+    destroy:
+      success: "Code has been deleted successfully"
+    edit:
+      title: "Editing code"
+    new:
+      title: "New code"
+    form:
+      guidelines:
+        body: "Maximum 50 characters. Must be unique."
+        payload: "Depends on code type. Maximum 250 characters."
+  code_sender:
+    email:
+      subject: "Email confirmation"
+    password:
+      subject: "Password reset"
+  privileges:
+    new:
+      title: "New privilege"
+    edit:
+      title: "Editing privilege"
+      forbidden: "Editing this privilege is forbidden"
+    update:
+      success: "Privilege has been updated successfully"
+    destroy:
+      success: "Privilege has been deleted successfully"
+    form:
+      guidelines:
+        name: "Up to 250 characters."
+        slug: "Used in code for determining privilege presence. Up to 250 characters."
+        description: "Short privilege description. Up to 350 characters."
+      placeholders:
+        slug: "administrator"
+  privilege_groups:
+    new:
+      title: "New privilege group"
+      heading: "New privilege group"
+    edit:
+      title: "Editing privilege group"
+      heading: "Editing privilege group"
+    update:
+      success: "Group has been updated successfully"
+    destroy:
+      success: "Group has been deleted successfully"
+    form:
+      guidelines:
+        slug: "Used in code for users."
+        description: "Short group description. Up to 350 characters."
+      placeholders:
+        name: "Editors"
+        slug: "editors"
+  my:
+    index:
+      index:
+        title: "Private office"
+        heading: "Private office"
+    recoveries:
+      create:
+        impossible: "Password reset for this user is unacailable"
+        completed: "Password reset code has been sent to your email"
+      update:
+        invalid_code: "Invalid code"
+        success: "Password has been reset successfully. You have logged in."
+      show:
+        title: "Password reset"
+        got_code: "Have password reset code?"
+        update_password: "Change password"
+        no_code: "No password reset code?"
+        send_code: "Send code"
+        receive_code: "Receive code"
+    confirmations:
+      create:
+        set_email: "Please fill in email"
+        success: "Confirmation code has been sent"
+      update:
+        invalid_code: "Invalid code"
+      show:
+        title: "Confirm email"
+        got_code: "Have email confirmation code?"
+        confirm: "Confirm email"
+        no_code: "No confirmation code?"
+        send_code: "Send confirmation code"
+    profiles:
+      nav_item:
+        text: "Private office"
+        description: "View and edit your profile"
+      new:
+        title: "Join"
+        heading: "Join"
+        form:
+          i_am_bot: "DO NOT check this checkbox"
+          consent: "I accept terms of service and agree to processing of my personal data"
+          guidelines:
+            screen_name: "Only latin letters, numbers and underscores. 1 to 30 characters."
+            password: "Choose reliable password that is hard to guess."
+            password_confirmation: "Repeat password to be sure you entered it correctly."
+            email: "Enter email for contact and password reset."
+          join: "Join"
+      create:
+        success: "You have registered and logged in"
+        are_you_bot: "You should not have checked that checkbox."
+      update:
+        success: "Profile has been updated successfully"
+      show:
+        title: "My profile"
+        heading: "My profile"
+      edit:
+        title: "Editing profile"
+        form:
+          common_parameters: "Common parameters"
+          update_image: "Update image"
+          sensitive_parameters: "Sensitive parameters"
+          sensitive_parameters_notice: "Enter current password if you want to change sensitive parameters."
+          current_password: "Current password"
+          leave_blank_if_necessary: "Leave blank, if you do not change this."
+          new_password: "New password"
+          update: "Update"
+          flags: "Flags"
+    tokens:
+      nav_item:
+        text: "Access tokens (sessions)"
+        description: "Managing session tokens"
+      index:
+        title: "Tokens, page %{page}"
+        heading: "Access tokens (sessions)"
+    login_attempts:
+      nav_item:
+        text: "Login attempts"
+        description: "Login attempts for your account"
+      index:
+        title: "Login attempts for my account, page %{page}"
+        heading: "Login attempts for my account"
+  user_mailer:
+    login_attempt:
+      subject: "Someone is trying to log in to your account"
+      greeting: "Hello %{name}"
+      message: "Someone is trying to log in to your account. For security reasons logging in for you account is suspended for 15 minutes."
+      you_can_recover_password: "If you forgot your password, you can reset it by following this link"
