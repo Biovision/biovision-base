@@ -1,117 +1,183 @@
-<%= render partial: 'shared/list_of_errors', locals: { entity: entity } %>
+<%=
+  form_with(
+      url: my_profile_path,
+      method: :patch,
+      multipart: true,
+      id: 'my-profile-form'
+  ) do |f|
+%>
+  <%= render partial: 'shared/list_of_errors', locals: { entity: entity } %>
+  <section>
+    <h2><%= t('.common_parameters') %></h2>
 
-<%= form_tag my_profile_path, method: :patch, multipart: true do %>
-    <section>
-      <h2><%= t('.common_parameters') %></h2>
+    <dl>
+      <dt>
+        <%= t('activerecord.attributes.user.image') %>
+      </dt>
+      <dd>
+        <figure id="user-image">
+          <%=
+            label_tag(
+                :user_image,
+                image_tag(entity.image.profile.url, alt: t(:current_image))
+            )
+          %>
+          <figcaption>
+            <%=
+              file_field_tag(
+                  'user[image]',
+                  accept: 'image/jpeg,image/png',
+                  data: { image: 'user-image' }
+              )
+            %>
+          </figcaption>
+        </figure>
+      </dd>
 
-      <dl>
-        <dt>
-          <%= t('activerecord.attributes.user.image') %>
-        </dt>
-        <dd>
-          <figure id="user-image">
-            <%= label_tag(:user_image, image_tag(entity.image.profile.url, alt: t(:current_image))) %>
-            <figcaption><%= file_field_tag 'user[image]', accept: 'image/jpeg,image/png', data: { image: 'user-image' } %></figcaption>
-          </figure>
-        </dd>
+      <dt>
+        <%= label_tag(:user_profile_name, t('activerecord.attributes.user_profile.name')) %>
+      </dt>
+      <dd>
+        <%=
+          text_field_tag(
+              'user_profile[name]',
+              entity.user_profile.name,
+              size: nil,
+              maxlength: UserProfile::NAME_LIMIT
+          )
+        %>
+      </dd>
 
-        <dt>
-          <%= label_tag :user_profile_name, t('activerecord.attributes.user_profile.name') %>
-        </dt>
-        <dd>
-          <%= text_field_tag 'user_profile[name]', entity.user_profile.name, size: nil, maxlength: UserProfile::NAME_LIMIT %>
-        </dd>
+      <dt>
+        <%= label_tag :user_profile_patronymic, t('activerecord.attributes.user_profile.patronymic') %>
+      </dt>
+      <dd>
+        <%=
+          text_field_tag(
+              'user_profile[patronymic]',
+              entity.user_profile.patronymic,
+              size: nil,
+              maxlength: UserProfile::NAME_LIMIT
+          )
+        %>
+      </dd>
 
-        <dt>
-          <%= label_tag :user_profile_patronymic, t('activerecord.attributes.user_profile.patronymic') %>
-        </dt>
-        <dd>
-          <%= text_field_tag 'user_profile[patronymic]', entity.user_profile.patronymic, size: nil, maxlength: UserProfile::NAME_LIMIT %>
-        </dd>
+      <dt>
+        <%= label_tag :user_profile_surname, t('activerecord.attributes.user_profile.surname') %>
+      </dt>
+      <dd>
+        <%=
+          text_field_tag(
+              'user_profile[surname]',
+              entity.user_profile.surname,
+              size: nil,
+              maxlength: UserProfile::NAME_LIMIT
+          )
+        %>
+      </dd>
 
-        <dt>
-          <%= label_tag :user_profile_surname, t('activerecord.attributes.user_profile.surname') %>
-        </dt>
-        <dd>
-          <%= text_field_tag 'user_profile[surname]', entity.user_profile.surname, size: nil, maxlength: UserProfile::NAME_LIMIT %>
-        </dd>
+      <dt>
+        <%= label_tag :user_profile_gender, t('activerecord.attributes.user_profile.gender') %>
+      </dt>
+      <dd>
+        <%=
+          select_tag(
+              'user_profile[gender]',
+              options_for_select(genders_for_select, selected: entity.user_profile.gender)
+          )
+        %>
+      </dd>
 
-        <dt>
-          <%= label_tag :user_profile_gender, t('activerecord.attributes.user_profile.gender') %>
-        </dt>
-        <dd>
-          <%= select_tag 'user_profile[gender]', options_for_select(genders_for_select, selected: entity.user_profile.gender) %>
-        </dd>
+      <dt>
+        <%= label_tag :user_profile_birthday, t('activerecord.attributes.user_profile.birthday') %>
+      </dt>
+      <dd>
+        <%=
+          date_field_tag(
+              'user_profile[birthday]',
+              entity.user_profile.birthday,
+              size: 10
+          )
+        %>
+      </dd>
 
-        <dt>
-          <%= label_tag :user_profile_birthday, t('activerecord.attributes.user_profile.birthday') %>
-        </dt>
-        <dd>
-          <%= date_field_tag 'user_profile[birthday]', entity.user_profile.birthday, size: 10 %>
-        </dd>
+      <dt>
+        <%= t('.flags') %>
+      </dt>
+      <dd>
+        <ul>
+          <li>
+            <%= hidden_field_tag 'user[allow_mail]', '0', id: 'user_allow_mail_0' %>
+            <%= check_box_tag 'user[allow_mail]', '1', entity.allow_mail %>
+            <%= label_tag :user_allow_mail, t('activerecord.attributes.user.allow_mail') %>
+          </li>
+        </ul>
+      </dd>
+    </dl>
+  </section>
 
-        <dt>
-          <%= t('.flags') %>
-        </dt>
-        <dd>
-          <ul>
-            <li>
-              <%= hidden_field_tag 'user[allow_mail]', '0', id: 'user_allow_mail_0' %>
-              <%= check_box_tag 'user[allow_mail]', '1', entity.allow_mail %>
-              <%= label_tag :user_allow_mail, t('activerecord.attributes.user.allow_mail') %>
-            </li>
-          </ul>
-        </dd>
-      </dl>
-    </section>
+  <section>
+    <h2><%= t('.sensitive_parameters') %></h2>
 
-    <section>
-      <h2><%= t('.sensitive_parameters') %></h2>
+    <div class="guideline"><%= t('.sensitive_parameters_notice') %></div>
 
-      <div class="guideline"><%= t('.sensitive_parameters_notice') %></div>
+    <dl>
+      <dt>
+        <%= label_tag :password, t('.current_password') %>
+      </dt>
+      <dd>
+        <%= password_field_tag 'password', '' %>
+      </dd>
 
-      <dl>
-        <dt>
-          <%= label_tag :password, t('.current_password') %>
-        </dt>
-        <dd>
-          <%= password_field_tag 'password', '' %>
-        </dd>
+      <dt>
+        <%= label_tag :user_email, t('activerecord.attributes.user.email') %>
+      </dt>
+      <dd>
+        <%=
+          email_field_tag(
+              'user[email]',
+              entity.email,
+              size: nil,
+              maxlength: User::EMAIL_LIMIT,
+              required: true
+          )
+        %>
+      </dd>
 
-        <dt>
-          <%= label_tag :user_email, t('activerecord.attributes.user.email') %>
-        </dt>
-        <dd>
-          <%= email_field_tag 'user[email]', entity.email, size: nil, maxlength: User::EMAIL_LIMIT %>
-        </dd>
+      <dt>
+        <%= label_tag :user_phone, t('activerecord.attributes.user.phone') %>
+      </dt>
+      <dd>
+        <%=
+          telephone_field_tag(
+              'user[phone]',
+              entity.phone,
+              size: nil,
+              maxlength: User::PHONE_LIMIT
+          )
+        %>
+      </dd>
+    </dl>
 
-        <dt>
-          <%= label_tag :user_phone, t('activerecord.attributes.user.phone') %>
-        </dt>
-        <dd>
-          <%= telephone_field_tag 'user[phone]', entity.phone, size: nil, maxlength: User::PHONE_LIMIT %>
-        </dd>
-      </dl>
+    <div class="guideline"><%= t('.leave_blank_if_necessary') %></div>
+    <dl>
+      <dt>
+        <%= label_tag :profile_password, t('.new_password') %>
+      </dt>
+      <dd>
+        <%= password_field_tag 'user[password]', '', size: nil, maxlength: 70 %>
+      </dd>
 
-      <div class="guideline"><%= t('.leave_blank_if_necessary') %></div>
-      <dl>
-        <dt>
-          <%= label_tag :profile_password, t('.new_password') %>
-        </dt>
-        <dd>
-          <%= password_field_tag 'user[password]', '', size: nil, maxlength: 70 %>
-        </dd>
+      <dt>
+        <%= label_tag :profile_password_confirmation, t('activerecord.attributes.user.password_confirmation') %>
+      </dt>
+      <dd>
+        <%= password_field_tag 'user[password_confirmation]', '', size: nil, maxlength: 70 %>
+      </dd>
+    </dl>
+  </section>
 
-        <dt>
-          <%= label_tag :profile_password_confirmation, t('activerecord.attributes.user.password_confirmation') %>
-        </dt>
-        <dd>
-          <%= password_field_tag 'user[password_confirmation]', '', size: nil, maxlength: 70 %>
-        </dd>
-      </dl>
-    </section>
-
-    <div>
-      <%= button_tag t('.update'), type: :submit %>
-    </div>
+  <div>
+    <%= button_tag t('.update'), type: :submit %>
+  </div>
 <% end %>

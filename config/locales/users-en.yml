@@ -41,7 +41,7 @@ en:
         user:
           attributes:
             email:
-              unreasonable: "does not look like email"
+              invalid: "does not look like email"
             slug:
               invalid: "must contain 1 to 30 latin letters, numbers of underscores"
     attributes:

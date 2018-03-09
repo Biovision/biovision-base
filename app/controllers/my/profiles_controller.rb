@@ -30,7 +30,12 @@ class My::ProfilesController < ApplicationController
   def update
     if current_user.update(user_parameters)
       current_user.user_profile.update(profile_parameters)
-      redirect_to my_profile_path, notice: t('my.profiles.update.success')
+      next_url       = my_profile_path
+      flash[:notice] = t('my.profiles.update.success')
+      respond_to do |format|
+        format.js { render(js: "document.location.href = '#{next_url}'") }
+        format.html { redirect_to(next_url) }
+      end
     else
       render :edit, status: :bad_request
     end

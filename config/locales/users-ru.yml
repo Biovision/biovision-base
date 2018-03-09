@@ -41,7 +41,7 @@ ru:
         user:
           attributes:
             email:
-              unreasonable: "не выглядит как email"
+              invalid: "не выглядит как email"
             slug:
               invalid: "должен содержать от 1 до 30 латинских букв, цифр или знаков подчёркивания"
     attributes:
