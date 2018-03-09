@@ -121,7 +121,11 @@ Rails.application.routes.draw do
   resources :editable_pages, except: [:index, :show]
   resources :stored_values, except: [:index, :show]
 
-  resources :users, except: [:index, :show]
+  resources :users, except: [:index, :show] do
+    collection do
+      post 'check', defaults: { format: :json }
+    end
+  end
   resources :tokens, :codes, except: [:index, :show]
 
   resources :metrics, only: [:edit, :update]

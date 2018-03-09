@@ -88,7 +88,12 @@ class My::ProfilesController < ApplicationController
     return_path = cookies['return_path'].to_s
     return_path = my_profile_path unless return_path[0] == '/'
     cookies.delete 'return_path', domain: :all
-    
-    redirect_to return_path, notice: t('my.profiles.create.success')
+
+    flash[:notice] = t('my.profiles.create.success')
+
+    respond_to do |format|
+      format.js { render(js: "document.location.href= '#{return_path}'") }
+      format.html { redirect_to return_path }
+    end
   end
 end

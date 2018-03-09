@@ -266,6 +266,15 @@ form {
     }
   }
 
+  .check-result-error {
+    color: #ff0000;
+
+    &::before {
+      content: '\261D';
+      margin-right: .4rem;
+    }
+  }
+
   dl {
     margin: 0;
     padding: 0;

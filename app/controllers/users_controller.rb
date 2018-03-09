@@ -1,5 +1,13 @@
-class UsersController < AdminController
+class UsersController < ApplicationController
+  before_action :restrict_access, except: [:check]
   before_action :set_entity, only: [:edit, :update, :destroy]
+
+  layout 'admin', except: :check
+
+  # post /users/check
+  def check
+    @entity = User.new(creation_parameters)
+  end
 
   # get /users/new
   def new
@@ -47,6 +55,9 @@ class UsersController < AdminController
 
   def set_entity
     @entity = User.find_by(id: params[:id])
+    if @entity.nil?
+      handle_http_404('Cannot find user')
+    end
   end
 
   def entity_parameters

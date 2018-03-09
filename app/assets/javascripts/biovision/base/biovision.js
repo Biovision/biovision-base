@@ -162,6 +162,46 @@ const Biovision = {
 
             Biovision.new_ajax_request(method, url, () => this.disabled = false).send();
         }
+    },
+    instant_check: function (form) {
+        const url = form.getAttribute('data-check-url');
+
+        const perform_check = function () {
+            const element = this;
+
+            const request = Biovision.new_ajax_request('POST', url, function () {
+                const response = JSON.parse(this.responseText);
+
+                if (response.hasOwnProperty('meta')) {
+                    if (response.meta.valid) {
+                        form.querySelectorAll('[data-field]').forEach(function (field) {
+                            field.innerHTML = '';
+                            field.classList.add('hidden');
+                        });
+                    } else {
+                        const key = element.getAttribute('data-check');
+                        const container = form.querySelector('[data-field="' + key + '"]');
+
+                        if (container) {
+                            const errors = response.meta.errors;
+
+                            if (errors.hasOwnProperty(key)) {
+                                container.innerHTML = errors[key];
+                                container.classList.remove('hidden');
+                            } else {
+                                container.classList.add('hidden');
+                            }
+                        }
+                    }
+                }
+            });
+
+            request.send(new FormData(form));
+        };
+
+        form.querySelectorAll('[data-check]').forEach(function (element) {
+            element.addEventListener('blur', perform_check);
+        });
     }
 };
 
@@ -387,6 +427,8 @@ document.addEventListener('DOMContentLoaded', function () {
             button.disabled = false;
         });
     });
+
+    document.querySelectorAll('form[data-check-url]').forEach(Biovision.instant_check);
 
     if (typeof jQuery !== 'undefined') {
         jQuery.ajaxSetup({
