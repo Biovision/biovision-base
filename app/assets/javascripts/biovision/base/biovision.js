@@ -170,26 +170,28 @@ const Biovision = {
             const element = this;
 
             const request = Biovision.new_ajax_request('POST', url, function () {
-                const response = JSON.parse(this.responseText);
+                if (this.responseText) {
+                    const response = JSON.parse(this.responseText);
 
-                if (response.hasOwnProperty('meta')) {
-                    if (response.meta.valid) {
-                        form.querySelectorAll('[data-field]').forEach(function (field) {
-                            field.innerHTML = '';
-                            field.classList.add('hidden');
-                        });
-                    } else {
-                        const key = element.getAttribute('data-check');
-                        const container = form.querySelector('[data-field="' + key + '"]');
+                    if (response.hasOwnProperty('meta')) {
+                        if (response.meta.valid) {
+                            form.querySelectorAll('[data-field]').forEach(function (field) {
+                                field.innerHTML = '';
+                                field.classList.add('hidden');
+                            });
+                        } else {
+                            const key = element.getAttribute('data-check');
+                            const container = form.querySelector('[data-field="' + key + '"]');
 
-                        if (container) {
-                            const errors = response.meta.errors;
+                            if (container) {
+                                const errors = response.meta.errors;
 
-                            if (errors.hasOwnProperty(key)) {
-                                container.innerHTML = errors[key];
-                                container.classList.remove('hidden');
-                            } else {
-                                container.classList.add('hidden');
+                                if (errors.hasOwnProperty(key)) {
+                                    container.innerHTML = errors[key];
+                                    container.classList.remove('hidden');
+                                } else {
+                                    container.classList.add('hidden');
+                                }
                             }
                         }
                     }

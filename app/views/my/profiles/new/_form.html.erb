@@ -5,7 +5,7 @@
       url:   my_profile_path,
       class: 'new-my-profile',
       id:    'new-profile-form',
-      data:  { check_url: check_users_path, scope: 'user' }
+      data:  { check_url: check_users_path }
   ) do |f|
 %>
   <%= render partial: 'shared/list_of_errors', locals: { entity: entity } %>
