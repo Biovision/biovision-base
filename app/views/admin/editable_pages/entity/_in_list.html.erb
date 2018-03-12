@@ -6,6 +6,12 @@
   <div class="info">
     <%= entity.slug %>
   </div>
+  <% unless entity.language.nil? %>
+    <div class="secondary info">
+      <%= t('activerecord.attributes.editable_page.language') %>:
+      <%= language_name(entity.language) %>
+    </div>
+  <% end %>
 
   <ul class="actions">
     <li><%= edit_icon(edit_editable_page_path(entity)) %></li>

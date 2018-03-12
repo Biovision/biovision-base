@@ -5,14 +5,15 @@ ru:
       stored_value: "Хранимое значение"
     attributes:
       editable_page:
+        body: "Содержимое"
+        description: "Метаописание"
+        image: "Картинка"
+        keywords: "Ключевые слова"
         language: "Язык"
+        language_id: "Язык"
         name: "Название"
         slug: "Идентификатор"
-        image: "Картинка"
         title: "Заголовок"
-        keywords: "Ключевые слова"
-        description: "Метаописание"
-        body: "Содержимое"
       stored_value:
         description: "Описание"
         name: "Название"

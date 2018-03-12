@@ -34,11 +34,20 @@ class EditablePage < ApplicationRecord
   end
 
   def self.entity_parameters
-    %i(image name title keywords description body)
+    %i(image name title keywords description body language_id)
   end
 
   def self.creation_parameters
     entity_parameters + %i(slug)
+  end
+
+  # @param [String] slug
+  # @param [String] language_code
+  def self.find_localized(slug, language_code = nil)
+    language = Language.find_by(code: language_code)
+    criteria = { slug: slug }
+    instance = find_by(criteria.merge(language: language))
+    instance || find_by(criteria)
   end
 
   # @param [Integer] delta

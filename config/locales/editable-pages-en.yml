@@ -5,14 +5,15 @@ en:
       stored_value: "Stored value"
     attributes:
       editable_page:
+        body: "Body"
+        description: "Description"
+        image: "Image"
+        keywords: "Keywords"
         language: "Language"
+        language_id: "Language"
         name: "Name"
         slug: "Slug"
-        image: "Image"
         title: "Title"
-        keywords: "Keywords"
-        description: "Description"
-        body: "Body"
       stored_value:
         description: "Description"
         name: "Name"

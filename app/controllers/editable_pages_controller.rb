@@ -10,7 +10,11 @@ class EditablePagesController < AdminController
   def create
     @entity = EditablePage.new(creation_parameters)
     if @entity.save
-      redirect_to(admin_editable_page_path(@entity.id))
+      next_page = admin_editable_page_path(@entity.id)
+      respond_to do |format|
+        format.js { render(js: "document.location.href = '#{next_page}'") }
+        format.html { redirect_to(next_page) }
+      end
     else
       render :new, status: :bad_request
     end
@@ -23,7 +27,12 @@ class EditablePagesController < AdminController
   # patch /editable_pages/:id
   def update
     if @entity.update entity_parameters
-      redirect_to admin_editable_page_path(@entity), notice: t('editable_pages.update.success')
+      flash[:notice] = t('editable_pages.update.success')
+      next_page      = admin_editable_page_path(@entity.id)
+      respond_to do |format|
+        format.js { render(js: "document.location.href = '#{next_page}'") }
+        format.html { redirect_to(next_page) }
+      end
     else
       render :edit, status: :bad_request
     end

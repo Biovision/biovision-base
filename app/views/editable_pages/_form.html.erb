@@ -1,63 +1,118 @@
-<%= render partial: 'shared/list_of_errors', locals: { entity: entity } %>
+<%= form_with(model: entity, html: { id: 'editable_page-form' }) do |f| %>
+  <%= render partial: 'shared/list_of_errors', locals: { entity: entity } %>
 
-<%= form_for entity do |f| %>
-    <figure class="preview" id="editable_page-image">
-      <% if entity.image.blank? %>
-          <% image_path = 'biovision/base/placeholders/image.svg' %>
-      <% else %>
-          <% image_path = entity.image.url %>
-      <% end %>
-      <%= label_tag(:editable_page_image, image_tag(image_path, alt: t('activerecord.attributes.editable_page.image'))) %>
-      <figcaption>
-        <%= f.label :image %>
-        <%= f.file_field :image, accept: 'image/jpeg,image/png', data: { image: 'editable_page-image' } %>
-        <div class="guideline"><%= t('.guidelines.image') %></div>
-      </figcaption>
-    </figure>
 
-    <dl>
-      <% if entity.id.nil? %>
-          <dt><%= f.label :slug %></dt>
-          <dd>
-            <%= f.text_field :slug, required: true %>
-            <div class="guideline"><%= t('.guidelines.slug') %></div>
-          </dd>
-      <% end %>
+  <dl>
+    <dt><%= f.label :language_id %></dt>
+    <dd><%= f.select :language_id, languages_for_select %></dd>
 
-      <dt><%= f.label :name %></dt>
-      <dd>
-        <%= f.text_field :name, required: true, size: nil, maxlength: 100 %>
-        <div class="guideline"><%= t('.guidelines.name') %></div>
-      </dd>
+    <dt><%= f.label :slug %></dt>
+    <dd>
+      <%=
+        f.text_field(
+            :slug,
+            id:        :editable_page_slug,
+            size:      nil,
+            maxlength: EditablePage::SLUG_LIMIT,
+            required:  true
+        )
+      %>
+      <div class="guideline"><%= t('.guidelines.slug') %></div>
+    </dd>
 
-      <dt><%= f.label :title %></dt>
-      <dd>
-        <%= f.text_field :title, size: nil, maxlength: 200 %>
-        <div class="guideline"><%= t('.guidelines.title') %></div>
-      </dd>
+    <dt><%= f.label :image %></dt>
+    <dd>
+      <figure class="preview" role="group" id="editable_page-image">
+        <% if entity.image.blank? %>
+          <%= f.label :image, image_tag('biovision/base/placeholders/image.svg') %>
+        <% else %>
+          <%= f.label :image, image_tag(entity.image.medium.url) %>
+        <% end %>
+        <figcaption>
+          <%=
+            f.file_field(
+                :image,
+                id:     :editable_page_image,
+                accept: 'image/jpeg,image/png',
+                data:   { image: 'editable_page-image' }
+            )
+          %>
+        </figcaption>
+      </figure>
+      <div class="guideline"><%= t('.guidelines.image') %></div>
+    </dd>
 
-      <dt><%= f.label :keywords %></dt>
-      <dd>
-        <%= f.text_field :keywords, size: nil, maxlength: 250 %>
-        <div class="guideline"><%= t('.guidelines.keywords') %></div>
-      </dd>
+    <dt><%= f.label :name %></dt>
+    <dd>
+      <%=
+        f.text_field(
+            :name,
+            id:        :editable_page_name,
+            size:      nil,
+            maxlength: EditablePage::NAME_LIMIT,
+            required:  true
+        )
+      %>
+      <div class="guideline"><%= t('.guidelines.name') %></div>
+    </dd>
 
-      <dt><%= f.label :description %></dt>
-      <dd>
-        <%= f.text_field :description, size: nil, maxlength: 250 %>
-        <div class="guideline"><%= t('.guidelines.description') %></div>
-      </dd>
+    <dt><%= f.label :title %></dt>
+    <dd>
+      <%=
+        f.text_field(
+            :title,
+            id: :editable_page_title,
+            size: nil,
+            maxlength: EditablePage::META_LIMIT
+        )
+      %>
+      <div class="guideline"><%= t('.guidelines.title') %></div>
+    </dd>
 
-      <dt><%= f.label :body %></dt>
-      <dd>
-        <%= f.text_area :body, cols: 80, rows: 25, required: true %>
-        <div class="guideline"><%= t('.guidelines.body') %></div>
-      </dd>
-    </dl>
+    <dt><%= f.label :keywords %></dt>
+    <dd>
+      <%=
+        f.text_field(
+            :keywords,
+            id: :editable_page_keywords,
+            size: nil,
+            maxlength: EditablePage::META_LIMIT
+        )
+      %>
+      <div class="guideline"><%= t('.guidelines.keywords') %></div>
+    </dd>
 
-    <div class="buttons">
-      <%= f.button t(:save), type: :submit %>
-    </div>
+    <dt><%= f.label :description %></dt>
+    <dd>
+      <%=
+        f.text_field(
+            :description,
+            id: :editable_page_description,
+            size: nil,
+            maxlength: EditablePage::META_LIMIT
+        )
+      %>
+      <div class="guideline"><%= t('.guidelines.description') %></div>
+    </dd>
+
+    <dt><%= f.label :body %></dt>
+    <dd>
+      <%=
+        f.text_area(
+            :body,
+            id: :editable_page_body,
+            cols: 80,
+            rows: 25,
+            required: true
+        )
+      %>
+      <div class="guideline"><%= t('.guidelines.body') %></div>
+    </dd>
+  </dl>
+
+  <div class="buttons">
+    <%= f.button t(:save), type: :submit, class: 'button-save' %>
+  </div>
 <% end %>
 
 <%= render 'editable_pages/form/ckeditor' %>
