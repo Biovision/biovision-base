@@ -1,0 +1,9 @@
+<% unless entity.nil? %>
+  <% unless entity.title.blank? %>
+    <h1><%= entity.title %></h1>
+  <% end %>
+
+  <div class="index-editable">
+    <%= raw(entity.body) %>
+  </div>
+<% end %>

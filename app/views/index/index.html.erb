@@ -1,12 +1,11 @@
 <% if @editable_page.nil? %>
   <% content_for :meta_title, t('.title') %>
   <% content_for :meta_title, t('.description') %>
-  <% heading = t('.heading') %>
 <% else %>
   <%= render partial: 'editable_pages/entity/metadata', locals: { entity: @editable_page } %>
-  <% heading = @editable_page.title %>
 <% end %>
 
 <article id="homepage">
-  <h1><%= heading %></h1>
+  <%= render partial: 'index/index/editable', locals: { entity: @editable_page } %>
+  <%= render 'index/index/default_dashboard' %>
 </article>
