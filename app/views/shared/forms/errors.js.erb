@@ -1,0 +1,5 @@
+<%
+entity_name = @entity.class.to_s.underscore
+list = @entity.errors.full_messages.map { |m| "'#{j(m)}'" }
+%>
+Biovision.show_list_of_errors('<%= entity_name %>', [<%= raw(list.join(',')) %>]);

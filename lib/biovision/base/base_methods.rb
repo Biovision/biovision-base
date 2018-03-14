@@ -92,6 +92,20 @@ module Biovision
       def tracking_for_entity
         { agent: agent, ip: request.env['HTTP_X_REAL_IP'] || request.remote_ip }
       end
+
+      def form_processed_ok(next_page)
+        respond_to do |format|
+          format.js { render(js: "document.location.href = '#{next_page}'") }
+          format.html { redirect_to(next_page) }
+        end
+      end
+
+      def form_processed_with_error(view_to_render)
+        respond_to do |format|
+          format.js { render('shared/forms/errors', status: :bad_request) }
+          format.html { render(view_to_render, status: :bad_request) }
+        end
+      end
     end
   end
 end

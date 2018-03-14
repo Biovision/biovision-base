@@ -1,0 +1,11 @@
+<script src="//cdn.ckeditor.com/4.8.0/full/ckeditor.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('form [data-wysiwyg]').forEach(function(editor) {
+            CKEDITOR.replace(editor, {
+                filebrowserUploadUrl: '/media_files/ckeditor',
+                removePlugins: 'forms,save,preview,flash,bidi,language,print,templates,newpage,iframe,about,scayt,wsc',
+            });
+        });
+    });
+</script>

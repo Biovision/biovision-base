@@ -10,13 +10,9 @@ class EditablePagesController < AdminController
   def create
     @entity = EditablePage.new(creation_parameters)
     if @entity.save
-      next_page = admin_editable_page_path(@entity.id)
-      respond_to do |format|
-        format.js { render(js: "document.location.href = '#{next_page}'") }
-        format.html { redirect_to(next_page) }
-      end
+      form_processed_ok(admin_editable_page_path(@entity.id))
     else
-      render :new, status: :bad_request
+      form_processed_with_error(:new)
     end
   end
 
@@ -26,15 +22,11 @@ class EditablePagesController < AdminController
 
   # patch /editable_pages/:id
   def update
-    if @entity.update entity_parameters
+    if @entity.update(entity_parameters)
       flash[:notice] = t('editable_pages.update.success')
-      next_page      = admin_editable_page_path(@entity.id)
-      respond_to do |format|
-        format.js { render(js: "document.location.href = '#{next_page}'") }
-        format.html { redirect_to(next_page) }
-      end
+      form_processed_ok(admin_editable_page_path(@entity.id))
     else
-      render :edit, status: :bad_request
+      form_processed_with_error(:edit)
     end
   end
 

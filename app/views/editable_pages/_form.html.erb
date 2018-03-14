@@ -1,6 +1,5 @@
-<%= form_with(model: entity, html: { id: 'editable_page-form' }) do |f| %>
+<%= form_with(model: entity, html: { id: "#{entity.class.to_s.underscore}-form" }) do |f| %>
   <%= render partial: 'shared/list_of_errors', locals: { entity: entity } %>
-
 
   <dl>
     <dt><%= f.label :language_id %></dt>
@@ -61,8 +60,8 @@
       <%=
         f.text_field(
             :title,
-            id: :editable_page_title,
-            size: nil,
+            id:        :editable_page_title,
+            size:      nil,
             maxlength: EditablePage::META_LIMIT
         )
       %>
@@ -74,8 +73,8 @@
       <%=
         f.text_field(
             :keywords,
-            id: :editable_page_keywords,
-            size: nil,
+            id:        :editable_page_keywords,
+            size:      nil,
             maxlength: EditablePage::META_LIMIT
         )
       %>
@@ -87,8 +86,8 @@
       <%=
         f.text_field(
             :description,
-            id: :editable_page_description,
-            size: nil,
+            id:        :editable_page_description,
+            size:      nil,
             maxlength: EditablePage::META_LIMIT
         )
       %>
@@ -100,10 +99,11 @@
       <%=
         f.text_area(
             :body,
-            id: :editable_page_body,
-            cols: 80,
-            rows: 25,
-            required: true
+            id:       :editable_page_body,
+            cols:     80,
+            rows:     25,
+            required: true,
+            data:     { wysiwyg: 1 }
         )
       %>
       <div class="guideline"><%= t('.guidelines.body') %></div>
@@ -115,4 +115,4 @@
   </div>
 <% end %>
 
-<%= render 'editable_pages/form/ckeditor' %>
+<%= render partial: 'shared/forms/wysiwyg' %>

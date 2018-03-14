@@ -204,6 +204,28 @@ const Biovision = {
         form.querySelectorAll('[data-check]').forEach(function (element) {
             element.addEventListener('blur', perform_check);
         });
+    },
+    show_list_of_errors: function(entity_name, list) {
+        const form = document.getElementById(entity_name + '-form');
+        if (form) {
+            let errors = form.querySelector('ol.errors');
+            let data = '';
+
+            if (!errors) {
+                errors = document.createElement('ol');
+                errors.classList.add('errors');
+            }
+
+            list.forEach(function (message) {
+                data += '<li>' + message + '</li>';
+            });
+
+            errors.innerHTML = data;
+
+            form.prepend(errors);
+
+            errors.scrollIntoView();
+        }
     }
 };
 
