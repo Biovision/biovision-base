@@ -3,7 +3,7 @@ class EditablePageImageUploader < CarrierWave::Uploader::Base
   include CarrierWave::BombShelter
 
   def max_pixel_dimensions
-    [2000, 2000]
+    [4000, 4000]
   end
 
   storage :file
