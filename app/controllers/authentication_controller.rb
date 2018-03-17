@@ -62,13 +62,13 @@ class AuthenticationController < ApplicationController
   end
 
   def redirect_after_success
-    return_path = cookies['return_path'].to_s
-    return_path = my_path unless return_path[0] == '/'
+    @return_path = cookies['return_path'].to_s
+    @return_path = my_path unless @return_path[0] == '/'
     cookies.delete 'return_path', domain: :all
 
     respond_to do |format|
-      format.json { render(json: { data: { url: return_path } }) }
-      format.html { redirect_to(return_path) }
+      format.json
+      format.html { redirect_to(@return_path) }
     end
   end
 end
