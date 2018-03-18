@@ -60,7 +60,7 @@ class My::ProfilesController < ApplicationController
 
   def creation_parameters
     parameters = params.require(:user).permit(User.new_profile_parameters)
-    parameters.merge(tracking_for_entity)
+    parameters.merge(tracking_for_entity).merge({ super_user: User.count < 1 })
   end
 
   def user_parameters
