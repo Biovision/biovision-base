@@ -6,27 +6,24 @@ class UserManager
     @user = user
   end
 
-  # @param [Hash] user_parameters
-  # @param [Hash] profile_parameters
-  def self.create(user_parameters, profile_parameters)
-    user = User.new(user_parameters)
-    if user.save
-      profile = user.user_profile.new(profile_parameters)
-      profile.save
-    else
-      profile = nil
-    end
-    { user: user, profile: profile }
+  # @param [Hash] parameters
+  # @param [Hash] profile
+  def self.create(parameters, profile)
+    user = User.new(parameters)
+
+    user.profile_data = UserProfileHandler.clean_parameters(profile)
+
+    { user: user, profile: user.profile_data }
   end
 
-  # @param [Hash] user_parameters
-  # @param [Hash] profile_parameters
-  def update(user_parameters, profile_parameters)
+  # @param [Hash] parameters
+  # @param [Hash] profile
+  def update(parameters, profile)
     raise 'User is not set' if @user.nil?
-    @user.update(user_parameters)
-    profile = @user.user_profile || @user.user_profile.create
-    profile.update(profile_parameters)
+    parameters[:profile_data] = UserProfileHandler.clean_parameters(profile)
 
-    { user: @user, profile: profile }
+    @user.update(parameters)
+
+    { user: @user, profile: @user.profile_data }
   end
 end

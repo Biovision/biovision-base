@@ -18,10 +18,9 @@ class UsersController < ApplicationController
   def create
     @entity = User.new(creation_parameters)
     if @entity.save
-      @entity.user_profile.update(profile_parameters)
-      redirect_to admin_user_path(@entity.id), notice: t('users.create.success')
+      form_processed_ok(admin_user_path(@entity.id))
     else
-      render :new, status: :bad_request
+      form_processed_with_error(:new)
     end
   end
 
@@ -32,10 +31,9 @@ class UsersController < ApplicationController
   # patch /users/:id
   def update
     if @entity.update(entity_parameters)
-      @entity.user_profile.update(profile_parameters)
-      redirect_to admin_user_path(@entity.id), notice: t('users.update.success')
+      form_processed_ok(admin_user_path(@entity.id))
     else
-      render :edit, status: :bad_request
+      form_processed_with_error(:edit)
     end
   end
 
@@ -61,14 +59,17 @@ class UsersController < ApplicationController
   end
 
   def entity_parameters
-    params.require(:user).permit(User.entity_parameters)
+    parameters = params.require(:user).permit(User.entity_parameters)
+    parameters.merge(profile_parameters)
   end
 
   def creation_parameters
-    params.require(:user).permit(User.entity_parameters).merge(tracking_for_entity)
+    entity_parameters.merge(tracking_for_entity)
   end
 
   def profile_parameters
-    params.require(:user_profile).permit(UserProfile.entity_parameters)
+    permitted = UserProfileHandler.allowed_parameters
+    dirty     = params.require(:user_profile).permit(permitted)
+    { profile_data: UserProfileHandler.clean_parameters(dirty) }
   end
 end

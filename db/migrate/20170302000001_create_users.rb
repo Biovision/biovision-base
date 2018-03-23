@@ -26,6 +26,7 @@ class CreateUsers < ActiveRecord::Migration[5.1]
         t.boolean :allow_mail, default: true, null: false
         t.boolean :foreign_slug, default: false, null: false
         t.datetime :last_seen
+        t.date :birthday
         t.string :slug, null: false
         t.string :screen_name, index: true, null: false
         t.string :password_digest
@@ -34,6 +35,7 @@ class CreateUsers < ActiveRecord::Migration[5.1]
         t.string :image
         t.string :notice
         t.string :search_string
+        t.json :profile_data, default: {}, null: false
       end
 
       add_foreign_key :users, :users, column: :inviter_id, on_update: :cascade, on_delete: :nullify

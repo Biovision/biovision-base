@@ -93,6 +93,7 @@ module Biovision
         { agent: agent, ip: request.env['HTTP_X_REAL_IP'] || request.remote_ip }
       end
 
+      # @param [String] next_page
       def form_processed_ok(next_page)
         respond_to do |format|
           format.js { render(js: "document.location.href = '#{next_page}'") }
@@ -100,6 +101,7 @@ module Biovision
         end
       end
 
+      # @param [Symbol|String] view_to_render
       def form_processed_with_error(view_to_render)
         respond_to do |format|
           format.js { render('shared/forms/errors', status: :bad_request) }

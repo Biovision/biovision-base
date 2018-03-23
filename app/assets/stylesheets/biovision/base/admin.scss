@@ -1,5 +1,6 @@
 :root {
   --content-width: #{$content-width};
+  --content-width-min: #{$content-width-min};
 }
 
 html {
@@ -33,6 +34,7 @@ body {
   margin: 0 auto;
   max-width: var(--content-width);
   min-height: 100vh;
+  min-width: var(--content-width-min);
 
   > header {
     align-items: center;
@@ -57,7 +59,7 @@ body {
       li {
         display: inline-block;
         list-style: none;
-        margin: 0 .25rem;
+        margin: 0 .4rem;
         text-align: center;
       }
     }
@@ -84,10 +86,14 @@ body {
 
 article {
   figure {
+    max-width: 100%;
+
     &.preview {
+      max-width: 32rem;
+
       img {
         box-shadow: $block-shadow;
-        max-width: 32rem;
+        max-width: 100%;
       }
     }
   }

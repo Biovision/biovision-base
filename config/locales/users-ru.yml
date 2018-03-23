@@ -49,6 +49,7 @@ ru:
         agent: "Агент пользователя при регистрации"
         allow_login: "Позволить вход"
         allow_mail: "Разрешить email-уведомления"
+        birthday: "Дата рождения"
         bot: "Это бот"
         email: "Email"
         email_confirmed: "Email подтверждён"
@@ -66,7 +67,6 @@ ru:
         search_string: "Строка для поиска"
         slug: "Идентификатор"
       user_profile:
-        birthday: "Дата рождения"
         gender: "Пол"
         name: "Имя"
         patronymic: "Отчество"
@@ -229,6 +229,10 @@ ru:
     index:
       title: "Пользователи сайта, страница %{page}"
       heading: "Пользователи сайта"
+    form:
+      guidelines:
+        notice: "Заметка для себя и других администраторов"
+        screen_name: "Только латинские буквы, цифры и знаки подчёркивания, от 1 до 30 символов."
   profiles:
     profile:
       user_info: "Информация о пользователе"

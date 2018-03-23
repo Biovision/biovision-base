@@ -29,15 +29,10 @@ class My::ProfilesController < ApplicationController
   # patch /my/profile
   def update
     if current_user.update(user_parameters)
-      current_user.user_profile.update(profile_parameters)
-      next_url       = my_profile_path
       flash[:notice] = t('my.profiles.update.success')
-      respond_to do |format|
-        format.js { render(js: "document.location.href = '#{next_url}'") }
-        format.html { redirect_to(next_url) }
-      end
+      form_processed_ok(my_profile_path)
     else
-      render :edit, status: :bad_request
+      form_processed_with_error(:edit)
     end
   end
 
@@ -54,7 +49,7 @@ class My::ProfilesController < ApplicationController
       create_token_for_user(@user)
       redirect_after_creation
     else
-      render :new, status: :bad_request
+      form_processed_with_error(:new)
     end
   end
 
@@ -67,7 +62,7 @@ class My::ProfilesController < ApplicationController
     sensitive  = sensitive_parameters
     editable   = User.profile_parameters + sensitive
     parameters = params.require(:user).permit(editable)
-    filter_parameters parameters, sensitive
+    filter_parameters parameters.merge(profile_parameters), sensitive
   end
 
   def sensitive_parameters
@@ -79,9 +74,13 @@ class My::ProfilesController < ApplicationController
   end
 
   def profile_parameters
-    params.require(:user_profile).permit(UserProfile.entity_parameters)
+    permitted = UserProfileHandler.allowed_parameters
+    dirty     = params.require(:user_profile).permit(permitted)
+    { profile_data: UserProfileHandler.clean_parameters(dirty) }
   end
 
+  # @param [Hash] parameters
+  # @param [Hash] sensitive
   def filter_parameters(parameters, sensitive)
     sensitive.each { |parameter| parameters.except! parameter if parameter.blank? }
     parameters[:email_confirmed] = false if parameters[:email] && parameters[:email] != current_user.email
@@ -96,9 +95,6 @@ class My::ProfilesController < ApplicationController
 
     flash[:notice] = t('my.profiles.create.success')
 
-    respond_to do |format|
-      format.js { render(js: "document.location.href= '#{return_path}'") }
-      format.html { redirect_to return_path }
-    end
+    form_processed_ok(return_path)
   end
 end

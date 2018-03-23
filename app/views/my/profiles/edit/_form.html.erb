@@ -4,7 +4,7 @@
       method: :patch,
       multipart: true,
       id: 'my-profile-form'
-  ) do |f|
+  ) do
 %>
   <%= render partial: 'shared/list_of_errors', locals: { entity: entity } %>
   <section>
@@ -15,7 +15,7 @@
         <%= t('activerecord.attributes.user.image') %>
       </dt>
       <dd>
-        <figure id="user-image">
+        <figure id="user-image" role="group" class="preview">
           <%=
             label_tag(
                 :user_image,
@@ -35,71 +35,19 @@
       </dd>
 
       <dt>
-        <%= label_tag(:user_profile_name, t('activerecord.attributes.user_profile.name')) %>
-      </dt>
-      <dd>
-        <%=
-          text_field_tag(
-              'user_profile[name]',
-              entity.user_profile.name,
-              size: nil,
-              maxlength: UserProfile::NAME_LIMIT
-          )
-        %>
-      </dd>
-
-      <dt>
-        <%= label_tag :user_profile_patronymic, t('activerecord.attributes.user_profile.patronymic') %>
-      </dt>
-      <dd>
-        <%=
-          text_field_tag(
-              'user_profile[patronymic]',
-              entity.user_profile.patronymic,
-              size: nil,
-              maxlength: UserProfile::NAME_LIMIT
-          )
-        %>
-      </dd>
-
-      <dt>
-        <%= label_tag :user_profile_surname, t('activerecord.attributes.user_profile.surname') %>
-      </dt>
-      <dd>
-        <%=
-          text_field_tag(
-              'user_profile[surname]',
-              entity.user_profile.surname,
-              size: nil,
-              maxlength: UserProfile::NAME_LIMIT
-          )
-        %>
-      </dd>
-
-      <dt>
-        <%= label_tag :user_profile_gender, t('activerecord.attributes.user_profile.gender') %>
-      </dt>
-      <dd>
-        <%=
-          select_tag(
-              'user_profile[gender]',
-              options_for_select(genders_for_select, selected: entity.user_profile.gender)
-          )
-        %>
-      </dd>
-
-      <dt>
-        <%= label_tag :user_profile_birthday, t('activerecord.attributes.user_profile.birthday') %>
+        <%= label_tag :user_profile_birthday, t('activerecord.attributes.user.birthday') %>
       </dt>
       <dd>
         <%=
           date_field_tag(
-              'user_profile[birthday]',
-              entity.user_profile.birthday,
+              'user[birthday]',
+              entity.birthday,
               size: 10
           )
         %>
       </dd>
+
+      <%= render partial: 'my/profiles/edit/form/profile_data', locals: { data: entity.profile_data } %>
 
       <dt>
         <%= t('.flags') %>
@@ -178,6 +126,6 @@
   </section>
 
   <div>
-    <%= button_tag t('.update'), type: :submit %>
+    <%= button_tag t('.update'), type: :submit, class: 'button-save' %>
   </div>
 <% end %>

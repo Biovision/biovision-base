@@ -9,7 +9,7 @@
 
   <% if current_user == user %>
       <nav>
-        <%= link_to t(:edit), edit_my_profile_path %>
+        <%= link_to t(:edit), edit_my_profile_path, class: 'button-action' %>
       </nav>
   <% end %>
 
@@ -25,7 +25,7 @@
         <dt><%= t('activerecord.attributes.user.last_seen') %></dt>
         <dd><%= time_tag user.last_seen %></dd>
     <% end %>
-    <% unless user.profile&.name.blank? %>
+    <% unless user.profile_data['name'].blank? %>
         <dt><%= t('activerecord.attributes.user_profile.name') %></dt>
         <dd><%= user.full_name %></dd>
     <% end %>
@@ -33,10 +33,9 @@
         <dt><%= t('activerecord.attributes.user.email') %></dt>
         <dd><%= user.email %></dd>
     <% end %>
-    <% unless user.profile&.gender.blank? %>
+    <% unless user.profile_data['gender'].blank? %>
         <dt><%= t('activerecord.attributes.user_profile.gender') %></dt>
-        <dd><%= t("activerecord.attributes.user_profile.genders.#{user.user_profile.gender}") %></dd>
+        <dd><%= gender_name(user.profile_data['gender']) %></dd>
     <% end %>
   </dl>
-
 </article>

@@ -1,0 +1,17 @@
+<% unless data['name'].blank? %>
+  <dt><%= t('activerecord.attributes.user_profile.name') %></dt>
+  <dd><%= data['name'] %></dd>
+<% end %>
+
+<% unless data['patronymic'].blank? %>
+  <dt><%= t('activerecord.attributes.user_profile.patronymic') %></dt>
+  <dd><%= data['patronymic'] %></dd>
+<% end %>
+
+<% unless data['surname'].blank? %>
+  <dt><%= t('activerecord.attributes.user_profile.surname') %></dt>
+  <dd><%= data['surname'] %></dd>
+<% end %>
+
+<dt><%= t('activerecord.attributes.user_profile.gender') %></dt>
+<dd><%= gender_name(data['gender']) %></dd>

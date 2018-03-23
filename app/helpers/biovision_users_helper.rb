@@ -1,8 +1,17 @@
 module BiovisionUsersHelper
   def genders_for_select
     genders = [[t(:not_selected), '']]
-    prefix  = 'activerecord.attributes.user_profile.genders.'
-    genders + UserProfile.genders.keys.to_a.map { |o| [t("#{prefix}#{o}"), o] }
+    genders + UserProfileHandler::GENDERS.keys.map { |k| [gender_name(k), k] }
+  end
+
+  # @param [Integer] gender_id
+  def gender_name(gender_id)
+    prefix = 'activerecord.attributes.user_profile.genders.'
+    if UserProfileHandler::GENDERS.key?(gender_id)
+      t("#{prefix}.#{UserProfileHandler::GENDERS[gender_id]}")
+    else
+      t(:not_selected)
+    end
   end
 
   # @param [User] entity

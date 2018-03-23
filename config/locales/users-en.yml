@@ -49,6 +49,7 @@ en:
         agent: "User agent at the time if registration"
         allow_login: "Allow logging in"
         allow_mail: "Allow email notifications"
+        birthday: "Birthday"
         bot: "It is bot"
         email: "Email"
         email_confirmed: "Email is confirmed"
@@ -66,7 +67,6 @@ en:
         search_string: "Search string"
         slug: "Slug"
       user_profile:
-        birthday: "Birthday"
         gender: "Gender"
         name: "Name"
         patronymic: "Patronymic"
@@ -229,6 +229,10 @@ en:
     index:
       title: "Site users, page %{page}"
       heading: "Site users"
+    form:
+      guidelines:
+        notice: "Administrative notice for yourself and other administrators"
+        screen_name: "Only latin letters, digits and underscores, 1 to 30 chars."
   profiles:
     profile:
       user_info: "User info"

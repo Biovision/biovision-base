@@ -27,7 +27,6 @@ class User < ApplicationRecord
   belongs_to :language, optional: true, counter_cache: true
   belongs_to :agent, optional: true
   belongs_to :inviter, class_name: User.to_s, optional: true
-  has_one :user_profile, dependent: :destroy
   has_many :invitees, class_name: User.to_s, foreign_key: :inviter_id, dependent: :nullify
   has_many :tokens, dependent: :delete_all
   has_many :codes, dependent: :delete_all
@@ -39,7 +38,6 @@ class User < ApplicationRecord
 
   before_save :normalize_slug
   before_save :prepare_search_string
-  after_create { UserProfile.create(user: self) }
 
   validates_presence_of :screen_name, :email
   validates_format_of :screen_name, with: SCREEN_NAME_PATTERN, if: :native_slug?
@@ -59,15 +57,16 @@ class User < ApplicationRecord
   scope :screen_name_like, ->(val) { where('screen_name ilike ?', "%#{val}%") unless val.blank? }
   scope :search, ->(q) { where('search_string like ?', "%#{q.downcase}%") unless q.blank? }
   scope :filtered, ->(f) { email_like(f[:email]).screen_name_like(f[:screen_name]) }
+  scope :list_for_administration, -> { order('id desc') }
 
   # @param [Integer] page
   # @param [String] search_query
   def self.page_for_administration(page, search_query = '')
-    search(search_query).order('id desc').page(page).per(PER_PAGE)
+    list_for_administration.search(search_query).page(page).per(PER_PAGE)
   end
 
   def self.profile_parameters
-    %i(image allow_mail)
+    %i(image allow_mail birthday)
   end
 
   def self.sensitive_parameters
@@ -92,10 +91,6 @@ class User < ApplicationRecord
     (min..max)
   end
 
-  def profile
-    user_profile
-  end
-
   # Name to be shown as profile
   #
   # This can be redefined for cases when something other than screen name should
@@ -107,14 +102,14 @@ class User < ApplicationRecord
   end
 
   def name_for_letter
-    user_profile&.name.blank? ? profile_name : user_profile.name
+    profile_data['name'].blank? ? profile_name : profile_data['name']
   end
 
   # @param [Boolean] include_patronymic
   def full_name(include_patronymic = false)
     result = [name_for_letter]
-    result << user_profile&.patronymic.to_s.strip if include_patronymic
-    result << user_profile&.surname.to_s.strip
+    result << profile_data['patronymic'].to_s.strip if include_patronymic
+    result << profile_data['surname'].to_s.strip
     result.compact.join(' ')
   end
 
@@ -129,18 +124,12 @@ class User < ApplicationRecord
   private
 
   def normalize_slug
-    if native_slug?
-      self.slug = screen_name.downcase
-    else
-      self.slug = slug.downcase
-    end
+    self.slug = (native_slug? ? screen_name : slug).downcase
   end
 
   def prepare_search_string
-    new_string = "#{slug} #{email}"
-    unless user_profile.nil?
-      new_string << " #{user_profile.search_string}"
-    end
-    self.search_string = new_string.downcase
+    string = "#{slug} #{email} #{UserProfileHandler.search_string(self)}"
+
+    self.search_string = string.downcase
   end
 end

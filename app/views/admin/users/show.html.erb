@@ -1,19 +1,19 @@
 <% content_for :meta_title, t('.title', name: @entity.profile_name) %>
 <% content_for :breadcrumbs do %>
-    <%= link_to(t('admin.users.nav_item.text'), admin_users_path) %>
-    <span><%= @entity.profile_name %></span>
+  <%= link_to(t('admin.users.nav_item.text'), admin_users_path) %>
+  <span><%= @entity.profile_name %></span>
 <% end %>
 
 <article>
   <h1><%= @entity.screen_name %></h1>
   <% if @entity.deleted? %>
-      <div class="message-box-alert"><%= t(:deleted_entity) %></div>
+    <div class="message-box-alert"><%= t(:deleted_entity) %></div>
   <% end %>
   <ul class="actions">
     <li><%= back_icon(admin_users_path) %></li>
     <% unless @entity.deleted? %>
       <li><%= world_icon(user_profile_path(@entity.screen_name)) %></li>
-        <li><%= edit_icon(edit_user_path(@entity.id)) %></li>
+      <li><%= edit_icon(edit_user_path(@entity.id)) %></li>
     <% end %>
   </ul>
 
@@ -23,12 +23,12 @@
       <li><%= link_to t('admin.tokens.index.heading'), tokens_admin_user_path(@entity) %></li>
       <li><%= link_to t('admin.codes.index.heading'), codes_admin_user_path(@entity) %></li>
       <% unless @entity == current_user %>
-          <li><%= link_to t('.authenticate'), authenticate_admin_user_path(@entity.id), method: :post %></li>
+        <li><%= link_to t('.authenticate'), authenticate_admin_user_path(@entity.id), method: :post %></li>
       <% end %>
     </ul>
   </nav>
 
-  <figure>
+  <figure role="group">
     <%= profile_avatar @entity %>
     <figcaption>
       <%= @entity.slug %>
@@ -37,44 +37,28 @@
 
   <dl>
     <% unless @entity.notice.blank? %>
-        <dt><%= t('activerecord.attributes.user.notice') %></dt>
-        <dd><%= @entity.notice %></dd>
+      <dt><%= t('activerecord.attributes.user.notice') %></dt>
+      <dd><%= @entity.notice %></dd>
     <% end %>
 
     <dt><%= t('activerecord.attributes.user.screen_name') %></dt>
     <dd><%= user_link @entity %></dd>
 
-    <% unless @entity.user_profile.name.blank? %>
-        <dt><%= t('activerecord.attributes.user_profile.name') %></dt>
-        <dd><%= @entity.user_profile.name %></dd>
-    <% end %>
-
-    <% unless @entity.user_profile.patronymic.blank? %>
-        <dt><%= t('activerecord.attributes.user_profile.patronymic') %></dt>
-        <dd><%= @entity.user_profile.patronymic %></dd>
-    <% end %>
-
-    <% unless @entity.user_profile.surname.blank? %>
-        <dt><%= t('activerecord.attributes.user_profile.surname') %></dt>
-        <dd><%= @entity.user_profile.surname %></dd>
-    <% end %>
-
     <% unless @entity.email.blank? %>
-        <dt><%= t('activerecord.attributes.user.email') %></dt>
-        <dd><%= link_to @entity.email, "mailto:#{@entity.email}" %></dd>
+      <dt><%= t('activerecord.attributes.user.email') %></dt>
+      <dd><%= link_to @entity.email, "mailto:#{@entity.email}" %></dd>
     <% end %>
 
     <% unless @entity.phone.blank? %>
-        <dt><%= t('activerecord.attributes.user.phone') %></dt>
-        <dd><%= link_to @entity.phone, "tel:#{@entity.phone}" %></dd>
+      <dt><%= t('activerecord.attributes.user.phone') %></dt>
+      <dd><%= link_to @entity.phone, "tel:#{@entity.phone}" %></dd>
     <% end %>
 
-    <dt><%= t('activerecord.attributes.user_profile.gender') %></dt>
-    <dd><%= @entity.user_profile.gender.blank? ? t(:not_selected) : t("activerecord.attributes.user_profile.genders.#{@entity.user_profile.gender}") %></dd>
+    <%= render partial: 'admin/users/entity/profile', locals: { data: @entity.profile_data } %>
 
     <% unless @entity.ip.blank? %>
-        <dt><%= t('activerecord.attributes.user.ip') %></dt>
-        <dd><%= @entity.ip %></dd>
+      <dt><%= t('activerecord.attributes.user.ip') %></dt>
+      <dd><%= @entity.ip %></dd>
     <% end %>
 
     <dt><%= t(:created_at) %></dt>
@@ -84,24 +68,24 @@
     <dd><%= time_tag @entity.updated_at %></dd>
 
     <% unless @entity.last_seen.blank? %>
-        <dt><%= t('activerecord.attributes.user.last_seen') %></dt>
-        <dd><%= time_tag @entity.last_seen %></dd>
+      <dt><%= t('activerecord.attributes.user.last_seen') %></dt>
+      <dd><%= time_tag @entity.last_seen %></dd>
     <% end %>
 
     <% if @entity.user_privileges.any? %>
-        <dt><%= t('.privileges') %></dt>
-        <dd>
-          <ol>
-            <% @entity.user_privileges.order('privilege_id, region_id asc nulls first').each do |link| %>
-                <li>
-                  <%= link.privilege.name %>
-                  <% unless link.region_id.nil? %>
-                      (<%= link.region_id %><%# link.region.long_name %>)
-                  <% end %>
-                </li>
-            <% end %>
-          </ol>
-        </dd>
+      <dt><%= t('.privileges') %></dt>
+      <dd>
+        <ol>
+          <% @entity.user_privileges.order('privilege_id, region_id asc nulls first').each do |link| %>
+            <li>
+              <%= link.privilege.name %>
+              <% unless link.region_id.nil? %>
+                (<%= link.region_id %><%# link.region.long_name %>)
+              <% end %>
+            </li>
+          <% end %>
+        </ol>
+      </dd>
     <% end %>
   </dl>
 
