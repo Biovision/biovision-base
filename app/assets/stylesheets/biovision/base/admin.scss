@@ -4,9 +4,8 @@
 }
 
 html {
-  background-attachment: fixed;
+  background: linear-gradient(to bottom, #dedfe3 2%, #aeb3b9 95%) fixed, radial-gradient(farthest-corner at 33% 100%, rgba(255, 255, 255, .5) 0%, rgba(0, 0, 0, .5) 100%) fixed;
   background-blend-mode: screen;
-  background-image: linear-gradient(to bottom, #dedfe3 2%, #aeb3b9 95%), radial-gradient(farthest-corner at 33% 100%, rgba(255, 255, 255, .5) 0%, rgba(0, 0, 0, .5) 100%);
   font: 300 10px $font-family-main;
 }
 
@@ -157,6 +156,42 @@ article {
     padding: .8rem 0 0 0;
   }
 }
+
+.dashboard {
+  nav {
+    margin: .4rem 0 1.6rem;
+    max-width: 64rem;
+  }
+
+  .heading {
+    display: block;
+    font: 500 1.8rem/1.5 $font-family-heading;
+  }
+
+  ul {
+    box-shadow: $block-shadow;
+    margin: .4rem;
+    padding: 0;
+  }
+
+  li {
+    background: $row-background-odd;
+    list-style: none;
+    margin: 0;
+    padding: .8rem;
+    position: relative;
+
+    &:nth-last-of-type(even) {
+      background: $row-background-even;
+    }
+  }
+
+  .description {
+    color: $text-color-secondary;
+    font-size: $font-size-decreased;
+  }
+}
+
 
 nav.admin-breadcrumbs {
   margin-bottom: .8rem;

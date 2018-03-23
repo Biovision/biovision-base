@@ -200,45 +200,6 @@ ol.list-of-entities {
   }
 }
 
-.dashboard {
-  display: flex;
-  flex-wrap: wrap;
-
-  nav {
-    margin: .4rem;
-    width: 31rem;
-  }
-
-  .heading {
-    display: block;
-    font: 500 1.8rem/1.5 $font-family-heading;
-    text-align: center;
-  }
-
-  ul {
-    box-shadow: $block-shadow;
-    margin: .4rem;
-    padding: 0;
-  }
-
-  li {
-    background: $row-background-odd;
-    list-style: none;
-    margin: 0;
-    padding: .8rem;
-    position: relative;
-
-    &:nth-last-of-type(even) {
-      background: $row-background-even;
-    }
-  }
-
-  .description {
-    color: $text-color-secondary;
-    font-size: $font-size-decreased;
-  }
-}
-
 .breadcrumbs {
   a {
     background: image_url('biovision/base/icons/breadcrumb.svg') no-repeat bottom .1rem right / .6rem 1.2rem;
