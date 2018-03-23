@@ -68,8 +68,12 @@ class UsersController < ApplicationController
   end
 
   def profile_parameters
-    permitted = UserProfileHandler.allowed_parameters
-    dirty     = params.require(:user_profile).permit(permitted)
-    { profile_data: UserProfileHandler.clean_parameters(dirty) }
+    if params.key?(:user_profile)
+      permitted = UserProfileHandler.allowed_parameters
+      dirty     = params.require(:user_profile).permit(permitted)
+      { profile_data: UserProfileHandler.clean_parameters(dirty) }
+    else
+      {}
+    end
   end
 end

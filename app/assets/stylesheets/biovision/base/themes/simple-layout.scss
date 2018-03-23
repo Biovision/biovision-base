@@ -26,6 +26,8 @@ body {
     }
 
     .authentication {
+      margin: 0 0 0 auto;
+
       > div {
         display: flex;
         align-items: center;
@@ -65,12 +67,15 @@ body {
     margin: auto 0 0 0;
 
     > div {
+      align-items: flex-start;
       color: $text-color-secondary;
+      display: flex;
+      flex-wrap: wrap;
       font-size: $font-size-decreased;
     }
 
     nav {
-      margin: 0 auto;
+      margin: 0 0 0 auto;
     }
 
     ul {

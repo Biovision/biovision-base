@@ -7,7 +7,7 @@ class AddProfileDataToUsers < ActiveRecord::Migration[5.1]
       add_column :users, :profile_data, :json, null: false, default: {}
     end
 
-    copy_data
+    copy_data if UserProfile.table_exists?
   end
 
   def down
