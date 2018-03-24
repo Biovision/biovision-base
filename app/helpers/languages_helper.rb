@@ -6,8 +6,10 @@ module LanguagesHelper
     t("languages.#{entity.slug}", default: entity.slug)
   end
 
-  def languages_for_select
-    options = [[t(:not_set), '']]
+  # @param [Boolean] include_blank
+  def languages_for_select(include_blank = true)
+    options = []
+    options << [t(:not_set), ''] if include_blank
     Language.ordered_by_priority.each do |language|
       options << ["#{language.code}: #{language_name(language)}", language.id]
     end

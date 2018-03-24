@@ -5,7 +5,7 @@ module Biovision
 
       included do
         helper_method :current_page, :param_from_request
-        helper_method :current_user
+        helper_method :current_user, :current_language
         helper_method :agent
       end
 
@@ -31,6 +31,13 @@ module Biovision
       # @return [User|nil]
       def current_user
         @current_user ||= Token.user_by_token cookies['token'], true
+      end
+
+      # Get current language from locale
+      #
+      # @return [Language]
+      def current_language
+        @current_language ||= Language.find_by(code: locale)
       end
 
       # @return [Agent]
