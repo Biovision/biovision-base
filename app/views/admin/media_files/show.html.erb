@@ -12,10 +12,10 @@
       <% if @entity.media_folder.nil? %>
         <%= return_icon(admin_media_files_path) %>
       <% else %>
-        <%= return_icon(admin_media_folder_path(@entity.media_folder_id)) %>
+        <%= return_icon(admin_media_folder_path(id: @entity.media_folder_id)) %>
       <% end %>
     </li>
-    <li><%= edit_icon(edit_media_file_path(@entity.id)) %></li>
+    <li><%= edit_icon(edit_media_file_path(id: @entity.id)) %></li>
   </ul>
 
   <dl>

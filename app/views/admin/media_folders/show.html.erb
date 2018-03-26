@@ -15,10 +15,10 @@
       <% if @entity.parent.nil? %>
         <%= return_icon(admin_media_folders_path) %>
       <% else %>
-        <%= return_icon(admin_media_folder_path(@entity.parent_id)) %>
+        <%= return_icon(admin_media_folder_path(id: @entity.parent_id)) %>
       <% end %>
     </li>
-    <li><%= edit_icon(edit_media_folder_path(@entity.id)) %></li>
+    <li><%= edit_icon(edit_media_folder_path(id: @entity.id)) %></li>
   </ul>
 
   <% unless @entity.snapshot.blank? %>
@@ -54,8 +54,10 @@
     <dt><%= t('.media_files') %></dt>
     <dd>
       <%=
-        link_to(t(:media_file_count, count: @entity.media_files_count),
-                files_admin_media_folder_path(@entity.id))
+        link_to(
+            t(:media_file_count, count: @entity.media_files_count),
+            files_admin_media_folder_path(id: @entity.id)
+        )
       %>
     </dd>
 

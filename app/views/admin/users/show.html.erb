@@ -12,18 +12,18 @@
   <ul class="actions">
     <li><%= back_icon(admin_users_path) %></li>
     <% unless @entity.deleted? %>
-      <li><%= world_icon(user_profile_path(@entity.screen_name)) %></li>
-      <li><%= edit_icon(edit_user_path(@entity.id)) %></li>
+      <li><%= world_icon(user_profile_path(slug: @entity.screen_name)) %></li>
+      <li><%= edit_icon(edit_user_path(id: @entity.id)) %></li>
     <% end %>
   </ul>
 
   <nav>
     <ul>
-      <li><%= link_to t('.privileges'), privileges_admin_user_path(@entity.id) %></li>
-      <li><%= link_to t('admin.tokens.index.heading'), tokens_admin_user_path(@entity) %></li>
-      <li><%= link_to t('admin.codes.index.heading'), codes_admin_user_path(@entity) %></li>
+      <li><%= link_to t('.privileges'), privileges_admin_user_path(id: @entity.id) %></li>
+      <li><%= link_to t('admin.tokens.index.heading'), tokens_admin_user_path(id: @entity.id) %></li>
+      <li><%= link_to t('admin.codes.index.heading'), codes_admin_user_path(id: @entity.id) %></li>
       <% unless @entity == current_user %>
-        <li><%= link_to t('.authenticate'), authenticate_admin_user_path(@entity.id), method: :post %></li>
+        <li><%= link_to t('.authenticate'), authenticate_admin_user_path(id: @entity.id), method: :post %></li>
       <% end %>
     </ul>
   </nav>

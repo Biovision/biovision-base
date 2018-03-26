@@ -8,7 +8,7 @@ class PrivilegesController < AdminController
     @entity = Privilege.new(creation_parameters)
     if @entity.save
       cache_relatives
-      redirect_to admin_privilege_path(@entity)
+      redirect_to admin_privilege_path(id: @entity.id)
     else
       render :new, status: :bad_request
     end
@@ -22,7 +22,7 @@ class PrivilegesController < AdminController
   def update
     if @entity.update(entity_parameters)
       cache_relatives
-      redirect_to admin_privilege_path(@entity), notice: t('privileges.update.success')
+      redirect_to admin_privilege_path(id: @entity.id), notice: t('privileges.update.success')
     else
       render :edit, status: :bad_request
     end
@@ -51,7 +51,7 @@ class PrivilegesController < AdminController
 
   def restrict_editing
     if @entity.locked?
-      redirect_to admin_privilege_path(@entity), alert: t('privileges.edit.forbidden')
+      redirect_to admin_privilege_path(id: @entity.id), alert: t('privileges.edit.forbidden')
     end
   end
 

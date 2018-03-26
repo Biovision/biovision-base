@@ -10,7 +10,7 @@ class EditablePagesController < AdminController
   def create
     @entity = EditablePage.new(creation_parameters)
     if @entity.save
-      form_processed_ok(admin_editable_page_path(@entity.id))
+      form_processed_ok(admin_editable_page_path(id: @entity.id))
     else
       form_processed_with_error(:new)
     end
@@ -24,7 +24,7 @@ class EditablePagesController < AdminController
   def update
     if @entity.update(entity_parameters)
       flash[:notice] = t('editable_pages.update.success')
-      form_processed_ok(admin_editable_page_path(@entity.id))
+      form_processed_ok(admin_editable_page_path(id: @entity.id))
     else
       form_processed_with_error(:edit)
     end

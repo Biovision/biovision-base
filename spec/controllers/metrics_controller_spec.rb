@@ -6,8 +6,8 @@ RSpec.describe MetricsController, type: :controller do
   let(:valid_update_params) { { id: entity.id, metric: { name: 'Changed' } } }
   let(:invalid_create_params) { { metric: { name: ' ' } } }
   let(:invalid_update_params) { { id: entity.id, metric: { name: ' ' } } }
-  let(:path_after_create) { admin_metric_path(entity.class.last.id) }
-  let(:path_after_update) { admin_metric_path(entity.id) }
+  let(:path_after_create) { admin_metric_path(id: entity.class.last.id) }
+  let(:path_after_update) { admin_metric_path(id: entity.id) }
   let(:path_after_destroy) { admin_metrics_path }
 
   it_behaves_like 'edit_entity_with_required_privilege'

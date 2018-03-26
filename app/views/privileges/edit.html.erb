@@ -11,7 +11,7 @@
 <article>
   <h1><%= t('.title') %></h1>
   <ul class="actions">
-    <li><%= back_icon(admin_privilege_path(@entity.id)) %></li>
+    <li><%= back_icon(admin_privilege_path(id: @entity.id)) %></li>
     <% if @entity.can_be_deleted? %>
         <li class="danger"><%= destroy_icon(@entity) %></li>
     <% end %>

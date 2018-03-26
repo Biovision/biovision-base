@@ -15,7 +15,7 @@ class MediaFilesController < ApplicationController
   def create
     @entity = MediaFile.new(creation_parameters)
     if @entity.save
-      next_page = admin_media_file_path(@entity.id)
+      next_page = admin_media_file_path(id: @entity.id)
       respond_to do |format|
         format.html { redirect_to(next_page) }
         format.json { render json: { links: { self: next_page } } }
@@ -33,7 +33,7 @@ class MediaFilesController < ApplicationController
   # patch /media_files/:id
   def update
     if @entity.update entity_parameters
-      next_page = admin_media_file_path(@entity)
+      next_page = admin_media_file_path(id: @entity.id)
       respond_to do |format|
         format.html { redirect_to(next_page, notice: t('media_files.update.success')) }
         format.json { render json: { links: { self: next_page } } }
@@ -77,7 +77,7 @@ class MediaFilesController < ApplicationController
 
   def restrict_editing
     unless @entity.editable_by?(current_user)
-      redirect_to admin_media_file_path(@entity.id), alert: t('media_files.edit.forbidden')
+      redirect_to admin_media_file_path(id: @entity.id), alert: t('media_files.edit.forbidden')
     end
   end
 

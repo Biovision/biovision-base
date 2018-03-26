@@ -2,12 +2,12 @@ module MediaHelper
   # @param [MediaFolder] entity
   # @param [String] text
   def admin_media_folder_link(entity, text = entity.name)
-    link_to(text, admin_media_folder_path(entity.id))
+    link_to(text, admin_media_folder_path(id: entity.id))
   end
 
   # @param [MediaFile] entity
   def admin_media_file_link(entity)
-    link_to(entity.name, admin_media_file_path(entity.id))
+    link_to(entity.name, admin_media_file_path(id: entity.id))
   end
 
   # @param [MediaFolder|MediaFile] entity

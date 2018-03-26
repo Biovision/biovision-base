@@ -8,7 +8,7 @@
 <article>
   <h1><%= t('.heading') %></h1>
   <ul class="actions">
-    <li><%= back_icon(admin_user_path(@entity.id)) %></li>
+    <li><%= back_icon(admin_user_path(id: @entity.id)) %></li>
     <% unless @entity.deleted? %>
         <li class="danger"><%= destroy_icon @entity %></li>
     <% end %>

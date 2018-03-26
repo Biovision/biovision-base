@@ -14,5 +14,5 @@
     </div>
   <% end %>
 
-  <%= render partial: 'shared/admin/toggleable', locals: { entity: entity, url: toggle_admin_feedback_request_path(entity.id) } %>
+  <%= render partial: 'shared/admin/toggleable', locals: { entity: entity, url: toggle_admin_feedback_request_path(id: entity.id) } %>
 </div>

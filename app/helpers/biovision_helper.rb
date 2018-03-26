@@ -59,8 +59,8 @@ module BiovisionHelper
   # @param [Hash] options
   def destroy_icon(entity, title = t(:delete), options = {})
     default = {
-        method: :delete,
-        data: { confirm: t(:are_you_sure), tootik: title, tootik_conf: 'danger' }
+      method: :delete,
+      data:   { confirm: t(:are_you_sure), tootik: title, tootik_conf: 'danger' }
     }
     icon_with_link('biovision/base/icons/destroy.svg', entity, title, default.merge(options))
   end
@@ -70,8 +70,8 @@ module BiovisionHelper
   # @param [Hash] options
   def destroy_path_icon(path, title = t(:delete), options = {})
     default = {
-        method: :delete,
-        data: { confirm: t(:are_you_sure), tootik: title, tootik_conf: 'danger' }
+      method: :delete,
+      data:   { confirm: t(:are_you_sure), tootik: title, tootik_conf: 'danger' }
     }
     icon_with_link('biovision/base/icons/destroy.svg', path, title, default.merge(options))
   end

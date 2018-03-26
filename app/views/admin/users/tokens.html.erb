@@ -9,7 +9,7 @@
   <h1><%= t('admin.tokens.index.heading') %></h1>
 
   <ul class="actions">
-    <li><%= back_icon(admin_user_path(@entity.id)) %></li>
+    <li><%= back_icon(admin_user_path(id: @entity.id)) %></li>
   </ul>
 
   <%= paginate @collection %>

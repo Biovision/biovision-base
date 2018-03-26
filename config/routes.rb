@@ -1,4 +1,22 @@
 Rails.application.routes.draw do
+  resources :agents, :browsers, only: [:update, :destroy]
+
+  resources :editable_pages, only: [:update, :destroy]
+  resources :stored_values, only: [:update, :destroy]
+
+  resources :users, only: [:update, :destroy]
+  resources :tokens, :codes, only: [:update, :destroy]
+
+  resources :metrics, only: [:update]
+
+  resources :privileges, only: [:update, :destroy]
+  resources :privilege_groups, only: [:update, :destroy]
+
+  resources :media_folders, only: [:update, :destroy]
+  resources :media_files, only: [:update, :destroy]
+
+  resources :feedback_requests, only: [:destroy]
+
   scope '(:locale)', constraints: { locale: /ru|en/ } do
     # Handling errors
     match '/400' => 'errors#bad_request', via: :all
@@ -117,30 +135,30 @@ Rails.application.routes.draw do
       resources :login_attempts, only: [:index]
     end
 
-    resources :agents, :browsers, except: [:index, :show]
+    resources :agents, :browsers, except: [:index, :show, :update, :destroy]
 
-    resources :editable_pages, except: [:index, :show]
-    resources :stored_values, except: [:index, :show]
+    resources :editable_pages, except: [:index, :show, :update, :destroy]
+    resources :stored_values, except: [:index, :show, :update, :destroy]
 
-    resources :users, except: [:index, :show] do
+    resources :users, except: [:index, :show, :update, :destroy] do
       collection do
         post 'check', defaults: { format: :json }
       end
     end
-    resources :tokens, :codes, except: [:index, :show]
+    resources :tokens, :codes, except: [:index, :show, :update, :destroy]
 
-    resources :metrics, only: [:edit, :update]
+    resources :metrics, only: [:edit]
 
-    resources :privileges, except: [:index, :show]
-    resources :privilege_groups, except: [:index, :show]
+    resources :privileges, except: [:index, :show, :update, :destroy]
+    resources :privilege_groups, except: [:index, :show, :update, :destroy]
 
-    resources :media_folders, except: [:index, :show]
-    resources :media_files, except: [:index, :show] do
+    resources :media_folders, except: [:index, :show, :update, :destroy]
+    resources :media_files, except: [:index, :show, :update, :destroy] do
       collection do
         post :ckeditor
       end
     end
 
-    resources :feedback_requests, only: [:create, :destroy]
+    resources :feedback_requests, only: [:create]
   end
 end

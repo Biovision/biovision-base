@@ -47,15 +47,11 @@ module Biovision
         @agent ||= Agent.named(request.user_agent || 'n/a')
       end
 
-      def default_url_options
-        { locale: I18n.locale }
-      end
-
-      protected
-
       def set_locale
         I18n.locale = params[:locale] || I18n.default_locale
       end
+
+      protected
 
       # Handle HTTP error with status 404 without raising exception
       #

@@ -1,7 +1,7 @@
 module CodesHelper
   # @param [Code] entity
   def admin_code_link(entity)
-    link_to entity.body, admin_code_path(entity.id)
+    link_to entity.body, admin_code_path(id: entity.id)
   end
 
   def code_types_for_select

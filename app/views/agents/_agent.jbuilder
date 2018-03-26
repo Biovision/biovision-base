@@ -14,7 +14,7 @@ json.agent do
       json.value agent.active
     end
   end
-  json.url api_agent_path(agent)
+  json.url api_agent_path(id: agent.id)
   json.browser agent.browser.nil? ? nil : agent.browser.name
   json.html render(partial: 'admin/agents/entity/in_list', locals: { agent: agent }, formats: [:html] )
 end

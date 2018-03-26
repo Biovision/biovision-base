@@ -12,7 +12,7 @@ class MediaFoldersController < AdminController
   def create
     @entity = MediaFolder.new(creation_parameters)
     if @entity.save
-      next_page = admin_media_folder_path(@entity.id)
+      next_page = admin_media_folder_path(id: @entity.id)
       respond_to do |format|
         format.html { redirect_to next_page }
         format.json { render json: { links: { self: next_page } } }
@@ -30,7 +30,7 @@ class MediaFoldersController < AdminController
   # patch /media_folders/:id
   def update
     if @entity.update(entity_parameters)
-      next_page = admin_media_folder_path(@entity.id)
+      next_page = admin_media_folder_path(id: @entity.id)
       respond_to do |format|
         format.html { redirect_to next_page }
         format.json { render json: { links: { self: next_page } } }

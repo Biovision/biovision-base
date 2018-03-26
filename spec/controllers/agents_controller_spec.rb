@@ -7,8 +7,8 @@ RSpec.describe AgentsController, type: :controller do
   let(:valid_update_params) { { id: entity.id, agent: { name: 'Changed' } } }
   let(:invalid_create_params) { { agent: { name: ' ' } } }
   let(:invalid_update_params) { { id: entity.id, agent: { name: ' ' } } }
-  let(:path_after_create) { admin_agent_path(entity.class.last.id) }
-  let(:path_after_update) { admin_agent_path(entity.id) }
+  let(:path_after_create) { admin_agent_path(id: entity.class.last.id) }
+  let(:path_after_update) { admin_agent_path(id: entity.id) }
   let(:path_after_destroy) { admin_agents_path }
 
   before :each do

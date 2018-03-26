@@ -1,7 +1,7 @@
 module EditablePagesHelper
   # @param [EditablePage] entity
   def admin_editable_page_link(entity)
-    link_to(entity.name, admin_editable_page_path(entity.id))
+    link_to(entity.name, admin_editable_page_path(id: entity.id))
   end
 
   # @param [EditablePage] entity

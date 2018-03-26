@@ -18,7 +18,7 @@ class UsersController < ApplicationController
   def create
     @entity = User.new(creation_parameters)
     if @entity.save
-      form_processed_ok(admin_user_path(@entity.id))
+      form_processed_ok(admin_user_path(id: @entity.id))
     else
       form_processed_with_error(:new)
     end
@@ -31,7 +31,7 @@ class UsersController < ApplicationController
   # patch /users/:id
   def update
     if @entity.update(entity_parameters)
-      form_processed_ok(admin_user_path(@entity.id))
+      form_processed_ok(admin_user_path(id: @entity.id))
     else
       form_processed_with_error(:edit)
     end

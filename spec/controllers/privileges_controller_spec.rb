@@ -7,8 +7,8 @@ RSpec.describe PrivilegesController, type: :controller do
   let(:valid_update_params) { { id: entity.id, privilege: { name: 'Changed' } } }
   let(:invalid_create_params) { { privilege: { name: ' ' } } }
   let(:invalid_update_params) { { id: entity.id, privilege: { name: ' ' } } }
-  let(:path_after_create) { admin_privilege_path(entity.class.last.id) }
-  let(:path_after_update) { admin_privilege_path(entity.id) }
+  let(:path_after_create) { admin_privilege_path(id: entity.class.last.id) }
+  let(:path_after_update) { admin_privilege_path(id: entity.id) }
   let(:path_after_destroy) { admin_privileges_path }
 
   before :each do

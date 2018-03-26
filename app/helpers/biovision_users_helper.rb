@@ -27,7 +27,7 @@ module BiovisionUsersHelper
     return I18n.t(:anonymous) if entity.nil?
 
     text = entity.profile_name
-    link_to(text, admin_user_path(entity.id), class: 'profile')
+    link_to(text, admin_user_path(id: entity.id), class: 'profile')
   end
 
   # @param [User] entity
@@ -39,7 +39,7 @@ module BiovisionUsersHelper
 
   # @param [Token] entity
   def admin_token_link(entity)
-    link_to entity.name, admin_token_path(entity.id)
+    link_to entity.name, admin_token_path(id: entity.id)
   end
 
   # @param [User] entity

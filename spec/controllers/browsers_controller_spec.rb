@@ -7,8 +7,8 @@ RSpec.describe BrowsersController, type: :controller do
   let(:valid_update_params) { { id: entity.id, browser: { name: 'Changed' } } }
   let(:invalid_create_params) { { browser: { name: ' ' } } }
   let(:invalid_update_params) { { id: entity.id, browser: { name: ' ' } } }
-  let(:path_after_create) { admin_browser_path(entity.class.last.id) }
-  let(:path_after_update) { admin_browser_path(entity.id) }
+  let(:path_after_create) { admin_browser_path(id: entity.class.last.id) }
+  let(:path_after_update) { admin_browser_path(id: entity.id) }
   let(:path_after_destroy) { admin_browsers_path }
 
   before :each do

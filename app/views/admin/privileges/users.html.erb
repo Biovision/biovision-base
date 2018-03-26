@@ -11,7 +11,7 @@
 <article>
   <h1><%= @entity.full_title %></h1>
   <ul class="actions">
-    <li><%= return_icon(admin_privilege_path(@entity)) %></li>
+    <li><%= return_icon(admin_privilege_path(id: @entity.id)) %></li>
   </ul>
 
   <section>

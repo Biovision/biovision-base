@@ -8,7 +8,7 @@ class MetricsController < AdminController
   # patch /metrics/:id
   def update
     if @entity.update entity_parameters
-      redirect_to admin_metric_path(@entity.id), notice: t('metrics.update.success')
+      redirect_to admin_metric_path(id: @entity.id), notice: t('metrics.update.success')
     else
       render :edit, status: :bad_request
     end

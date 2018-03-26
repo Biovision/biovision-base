@@ -10,7 +10,7 @@
   <ul class="actions">
     <li><%= return_icon(admin_agents_path) %></li>
     <% unless @entity.locked? %>
-        <li><%= edit_icon edit_agent_path(@entity.id) %></li>
+        <li><%= edit_icon edit_agent_path(id: @entity.id) %></li>
         <li class="danger"><%= destroy_icon @entity %></li>
     <% end %>
   </ul>
@@ -24,5 +24,13 @@
       </dl>
   <% end %>
 
-  <%= render partial: 'shared/admin/toggleable', locals: { entity: @entity, url: toggle_admin_agent_path(@entity.id) } %>
+  <%=
+    render(
+        partial: 'shared/admin/toggleable',
+        locals: {
+            entity: @entity,
+            url: toggle_admin_agent_path(id: @entity.id)
+        }
+    )
+  %>
 </article>

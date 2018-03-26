@@ -11,7 +11,7 @@
     <% if @entity.parent.nil? %>
       <li><%= return_icon(admin_media_folders_path) %></li>
     <% else %>
-      <li><%= return_icon(admin_media_folder_path(@entity.parent_id)) %></li>
+      <li><%= return_icon(admin_media_folder_path(id: @entity.parent_id)) %></li>
     <% end %>
   </ul>
 

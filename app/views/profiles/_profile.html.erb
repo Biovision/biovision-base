@@ -3,7 +3,7 @@
 
   <% if current_user_has_privilege?(:administrator) %>
       <ul class="actions">
-        <li><%= gear_icon(admin_user_path(user)) %></li>
+        <li><%= gear_icon(admin_user_path(id: user.id)) %></li>
       </ul>
   <% end %>
 

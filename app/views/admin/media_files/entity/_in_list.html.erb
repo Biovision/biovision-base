@@ -20,7 +20,7 @@
 
   <ul class="actions">
     <% if entity.editable_by?(current_user) %>
-      <li><%= edit_icon(edit_media_file_path(entity.id)) %></li>
+      <li><%= edit_icon(edit_media_file_path(id: entity.id)) %></li>
     <% end %>
   </ul>
 </div>

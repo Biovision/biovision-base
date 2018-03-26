@@ -11,7 +11,7 @@ class PrivilegeGroupsController < AdminController
   def create
     @entity = PrivilegeGroup.new entity_parameters
     if @entity.save
-      redirect_to admin_privilege_group_path(@entity)
+      redirect_to admin_privilege_group_path(id: @entity.id)
     else
       render :new, status: :bad_request
     end
@@ -24,7 +24,7 @@ class PrivilegeGroupsController < AdminController
   # patch /privilege_groups/:id
   def update
     if @entity.update entity_parameters
-      redirect_to admin_privilege_group_path(@entity), notice: t('privilege_groups.update.success')
+      redirect_to admin_privilege_group_path(id: @entity.id), notice: t('privilege_groups.update.success')
     else
       render :edit, status: :bad_request
     end

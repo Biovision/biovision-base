@@ -10,7 +10,7 @@ class TokensController < AdminController
   def create
     @entity = Token.new(creation_parameters)
     if @entity.save
-      redirect_to admin_token_path(@entity)
+      redirect_to admin_token_path(id: @entity.id)
     else
       render :new, status: :bad_request
     end
@@ -23,7 +23,7 @@ class TokensController < AdminController
   # patch /tokens/:id
   def update
     if @entity.update(entity_parameters)
-      redirect_to admin_token_path(@entity), notice: t('tokens.update.success')
+      redirect_to admin_token_path(id: @entity.id), notice: t('tokens.update.success')
     else
       render :edit, status: :bad_request
     end

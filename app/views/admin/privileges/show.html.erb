@@ -13,14 +13,14 @@
   <ul class="actions">
     <li><%= return_icon(admin_privileges_path) %></li>
     <% unless @entity.locked? %>
-        <li><%= edit_icon(edit_privilege_path(@entity.id)) %></li>
+        <li><%= edit_icon(edit_privilege_path(id: @entity.id)) %></li>
     <% end %>
   </ul>
 
   <dl>
     <% unless @entity.parent.nil? %>
         <dt><%= t('activerecord.attributes.privilege.parent_id') %></dt>
-        <dd><%= link_to @entity.parent.name, admin_privilege_path(@entity.parent_id) %></dd>
+        <dd><%= link_to @entity.parent.name, admin_privilege_path(id: @entity.parent_id) %></dd>
     <% end %>
     <dt><%= t('activerecord.attributes.privilege.slug') %></dt>
     <dd><%= @entity.slug %></dd>
@@ -44,11 +44,11 @@
     <% end %>
   </dl>
 
-  <%= render partial: 'shared/admin/toggleable', locals: { entity: @entity, url: toggle_admin_privilege_path(@entity.id) } %>
+  <%= render partial: 'shared/admin/toggleable', locals: { entity: @entity, url: toggle_admin_privilege_path(id: @entity.id) } %>
 
   <nav>
     <ul>
-      <li><%= link_to t(:user_count, count: @entity.users_count), users_admin_privilege_path(@entity.id) %></li>
+      <li><%= link_to t(:user_count, count: @entity.users_count), users_admin_privilege_path(id: @entity.id) %></li>
     </ul>
   </nav>
 

@@ -9,7 +9,7 @@
   <h1><%= t('.title') %></h1>
 
   <ul class="actions">
-    <li><%= return_icon(admin_code_path(@entity.id)) %></li>
+    <li><%= return_icon(admin_code_path(id: @entity.id)) %></li>
     <li class="danger"><%= destroy_icon(@entity) %></li>
   </ul>
 

@@ -9,7 +9,7 @@
   <h1><%= t('.heading') %></h1>
 
   <ul class="actions">
-    <li><%= return_icon(admin_editable_page_path(@entity.id)) %></li>
+    <li><%= return_icon(admin_editable_page_path(id: @entity.id)) %></li>
     <li class="danger"><%= destroy_icon(@entity) %></li>
   </ul>
 

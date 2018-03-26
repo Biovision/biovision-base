@@ -10,12 +10,12 @@
     <li><%= create_icon new_browser_path %></li>
     <li><%= return_icon admin_browsers_path %></li>
     <% unless @entity.locked? %>
-        <li><%= edit_icon edit_browser_path(@entity) %></li>
+        <li><%= edit_icon edit_browser_path(id: @entity.id) %></li>
         <li class="danger"><%= destroy_icon @entity %></li>
     <% end %>
   </ul>
 
-  <%= render partial: 'shared/admin/toggleable', locals: { entity: @entity, url: toggle_admin_browser_path(@entity.id) } %>
+  <%= render partial: 'shared/admin/toggleable', locals: { entity: @entity, url: toggle_admin_browser_path(id: @entity.id) } %>
 
   <section id="browser-agents">
     <h2><%= t('admin.agents.index.heading') %></h2>

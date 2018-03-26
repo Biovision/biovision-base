@@ -11,7 +11,7 @@ class AgentsController < AdminController
   def create
     @entity = Agent.new entity_parameters
     if @entity.save
-      redirect_to admin_agent_path(@entity)
+      redirect_to admin_agent_path(id: @entity.id)
     else
       render :new, status: :bad_request
     end
@@ -28,7 +28,7 @@ class AgentsController < AdminController
   # patch /agents/:id
   def update
     if @entity.update entity_parameters
-      redirect_to admin_agent_path(@entity), notice: t('agents.update.success')
+      redirect_to admin_agent_path(id: @entity.id), notice: t('agents.update.success')
     else
       render :edit, status: :bad_request
     end
@@ -57,7 +57,7 @@ class AgentsController < AdminController
 
   def restrict_editing
     if @entity.locked?
-      redirect_to admin_agent_path(@entity), alert: t('agents.edit.forbidden')
+      redirect_to admin_agent_path(id: @entity.id), alert: t('agents.edit.forbidden')
     end
   end
 

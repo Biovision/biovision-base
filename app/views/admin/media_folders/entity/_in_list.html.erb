@@ -10,7 +10,7 @@
     <%= editor_user_link(entity.user) %>
   </div>
   <div class="secondary info">
-    <%= link_to(t(:media_file_count, count: entity.media_files_count), files_admin_media_folder_path(entity.id)) %>
+    <%= link_to(t(:media_file_count, count: entity.media_files_count), files_admin_media_folder_path(id: entity.id)) %>
     (<%= t(:total) %> <%= entity.file_count %>)
   </div>
   <% if entity.children_cache.any? %>
@@ -26,7 +26,7 @@
 
   <% if entity.editable_by?(current_user) %>
     <ul class="actions">
-      <li><%= edit_icon(edit_media_folder_path(entity.id)) %></li>
+      <li><%= edit_icon(edit_media_folder_path(id: entity.id)) %></li>
     </ul>
   <% end %>
 </div>

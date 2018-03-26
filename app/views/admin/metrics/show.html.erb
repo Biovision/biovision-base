@@ -9,12 +9,12 @@
 
   <ul class="actions">
     <li><%= return_icon(admin_metrics_path) %></li>
-    <li><%= edit_icon(edit_metric_path(@entity.id)) %></li>
+    <li><%= edit_icon(edit_metric_path(id: @entity.id)) %></li>
   </ul>
 
   <div><%= @entity.description %></div>
 
-  <canvas id="metric-chart" width="640" height="480" data-source="<%= data_admin_metric_path(@entity.id) %>"></canvas>
+  <canvas id="metric-chart" width="640" height="480" data-source="<%= data_admin_metric_path(id: @entity.id) %>"></canvas>
 </article>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js"></script>

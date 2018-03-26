@@ -9,7 +9,7 @@
 
   <ul class="actions">
     <li><%= return_icon(admin_tokens_path) %></li>
-    <li><%= edit_icon(edit_token_path(@entity)) %></li>
+    <li><%= edit_icon(edit_token_path(id: @entity.id)) %></li>
     <li class="danger"><%= destroy_icon(@entity) %></li>
   </ul>
 
@@ -39,5 +39,5 @@
     <% end %>
   </dl>
 
-  <%= render partial: 'shared/admin/toggleable', locals: { entity: @entity, url: toggle_admin_token_path(@entity.id) } %>
+  <%= render partial: 'shared/admin/toggleable', locals: { entity: @entity, url: toggle_admin_token_path(id: @entity.id) } %>
 </article>
