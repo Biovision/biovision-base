@@ -130,9 +130,9 @@ end
 -------------------------------
 
 ```ruby
-  root 'index#index'
-  
-  # mount Biovision::Base::Engine, at: '/', as: :biovision
+  scope '(:locale)', constraints: { locale: /ru|en/ } do
+    root 'index#index'  
+  end
 ```
 
 Добавления в `config/application_controller.rb`
@@ -142,6 +142,10 @@ end
 
 ```ruby
   include Biovision::Base::PrivilegeMethods
+
+  def default_url_options
+    params.key?(:locale) ? { locale: I18n.locale } : {}
+  end
 ```
 
 Если регионы используются, добавить вместо этого строку из модуля регионов.
@@ -245,3 +249,9 @@ end
 Для удобства запуска на сервере:
 
 `$ bundle binstub puma`
+
+Пример конфигурации nginx
+-------------------------
+
+```conf
+```
