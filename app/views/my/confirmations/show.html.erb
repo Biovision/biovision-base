@@ -1,6 +1,6 @@
 <% content_for :meta_title, t('.title') %>
 
-<article class="my-confirmation">
+<article class="profile-content my-confirmation">
   <h1><%= t('.title') %></h1>
   <% if current_user&.email_confirmed? %>
       <div class="message-box-notice"><%= t('activerecord.attributes.user.email_confirmed') %></div>
