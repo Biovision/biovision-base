@@ -3,6 +3,8 @@
     <li><%= render 'my/profiles/nav_item' %></li>
     <li><%= render 'my/tokens/nav_item' %></li>
     <li><%= render 'my/login_attempts/nav_item' %></li>
+    <%= render 'my/index/sidebar/biovision_courses' if Gem.loaded_specs.key?('biovision-courses') %>
+    <%= render 'my/index/index/custom_sidebar' %>
     <% if UserPrivilege.user_has_any_privilege?(current_user) %>
       <li><%= link_to t('admin.index.index.heading'), admin_path %></li>
     <% end %>
