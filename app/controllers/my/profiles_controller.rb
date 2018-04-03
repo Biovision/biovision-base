@@ -30,7 +30,7 @@ class My::ProfilesController < ApplicationController
   def update
     if current_user.update(user_parameters)
       flash[:notice] = t('my.profiles.update.success')
-      form_processed_ok(my_profile_path)
+      form_processed_ok(my_path)
     else
       form_processed_with_error(:edit)
     end
