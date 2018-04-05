@@ -28,7 +28,8 @@ class My::ProfilesController < ApplicationController
 
   # patch /my/profile
   def update
-    if current_user.update(user_parameters)
+    @entity = current_user
+    if @entity.update(user_parameters)
       flash[:notice] = t('my.profiles.update.success')
       form_processed_ok(my_path)
     else
