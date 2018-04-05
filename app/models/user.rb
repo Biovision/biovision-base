@@ -39,6 +39,7 @@ class User < ApplicationRecord
   before_save :normalize_slug
   before_save :prepare_search_string
 
+  validates_acceptance_of :consent
   validates_presence_of :screen_name, :email
   validates_format_of :screen_name, with: SCREEN_NAME_PATTERN, if: :native_slug?
   validates_format_of :email, with: EMAIL_PATTERN
@@ -66,7 +67,7 @@ class User < ApplicationRecord
   end
 
   def self.profile_parameters
-    %i(image allow_mail birthday)
+    %i(image allow_mail birthday consent)
   end
 
   def self.sensitive_parameters

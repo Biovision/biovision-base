@@ -51,6 +51,7 @@ en:
         allow_mail: "Allow email notifications"
         birthday: "Birthday"
         bot: "It is bot"
+        consent: "Consent for processing of personal data and acceptance of terms of service"
         email: "Email"
         email_confirmed: "Email is confirmed"
         foreign_slug: "Foreign slug"

@@ -142,6 +142,7 @@
   </dl>
 
   <div class="buttons">
+    <%= f.hidden_field :consent if entity.id.nil? %>
     <%= f.button t(:save), type: :submit, class: 'button-save' %>
   </div>
 <% end %>

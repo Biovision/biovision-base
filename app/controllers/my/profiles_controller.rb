@@ -6,7 +6,7 @@ class My::ProfilesController < ApplicationController
 
   # get /my/profile/new
   def new
-    @user = User.new
+    @entity = User.new
   end
 
   # post /my/profile
@@ -43,10 +43,10 @@ class My::ProfilesController < ApplicationController
   end
 
   def create_user
-    @user = User.new creation_parameters
-    if @user.save
+    @entity = User.new creation_parameters
+    if @entity.save
       Metric.register(User::METRIC_REGISTRATION)
-      create_token_for_user(@user)
+      create_token_for_user(@entity)
       redirect_after_creation
     else
       form_processed_with_error(:new)

@@ -11,7 +11,7 @@ class UsersController < ApplicationController
 
   # get /users/new
   def new
-    @entity = User.new
+    @entity = User.new(consent: true)
   end
 
   # post /users
@@ -64,7 +64,7 @@ class UsersController < ApplicationController
   end
 
   def creation_parameters
-    entity_parameters.merge(tracking_for_entity)
+    entity_parameters.merge(tracking_for_entity).merge(consent: true)
   end
 
   def profile_parameters
