@@ -64,6 +64,9 @@ end
 Изменения в `config/environments/production.rb`
 -----------------------------------------------
 
+Нужно раскомментировать строку `config.require_master_key = true` (на момент
+написания это `19` строка).
+
 Если при развёртывании не компилируется JS, нужно заменить строку
 `config.assets.js_compressor = :uglifier` на 
 `config.assets.js_compressor = Uglifier.new(harmony: true)` 
@@ -248,10 +251,72 @@ end
 
 Для удобства запуска на сервере:
 
-`$ bundle binstub puma`
+```bash
+bundle binstubs bundler --force
+bundle binstub puma
+```
 
 Пример конфигурации nginx
 -------------------------
 
 ```conf
+upstream example.com {
+  server unix:///var/www/example.com/shared/tmp/puma.sock;
+}
+
+# Перенаправление версий с www и без www с http на https
+#server {
+#  listen 80;
+#  server_name example.com www.example.com;
+#
+#  return 301 https://example.com$request_uri;
+#}
+
+# Перенаправление версий https с www на версию без www
+#server {
+#  listen 443 ssl http2;
+#  listen [::]:443 ssl http2;
+#  server_name www.example.com;
+#
+#  ssl_certificate /etc/letsencrypt/live/example.com/fullchain.pem;
+#  ssl_certificate_key /etc/letsencrypt/live/example.com/privkey.pem;
+#  include snippets/ssl-params.conf;
+#
+#  return 301 https://example.com$request_uri;
+#}
+
+server {
+  listen 80;
+#  listen 443 ssl http2;
+#  listen [::]:443 ssl http2;
+
+#  ssl_certificate /etc/letsencrypt/live/example.com/fullchain.pem;
+#  ssl_certificate_key /etc/letsencrypt/live/example.com/privkey.pem;
+#  include snippets/ssl-params.conf;
+
+  server_name example.com www.example.com;
+  root /var/www/example.com/current/public;
+  access_log /var/log/nginx/example.com-access.log combined;
+  error_log /var/log/nginx/example.com-error.log notice;
+
+  gzip on;
+  gzip_types text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript application/javascript;
+
+  location ~* ^.+\.(css|js|jpe?g|svg|txt|gif|png|ico)$ {
+    access_log off;
+    expires 7d;
+  }
+
+  location / {
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_set_header Host $host;
+
+    if (!-f $request_filename) {
+      proxy_pass http://example.com;
+      break;
+    }
+  }
+}
 ```
