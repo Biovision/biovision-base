@@ -15,7 +15,7 @@ class AboutController < ApplicationController
 
   # get /privacy
   def privacy
-    @editable_page = EditablePage.find_localized('tos', locale)
+    @editable_page = EditablePage.find_localized('privacy', locale)
 
     render :editable
   end
