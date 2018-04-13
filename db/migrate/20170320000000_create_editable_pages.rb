@@ -20,6 +20,7 @@ class CreateEditablePages < ActiveRecord::Migration[5.1]
         index: { ru: 'Главная страница', en: 'Main page' },
         about: { ru: 'О проекте', en: 'About' },
         tos: { ru: 'Пользовательское соглашение', en: 'Terms of service' },
+        privacy: { ru: 'Соглашение о конфиденциальности', en: 'Privacy' }
       }
 
       pages.each do |slug, names|

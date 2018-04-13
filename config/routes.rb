@@ -36,6 +36,7 @@ Rails.application.routes.draw do
     controller :about do
       get 'about' => :index
       get 'tos' => :tos
+      get 'privacy' => :privacy
     end
 
     scope 'u/:slug', controller: :profiles, constraints: { slug: /[^\/]+/ } do
