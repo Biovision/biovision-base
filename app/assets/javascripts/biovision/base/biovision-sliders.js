@@ -43,9 +43,30 @@ Biovision.sliders = {
             Biovision.sliders.behavior[type].left(list, delay);
         };
 
+        const handle_gesture = function () {
+            const x0 = Biovision.sliders.touch_state.x0;
+            const x1 = Biovision.sliders.touch_state.x1;
+
+            if (x0 < x1) {
+                slide_left();
+            } else if (x0 > x1) {
+                slide_right();
+            }
+        };
+
         slider.querySelector('button.prev').addEventListener('click', slide_left);
         slider.querySelector('button.next').addEventListener('click', slide_right);
-    }
+        slider.addEventListener('touchstart', function (event) {
+            Biovision.sliders.touch_state.x0 = event.changedTouches[0].pageX;
+            Biovision.sliders.touch_state.y0 = event.changedTouches[0].pageY;
+        }, false);
+        slider.addEventListener('touchend', function (event) {
+            Biovision.sliders.touch_state.x1 = event.changedTouches[0].pageX;
+            Biovision.sliders.touch_state.y1 = event.changedTouches[0].pageY;
+            handle_gesture();
+        }, false);
+    },
+    touch_state: {x0: 0, y0: 0, x1: 0, y1: 0}
 };
 
 document.addEventListener('DOMContentLoaded', function () {
