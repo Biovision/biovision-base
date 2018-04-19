@@ -19,6 +19,8 @@ class CreatePrivileges < ActiveRecord::Migration[5.1]
       add_foreign_key :privileges, :privileges, column: :parent_id, on_update: :cascade, on_delete: :cascade
 
       add_index :privileges, :slug, unique: true
+
+      create_privileges
     end
   end
 
