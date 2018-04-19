@@ -205,7 +205,7 @@ const Biovision = {
             element.addEventListener('blur', perform_check);
         });
     },
-    show_list_of_errors: function(entity_name, list) {
+    show_list_of_errors: function (entity_name, list) {
         const form = document.getElementById(entity_name + '-form');
         if (form) {
             let errors = form.querySelector('ol.errors');
@@ -470,6 +470,32 @@ function handle_ajax_failure(response) {
         console.log(response);
     }
 }
+
+/**
+ * Workaround for defective Safari behaviour with empty files
+ * @see https://github.com/rails/rails/issues/32440
+ */
+document.addEventListener('ajax:beforeSend', function (e) {
+    const formData = e.detail[1].data;
+
+    if (!(formData instanceof window.FormData) || !formData.keys) {
+        return;
+    }
+
+    const newFormData = new window.FormData();
+
+    Array.from(formData.entries()).forEach(function (entry) {
+        const value = entry[1];
+
+        if (value instanceof window.File && value.name === '' && value.size === 0) {
+            newFormData.append(entry[0], new window.Blob([]), '');
+        } else {
+            newFormData.append(entry[0], value);
+        }
+    });
+
+    e.detail[1].data = newFormData
+});
 
 /*
  *************

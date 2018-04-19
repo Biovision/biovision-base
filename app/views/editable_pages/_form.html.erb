@@ -1,4 +1,5 @@
-<%= form_with(model: entity, html: { id: "#{entity.class.to_s.underscore}-form" }) do |f| %>
+<% entity_name = entity.class.to_s.underscore %>
+<%= form_with(model: entity, html: { id: "#{entity_name}-form" }) do |f| %>
   <%= render partial: 'shared/list_of_errors', locals: { entity: entity } %>
 
   <dl>
@@ -21,7 +22,7 @@
 
     <dt><%= f.label :image %></dt>
     <dd>
-      <figure class="preview" role="group" id="editable_page-image">
+      <figure class="preview" role="group" id="<%= entity_name %>-image">
         <% if entity.image.blank? %>
           <%= f.label :image, image_tag('biovision/base/placeholders/image.svg') %>
         <% else %>
@@ -31,9 +32,9 @@
           <%=
             f.file_field(
                 :image,
-                id:     :editable_page_image,
+                id:     "#{entity_name}_image",
                 accept: 'image/jpeg,image/png',
-                data:   { image: 'editable_page-image' }
+                data:   { image: "#{entity_name}-image" }
             )
           %>
         </figcaption>
