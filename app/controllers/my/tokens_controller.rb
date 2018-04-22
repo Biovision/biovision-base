@@ -1,7 +1,6 @@
-class My::TokensController < ApplicationController
+class My::TokensController < ProfileController
   include ToggleableEntity
 
-  before_action :restrict_anonymous_access
   before_action :set_entity, except: [:index]
 
   # get /my

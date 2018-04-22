@@ -4,6 +4,8 @@ class My::ProfilesController < ApplicationController
   before_action :redirect_authorized_user, only: [:new, :create]
   before_action :restrict_anonymous_access, except: [:new, :create]
 
+  layout 'profile', only: [:show, :edit]
+
   # get /my/profile/new
   def new
     @entity = User.new
@@ -40,7 +42,7 @@ class My::ProfilesController < ApplicationController
   protected
 
   def redirect_authorized_user
-    redirect_to my_profile_path if current_user.is_a? User
+    redirect_to my_path if current_user.is_a? User
   end
 
   def create_user

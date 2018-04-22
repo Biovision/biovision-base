@@ -1,14 +1,5 @@
 <% content_for :meta_title, t('.title') %>
-<% content_for :breadcrumbs do %>
-  <span><%= t('.heading') %></span>
-<% end %>
 
 <article id="my-index" class="profile-content">
-  <div class="sidebar dashboard">
-    <%= render 'my/index/index/sidebar' %>
-  </div>
-
-  <div class="content">
-    <%= render 'my/index/index/dashboard' %>
-  </div>
+  <%= render 'my/index/index/dashboard' %>
 </article>

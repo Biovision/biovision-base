@@ -1,8 +1,4 @@
-class My::IndexController < ApplicationController
-  before_action :restrict_anonymous_access
-
-  # layout 'profile'
-
+class My::IndexController < ProfileController
   # get /my
   def index
   end
