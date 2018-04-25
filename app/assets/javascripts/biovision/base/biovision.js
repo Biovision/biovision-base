@@ -442,13 +442,22 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.querySelectorAll('form[data-remote]').forEach(function (form) {
         const button = form.querySelector('button[type=submit]');
+        const loading_message = form.querySelector('.loading_message');
 
         form.addEventListener('ajax:before', function () {
             button.disabled = true;
+
+            if (loading_message) {
+                loading_message.classList.remove('hidden');
+            }
         });
 
         form.addEventListener('ajax:complete', function () {
             button.disabled = false;
+
+            if (loading_message) {
+                loading_message.classList.add('hidden');
+            }
         });
     });
 
