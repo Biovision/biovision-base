@@ -1,6 +1,8 @@
 :root {
   --content-width: #{$content-width};
   --content-width-min: #{$content-width-min};
+  --spacer-xs: .5rem;
+  --spacer-s: 1rem;
 }
 
 html {
@@ -135,7 +137,7 @@ article {
       min-width: 1ch;
     }
 
-    input:not([type=checkbox]):not([type=radio]):not([size]):not([type=date]):not([max]),
+    input:not([type=checkbox]):not([type=radio]):not([size]):not([type=date]):not([max]):not([min]),
     textarea {
       width: 100%;
     }
@@ -192,6 +194,21 @@ article {
   }
 }
 
+.list-of-entities {
+  .data {
+    > div:first-of-type {
+      margin-bottom: var(--spacer-xs);
+    }
+
+    nav {
+      margin: var(--spacer-s) 0;
+
+      a:not(:last-of-type) {
+        margin-right: var(--spacer-xs);
+      }
+    }
+  }
+}
 
 nav.admin-breadcrumbs {
   margin-bottom: .8rem;
