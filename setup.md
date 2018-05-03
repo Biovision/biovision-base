@@ -101,8 +101,7 @@ production:
 --------------------------------------------
 
 ```ruby
-Rails.application.config.assets.precompile << %w(admin.scss)
-Rails.application.config.assets.precompile << %w(biovision/base/**/*)
+Rails.application.config.assets.precompile << %w(admin.scss biovision/base/**/*)
 ```
 
 Добавления в `spec/rails_helper.rb` (`$ rails generate rspec:install`)
@@ -244,10 +243,11 @@ end
 Перед запуском:
 ---------------
 
-После установки приложения нужно накатить миграции:
+После установки приложения нужно накатить миграции (в консоли):
 
- 1. `$ rails railties:install:migrations`
- 2. `$ rails db:migrate`
+ 1. `rails db:create`
+ 2. `rails railties:install:migrations`
+ 3. `rails db:migrate`
 
 Для удобства запуска на сервере:
 
@@ -259,7 +259,7 @@ bundle binstub puma
 Пример конфигурации nginx
 -------------------------
 
-```conf
+```nginx
 upstream example.com {
   server unix:///var/www/example.com/shared/tmp/puma.sock;
 }
