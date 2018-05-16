@@ -342,3 +342,7 @@ form {
     padding-top: 50%;
   }
 }
+
+input.control:not(:checked) + div {
+  display: none;
+}

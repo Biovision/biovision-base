@@ -24,8 +24,9 @@ module Biovision
       #
       # @param [Symbol] param
       # @return [String]
-      def param_from_request(param)
-        params[param].to_s.encode('UTF-8', 'UTF-8', invalid: :replace, replace: '')
+      def param_from_request(*param)
+        value = params.dig(*param)
+        value.to_s.encode('UTF-8', 'UTF-8', invalid: :replace, replace: '')
       end
 
       # Get current user from token cookie
