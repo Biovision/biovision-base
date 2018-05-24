@@ -187,7 +187,7 @@ const Biovision = {
                                 const errors = response.meta.errors;
 
                                 if (errors.hasOwnProperty(key)) {
-                                    container.innerHTML = errors[key];
+                                    container.innerHTML = errors[key].join('; ');
                                     container.classList.remove('hidden');
                                 } else {
                                     container.classList.add('hidden');

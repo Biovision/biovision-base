@@ -1,11 +1,12 @@
+<% model_name = entity.class.to_s.underscore %>
 <%=
   form_with(
       model: entity,
-      scope: 'user',
+      scope: model_name,
       url:   my_profile_path,
       class: 'new-my-profile',
-      id:    'user-form',
-      data:  { check_url: check_users_path }
+      id:    "#{model_name}-form",
+      data:  { check_url: check_my_profile_path }
   ) do |f|
 %>
   <%= render partial: 'shared/list_of_errors', locals: { entity: entity } %>
@@ -17,7 +18,7 @@
       <%=
         f.text_field(
             :screen_name,
-            id:        :user_screen_name,
+            id:        "#{model_name}_screen_name",
             required:  true,
             maxlength: User::SCREEN_NAME_LIMIT,
             pattern:   User::SCREEN_NAME_PATTERN_HTML,
@@ -36,7 +37,7 @@
       <%=
         f.password_field(
             :password,
-            id:        :user_password,
+            id:        "#{model_name}_password",
             required:  true,
             size:      nil,
             maxlength: 70,
@@ -54,7 +55,7 @@
       <%=
         f.password_field(
             :password_confirmation,
-            id:        :user_password_confirmation,
+            id:        "#{model_name}_password_confirmation",
             required:  true,
             size:      nil,
             maxlength: 70,
@@ -72,7 +73,7 @@
       <%=
         f.email_field(
             :email,
-            id:        :user_email,
+            id:        "#{model_name}_email",
             size:      nil,
             maxlength: User::EMAIL_LIMIT,
             required:  true,
@@ -86,8 +87,8 @@
 
   <ul class="flags">
     <li>
-      <%= check_box_tag 'user[consent]', '1', false, required: true %>
-      <%= label_tag :user_consent, t('.consent') %>
+      <%= f.check_box :consent, id: "#{model_name}_consent", required: true %>
+      <%= f.label :consent, t('.consent') %>
     </li>
     <li>
       <%= f.check_box :allow_mail, id: :user_allow_mail %>
@@ -95,7 +96,7 @@
     </li>
   </ul>
 
-  <div class="trap">
+  <div class="visually-hidden">
     <%= check_box_tag :agree, '1', false, tabindex: '-1' %>
     <%= label_tag :agree, t('.i_am_bot') %>
   </div>

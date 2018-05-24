@@ -126,7 +126,9 @@ Rails.application.routes.draw do
     namespace :my do
       get '/' => 'index#index'
 
-      resource :profile, except: [:destroy]
+      resource :profile, except: [:destroy] do
+        post 'check'
+      end
       resource :confirmation, :recovery, only: [:show, :create, :update]
       resources :tokens, only: [:index] do
         member do

@@ -2,9 +2,14 @@ class My::ProfilesController < ApplicationController
   include Authentication
 
   before_action :redirect_authorized_user, only: [:new, :create]
-  before_action :restrict_anonymous_access, except: [:new, :create]
+  before_action :restrict_anonymous_access, except: [:check, :new, :create]
 
   layout 'profile', only: [:show, :edit]
+
+  # post /my/profile/check
+  def check
+    @entity = User.new(creation_parameters)
+  end
 
   # get /my/profile/new
   def new

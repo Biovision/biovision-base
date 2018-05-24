@@ -11,7 +11,7 @@
       <%=
         f.text_field(
             :slug,
-            id:        :editable_page_slug,
+            id:        "#{model_name}_slug",
             size:      nil,
             maxlength: EditablePage::SLUG_LIMIT,
             required:  true
@@ -47,7 +47,7 @@
       <%=
         f.text_field(
             :name,
-            id:        :editable_page_name,
+            id:        "#{model_name}_name",
             size:      nil,
             maxlength: EditablePage::NAME_LIMIT,
             required:  true
@@ -61,7 +61,7 @@
       <%=
         f.text_field(
             :title,
-            id:        :editable_page_title,
+            id:        "#{model_name}_title",
             size:      nil,
             maxlength: EditablePage::META_LIMIT
         )
@@ -74,7 +74,7 @@
       <%=
         f.text_field(
             :keywords,
-            id:        :editable_page_keywords,
+            id:        "#{model_name}_keywords",
             size:      nil,
             maxlength: EditablePage::META_LIMIT
         )
@@ -87,7 +87,7 @@
       <%=
         f.text_field(
             :description,
-            id:        :editable_page_description,
+            id:        "#{model_name}_description",
             size:      nil,
             maxlength: EditablePage::META_LIMIT
         )
@@ -100,7 +100,7 @@
       <%=
         f.text_area(
             :body,
-            id:       :editable_page_body,
+            id:       "#{model_name}_body",
             cols:     80,
             rows:     25,
             required: true,

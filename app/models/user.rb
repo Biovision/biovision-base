@@ -40,11 +40,11 @@ class User < ApplicationRecord
   before_save :prepare_search_string
 
   validates_acceptance_of :consent
-  validates_presence_of :screen_name, :email
+  validates_presence_of :screen_name
   validates_format_of :screen_name, with: SCREEN_NAME_PATTERN, if: :native_slug?
-  validates_format_of :email, with: EMAIL_PATTERN
+  validates_format_of :email, with: EMAIL_PATTERN, allow_blank: true
   validates :screen_name, uniqueness: { case_sensitive: false }
-  validates :email, uniqueness: { case_sensitive: false }
+  validates :email, uniqueness: { case_sensitive: false }, allow_nil: true
   validates_length_of :slug, maximum: SLUG_LIMIT
   validates_length_of :screen_name, maximum: SLUG_LIMIT
   validates_length_of :email, maximum: EMAIL_LIMIT
