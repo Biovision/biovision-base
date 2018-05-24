@@ -100,6 +100,13 @@ const Biovision = {
 
         return request;
     },
+    jsonAjaxRequest: function (method, url, onSuccess, onFailure) {
+        const request = Biovision.new_ajax_request(method, url, onSuccess, onFailure);
+
+        request.setRequestHeader('Content-Type', 'application/json');
+
+        return request;
+    },
     handle_ajax_failure: function (response) {
         console.log('AJAX failed', this);
         if (response.hasOwnProperty('responseJSON')) {
