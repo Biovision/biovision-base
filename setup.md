@@ -328,7 +328,7 @@ server {
   error_log /var/log/nginx/example.com-error.log notice;
 
   gzip on;
-  gzip_types text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript application/javascript;
+  gzip_types text/plain text/css application/json application/javascript image/svg+xml text/xml application/xml application/xml+rss;
 
   location ~* ^.+\.(css|js|jpe?g|svg|txt|gif|png|ico)$ {
     access_log off;
@@ -346,5 +346,13 @@ server {
       break;
     }
   }
+
+# Раскомментировать, если используется actioncable
+#  location /cable {
+#    proxy_pass http://example.com;
+#    proxy_http_version 1.1;
+#    proxy_set_header Upgrade $http_upgrade;
+#    proxy_set_header Connection "upgrade";
+#  }
 }
 ```
