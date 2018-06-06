@@ -70,10 +70,10 @@ end
 Если при развёртывании не компилируется JS, нужно заменить строку
 `config.assets.js_compressor = :uglifier` на 
 `config.assets.js_compressor = Uglifier.new(harmony: true)` 
-(в районе `27` строки).
+(в районе `26` строки).
 
 Нужно выставить уровень сообщения об ошибках в `:warn` 
-(`config.log_level = :warn` в районе `52` строки)
+(`config.log_level = :warn` в районе `54` строки)
 
 Актуализация `config/database.yml`
 ----------------------------------
