@@ -205,12 +205,25 @@ const Biovision = {
                 }
             });
 
-            request.send(new FormData(form));
+            const data = new window.FormData();
+            Array.from((new FormData(form)).entries()).forEach(function (entry) {
+                const value = entry[1];
+
+                if (value instanceof window.File && value.name === '' && value.size === 0) {
+                    data.append(entry[0], new window.Blob([]), '');
+                } else {
+                    data.append(entry[0], value);
+                }
+            });
+
+            request.send(data);
         };
 
-        form.querySelectorAll('[data-check]').forEach(function (element) {
-            element.addEventListener('blur', perform_check);
-        });
+        if (url.length) {
+            form.querySelectorAll('[data-check]').forEach(function (element) {
+                element.addEventListener('blur', perform_check);
+            });
+        }
     },
     show_list_of_errors: function (entity_name, list) {
         const form = document.getElementById(entity_name + '-form');
