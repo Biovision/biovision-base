@@ -212,7 +212,9 @@ const Biovision = {
                 if (value instanceof window.File && value.name === '' && value.size === 0) {
                     data.append(entry[0], new window.Blob([]), '');
                 } else {
-                    data.append(entry[0], value);
+                    if (entry[0] !== '_method') {
+                        data.append(entry[0], value);
+                    }
                 }
             });
 
