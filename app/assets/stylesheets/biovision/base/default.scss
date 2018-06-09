@@ -1,11 +1,11 @@
 $font-family-main: "Roboto", sans-serif !default;
 $font-family-heading: $font-family-main !default;
 
-$font-size-large: 2rem !default;
-$font-size-increased: 1.6rem !default;
-$font-size-normal: 1.4rem !default;
-$font-size-decreased: 1.2rem !default;
-$font-size-small: 1rem !default;
+$font-size-large: 2.4rem !default;
+$font-size-increased: 1.8rem !default;
+$font-size-normal: 1.6rem !default;
+$font-size-decreased: 1.3rem !default;
+$font-size-small: 1.1rem !default;
 
 $content-width: 100rem !default;
 $content-width-min: 32rem !default;
@@ -32,3 +32,11 @@ $background-footer: #fff !default;
 $link-color: rgb(20, 127, 255) !default;
 $link-color-visited: rgb(20, 77, 250) !default;
 $link-color-hover: rgb(255, 77, 20) !default;
+
+:root {
+  --font-size-large: #{$font-size-large};
+  --font-size-increased: #{$font-size-increased};
+  --font-size-normal: #{$font-size-normal};
+  --font-size-decreased: #{$font-size-decreased};
+  --font-size-small: #{$font-size-small};
+}

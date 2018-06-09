@@ -151,12 +151,14 @@ ru:
       footer:
         support: "Поддержка"
   about:
-    index:
-      nav_text: "О проекте"
-    tos:
-      nav_text: "Пользовательское соглашение"
+    contact:
+      nav_text: "Контакты"
     editable:
       title: "Раздел в разработке"
       heading: "Раздел наполняется"
       message: "Информация ещё не готова, зайдите позже"
+    index:
+      nav_text: "О проекте"
+    tos:
+      nav_text: "Пользовательское соглашение"
   total: "Всего"

@@ -4,6 +4,7 @@
 
 html {
   font: 10px $font-family-main;
+  height: 100%;
   margin: 0;
   padding: 0;
   -webkit-text-size-adjust: none;
@@ -58,7 +59,7 @@ article {
 button,
 input,
 textarea {
-  font-size: $font-size-normal;
+  font-size: inherit;
 }
 
 ul.actions {

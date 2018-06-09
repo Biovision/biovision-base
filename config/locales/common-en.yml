@@ -151,12 +151,14 @@ en:
       footer:
         support: "Support"
   about:
-    index:
-      nav_text: "About us"
-    tos:
-      nav_text: "Terms of service"
+    contact:
+      nav_text: "Contact"
     editable:
       title: "In progress"
       heading: "Content is not ready"
       message: "Page content is not ready, please come back later."
+    index:
+      nav_text: "About us"
+    tos:
+      nav_text: "Terms of service"
   total: "Total"

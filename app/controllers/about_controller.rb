@@ -19,4 +19,9 @@ class AboutController < ApplicationController
 
     render :editable
   end
+
+  # get /contact
+  def contact
+    @editable_page = EditablePage.find_localized('contact', locale)
+  end
 end
