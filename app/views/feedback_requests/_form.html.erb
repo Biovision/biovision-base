@@ -1,4 +1,7 @@
-<% form_id = 'feedback-request-form' unless local_assigns[:form_id] %>
+<%
+  form_id = 'feedback_request-form' unless local_assigns[:form_id]
+  entity = FeedbackRequest.new unless local_assigns[:entity]
+%>
 <%= form_with model: entity, html: { id: form_id } do |f| %>
   <div class="fields">
     <%=
@@ -11,31 +14,35 @@
           required:    true
       )
     %>
-    <%=
-      f.phone_field(
-          :phone,
-          size:        nil,
-          maxlength:   FeedbackRequest::PHONE_LIMIT,
-          placeholder: t('activerecord.attributes.feedback_request.phone'),
-          aria:        {
-              label: t('activerecord.attributes.feedback_request.phone')
-          },
-          required:    true
-      )
-    %>
-    <%=
-      f.email_field(
-          :email,
-          size:        nil,
-          maxlength:   FeedbackRequest::EMAIL_LIMIT,
-          placeholder: t('activerecord.attributes.feedback_request.email'),
-          aria:        {
-              label: t('activerecord.attributes.feedback_request.email')
-          },
-          required:    true
-      )
-    %>
-    <% if local_assigns[:accept_comment] %>
+    <% unless local_assigns[:hide_phone] %>
+      <%=
+        f.phone_field(
+            :phone,
+            size:        nil,
+            maxlength:   FeedbackRequest::PHONE_LIMIT,
+            placeholder: t('activerecord.attributes.feedback_request.phone'),
+            aria:        {
+                label: t('activerecord.attributes.feedback_request.phone')
+            },
+            required:    true
+        )
+      %>
+    <% end %>
+    <% unless local_assigns[:hide_email] %>
+      <%=
+        f.email_field(
+            :email,
+            size:        nil,
+            maxlength:   FeedbackRequest::EMAIL_LIMIT,
+            placeholder: t('activerecord.attributes.feedback_request.email'),
+            aria:        {
+                label: t('activerecord.attributes.feedback_request.email')
+            },
+            required:    true
+        )
+      %>
+    <% end %>
+    <% unless local_assigns[:hide_comment] %>
       <%= f.text_area(
               :comment,
               cols:        20,
@@ -48,9 +55,13 @@
           )
       %>
     <% end %>
-    <%= hidden_field_tag 'form_id', form_id %>
+    <div>
+      <%= f.check_box :consent, id: :feedback_request_consent %>
+      <%= f.label :consent %>
+    </div>
   </div>
   <div class="buttons">
+    <%= hidden_field_tag 'form_id', form_id %>
     <%= button_tag(t(:submit), type: :submit) %>
   </div>
 

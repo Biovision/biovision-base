@@ -5,6 +5,7 @@ ru:
     attributes:
       feedback_request:
         comment: "Комментарий"
+        consent: "Согласие на обработку персональных данных"
         email: "Почта"
         image: "Картинка"
         language: "Язык"
@@ -23,11 +24,6 @@ ru:
       dashboard:
         biovision_feedback:
           heading: "Обратная связь"
-  index:
-    index:
-      contact:
-        heading: "Контакты"
-        or_use_form: "Или оставьте ваши контактные данные и мы очень быстро свяжемся с вами"
   feedback_requests:
     form:
       result: "Спасибо, с Вами свяжутся"

@@ -7,6 +7,7 @@ class CreateFeedbackRequests < ActiveRecord::Migration[5.1]
         t.references :agent, foreign_key: { on_update: :cascade, on_delete: :nullify }
         t.inet :ip
         t.boolean :processed
+        t.boolean :consent, default: false, null: false
         t.string :name
         t.string :email
         t.string :phone
@@ -15,7 +16,12 @@ class CreateFeedbackRequests < ActiveRecord::Migration[5.1]
       end
 
       Privilege.create(slug: 'feedback_manager', name: 'Менеджер обратной связи')
-      StoredValue.create(slug: 'feedback_receiver', value: 'support@example.com', name: 'Адрес для запросов обратной связи', description: 'На этот адрес будут отправляться запросы обратной связи')
+      StoredValue.create(
+        slug: 'feedback_receiver',
+        value: 'support@example.com',
+        name: 'Адрес для запросов обратной связи',
+        description: 'На этот адрес будут отправляться запросы обратной связи'
+      )
     end
   end
 
