@@ -1,0 +1,15 @@
+<% content_for :meta_title, @editable_page&.title || t('.title') %>
+<% content_for :meta_description, @editable_page&.description %>
+<% content_for :breadcrumbs do %>
+  <span><%= t('.nav_text') %></span>
+<% end %>
+
+<article>
+  <h1><%= @editable_page&.title || t('.heading') %></h1>
+
+  <div class="text">
+    <%= raw(@editable_page&.body) %>
+  </div>
+
+  <%= render partial: 'feedback_requests/form' %>
+</article>

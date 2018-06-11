@@ -30,3 +30,7 @@ en:
     new_feedback_request:
       subject: "New feedback request"
       title: "New feebdack request came"
+  about:
+    contact:
+      title: "Contact"
+      heading: "Contact"

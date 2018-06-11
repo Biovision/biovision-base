@@ -31,3 +31,7 @@ ru:
     new_feedback_request:
       subject: "Новый запрос обратной связи"
       title: "Поступил новый запрос на обратную связь"
+  about:
+    contact:
+      title: "Контакты"
+      heading: "Контакты"
