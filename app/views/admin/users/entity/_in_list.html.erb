@@ -8,17 +8,33 @@
   <% end %>
   <% unless entity.email.blank? %>
       <div class="info">
-        <div><%= t('activerecord.attributes.user.email') %>: <%= entity.email %></div>
+        <%= t('activerecord.attributes.user.email') %>: <%= entity.email %>
       </div>
   <% end %>
+  <div class="info">
+    <%= t('activerecord.attributes.user.balance') %>:
+    <%= entity.balance %>
+  </div>
   <div class="secondary info">
     <div><%= t(:created_at) %>: <%= time_tag entity.created_at %></div>
     <% unless entity.last_seen.nil? %>
-        <div><%= t('activerecord.attributes.user.last_seen') %>: <%= time_tag entity.last_seen %></div>
+        <div>
+          <%= t('activerecord.attributes.user.last_seen') %>:
+          <%= time_tag entity.last_seen %>
+        </div>
     <% end %>
   </div>
 
-  <%= render partial: 'shared/admin/toggleable', locals: { entity: entity, url: toggle_admin_user_path(id: entity.id) } %>
+  <%=
+    render(
+        partial: 'shared/admin/toggleable',
+        locals: {
+            entity: entity,
+            url: toggle_admin_user_path(id: entity.id)
+        }
+    )
+  %>
+
   <ul class="actions">
     <li><%= edit_icon(edit_user_path(id: entity.id)) %></li>
     <li><%= world_icon(user_profile_path(slug: entity.screen_name)) %></li>

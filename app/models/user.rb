@@ -83,7 +83,7 @@ class User < ApplicationRecord
   def self.entity_parameters
     flags = %i(bot allow_login email_confirmed phone_confirmed foreign_slug)
 
-    new_profile_parameters + flags + %i(screen_name notice)
+    new_profile_parameters + flags + %i(screen_name notice balance)
   end
 
   def self.ids_range

@@ -7,6 +7,7 @@ class CreatePrivileges < ActiveRecord::Migration[5.1]
         t.boolean :locked, default: false, null: false
         t.boolean :deleted, default: false, null: false
         t.boolean :regional, default: false, null: false
+        t.boolean :administrative, default: true, null: false
         t.integer :priority, limit: 2, default: 1, null: false
         t.integer :users_count, default: 0, null: false
         t.string :parents_cache, default: '', null: false

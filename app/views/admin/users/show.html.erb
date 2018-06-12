@@ -18,17 +18,23 @@
   </ul>
 
   <nav>
-    <ul>
-      <li><%= link_to t('.privileges'), privileges_admin_user_path(id: @entity.id) %></li>
-      <li><%= link_to t('admin.tokens.index.heading'), tokens_admin_user_path(id: @entity.id) %></li>
-      <li><%= link_to t('admin.codes.index.heading'), codes_admin_user_path(id: @entity.id) %></li>
-      <% unless @entity == current_user %>
-        <li><%= link_to t('.authenticate'), authenticate_admin_user_path(id: @entity.id), method: :post %></li>
-      <% end %>
-    </ul>
+    <%= link_to(t('.privileges'), privileges_admin_user_path(id: @entity.id), class: 'button-nav') %>
+    <%= link_to(t('admin.tokens.index.heading'), tokens_admin_user_path(id: @entity.id), class: 'button-nav') %>
+    <%= link_to(t('admin.codes.index.heading'), codes_admin_user_path(id: @entity.id), class: 'button-nav') %>
+    <%= render partial: 'admin/users/entity/custom_nav', locals: { entity: @entity } %>
+    <% unless @entity == current_user %>
+      <%=
+        link_to(
+            t('.authenticate'),
+            authenticate_admin_user_path(id: @entity.id),
+            method: :post,
+            class: 'button-action'
+        )
+      %>
+    <% end %>
   </nav>
 
-  <figure role="group">
+  <figure role="group" class="preview">
     <%= profile_avatar @entity %>
     <figcaption>
       <%= @entity.slug %>
@@ -53,6 +59,9 @@
       <dt><%= t('activerecord.attributes.user.phone') %></dt>
       <dd><%= link_to @entity.phone, "tel:#{@entity.phone}" %></dd>
     <% end %>
+
+    <dt><%= t('activerecord.attributes.user.balance') %></dt>
+    <dd><%= @entity.balance %></dd>
 
     <%= render partial: 'admin/users/entity/profile', locals: { data: @entity.profile_data } %>
 

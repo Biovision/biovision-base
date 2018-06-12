@@ -49,6 +49,7 @@ en:
         agent: "User agent at the time if registration"
         allow_login: "Allow logging in"
         allow_mail: "Allow email notifications"
+        balance: "Balance"
         birthday: "Birthday"
         bot: "It is bot"
         consent: "Consent for processing of personal data and acceptance of terms of service"

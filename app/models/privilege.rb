@@ -6,7 +6,7 @@ class Privilege < ApplicationRecord
   SLUG_LIMIT        = 250
   PRIORITY_RANGE    = (1..32767)
 
-  toggleable :regional
+  toggleable :regional, :administrative
 
   belongs_to :parent, class_name: Privilege.to_s, optional: true
   has_many :children, class_name: Privilege.to_s, foreign_key: :parent_id
@@ -42,7 +42,7 @@ class Privilege < ApplicationRecord
   end
 
   def self.entity_parameters
-    %i(name slug priority description regional)
+    %i(administrative description name priority regional slug)
   end
 
   def self.creation_parameters
