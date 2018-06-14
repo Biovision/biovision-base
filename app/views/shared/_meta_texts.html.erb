@@ -4,12 +4,13 @@
 <% if content_for? :meta_keywords %>
   <meta name="keywords" content="<%= yield :meta_keywords %>" />
 <% end %>
+<meta property="og:site_name" content="<%= t('.site_name') %>" />
 <% if content_for? :meta_opengraph %>
   <%= yield :meta_opengraph %>
 <% else %>
+  <meta property="og:url" content="<%= url_for(only_path: false) %>" />
   <meta property="og:title" content="<%= content_for :meta_title %>" />
   <meta property="og:type" content="<%= content_for?(:meta_type) ? (yield :meta_type) : 'website' %>" />
-  <meta property="og:url" content="<%= url_for(only_path: false) %>" />
   <% if content_for? :meta_image %>
     <meta property="og:image" content="<%= yield :meta_image %>" />
   <% end %>
@@ -18,14 +19,13 @@
     <meta property="og:description" content="<%= yield :meta_description %>" />
   <% end %>
 <% end %>
-<meta property="og:site_name" content="<%= t('.site_name') %>" />
 <% if content_for? :meta_twitter %>
   <%= yield :meta_twitter %>
 <% else %>
   <meta property="twitter:title" content="<%= content_for :meta_title %>" />
-  <meta name="twitter:site" content="<%= t('.twitter_site') %>" />
-  <meta name="twitter:creator" content="<%= t('.twitter_creator') %>" />
   <% if content_for? :meta_image %>
     <meta name="twitter:image" content="<%= yield :meta_image %>" />
   <% end %>
 <% end %>
+<meta name="twitter:site" content="<%= t('.twitter_site') %>" />
+<meta name="twitter:creator" content="<%= t('.twitter_creator') %>" />
