@@ -15,6 +15,7 @@ ru:
   errors:
     messages:
       extension_blacklist_error: "имеет недопустимое расширение файла"
+      extension_whitelist_error: "имеет недопустимое расширение файла"
     error:
       bad_request:
         title: "Плохой запрос"
