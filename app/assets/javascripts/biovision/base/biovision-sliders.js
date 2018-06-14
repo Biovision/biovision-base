@@ -23,7 +23,30 @@ Biovision.sliders = {
                 li.style.opacity = '0';
                 setTimeout(move, delay);
             }
-        }
+        },
+        slide: {
+            left: function (list, delay) {
+                const li = list.querySelector('li:last-of-type');
+                const elementWidth = li.offsetWidth;
+                const restore_style = function () {
+                    li.style.marginLeft = '';
+                };
+
+                li.style.marginLeft = -elementWidth + 'px';
+                list.prepend(li);
+                setTimeout(restore_style, delay);
+            },
+            right: function (list, delay) {
+                const li = list.querySelector('li:first-of-type');
+                const elementWidth = li.offsetWidth;
+                const move = function () {
+                    list.append(li);
+                    li.style.marginLeft = '';
+                };
+                li.style.marginLeft = -elementWidth + 'px';
+                setTimeout(move, delay);
+            }
+        },
     },
     initialize: function (slider) {
         const delay = slider.getAttribute('data-delay') || 125;
