@@ -22,7 +22,6 @@ class MediaFile < ApplicationRecord
   validates_presence_of :file
   validates_length_of :name, maximum: NAME_LIMIT
   validates_length_of :description, maximum: DESCRIPTION_LIMIT
-  validates_uniqueness_of :name, scope: [:media_folder_id]
   validates_uniqueness_of :uuid
 
   scope :ordered_by_name, -> { order('name asc') }

@@ -62,7 +62,15 @@ class MediaFilesController < ApplicationController
 
     @entity = MediaFile.create!(parameters)
 
-    render layout: false
+    if params[:CKEditorFuncNum]
+      render layout: false
+    else
+      render json: {
+        uploaded: 1,
+        fileName: File.basename(@entity.name),
+        url: @entity.file.medium.url
+      }
+    end
   end
 
   protected
