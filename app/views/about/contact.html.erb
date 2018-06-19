@@ -1,4 +1,11 @@
-<%= render partial: 'editable_pages/entity/metadata', locals: { entity: @editable_page } %>
+<% unless @editable_page.nil? %>
+  <%=
+    render(
+        partial: 'editable_pages/entity/metadata',
+        locals: { entity: @editable_page }
+    )
+  %>
+<% end %>
 <% content_for :breadcrumbs do %>
   <span><%= t('.nav_text') %></span>
 <% end %>
