@@ -13,6 +13,9 @@
   <meta property="og:type" content="<%= content_for?(:meta_type) ? (yield :meta_type) : 'website' %>" />
   <% if content_for? :meta_image %>
     <meta property="og:image" content="<%= yield :meta_image %>" />
+    <% if content_for? :meta_image_alt %>
+      <meta property="og:image:alt" content="<%= yield :meta_image_alt %>" />
+    <% end %>
   <% end %>
   <%= yield :meta_type_extension if content_for? :meta_type_extension %>
   <% if content_for? :meta_description %>

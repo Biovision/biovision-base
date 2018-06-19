@@ -3,10 +3,7 @@
 <% content_for(:meta_description, entity.description) unless entity.description.blank? %>
 <% unless entity.image.blank? %>
   <% content_for :meta_image, (request.protocol + request.host_with_port + entity.image.url) %>
-<% end %>
-<% content_for :meta_type_extension do %>
-  <meta property="og:article:published_time" content="<%= entity.created_at.strftime('%F') %>"/>
-  <meta property="og:article:modified_time" content="<%= entity.updated_at.strftime('%F') %>"/>
+  <% content_for :meta_image_alt, entity.image_alt_text %>
 <% end %>
 <% content_for :meta_twitter do %>
   <meta name="twitter:card" content="summary_large_image"/>

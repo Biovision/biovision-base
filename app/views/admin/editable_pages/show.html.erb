@@ -9,6 +9,9 @@
 
   <ul class="actions">
     <li><%= back_icon(admin_editable_pages_path) %></li>
+    <% unless @entity.url.blank? %>
+      <li><%= world_icon(@entity.url, t(:view_as_visitor), locale: @entity.language&.code) %></li>
+    <% end %>
     <li><%= edit_icon(edit_editable_page_path(id: @entity.id)) %></li>
   </ul>
 
@@ -21,14 +24,20 @@
     <% unless @entity.image.blank? %>
       <dt><%= t('activerecord.attributes.editable_page.image') %></dt>
       <dd>
-        <figure>
+        <figure role="group" class="preview">
           <%= editable_page_image_medium(@entity) %>
+          <figcaption><%= @entity.image_alt_text %></figcaption>
         </figure>
       </dd>
     <% end %>
 
     <dt><%= t('activerecord.attributes.editable_page.slug') %></dt>
     <dd><%= @entity.slug %></dd>
+
+    <% unless @entity.url.blank? %>
+      <dt><%= t('activerecord.attributes.editable_page.url') %></dt>
+      <dd><%= @entity.url %></dd>
+    <% end %>
 
     <dt><%= t(:created_at) %></dt>
     <dd><%= time_tag(@entity.created_at) %></dd>

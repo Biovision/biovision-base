@@ -6,6 +6,11 @@
   <div class="info">
     <%= entity.slug %>
   </div>
+  <% unless entity.url.blank? %>
+    <div class="info">
+      URL: <%= entity.url %>
+    </div>
+  <% end %>
   <% unless entity.language.nil? %>
     <div class="secondary info">
       <%= t('activerecord.attributes.editable_page.language') %>:
@@ -15,5 +20,16 @@
 
   <ul class="actions">
     <li><%= edit_icon(edit_editable_page_path(id: entity.id)) %></li>
+    <% unless entity.url.blank? %>
+      <li><%= world_icon(entity.url, t(:view_as_visitor), locale: entity.language&.code) %></li>
+    <% end %>
+    <%=
+      render(
+          partial: 'shared/actions/priority_changer',
+          locals:  {
+              path: priority_admin_editable_page_path(id: entity.id)
+          }
+      )
+    %>
   </ul>
 </div>

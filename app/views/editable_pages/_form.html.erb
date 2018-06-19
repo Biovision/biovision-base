@@ -3,6 +3,18 @@
   <%= render partial: 'shared/list_of_errors', locals: { entity: entity } %>
 
   <dl>
+    <dt><%= f.label :priority %></dt>
+    <dd>
+      <%=
+        f.number_field(
+            :priority,
+            id: "#{model_name}_priority",
+            in: EditablePage::PRIORITY_RANGE,
+            required: true
+        )
+      %>
+    </dd>
+
     <dt><%= f.label :language_id %></dt>
     <dd><%= f.select :language_id, languages_for_select %></dd>
 
@@ -18,6 +30,20 @@
         )
       %>
       <div class="guideline"><%= t('.guidelines.slug') %></div>
+    </dd>
+
+    <dt><%= f.label :url %></dt>
+    <dd>
+      <%=
+        f.text_field(
+            :url,
+            id:        "#{model_name}_url",
+            size:      nil,
+            maxlength: EditablePage::META_LIMIT,
+            placeholder: t('.placeholders.url')
+        )
+      %>
+      <div class="guideline"><%= t('.guidelines.url') %></div>
     </dd>
 
     <dt><%= f.label :image %></dt>
@@ -40,6 +66,19 @@
         </figcaption>
       </figure>
       <div class="guideline"><%= t('.guidelines.image') %></div>
+    </dd>
+
+    <dt><%= f.label :image_alt_text %></dt>
+    <dd>
+      <%=
+        f.text_field(
+            :image_alt_text,
+            id:        "#{model_name}_image_alt_text",
+            size:      nil,
+            maxlength: EditablePage::META_LIMIT
+        )
+      %>
+      <div class="guideline"><%= t('.guidelines.image_alt_text') %></div>
     </dd>
 
     <dt><%= f.label :name %></dt>

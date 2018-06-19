@@ -8,7 +8,7 @@ class EditablePagesController < AdminController
 
   # post /editable_pages
   def create
-    @entity = EditablePage.new(creation_parameters)
+    @entity = EditablePage.new(entity_parameters)
     if @entity.save
       form_processed_ok(admin_editable_page_path(id: @entity.id))
     else
@@ -53,9 +53,5 @@ class EditablePagesController < AdminController
 
   def entity_parameters
     params.require(:editable_page).permit(EditablePage.entity_parameters)
-  end
-
-  def creation_parameters
-    params.require(:editable_page).permit(EditablePage.creation_parameters)
   end
 end

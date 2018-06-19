@@ -1,9 +1,11 @@
 class Admin::EditablePagesController < AdminController
+  include EntityPriority
+
   before_action :set_entity, except: [:index]
 
   # get /admin/editable_pages
   def index
-    @collection = EditablePage.page_for_administration
+    @collection = EditablePage.list_for_administration
   end
 
   # get /admin/editable_pages/:id

@@ -1,7 +1,5 @@
 <%= render partial: 'editable_pages/entity/metadata', locals: { entity: entity } %>
 
-<article>
-  <h1><%= entity.title %></h1>
-
-  <%= raw entity.body %>
+<article class="editable-page">
+  <%= render partial: 'editable_pages/entity/content', locals: { entity: entity } %>
 </article>

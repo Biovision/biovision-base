@@ -62,7 +62,11 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :editable_pages, only: [:index, :show]
+      resources :editable_pages, only: [:index, :show] do
+        member do
+          post 'priority', defaults: { format: :json }
+        end
+      end
       resources :stored_values, only: [:index, :show]
 
       resources :metrics, only: [:index, :show] do
@@ -164,5 +168,7 @@ Rails.application.routes.draw do
     end
 
     resources :feedback_requests, only: [:create]
+
+    get ':editable_page_url' => 'fallback#show', constraints: { editable_page_url: /.+/ }
   end
 end

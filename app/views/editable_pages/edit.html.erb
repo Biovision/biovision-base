@@ -1,8 +1,8 @@
 <% content_for :meta_title, t('.title') %>
 <% content_for :breadcrumbs do %>
-    <%= link_to(t('admin.editable_pages.nav_item.text'), admin_editable_pages_path) %>
-    <%= admin_editable_page_link(@entity) %>
-    <span><%= t(:edit) %></span>
+  <%= link_to(t('admin.editable_pages.nav_item.text'), admin_editable_pages_path) %>
+  <%= admin_editable_page_link(@entity) %>
+  <span><%= t(:edit) %></span>
 <% end %>
 
 <article>
