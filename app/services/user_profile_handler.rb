@@ -8,7 +8,7 @@ class UserProfileHandler
   # @param [Hash] input
   def self.clean_parameters(input)
     if input.key?('gender')
-      gender_key = input['gender'].to_i
+      gender_key = input['gender'].blank? ? nil : input['gender'].to_i
       gender     = GENDERS.key?(gender_key) ? gender_key : nil
     else
       gender = nil
