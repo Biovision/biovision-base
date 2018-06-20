@@ -39,6 +39,8 @@ class User < ApplicationRecord
   before_save :normalize_slug
   before_save :prepare_search_string
 
+  before_validation { self.email = nil if email.blank? }
+
   validates_acceptance_of :consent
   validates_presence_of :screen_name
   validates_format_of :screen_name, with: SCREEN_NAME_PATTERN, if: :native_slug?

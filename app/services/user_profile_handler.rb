@@ -2,7 +2,7 @@ class UserProfileHandler
   GENDERS = { 0 => 'female', 1 => 'male' }
 
   def self.allowed_parameters
-    %w(gender name patronymic surname)
+    %w(gender name patronymic surname about)
   end
 
   # @param [Hash] input
