@@ -36,5 +36,6 @@ class CreatePrivileges < ActiveRecord::Migration[5.1]
     Privilege.create!(slug: 'metrics_manager', name: 'Аналитик метрик')
     Privilege.create!(slug: 'moderator', name: 'Модератор')
     Privilege.create!(slug: 'chief_editor', name: 'Главный редактор')
+    Privilege.create!(slug: 'content_manager', name: 'Контент-менеджер')
   end
 end
