@@ -7,7 +7,7 @@ module LinkBlocksHelper
 
   # @param [LinkBlockItem] entity
   def admin_link_block_item_link(entity)
-    link_to(entity.title, admin_link_block_item_path(id: entity.id))
+    link_to(entity.text_for_link, admin_link_block_item_path(id: entity.id))
   end
 
   # @param [LinkBlock] entity

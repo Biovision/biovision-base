@@ -30,6 +30,7 @@
       <dt><%= t('activerecord.attributes.link_block.lead') %></dt>
       <dd><%= simple_format(@entity.lead) %></dd>
     <% end %>
+
     <% unless @entity.footer_text.blank? %>
       <dt><%= t('activerecord.attributes.link_block.footer_text') %></dt>
       <dd><%= simple_format(@entity.footer_text) %></dd>
@@ -46,9 +47,11 @@
     render(
         partial: 'shared/admin/toggleable',
         locals: {
-            entity: entity,
-            url: toggle_admin_link_block_path(id: entity.id)
+            entity: @entity,
+            url: toggle_admin_link_block_path(id: @entity.id)
         }
     )
   %>
+
+  <%= render partial: 'admin/link_blocks/entity/items', locals: { entity: @entity } %>
 </article>

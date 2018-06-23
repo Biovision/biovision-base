@@ -1,0 +1,18 @@
+<% content_for :meta_title, t('.title') %>
+<% content_for :breadcrumbs do %>
+  <%= link_to(t('admin.link_blocks.nav_item.text'), admin_link_blocks_path) %>
+  <% unless @entity.link_block.nil? %>
+    <%= admin_link_block_link(@entity.link_block) %>
+  <% end %>
+  <span><%= t('.nav_text') %></span>
+<% end %>
+
+<article>
+  <h1><%= t('.title') %></h1>
+
+  <ul class="actions">
+    <li><%= back_icon(admin_link_block_path(id: @entity.link_block_id)) %></li>
+  </ul>
+
+  <%= render partial: 'form', locals: { entity: @entity } %>
+</article>

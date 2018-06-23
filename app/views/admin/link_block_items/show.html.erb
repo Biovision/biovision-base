@@ -1,0 +1,74 @@
+<% content_for :meta_title, t('.title', title: @entity.text_for_link) %>
+<% content_for :breadcrumbs do %>
+  <%= link_to(t('admin.link_blocks.nav_item.text'), admin_link_blocks_path) %>
+  <%= admin_link_block_link(@entity.link_block) %>
+  <span><%= @entity.text_for_link %></span>
+<% end %>
+
+<article>
+  <h1><%= @entity.text_for_link %></h1>
+
+  <ul class="actions">
+    <li><%= return_icon(admin_link_block_path(id: @entity.link_block_id)) %></li>
+    <li><%= edit_icon(edit_link_block_item_path(id: @entity.id)) %></li>
+  </ul>
+
+  <dl>
+    <dt><%= t('activerecord.attributes.link_block_item.link_block') %></dt>
+    <dd><%= admin_link_block_link(@entity.link_block) %></dd>
+
+    <dt><%= t('activerecord.attributes.link_block_item.priority') %></dt>
+    <dd><%= @entity.priority %></dd>
+
+    <% unless @entity.image.blank? %>
+      <dt><%= t('activerecord.attributes.link_block_item.image') %></dt>
+      <dd>
+        <figure role="group" class="preview">
+          <%= link_block_image(@entity) %>
+          <figcaption><%= @entity.image_alt_text %></figcaption>
+        </figure>
+      </dd>
+    <% end %>
+
+    <% unless @entity.slug.blank? %>
+      <dt><%= t('activerecord.attributes.link_block_item.slug') %></dt>
+      <dd><%= @entity.slug %></dd>
+    <% end %>
+
+    <% unless @entity.title.blank? %>
+      <dt><%= t('activerecord.attributes.link_block_item.title') %></dt>
+      <dd><%= @entity.title %></dd>
+    <% end %>
+
+    <% unless @entity.button_text.blank? %>
+      <dt><%= t('activerecord.attributes.link_block_item.button_text') %></dt>
+      <dd><%= @entity.button_text %></dd>
+    <% end %>
+
+    <% unless @entity.button_url.blank? %>
+      <dt><%= t('activerecord.attributes.link_block_item.button_url') %></dt>
+      <dd><%= @entity.button_url %></dd>
+    <% end %>
+
+    <% unless @entity.body.blank? %>
+      <dt><%= t('activerecord.attributes.link_block_item.body') %></dt>
+      <dd><%= simple_format(@entity.body) %></dd>
+    <% end %>
+
+    <dt><%= t(:created_at) %></dt>
+    <dd><%= time_tag(@entity.created_at) %></dd>
+
+    <dt><%= t(:updated_at) %></dt>
+    <dd><%= time_tag(@entity.updated_at) %></dd>
+  </dl>
+
+  <%=
+    render(
+        partial: 'shared/admin/toggleable',
+        locals:  {
+            entity: @entity,
+            url:    toggle_admin_link_block_item_path(id: @entity.id)
+        }
+    )
+  %>
+</article>

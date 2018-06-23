@@ -3,7 +3,7 @@ class LinkBlockItemsController < AdminController
 
   # post /admin/link_blocks/check
   def check
-    @entity = LinkBlock.instance_for_check(params[:entity_id], entity_parameters)
+    @entity = LinkBlockItem.instance_for_check(params[:entity_id], entity_parameters)
 
     render 'shared/forms/check'
   end

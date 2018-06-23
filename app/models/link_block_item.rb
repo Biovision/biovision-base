@@ -32,7 +32,7 @@ class LinkBlockItem < ApplicationRecord
   validates_length_of :title, maximum: TITLE_LIMIT
 
   scope :ordered_by_priority, -> { order('priority asc, slug asc') }
-  scope :siblings, -> (link_block_id) { where(lint_block_id: link_block_id) }
+  scope :siblings, -> (link_block_id) { where(link_block_id: link_block_id) }
   scope :visible, -> { where(visible: true) }
   scope :list_for_administration, -> { ordered_by_priority }
   scope :list_for_visitors, -> { visible.ordered_by_priority }
@@ -45,11 +45,19 @@ class LinkBlockItem < ApplicationRecord
     entity_parameters + %i(link_block_id)
   end
 
+  def text_for_link
+    if title.blank?
+      slug.blank? ? "#{link_block.slug}-#{priority}" : slug
+    else
+      title
+    end
+  end
+
   # @param [Integer] delta
   def change_priority(delta)
     new_priority = priority + delta
     criteria     = { priority: new_priority }
-    adjacent     = self.class.siblings(list_block_id).find_by(criteria)
+    adjacent     = self.class.siblings(link_block_id).find_by(criteria)
     if adjacent.is_a?(self.class) && (adjacent.id != id)
       adjacent.update!(priority: priority)
     end

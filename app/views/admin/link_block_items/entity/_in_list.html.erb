@@ -1,0 +1,39 @@
+<div class="image">
+  <%= link_block_image(entity) %>
+</div>
+<div class="data">
+  <div><%= admin_link_block_item_link(entity) %></div>
+  <% unless entity.slug.blank? %>
+    <div class="info">
+      <%= entity.slug %>
+    </div>
+  <% end %>
+  <% unless entity.button_url.blank? %>
+    <div class="secondary info">
+      <%= t('activerecord.attributes.link_block_item.button_url') %>:
+      <%= entity.button_url %>
+    </div>
+  <% end %>
+
+  <%=
+    render(
+        partial: 'shared/admin/toggleable',
+        locals:  {
+            entity: entity,
+            url:    toggle_admin_link_block_item_path(id: entity.id)
+        }
+    )
+  %>
+
+  <ul class="actions">
+    <li><%= edit_icon(edit_link_block_item_path(id: entity.id)) %></li>
+    <%=
+      render(
+          partial: 'shared/actions/priority_changer',
+          locals:  {
+              path: priority_admin_link_block_item_path(id: entity.id)
+          }
+      )
+    %>
+  </ul>
+</div>
