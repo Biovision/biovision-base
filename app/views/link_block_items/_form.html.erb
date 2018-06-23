@@ -96,6 +96,23 @@
       <div class="guideline"><%= t('.guidelines.title') %></div>
     </dd>
 
+    <dt><%= f.label :body %></dt>
+    <dd>
+      <%=
+        f.text_area(
+            :body,
+            id:   "#{model_name}_body",
+            cols: 80,
+            rows: 5,
+            data: {
+                check: :body
+            }
+        )
+      %>
+      <div class="check-result-error hidden" data-field="body"></div>
+      <div class="guideline"><%= t('.guidelines.body') %></div>
+    </dd>
+
     <dt><%= f.label :button_text %></dt>
     <dd>
       <%=
@@ -128,23 +145,6 @@
       %>
       <div class="check-result-error hidden" data-field="button_url"></div>
       <div class="guideline"><%= t('.guidelines.button_url') %></div>
-    </dd>
-
-    <dt><%= f.label :body %></dt>
-    <dd>
-      <%=
-        f.text_area(
-            :body,
-            id:   "#{model_name}_body",
-            cols: 80,
-            rows: 5,
-            data: {
-                check: :body
-            }
-        )
-      %>
-      <div class="check-result-error hidden" data-field="body"></div>
-      <div class="guideline"><%= t('.guidelines.body') %></div>
     </dd>
 
     <%= render partial: 'shared/forms/entity_flags', locals: { f: f } %>

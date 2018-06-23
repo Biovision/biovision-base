@@ -4,6 +4,12 @@
       <h2><%= entity.title %></h2>
     <% end %>
 
+    <% if entity.editable_by?(current_user) %>
+      <ul class="actions">
+        <li><%= gear_icon(admin_link_block_path(id: entity.id)) %></li>
+      </ul>
+    <% end %>
+
     <% unless entity.lead.blank? %>
       <div class="lead">
         <%= simple_format(entity.lead) %>
@@ -13,7 +19,7 @@
     <%=
       render(
           partial: 'link_block_items/list',
-          locals: {
+          locals:  {
               collection: entity.link_block_items.list_for_visitors
           }
       )

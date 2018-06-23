@@ -1,5 +1,5 @@
 <% if collection.any? %>
-  <ul>
+  <ul class="items">
     <% collection.each do |entity| %>
       <li class="<%= entity.slug %>">
         <% unless entity.image.blank? %>

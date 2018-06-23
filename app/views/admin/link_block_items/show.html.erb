@@ -40,6 +40,11 @@
       <dd><%= @entity.title %></dd>
     <% end %>
 
+    <% unless @entity.body.blank? %>
+      <dt><%= t('activerecord.attributes.link_block_item.body') %></dt>
+      <dd><%= simple_format(@entity.body) %></dd>
+    <% end %>
+
     <% unless @entity.button_text.blank? %>
       <dt><%= t('activerecord.attributes.link_block_item.button_text') %></dt>
       <dd><%= @entity.button_text %></dd>
@@ -48,11 +53,6 @@
     <% unless @entity.button_url.blank? %>
       <dt><%= t('activerecord.attributes.link_block_item.button_url') %></dt>
       <dd><%= @entity.button_url %></dd>
-    <% end %>
-
-    <% unless @entity.body.blank? %>
-      <dt><%= t('activerecord.attributes.link_block_item.body') %></dt>
-      <dd><%= simple_format(@entity.body) %></dd>
     <% end %>
 
     <dt><%= t(:created_at) %></dt>
