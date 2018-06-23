@@ -1,0 +1,32 @@
+<% if collection.any? %>
+  <ul>
+    <% collection.each do |entity| %>
+      <li class="<%= entity.slug %>">
+        <% unless entity.image.blank? %>
+          <div class="image">
+            <%= link_block_image(entity) %>
+          </div>
+        <% end %>
+        <% unless entity.title.blank? %>
+          <div class="title"><%= entity.title %></div>
+        <% end %>
+        <% unless entity.body.blank? %>
+          <div class="body">
+            <%= simple_format(entity.body) %>
+          </div>
+        <% end %>
+        <% unless entity.button_url.blank? %>
+          <div class="button">
+            <%=
+              link_to(
+                  entity.button_text.blank? ? t('.more') : entity.button_text,
+                  entity.button_url,
+                  class: 'button-nav'
+              )
+            %>
+          </div>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
