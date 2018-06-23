@@ -35,4 +35,9 @@ class LinkBlock < ApplicationRecord
   def self.entity_parameters
     %i(footer_text language_id lead slug title visible)
   end
+
+  # @param [User] user
+  def editable_by?(user)
+    UserPrivilege.user_has_privilege?(user, :content_manager)
+  end
 end

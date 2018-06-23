@@ -3,6 +3,7 @@ class LinkBlockItem < ApplicationRecord
   include Toggleable
 
   BUTTON_TEXT_LIMIT = 50
+  META_LIMIT        = 255
   PRIORITY_RANGE    = (1..32767)
   SLUG_LIMIT        = 50
   SLUG_PATTERN      = /\A[a-z][-_a-z0-9]*[a-z]\z/i
@@ -18,8 +19,17 @@ class LinkBlockItem < ApplicationRecord
   belongs_to :link_block
 
   after_initialize :set_next_priority
+  before_validation { self.slug = nil if slug.blank? }
   before_validation { self.slug = slug.strip unless slug.nil? }
   before_validation :normalize_priority
+
+  validates_format_of :slug, with: SLUG_PATTERN, allow_nil: true
+  validates_length_of :body, maximum: TEXT_LIMIT
+  validates_length_of :button_text, maximum: BUTTON_TEXT_LIMIT
+  validates_length_of :button_url, maximum: URL_LIMIT
+  validates_length_of :image_alt_text, maximum: META_LIMIT
+  validates_length_of :slug, maximum: SLUG_LIMIT
+  validates_length_of :title, maximum: TITLE_LIMIT
 
   scope :ordered_by_priority, -> { order('priority asc, slug asc') }
   scope :siblings, -> (link_block_id) { where(lint_block_id: link_block_id) }
@@ -28,7 +38,7 @@ class LinkBlockItem < ApplicationRecord
   scope :list_for_visitors, -> { visible.ordered_by_priority }
 
   def self.entity_parameters
-    %i(body button_text button_url image priority slug title visible)
+    %i(body button_text button_url image image_alt_text priority slug title visible)
   end
 
   def self.creation_parameters

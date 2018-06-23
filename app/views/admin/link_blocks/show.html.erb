@@ -1,0 +1,54 @@
+<% content_for :meta_title, t('.title', slug: @entity.slug) %>
+<% content_for :breadcrumbs do %>
+  <%= link_to(t('admin.link_blocks.nav_item.text'), admin_link_blocks_path) %>
+  <span><%= @entity.slug %></span>
+<% end %>
+
+<article>
+  <h1><%= @entity.slug %></h1>
+
+  <ul class="actions">
+    <li><%= back_icon(admin_link_blocks_path) %></li>
+    <li><%= edit_icon(edit_link_block_path(id: @entity.id)) %></li>
+  </ul>
+
+  <dl>
+    <% unless @entity.language.nil? %>
+      <dt><%= t('activerecord.attributes.link_block.language') %></dt>
+      <dd><%= language_name(@entity.language) %></dd>
+    <% end %>
+
+    <dt><%= t('activerecord.attributes.link_block.slug') %></dt>
+    <dd><%= @entity.slug %></dd>
+
+    <% unless @entity.title.blank? %>
+      <dt><%= t('activerecord.attributes.link_block.title') %></dt>
+      <dd><%= @entity.title %></dd>
+    <% end %>
+
+    <% unless @entity.lead.blank? %>
+      <dt><%= t('activerecord.attributes.link_block.lead') %></dt>
+      <dd><%= simple_format(@entity.lead) %></dd>
+    <% end %>
+    <% unless @entity.footer_text.blank? %>
+      <dt><%= t('activerecord.attributes.link_block.footer_text') %></dt>
+      <dd><%= simple_format(@entity.footer_text) %></dd>
+    <% end %>
+
+    <dt><%= t(:created_at) %></dt>
+    <dd><%= time_tag(@entity.created_at) %></dd>
+
+    <dt><%= t(:updated_at) %></dt>
+    <dd><%= time_tag(@entity.updated_at) %></dd>
+  </dl>
+
+  <%=
+    render(
+        partial: 'shared/admin/toggleable',
+        locals: {
+            entity: entity,
+            url: toggle_admin_link_block_path(id: entity.id)
+        }
+    )
+  %>
+</article>

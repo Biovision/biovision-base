@@ -7,6 +7,7 @@ class CreateLinkBlockItems < ActiveRecord::Migration[5.2]
       t.integer :priority, limit: 2, default: 1, null: false
       t.string :slug
       t.string :image
+      t.string :image_alt_text
       t.string :title
       t.string :button_text
       t.string :button_url

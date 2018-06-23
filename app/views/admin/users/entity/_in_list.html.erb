@@ -6,6 +6,9 @@
   <% unless entity.notice.blank? %>
       <div><%= entity.notice %></div>
   <% end %>
+  <div class="info">
+    <%= entity.screen_name %>
+  </div>
   <% unless entity.email.blank? %>
       <div class="info">
         <%= t('activerecord.attributes.user.email') %>: <%= entity.email %>

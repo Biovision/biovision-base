@@ -1,0 +1,89 @@
+ru:
+  activerecord:
+    models:
+      link_block: "Блок ссылок"
+      link_block_item: "Ссылка"
+    attributes:
+      link_block:
+        footer_text: "Текст после ссылок"
+        language: "Язык"
+        language_id: "Язык"
+        lead: "Текст до ссылок"
+        slug: "Идентификатор"
+        title: "Название"
+        visible: "Показывать"
+      link_block_item:
+        body: "Текст"
+        button_text: "Текст на кнопке"
+        button_url: "Ссылка на кнопке"
+        image: "Картинка"
+        image_alt_text: "Текст для атрибута alt картинки"
+        link_block: "Блок"
+        priority: "Порядок сортировки"
+        slug: "Идентификатор"
+        title: "Название"
+        visible: "Показывать"
+  admin:
+    link_block_items:
+      nav_item:
+        description: "Управление блоками ссылок"
+        text: "Блоки ссылок"
+      index:
+        heading: "Блоки ссылок"
+        title: "Блоки ссылок"
+      show:
+        title: "Блок ссылок «%{title}»"
+    link_blocks:
+      show:
+        title: "Блок ссылок «%{slug}»"
+      nav_item:
+        text: "Блоки ссылок"
+        description: "Управление блоками ссылок"
+      index:
+        title: "Блоки ссылок"
+        heading: "Блоки ссылок"
+    index:
+      dashboard:
+        biovision_links:
+          heading: "Блоки со ссылками"
+  link_block_items:
+    new:
+      heading: "Новая ссылка"
+      nav_text: "Добавить"
+      title: "Добавление ссылки"
+    edit:
+      heading: "Редактирование ссылки"
+      nav_text: "Редактировать"
+      title: "Редактирование ссылки"
+    destroy:
+      success: "Ссылка успешно удалена"
+    update:
+      success: "Ссылка успешно отредактирована"
+    form:
+      guidelines:
+        body: "Максимум 5000 символов."
+        button_text: "Максимум 50 символов"
+        button_url: "Максимум 250 символов"
+        image: "Картинка размером в районе 320×320, формат — SVG, JPG или PNG."
+        image_alt_text: "Максимум 255 символов."
+        slug: "Только латинские буквы, цифры, дефис или подчёркивание (кроме начала и конца). 2–50 символов."
+        title: "Максимум 250 символов."
+  link_blocks:
+    new:
+      title: "Добавление блока ссылок"
+      heading: "Добавить блок ссылок"
+      nav_text: "Создать"
+    edit:
+      heading: "Редактирование блока ссылок"
+      title: "Редактирование блока ссылок"
+      nav_text: "Редактировать"
+    destroy:
+      success: "Блок ссылок удалён"
+    form:
+      guidelines:
+        footer_text: "Максимум 5000 символов."
+        lead: "Максимум 5000 символов."
+        slug: "Только латинские буквы, цифры, дефис или подчёркивание (кроме начала и конца). 2–50 символов."
+        title: "Максимум 100 символов."
+    update:
+      success: "Блок ссылок успешно отредактирован"
