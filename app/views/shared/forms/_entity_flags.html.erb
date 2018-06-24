@@ -1,6 +1,6 @@
 <%
-  entity = f.object unless local_assigns[:entity]
-  model_name = entity.class.to_s.underscore unless local_assigns[:entity]
+  entity = f.object
+  model_name = entity.class.to_s.underscore
 %>
 <dt><%= t(:flags) %></dt>
 <dd>
