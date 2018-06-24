@@ -7,7 +7,7 @@
   <ul class="flags">
     <% entity.class.toggleable_attributes.each do |flag| %>
       <li>
-        <%= f.check_box flag, id: "#{model_name}_flag" %>
+        <%= f.check_box flag, id: "#{model_name}_#{flag}" %>
         <%= f.label flag %>
       </li>
     <% end %>
