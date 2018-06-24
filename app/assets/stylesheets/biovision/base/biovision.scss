@@ -349,3 +349,13 @@ form {
 input.control:not(:checked) + div {
   display: none;
 }
+
+.covered {
+  overflow: hidden;
+
+  > * {
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+  }
+}
