@@ -63,14 +63,14 @@ class LinkBlockItem < ApplicationRecord
     end
     update(priority: new_priority)
 
-    self.class.ordered_by_priority.map { |e| [e.id, e.priority] }.to_h
+    self.class.siblings(link_block_id).ordered_by_priority.map { |e| [e.id, e.priority] }.to_h
   end
 
   private
 
   def set_next_priority
     if id.nil? && priority == 1
-      self.priority = self.class.maximum(:priority).to_i + 1
+      self.priority = self.class.siblings(link_block_id).maximum(:priority).to_i + 1
     end
   end
 
