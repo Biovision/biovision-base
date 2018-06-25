@@ -16,7 +16,7 @@
           </div>
         <% end %>
         <% unless entity.button_url.blank? %>
-          <div class="button">
+          <div class="item-button">
             <%=
               link_to(
                   entity.button_text.blank? ? t('.more') : entity.button_text,
