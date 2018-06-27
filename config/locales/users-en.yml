@@ -104,6 +104,7 @@ en:
         payload: "Payload"
         quantity: "Number of activations"
       privilege:
+        administrative: "Administrative"
         parent_id: "Parent category"
         priority: "Sorting order"
         regional: "Regional"

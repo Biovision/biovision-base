@@ -104,6 +104,7 @@ ru:
         payload: "Полезная нагрузка"
         quantity: "Количество активаций"
       privilege:
+        administrative: "Административная"
         parent_id: "Родительская категория"
         priority: "Порядок сортировки"
         regional: "Региональная"

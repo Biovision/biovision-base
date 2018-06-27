@@ -33,14 +33,9 @@
         <%= f.text_area :description, cols: 50, rows: 3, maxlength: Privilege::DESCRIPTION_LIMIT %>
         <div class="guideline"><%= t('.guidelines.description') %></div>
       </dd>
-    </dl>
 
-    <ul class="flags">
-      <li>
-        <%= f.check_box :regional %>
-        <%= f.label :regional %>
-      </li>
-    </ul>
+      <%= render partial: 'shared/forms/entity_flags', locals: { f: f } %>
+    </dl>
 
     <div class="buttons">
       <%= f.hidden_field :parent_id if entity.id.nil? %>

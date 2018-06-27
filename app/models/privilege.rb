@@ -34,8 +34,10 @@ class Privilege < ApplicationRecord
   scope :ordered_by_priority, -> { order('priority asc, name asc') }
   scope :ordered_by_name, -> { order('name asc, slug asc') }
   scope :visible, -> { where(visible: true, deleted: false) }
+  scope :administrative, -> { where(administrative: true) }
   scope :for_tree, ->(parent_id = nil) { where(parent_id: parent_id).ordered_by_priority }
   scope :siblings, ->(item) { where(parent_id: item.parent_id) }
+  scope :list_for_administration, -> { ordered_by_name }
 
   def self.page_for_administration
     ordered_by_name

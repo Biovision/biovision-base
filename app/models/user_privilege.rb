@@ -25,10 +25,15 @@ class UserPrivilege < ApplicationRecord
   end
 
   # @param [User] user
-  def self.user_has_any_privilege?(user)
+  # @param [TrueClass|FalseClass] administrative
+  def self.user_has_any_privilege?(user, administrative = true)
     return false if user.nil?
     return true if user.super_user?
-    exists?(user: user)
+    criteria = { user: user }
+    if administrative
+      criteria[:privilege_id] = Privilege.administrative.pluck(:id)
+    end
+    exists?(criteria)
   end
 
   # @param [User] user
