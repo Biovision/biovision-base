@@ -6,7 +6,5 @@
     <figcaption><%= current_user.profile_name %></figcaption>
   </figure>
 
-  <nav>
-
-  </nav>
+  <%= render 'my/index/dashboard/biovision_post' if Gem.loaded_specs.key?('biovision-post') %>
 </section>
