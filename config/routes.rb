@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :agents, :browsers, only: [:update, :destroy]
 
+  resources :editable_blocks, only: [:update, :destroy]
   resources :editable_pages, only: [:update, :destroy]
   resources :stored_values, only: [:update, :destroy]
 
@@ -71,6 +72,11 @@ Rails.application.routes.draw do
       resources :editable_pages, only: [:index, :show] do
         member do
           post 'priority', defaults: { format: :json }
+        end
+      end
+      resources :editable_blocks, only: [:index, :show] do
+        member do
+          post 'toggle', defaults: { format: :json }
         end
       end
       resources :stored_values, only: [:index, :show]
@@ -164,9 +170,18 @@ Rails.application.routes.draw do
     resources :agents, :browsers, except: [:index, :show, :update, :destroy]
 
     resources :editable_pages, except: [:index, :show, :update, :destroy]
+    resources :editable_blocks, except: [:index, :show, :update, :destroy] do
+      collection do
+        post 'check', defaults: { format: :json }
+      end
+    end
     resources :stored_values, except: [:index, :show, :update, :destroy]
 
-    resources :link_blocks, :link_block_items, except: [:index, :show, :update, :destroy]
+    resources :link_blocks, :link_block_items, except: [:index, :show, :update, :destroy] do
+      collection do
+        post 'check', defaults: { format: :json }
+      end
+    end
 
     resources :users, except: [:index, :show, :update, :destroy] do
       collection do

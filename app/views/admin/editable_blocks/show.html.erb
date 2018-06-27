@@ -1,0 +1,72 @@
+<% content_for :meta_title, t('.title', slug: @entity.slug) %>
+<% content_for :breadcrumbs do %>
+  <%= link_to(t('admin.editable_blocks.nav_item.text'), admin_editable_blocks_path) %>
+  <span><%= @entity.slug %></span>
+<% end %>
+
+<article>
+  <h1><%= @entity.slug %></h1>
+
+  <ul class="actions">
+    <li><%= back_icon(admin_editable_blocks_path) %></li>
+    <li><%= edit_icon(edit_editable_block_path(id: @entity.id)) %></li>
+  </ul>
+
+  <dl>
+    <% unless @entity.language.nil? %>
+      <dt><%= t('activerecord.attributes.editable_block.language') %></dt>
+      <dd><%= language_name(@entity.language) %></dd>
+    <% end %>
+
+    <dt><%= t('activerecord.attributes.editable_block.name') %></dt>
+    <dd><%= @entity.name %></dd>
+
+    <dt><%= t('activerecord.attributes.editable_block.slug') %></dt>
+    <dd><%= @entity.slug %></dd>
+
+    <% unless @entity.image.blank? %>
+      <dt><%= t('activerecord.attributes.link_block_item.image') %></dt>
+      <dd>
+        <figure role="group" class="preview">
+          <%= editable_block_image_medium(@entity) %>
+        </figure>
+      </dd>
+    <% end %>
+
+    <% unless @entity.title.blank? %>
+      <dt><%= t('activerecord.attributes.editable_block.title') %></dt>
+      <dd><%= @entity.title %></dd>
+    <% end %>
+
+    <% unless @entity.lead.blank? %>
+      <dt><%= t('activerecord.attributes.editable_block.lead') %></dt>
+      <dd><%= simple_format(@entity.lead) %></dd>
+    <% end %>
+
+    <% unless @entity.body.blank? %>
+      <dt><%= t('activerecord.attributes.editable_block.body') %></dt>
+      <dd><%= simple_format(@entity.body) %></dd>
+    <% end %>
+
+    <% unless @entity.footer.blank? %>
+      <dt><%= t('activerecord.attributes.editable_block.footer') %></dt>
+      <dd><%= simple_format(@entity.footer) %></dd>
+    <% end %>
+
+    <dt><%= t(:created_at) %></dt>
+    <dd><%= time_tag(@entity.created_at) %></dd>
+
+    <dt><%= t(:updated_at) %></dt>
+    <dd><%= time_tag(@entity.updated_at) %></dd>
+  </dl>
+
+  <%=
+    render(
+        partial: 'shared/admin/toggleable',
+        locals:  {
+            entity: @entity,
+            url:    toggle_admin_editable_block_path(id: @entity.id)
+        }
+    )
+  %>
+</article>

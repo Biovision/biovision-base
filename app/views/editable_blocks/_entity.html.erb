@@ -1,0 +1,36 @@
+<% unless entity.nil? %>
+  <% style = 'background-image: url("' + entity.image.url + '")' %>
+  <section
+    id="editable-block-<%= entity.slug %>"
+    style="<%= entity.image.blank? ? '' : style %>"
+    class="biovision-editable-block"
+  >
+    <% unless entity.title.blank? %>
+      <h2><%= entity.title %></h2>
+    <% end %>
+
+    <% if entity.editable_by?(current_user) %>
+      <ul class="actions">
+        <li><%= gear_icon(admin_editable_block_path(id: entity.id)) %></li>
+      </ul>
+    <% end %>
+
+    <% unless entity.lead.blank? %>
+      <div class="lead">
+        <%= simple_format(entity.lead) %>
+      </div>
+    <% end %>
+
+    <% unless entity.body.blank? %>
+      <div class="body">
+        <%= simple_format(entity.body) %>
+      </div>
+    <% end %>
+
+    <% unless entity.footer.blank? %>
+      <footer>
+        <%= simple_format(entity.footer) %>
+      </footer>
+    <% end %>
+  </section>
+<% end %>

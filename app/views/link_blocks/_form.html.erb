@@ -87,12 +87,7 @@
       <div class="guideline"><%= t('.guidelines.footer_text') %></div>
     </dd>
 
-    <%=
-      render(
-          partial: 'shared/forms/entity_flags',
-          locals: { f: f, entity: entity, model_name: model_name }
-      )
-    %>
+    <%= render(partial: 'shared/forms/entity_flags', locals: { f: f }) %>
   </dl>
 
   <div class="buttons">

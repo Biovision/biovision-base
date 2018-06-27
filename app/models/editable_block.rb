@@ -15,6 +15,7 @@ class EditableBlock < ApplicationRecord
 
   belongs_to :language, optional: true
 
+  validates_presence_of :name
   validates_uniqueness_of :slug, scope: [:language_id]
   validates_format_of :slug, with: SLUG_PATTERN
   validates_length_of :slug, maximum: SLUG_LIMIT

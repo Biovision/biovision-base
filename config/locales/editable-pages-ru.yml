@@ -8,6 +8,7 @@ ru:
       editable_block:
         body: "Основной текст"
         footer: "Текст под основным"
+        image: "Картинка"
         language: "Язык"
         language_id: "Язык"
         lead: "Текст до основного"
@@ -39,8 +40,8 @@ ru:
       show:
         title: "Редактируемый блок «%{slug}»"
       nav_item:
-        text: "Блоки ссылок"
-        description: "Управление блоками ссылок"
+        text: "Редактируемые блоки"
+        description: "Управление редактируемыми блоками"
       index:
         title: "Блоки ссылок"
         heading: "Блоки ссылок"
