@@ -41,7 +41,7 @@ class EditablePagesController < AdminController
   protected
 
   def restrict_access
-    require_privilege :chief_editor
+    require_privilege :content_manager
   end
 
   def set_entity
