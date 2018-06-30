@@ -14,7 +14,14 @@
     <li class="lockable <%= entity.locked? ? 'hidden' : '' %>">
       <%= edit_icon(edit_privilege_path(id: entity.id)) %>
     </li>
-    <%= render partial: 'shared/actions/priority_changer', locals: { path: priority_admin_privilege_path(id: entity.id) } %>
+    <%=
+      render(
+          partial: 'shared/actions/priority_changer',
+          locals: {
+              path: priority_admin_privilege_path(id: entity.id)
+          }
+      )
+    %>
     <%= render partial: 'shared/actions/locks', locals: { entity: entity, path: lock_admin_privilege_path(id: entity.id) } %>
   </ul>
 

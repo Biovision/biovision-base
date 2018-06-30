@@ -56,8 +56,13 @@ class Privilege < ApplicationRecord
     (parents.map(&:name) + [name]).join ' / '
   end
 
-  # @return [Array<Integer>]
+  # @deprecated use #subbranch_ids
   def ids
+    [id] + children_cache
+  end
+
+  # @return [Array<Integer>]
+  def subbranch_ids
     [id] + children_cache
   end
 
@@ -126,7 +131,8 @@ class Privilege < ApplicationRecord
   # @param [Integer] delta
   def change_priority(delta)
     new_priority = priority + delta
-    adjacent     = self.class.siblings(self).find_by(priority: new_priority)
+    criteria     = { priority: new_priority }
+    adjacent     = self.class.siblings(self).find_by(criteria)
     if adjacent.is_a?(self.class) && (adjacent.id != id)
       adjacent.update!(priority: priority)
     end

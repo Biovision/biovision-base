@@ -11,7 +11,7 @@ class UserPrivilege < ApplicationRecord
   def self.ids(user)
     privileges = user&.privileges
     return [] if privileges.blank?
-    privileges.map(&:ids).flatten.uniq
+    privileges.map(&:subbranch_ids).flatten.uniq
   end
 
   # @param [User] user

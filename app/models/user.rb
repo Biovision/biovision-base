@@ -54,6 +54,8 @@ class User < ApplicationRecord
   validates_length_of :notice, maximum: NOTICE_LIMIT
 
   scope :with_privilege, ->(privilege) { joins(:user_privileges).where(user_privileges: { privilege_id: privilege.branch_ids }) }
+  scope :with_privilege_ids, -> (privilege_ids) { joins(:user_privileges).where(user_privileges: { privilege_id: privilege_ids }) }
+  scope :ordered_by_screen_name, -> { order('screen_name asc') }
   scope :bots, ->(flag) { where(bot: flag.to_i > 0) unless flag.blank? }
   scope :email_like, ->(val) { where('email ilike ?', "%#{val}%") unless val.blank? }
   scope :with_email, ->(email) { where('lower(email) = lower(?)', email) }

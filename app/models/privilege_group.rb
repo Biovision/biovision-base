@@ -30,6 +30,11 @@ class PrivilegeGroup < ApplicationRecord
     %i(name slug description)
   end
 
+  # @param [String] slug
+  def self.users(slug)
+    User.with_privilege_ids(ids(slug)).ordered_by_screen_name
+  end
+
   # @param [Privilege] privilege
   def has_privilege?(privilege)
     privilege_group_privileges.exists?(privilege: privilege)
