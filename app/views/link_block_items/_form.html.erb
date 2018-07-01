@@ -135,7 +135,7 @@
       <%=
         f.text_field(
             :button_url,
-            id:        "#{model_name}_button_text",
+            id:        "#{model_name}_button_url",
             size:      nil,
             maxlength: LinkBlockItem::URL_LIMIT,
             data:      {
@@ -152,6 +152,7 @@
 
   <div class="buttons">
     <%= f.hidden_field :link_block_id if entity.id.nil? %>
+    <%= hidden_field_tag :entity_id, entity.id %>
     <%= f.button t(:save), type: :submit, class: 'button-save' %>
   </div>
 <% end %>
