@@ -78,16 +78,35 @@ const Biovision = {
             }
         }
     },
-    new_ajax_request: function (method, url, on_success, on_failure) {
+    /**
+     * @deprecated use Biovision.newAjaxRequest
+     * @param method
+     * @param url
+     * @param [onSuccess]
+     * @param [onFailure]
+     */
+    new_ajax_request: function(method, url, onSuccess, onFailure) {
+        Biovision.newAjaxRequest(method, url, onSuccess, onFailure);
+    },
+    /**
+     * Initialize new AJAX request
+     *
+     * @param {string} method
+     * @param {string} url
+     * @param {function} [onSuccess] callback for success
+     * @param {function} [onFailure=Biovision.handleAjaxFailure] callback for failure
+     * @returns {XMLHttpRequest}
+     */
+    newAjaxRequest: function (method, url, onSuccess, onFailure) {
         const request = new XMLHttpRequest();
 
         request.addEventListener('load', function () {
             if (this.status >= 200 && this.status < 400) {
-                if (on_success) {
-                    on_success.call(this);
+                if (onSuccess) {
+                    onSuccess.call(this);
                 }
             } else {
-                (on_failure || Biovision.handle_ajax_failure).call(this);
+                (onFailure || Biovision.handleAjaxFailure).call(this);
             }
         });
         request.addEventListener('error', function () {
@@ -101,12 +120,16 @@ const Biovision = {
         return request;
     },
     jsonAjaxRequest: function (method, url, onSuccess, onFailure) {
-        const request = Biovision.new_ajax_request(method, url, onSuccess, onFailure);
+        const request = Biovision.newAjaxRequest(method, url, onSuccess, onFailure);
 
         request.setRequestHeader('Content-Type', 'application/json');
 
         return request;
     },
+    /**
+     * @deprecated use Biovision.handleAjaxFailure
+     * @param response
+     */
     handle_ajax_failure: function (response) {
         console.log('AJAX failed', this);
         if (response.hasOwnProperty('responseJSON')) {
@@ -114,6 +137,12 @@ const Biovision = {
         } else {
             console.log(response);
         }
+    },
+    /**
+     * Handle failed AJAX request
+     */
+    handleAjaxFailure: function () {
+        console.log('AJAX failed', this.responseText);
     },
     transliterate: function (input) {
         const char_map = {
@@ -145,7 +174,7 @@ const Biovision = {
         };
         const message = messages.hasOwnProperty(Biovision.locale) ? messages[Biovision.locale] : 'Are you sure?';
         const url = element.getAttribute('data-url');
-        const request = Biovision.new_ajax_request('delete', url, function () {
+        const request = Biovision.newAjaxRequest('delete', url, function () {
             element.closest('li[data-id]').remove();
         });
 
@@ -167,7 +196,7 @@ const Biovision = {
 
             this.disabled = true;
 
-            Biovision.new_ajax_request(method, url, () => this.disabled = false).send();
+            Biovision.newAjaxRequest(method, url, () => this.disabled = false).send();
         }
     },
     instant_check: function (form) {
@@ -176,7 +205,7 @@ const Biovision = {
         const perform_check = function () {
             const element = this;
 
-            const request = Biovision.new_ajax_request('POST', url, function () {
+            const request = Biovision.newAjaxRequest('POST', url, function () {
                 if (this.responseText) {
                     const response = JSON.parse(this.responseText);
 
@@ -247,6 +276,32 @@ const Biovision = {
             form.prepend(errors);
 
             errors.scrollIntoView();
+        }
+    },
+    removeEntityImage: function () {
+        const button = this;
+        if (!button.disabled) {
+            const message = button.getAttribute('data-text');
+            if (confirm(message)) {
+                const url = button.getAttribute('data-url');
+                const request = Biovision.newAjaxRequest('delete', url, function () {
+                    if (this.responseText) {
+                        const response = JSON.parse(this.responseText);
+                        const term = document.getElementById('entity-image');
+
+                        console.log(response);
+
+                        if (term) {
+                            term.remove();
+                        }
+                        button.parentNode.parentNode.remove();
+                    }
+                });
+
+                button.disabled = true;
+
+                request.send();
+            }
         }
     }
 };
@@ -345,10 +400,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 const on_failure = function () {
                     element.className = 'unknown';
-                    Biovision.handle_ajax_failure.call(this);
+                    Biovision.handleAjaxFailure().call(this);
                 };
 
-                const request = Biovision.new_ajax_request('POST', url, on_success, on_failure);
+                const request = Biovision.newAjaxRequest('POST', url, on_success, on_failure);
                 const data = new FormData();
                 data.append('parameter', parameter);
 
@@ -418,7 +473,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const input = container.querySelector('input[type=search]');
             const url = container.getAttribute('data-url') + '?q=' + encodeURIComponent(input.value);
 
-            const request = Biovision.new_ajax_request('GET', url, function () {
+            const request = Biovision.newAjaxRequest('GET', url, function () {
                 const response = JSON.parse(this.responseText);
                 const results = container.querySelector('.results');
 
@@ -440,7 +495,7 @@ document.addEventListener('DOMContentLoaded', function () {
         element.addEventListener('click', function () {
             const container = this.closest('div[data-destroy-url]');
             const url = container.getAttribute('data-destroy-url');
-            const request = Biovision.new_ajax_request('DELETE', url, function () {
+            const request = Biovision.newAjaxRequest('DELETE', url, function () {
                 container.remove();
             });
 
@@ -484,6 +539,10 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     document.querySelectorAll('form[data-check-url]').forEach(Biovision.instant_check);
+
+    document.querySelectorAll('.remove-image-button').forEach(function (button) {
+        button.addEventListener('click', Biovision.removeEntityImage);
+    });
 
     if (typeof jQuery !== 'undefined') {
         jQuery.ajaxSetup({
