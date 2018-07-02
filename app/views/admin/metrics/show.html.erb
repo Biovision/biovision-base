@@ -24,7 +24,7 @@
     document.addEventListener('DOMContentLoaded', function () {
         const canvas = document.getElementById('metric-chart');
         const url = canvas.getAttribute('data-source');
-        const request = Biovision.new_ajax_request('GET', url, function () {
+        const request = Biovision.newAjaxRequest('GET', url, function () {
             const response = JSON.parse(this.responseText);
 
             if (response.hasOwnProperty('data')) {

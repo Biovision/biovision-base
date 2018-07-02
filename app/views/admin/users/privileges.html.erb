@@ -30,7 +30,7 @@
                     const method = this.checked ? 'put' : 'delete';
                     const region_id = this.getAttribute('data-region-id');
                     const data = region_id > 0 ? {region_id: region_id} : {};
-                    const request = Biovision.new_ajax_request(method, url);
+                    const request = Biovision.newAjaxRequest(method, url);
 
                     request.setRequestHeader("Content-Type", "application/json");
                     request.send(JSON.stringify(data));
@@ -44,7 +44,7 @@
             if (element.matches('button.add_regions')) {
                 const container = element.closest('ul');
                 const url = container.getAttribute('data-url');
-                const request = Biovision.new_ajax_request('GET', url, function () {
+                const request = Biovision.newAjaxRequest('GET', url, function () {
                     const response = JSON.parse(this.responseText);
                     const li = element.closest('li');
 
@@ -71,7 +71,7 @@
                 const data = {region_id: element.value};
                 const list = li.querySelector('ul.regions');
 
-                const request = Biovision.new_ajax_request('put', url, function() {
+                const request = Biovision.newAjaxRequest('put', url, function() {
                     if (list) {
                         list.parentNode.removeChild(list);
                     }

@@ -20,7 +20,7 @@
                   element.addEventListener('click', function () {
                       const url = this.closest('li').getAttribute('data-url');
                       const method = this.checked ? 'put' : 'delete';
-                      const request = Biovision.new_ajax_request(method, url, function() {
+                      const request = Biovision.newAjaxRequest(method, url, function() {
                           console.log(JSON.parse(this.responseText));
                       });
 

@@ -11,8 +11,7 @@ const Biovision = {
                 window[type].removeItem(x);
 
                 return true;
-            }
-            catch (e) {
+            } catch (e) {
                 return false;
             }
         },
@@ -85,8 +84,8 @@ const Biovision = {
      * @param [onSuccess]
      * @param [onFailure]
      */
-    new_ajax_request: function(method, url, onSuccess, onFailure) {
-        Biovision.newAjaxRequest(method, url, onSuccess, onFailure);
+    new_ajax_request: function (method, url, onSuccess, onFailure) {
+        return Biovision.newAjaxRequest(method, url, onSuccess, onFailure);
     },
     /**
      * Initialize new AJAX request
@@ -341,7 +340,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (url.length > 1) {
                 const method = button.classList.contains('lock') ? 'PUT' : 'DELETE';
 
-                const request = Biovision.new_ajax_request(method, url, function () {
+                const request = Biovision.newAjaxRequest(method, url, function () {
                     const response = JSON.parse(this.responseText);
 
                     if (response.hasOwnProperty('data') && response['data'].hasOwnProperty('locked')) {
@@ -420,7 +419,7 @@ document.addEventListener('DOMContentLoaded', function () {
             let item = element.closest('li[data-number]');
 
             if (parseInt(item.getAttribute('data-number')) + delta > 0) {
-                const on_success = function () {
+                const onSuccess = function () {
                     const response = JSON.parse(this.responseText);
 
                     if (response.hasOwnProperty('data')) {
@@ -456,7 +455,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     }
                 };
 
-                const request = Biovision.new_ajax_request('POST', url, on_success);
+                const request = Biovision.newAjaxRequest('POST', url, onSuccess);
 
                 const data = new FormData();
                 data.append('delta', delta);
