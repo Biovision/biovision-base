@@ -2,6 +2,7 @@ class EditableBlock < ApplicationRecord
   include Checkable
   include Toggleable
 
+  DESCRIPTION_LIMIT = 250
   NAME_LIMIT        = 50
   SLUG_LIMIT        = 50
   SLUG_PATTERN      = /\A[a-z][-_a-z0-9]*[a-z]\z/i
@@ -9,7 +10,7 @@ class EditableBlock < ApplicationRecord
   TITLE_LIMIT       = 255
   TEXT_LIMIT        = 5000
 
-  toggleable :visible
+  toggleable :visible, :raw_output
 
   mount_uploader :image, EditablePageImageUploader
 
@@ -38,7 +39,7 @@ class EditableBlock < ApplicationRecord
   end
 
   def self.entity_parameters
-    %i(body footer image language_id lead name slug title visible)
+    %i[body description footer image language_id lead name raw_output slug title visible]
   end
 
   # @param [User] user

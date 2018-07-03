@@ -1,12 +1,12 @@
 <% unless entity.nil? %>
-  <% style = 'background-image: url("' + entity.image.url + '")' %>
+  <% style = 'background-image: url("' + entity.image.large.url + '")' %>
   <section
     id="editable-block-<%= entity.slug %>"
     style="<%= entity.image.blank? ? '' : style %>"
     class="biovision-editable-block"
   >
     <% unless entity.title.blank? %>
-      <h2><%= entity.title %></h2>
+      <h2><%= raw(entity.title) %></h2>
     <% end %>
 
     <% if entity.editable_by?(current_user) %>
@@ -17,19 +17,19 @@
 
     <% unless entity.lead.blank? %>
       <div class="lead">
-        <%= simple_format(entity.lead) %>
+        <%= entity.raw_output? ? raw(entity.lead) : entity.lead %>
       </div>
     <% end %>
 
     <% unless entity.body.blank? %>
       <div class="body">
-        <%= simple_format(entity.body) %>
+        <%= entity.raw_output? ? raw(entity.body) : entity.body %>
       </div>
     <% end %>
 
     <% unless entity.footer.blank? %>
       <footer>
-        <%= simple_format(entity.footer) %>
+        <%= entity.raw_output? ? raw(entity.footer) : entity.footer %>
       </footer>
     <% end %>
   </section>

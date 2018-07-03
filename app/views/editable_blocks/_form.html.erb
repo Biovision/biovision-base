@@ -52,6 +52,23 @@
       <div class="guideline"><%= t('.guidelines.name') %></div>
     </dd>
 
+    <dt><%= f.label :description %></dt>
+    <dd>
+      <%=
+        f.text_field(
+            :description,
+            id:        "#{model_name}_description",
+            size:      nil,
+            maxlength: EditableBlock::DESCRIPTION_LIMIT,
+            data: {
+                check: :description
+            }
+        )
+      %>
+      <div class="check-result-error hidden" data-field="description"></div>
+      <div class="guideline"><%= t('.guidelines.description') %></div>
+    </dd>
+
     <dt><%= f.label :image %></dt>
     <dd>
       <figure class="preview" role="group" id="<%= model_name %>-image">

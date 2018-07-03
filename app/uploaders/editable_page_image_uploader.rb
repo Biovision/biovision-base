@@ -14,7 +14,11 @@ class EditablePageImageUploader < CarrierWave::Uploader::Base
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
 
-  version :medium_2x do
+  version :large do
+    resize_to_fit 1920, 1920
+  end
+
+  version :medium_2x, from_version: :large do
     resize_to_fit 1280, 1280
   end
 

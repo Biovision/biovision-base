@@ -2,6 +2,9 @@
   <div><%= admin_editable_block_link(entity) %></div>
   <div class="info">
     <%= entity.slug %>
+    <% unless entity.description.blank? %>
+      <div><%= entity.description %></div>
+    <% end %>
   </div>
   <% unless entity.language.nil? %>
     <div class="secondary info">
@@ -13,9 +16,9 @@
   <%=
     render(
         partial: 'shared/admin/toggleable',
-        locals: {
+        locals:  {
             entity: entity,
-            url: toggle_admin_editable_block_path(id: entity.id)
+            url:    toggle_admin_editable_block_path(id: entity.id)
         }
     )
   %>

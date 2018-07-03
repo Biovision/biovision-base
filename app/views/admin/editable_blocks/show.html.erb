@@ -40,17 +40,17 @@
 
     <% unless @entity.lead.blank? %>
       <dt><%= t('activerecord.attributes.editable_block.lead') %></dt>
-      <dd><%= simple_format(@entity.lead) %></dd>
+      <dd><%= @entity.lead %></dd>
     <% end %>
 
     <% unless @entity.body.blank? %>
       <dt><%= t('activerecord.attributes.editable_block.body') %></dt>
-      <dd><%= simple_format(@entity.body) %></dd>
+      <dd><%= @entity.body %></dd>
     <% end %>
 
     <% unless @entity.footer.blank? %>
       <dt><%= t('activerecord.attributes.editable_block.footer') %></dt>
-      <dd><%= simple_format(@entity.footer) %></dd>
+      <dd><%= @entity.footer %></dd>
     <% end %>
 
     <dt><%= t(:created_at) %></dt>
