@@ -15,6 +15,8 @@ class CreateEditableBlocks < ActiveRecord::Migration[5.2]
         t.text :body
         t.text :footer
       end
+
+      add_default_blocks
     end
   end
 
