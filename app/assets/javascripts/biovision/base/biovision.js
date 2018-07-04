@@ -255,8 +255,16 @@ const Biovision = {
             });
         }
     },
-    show_list_of_errors: function (entity_name, list) {
-        const form = document.getElementById(entity_name + '-form');
+    /**
+     * Показать список ошибок после обработки формы
+     *
+     * Используется в контроллерах при отправке форм через remote: true
+     *
+     * @param {string} model_name название модели
+     * @param {Array<string>} list список ошибок
+     */
+    showListOfErrors: function (model_name, list) {
+        const form = document.getElementById(model_name + '-form');
         if (form) {
             let errors = form.querySelector('ol.errors');
             let data = '';
@@ -301,6 +309,25 @@ const Biovision = {
 
                 request.send();
             }
+        }
+    },
+    autoExpand: function () {
+        if (!this.hasOwnProperty('baseScrollHeight')) {
+            let savedValue = this.value;
+            this.value = '';
+            this.baseScrollHeight = this.scrollHeight;
+            this.value = savedValue;
+        }
+        const styles = getComputedStyle(this);
+        const ratio = styles.getPropertyValue('line-height').replace('px', '');
+        const minRows = this.getAttribute('data-min-rows') | 0;
+        const maxRows = this.hasAttribute('data-max-rows') ? parseInt(this.getAttribute('data-max-rows')) : 25;
+        const rows = Math.ceil((this.scrollHeight - this.baseScrollHeight) / ratio);
+
+        this.rows = minRows;
+        this.rows = minRows + rows;
+        if (this.rows > maxRows) {
+            this.rows = maxRows;
         }
     }
 };
@@ -541,6 +568,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.querySelectorAll('.remove-image-button').forEach(function (button) {
         button.addEventListener('click', Biovision.removeEntityImage);
+    });
+
+    document.querySelectorAll('textarea.auto-expand').forEach(function (textarea) {
+        textarea.addEventListener('focus', Biovision.autoExpand);
+        textarea.addEventListener('input', Biovision.autoExpand);
     });
 
     if (typeof jQuery !== 'undefined') {
