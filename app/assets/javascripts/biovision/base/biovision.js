@@ -335,6 +335,17 @@ const Biovision = {
 document.addEventListener('DOMContentLoaded', function () {
     Biovision.csrf_token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
+    const topLinker = document.getElementById('go-to-top');
+    if (topLinker) {
+        window.addEventListener('scroll', function () {
+            if (window.pageYOffset > 500) {
+                topLinker.classList.remove('inactive');
+            } else {
+                topLinker.classList.add('inactive');
+            }
+        });
+    }
+
     // Предварительный просмотр картинки при выборе файла
     document.addEventListener('change', function (event) {
         const input = event.target;
