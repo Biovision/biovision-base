@@ -37,7 +37,7 @@
   <figure role="group" class="preview">
     <%= profile_avatar @entity %>
     <figcaption>
-      <%= @entity.slug %>
+      <%= user_link(@entity) %>
     </figcaption>
   </figure>
 
@@ -48,7 +48,7 @@
     <% end %>
 
     <dt><%= t('activerecord.attributes.user.screen_name') %></dt>
-    <dd><%= user_link @entity %></dd>
+    <dd><%= @entity.screen_name %></dd>
 
     <% unless @entity.email.blank? %>
       <dt><%= t('activerecord.attributes.user.email') %></dt>
