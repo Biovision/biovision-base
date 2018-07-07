@@ -1,8 +1,9 @@
-<%= render partial: 'shared/list_of_errors', locals: { entity: entity } %>
+<% model_name = entity.class.to_s.underscore %>
+<%= form_with(model: entity, html: { id: "#{model_name}-form" }) do |f| %>
+  <%= render partial: 'shared/list_of_errors', locals: { entity: entity } %>
 
-<%= form_for entity do |f| %>
-    <dl>
-      <% if entity.id.blank? %>
+  <dl>
+      <% if entity.id.nil? %>
           <dt><%= f.label :code_type_id %></dt>
           <dd>
             <%= f.select :code_type_id, code_types_for_select, required: true %>
@@ -10,8 +11,19 @@
 
           <dt><%= f.label :user_id %></dt>
           <dd>
-            <%= f.number_field :user_id, in: User.ids_range %>
-            <%= render partial: 'admin/users/search', locals: { target_id: :code_user_id } %>
+            <%=
+              f.number_field(
+                  :user_id,
+                  id: "#{model_name}_user_id",
+                  in: User.ids_range
+              )
+            %>
+            <%=
+              render(
+                  partial: 'admin/users/search',
+                  locals: { target_id: "#{model_name}_user_id" }
+              )
+            %>
           </dd>
       <% else %>
           <dt><%= t('activerecord.attributes.code.code_type') %></dt>
@@ -27,19 +39,40 @@
 
       <dt><%= f.label :body %></dt>
       <dd>
-        <%= f.text_field :body, size: 25, maxlength: Code::BODY_LIMIT, required: true %>
+        <%=
+          f.text_field(
+              :body,
+              id: "#{model_name}_body",
+              size: 25,
+              maxlength: Code::BODY_LIMIT,
+              required: true
+          )
+        %>
         <div class="guideline"><%= t('.guidelines.body') %></div>
       </dd>
 
       <dt><%= f.label :payload %></dt>
       <dd>
-        <%= f.text_field :payload, size: 25, maxlength: Code::PAYLOAD_LIMIT %>
+        <%=
+          f.text_field(
+              :payload,
+              id: "#{model_name}_payload",
+              size: 25,
+              maxlength: Code::PAYLOAD_LIMIT
+          )
+        %>
         <div class="guideline"><%= t('.guidelines.payload') %></div>
       </dd>
 
       <dt><%= f.label :quantity %></dt>
       <dd>
-        <%= f.number_field :quantity, in: Code::QUANTITY_RANGE %>
+        <%=
+          f.number_field(
+              :quantity,
+              id: "#{model_name}_quantity",
+              in: Code::QUANTITY_RANGE
+          )
+        %>
       </dd>
     </dl>
 

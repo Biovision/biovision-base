@@ -10,9 +10,9 @@ class CodesController < AdminController
   def create
     @entity = Code.new(creation_parameters)
     if @entity.save
-      redirect_to admin_code_path(id: @entity.id)
+      form_processed_ok(admin_code_path(id: @entity.id))
     else
-      render :new, status: :bad_request
+      form_processed_with_error(:new)
     end
   end
 
@@ -23,9 +23,10 @@ class CodesController < AdminController
   # patch /codes/:id
   def update
     if @entity.update(entity_parameters)
-      redirect_to admin_code_path(id: @entity.id), notice: t('codes.update.success')
+      flash[:notice] = t('codes.update.success')
+      form_processed_ok(admin_code_path(id: @entity.id))
     else
-      render :edit, status: :bad_request
+      form_processed_with_error(:edit)
     end
   end
 
