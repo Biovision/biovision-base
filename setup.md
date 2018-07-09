@@ -196,6 +196,26 @@ end
   config.action_mailer.default_url_options = { host: 'example.com' }
 ```
 
+Вариант для `yandex.ru`
+
+```ruby
+  config.action_mailer.smtp_settings = {
+    address: 'smtp.yandex.ru',
+    port: 465,
+    tls: true,
+    domain: 'example.com',
+    user_name: 'webmaster@example.com',
+    password: ENV['MAIL_PASSWORD'],
+    authentication: :plain,
+    enable_starttls_auto: true
+  }
+  config.action_mailer.default_options = {
+      from: 'example.com <webmaster@example.com>',
+      reply_to: 'support@example.com'
+  }
+  config.action_mailer.default_url_options = { host: 'example.com' }
+```
+
 Дополнения в `config/environments/test.rb`
 ------------------------------------------
 
