@@ -1,5 +1,21 @@
 <%= t('.title') %>
 
-<%= t('activerecord.attributes.feedback_request.name') %>: <%= @entity.name %>
-<%= t('activerecord.attributes.feedback_request.email') %>: <%= @entity.email %>
-<%= t('activerecord.attributes.feedback_request.phone') %>: <%= @entity.phone %>
+<% unless @entity.name.blank? %>
+<%= t('activerecord.attributes.feedback_request.name') %>:
+  <%= @entity.name %>
+<% end %>
+<% unless @entity.email.blank? %>
+
+<%= t('activerecord.attributes.feedback_request.email') %>:
+  <%= @entity.email %>
+<% end %>
+<% unless @entity.phone.blank? %>
+
+<%= t('activerecord.attributes.feedback_request.phone') %>:
+  <%= @entity.phone %>
+<% end %>
+<% unless @entity.comment.blank? %>
+
+<%= t('activerecord.attributes.feedback_request.comment') %>:
+  <%= @entity.comment %>
+<% end %>

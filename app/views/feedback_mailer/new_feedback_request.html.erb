@@ -1,12 +1,23 @@
 <h1><%= t('.title') %></h1>
 
 <dl>
-  <dt><%= t('activerecord.attributes.feedback_request.name') %></dt>
-  <dd><%= @entity.name %></dd>
+  <% unless @entity.name.blank? %>
+    <dt><%= t('activerecord.attributes.feedback_request.name') %></dt>
+    <dd><%= @entity.name %></dd>
+  <% end %>
 
-  <dt><%= t('activerecord.attributes.feedback_request.email') %></dt>
-  <dd><%= @entity.email %></dd>
+  <% unless @entity.email.blank? %>
+    <dt><%= t('activerecord.attributes.feedback_request.email') %></dt>
+    <dd><%= @entity.email %></dd>
+  <% end %>
 
-  <dt><%= t('activerecord.attributes.feedback_request.phone') %></dt>
-  <dd><%= @entity.phone %></dd>
+  <% unless @entity.phone.blank? %>
+    <dt><%= t('activerecord.attributes.feedback_request.phone') %></dt>
+    <dd><%= @entity.phone %></dd>
+  <% end %>
+
+  <% unless @entity.comment.blank? %>
+    <dt><%= t('activerecord.attributes.feedback_request.comment') %></dt>
+    <dd><%= simple_format(@entity.comment) %></dd>
+  <% end %>
 </dl>
