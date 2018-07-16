@@ -31,7 +31,7 @@
             id:        "#{model_name}_slug",
             size:      nil,
             maxlength: LinkBlockItem::SLUG_LIMIT,
-            data: {
+            data:      {
                 check: :slug
             }
         )
@@ -101,10 +101,11 @@
       <%=
         f.text_area(
             :body,
-            id:   "#{model_name}_body",
-            cols: 80,
-            rows: 5,
-            data: {
+            id:    "#{model_name}_body",
+            cols:  80,
+            rows:  5,
+            class: 'auto-expand',
+            data:  {
                 check: :body
             }
         )
