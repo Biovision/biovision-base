@@ -211,7 +211,7 @@ end
   }
   config.action_mailer.default_options = {
       from: 'example.com <webmaster@example.com>',
-      reply_to: 'support@example.com'
+      reply_to: 'info@example.com'
   }
   config.action_mailer.default_url_options = { host: 'example.com' }
 ```
@@ -222,7 +222,7 @@ end
 ```ruby
   config.action_mailer.default_options = {
       from: 'example.com <webmaster@example.com>',
-      reply_to: 'support@example.com'
+      reply_to: 'info@example.com'
   }
   config.action_mailer.default_url_options = { :host => '0.0.0.0:3000' }
 ```
@@ -234,7 +234,7 @@ end
   config.action_mailer.delivery_method = :test
   config.action_mailer.default_options = {
       from: 'example.com <webmaster@example.com>',
-      reply_to: 'support@example.com'
+      reply_to: 'info@example.com'
   }
   config.action_mailer.default_url_options = { :host => '0.0.0.0:3000' }
 ```
@@ -275,6 +275,9 @@ end
 bundle binstubs bundler --force
 bundle binstub puma
 ```
+
+Также имеет смысл запустить `EDITOR=vim rails credentials:edit`, чтобы создать
+зашированный файл с ключом шифрования сессии.
 
 Настройка отгрузки через `mina`
 -------------------------------
