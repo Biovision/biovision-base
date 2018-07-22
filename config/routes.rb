@@ -1,30 +1,30 @@
 Rails.application.routes.draw do
-  resources :agents, :browsers, only: [:update, :destroy]
+  resources :agents, :browsers, only: %i[update destroy]
 
-  resources :editable_blocks, only: [:update, :destroy]
-  resources :editable_pages, only: [:update, :destroy]
-  resources :stored_values, only: [:update, :destroy]
+  resources :editable_blocks, only: %i[update destroy]
+  resources :editable_pages, only: %i[update destroy]
+  resources :stored_values, only: %i[update destroy]
 
-  resources :users, only: [:update, :destroy]
-  resources :tokens, :codes, only: [:update, :destroy]
+  resources :users, only: %i[update destroy]
+  resources :tokens, :codes, only: %i[update destroy]
 
-  resources :metrics, only: [:update]
+  resources :metrics, only: :update
 
-  resources :privileges, only: [:update, :destroy]
-  resources :privilege_groups, only: [:update, :destroy]
+  resources :privileges, only: %i[update destroy]
+  resources :privilege_groups, only: %i[update destroy]
 
-  resources :media_folders, only: [:update, :destroy]
-  resources :media_files, only: [:update, :destroy]
+  resources :media_folders, only: %i[update destroy]
+  resources :media_files, only: %i[update destroy]
 
-  resources :feedback_requests, only: [:destroy]
+  resources :feedback_requests, only: :destroy
 
-  resources :link_blocks, :link_block_items, only: [:update, :destroy] do
+  resources :link_blocks, :link_block_items, only: %i[update destroy] do
     collection do
       post 'check', defaults: { format: :json }
     end
   end
 
-  scope '(:locale)', constraints: { locale: /ru|en/ } do
+  scope '(:locale)', constraints: { locale: /ru|en|se/ } do
     # Handling errors
     match '/400' => 'errors#bad_request', via: :all
     match '/401' => 'errors#unauthorized', via: :all
@@ -54,7 +54,7 @@ Rails.application.routes.draw do
     namespace :admin do
       get '/' => 'index#index'
 
-      resources :agents, :browsers, only: [:index, :show] do
+      resources :agents, :browsers, only: %i[index show] do
         member do
           post 'toggle', defaults: { format: :json }
           put 'lock', defaults: { format: :json }
@@ -62,32 +62,32 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :codes, only: [:index, :show]
-      resources :tokens, only: [:index, :show] do
+      resources :codes, only: %i[index show]
+      resources :tokens, only: %i[index show] do
         member do
           post 'toggle', defaults: { format: :json }
         end
       end
 
-      resources :editable_pages, only: [:index, :show] do
+      resources :editable_pages, only: %i[index show] do
         member do
           post 'priority', defaults: { format: :json }
         end
       end
-      resources :editable_blocks, only: [:index, :show] do
+      resources :editable_blocks, only: %i[index show] do
         member do
           post 'toggle', defaults: { format: :json }
         end
       end
-      resources :stored_values, only: [:index, :show]
+      resources :stored_values, only: %i[index show]
 
-      resources :metrics, only: [:index, :show] do
+      resources :metrics, only: %i[index show] do
         member do
           get 'data', defaults: { format: :json }
         end
       end
 
-      resources :privileges, only: [:index, :show] do
+      resources :privileges, only: %i[index show] do
         member do
           put 'lock', defaults: { format: :json }
           delete 'lock', action: :unlock, defaults: { format: :json }
@@ -97,14 +97,14 @@ Rails.application.routes.draw do
           get 'regions', defaults: { format: :json }
         end
       end
-      resources :privilege_groups, only: [:index, :show] do
+      resources :privilege_groups, only: %i[index show] do
         member do
           put 'privileges/:privilege_id' => :add_privilege, as: :privilege, defaults: { format: :json }
           delete 'privileges/:privilege_id' => :remove_privilege, defaults: { format: :json }
         end
       end
 
-      resources :users, only: [:index, :show] do
+      resources :users, only: %i[index show] do
         collection do
           get 'search', defaults: { format: :json }
         end
@@ -119,32 +119,32 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :login_attempts, only: [:index]
+      resources :login_attempts, only: :index
 
-      resources :media_folders, only: [:index, :show] do
+      resources :media_folders, only: %i[index show] do
         member do
           get 'files'
         end
       end
-      resources :media_files, only: [:index, :show] do
+      resources :media_files, only: %i[index show] do
         member do
           put 'lock', defaults: { format: :json }
           delete 'lock', action: :unlock, defaults: { format: :json }
         end
       end
 
-      resources :feedback_requests, only: [:index] do
+      resources :feedback_requests, only: :index do
         member do
           post 'toggle', defaults: { format: :json }
         end
       end
 
-      resources :link_blocks, only: [:index, :show] do
+      resources :link_blocks, only: %i[index show] do
         member do
           post 'toggle', defaults: { format: :json }
         end
       end
-      resources :link_block_items, only: [:show] do
+      resources :link_block_items, only: :show do
         member do
           post 'toggle', defaults: { format: :json }
           post 'priority', defaults: { format: :json }
@@ -155,54 +155,54 @@ Rails.application.routes.draw do
     namespace :my do
       get '/' => 'index#index'
 
-      resource :profile, except: [:destroy] do
+      resource :profile, except: :destroy do
         post 'check'
       end
-      resource :confirmation, :recovery, only: [:show, :create, :update]
-      resources :tokens, only: [:index] do
+      resource :confirmation, :recovery, only: %i[show create update]
+      resources :tokens, only: :index do
         member do
           post 'toggle', defaults: { format: :json }
         end
       end
-      resources :login_attempts, only: [:index]
+      resources :login_attempts, only: :index
     end
 
-    resources :agents, :browsers, except: [:index, :show, :update, :destroy]
+    resources :agents, :browsers, except: %i[index show update destroy]
 
-    resources :editable_pages, except: [:index, :show, :update, :destroy]
-    resources :editable_blocks, except: [:index, :show, :update, :destroy] do
+    resources :editable_pages, except: %i[index show update destroy]
+    resources :editable_blocks, except: %i[index show update destroy] do
       collection do
         post 'check', defaults: { format: :json }
       end
     end
-    resources :stored_values, except: [:index, :show, :update, :destroy]
+    resources :stored_values, except: %i[index show update destroy]
 
-    resources :link_blocks, :link_block_items, except: [:index, :show, :update, :destroy] do
+    resources :link_blocks, :link_block_items, except: %i[index show update destroy] do
       collection do
         post 'check', defaults: { format: :json }
       end
     end
 
-    resources :users, except: [:index, :show, :update, :destroy] do
+    resources :users, except: %i[index show update destroy] do
       collection do
         post 'check', defaults: { format: :json }
       end
     end
-    resources :tokens, :codes, except: [:index, :show, :update, :destroy]
+    resources :tokens, :codes, except: %i[index show update destroy]
 
-    resources :metrics, only: [:edit]
+    resources :metrics, only: :edit
 
-    resources :privileges, except: [:index, :show, :update, :destroy]
-    resources :privilege_groups, except: [:index, :show, :update, :destroy]
+    resources :privileges, except: %i[index show update destroy]
+    resources :privilege_groups, except: %i[index show update destroy]
 
-    resources :media_folders, except: [:index, :show, :update, :destroy]
-    resources :media_files, except: [:index, :show, :update, :destroy] do
+    resources :media_folders, except: %i[index show update destroy]
+    resources :media_files, except: %i[index show update destroy] do
       collection do
         post :ckeditor
       end
     end
 
-    resources :feedback_requests, only: [:create]
+    resources :feedback_requests, only: :create
 
     get ':editable_page_url' => 'fallback#show', constraints: { editable_page_url: /.+/ }
   end
