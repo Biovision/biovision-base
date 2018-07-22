@@ -21,6 +21,7 @@ class Language < ApplicationRecord
   validates_uniqueness_of :slug
 
   scope :ordered_by_priority, -> { order('priority asc') }
+  scope :active, -> { where(active: true) }
 
   # @param [Integer] delta
   def change_priority(delta)

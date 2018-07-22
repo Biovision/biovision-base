@@ -5,6 +5,7 @@ class CreateLanguages < ActiveRecord::Migration[5.1]
         t.timestamps
         t.integer :users_count, default: 0, null: false
         t.integer :priority, limit: 2, default: 1, null: false
+        t.boolean :active, default: true, null: false
         t.string :slug, null: false
         t.string :code, null: false
       end
