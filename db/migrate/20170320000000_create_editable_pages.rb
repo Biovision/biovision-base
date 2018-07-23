@@ -44,7 +44,7 @@ class CreateEditablePages < ActiveRecord::Migration[5.1]
           slug:     slug,
           name:     names[language.code.to_sym],
           language: language,
-          url:      url
+          url:      "/#{language.code}/#{url}"
         )
       end
     end
