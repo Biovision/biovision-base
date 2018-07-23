@@ -45,12 +45,8 @@ ru:
         text: "Редактируемые блоки"
         description: "Управление редактируемыми блоками"
       index:
-        title: "Блоки ссылок"
-        heading: "Блоки ссылок"
-      entity:
-        items:
-          heading: "Ссылки"
-          new_item: "Добавить ссылку"
+        title: "Редактируемые блоки"
+        heading: "Редактируемые блоки"
     editable_pages:
       nav_item:
         description: "Управление редактируемыми страницами"

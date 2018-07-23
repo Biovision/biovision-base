@@ -1,9 +1,23 @@
 en:
   activerecord:
     models:
+      editable_block: "Editable block"
       editable_page: "Editable page"
       stored_value: "Stored value"
     attributes:
+      editable_block:
+        body: "Main text"
+        description: "Description"
+        footer: "Footer text"
+        image: "Image"
+        language: "Language"
+        language_id: "Language"
+        lead: "Lead (before main text)"
+        name: "Name"
+        raw_output: "Raw output"
+        slug: "Slug"
+        title: "Title (before lead)"
+        visible: "Visible"
       editable_page:
         body: "Body"
         description: "Description"
@@ -20,6 +34,15 @@ en:
         slug: "Slug"
         value: "Value"
   admin:
+    editable_blocks:
+      show:
+        title: "Editable block '%{slug}'"
+      nav_item:
+        text: "Editable blocks"
+        description: "Manage editable blocks"
+      index:
+        title: "Editable blocks"
+        heading: "Editable blocks"
     editable_pages:
       nav_item:
         description: "Managing editable pages"
@@ -28,7 +51,7 @@ en:
         heading: "Editable pages"
         title: "Editable pages"
       show:
-        title: "Editable page \"%{name}\""
+        title: "Editable page '%{name}'"
     stored_values:
       nav_item:
         description: "Managing stored values"
@@ -37,7 +60,30 @@ en:
         heading: "Stored values"
         title: "Stored values"
       show:
-        title: "Stored value \"%{slug}\""
+        title: "Stored value '%{slug}'"
+  editable_blocks:
+    new:
+      heading: "New editable block"
+      nav_text: "Create"
+      title: "New editable block"
+    edit:
+      heading: "Editing editable block"
+      nav_text: "Edit"
+      title: "Editing editable block"
+    destroy:
+      success: "Editable block has been deleted"
+    form:
+      guidelines:
+        body: "Maximum 5000 characters."
+        description: "For administrative purposes. Maximum 250 characters."
+        footer: "Maximum 5000 characters."
+        image: "Image in JPG or PNG format with dimensions up to 1280×640 for background."
+        lead: "Maximum 5000 characters."
+        name: "Used for more convenient management. Maximum 100 characters."
+        slug: "Only latin letters, numbers, dash or underscore (except start or end). 2 to 50 characters."
+        title: "Maximum 100 characters."
+    update:
+      success: "Editable block has been updated"
   editable_pages:
     new:
       title: "New editable page"
