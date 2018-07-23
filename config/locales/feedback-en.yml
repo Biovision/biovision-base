@@ -21,8 +21,9 @@ en:
         heading: "Feedback requests"
         title: "Feedback requests, page %{page}"
     index:
-      feedback_requests:
-        heading: "Feedback"
+      dashboard:
+        feedback_requests:
+          heading: "Feedback"
   feedback_requests:
     form:
       result: "Thank you, we will contact you"
