@@ -24,7 +24,7 @@ Rails.application.routes.draw do
     end
   end
 
-  scope '(:locale)', constraints: { locale: /ru|en|se/ } do
+  scope '(:locale)', constraints: { locale: /ru|en|sv/ } do
     # Handling errors
     match '/400' => 'errors#bad_request', via: :all
     match '/401' => 'errors#unauthorized', via: :all
