@@ -22,7 +22,7 @@ en:
         title: "Feedback requests, page %{page}"
     index:
       dashboard:
-        feedback_requests:
+        biovision_feedback:
           heading: "Feedback"
   feedback_requests:
     form:
