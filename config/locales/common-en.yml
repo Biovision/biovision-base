@@ -160,6 +160,8 @@ en:
       message: "Page content is not ready, please come back later."
     index:
       nav_text: "About us"
+    privacy:
+      nav_text: "Privacy policy"
     tos:
       nav_text: "Terms of service"
   total: "Total"

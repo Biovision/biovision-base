@@ -5,6 +5,7 @@
       <ul>
         <li><%= link_to(t('about.index.nav_text'), about_path) %></li>
         <li><%= link_to(t('about.tos.nav_text'), tos_path) %></li>
+        <li><%= link_to(t('about.privacy.nav_text'), privacy_path) %></li>
         <% if UserPrivilege.user_has_any_privilege?(current_user) %>
             <li><%= link_to(t('admin.index.index.heading'), admin_path) %></li>
         <% end %>

@@ -33,10 +33,26 @@ $link-color: rgb(20, 127, 255) !default;
 $link-color-visited: rgb(20, 77, 250) !default;
 $link-color-hover: rgb(255, 77, 20) !default;
 
+$spacer-xxs: .4rem;
+$spacer-xs: .8rem;
+$spacer-s: 1.6rem;
+$spacer-m: 3.2rem;
+$spacer-l: 4.8rem;
+$spacer-xl: 6.4rem;
+$spacer-xxl: 9.6rem;
+
 :root {
   --font-size-large: #{$font-size-large};
   --font-size-increased: #{$font-size-increased};
   --font-size-normal: #{$font-size-normal};
   --font-size-decreased: #{$font-size-decreased};
   --font-size-small: #{$font-size-small};
+
+  --spacer-xxs: #{$spacer-xxs};
+  --spacer-xs: #{$spacer-xs};
+  --spacer-s: #{$spacer-s};
+  --spacer-m: #{$spacer-m};
+  --spacer-l: #{$spacer-l};
+  --spacer-xl: #{$spacer-xl};
+  --spacer-xxl: #{$spacer-xxl};
 }
