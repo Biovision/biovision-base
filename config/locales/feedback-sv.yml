@@ -1,0 +1,37 @@
+sv:
+  activerecord:
+    models:
+      feedback_request: "Feedback request"
+    attributes:
+      feedback_request:
+        comment: "Comment"
+        consent: "Consent on processing personal data"
+        email: "E-mail"
+        image: "Image"
+        language: "Language"
+        name: "Name"
+        phone: "Phone number"
+        processed: "Processed"
+  admin:
+    feedback_requests:
+      nav_item:
+        description: "Feedback requests list"
+        text: "Feedback requests"
+      index:
+        heading: "Feedback requests"
+        title: "Feedback requests, page %{page}"
+    index:
+      dashboard:
+        biovision_feedback:
+          heading: "Feedback"
+  feedback_requests:
+    form:
+      result: "Thank you, we will contact you"
+  feedback_mailer:
+    new_feedback_request:
+      subject: "New feedback request"
+      title: "New feebdack request came"
+  about:
+    contact:
+      title: "Contact"
+      heading: "Contact"

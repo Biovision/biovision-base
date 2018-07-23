@@ -1,0 +1,92 @@
+sv:
+  media_file_count:
+    zero: "no media files"
+    one: "%{count} file"
+    few: "%{count} files"
+    many: "%{count} files"
+    other: "%{count} files"
+  child_media_folder_count:
+    zero: "no inner folders"
+    one: "%{count} inner folder"
+    few: "%{count} inner folders"
+    many: "%{count} inner folders"
+    other: "%{count} inner folders"
+  activerecord:
+    models:
+      media_folder: "Media-folder"
+      media_file: "Media-file"
+    errors:
+      models:
+        media_folder:
+          attributes:
+            parent:
+              is_too_deep: "is too deep"
+    attributes:
+      media_file:
+        description: "Description"
+        file: "File"
+        media_folder: "Folder"
+        media_folder_id: "Folder"
+        mime_type: "MIME-type"
+        name: "Name"
+        original_name: "Original name"
+        snapshot: "Snapshot"
+        user: "User"
+        uuid: "UUID"
+      media_folder:
+        name: "Name"
+        parent: "Parent folder"
+        parent_id: "Parent folder"
+        snapshot: "Snapshot"
+        user: "User"
+        uuid: "UUID"
+  admin:
+    media_files:
+      nav_item:
+        description: "Managing uploaded files"
+        text: "Media-files"
+      index:
+        title: "Media-files, page %{page}"
+        heading: "Media-files"
+    media_folders:
+      nav_item:
+        description: "Managing folders for media-files"
+        text: "Media-folders"
+      index:
+        title: "Media-folders"
+        heading: "Media-folders"
+      show:
+        add_child: "Add child folder"
+        media_files: "Files"
+      files:
+        title: "Files in media-folder \"%{name}\", page %{page}"
+  media_files:
+    new:
+      heading: "New media-file"
+      title: "Adding media-file"
+    edit:
+      heading: "Editing media-file"
+      forbidden: "Editing this file is forbitten"
+      title: "Editing media-file"
+    destroy:
+      success: "File has been updated"
+    update:
+      success: "File has been deleted"
+    form:
+      guidelines:
+        file: "Image with maximum dimensions of 3000×3000, format: JPG or PNG."
+        name: "Maximum 250 characters."
+        description: "Maximum 250 characters."
+  media_folders:
+    new:
+      heading: "New media-folder"
+      title: "Adding media-folder"
+    edit:
+      heading: "Editing media-folder"
+      title: "Editing media-folder"
+    destroy:
+      success: "Media-folder has been deleted"
+    form:
+      guidelines:
+        snapshot: "Image of size 160×160, format: JPG or PNG."
+        name: "Maximum 100 characters."
