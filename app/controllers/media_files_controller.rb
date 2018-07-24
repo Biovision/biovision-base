@@ -68,7 +68,7 @@ class MediaFilesController < ApplicationController
       render json: {
         uploaded: 1,
         fileName: File.basename(@entity.name),
-        url: @entity.file.medium.url
+        url: @entity.file.medium_2x.url
       }
     end
   end
