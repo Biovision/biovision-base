@@ -214,6 +214,7 @@ en:
       breadcrumbs: "Log in"
     form:
       log_in: "Log in"
+      login: "Login"
   users:
     create:
       success: "User has been created successfully"

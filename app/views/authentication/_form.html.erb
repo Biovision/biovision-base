@@ -1,7 +1,7 @@
 <%= form_tag login_path, class: 'login' do %>
     <div class="fields">
       <div>
-        <%= label_tag :login, t('activerecord.attributes.user.screen_name') %>
+        <%= label_tag :login, t('.login') %>
         <%= text_field_tag :login, '', required: true, size: 18 %>
       </div>
       <div>

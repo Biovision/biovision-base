@@ -214,6 +214,7 @@ ru:
       breadcrumbs: "Вход"
     form:
       log_in: "Войти"
+      login: "Логин"
   users:
     create:
       success: "Пользователь успешно создан"
