@@ -1,391 +1,391 @@
 sv:
   user_count:
-    zero: "no users"
-    one: "%{count} user"
-    few: "%{count} users"
-    many: "%{count} users"
-    other: "%{count} users"
+    zero: "inga användare"
+    one: "%{count} användare"
+    few: "%{count} användare"
+    many: "%{count} användare"
+    other: "%{count} användare"
   code_activation_count:
-    zero: "no activations"
-    one: "%{count} activation"
-    few: "%{count} activations"
-    many: "%{count} activations"
-    other: "%{count} activations"
+    zero: "inga aktiveringar"
+    one: "%{count} aktiveringar"
+    few: "%{count} aktiveringar"
+    many: "%{count} aktiveringar"
+    other: "%{count} aktiveringar"
   age_year_count:
-    zero: "%{count} years"
-    one: "%{count} year"
-    few: "%{count} years"
-    many: "%{count} years"
-    other: "%{count} years"
-  invalid_code: "Invalid code"
-  could_not_log_in: "Could not log in"
-  logout: "Log out"
-  email_already_confirmed: "Email is already confirmed"
-  anonymous: "Anonymous"
+    zero: "%{count} år"
+    one: "%{count} år"
+    few: "%{count} år"
+    many: "%{count} år"
+    other: "%{count} år"
+  invalid_code: "Ogiltig kod"
+  could_not_log_in: "Det gick inte att logga in"
+  logout: "Logga ut"
+  email_already_confirmed: "E-post är redan bekräftat"
+  anonymous: "Anonym"
   activerecord:
     models:
-      user: "User"
-      user_profile: "User profile"
-      foreign_site: "Foreign site"
-      foreign_user: "Foreign user"
-      code_type: "Code type"
-      code: "Code"
+      user: "Användare"
+      user_profile: "Användare profile"
+      foreign_site: "Extern webbplats"
+      foreign_user: "Extern användare"
+      code_type: "Kodtyp"
+      code: "Kod"
       token: "Access token"
-      privilege: "Privilege"
-      privilege_group: "Privilege group"
-      privilege_group_privilege: "Privilege in group"
-      user_privilege: "Privilege for user"
+      privilege: "Privilegium"
+      privilege_group: "Privilegiumgrupp"
+      privilege_group_privilege: "Privilegium i grupp"
+      user_privilege: "Privilegium för användare"
       login_attempt: "Login attempt"
     errors:
       models:
         user:
           attributes:
             email:
-              invalid: "does not look like email"
+              invalid: "ser inte ut som e-post"
             slug:
-              invalid: "must contain 1 to 30 latin letters, numbers of underscores"
+              invalid: "måste innehålla 1 till 30 latinska bokstäver, antal underskrifter"
     attributes:
       user:
-        agent: "User agent at the time if registration"
-        allow_login: "Allow logging in"
-        allow_mail: "Allow email notifications"
-        balance: "Balance"
-        birthday: "Birthday"
-        bot: "It is bot"
-        consent: "Consent for processing of personal data and acceptance of terms of service"
-        email: "Email"
-        email_confirmed: "Email is confirmed"
-        foreign_slug: "Foreign slug"
-        image: "Image"
-        ip: "IP-address at the time of registration"
-        language: "Language"
-        last_seen: "Last seen"
-        notice: "Notice"
-        password: "Password"
-        password_confirmation: "Password confirmation"
-        phone: "Phone"
-        phone_confirmed: "Phone is confirmed"
-        screen_name: "Screen name"
-        search_string: "Search string"
-        slug: "Slug"
+        agent: "Användaragent vid registreringstidpunkten"
+        allow_login: "Tillåt inloggning"
+        allow_mail: "Tillåt e-postmeddelanden"
+        balance: "Balans"
+        birthday: "Födelsedag"
+        bot: "Det är bot"
+        consent: "Samtycke till behandling av personuppgifter och godkännande av användarvillkor"
+        email: "E-post"
+        email_confirmed: "E-post bekräftas"
+        foreign_slug: "Extern pollett"
+        image: "Bild"
+        ip: "IP-adress vid registreringstidpunkten"
+        language: "Språk"
+        last_seen: "Senast sedd"
+        notice: "Anmälan"
+        password: "Lösenord"
+        password_confirmation: "Lösenordsbekräftelse"
+        phone: "Telefon"
+        phone_confirmed: "Telefonen är bekräftad"
+        screen_name: "Skärmnamn"
+        search_string: "Söksträng"
+        slug: "Pollett"
       user_profile:
-        gender: "Gender"
-        name: "Name"
-        patronymic: "Patronymic"
-        surname: "Surname"
+        gender: "Kön"
+        name: "Namn"
+        patronymic: "Patronymikon"
+        surname: "Efternamn"
         genders:
-          female: "Female"
-          male: "Male"
+          female: "Kvinna"
+          male: "Manlig"
       foreign_site:
-        slug: "Slug"
-        name: "Name"
+        slug: "Pollett"
+        name: "Namn"
       foreign_user:
-        foreign_site: "Foreign site"
-        user: "Inner user"
-        agent: "User agent at the time of registration"
-        ip: "IP-address at the time of registration"
-        slug: "Slug"
-        name: "Name"
-        email: "Email"
+        foreign_site: "Extern webbplats"
+        user: "Inre användare"
+        agent: "Användaragent vid registreringstidpunkten"
+        ip: "IP-adress vid registreringstidpunkten"
+        slug: "Pollett"
+        name: "Namn"
+        email: "E-post"
         data: "Data"
       token:
-        user: "User"
-        user_id: "User"
-        last_used: "Last used"
-        active: "Active"
-        token: "Token"
+        user: "Användare"
+        user_id: "Användare"
+        last_used: "Senast använd"
+        active: "Aktiva"
+        token: "Tecken"
       code:
-        code_type: "Code type"
-        code_type_id: "Code type"
-        user: "User"
-        user_id: "User"
-        category: "Category"
-        body: "Code"
+        code_type: "Kodtyp"
+        code_type_id: "Kodtyp"
+        user: "Användare"
+        user_id: "Användare"
+        category: "Kategori"
+        body: "Kod"
         payload: "Payload"
-        quantity: "Number of activations"
+        quantity: "Antal aktiveringar"
       privilege:
-        administrative: "Administrative"
-        parent_id: "Parent category"
-        priority: "Sorting order"
+        administrative: "Administrativ"
+        parent_id: "Föräldrakategori"
+        priority: "Sorteringsordning"
         regional: "Regional"
-        name: "Name"
-        slug: "Slug"
-        description: "Description"
-        parents_cache: "Parents cache"
-        children_cache: "Children cache"
+        name: "Namn"
+        slug: "Pollett"
+        description: "Beskrivning"
+        parents_cache: "Föräldrarnas cache"
+        children_cache: "Barn cache"
       user_privilege:
-        privilege: "Privilege"
-        user: "User"
+        privilege: "Privilegium"
+        user: "Användare"
       privilege_group:
-        name: "Name"
-        slug: "Slug"
-        description: "Description"
+        name: "Namn"
+        slug: "Pollett"
+        description: "Beskrivning"
       privilege_group_privilege:
-        privilege: "Privilege"
-        privilege_group: "Privilege group"
+        privilege: "Privilegium"
+        privilege_group: "Privilegegrupp"
       login_attempt:
-        user: "User"
-        password: "Password"
+        user: "Användare"
+        password: "Lösenord"
   admin:
     users:
       nav_item:
-        text: "Users"
-        description: "Managing site users"
+        text: "Användares"
+        description: "Hantera webbplatsanvändare"
       index:
-        title: "Users, page %{page}"
-        heading: "Users"
+        title: "Användares, sida %{page}"
+        heading: "Användares"
       show:
-        title: "User %{name}"
-        privileges: "Privileges"
-        authenticate: "Log in as this user"
+        title: "Användare %{name}"
+        privileges: "Privilegiums"
+        authenticate: "Logga in som den här användaren"
       tokens:
-        title: "Tokens of user %{user], page %{page}"
-        heading: "Access tokens"
+        title: "Teck av användare %{user}, sida %{page}"
+        heading: "Tillgång teckens"
       codes:
-        title: "Codes of user %{user}, page %{page}"
-        heading: "Codes"
+        title: "Kods av användare %{user}, sida %{page}"
+        heading: "Kods"
       privileges:
-        title: "Privileges of user %{user}"
-        heading: "Privileges of user"
+        title: "Privilegiums av användare %{user}"
+        heading: "Privilegiums av användare"
       filter:
-        search: "Search"
+        search: "Sök"
     tokens:
       nav_item:
-        text: "Access tokens (user sessions)"
+        text: "Tillgång teckens (användarsessioner)"
         description: "Managing session tokens"
       index:
-        title: "Access tokens, page %{page}"
-        heading: "Access tokens (user sessions)"
+        title: "Tillgång teckens, sida %{page}"
+        heading: "Tillgång teckens (användarsessioner)"
       show:
-        title: "Token №%{id}"
+        title: "Tecken №%{id}"
     codes:
       nav_item:
-        text: "Codes"
-        description: "Managing codes for resetting password, email confirmation, invitations, etc."
+        text: "Kods"
+        description: "Hantera koder för återställning av lösenord, e-postbekräftelse, inbjudningar etc."
       index:
-        title: "Codes, page %{page}"
-        heading: "Codes"
+        title: "Kods, sida %{page}"
+        heading: "Kods"
       show:
-        title: "Code \"%{body}\""
+        title: "Kod \"%{body}\""
     privileges:
       nav_item:
-        text: "Privileges of users"
-        description: "Managing privileges of users"
+        text: "Privilegiums av användares"
+        description: "Hantera privilegier av användares"
       index:
-        title: "Privileges"
-        heading: "Privileges of users"
+        title: "Privilegiums"
+        heading: "Privilegiums av användares"
       show:
-        title: "Privilege \"%{name}\""
-        children: "Child privileges"
-        add_child: "Add child privilege"
+        title: "Privilegium \"%{name}\""
+        children: "Barn privilegier"
+        add_child: "Lägg till barn privilegium"
       users:
-        title: "Users with privilege \"%{privilege}\", page %{page}"
-        heading: "Users with privilege"
+        title: "Användares med privilegium \"%{privilege}\", sida %{page}"
+        heading: "Användares med privilegium"
       entity:
         groups:
-          heading: "Privilege groups"
+          heading: "Privilegegrupps"
     privilege_groups:
       nav_item:
-        text: "Privilege groups"
-        description: "Managing privilege groups"
+        text: "Privilegegrupps"
+        description: "Hantera privilegiergrupper"
       index:
-        title: "Privilege groups"
-        heading: "Privilege groups"
+        title: "Privilegegrupps"
+        heading: "Privilegegrupps"
       show:
-        title: "Privilege group \"%{name}\""
-        privileges: "Privileges"
+        title: "Privilegegrupp \"%{name}\""
+        privileges: "Privilegiums"
     login_attempts:
       index:
-        title: "Login attempts, page %{page}"
-        heading: "Login attempts for users"
+        title: "Inloggningsförsök, sida %{page}"
+        heading: "Inloggningsförsök för användare"
       nav_item:
-        text: "Login attempts"
-        description: "Failed user login attempts"
+        text: "Inloggningsförsök"
+        description: "Felaktiga användarinloggningsförsök"
   authentication:
     nav_item:
-      log_in: "Log in"
-      join: "Join"
-      logout: "Log out"
+      log_in: "Logga in"
+      join: "Ansluta sig"
+      logout: "Logga ut"
     info:
-      logout: "Log out"
+      logout: "Logga ut"
     new:
-      title: "Log in"
-      heading: "Log in"
-      breadcrumbs: "Log in"
+      title: "Logga in"
+      heading: "Logga in"
+      breadcrumbs: "Logga in"
     form:
-      log_in: "Log in"
+      log_in: "Logga in"
   users:
     create:
-      success: "User has been created successfully"
+      success: "Användare har skapats framgångsrikt"
     update:
-      success: "User has been updated successfully"
+      success: "Användare har uppdaterats framgångsrikt"
     destroy:
-      success: "User has been deleted successfully"
+      success: "Användare har tagits bort framgångsrikt"
     edit:
-      title: "Editing user"
-      heading: "Editing user"
+      title: "Redigerar användaren"
+      heading: "Redigerar användaren"
     new:
-      title: "Adding user"
-      heading: "Adding user"
+      title: "Lägger till användare"
+      heading: "Lägger till användare"
     user:
-      account_data: "Account data"
+      account_data: "Kontodata"
     index:
-      title: "Site users, page %{page}"
-      heading: "Site users"
+      title: "Webbplatsanvändare, sida %{page}"
+      heading: "Webbplatsanvändare"
     form:
       guidelines:
-        notice: "Administrative notice for yourself and other administrators"
-        screen_name: "Only latin letters, digits and underscores, 1 to 30 chars."
+        notice: "Administrativt meddelande för dig själv och andra administratörer"
+        screen_name: "Endast latinska bokstäver, siffror och understreck, 1 till 30 tecken."
   profiles:
     profile:
-      user_info: "User info"
-      registration_date: "Registration date"
+      user_info: "Användare info"
+      registration_date: "Registrerings datum"
   tokens:
     update:
-      success: "Token had been updated successfully"
+      success: "Tecken har uppdaterats framgångsrikt"
     destroy:
-      success: "Token has been deleted successfully"
+      success: "Tecken har tagits bort framgångsrikt"
     new:
-      title: "Adding token"
+      title: "Lägger till tecken"
     edit:
-      title: "Editing token"
+      title: "Redigerar tecken"
   codes:
     update:
-      success: "Code had been updated successfully"
+      success: "Kod har uppdaterats framgångsrikt"
     destroy:
-      success: "Code has been deleted successfully"
+      success: "Kod har tagits bort framgångsrikt"
     edit:
-      title: "Editing code"
+      title: "Redigerar kod"
     new:
-      title: "New code"
+      title: "Ny kod"
     form:
       guidelines:
-        body: "Maximum 50 characters. Must be unique."
-        payload: "Depends on code type. Maximum 250 characters."
+        body: "Maximalt 50 tecken. Måste vara unik."
+        payload: "Beror på kodtyp. Maximalt 250 tecken."
   code_sender:
     email:
-      subject: "Email confirmation"
+      subject: "E-post bekräftelse"
     password:
-      subject: "Password reset"
+      subject: "Lösenordsåterställning"
   privileges:
     new:
-      title: "New privilege"
+      title: "Nytt privilegium"
     edit:
-      title: "Editing privilege"
-      forbidden: "Editing this privilege is forbidden"
+      title: "Redigerar privilegium"
+      forbidden: "Redigering av detta privilegium är förbjudet"
     update:
-      success: "Privilege has been updated successfully"
+      success: "Privilegium har uppdaterats framgångsrikt"
     destroy:
-      success: "Privilege has been deleted successfully"
+      success: "Privilegium har tagits bort framgångsrikt"
     form:
       guidelines:
-        name: "Up to 250 characters."
-        slug: "Used in code for determining privilege presence. Up to 250 characters."
-        description: "Short privilege description. Up to 350 characters."
+        name: "Upp till 250 tecken."
+        slug: "Används i kod för att bestämma privilegier närvaro. Upp till 250 tecken."
+        description: "Kort beskrivning av privilegier. Upp till 350 tecken."
       placeholders:
         slug: "administrator"
   privilege_groups:
     new:
-      title: "New privilege group"
-      heading: "New privilege group"
+      title: "Ny privilegiumgrupp"
+      heading: "Ny privilegiumgrupp"
     edit:
-      title: "Editing privilege group"
-      heading: "Editing privilege group"
+      title: "Redigerar privilegiumgrupp"
+      heading: "Redigerar privilegiumgrupp"
     update:
-      success: "Group has been updated successfully"
+      success: "Grupp har uppdaterats framgångsrikt"
     destroy:
-      success: "Group has been deleted successfully"
+      success: "Grupp har tagits bort framgångsrikt"
     form:
       guidelines:
-        slug: "Used in code for users."
-        description: "Short group description. Up to 350 characters."
+        slug: "Används i kod för användare."
+        description: "Kort gruppbeskrivning. Upp till 350 tecken."
       placeholders:
-        name: "Editors"
-        slug: "editors"
+        name: "Redaktörer"
+        slug: "redaktörer"
   my:
     index:
       index:
-        title: "Private office"
-        heading: "Private office"
+        title: "Privat kontor"
+        heading: "Privat kontor"
     recoveries:
       create:
-        impossible: "Password reset for this user is unacailable"
-        completed: "Password reset code has been sent to your email"
+        impossible: "Lösenordsåterställning för den här användaren är inte tillgänglig"
+        completed: "Lösenordsåterställningskoden har skickats till din e-postadress"
       update:
-        invalid_code: "Invalid code"
-        success: "Password has been reset successfully. You have logged in."
+        invalid_code: "Ogiltig kod"
+        success: "Lösenordet har återställts framgångsrikt. Du har loggat in."
       show:
-        title: "Password reset"
-        got_code: "Have password reset code?"
-        update_password: "Change password"
-        no_code: "No password reset code?"
-        send_code: "Send code"
-        receive_code: "Receive code"
+        title: "Lösenordsåterställning"
+        got_code: "Har du lösenordskod?"
+        update_password: "Ändra lösenord"
+        no_code: "Ingen återställningskod för lösenord?"
+        send_code: "Skicka kod"
+        receive_code: "Ta emot koden"
     confirmations:
       create:
-        set_email: "Please fill in email"
-        success: "Confirmation code has been sent"
+        set_email: "Vänligen fyll i email"
+        success: "Bekräftelsekoden har skickats"
       update:
-        invalid_code: "Invalid code"
+        invalid_code: "Ogiltig kod"
       show:
-        title: "Confirm email"
-        got_code: "Have email confirmation code?"
-        confirm: "Confirm email"
-        no_code: "No confirmation code?"
-        send_code: "Send confirmation code"
+        title: "Bekräfta e-postadress"
+        got_code: "Har e-postbekräftelsekod?"
+        confirm: "Bekräfta e-postadress"
+        no_code: "Ingen bekräftelsekod?"
+        send_code: "Skicka bekräftelsekod"
     profiles:
       nav_item:
-        text: "Private office"
-        description: "View and edit your profile"
+        text: "Privat kontor"
+        description: "Visa och redigera din profil"
       new:
-        title: "Join"
-        heading: "Join"
+        title: "Ansluta sig"
+        heading: "Ansluta sig"
         form:
-          i_am_bot: "DO NOT check this checkbox"
-          consent: "I accept terms of service and agree to processing of my personal data"
+          i_am_bot: "Markera inte kryssrutan"
+          consent: "Jag accepterar användarvillkor och godkänner behandling av mina personuppgifter"
           guidelines:
-            screen_name: "Only latin letters, numbers and underscores. 1 to 30 characters."
-            password: "Choose reliable password that is hard to guess."
-            password_confirmation: "Repeat password to be sure you entered it correctly."
-            email: "Enter email for contact and password reset."
-          join: "Join"
+            screen_name: "Endast latinska bokstäver, siffror och understreck. 1 till 30 tecken."
+            password: "Välj pålitligt lösenord som är svårt att gissa."
+            password_confirmation: "Upprepa lösenordet för att vara säker på att du har skrivit in det korrekt."
+            email: "Ange e-post för återställning av kontakt och lösenord."
+          join: "Ansluta sig"
       create:
-        success: "You have registered and logged in"
-        are_you_bot: "You should not have checked that checkbox."
+        success: "Du har registrerat dig och loggat in"
+        are_you_bot: "Du bör inte ha markerat den kryssrutan."
       update:
-        success: "Profile has been updated successfully"
+        success: "Profil har uppdaterats framgångsrikt"
       show:
-        title: "My profile"
-        heading: "My profile"
+        title: "Min profil"
+        heading: "Min profil"
       edit:
-        title: "Editing profile"
+        title: "Redigerar profil"
         form:
-          common_parameters: "Common parameters"
-          update_image: "Update image"
-          sensitive_parameters: "Sensitive parameters"
-          sensitive_parameters_notice: "Enter current password if you want to change sensitive parameters."
-          current_password: "Current password"
-          leave_blank_if_necessary: "Leave blank, if you do not change this."
-          new_password: "New password"
-          update: "Update"
-          flags: "Flags"
+          common_parameters: "Vanliga parametrar"
+          update_image: "Uppdatera bild"
+          sensitive_parameters: "Känsliga parametrar"
+          sensitive_parameters_notice: "Ange nuvarande lösenord om du vill ändra känsliga parametrar."
+          current_password: "Nuvarande lösenord"
+          leave_blank_if_necessary: "Lämna tomma, om du inte ändrar det här."
+          new_password: "Nytt lösenord"
+          update: "Uppdatering"
+          flags: "Flaggor"
     tokens:
       nav_item:
-        text: "Access tokens (sessions)"
-        description: "Managing session tokens"
+        text: "Tillgång teckens (sessioner)"
+        description: "Hantera sessionstoken"
       index:
-        title: "Tokens, page %{page}"
-        heading: "Access tokens (sessions)"
+        title: "Teckens, sida %{page}"
+        heading: "Tillgång teckens (sessioner)"
     login_attempts:
       nav_item:
-        text: "Login attempts"
-        description: "Login attempts for your account"
+        text: "Inloggningsförsök"
+        description: "Inloggningsförsök för ditt konto"
       index:
-        title: "Login attempts for my account, page %{page}"
-        heading: "Login attempts for my account"
+        title: "Inloggningsförsök för mitt konto, sida %{page}"
+        heading: "Inloggningsförsök för mitt konto"
   user_mailer:
     login_attempt:
-      subject: "Someone is trying to log in to your account"
-      greeting: "Hello %{name}"
-      message: "Someone is trying to log in to your account. For security reasons logging in for you account is suspended for 15 minutes."
-      you_can_recover_password: "If you forgot your password, you can reset it by following this link"
+      subject: "Någon försöker logga in på ditt konto"
+      greeting: "Hallå %{name}"
+      message: "Någon försöker logga in på ditt konto. Av säkerhetsskäl inloggas ditt konto i 15 minuter."
+      you_can_recover_password: "Om du glömde ditt lösenord kan du återställa det genom att följa den här länken"

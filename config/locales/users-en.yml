@@ -46,7 +46,7 @@ en:
               invalid: "must contain 1 to 30 latin letters, numbers of underscores"
     attributes:
       user:
-        agent: "User agent at the time if registration"
+        agent: "User agent at the time of registration"
         allow_login: "Allow logging in"
         allow_mail: "Allow email notifications"
         balance: "Balance"
@@ -139,7 +139,7 @@ en:
         privileges: "Privileges"
         authenticate: "Log in as this user"
       tokens:
-        title: "Tokens of user %{user], page %{page}"
+        title: "Tokens of user %{user}, page %{page}"
         heading: "Access tokens"
       codes:
         title: "Codes of user %{user}, page %{page}"
@@ -242,7 +242,7 @@ en:
       registration_date: "Registration date"
   tokens:
     update:
-      success: "Token had been updated successfully"
+      success: "Token has been updated successfully"
     destroy:
       success: "Token has been deleted successfully"
     new:
@@ -251,7 +251,7 @@ en:
       title: "Editing token"
   codes:
     update:
-      success: "Code had been updated successfully"
+      success: "Code has been updated successfully"
     destroy:
       success: "Code has been deleted successfully"
     edit:
@@ -309,7 +309,7 @@ en:
         heading: "Private office"
     recoveries:
       create:
-        impossible: "Password reset for this user is unacailable"
+        impossible: "Password reset for this user is unavailable"
         completed: "Password reset code has been sent to your email"
       update:
         invalid_code: "Invalid code"
@@ -387,5 +387,5 @@ en:
     login_attempt:
       subject: "Someone is trying to log in to your account"
       greeting: "Hello %{name}"
-      message: "Someone is trying to log in to your account. For security reasons logging in for you account is suspended for 15 minutes."
+      message: "Someone is trying to log in to your account. For security reasons logging in for your account is suspended for 15 minutes."
       you_can_recover_password: "If you forgot your password, you can reset it by following this link"
