@@ -38,6 +38,7 @@ class User < ApplicationRecord
 
   before_save :normalize_slug
   before_save :prepare_search_string
+  before_save { self.referral_link = SecureRandom.alphanumeric(12) if referral_link.blank? }
 
   before_validation { self.email = nil if email.blank? }
 
