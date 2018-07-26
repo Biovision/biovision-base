@@ -1,7 +1,7 @@
 class AddReferralLinkToUsers < ActiveRecord::Migration[5.2]
   def up
     unless column_exists?(:users, :referral_link)
-      add_column :users, :referral_link, :string
+      add_column :users, :referral_link, :string, index: true
 
       seed_links
     end

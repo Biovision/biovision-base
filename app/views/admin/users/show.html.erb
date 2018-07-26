@@ -28,7 +28,7 @@
             t('.authenticate'),
             authenticate_admin_user_path(id: @entity.id),
             method: :post,
-            class: 'button-action'
+            class:  'button-action'
         )
       %>
     <% end %>
@@ -49,6 +49,11 @@
 
     <dt><%= t('activerecord.attributes.user.screen_name') %></dt>
     <dd><%= @entity.screen_name %></dd>
+
+    <% unless @entity.inviter_id.nil? %>
+      <dt><%= t('activerecord.attributes.user.inviter') %></dt>
+      <dd><%= admin_user_link(@entity.inviter) %></dd>
+    <% end %>
 
     <% unless @entity.email.blank? %>
       <dt><%= t('activerecord.attributes.user.email') %></dt>
@@ -75,6 +80,9 @@
 
     <dt><%= t(:updated_at) %></dt>
     <dd><%= time_tag @entity.updated_at %></dd>
+
+    <dt><%= t('activerecord.attributes.user.referral_link') %></dt>
+    <dd><%= root_url(rl: @entity.referral_link) %></dd>
 
     <% unless @entity.last_seen.blank? %>
       <dt><%= t('activerecord.attributes.user.last_seen') %></dt>

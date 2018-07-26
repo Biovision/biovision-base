@@ -51,10 +51,11 @@ class My::ProfilesController < ApplicationController
   end
 
   def create_user
-    @entity = User.new creation_parameters
+    @entity = User.new(creation_parameters)
     if @entity.save
       Metric.register(User::METRIC_REGISTRATION)
       create_token_for_user(@entity)
+      cookies.delete('r', domain: :all)
       redirect_after_creation
     else
       form_processed_with_error(:new)
@@ -63,7 +64,13 @@ class My::ProfilesController < ApplicationController
 
   def creation_parameters
     parameters = params.require(:user).permit(User.new_profile_parameters)
-    parameters.merge(tracking_for_entity).merge({ super_user: User.count < 1 })
+    parameters.merge!(tracking_for_entity)
+    parameters.merge!({ super_user: User.count < 1 })
+    if cookies['r']
+      parameters[:inviter] = User.find_by(referral_link: cookies['r'])
+    end
+
+    parameters
   end
 
   def user_parameters

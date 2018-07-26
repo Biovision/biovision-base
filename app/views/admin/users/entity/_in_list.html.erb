@@ -4,15 +4,15 @@
 <div class="data">
   <div><%= admin_user_link(entity) %></div>
   <% unless entity.notice.blank? %>
-      <div><%= entity.notice %></div>
+    <div><%= entity.notice %></div>
   <% end %>
   <div class="info">
     <%= entity.screen_name %>
   </div>
   <% unless entity.email.blank? %>
-      <div class="info">
-        <%= t('activerecord.attributes.user.email') %>: <%= entity.email %>
-      </div>
+    <div class="info">
+      <%= t('activerecord.attributes.user.email') %>: <%= entity.email %>
+    </div>
   <% end %>
   <div class="info">
     <%= t('activerecord.attributes.user.balance') %>:
@@ -21,19 +21,25 @@
   <div class="secondary info">
     <div><%= t(:created_at) %>: <%= time_tag entity.created_at %></div>
     <% unless entity.last_seen.nil? %>
-        <div>
-          <%= t('activerecord.attributes.user.last_seen') %>:
-          <%= time_tag entity.last_seen %>
-        </div>
+      <div>
+        <%= t('activerecord.attributes.user.last_seen') %>:
+        <%= time_tag entity.last_seen %>
+      </div>
     <% end %>
   </div>
+  <% unless entity.inviter_id.nil? %>
+    <div class="secondary info">
+      <%= t('activerecord.attributes.user.inviter') %>:
+      <%= admin_user_link(entity.inviter) %>
+    </div>
+  <% end %>
 
   <%=
     render(
         partial: 'shared/admin/toggleable',
-        locals: {
+        locals:  {
             entity: entity,
-            url: toggle_admin_user_path(id: entity.id)
+            url:    toggle_admin_user_path(id: entity.id)
         }
     )
   %>
