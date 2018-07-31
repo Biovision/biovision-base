@@ -8,7 +8,7 @@ module Biovision
 
         helper_method :current_page, :param_from_request
         helper_method :current_user, :current_language
-        helper_method :agent
+        helper_method :agent, :visitor_slug
       end
 
       # Get current page number from request
@@ -46,6 +46,15 @@ module Biovision
       # @return [Agent]
       def agent
         @agent ||= Agent.named(request.user_agent || 'n/a')
+      end
+
+      # @return [String]
+      def visitor_slug
+        if current_user.nil?
+          "#{request.env['HTTP_X_REAL_IP'] || request.remote_ip}:#{agent.id}"
+        else
+          current_user.id
+        end
       end
 
       def set_locale
