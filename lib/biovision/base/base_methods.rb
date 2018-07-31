@@ -53,7 +53,7 @@ module Biovision
         if current_user.nil?
           "#{request.env['HTTP_X_REAL_IP'] || request.remote_ip}:#{agent.id}"
         else
-          current_user.id
+          current_user.id.to_s
         end
       end
 
