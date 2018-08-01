@@ -220,7 +220,7 @@ const Biovision = {
                             const container = form.querySelector('[data-field="' + key + '"]');
 
                             if (container) {
-                                const errors = response.meta.errors;
+                                const errors = response.meta['errors'];
 
                                 if (errors.hasOwnProperty(key)) {
                                     container.innerHTML = errors[key].join('; ');
@@ -234,7 +234,7 @@ const Biovision = {
                 }
             });
 
-            const data = new window.FormData();
+            const data = new FormData();
             Array.from((new FormData(form)).entries()).forEach(function (entry) {
                 const value = entry[1];
 
@@ -330,6 +330,49 @@ const Biovision = {
         if (this.rows > maxRows) {
             this.rows = maxRows;
         }
+    },
+    remoteFormHandler: function (form) {
+        const button = form.querySelector('button[type=submit]');
+        const loadingMessage = form.querySelector('.loading_message');
+        const stateContainer = form.querySelector('.state_container');
+        const progressPercent = form.querySelector('.state_container .percentage');
+        const progressBar = form.querySelector('.state_container progress');
+
+        form.addEventListener('ajax:before', function () {
+            button.disabled = true;
+
+            if (loadingMessage) {
+                loadingMessage.classList.remove('hidden');
+            }
+        });
+
+        form.addEventListener('ajax:complete', function () {
+            button.disabled = false;
+
+            if (loadingMessage) {
+                loadingMessage.classList.add('hidden');
+            }
+            if (progressBar) {
+                progressBar.removeAttribute('value');
+            }
+        });
+
+        if (stateContainer) {
+            form.addEventListener('ajax:beforeSend', function (event) {
+                const request = event.detail[0];
+
+                request.upload.addEventListener('progress', function (e) {
+                    const value = e.loaded / e.total;
+
+                    if (progressPercent) {
+                        progressPercent.innerHTML = (value * 100) + '%';
+                    }
+                    if (progressBar) {
+                        progressBar.value = value;
+                    }
+                });
+            });
+        }
     }
 };
 
@@ -373,7 +416,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             const container = element.closest('li');
             const button = element.closest('a');
-            const lockable = container.parentNode.querySelectorAll('.lockable');
+            const lockable = container.parentElement.querySelectorAll('.lockable');
             const url = container.getAttribute('data-url');
 
             if (url.length > 1) {
@@ -417,7 +460,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 const url = element.parentNode.getAttribute('data-url');
                 const parameter = element.getAttribute('data-flag');
 
-                const on_success = function () {
+                const onSuccess = function () {
                     const response = JSON.parse(this.responseText);
 
                     if (response.hasOwnProperty('data')) {
@@ -436,12 +479,12 @@ document.addEventListener('DOMContentLoaded', function () {
                     }
                 };
 
-                const on_failure = function () {
+                const onFailure = function () {
                     element.className = 'unknown';
                     Biovision.handleAjaxFailure().call(this);
                 };
 
-                const request = Biovision.newAjaxRequest('POST', url, on_success, on_failure);
+                const request = Biovision.newAjaxRequest('POST', url, onSuccess, onFailure);
                 const data = new FormData();
                 data.append('parameter', parameter);
 
@@ -497,7 +540,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 const request = Biovision.newAjaxRequest('POST', url, onSuccess);
 
                 const data = new FormData();
-                data.append('delta', delta);
+                data.append('delta', String(delta));
 
                 request.send(data);
             }
@@ -555,27 +598,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    document.querySelectorAll('form[data-remote]').forEach(function (form) {
-        const button = form.querySelector('button[type=submit]');
-        const loading_message = form.querySelector('.loading_message');
-
-        form.addEventListener('ajax:before', function () {
-            button.disabled = true;
-
-            if (loading_message) {
-                loading_message.classList.remove('hidden');
-            }
-        });
-
-        form.addEventListener('ajax:complete', function () {
-            button.disabled = false;
-
-            if (loading_message) {
-                loading_message.classList.add('hidden');
-            }
-        });
-    });
-
+    document.querySelectorAll('form[data-remote]').forEach(Biovision.remoteFormHandler);
     document.querySelectorAll('form[data-check-url]').forEach(Biovision.instant_check);
 
     document.querySelectorAll('.remove-image-button').forEach(function (button) {
@@ -611,11 +634,11 @@ function handle_ajax_failure(response) {
 document.addEventListener('ajax:beforeSend', function (e) {
     const formData = e.detail[1].data;
 
-    if (!(formData instanceof window.FormData) || !formData.keys) {
+    if (!(formData instanceof FormData) || !formData.keys) {
         return;
     }
 
-    const newFormData = new window.FormData();
+    const newFormData = new FormData();
 
     Array.from(formData.entries()).forEach(function (entry) {
         const value = entry[1];
