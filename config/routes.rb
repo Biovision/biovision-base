@@ -199,6 +199,7 @@ Rails.application.routes.draw do
     resources :media_files, except: %i[index show update destroy] do
       collection do
         post :ckeditor
+        post :medium, defaults: { format: :json }
       end
     end
 

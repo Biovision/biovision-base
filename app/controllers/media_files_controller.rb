@@ -68,9 +68,13 @@ class MediaFilesController < ApplicationController
       render json: {
         uploaded: 1,
         fileName: File.basename(@entity.name),
-        url: @entity.file.medium_2x.url
+        url:      @entity.file.medium_2x.url
       }
     end
+  end
+
+  def medium
+    @entity = MediaFile.create!(medium_image_parameters)
   end
 
   protected
@@ -108,5 +112,12 @@ class MediaFilesController < ApplicationController
       parameters.merge!(snapshot: file, original_name: file.original_filename)
     end
     parameters.merge(owner_for_entity(true))
+  end
+
+  def medium_image_parameters
+    default_name = { name: "image-#{Time.now.strftime('%F-%H-%M-%S')}" }
+    parameters   = params.require(:media_file).permit(:file)
+
+    parameters.merge(default_name).merge(owner_for_entity(true))
   end
 end
