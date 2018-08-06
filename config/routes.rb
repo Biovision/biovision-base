@@ -203,6 +203,7 @@ Rails.application.routes.draw do
       collection do
         post :ckeditor
         post :medium, defaults: { format: :json }
+        post :medium_jquery, defaults: { format: :json }
       end
     end
 

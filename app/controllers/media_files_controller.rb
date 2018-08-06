@@ -73,8 +73,20 @@ class MediaFilesController < ApplicationController
     end
   end
 
+  # post /media_files/medium
   def medium
     @entity = MediaFile.create!(medium_image_parameters)
+  end
+
+  # post /media_files/medium-jquery
+  def medium_jquery
+    files = []
+    if params.key?(:files)
+      params[:files].each do |file|
+        files << MediaFile.create(name: "image-#{Time.now.strftime('%F-%H-%M-%S')}", file: file)
+      end
+    end
+    render json: { files: files.map { |f| { url: f.file.medium_2x.url } } }
   end
 
   protected
