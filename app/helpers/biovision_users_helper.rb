@@ -30,6 +30,12 @@ module BiovisionUsersHelper
     link_to(text, admin_user_path(id: entity.id), class: 'profile')
   end
 
+  # @param [ForeignUser] entity
+  # @param [String] long_slug
+  def admin_foreign_user_link(entity, text = entity.long_slug)
+    link_to(text, admin_foreign_user_path(id: entity.id))
+  end
+
   # @param [User] entity
   def editor_user_link(entity)
     return t(:anonymous) if entity.nil?

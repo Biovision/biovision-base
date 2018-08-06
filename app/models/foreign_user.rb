@@ -1,5 +1,5 @@
 class ForeignUser < ApplicationRecord
-  PER_PAGE = 20
+  include HasOwner
 
   belongs_to :agent, optional: true
   belongs_to :foreign_site, counter_cache: true
@@ -9,10 +9,15 @@ class ForeignUser < ApplicationRecord
   validates_uniqueness_of :slug, scope: [:foreign_site_id]
 
   scope :ordered_by_slug, -> { order('slug asc') }
+  scope :list_for_administration, -> { ordered_by_slug }
 
   # @param [Integer] page
   def self.page_for_administration(page = 1)
-    ordered_by_slug.page(page).per(PER_PAGE)
+    list_for_administration.page(page)
+  end
+
+  def long_slug
+    "#{foreign_site.slug}-#{slug}"
   end
 
   private

@@ -1,0 +1,62 @@
+<% content_for :meta_title, t('.title', slug: @entity.long_slug) %>
+<% content_for :breadcrumbs do %>
+  <%= link_to(t('admin.foreign_users.nav_item.text'), admin_foreign_users_path) %>
+  <span><%= @entity.long_slug %></span>
+<% end %>
+
+<article>
+  <h1><%= @entity.long_slug %></h1>
+
+  <ul class="actions">
+    <li><%= back_icon(admin_foreign_users_path) %></li>
+    <li class="danger"><%= destroy_icon(@entity) %></li>
+  </ul>
+
+  <figure role="group" class="preview">
+    <%= profile_avatar @entity.user %>
+    <figcaption>
+      <%= user_link(@entity.user) %>
+    </figcaption>
+  </figure>
+
+  <dl>
+    <dt><%= t('activerecord.attributes.foreign_user.foreign_site') %></dt>
+    <dd><%= @entity.foreign_site.name %></dd>
+
+    <dt><%= t('activerecord.attributes.foreign_user.slug') %></dt>
+    <dd><%= @entity.slug %></dd>
+
+    <dt><%= t('activerecord.attributes.foreign_user.user') %></dt>
+    <dd><%= admin_user_link(@entity.user) %></dd>
+
+    <% unless @entity.name.blank? %>
+      <dt><%= t('activerecord.attributes.foreign_user.name') %></dt>
+      <dd><%= @entity.name %></dd>
+    <% end %>
+
+    <% unless @entity.email.blank? %>
+      <dt><%= t('activerecord.attributes.foreign_user.email') %></dt>
+      <dd><%= link_to @entity.email, "mailto:#{@entity.email}" %></dd>
+    <% end %>
+
+    <% unless @entity.ip.blank? %>
+      <dt><%= t('activerecord.attributes.foreign_user.ip') %></dt>
+      <dd><%= @entity.ip %></dd>
+    <% end %>
+
+    <% unless @entity.agent.blank? %>
+      <dt><%= t('activerecord.attributes.foreign_user.agent') %></dt>
+      <dd><%= @entity.agent.name %></dd>
+    <% end %>
+
+    <dt><%= t(:created_at) %></dt>
+    <dd><%= time_tag @entity.created_at %></dd>
+
+    <dt><%= t('activerecord.attributes.foreign_user.data') %></dt>
+    <dd>
+      <% JSON.parse(@entity.data).each do |k, v| %>
+        <%= "#{k}: #{v}" %><br/>
+      <% end %>
+    </dd>
+  </dl>
+</article>

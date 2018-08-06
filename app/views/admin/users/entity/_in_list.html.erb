@@ -33,6 +33,14 @@
       <%= admin_user_link(entity.inviter) %>
     </div>
   <% end %>
+  <% if entity.foreign_users.any? %>
+    <div class="secondary info">
+      <%= t('.foreign_users') %>:
+      <% entity.foreign_users.each do |foreign_user| %>
+        <%= admin_foreign_user_link(foreign_user) %><br/>
+      <% end %>
+    </div>
+  <% end %>
 
   <%=
     render(

@@ -130,6 +130,15 @@ en:
         user: "User"
         password: "Password"
   admin:
+    foreign_users:
+      nav_item:
+        description: "Manage foreign users (authentication via Facebook, Google, etc.)"
+        text: "Foreign users"
+      index:
+        heading: "Foreign users"
+        title: "Foreign users, page %{page}"
+      show:
+        title: "Foreign user %{slug}"
     users:
       nav_item:
         text: "Users"
@@ -152,6 +161,9 @@ en:
         heading: "Privileges of user"
       filter:
         search: "Search"
+      entity:
+        in_list:
+          foreign_users: "Foreign users"
     tokens:
       nav_item:
         text: "Access tokens (user sessions)"
@@ -393,3 +405,6 @@ en:
       greeting: "Hello %{name}"
       message: "Someone is trying to log in to your account. For security reasons logging in for your account is suspended for 15 minutes."
       you_can_recover_password: "If you forgot your password, you can reset it by following this link"
+  foreign_users:
+    destroy:
+      success: "Foreign user has been deleted"

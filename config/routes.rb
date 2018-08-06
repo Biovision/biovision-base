@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :stored_values, only: %i[update destroy]
 
   resources :users, only: %i[update destroy]
+  resources :foreign_users, only: :destroy
   resources :tokens, :codes, only: %i[update destroy]
 
   resources :metrics, only: :update
@@ -118,6 +119,8 @@ Rails.application.routes.draw do
           post 'authenticate'
         end
       end
+
+      resources :foreign_users, only: %i[index show]
 
       resources :login_attempts, only: :index
 

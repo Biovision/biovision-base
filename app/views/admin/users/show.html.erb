@@ -89,6 +89,17 @@
       <dd><%= time_tag @entity.last_seen %></dd>
     <% end %>
 
+    <% if @entity.foreign_users.any? %>
+      <dt><%= t('admin.users.entity.in_list.foreign_users') %></dt>
+      <dd>
+        <ul>
+          <% @entity.foreign_users.each do |foreign_user| %>
+            <li><%= admin_foreign_user_link(foreign_user) %></li>
+          <% end %>
+        </ul>
+      </dd>
+    <% end %>
+
     <% if @entity.user_privileges.any? %>
       <dt><%= t('.privileges') %></dt>
       <dd>

@@ -130,6 +130,15 @@ sv:
         user: "Användare"
         password: "Lösenord"
   admin:
+    foreign_users:
+      nav_item:
+        description: "Hantera utländska användare (autentisering via Facebook, Google, etc.)"
+        text: "Utländska användare"
+      index:
+        heading: "Utländska användare"
+        title: "Utländska användare, sida %{page}"
+      show:
+        title: "Utländsk användare %{slug}"
     users:
       nav_item:
         text: "Användares"
@@ -152,6 +161,9 @@ sv:
         heading: "Privilegiums av användare"
       filter:
         search: "Sök"
+      entity:
+        in_list:
+          foreign_users: "Utländska användare"
     tokens:
       nav_item:
         text: "Tillgång teckens (användarsessioner)"
@@ -393,3 +405,6 @@ sv:
       greeting: "Hallå %{name}"
       message: "Någon försöker logga in på ditt konto. Av säkerhetsskäl inloggas ditt konto i 15 minuter."
       you_can_recover_password: "Om du glömde ditt lösenord kan du återställa det genom att följa den här länken"
+  foreign_users:
+    destroy:
+      success: "Utländsk användare har tagits bort"

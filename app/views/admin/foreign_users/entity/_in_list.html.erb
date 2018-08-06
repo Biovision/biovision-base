@@ -1,0 +1,13 @@
+<div class="image">
+  <%= user_image_preview(entity.user) %>
+</div>
+<div class="data">
+  <div><%= admin_foreign_user_link(entity) %></div>
+  <div class="info">
+    <%= admin_user_link(entity.user) %>: <%= entity.name %>
+  </div>
+  <div class="secondary info">
+    <div><%= t(:created_at) %>: <%= time_tag entity.created_at %></div>
+    <%= render partial: 'shared/track', locals: { item: entity } %>
+  </div>
+</div>
