@@ -35,9 +35,7 @@ class AuthenticationController < ApplicationController
   def set_foreign_site
     @foreign_site = ForeignSite.with_slug(params[:provider]).first
     if @foreign_site.nil?
-      metric = Metric::METRIC_HTTP_503
-      status = :service_unavailable
-      handle_http_error('Cannot set foreign site', metric, status, status)
+      handle_http_503('Cannot set foreign site')
     end
   end
 
