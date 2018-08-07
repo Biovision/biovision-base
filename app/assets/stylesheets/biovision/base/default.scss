@@ -1,11 +1,15 @@
 $font-family-main: "Roboto", sans-serif !default;
 $font-family-heading: $font-family-main !default;
 
+$font-size-xxxl: 5.6rem !default;
+$font-size-xxl: 4.5rem !default;
+$font-size-xl: 3.2rem !default;
 $font-size-large: 2.4rem !default;
 $font-size-increased: 1.8rem !default;
 $font-size-normal: 1.6rem !default;
 $font-size-decreased: 1.3rem !default;
 $font-size-small: 1.1rem !default;
+$font-size-xs: 1rem !default;
 
 $content-width: 100rem !default;
 $content-width-min: 32rem !default;
@@ -40,19 +44,3 @@ $spacer-m: 3.2rem;
 $spacer-l: 4.8rem;
 $spacer-xl: 6.4rem;
 $spacer-xxl: 9.6rem;
-
-:root {
-  --font-size-large: #{$font-size-large};
-  --font-size-increased: #{$font-size-increased};
-  --font-size-normal: #{$font-size-normal};
-  --font-size-decreased: #{$font-size-decreased};
-  --font-size-small: #{$font-size-small};
-
-  --spacer-xxs: #{$spacer-xxs};
-  --spacer-xs: #{$spacer-xs};
-  --spacer-s: #{$spacer-s};
-  --spacer-m: #{$spacer-m};
-  --spacer-l: #{$spacer-l};
-  --spacer-xl: #{$spacer-xl};
-  --spacer-xxl: #{$spacer-xxl};
-}
