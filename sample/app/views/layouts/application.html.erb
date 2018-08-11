@@ -8,6 +8,7 @@
   <%= csrf_meta_tags %>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="format-detection" content="telephone=no"/>
+  <%= yield :alternate_links %>
   <%= render 'shared/meta_texts' %>
 </head>
 <body>
