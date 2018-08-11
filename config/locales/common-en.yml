@@ -109,6 +109,9 @@ en:
       site_name: "example.com"
       twitter_site: ""
       twitter_creator: ""
+    forms:
+      state_container:
+        saving: "Saving..."
   admin:
     index:
       index:

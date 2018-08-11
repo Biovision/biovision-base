@@ -353,7 +353,7 @@ const Biovision = {
                 loadingMessage.classList.add('hidden');
             }
             if (progressBar) {
-                progressBar.removeAttribute('value');
+                progressBar.value = '0';
             }
         });
 
