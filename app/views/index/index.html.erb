@@ -1,6 +1,6 @@
 <% if @editable_page.nil? %>
   <% content_for :meta_title, t('.title') %>
-  <% content_for :meta_title, t('.description') %>
+  <% content_for :meta_description, t('.description') %>
 <% else %>
   <%= render partial: 'editable_pages/entity/metadata', locals: { entity: @editable_page } %>
 <% end %>
