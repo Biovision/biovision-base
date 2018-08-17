@@ -15,28 +15,29 @@ module BiovisionUsersHelper
   end
 
   # @param [User] entity
-  def user_link(entity)
+  # @param [String] text
+  def user_link(entity, text = entity&.profile_name)
     return I18n.t(:anonymous) if entity.nil? || entity.deleted?
 
-    text = entity.profile_name
     link_to(text, user_profile_path(slug: entity.screen_name), class: 'profile')
   end
 
   # @param [User] entity
-  def admin_user_link(entity)
+  # @param [String] text
+  def admin_user_link(entity, text = entity&.profile_name)
     return I18n.t(:anonymous) if entity.nil?
 
-    text = entity.profile_name
     link_to(text, admin_user_path(id: entity.id), class: 'profile')
   end
 
   # @param [ForeignUser] entity
-  # @param [String] long_slug
+  # @param [String] text
   def admin_foreign_user_link(entity, text = entity.long_slug)
     link_to(text, admin_foreign_user_path(id: entity.id))
   end
 
   # @param [User] entity
+  # @deprecated use #admin_user_link
   def editor_user_link(entity)
     return t(:anonymous) if entity.nil?
 
