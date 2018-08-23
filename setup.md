@@ -50,8 +50,8 @@ end
 Это добавляется перед `//= require tree .`
 
 ```js
-//= require biovision/base/biovision.js
-//= require biovision/base/biovision-sliders.js
+//= require biovision/base/biovision
+//= require biovision/base/biovision-sliders
 ```
 
 Если нужна поддержка jQuery, то добавить ещё и это, не забыв раскомментировать
@@ -377,5 +377,28 @@ server {
 #    proxy_set_header Upgrade $http_upgrade;
 #    proxy_set_header Connection "upgrade";
 #  }
+}
+```
+
+Фрагмент для пумы
+-----------------
+
+```conf
+/var/www/example.com/current,developer,/var/www/example.com/current/config/puma.rb,/var/www/example.com/shared/log/puma.log,RAILS_ENV=production
+```
+
+Logrotate для нового проекта
+----------------------------
+
+```
+/var/www/example.com/shared/log/*.log {
+   su developer developer
+   daily
+   missingok
+   rotate 7
+   compress
+   delaycompress
+   notifempty
+   copytruncate
 }
 ```
