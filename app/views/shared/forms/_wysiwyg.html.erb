@@ -1,11 +1,19 @@
-<script src="//cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/11.0.1/classic/ckeditor.js"></script>
 <script>
+    'use strict';
     document.addEventListener('DOMContentLoaded', function () {
-        document.querySelectorAll('form [data-wysiwyg]').forEach(function(editor) {
-            CKEDITOR.replace(editor, {
-                filebrowserUploadUrl: '/media_files/ckeditor',
-                removePlugins: 'forms,save,preview,flash,bidi,language,print,templates,newpage,iframe,about,scayt,wsc',
-            });
+        document.querySelectorAll('form [data-wysiwyg]').forEach(function (editor) {
+            editor.required = false;
+            ClassicEditor
+                .create(editor, {
+                    image: {
+                        toolbar: ['imageTextAlternative']
+                    },
+                    ckfinder: {
+                        uploadUrl: '/media_files/ckeditor'
+                    }
+                })
+                .catch(error => console.error(error));
         });
     });
 </script>

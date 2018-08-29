@@ -19,11 +19,7 @@ Rails.application.routes.draw do
 
   resources :feedback_requests, only: :destroy
 
-  resources :link_blocks, :link_block_items, only: %i[update destroy] do
-    collection do
-      post 'check', defaults: { format: :json }
-    end
-  end
+  resources :link_blocks, :link_block_items, only: %i[update destroy]
 
   scope '(:locale)', constraints: { locale: /ru|en|sv/ } do
     # Handling errors
