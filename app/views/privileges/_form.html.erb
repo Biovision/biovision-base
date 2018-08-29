@@ -37,6 +37,8 @@
       <%= render partial: 'shared/forms/entity_flags', locals: { f: f } %>
     </dl>
 
+  <%= render 'shared/forms/state_container' %>
+
     <div class="buttons">
       <%= f.hidden_field :parent_id if entity.id.nil? %>
       <%= f.button t(:save), type: :submit %>

@@ -92,6 +92,8 @@
     <%= render(partial: 'shared/forms/entity_flags', locals: { f: f }) %>
   </dl>
 
+  <%= render 'shared/forms/state_container' %>
+
   <div class="buttons">
     <%= hidden_field_tag :entity_id, entity.id %>
     <%= f.button t(:save), type: :submit, class: 'button-save' %>

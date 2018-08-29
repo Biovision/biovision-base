@@ -24,6 +24,8 @@
       <li><%= f.check_box :active %><%= f.label :active %></li>
     </ul>
 
+  <%= render 'shared/forms/state_container' %>
+
     <div class="buttons">
       <%= f.button t(:save), type: :submit %>
     </div>

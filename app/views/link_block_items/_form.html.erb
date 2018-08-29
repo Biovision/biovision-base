@@ -151,6 +151,8 @@
     <%= render partial: 'shared/forms/entity_flags', locals: { f: f } %>
   </dl>
 
+  <%= render 'shared/forms/state_container' %>
+
   <div class="buttons">
     <%= f.hidden_field :link_block_id if entity.id.nil? %>
     <%= hidden_field_tag :entity_id, entity.id %>
