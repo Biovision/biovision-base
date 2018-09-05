@@ -11,6 +11,14 @@ $font-size-decreased: 1.3rem !default;
 $font-size-small: 1.1rem !default;
 $font-size-xs: 1rem !default;
 
+$spacer-xxs: .4rem !default;
+$spacer-xs: .8rem !default;
+$spacer-s: 1.6rem !default;
+$spacer-m: 3.2rem !default;
+$spacer-l: 4.8rem !default;
+$spacer-xl: 6.4rem !default;
+$spacer-xxl: 9.6rem !default;
+
 $content-width: 100rem !default;
 $content-width-min: 32rem !default;
 
@@ -36,11 +44,3 @@ $background-footer: #fff !default;
 $link-color: rgb(20, 127, 255) !default;
 $link-color-visited: rgb(20, 77, 250) !default;
 $link-color-hover: rgb(255, 77, 20) !default;
-
-$spacer-xxs: .4rem;
-$spacer-xs: .8rem;
-$spacer-s: 1.6rem;
-$spacer-m: 3.2rem;
-$spacer-l: 4.8rem;
-$spacer-xl: 6.4rem;
-$spacer-xxl: 9.6rem;
