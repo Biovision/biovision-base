@@ -81,6 +81,11 @@ end
 В файле database.yml нужно поменять названия баз данных на актуальные:
 
 ```yaml
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
 development:
   <<: *default
   database: example # Поменять на актуальное название
@@ -101,7 +106,7 @@ production:
 --------------------------------------------
 
 ```ruby
-Rails.application.config.assets.precompile << %w(admin.scss biovision/base/**/*)
+Rails.application.config.assets.precompile << %w[admin.scss biovision/base/**/*]
 ```
 
 Добавления в `spec/rails_helper.rb` (`$ rails generate rspec:install`)
@@ -278,6 +283,10 @@ bundle binstub puma
 
 Также имеет смысл запустить `EDITOR=vim rails credentials:edit`, чтобы создать
 зашированный файл с ключом шифрования сессии.
+
+Не забыть скопировать `.env` и `config/master.key` на сервер:
+`scp .env biovision:/var/www/example.com/shared`, 
+`scp config/master.kry biovision:/var/www/example.com/shared/config`,
 
 Настройка отгрузки через `mina`
 -------------------------------
