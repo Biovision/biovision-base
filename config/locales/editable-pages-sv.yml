@@ -82,6 +82,9 @@ sv:
         name: "Used for more convenient management. Maximum 100 characters."
         slug: "Only latin letters, numbers, dash or underscore (except start or end). 2 to 50 characters."
         title: "Maximum 100 characters."
+        url: "Absolute URL"
+      placeholders:
+        url: "/about/editable-pages"
     update:
       success: "Editable block has been updated"
   editable_pages:

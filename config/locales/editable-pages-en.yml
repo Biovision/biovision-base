@@ -104,6 +104,9 @@ en:
         keywords: "Value for meta keywords (for search robots). Maximum 250 characters."
         description: "Meta description for search robots, search results and sharing. Maximum 250 characters."
         body: "HTML for insertion inside the site. Maximum 64kiB of text."
+        url: "Absolute URL"
+      placeholders:
+        url: "/about/editable-pages"
   stored_values:
     new:
       heading: "New stored value"
