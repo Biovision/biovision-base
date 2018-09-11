@@ -1,4 +1,4 @@
-$font-size-normal: 1.4rem !default;
+$font-size-normal: 1.6rem !default;
 $font-family-main: "Roboto", sans-serif !default;
 
 $button-action-bg-a: #2e3c8e !default;
@@ -37,6 +37,7 @@ $button-destroy-text-b: $button-destroy-text-a !default;
   cursor: pointer;
   display: inline-block;
   font: #{$font-size-normal}/1.5 $font-family-main;
+  font-size: var(--font-size-normal, #{$font-size-normal});
   padding: 0 1.2rem;
   text-decoration: none;
   transition: .125s;

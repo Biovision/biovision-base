@@ -42,25 +42,22 @@ h6 {
   margin: 0;
 }
 
-h1 {
-  font-size: var(--font-size-xl);
-  line-height: 1.25;
-}
+a {
+  &:link {
+    color: $link-color;
+    text-decoration: none;
+    transition: color .125s;
+  }
 
-a:link {
-  color: $link-color;
-  text-decoration: none;
-  transition: color .125s;
-}
+  &:visited {
+    color: $link-color-visited;
+  }
 
-a:visited {
-  color: $link-color-visited;
-}
-
-a:active,
-a:hover {
-  color: $link-color-hover;
-  text-decoration: underline;
+  &:active,
+  &:hover {
+    color: $link-color-hover;
+    text-decoration: underline;
+  }
 }
 
 figure {
