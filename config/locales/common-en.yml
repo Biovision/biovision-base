@@ -101,6 +101,11 @@ en:
       next: "→"
       truncate: "…"
   shared:
+    entity:
+      meta_texts:
+        meta_title: "meta: title"
+        meta_description: "meta: description"
+        meta_keywords: "meta: keywords"
     flash_messages:
       notice: "Notice"
       warning: "Warning"

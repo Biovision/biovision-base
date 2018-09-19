@@ -102,6 +102,11 @@ ru:
       next: "→"
       truncate: "…"
   shared:
+    entity:
+      meta_texts:
+        meta_title: "Текст для заголовка окна"
+        meta_description: "Описание для метатэга"
+        meta_keywords: "Ключевые слова для метатэга"
     flash_messages:
       notice: "Замечание"
       warning: "Предупреждение"
