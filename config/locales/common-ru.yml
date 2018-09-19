@@ -113,6 +113,11 @@ ru:
     forms:
       state_container:
         saving: "Сохранение…"
+      meta_texts:
+        guidelines:
+          meta_title: "Максимум 250 символов"
+          meta_description: "30–50 слов, максимум 500 символов."
+          meta_keywords: "Максимум 250 символов."
   admin:
     index:
       index:

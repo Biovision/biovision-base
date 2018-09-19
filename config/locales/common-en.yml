@@ -112,6 +112,11 @@ en:
     forms:
       state_container:
         saving: "Saving..."
+      meta_texts:
+        guidelines:
+          meta_title: "Maximum 250 characters"
+          meta_description: "30 to 50 words, maximum 500 characters."
+          meta_keywords: "Maximum 250 characters."
   admin:
     index:
       index:

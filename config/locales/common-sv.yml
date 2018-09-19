@@ -112,6 +112,11 @@ sv:
     forms:
       state_container:
         saving: "Sparar..."
+      meta_texts:
+        guidelines:
+          meta_title: "Up till 250 tecken"
+          meta_description: "30 till 50 ord, up till 500 tecken."
+          meta_keywords: "Up till 250 tecken."
   admin:
     index:
       index:
