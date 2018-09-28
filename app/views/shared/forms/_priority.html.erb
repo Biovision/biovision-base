@@ -1,0 +1,12 @@
+<% model_name = f.object.class.to_s.underscore %>
+<dt><%= f.label :priority %></dt>
+<dd>
+  <%=
+    f.number_field(
+        :priority,
+        id:       "#{model_name}_priority",
+        in:       f.object.class.priority_range,
+        required: true
+    )
+  %>
+</dd>
