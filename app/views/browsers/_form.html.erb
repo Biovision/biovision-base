@@ -1,31 +1,27 @@
-<%= render partial: 'shared/list_of_errors', locals: { entity: entity } %>
+<% model_name = entity.class.to_s.underscore %>
+<%= form_with(model: entity, html: { id: "#{model_name}-form" }) do |f| %>
+  <%= render partial: 'shared/list_of_errors', locals: { entity: entity } %>
 
-<%= form_for entity do |f| %>
-    <dl>
-      <dt><%= f.label :name %></dt>
-      <dd>
-        <%= f.text_field :name, size: 50, maxlenght: Browser::NAME_LIMIT, required: true %>
-      </dd>
-    </dl>
+  <dl>
+    <dt><%= f.label :name %></dt>
+    <dd>
+      <%=
+        f.text_field(
+            :name,
+            id: "#{model_name}_name",
+            size: nil,
+            maxlenght: Browser::NAME_LIMIT,
+            required: true
+        )
+      %>
+    </dd>
 
-    <ul class="flags">
-      <li>
-        <%= f.check_box :active %>
-        <%= f.label :active %>
-      </li>
-      <li>
-        <%= f.check_box :mobile %>
-        <%= f.label :mobile %>
-      </li>
-      <li>
-        <%= f.check_box :bot %>
-        <%= f.label :bot %>
-      </li>
-    </ul>
+    <%= render partial: 'shared/forms/entity_flags', locals: { f: f } %>
+  </dl>
 
   <%= render 'shared/forms/state_container' %>
 
-    <div class="buttons">
-      <%= f.button t(:save), type: :submit %>
-    </div>
+  <div class="buttons">
+    <%= f.button t(:save), type: :submit %>
+  </div>
 <% end %>

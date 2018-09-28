@@ -22,7 +22,7 @@ class Metric < ApplicationRecord
   end
 
   def self.entity_parameters
-    %i(incremental start_with_zero show_on_dashboard default_period description)
+    %i[incremental start_with_zero show_on_dashboard default_period description]
   end
 
   # @param [String] name

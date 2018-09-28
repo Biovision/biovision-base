@@ -1,35 +1,64 @@
-<%= render partial: 'shared/list_of_errors', locals: { entity: entity } %>
+<% model_name = entity.class.to_s.underscore %>
+<%= form_with(model: entity, html: { id: "#{model_name}-form" }) do |f| %>
+  <%= render partial: 'shared/list_of_errors', locals: { entity: entity } %>
+  <dl>
+    <dt><%= f.label :slug %></dt>
+    <dd>
+      <%=
+        f.text_field(
+            :slug,
+            id: "#{model_name}_slug",
+            required: true,
+            size: nil,
+            maxlength: StoredValue::SLUG_LIMIT
+        )
+      %>
+      <div class="guideline"><%= t('.guidelines.slug') %></div>
+    </dd>
 
-<%= form_for entity do |f| %>
-    <dl>
-      <dt><%= f.label :slug %></dt>
-      <dd>
-        <%= f.text_field :slug, required: true, size: nil, maxlength: StoredValue::SLUG_LIMIT %>
-        <div class="guideline"><%= t('.guidelines.slug') %></div>
-      </dd>
+    <dt><%= f.label :value %></dt>
+    <dd>
+      <%=
+        f.text_field(
+            :value,
+            id: "#{model_name}_value",
+            size: nil,
+            maxlength: StoredValue::VALUE_LIMIT
+        )
+      %>
+      <div class="guideline"><%= t('.guidelines.value') %></div>
+    </dd>
 
-      <dt><%= f.label :value %></dt>
-      <dd>
-        <%= f.text_field :value, size: nil, maxlength: StoredValue::VALUE_LIMIT %>
-        <div class="guideline"><%= t('.guidelines.value') %></div>
-      </dd>
+    <dt><%= f.label :name %></dt>
+    <dd>
+      <%=
+        f.text_field(
+            :name,
+            id: "#{model_name}_name",
+            size: nil,
+            maxlength: StoredValue::NAME_LIMIT
+        )
+      %>
+      <div class="guideline"><%= t('.guidelines.name') %></div>
+    </dd>
 
-      <dt><%= f.label :name %></dt>
-      <dd>
-        <%= f.text_field :name, size: nil, maxlength: StoredValue::NAME_LIMIT %>
-        <div class="guideline"><%= t('.guidelines.name') %></div>
-      </dd>
-
-      <dt><%= f.label :description %></dt>
-      <dd>
-        <%= f.text_field :description, size: nil, maxlength: StoredValue::DESCRIPTION_LIMIT %>
-        <div class="guideline"><%= t('.guidelines.description') %></div>
-      </dd>
-    </dl>
+    <dt><%= f.label :description %></dt>
+    <dd>
+      <%=
+        f.text_field(
+            :description,
+            id: "#{model_name}_description",
+            size: nil,
+            maxlength: StoredValue::DESCRIPTION_LIMIT
+        )
+      %>
+      <div class="guideline"><%= t('.guidelines.description') %></div>
+    </dd>
+  </dl>
 
   <%= render 'shared/forms/state_container' %>
 
-    <div class="buttons">
-      <%= f.button t(:save), type: :submit %>
-    </div>
+  <div class="buttons">
+    <%= f.button t(:save), type: :submit %>
+  </div>
 <% end %>

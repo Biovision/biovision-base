@@ -11,9 +11,9 @@ class BrowsersController < AdminController
   def create
     @entity = Browser.new entity_parameters
     if @entity.save
-      redirect_to admin_browser_path(id: @entity.id)
+      form_processed_ok(admin_browser_path(id: @entity.id))
     else
-      render :new, status: :bad_request
+      form_processed_with_error(:new)
     end
   end
 
@@ -24,9 +24,9 @@ class BrowsersController < AdminController
   # patch /browsers/:id
   def update
     if @entity.update entity_parameters
-      redirect_to admin_browser_path(id: @entity.id), notice: t('browsers.update.success')
+      form_processed_ok(admin_browser_path(id: @entity.id))
     else
-      render :edit, status: :bad_request
+      form_processed_with_error(:edit)
     end
   end
 

@@ -1,32 +1,37 @@
-<%= render partial: 'shared/list_of_errors', locals: { entity: entity } %>
+<% model_name = entity.class.to_s.underscore %>
+<%= form_with(model: entity, html: { id: "#{model_name}-form" }) do |f| %>
+  <%= render partial: 'shared/list_of_errors', locals: { entity: entity } %>
+  <dl>
+    <% if entity.id.blank? %>
+      <dt><%= f.label :user_id %></dt>
+      <dd>
+        <%=
+          f.number_field(
+              :user_id,
+              id: "#{model_name}_user_id",
+              in: User.ids_range
+          )
+        %>
+        <%= render partial: 'admin/users/search', locals: { target_id: 'token_user_id' } %>
+      </dd>
+    <% else %>
+      <dt><%= t('activerecord.attributes.token.user') %></dt>
+      <dd>
+        <%= admin_user_link entity.user %>
+      </dd>
 
-<%= form_for entity do |f| %>
-    <dl>
-      <% if entity.id.blank? %>
-          <dt><%= f.label :user_id %></dt>
-          <dd>
-            <%= f.number_field :user_id, in: User.ids_range %>
-            <%= render partial: 'admin/users/search', locals: { target_id: 'token_user_id' } %>
-          </dd>
-      <% else %>
-          <dt><%= t('activerecord.attributes.token.user') %></dt>
-          <dd>
-            <%= admin_user_link entity.user %>
-          </dd>
+      <dt><%= t('activerecord.attributes.token.token') %></dt>
+      <dd>
+        <%= entity.token %>
+      </dd>
+    <% end %>
 
-          <dt><%= t('activerecord.attributes.token.token') %></dt>
-          <dd>
-            <%= entity.token %>
-          </dd>
-      <% end %>
-    </dl>
-    <ul class="flags">
-      <li><%= f.check_box :active %><%= f.label :active %></li>
-    </ul>
+    <%= render partial: 'shared/forms/entity_flags', locals: { f: f } %>
+  </dl>
 
   <%= render 'shared/forms/state_container' %>
 
-    <div class="buttons">
-      <%= f.button t(:save), type: :submit %>
-    </div>
+  <div class="buttons">
+    <%= f.button t(:save), type: :submit %>
+  </div>
 <% end %>

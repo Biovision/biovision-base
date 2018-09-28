@@ -8,9 +8,9 @@ class PrivilegesController < AdminController
     @entity = Privilege.new(creation_parameters)
     if @entity.save
       cache_relatives
-      redirect_to admin_privilege_path(id: @entity.id)
+      form_processed_ok(admin_privilege_path(id: @entity.id))
     else
-      render :new, status: :bad_request
+      form_processed_with_error(:new)
     end
   end
 
@@ -22,9 +22,9 @@ class PrivilegesController < AdminController
   def update
     if @entity.update(entity_parameters)
       cache_relatives
-      redirect_to admin_privilege_path(id: @entity.id), notice: t('privileges.update.success')
+      form_processed_ok(admin_privilege_path(id: @entity.id))
     else
-      render :edit, status: :bad_request
+      form_processed_with_error(:edit)
     end
   end
 

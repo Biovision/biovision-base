@@ -10,9 +10,9 @@ class StoredValuesController < AdminController
   def create
     @entity = StoredValue.new(entity_parameters)
     if @entity.save
-      redirect_to admin_stored_value_path(id: @entity.id)
+      form_processed_ok(admin_stored_value_path(id: @entity.id))
     else
-      render :new, status: :bad_request
+      form_processed_with_error(:new)
     end
   end
 
@@ -23,9 +23,9 @@ class StoredValuesController < AdminController
   # patch /stored_values/:id
   def update
     if @entity.update(entity_parameters)
-      redirect_to admin_stored_value_path(id: @entity.id), notice: t('stored_values.update.success')
+      form_processed_ok(admin_stored_value_path(id: @entity.id))
     else
-      render :edit, status: :bad_request
+      form_processed_with_error(:edit)
     end
   end
 

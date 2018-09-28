@@ -1,43 +1,45 @@
-<%= render partial: 'shared/list_of_errors', locals: { entity: entity } %>
+<% model_name = entity.class.to_s.underscore %>
+<%= form_with(model: entity, html: { id: "#{model_name}-form" }) do |f| %>
+  <%= render partial: 'shared/list_of_errors', locals: { entity: entity } %>
+  <dl>
+    <dt><%= t('activerecord.attributes.metric.name') %></dt>
+    <dd>
+      <%= entity.name %>
+    </dd>
 
-<%= form_for entity do |f| %>
-    <dl>
-        <dt><%= t('activerecord.attributes.metric.name') %></dt>
-        <dd>
-          <%= entity.name %>
-        </dd>
+    <dt><%= f.label :description %></dt>
+    <dd>
+      <%=
+        f.text_field(
+            :description,
+            id: "#{model_name}_description",
+            size: nil,
+            maxlength: Metric::DESCRIPTION_LIMIT
+        )
+      %>
+      <div class="guideline"><%= t('.guidelines.description') %></div>
+    </dd>
 
-        <dt><%= f.label :description %></dt>
-        <dd>
-          <%= f.text_field :description %>
-          <div class="guideline"><%= t('.guidelines.description') %></div>
-        </dd>
+    <dt><%= f.label :default_period %></dt>
+    <dd>
+      <%=
+        f.number_field(
+            :default_period,
+            id: "#{model_name}_default_period",
+            in: Metric::PERIOD_RANGE,
+            size: 3,
+            required: true
+        )
+      %>
+      <div class="guideline"><%= t('.guidelines.default_period') %></div>
+    </dd>
 
-        <dt><%= f.label :default_period %></dt>
-        <dd>
-          <%= f.number_field :default_period, in: Metric::PERIOD_RANGE, size: 3, required: true %>
-          <div class="guideline"><%= t('.guidelines.default_period') %></div>
-        </dd>
-    </dl>
-    
-    <ul class="flags">
-      <li>
-        <%= f.check_box :incremental %>
-        <%= f.label :incremental %>
-      </li>
-      <li>
-        <%= f.check_box :start_with_zero %>
-        <%= f.label :start_with_zero %>
-      </li>
-      <li>
-        <%= f.check_box :show_on_dashboard %>
-        <%= f.label :show_on_dashboard %>
-      </li>
-    </ul>
+    <%= render partial: 'shared/forms/entity_flags', locals: { f: f } %>
+  </dl>
 
   <%= render 'shared/forms/state_container' %>
 
-    <div class="buttons">
-      <%= f.button t(:save), type: :submit %>
-    </div>
+  <div class="buttons">
+    <%= f.button t(:save), type: :submit %>
+  </div>
 <% end %>
