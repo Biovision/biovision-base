@@ -1,16 +1,16 @@
-<%= form_tag login_path, class: 'login' do %>
-    <div class="fields">
-      <div>
-        <%= label_tag :login, t('.login') %>
-        <%= text_field_tag :login, '', required: true, size: 18 %>
-      </div>
-      <div>
-        <%= label_tag :password, t('activerecord.attributes.user.password') %>
-        <%= password_field_tag :password, '', required: true, size: 18 %>
-      </div>
+<%= form_with url: login_path, local: true, html: { class: 'login' } do %>
+  <div class="fields">
+    <div>
+      <%= label_tag :login, t('.login') %>
+      <%= text_field_tag :login, '', required: true, size: 18 %>
     </div>
-    <div class="actions">
-      <%= button_tag t('.log_in'), type: 'submit', class: 'button-action' %>
-      <%= link_to t('my.profiles.new.title'), new_my_profile_path, class: 'button-nav' %>
+    <div>
+      <%= label_tag :password, t('activerecord.attributes.user.password') %>
+      <%= password_field_tag :password, '', required: true, size: 18 %>
     </div>
+  </div>
+  <div class="actions">
+    <%= button_tag t('.log_in'), type: 'submit', class: 'button-action' %>
+    <%= link_to t('my.profiles.new.title'), new_my_profile_path, class: 'button-nav' %>
+  </div>
 <% end %>
