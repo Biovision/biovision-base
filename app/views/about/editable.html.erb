@@ -1,7 +1,7 @@
 <% if @editable_page.nil? %>
   <% content_for :meta_title, t('.title') %>
 
-  <article>
+  <article class="editable-page">
     <h1><%= t('.heading') %></h1>
 
     <div class="message-box-warning"><%= t('.message') %></div>
