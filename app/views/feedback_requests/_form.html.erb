@@ -3,14 +3,16 @@
   entity = FeedbackRequest.new unless local_assigns[:entity]
 %>
 <%= form_with model: entity, html: { id: form_id } do |f| %>
-  <div class="fields">
+  <div class="fields state-1">
     <%=
       f.text_field(
           :name,
           size:        nil,
           maxlength:   FeedbackRequest::NAME_LIMIT,
           placeholder: t('activerecord.attributes.feedback_request.name'),
-          aria:        { label: t('activerecord.attributes.feedback_request.name') },
+          aria:        {
+              label: t('activerecord.attributes.feedback_request.name')
+          },
           required:    true
       )
     %>
@@ -60,10 +62,10 @@
       <%= f.label :consent %>
     </div>
   </div>
-  <div class="buttons">
+  <div class="buttons state-1">
     <%= hidden_field_tag 'form_id', form_id %>
-    <%= button_tag(t(:submit), type: :submit) %>
+    <%= button_tag(t(:submit), type: :submit, class: 'button-primary') %>
   </div>
 
-  <div class="result hidden"><%= t('.result') %></div>
+  <div class="result hidden state-2"><%= t('.result') %></div>
 <% end %>

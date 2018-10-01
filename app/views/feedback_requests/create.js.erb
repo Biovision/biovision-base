@@ -1,10 +1,1 @@
-{
-    const form = document.getElementById('<%= j(param_from_request(:form_id)) %>');
-    const fields = form.querySelector('.fields');
-    const buttons = form.querySelector('.buttons');
-    const result = form.querySelector('.result');
-
-    fields.classList.add('hidden');
-    buttons.classList.add('hidden')
-    result.classList.remove('hidden');
-}
+Biovision.switchFormElements('<%= j(param_from_request(:form_id)) %>', 'state-1', 'state-2');

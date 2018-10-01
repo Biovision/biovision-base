@@ -373,6 +373,27 @@ const Biovision = {
                 });
             });
         }
+    },
+    /**
+     * Hide and show elements in form with given id
+     *
+     * Toggles class "hidden" for elements with selectors
+     * hideSelector and showSelector for form children
+     *
+     * @param {String} formId
+     * @param {String} hideSelector elements to hide
+     * @param {String} showSelector elements to show
+     */
+    switchFormElements: function(formId, hideSelector, showSelector) {
+        const form = document.getElementById(formId);
+        if (form) {
+            form.querySelectorAll(showSelector).forEach(function (element) {
+                element.classList.remove('hidden');
+            });
+            form.querySelectorAll(hideSelector).forEach(function (element) {
+                element.classList.add('hidden');
+            });
+        }
     }
 };
 
