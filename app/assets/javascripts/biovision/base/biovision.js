@@ -393,6 +393,8 @@ const Biovision = {
             form.querySelectorAll(hideSelector).forEach(function (element) {
                 element.classList.add('hidden');
             });
+        } else {
+            console.log('Cannot find element with id ' + formId)
         }
     }
 };
