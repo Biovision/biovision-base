@@ -692,6 +692,7 @@ Biovision.components.userSearch = {
     elements: [],
     init: function() {
         document.querySelectorAll(this.selector).forEach(this.apply);
+        this.initialized = true;
     },
     apply: function (element) {
         const component = Biovision.components.userSearch;

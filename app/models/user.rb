@@ -64,6 +64,8 @@ class User < ApplicationRecord
   scope :search, ->(q) { where('search_string like ?', "%#{q.downcase}%") unless q.blank? }
   scope :filtered, ->(f) { email_like(f[:email]).screen_name_like(f[:screen_name]) }
   scope :list_for_administration, -> { order('id desc') }
+  scope :created_after, ->(v) { where('created_at >= ?', v) unless v.blank? }
+  scope :created_before, ->(v) { where('created_at <= ?', v) unless v.blank? }
 
   # @param [Integer] page
   # @param [String] search_query
