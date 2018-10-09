@@ -1,0 +1,12 @@
+<svg version="1.1" viewBox="0 0 300 300" width="300px" height="300px" xmlns="http://www.w3.org/2000/svg">
+  <title>Image placeholder 1×1</title>
+  <style>
+    * { stroke: #777; fill: none; }
+    line { stroke-width: 3; }
+  </style>
+  <g>
+    <rect x="1" y="1" width="297" height="297" stroke-width="4"/>
+    <line x1="1" y1="1" x2="299" y2="299"/>
+    <line x1="1" y1="299" x2="299" y2="1"/>
+  </g>
+</svg>
