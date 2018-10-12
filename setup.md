@@ -229,7 +229,7 @@ end
       from: 'example.com <webmaster@example.com>',
       reply_to: 'info@example.com'
   }
-  config.action_mailer.default_url_options = { :host => '0.0.0.0:3000' }
+  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 ```
 
 Дополнения в `config/environments/development.rb`
@@ -241,7 +241,7 @@ end
       from: 'example.com <webmaster@example.com>',
       reply_to: 'info@example.com'
   }
-  config.action_mailer.default_url_options = { :host => '0.0.0.0:3000' }
+  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 ```
 
 Дополнения в `config/puma.rb`
@@ -286,7 +286,7 @@ bundle binstub puma
 
 Не забыть скопировать `.env` и `config/master.key` на сервер:
 `scp .env biovision:/var/www/example.com/shared`, 
-`scp config/master.kry biovision:/var/www/example.com/shared/config`,
+`scp config/master.key biovision:/var/www/example.com/shared/config`,
 
 Настройка отгрузки через `mina`
 -------------------------------

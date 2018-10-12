@@ -3,7 +3,9 @@
 <article class="profile-content my-confirmation">
   <h1><%= t('.title') %></h1>
   <% if current_user&.email_confirmed? %>
-      <div class="message-box-notice"><%= t('activerecord.attributes.user.email_confirmed') %></div>
+      <div class="message-box-notice">
+        <%= t('activerecord.attributes.user.email_confirmed') %>
+      </div>
   <% else %>
       <section id="confirmation-container">
         <h2><%= t('.got_code') %></h2>

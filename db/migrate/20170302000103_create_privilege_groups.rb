@@ -3,6 +3,7 @@ class CreatePrivilegeGroups < ActiveRecord::Migration[5.1]
     unless PrivilegeGroup.table_exists?
       create_table :privilege_groups do |t|
         t.timestamps
+        t.boolean :deletable, default: true, null: false
         t.string :name, null: false
         t.string :slug, null: false
         t.string :description, default: '', null: false
