@@ -14,14 +14,6 @@ class CreateFeedbackRequests < ActiveRecord::Migration[5.1]
         t.string :image
         t.text :comment
       end
-
-      Privilege.create(slug: 'feedback_manager', name: 'Менеджер обратной связи')
-      StoredValue.create(
-        slug: 'feedback_receiver',
-        value: 'support@example.com',
-        name: 'Адрес для запросов обратной связи',
-        description: 'На этот адрес будут отправляться запросы обратной связи'
-      )
     end
   end
 

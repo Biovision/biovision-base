@@ -5,12 +5,10 @@
 # Fields:
 #   - settings [Json]
 #   - slug [String]
-class Biovision::Component < ApplicationRecord
+class BiovisionComponent < ApplicationRecord
   include RequiredUniqueSlug
 
-  has_many :biovision_parameters, class_name: 'Biovision::Parameter'
-
-  validates_presence_of :settings
+  has_many :biovision_parameters, dependent: :delete_all
 
   # @param [String] slug
   def self.[](slug)

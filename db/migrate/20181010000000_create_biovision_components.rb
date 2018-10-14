@@ -1,6 +1,6 @@
 class CreateBiovisionComponents < ActiveRecord::Migration[5.2]
   def up
-    unless Biovision::Component.table_exists?
+    unless BiovisionComponent.table_exists?
       create_table :biovision_components do |t|
         t.timestamps
         t.string :slug, null: false
@@ -10,10 +10,10 @@ class CreateBiovisionComponents < ActiveRecord::Migration[5.2]
       add_index :biovision_components, :slug, unique: true
     end
 
-    unless Biovision::Parameter.table_exists?
+    unless BiovisionParameter.table_exists?
       create_table :biovision_parameters do |t|
         t.timestamps
-        t.references :biovision_components, null: false, foreign_key: { on_update: :cascade, on_delete: :cascade }
+        t.references :biovision_component, null: false, foreign_key: { on_update: :cascade, on_delete: :cascade }
         t.boolean :deletable, default: true, null: false
         t.string :slug, null: false
         t.string :name
@@ -26,8 +26,8 @@ class CreateBiovisionComponents < ActiveRecord::Migration[5.2]
   end
 
   def down
-    drop_table :biovision_parameters if Biovision::Parameter.table_exists?
-    drop_table :biovision_components if Biovision::Component.table_exists?
+    drop_table :biovision_parameters if BiovisionParameter.table_exists?
+    drop_table :biovision_components if BiovisionComponent.table_exists?
   end
 
   private
@@ -35,7 +35,7 @@ class CreateBiovisionComponents < ActiveRecord::Migration[5.2]
   def seed_items
     create_registration_component
 
-    component  = Biovision::Component.create!(slug: 'contact')
+    component  = BiovisionComponent.create!(slug: 'contact')
     collection = {
       feedback_receiver: ['Адрес обратной связи', 'info@example.com', 'На этот адрес приходят запросы обратной связи'],
       email:             ['E-mail', 'info@example.com', 'Адрес электронной почты для отображения в контактах'],
@@ -53,10 +53,10 @@ class CreateBiovisionComponents < ActiveRecord::Migration[5.2]
       confirm_email: false
     }
 
-    Biovision::Component.create!(slug: slug, settings: settings)
+    BiovisionComponent.create!(slug: slug, settings: settings)
   end
 
-  # @param [Biovision::Component] component
+  # @param [BiovisionComponent] component
   # @param [Hash] collection
   def create_parameters(component, collection)
     collection.each do |slug, data|
@@ -69,7 +69,7 @@ class CreateBiovisionComponents < ActiveRecord::Migration[5.2]
         description:         data[2]
       }
 
-      Biovision::Parameter.create!(attributes)
+      BiovisionParameter.create!(attributes)
     end
   end
 end

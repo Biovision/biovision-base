@@ -3,19 +3,19 @@
 # Biovision component parameter
 #
 # Fields:
-#   - biovision_component_id [Biovision::Component]
+#   - biovision_component_id [BiovisionComponent]
 #   - deletable [Boolean]
 #   - description [String], optional
 #   - name [String], optional
 #   - slug [String]
 #   - value [String], optional
-class Biovision::Parameter < ApplicationRecord
+class BiovisionParameter < ApplicationRecord
   DESCRIPTION_LIMIT = 250
   NAME_LIMIT        = 250
   SLUG_LIMIT        = 250
   VALUE_LIMIT       = 65_535
 
-  belongs_to :biovision_component, class_name: 'Biovision::Component'
+  belongs_to :biovision_component
 
   validates_uniqueness_of :slug, scope: [:biovision_component_id]
   validates_presence_of :slug
