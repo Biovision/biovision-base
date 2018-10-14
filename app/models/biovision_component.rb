@@ -16,7 +16,7 @@ class BiovisionComponent < ApplicationRecord
   end
 
   # @param [String] slug
-  def [](slug)
+  def receive(slug)
     biovision_parameters.find_by(slug: slug)&.value
   end
 

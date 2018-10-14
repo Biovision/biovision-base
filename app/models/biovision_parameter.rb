@@ -30,11 +30,4 @@ class BiovisionParameter < ApplicationRecord
   def self.entity_parameters
     %i[description name slug value]
   end
-
-  # @param [String] slug
-  # @param [String] default
-  def self.receive(slug, default = '')
-    entity = find_by(slug: slug)
-    entity&.value || default
-  end
 end
