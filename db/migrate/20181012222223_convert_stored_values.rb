@@ -4,7 +4,7 @@ class ConvertStoredValues < ActiveRecord::Migration[5.2]
 
     slug = 'feedback_receiver'
 
-    Biovision::Component['contact'][slug] = StoredValue.receive(slug)
+    BiovisionComponent['contact'][slug] = StoredValue.receive(slug)
   end
 
   def down
