@@ -33,13 +33,7 @@ class CreateBiovisionComponents < ActiveRecord::Migration[5.2]
   private
 
   def seed_items
-    component  = Biovision::Component.create!(slug: 'registration')
-    collection = {
-      open:          ['Регистрация открыта', '1', 'Разрешить регистрироваться новым пользователям'],
-      invite_only:   ['Только по приглашению', '0', 'Регистрация только с кодом приглашения'],
-      confirm_email: ['Подтверждать почту сразу', '0', 'Сразу после регистрации отправлять письмо для подтверждения почты']
-    }
-    create_parameters(component, collection)
+    create_registration_component
 
     component  = Biovision::Component.create!(slug: 'contact')
     collection = {
@@ -49,6 +43,17 @@ class CreateBiovisionComponents < ActiveRecord::Migration[5.2]
       address:           ['Адрес', 'г. Москва, улица с Названием, 42', 'Адрес для отображения в контактах']
     }
     create_parameters(component, collection)
+  end
+
+  def create_registration_component
+    slug     = 'registration'
+    settings = {
+      open: true,
+      invite_only: false,
+      confirm_email: false
+    }
+
+    Biovision::Component.create!(slug: slug, settings: settings)
   end
 
   # @param [Biovision::Component] component

@@ -1,4 +1,5 @@
 class PrivilegeGroup < ApplicationRecord
+  include Checkable
   include RequiredUniqueSlug
   include RequiredUniqueName
 
@@ -13,6 +14,8 @@ class PrivilegeGroup < ApplicationRecord
   validates_length_of :slug, maximum: SLUG_LIMIT
   validates_length_of :description, maximum: DESCRIPTION_LIMIT
 
+  scope :list_for_administration, -> { ordered_by_name }
+
   def self.page_for_administration
     ordered_by_name
   end
@@ -23,11 +26,12 @@ class PrivilegeGroup < ApplicationRecord
   def self.ids(slug)
     instance = find_by(slug: slug.to_s)
     return [] if instance.nil?
+
     instance.privileges.map(&:branch_ids).flatten.uniq
   end
 
   def self.entity_parameters
-    %i(name slug description)
+    %i[name slug description]
   end
 
   # @param [String] slug
@@ -44,6 +48,7 @@ class PrivilegeGroup < ApplicationRecord
   def add_privilege(privilege)
     criteria = { privilege_group: self, privilege: privilege }
     return if PrivilegeGroupPrivilege.exists?(criteria)
+
     PrivilegeGroupPrivilege.create(criteria)
   end
 

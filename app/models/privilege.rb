@@ -1,4 +1,5 @@
 class Privilege < ApplicationRecord
+  include Checkable
   include Toggleable
 
   DESCRIPTION_LIMIT = 350
@@ -9,7 +10,7 @@ class Privilege < ApplicationRecord
   toggleable :regional, :administrative
 
   belongs_to :parent, class_name: Privilege.to_s, optional: true
-  has_many :children, class_name: Privilege.to_s, foreign_key: :parent_id
+  has_many :child_categories, class_name: Privilege.to_s, foreign_key: :parent_id
   has_many :user_privileges, dependent: :destroy
   has_many :users, through: :user_privileges
   has_many :privilege_group_privileges, dependent: :destroy
@@ -22,7 +23,9 @@ class Privilege < ApplicationRecord
   before_validation { self.regional = true if parent&.regional? }
   before_validation :normalize_priority
 
-  before_save :compact_children_cache
+  before_save { self.children_cache.uniq! }
+  after_create :cache_parents!
+  after_save { parent.cache_children! unless parent.nil? }
 
   validates_presence_of :name, :slug, :priority
   validates :name, uniqueness: { case_sensitive: false, scope: [:parent_id] }
@@ -44,11 +47,11 @@ class Privilege < ApplicationRecord
   end
 
   def self.entity_parameters
-    %i(administrative description name priority regional slug)
+    %i[administrative description name priority regional slug]
   end
 
   def self.creation_parameters
-    entity_parameters + %i(parent_id)
+    entity_parameters + %i[parent_id]
   end
 
   # @return [String]
@@ -58,7 +61,7 @@ class Privilege < ApplicationRecord
 
   # @deprecated use #subbranch_ids
   def ids
-    [id] + children_cache
+    subbranch_ids
   end
 
   # @return [Array<Integer>]
@@ -81,20 +84,20 @@ class Privilege < ApplicationRecord
 
   def cache_parents!
     return if parent.nil?
+
     self.parents_cache = "#{parent.parents_cache},#{parent_id}".gsub(/\A,/, '')
     save!
   end
 
   def cache_children!
-    children.order('id asc').map do |child|
+    child_categories.order('id asc').each do |child|
       self.children_cache += [child.id] + child.children_cache
     end
     save!
-    parent&.cache_children!
   end
 
   def can_be_deleted?
-    children.count < 1
+    deletable? && child_categories.count < 1
   end
 
   # @param [User] user
@@ -114,6 +117,7 @@ class Privilege < ApplicationRecord
   # @param [Integer] region_id
   def grant(user, region_id = nil)
     return if user.nil?
+
     criteria             = { privilege: self, user: user }
     criteria[:region_id] = region_id if regional?
     UserPrivilege.create(criteria) unless UserPrivilege.exists?(criteria)
@@ -123,6 +127,7 @@ class Privilege < ApplicationRecord
   # @param [Integer] region_id
   def revoke(user, region_id = nil)
     return if user.nil?
+
     criteria             = { privilege: self, user: user }
     criteria[:region_id] = region_id if regional?
     UserPrivilege.where(criteria).delete_all
@@ -144,18 +149,14 @@ class Privilege < ApplicationRecord
   private
 
   def set_next_priority
-    if id.nil? && priority == 1
-      self.priority = self.class.siblings(self).maximum(:priority).to_i + 1
-    end
+    return unless id.nil? && priority == 1
+
+    self.priority = self.class.siblings(self).maximum(:priority).to_i + 1
   end
 
   def normalize_priority
     self.priority = PRIORITY_RANGE.first if priority < PRIORITY_RANGE.first
     self.priority = PRIORITY_RANGE.last if priority > PRIORITY_RANGE.last
-  end
-
-  def compact_children_cache
-    self.children_cache.uniq!
   end
 
   # @param [User] user

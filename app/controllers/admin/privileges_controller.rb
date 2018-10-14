@@ -1,5 +1,4 @@
 class Admin::PrivilegesController < AdminController
-  include LockableEntity
   include EntityPriority
   include ToggleableEntity
 
@@ -26,9 +25,9 @@ class Admin::PrivilegesController < AdminController
   end
 
   def set_entity
-    @entity = Privilege.find_by(id: params[:id], deleted: false)
+    @entity = Privilege.find_by(id: params[:id])
     if @entity.nil?
-      handle_http_404("Cannot find non-deleted privilege #{params[:id]}")
+      handle_http_404("Cannot find privilege #{params[:id]}")
     end
   end
 end

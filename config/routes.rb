@@ -85,9 +85,10 @@ Rails.application.routes.draw do
       end
 
       resources :privileges, only: %i[index show] do
+        collection do
+          post 'check'
+        end
         member do
-          put 'lock', defaults: { format: :json }
-          delete 'lock', action: :unlock, defaults: { format: :json }
           post 'priority', defaults: { format: :json }
           post 'toggle', defaults: { format: :json }
           get 'users'
@@ -95,6 +96,9 @@ Rails.application.routes.draw do
         end
       end
       resources :privilege_groups, only: %i[index show] do
+        collection do
+          post 'check'
+        end
         member do
           put 'privileges/:privilege_id' => :add_privilege, as: :privilege, defaults: { format: :json }
           delete 'privileges/:privilege_id' => :remove_privilege, defaults: { format: :json }
