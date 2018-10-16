@@ -30,7 +30,7 @@ Biovision::Base
 Параметры, которые можно задать через data-атрибуты:
 
  * `delay` — задержка перед пролистыванием. По умолчанию — `125` (мс)
- * `type` — тип. По умолчанию — `opacity` (пока это единственный вариант)
+ * `type` — тип. По умолчанию — `opacity` (есть ещё `slide`).
 
 ```html
 <div class="biovision-slider" data-delay="250" data-type="opacity">
