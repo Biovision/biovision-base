@@ -1,8 +1,21 @@
 :root {
-  --content-width: #{$content-width};
-  --content-width-min: #{$content-width-min};
-  --spacer-xs: .5rem;
-  --spacer-s: 1rem;
+  --font-size-xxxl: #{$font-size-xxxl};
+  --font-size-xxl: #{$font-size-xxl};
+  --font-size-xl: #{$font-size-xl};
+  --font-size-large: #{$font-size-large};
+  --font-size-increased: #{$font-size-increased};
+  --font-size-normal: #{$font-size-normal};
+  --font-size-decreased: #{$font-size-decreased};
+  --font-size-small: #{$font-size-small};
+  --font-size-xs: #{$font-size-xs};
+
+  --spacer-xxs: #{$spacer-xxs};
+  --spacer-xs: #{$spacer-xs};
+  --spacer-s: #{$spacer-s};
+  --spacer-m: #{$spacer-m};
+  --spacer-l: #{$spacer-l};
+  --spacer-xl: #{$spacer-xl};
+  --spacer-xxl: #{$spacer-xxl};
 }
 
 html {
@@ -33,9 +46,9 @@ body {
   flex-direction: column;
   font-size: $font-size-normal;
   margin: 0 auto;
-  max-width: var(--content-width);
+  max-width: $content-width;
   min-height: 100vh;
-  min-width: var(--content-width-min);
+  min-width: $content-width-min;
 
   > header {
     align-items: center;
@@ -116,6 +129,19 @@ article {
 
       label {
         font-weight: normal;
+      }
+    }
+
+    .text {
+      box-shadow: .2rem .2rem .8rem rgba(0, 0, 0, .25);
+      padding: var(--spacer-s);
+
+      ul {
+        padding-left: 2.4rem;
+
+        > li {
+          list-style: initial;
+        }
       }
     }
   }
@@ -273,5 +299,23 @@ nav.admin-breadcrumbs {
       opacity: .5;
       filter: grayscale(75%);
     }
+  }
+}
+
+.ck-content {
+  ul {
+    padding-left: 2.4rem;
+
+    > li {
+      list-style: initial;
+    }
+  }
+}
+
+.state_container {
+  margin-bottom: var(--spacer-s);
+
+  progress {
+    width: 100%;
   }
 }
