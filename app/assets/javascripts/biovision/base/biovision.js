@@ -271,10 +271,13 @@ Biovision.components.entityLinker = {
 
         if (url && !this.disabled) {
             const method = this.checked ? 'put' : 'delete';
+            const box = this;
 
             this.disabled = true;
 
-            Biovision.newAjaxRequest(method, url, () => this.disabled = false).send();
+            Biovision.newAjaxRequest(method, url, function () {
+                box.disabled = false
+            }).send();
         }
     }
 };
