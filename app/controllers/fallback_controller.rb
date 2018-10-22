@@ -1,7 +1,12 @@
+# frozen_string_literal: true
+
+# Fallback controller for the rest of URLs
+#
+# Tries to find and show editable page with given url
 class FallbackController < ApplicationController
-  # get (:editable_page_url)
+  # get (:slug)
   def show
-    url = params[:editable_page_url]
+    url = params[:slug]
 
     @editable_page = EditablePage.fallback_page("/#{url}", locale)
     if @editable_page.nil?

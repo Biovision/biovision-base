@@ -209,6 +209,6 @@ Rails.application.routes.draw do
 
     resources :feedback_requests, only: :create
 
-    get ':editable_page_url' => 'fallback#show', constraints: { editable_page_url: /.+/ }
+    get ':slug' => 'fallback#show', constraints: { slug: /.+/ }
   end
 end
