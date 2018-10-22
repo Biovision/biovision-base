@@ -7,17 +7,17 @@ $font-size-xl: 3.2rem !default;
 $font-size-large: 2.4rem !default;
 $font-size-increased: 1.8rem !default;
 $font-size-normal: 1.6rem !default;
-$font-size-decreased: 1.3rem !default;
-$font-size-small: 1.1rem !default;
+$font-size-decreased: 1.4rem !default;
+$font-size-small: 1.2rem !default;
 $font-size-xs: 1rem !default;
 
-$spacer-xxs: .4rem !default;
-$spacer-xs: .8rem !default;
 $spacer-s: 1.6rem !default;
-$spacer-m: 3.2rem !default;
-$spacer-l: 4.8rem !default;
-$spacer-xl: 6.4rem !default;
-$spacer-xxl: 9.6rem !default;
+$spacer-xxs: #{$spacer-s / 4} !default;
+$spacer-xs: #{$spacer-s / 2} !default;
+$spacer-m: #{$spacer-s * 2} !default;
+$spacer-l: #{$spacer-s * 3} !default;
+$spacer-xl: #{$spacer-s * 4} !default;
+$spacer-xxl: #{$spacer-s * 6} !default;
 
 $content-width: 120rem !default;
 $content-width-min: 32rem !default;

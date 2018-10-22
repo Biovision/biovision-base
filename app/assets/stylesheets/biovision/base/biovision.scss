@@ -1,21 +1,23 @@
-:root {
-  --font-size-xxxl: #{$font-size-xxxl};
-  --font-size-xxl: #{$font-size-xxl};
-  --font-size-xl: #{$font-size-xl};
-  --font-size-large: #{$font-size-large};
-  --font-size-increased: #{$font-size-increased};
-  --font-size-normal: #{$font-size-normal};
-  --font-size-decreased: #{$font-size-decreased};
-  --font-size-small: #{$font-size-small};
-  --font-size-xs: #{$font-size-xs};
+@supports (--css: vars) {
+  :root {
+    --font-size-xxxl: #{$font-size-xxxl};
+    --font-size-xxl: #{$font-size-xxl};
+    --font-size-xl: #{$font-size-xl};
+    --font-size-large: #{$font-size-large};
+    --font-size-increased: #{$font-size-increased};
+    --font-size-normal: #{$font-size-normal};
+    --font-size-decreased: #{$font-size-decreased};
+    --font-size-small: #{$font-size-small};
+    --font-size-xs: #{$font-size-xs};
 
-  --spacer-xxs: #{$spacer-xxs};
-  --spacer-xs: #{$spacer-xs};
-  --spacer-s: #{$spacer-s};
-  --spacer-m: #{$spacer-m};
-  --spacer-l: #{$spacer-l};
-  --spacer-xl: #{$spacer-xl};
-  --spacer-xxl: #{$spacer-xxl};
+    --spacer-s: #{$spacer-s};
+    --spacer-xxs: calc(var(--spacer-s) / 4);
+    --spacer-xs: calc(var(--spacer-s) / 2);
+    --spacer-m: calc(var(--spacer-s) * 2);
+    --spacer-l: calc(var(--spacer-s) * 3);
+    --spacer-xl: calc(var(--spacer-s) * 4);
+    --spacer-xxl: calc(var(--spacer-s) * 6);
+  }
 }
 
 * {
@@ -23,13 +25,25 @@
 }
 
 html {
-  font: 10px $font-family-main;
+  font: 400 10px $font-family-main;
   height: 100%;
   margin: 0;
   padding: 0;
   -webkit-text-size-adjust: none;
   -moz-text-size-adjust: none;
   -ms-text-size-adjust: none;
+}
+
+body {
+  font-size: $font-size-normal;
+  margin: 0;
+  padding: 0;
+}
+
+@supports (--css: vars) {
+  body {
+    font-size: var(--font-size-normal);
+  }
 }
 
 h1,
@@ -54,6 +68,7 @@ a {
   }
 
   &:active,
+  &:focus,
   &:hover {
     color: $link-color-hover;
     text-decoration: underline;
@@ -89,8 +104,8 @@ ul.actions {
   opacity: .5;
   padding: 0;
   position: absolute;
-  right: .4rem;
-  top: .4rem;
+  right: $spacer-xxs;
+  top: $spacer-xxs;
   transition: .25s;
 
   &:hover {
@@ -102,11 +117,11 @@ ul.actions {
     height: 1.6rem;
     line-height: 1.6rem;
     list-style: none;
-    margin: .4rem;
+    margin: $spacer-xxs;
     padding: 0;
 
     &.danger {
-      margin-left: 3.2rem;
+      margin-left: $spacer-m;
     }
 
     &.priority-changer {
@@ -119,9 +134,8 @@ ul.actions {
 
   a,
   button {
-    box-sizing: border-box;
     display: inline-block;
-    font-size: 1.2rem;
+    font-size: $font-size-decreased;
     height: 1.6rem;
     line-height: 1.6rem;
     margin: 0;
@@ -135,8 +149,28 @@ ul.actions {
   }
 }
 
+@supports (--css: vars) {
+  ul.actions {
+    right: var(--spacer-xxs);
+    top: var(--spacer-xxs);
+
+    > li {
+      margin: var(--spacer-xxs);
+
+      &.danger {
+        margin-left: var(--spacer-m);
+      }
+    }
+
+    a,
+    button {
+      font-size: var(--font-size-decreased);
+    }
+  }
+}
+
 .list-of-entities {
-  margin: 1.6rem 0;
+  margin: $spacer-s 0;
   padding: 0;
 
   > li {
@@ -146,7 +180,7 @@ ul.actions {
     flex-wrap: wrap;
     list-style: none;
     margin: 0;
-    padding: .8rem;
+    padding: $spacer-xs;
 
     &:nth-of-type(even) {
       background: $row-background-even;
@@ -154,7 +188,8 @@ ul.actions {
 
     .image {
       flex: none;
-      margin: 0 .8rem 0 0;
+      margin: 0 $spacer-xs 0 0;
+      margin-right: var(--spacer-xs);
       text-align: center;
       width: 8rem;
 
@@ -191,14 +226,15 @@ ul.actions {
         display: flex;
         flex-wrap: wrap;
 
-        .toggleable, > span {
-          margin: 0 .8rem;
+        .toggleable,
+        > span {
+          margin: 0 $spacer-xs;
         }
       }
 
       .children {
         border-left: .1rem dotted;
-        margin-left: var(--spacer-s);
+        margin-left: $spacer-s;
       }
     }
   }
@@ -216,9 +252,49 @@ ol.list-of-entities {
   > li[data-number]::before {
     content: attr(data-number) ":";
     display: inline-block;
-    margin: 0 .8rem 0 0;
+    margin: 0 $spacer-xs 0 0;
+    margin-right: var(--spacer-xs);
     text-align: right;
     width: 2.4rem;
+  }
+}
+
+@supports (--css: vars) {
+  .list-of-entities {
+    margin: var(--spacer-s) 0;
+
+    > li {
+      padding: var(--spacer-xs);
+
+      .image {
+
+        img {
+          max-height: 8rem;
+          max-width: 8rem;
+        }
+
+        & + .data {
+          max-width: calc(100% - 8rem - var(--spacer-xs));
+        }
+      }
+
+      .data {
+        .info {
+          font-size: var(--font-size-decreased);
+        }
+
+        .compact {
+          .toggleable,
+          > span {
+            margin: 0 var(--spacer-xs);
+          }
+        }
+
+        .children {
+          margin-left: var(--spacer-s);
+        }
+      }
+    }
   }
 }
 
@@ -228,6 +304,8 @@ ol.list-of-entities {
     padding-right: 1rem;
     transition: background .25s;
 
+    &:active,
+    &:focus,
     &:hover {
       background-image: image_url('biovision/base/icons/breadcrumb-hover.svg');
     }
@@ -240,12 +318,12 @@ form {
 
   .guideline {
     color: $text-color-secondary;
-    font-size: var(--font-size-decreased);
+    font-size: $font-size-decreased;
     margin: 0;
 
     &::before {
       content: '\261E';
-      margin-right: .4rem;
+      margin-right: $spacer-xxs;
     }
   }
 
@@ -254,7 +332,7 @@ form {
 
     &::before {
       content: '\261D';
-      margin-right: .4rem;
+      margin-right: $spacer-xxs;
     }
   }
 
@@ -264,12 +342,15 @@ form {
   }
 
   dt {
-    font: 500 var(--font-size-increased) $font-family-main;
+    font: 500 $font-size-increased $font-family-main;
+    font-size: var(--font-size-increased);
 
     &:not(:first-of-type) {
       border-top: $border-secondary;
-      margin: .8rem 0 0 0;
-      padding: .4rem 0 0 0;
+      margin: $spacer-xs 0 0 0;
+      margin-top: var(--spacer-xs);
+      padding: $spacer-xxs 0 0 0;
+      padding-top: var(--spacer-xxs);
     }
   }
 
@@ -294,13 +375,35 @@ form {
   }
 
   ul.flags {
-    margin: .8rem 0;
+    margin: $spacer-xs 0;
     padding: 0;
 
     li {
       list-style: none;
       margin: 0;
       padding: 0;
+    }
+  }
+}
+
+@supports (--css: vars) {
+  form {
+    .guideline {
+      font-size: var(--font-size-decreased);
+
+      &::before {
+        margin-right: var(--spacer-xxs);
+      }
+    }
+
+    .check-result-error {
+      &::before {
+        margin-right: var(--spacer-xxs);
+      }
+    }
+
+    ul.flags {
+      margin: var(--spacer-xs) 0;
     }
   }
 }
