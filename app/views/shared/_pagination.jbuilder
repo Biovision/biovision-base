@@ -1,13 +1,15 @@
 if collection.respond_to?(:current_page)
+  qp = request.query_parameters.merge(format: :json)
+
   json.links do
-    json.self url_for(page: collection.current_page, format: :json)
-    json.first url_for(page: 1, format: :json)
+    json.self url_for(qp.merge(page: collection.current_page))
+    json.first url_for(qp.merge(page: 1))
     unless collection.prev_page.nil?
-      json.prev url_for(page: collection.prev_page, format: :json)
+      json.prev url_for(qp.merge(page: collection.prev_page))
     end
     unless collection.next_page.nil?
-      json.next url_for(page: collection.next_page, format: :json)
+      json.next url_for(qp.merge(page: collection.next_page))
     end
-    json.last url_for(page: collection.total_pages, format: :json)
+    json.last url_for(qp.merge(page: collection.total_pages))
   end
 end
