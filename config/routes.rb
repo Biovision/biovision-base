@@ -51,6 +51,14 @@ Rails.application.routes.draw do
     namespace :admin do
       get '/' => 'index#index'
 
+      scope :settings, controller: :settings do
+        get '/' => :index, as: :settings
+        get ':slug' => :show, as: :component
+        patch ':slug' => :update
+        put ':slug/:parameter_slug' => :set_parameter, as: :parameter
+        delete ':slug/:parameter_slug' => :delete_parameter
+      end
+
       resources :agents, :browsers, only: %i[index show] do
         member do
           post 'toggle', defaults: { format: :json }

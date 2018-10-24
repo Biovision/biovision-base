@@ -1,16 +1,18 @@
 # Common class for managing Biovision Components
 class ComponentManager
-  attr_reader :entity
+  attr_reader :entity, :slug, :name
 
   # @param [BiovisionComponent] entity
   def initialize(entity)
     @entity = entity
+    @slug   = entity.slug
+    @name   = I18n.t("biovision.components.#{@slug}.name", default: @slug)
   end
 
   # Receive component-specific handler by component slug
   #
   # @param [String] slug
-  # @returns [ComponentManager]
+  # @return [ComponentManager]
   def self.handler(slug)
     entity = BiovisionComponent.find_by!(slug: slug)
 
@@ -23,6 +25,10 @@ class ComponentManager
   def settings=(new_settings)
     @entity.settings = @entity.settings.merge(normalize_settings(new_settings))
     @entity.save!
+  end
+
+  def parameters
+    @entity.biovision_parameters.list_for_administration
   end
 
   # Get instance of BiovisionParameter with given slug
@@ -75,6 +81,7 @@ class ComponentManager
   protected
 
   # @param [Hash] new_settings
+  # @return [Hash]
   def normalize_settings(new_settings)
     new_settings.to_h
   end

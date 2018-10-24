@@ -1,0 +1,31 @@
+<% if settings.any? %>
+  <section>
+    <h2><%= t('.heading') %></h2>
+
+    <%=
+      form_with(
+          url:    admin_component_path(slug: handler.slug),
+          method: :patch,
+          local:  true
+      ) do
+    %>
+      <div class="fields">
+        <% settings.each do |key, value| %>
+          <%=
+            render(
+                partial: 'admin/settings/component/setting',
+                locals: {
+                    slug: handler.slug,
+                    key: key,
+                    value: value
+                }
+            )
+          %>
+        <% end %>
+      </div>
+      <div class="buttons">
+        <%= button_tag(t(:update), type: :submit, class: 'button-save') %>
+      </div>
+    <% end %>
+  </section>
+<% end %>

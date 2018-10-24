@@ -1,0 +1,9 @@
+<section>
+  <ul class="biovision-components">
+    <% if current_user_has_privilege?(:administrator) %>
+      <li class="settings-general">
+        <%= link_to(t('admin.settings.index.nav_text'), admin_settings_path) %>
+      </li>
+    <% end %>
+  </ul>
+</section>

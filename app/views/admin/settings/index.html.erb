@@ -1,0 +1,22 @@
+<% content_for :meta_title, t('.title') %>
+<% content_for :breadcrumbs do %>
+  <span><%= t('.nav_text') %></span>
+<% end %>
+
+<article>
+  <h1><%= t('.heading') %></h1>
+
+  <ul>
+    <% @collection.each do |slug| %>
+      <li>
+        <%=
+          link_to(
+              t("biovision.components.#{slug}.name", default: slug),
+              admin_component_path(slug: slug),
+              class: "biovision-component-#{slug}"
+          )
+        %>
+      </li>
+    <% end %>
+  </ul>
+</article>

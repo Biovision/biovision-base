@@ -1,0 +1,22 @@
+ru:
+  admin:
+    settings:
+      index:
+        heading: "Настройки компонентов"
+        nav_text: "Настройки"
+        title: "Настройки компонентов"
+      show:
+        title: "Настройки компонента"
+      component:
+        settings:
+          heading: "Настройки"
+      update:
+        success: "Настройки компонента обновлены"
+  biovision:
+    components:
+      registration:
+        name: "Регистрация"
+        settings:
+          open: "Открыта"
+          invite_only: "Только по приглашениям"
+          confirm_email: "Отправлять письмо для подтверждения почты сразу"
