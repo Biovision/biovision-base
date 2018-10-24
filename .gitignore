@@ -9,3 +9,5 @@ spec/dummy/tmp/
 spec/examples.txt
 
 Gemfile.lock
+
+.ruby-version

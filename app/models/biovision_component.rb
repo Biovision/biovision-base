@@ -3,16 +3,18 @@
 # Biovision component
 #
 # Fields:
-#   - settings [Json]
+#   - settings [JSON]
 #   - slug [String]
 class BiovisionComponent < ApplicationRecord
   include RequiredUniqueSlug
 
   has_many :biovision_parameters, dependent: :delete_all
 
+  # Find component by slug
+  #
   # @param [String] slug
   def self.[](slug)
-    self.find_by(slug: slug)
+    find_by(slug: slug)
   end
 
   # @param [String] slug
