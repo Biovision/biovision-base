@@ -31,11 +31,13 @@ a:visited {
 
 h1 {
   font-size: var(--font-size-xxl);
+  font-weight: 500;
   margin-bottom: var(--spacer-xs);
 }
 
 h2 {
   font-size: var(--font-size-xl);
+  font-weight: 500;
   margin-bottom: var(--spacer-xxs);
 }
 
@@ -310,3 +312,5 @@ nav.breadcrumbs {
     width: 100%;
   }
 }
+
+@import "biovision/base/admin/components";

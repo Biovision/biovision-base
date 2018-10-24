@@ -10,10 +10,14 @@ ru:
       component:
         settings:
           heading: "Настройки"
+        parameters:
+          heading: "Параметры"
       update:
         success: "Настройки компонента обновлены"
   biovision:
     components:
+      contact:
+        name: "Контакты"
       registration:
         name: "Регистрация"
         settings:

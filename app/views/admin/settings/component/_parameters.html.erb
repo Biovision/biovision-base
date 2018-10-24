@@ -1,0 +1,27 @@
+<section>
+  <h2><%= t('.heading') %></h2>
+
+  <ul id="biovision-component-parameters">
+    <% parameters.each do |parameter| %>
+      <%
+        url = admin_parameter_path(slug: handler.slug, parameter_slug: parameter.slug)
+        element_id = "parameter-#{parameter.id}"
+      %>
+      <li data-url="<%= url %>">
+        <div class="name">
+          <%= label_tag(element_id, parameter.slug) %>
+          <% unless parameter.description.blank? %>
+            <span>(<%= parameter.name %>)</span>
+          <% end %>
+        </div>
+        <div class="value">
+          <%= text_field_tag(:value, parameter.value, id: element_id) %>
+          <%= button_tag t(:save), type: :button, class: 'button-save', disabled: true %>
+        </div>
+        <% unless parameter.description.blank? %>
+          <div class="description"><%= parameter.description %></div>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</section>

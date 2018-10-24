@@ -23,7 +23,9 @@ class Admin::SettingsController < AdminController
 
   # put /admin/settings/:slug/:parameter_slug
   def set_parameter
-    @handler[params[:parameter_slug]] = params.require(:key).permit(:value)
+    new_value = param_from_request(:key, :value)
+
+    @handler[params[:parameter_slug]] = new_value
 
     head :no_content
   end

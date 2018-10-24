@@ -794,6 +794,47 @@ Biovision.components.hidingPopups = {
     }
 };
 
+Biovision.components.componentEditor = {
+    initialized: false,
+    list: undefined,
+    elements: [],
+    init: function () {
+        this.list = document.getElementById('biovision-component-parameters');
+        if (this.list) {
+            const component = this;
+            this.list.querySelectorAll('input[type="text"]').forEach(component.apply);
+
+            this.initialized = true;
+        }
+    },
+    apply: function (element) {
+        const component = Biovision.components.componentEditor;
+        const button = element.parentNode.querySelector('button');
+
+        component.elements.push(element);
+        element.addEventListener('change', component.handleChange);
+        button.addEventListener('click', component.handleClick);
+    },
+    handleChange: function (event) {
+        const element = event.target;
+        const button = element.parentNode.querySelector('button');
+
+        button.disabled = false;
+    },
+    handleClick: function (event) {
+        const button = event.target;
+        const li = button.closest('li');
+        const url = li.getAttribute('data-url');
+        const input = li.querySelector('input');
+        const data = {"key": {"value": input.value}};
+
+        const request = Biovision.jsonAjaxRequest('put', url);
+
+        button.disabled = true;
+        request.send(JSON.stringify(data));
+    }
+};
+
 document.addEventListener('DOMContentLoaded', function () {
     Biovision.init();
 
