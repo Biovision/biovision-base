@@ -55,8 +55,8 @@ Rails.application.routes.draw do
         get '/' => :index, as: :settings
         get ':slug' => :show, as: :component
         patch ':slug' => :update
-        put ':slug/:parameter_slug' => :set_parameter, as: :parameter
-        delete ':slug/:parameter_slug' => :delete_parameter
+        put ':slug/parameter' => :set_parameter, as: :set_parameter
+        delete ':slug/:parameter_slug' => :delete_parameter, as: :parameter
       end
 
       resources :agents, :browsers, only: %i[index show] do

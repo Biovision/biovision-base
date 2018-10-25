@@ -38,6 +38,21 @@ class ComponentManager
     @entity.biovision_parameters.find_by(slug: slug)
   end
 
+  # Create or update parameter values
+  #
+  # @param [String] slug
+  # @param [String] value
+  # @param [String] name
+  # @param [String] description
+  def set_parameter(slug, value, name = '', description = '')
+    @entity[slug] = value
+
+    item = parameter(slug)
+    item.update(name: name, description: description) if item.deletable?
+
+    item
+  end
+
   # Delete parameter with given slug (if it is deletable)
   #
   # @param [String] slug

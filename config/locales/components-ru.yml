@@ -1,4 +1,13 @@
 ru:
+  activerecord:
+    models:
+      biovision_parameter: "Параметр"
+    attributes:
+      biovision_parameter:
+        description: "Описание"
+        name: "Название"
+        slug: "Идентификатор"
+        value: "Значение"
   admin:
     settings:
       index:
@@ -12,6 +21,13 @@ ru:
           heading: "Настройки"
         parameters:
           heading: "Параметры"
+        new_parameter:
+          heading: "Новый параметр"
+          guidelines:
+            description: "Более подробное описание для удобства"
+            name: "Название для удобства"
+            slug: "Только латинские буквы, цифры, дефис и подчёркивание (кроме начала и конца)."
+            value: "Произвольная строка"
       update:
         success: "Настройки компонента обновлены"
   biovision:

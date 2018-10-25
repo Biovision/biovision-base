@@ -1,13 +1,13 @@
 <section>
   <h2><%= t('.heading') %></h2>
 
-  <ul id="biovision-component-parameters">
+  <ul id="biovision-component-parameters" data-url="<%= admin_set_parameter_path(slug: handler.slug) %>">
     <% parameters.each do |parameter| %>
       <%
         url = admin_parameter_path(slug: handler.slug, parameter_slug: parameter.slug)
         element_id = "parameter-#{parameter.id}"
       %>
-      <li data-url="<%= url %>">
+      <li>
         <div class="name">
           <%= label_tag(element_id, parameter.slug) %>
           <% unless parameter.description.blank? %>
@@ -16,7 +16,30 @@
         </div>
         <div class="value">
           <%= text_field_tag(:value, parameter.value, id: element_id) %>
-          <%= button_tag t(:save), type: :button, class: 'button-save', disabled: true %>
+          <%=
+            button_tag(
+                '',
+                title: t(:save),
+                type: :button,
+                class: 'apply',
+                disabled: true,
+                data: {
+                    slug: parameter.slug
+                }
+            )
+          %>
+          <% if parameter.deletable? %>
+            <%=
+              button_tag(
+                  '',
+                  title:   t(:delete),
+                  type:    :button,
+                  class:   'delete',
+                  url:     url,
+                  confirm: t(:are_you_sure)
+              )
+            %>
+          <% end %>
         </div>
         <% unless parameter.description.blank? %>
           <div class="description"><%= parameter.description %></div>

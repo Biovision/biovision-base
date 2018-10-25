@@ -797,11 +797,14 @@ Biovision.components.hidingPopups = {
 Biovision.components.componentEditor = {
     initialized: false,
     list: undefined,
+    url: undefined,
     elements: [],
+    values: {},
     init: function () {
         this.list = document.getElementById('biovision-component-parameters');
         if (this.list) {
             const component = this;
+            this.url = this.list.getAttribute('data-url');
             this.list.querySelectorAll('input[type="text"]').forEach(component.apply);
 
             this.initialized = true;
@@ -811,8 +814,11 @@ Biovision.components.componentEditor = {
         const component = Biovision.components.componentEditor;
         const button = element.parentNode.querySelector('button');
 
+        component.values[element.getAttribute('id')] = element.value;
+
         component.elements.push(element);
         element.addEventListener('change', component.handleChange);
+        element.addEventListener('keyup', component.keyUp);
         button.addEventListener('click', component.handleClick);
     },
     handleChange: function (event) {
@@ -821,14 +827,30 @@ Biovision.components.componentEditor = {
 
         button.disabled = false;
     },
+    keyUp: function (event) {
+        const component = Biovision.components.componentEditor;
+        const element = event.target;
+        const button = element.parentNode.querySelector('button');
+
+        if (component.values[element.getAttribute('id')] !== element.value) {
+            button.disabled = false;
+        }
+    },
     handleClick: function (event) {
+        const component = Biovision.components.componentEditor;
         const button = event.target;
         const li = button.closest('li');
-        const url = li.getAttribute('data-url');
         const input = li.querySelector('input');
-        const data = {"key": {"value": input.value}};
+        const data = {
+            "key": {
+                "slug": button.getAttribute('data-slug'),
+                "value": input.value
+            }
+        };
 
-        const request = Biovision.jsonAjaxRequest('put', url);
+        const request = Biovision.jsonAjaxRequest('put', component.url, function () {
+            component.values[input.getAttribute('id')] = input.value;
+        });
 
         button.disabled = true;
         request.send(JSON.stringify(data));

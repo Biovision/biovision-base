@@ -21,11 +21,18 @@ class Admin::SettingsController < AdminController
     redirect_to(admin_component_path(slug: params[:slug]))
   end
 
-  # put /admin/settings/:slug/:parameter_slug
+  # put /admin/settings/:slug/parameter
   def set_parameter
-    new_value = param_from_request(:key, :value)
+    slug        = param_from_request(:key, :slug)
+    value       = param_from_request(:key, :value)
+    name        = param_from_request(:key, :name)
+    description = param_from_request(:key, :description)
 
-    @handler[params[:parameter_slug]] = new_value
+    if name.blank? && description.blank?
+      @handler[slug] = value
+    else
+      @handler.set_parameter(slug, value, name, description)
+    end
 
     head :no_content
   end

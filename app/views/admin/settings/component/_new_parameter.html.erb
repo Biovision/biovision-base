@@ -1,0 +1,90 @@
+<section>
+  <h2><%= t('.heading') %></h2>
+
+  <%=
+    form_with(
+        scope:  :key,
+        url:    admin_set_parameter_path(slug: handler.slug),
+        method: :put,
+        local:  true,
+        id:     'new-biovision-parameter-form'
+    ) do |f|
+  %>
+    <dl>
+      <dt>
+        <%=
+          f.label(:slug, t('activerecord.attributes.biovision_parameter.slug'))
+        %>
+      </dt>
+      <dd>
+        <%=
+          f.text_field(
+              :slug,
+              value:     '',
+              required:  true,
+              pattern:   BiovisionParameter::SLUG_PATTERN_HTML,
+              title:     t('.guidelines.slug'),
+              size:      nil,
+              maxlength: BiovisionParameter::SLUG_LIMIT
+          )
+        %>
+        <div class="guideline"><%= t('.guidelines.slug') %></div>
+      </dd>
+
+      <dt>
+        <%=
+          f.label(:value, t('activerecord.attributes.biovision_parameter.value'))
+        %>
+      </dt>
+      <dd>
+        <%=
+          f.text_field(
+              :value,
+              value:     '',
+              required:  true,
+              size:      nil,
+              maxlength: BiovisionParameter::VALUE_LIMIT
+          )
+        %>
+        <div class="guideline"><%= t('.guidelines.value') %></div>
+      </dd>
+
+      <dt>
+        <%=
+          f.label(:name, t('activerecord.attributes.biovision_parameter.name'))
+        %>
+      </dt>
+      <dd>
+        <%=
+          f.text_field(
+              :name,
+              value:     '',
+              size:      nil,
+              maxlength: BiovisionParameter::NAME_LIMIT
+          )
+        %>
+        <div class="guideline"><%= t('.guidelines.name') %></div>
+      </dd>
+
+      <dt>
+        <%=
+          f.label(:description, t('activerecord.attributes.biovision_parameter.description'))
+        %>
+      </dt>
+      <dd>
+        <%=
+          f.text_field(
+              :description,
+              value:     '',
+              size:      nil,
+              maxlength: BiovisionParameter::DESCRIPTION_LIMIT
+          )
+        %>
+        <div class="guideline"><%= t('.guidelines.description') %></div>
+      </dd>
+    </dl>
+    <div class="buttons">
+      <%= button_tag(t(:save), type: :submit, class: 'button-save') %>
+    </div>
+  <% end %>
+</section>

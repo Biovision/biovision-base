@@ -1,9 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
-<svg id="Layer_1" style="enable-background:new 0 0 612 792;" version="1.1" viewBox="0 0 24 24" width="24px" height="24px" xmlns="http://www.w3.org/2000/svg">
-  <style type="text/css">
-	.st0{fill:#E44061;}
-</style>
-  <g transform="matrix(0.046985, 0, 0, 0.046985, -2.34925, -6.624886)">
-    <polygon class="st0" points="382.2,396.4 560.8,217.8 484,141 305.4,319.6 126.8,141 50,217.8 228.6,396.4 50,575 126.8,651.8    305.4,473.2 484,651.8 560.8,575 382.2,396.4  "/>
+<svg version="1.1" viewBox="0 0 24 24" width="24px" height="24px" xmlns="http://www.w3.org/2000/svg">
+  <title>Delete</title>
+  <defs>
+    <style type="text/css">
+      line { stroke: #e44061; stroke-width: 3; stroke-linecap: round; }
+    </style>
+  </defs>
+  <g>
+    <line x1="3" y1="3" x2="21" y2="21"/>
+    <line x1="3" y1="21" x2="21" y2="3"/>
   </g>
 </svg>

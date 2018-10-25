@@ -18,6 +18,12 @@ $text-color-secondary: #777 !default;
     }
   }
 
+  .name {
+    input {
+      width: 100%;
+    }
+  }
+
   .value {
     align-items: center;
     display: flex;
@@ -28,7 +34,38 @@ $text-color-secondary: #777 !default;
     }
 
     button {
+      --shadow-color: rgba(0, 0, 0, .25);
+
+      background: no-repeat center / contain;
+      border: none;
+      border-radius: .2rem;
+      box-shadow: 0 0 .4rem var(--shadow-color);
+      cursor: pointer;
+      display: inline-block;
       flex: none;
+      height: 2.4rem;
+      margin: 0 var(--spacer-xxs);
+      transition: .25s;
+      width: 2.4rem;
+
+      &:active,
+      &:hover {
+        --shadow-color: rgba(0, 0, 0, .75);
+      }
+
+      &:disabled {
+        cursor: default;
+        filter: grayscale(1);
+      }
+    }
+
+    .apply {
+      background-color: rgba(97, 228, 64, .125);
+      background-image: image_url('biovision/base/icons/apply.svg');
+    }
+
+    .destroy {
+      background-image: image_url('biovision/base/icons/destroy.svg');
     }
   }
 
@@ -52,9 +89,11 @@ $text-color-secondary: #777 !default;
   }
 
   a {
+    --shadow-color: rgba(0, 0, 0, .25);
+
     background: no-repeat center top var(--spacer-s);
     border-radius: .4rem;
-    box-shadow: 0 0 .4rem rgba(0, 0, 0, .25);
+    box-shadow: 0 0 .4rem var(--shadow-color);
     display: inline-block;
     padding: calc(var(--spacer-m) + 16rem) 0 var(--spacer-s);
     text-align: center;
@@ -63,7 +102,7 @@ $text-color-secondary: #777 !default;
     &:active,
     &:focus,
     &:hover {
-      box-shadow: 0 0 .4rem rgba(0, 0, 0, .75);
+      --shadow-color: rgba(0, 0, 0, .75);
     }
   }
 

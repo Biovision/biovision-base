@@ -39,8 +39,8 @@ class CreateBiovisionComponents < ActiveRecord::Migration[5.2]
     collection = {
       feedback_receiver: ['Адрес обратной связи', 'info@example.com', 'На этот адрес приходят запросы обратной связи'],
       email:             ['E-mail', 'info@example.com', 'Адрес электронной почты для отображения в контактах'],
-      phone:             ['Телефон', '+7 (000) 000-00-00', 'Телефон для отображения в контактах'],
-      address:           ['Адрес', 'г. Москва, улица с Названием, 42', 'Адрес для отображения в контактах']
+      phone:             ['Телефон', '', 'Телефон для отображения в контактах'],
+      address:           ['Адрес', '', 'Адрес для отображения в контактах']
     }
     create_parameters(component, collection)
   end
