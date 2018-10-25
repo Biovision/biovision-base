@@ -6,6 +6,10 @@
 <article>
   <h1><%= t('.heading') %></h1>
 
+  <ul class="actions">
+    <li><%= back_icon(admin_path) %></li>
+  </ul>
+
   <ul>
     <% @collection.each do |slug| %>
       <li>

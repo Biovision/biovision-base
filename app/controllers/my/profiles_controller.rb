@@ -1,10 +1,13 @@
+# frozen_string_literal: true
+
+# Controller for registration and profile management
 class My::ProfilesController < ApplicationController
   include Authentication
 
-  before_action :redirect_authorized_user, only: [:new, :create]
-  before_action :restrict_anonymous_access, except: [:check, :new, :create]
+  before_action :redirect_authorized_user, only: %i[new create]
+  before_action :restrict_anonymous_access, except: %i[check new create]
 
-  layout 'profile', only: [:show, :edit]
+  layout 'profile', only: %i[show edit]
 
   # post /my/profile/check
   def check
@@ -47,7 +50,7 @@ class My::ProfilesController < ApplicationController
   protected
 
   def redirect_authorized_user
-    redirect_to my_path if current_user.is_a? User
+    redirect_to my_path if current_user.is_a?(User)
   end
 
   def create_user
@@ -77,7 +80,8 @@ class My::ProfilesController < ApplicationController
     sensitive  = sensitive_parameters
     editable   = User.profile_parameters + sensitive
     parameters = params.require(:user).permit(editable)
-    filter_parameters parameters.merge(profile_parameters), sensitive
+
+    filter_parameters(parameters.merge(profile_parameters), sensitive)
   end
 
   def sensitive_parameters
@@ -97,9 +101,14 @@ class My::ProfilesController < ApplicationController
   # @param [Hash] parameters
   # @param [Hash] sensitive
   def filter_parameters(parameters, sensitive)
-    sensitive.each { |parameter| parameters.except! parameter if parameter.blank? }
-    parameters[:email_confirmed] = false if parameters[:email] && parameters[:email] != current_user.email
-    parameters[:phone_confirmed] = false if parameters[:phone] && parameters[:phone] != current_user.phone
+    sensitive.each { |sp| parameters.except! sp if sp.blank? }
+    if parameters.key?(:email) && parameters[:email] != current_user.email
+      parameters[:email_confirmed] = false
+    end
+    if parameters.key?(:phone) && parameters[:phone] != current_user.phone
+      parameters[:phone_confirmed] = false
+    end
+
     parameters
   end
 
@@ -107,8 +116,6 @@ class My::ProfilesController < ApplicationController
     return_path = cookies['return_path'].to_s
     return_path = my_profile_path unless return_path[0] == '/'
     cookies.delete 'return_path', domain: :all
-
-    flash[:notice] = t('my.profiles.create.success')
 
     form_processed_ok(return_path)
   end

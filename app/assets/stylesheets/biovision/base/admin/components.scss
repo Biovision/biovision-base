@@ -37,3 +37,39 @@ $text-color-secondary: #777 !default;
     margin: var(--spacer-xxs) 0 0;
   }
 }
+
+.biovision-components {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+
+  li {
+    list-style: none;
+    margin: var(--spacer-xs);
+    padding: 0;
+  }
+
+  a {
+    background: no-repeat center top var(--spacer-s);
+    border-radius: .4rem;
+    box-shadow: 0 0 .4rem rgba(0, 0, 0, .25);
+    display: inline-block;
+    padding: calc(var(--spacer-m) + 16rem) 0 var(--spacer-s);
+    text-align: center;
+    width: calc(var(--spacer-s) + 16rem);
+
+    &:active,
+    &:focus,
+    &:hover {
+      box-shadow: 0 0 .4rem rgba(0, 0, 0, .75);
+    }
+  }
+
+  .settings-general {
+    a {
+      background-image: image_url('biovision/base/icons/settings.svg');
+    }
+  }
+}
