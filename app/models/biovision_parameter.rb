@@ -13,8 +13,8 @@ class BiovisionParameter < ApplicationRecord
   DESCRIPTION_LIMIT = 250
   NAME_LIMIT        = 250
   SLUG_LIMIT        = 250
-  SLUG_PATTERN      = /\A[a-z][-a-z0-9_]+[a-z]\z/i
-  SLUG_PATTERN_HTML = '^[a-zA-Z][-a-zA-Z0-9_]+[a-zA-Z]$'
+  SLUG_PATTERN      = /\A[a-z][-a-z0-9_]+[a-z0-9]\z/i
+  SLUG_PATTERN_HTML = '^[a-zA-Z][-a-zA-Z0-9_]+[a-zA-Z0-9]$'
   VALUE_LIMIT       = 65_535
 
   belongs_to :biovision_component

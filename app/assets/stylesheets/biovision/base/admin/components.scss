@@ -64,7 +64,8 @@ $text-color-secondary: #777 !default;
       background-image: image_url('biovision/base/icons/apply.svg');
     }
 
-    .destroy {
+    .delete {
+      background-color: rgba(228, 97, 64, .125);
       background-image: image_url('biovision/base/icons/destroy.svg');
     }
   }

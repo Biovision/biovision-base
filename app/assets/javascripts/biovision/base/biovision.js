@@ -796,6 +796,9 @@ Biovision.components.hidingPopups = {
 
 Biovision.components.componentEditor = {
     initialized: false,
+    /**
+     * @type {HTMLElement}
+     */
     list: undefined,
     url: undefined,
     elements: [],
@@ -854,6 +857,74 @@ Biovision.components.componentEditor = {
 
         button.disabled = true;
         request.send(JSON.stringify(data));
+    },
+    add: function (data) {
+        if (this.initialized) {
+            const li = document.createElement('li');
+            const name = document.createElement('div');
+            const value = document.createElement('div');
+            const input = document.createElement('input');
+
+            name.classList.add('name');
+            name.innerHTML = "<label>" + data["slug"] + "</label>\n<span>(" + data["name"] + ")</span>";
+
+            value.classList.add('value');
+            input.value = data["value"];
+            value.appendChild(input);
+
+            li.appendChild(name);
+            li.appendChild(value);
+
+            if (data["description"]) {
+                const desc = document.createElement('div');
+                desc.classList.add('description');
+                desc.innerHTML = data["description"];
+
+                li.appendChild(desc);
+            }
+
+            this.list.appendChild(li);
+        } else {
+            console.log('componentEditor is not initialized');
+        }
+    }
+};
+
+Biovision.components.newParameterForm = {
+    initialized: false,
+    element: undefined,
+    init: function () {
+        this.element = document.getElementById('new-biovision-parameter-form');
+        if (this.element) {
+            const component = this;
+
+            this.element.addEventListener('submit', component.handler);
+            this.initialized = true;
+        }
+    },
+    handler: function (event) {
+        event.preventDefault();
+
+        const form = event.target;
+        const url = form.getAttribute('action');
+        const data = {"key": {}};
+        form.querySelectorAll('input[data-field]').forEach(function (input) {
+            data["key"][input.getAttribute('data-field')] = input.value;
+        });
+
+        const request = Biovision.jsonAjaxRequest('put', url, function () {
+            Biovision.components.newParameterForm.clear();
+            Biovision.components.componentEditor.add(data["key"]);
+        });
+
+        request.send(JSON.stringify(data));
+    },
+    clear: function () {
+        const component = Biovision.components.newParameterForm;
+
+        component.element.querySelectorAll('input').forEach(function (input) {
+            input.value = '';
+        });
     }
 };
 

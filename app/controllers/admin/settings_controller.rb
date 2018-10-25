@@ -23,7 +23,7 @@ class Admin::SettingsController < AdminController
 
   # put /admin/settings/:slug/parameter
   def set_parameter
-    slug        = param_from_request(:key, :slug)
+    slug        = param_from_request(:key, :slug).downcase
     value       = param_from_request(:key, :value)
     name        = param_from_request(:key, :name)
     description = param_from_request(:key, :description)
