@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Common class for managing Biovision Components
 class ComponentManager
   attr_reader :entity, :slug, :name

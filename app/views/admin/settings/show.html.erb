@@ -1,11 +1,11 @@
-<% content_for :meta_title, t('.title') %>
+<% content_for :meta_title, t('.title', name: @handler.name) %>
 <% content_for :breadcrumbs do %>
   <%= link_to(t('admin.settings.index.nav_text'), admin_settings_path) %>
   <span><%= @handler.name %></span>
 <% end %>
 
 <article>
-  <h1><%= @handler.name %></h1>
+  <h1><%= t('.title', name: @handler.name) %></h1>
 
   <ul class="actions">
     <li><%= back_icon(admin_settings_path) %></li>

@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Authentication with form and OAuth
 class AuthenticationController < ApplicationController
   include Authentication
 

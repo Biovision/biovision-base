@@ -385,6 +385,10 @@ ru:
           new_password: "Новый пароль"
           update: "Обновить данные"
           flags: "Дополнительно"
+      closed:
+        title: "Регистрация закрыта"
+        heading: "Регистрация"
+        registration_is_closed: "Регистрация новых пользователей закрыта"
     tokens:
       nav_item:
         text: "Жетоны доступа (сессии)"

@@ -6,6 +6,7 @@ class My::ProfilesController < ApplicationController
 
   before_action :redirect_authorized_user, only: %i[new create]
   before_action :restrict_anonymous_access, except: %i[check new create]
+  before_action { @handler = ComponentManager.handler('registration') }
 
   layout 'profile', only: %i[show edit]
 
@@ -17,6 +18,8 @@ class My::ProfilesController < ApplicationController
   # get /my/profile/new
   def new
     @entity = User.new
+
+    render :closed unless @handler.open?
   end
 
   # post /my/profile
@@ -56,10 +59,7 @@ class My::ProfilesController < ApplicationController
   def create_user
     @entity = User.new(creation_parameters)
     if @entity.save
-      Metric.register(User::METRIC_REGISTRATION)
-      create_token_for_user(@entity)
-      cookies.delete('r', domain: :all)
-      redirect_after_creation
+      user_created
     else
       form_processed_with_error(:new)
     end
@@ -110,6 +110,19 @@ class My::ProfilesController < ApplicationController
     end
 
     parameters
+  end
+
+  def user_created
+    Metric.register(User::METRIC_REGISTRATION)
+    create_token_for_user(@entity)
+    cookies.delete('r', domain: :all)
+
+    if @handler.confirm_email?
+      code = CodeManager::Confirmation.code_for_user(@entity)
+      CodeSender.confirmation(code.id).deliver_later
+    end
+
+    redirect_after_creation
   end
 
   def redirect_after_creation

@@ -18,7 +18,7 @@ class User < ApplicationRecord
   SCREEN_NAME_PATTERN      = /\A[a-z0-9_]{1,30}\z/i
   SCREEN_NAME_PATTERN_HTML = '^[a-zA-Z0-9_]{1,30}$'
 
-  toggleable %i(allow_login bot email_confirmed phone_confirmed allow_mail)
+  toggleable %i(allow_login email_confirmed phone_confirmed allow_mail)
 
   has_secure_password
 

@@ -15,7 +15,7 @@ ru:
         nav_text: "Настройки"
         title: "Настройки компонентов"
       show:
-        title: "Настройки компонента"
+        title: "Настройки компонента «%{name}»"
       component:
         settings:
           heading: "Настройки"
