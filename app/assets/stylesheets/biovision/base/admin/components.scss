@@ -113,3 +113,29 @@ $text-color-secondary: #777 !default;
     }
   }
 }
+
+.biovision-components-list {
+  margin: 0;
+  padding: 0;
+
+  li {
+    list-style: none;
+    margin: var(--spacer-xs) 0;
+  }
+
+  a {
+    --image-size: calc(var(--font-size-normal) + var(--spacer-xs));
+
+    background: no-repeat center left / var(--image-size) var(--image-size);
+    display: inline-block;
+    padding: var(--spacer-xxs) 0 var(--spacer-xxs) calc(var(--image-size) + var(--spacer-xxs));
+  }
+
+  .contact {
+    background-image: image_url('biovision/base/icons/components/contact.svg');
+  }
+
+  .registration {
+    background-image: image_url('biovision/base/icons/components/registration.svg');
+  }
+}

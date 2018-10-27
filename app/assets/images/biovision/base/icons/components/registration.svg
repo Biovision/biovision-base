@@ -1,0 +1,17 @@
+<svg version="1.1" viewBox="0 0 24 24" width="24px" height="24px" xmlns="http://www.w3.org/2000/svg">
+  <title>Registration</title>
+  <defs>
+    <style type="text/css">
+      .a { stroke-width: 2; stroke: #3a3; stroke-linecap: round; }
+      .b { stroke-width: 1.5; stroke: #333; fill: #eee; }
+    </style>
+  </defs>
+  <g class="a">
+    <line x1="5" y1="2" x2="5" y2="8"/>
+    <line x1="2" y1="5" x2="8" y2="5"/>
+  </g>
+  <g class="b">
+    <ellipse cx="12.5" cy="10" rx="3.5" ry="4.5"/>
+    <path d="M3,22 Q12,11 22,22 z" stroke-linejoin="round"/>
+  </g>
+</svg>

@@ -1,0 +1,26 @@
+<svg version="1.1" viewBox="0 0 24 24" width="24px" height="24px" xmlns="http://www.w3.org/2000/svg">
+  <title>Contact</title>
+  <defs>
+    <style type="text/css">
+      * { stroke-width: 1; }
+      .a { stroke: #777; }
+      .b { stroke: #555; }
+      .c { fill: #3aa; }
+      line { stroke-linecap: round; }
+    </style>
+  </defs>
+  <g class="a">
+    <rect x="1" y="1" width="15" height="10" fill="#fff"/>
+    <polyline points="1,1 9,5 16,1" fill="none"/>
+  </g>
+  <g class="b">
+    <rect x="7" y="6" width="10" height="17" rx="2" fill="#eee"/>
+    <line x1="10" y1="8" x2="14" y2="8" />
+    <circle cx="12.25" cy="21" r=".5"/>
+    <rect x="8" y="9.5" width="8.125" height="10" rx="1" ry="1" fill="#555" stroke="none" />
+  </g>
+  <g class="c">
+    <path d="M20,24 l-3.5,-8 q4,-8 7,0 z"/>
+    <circle cx="20.125" cy="15.25" r="1.5" fill="#f7a"/>
+  </g>
+</svg>

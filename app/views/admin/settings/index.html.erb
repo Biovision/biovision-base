@@ -10,14 +10,15 @@
     <li><%= back_icon(admin_path) %></li>
   </ul>
 
-  <ul>
+  <ul class="biovision-components-list">
     <% @collection.each do |slug| %>
       <li>
+        <% name = t("biovision.components.#{slug}.name", default: slug) %>
         <%=
           link_to(
-              t("biovision.components.#{slug}.name", default: slug),
+              "#{slug}: #{name}",
               admin_component_path(slug: slug),
-              class: "biovision-component-#{slug}"
+              class: slug
           )
         %>
       </li>
