@@ -1,10 +1,21 @@
+# frozen_string_literal: true
+
+# Code for user
+#
+# Attributes:
+#   - agent_id [Agent], optional
+#   - body [String]
+#   - code_type_id [CodeType]
+#   - ip [Inet]
+#   - payload [String], optional
+#   - quantity [Integer]
+#   - user_id [User], optional
 class Code < ApplicationRecord
   include HasOwner
 
-  PER_PAGE       = 20
   BODY_LIMIT     = 50
   PAYLOAD_LIMIT  = 250
-  QUANTITY_RANGE = (0..32767)
+  QUANTITY_RANGE = (0..32_767)
 
   belongs_to :user, optional: true
   belongs_to :agent, optional: true
@@ -21,18 +32,19 @@ class Code < ApplicationRecord
 
   scope :recent, -> { order('id desc') }
   scope :active, -> { where('quantity > 0') }
+  scope :list_for_administration, -> { recent }
 
   # @param [Integer] page
   def self.page_for_administration(page = 1)
-    recent.page(page).per(PER_PAGE)
+    list_for_administration.page(page)
   end
 
   def self.entity_parameters
-    %i(body payload quantity)
+    %i[body payload quantity]
   end
 
   def self.creation_parameters
-    entity_parameters + %i(user_id code_type_id)
+    entity_parameters + %i[user_id code_type_id]
   end
 
   def activated?
@@ -40,13 +52,14 @@ class Code < ApplicationRecord
   end
 
   def active?
-    quantity > 0
+    quantity.positive?
   end
 
   private
 
   def generate_body
     return unless body.nil?
+
     number    = SecureRandom.random_number(0xffff_ffff_ffff_ffff)
     self.body = number.to_s(36).scan(/.{4}/).join('-').upcase
   end

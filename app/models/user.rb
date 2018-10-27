@@ -74,11 +74,11 @@ class User < ApplicationRecord
   end
 
   def self.profile_parameters
-    %i(image allow_mail birthday consent)
+    %i[image allow_mail birthday consent]
   end
 
   def self.sensitive_parameters
-    %i(email phone password password_confirmation)
+    %i[email phone password password_confirmation]
   end
 
   # Параметры при регистрации
@@ -88,9 +88,9 @@ class User < ApplicationRecord
 
   # Параметры для администрирования
   def self.entity_parameters
-    flags = %i(bot allow_login email_confirmed phone_confirmed foreign_slug)
+    flags = %i[bot allow_login email_confirmed phone_confirmed foreign_slug]
 
-    new_profile_parameters + flags + %i(screen_name notice balance)
+    new_profile_parameters + flags + %i[screen_name notice balance]
   end
 
   def self.ids_range

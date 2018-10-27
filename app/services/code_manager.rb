@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Manager for Codes
 class CodeManager
   attr_accessor :user, :code
 

@@ -57,9 +57,14 @@ class My::ProfilesController < ApplicationController
   end
 
   def create_user
-    @entity = User.new(creation_parameters)
-    if @entity.save
-      user_created
+    code    = Code.active.find_by(body: param_from_request(:code))
+    @entity = @handler.handle(creation_parameters, code)
+
+    if @entity.persisted?
+      create_token_for_user(@entity)
+      cookies.delete('r', domain: :all)
+
+      redirect_after_creation
     else
       form_processed_with_error(:new)
     end
@@ -110,19 +115,6 @@ class My::ProfilesController < ApplicationController
     end
 
     parameters
-  end
-
-  def user_created
-    Metric.register(User::METRIC_REGISTRATION)
-    create_token_for_user(@entity)
-    cookies.delete('r', domain: :all)
-
-    if @handler.confirm_email?
-      code = CodeManager::Confirmation.code_for_user(@entity)
-      CodeSender.confirmation(code.id).deliver_later
-    end
-
-    redirect_after_creation
   end
 
   def redirect_after_creation

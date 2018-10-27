@@ -76,13 +76,34 @@
             id:        "#{model_name}_email",
             size:      nil,
             maxlength: User::EMAIL_LIMIT,
-            required:  true,
+            required:  local_assigns[:component_handler] && component_handler.require_email?,
             data:      { check: :email }
         )
       %>
       <div class="check-result-error hidden" data-field="email"></div>
       <div class="guideline"><%= t('.guidelines.email') %></div>
     </dd>
+
+    <% if local_assigns[:component_handler] && component_handler.use_invites? %>
+      <dt>
+        <%= label_tag :code, t('.invitation_code') %>
+      </dt>
+      <dd>
+        <%=
+          text_field_tag(
+              :code,
+              param_from_request(:code),
+              required: component_handler.invite_only?,
+              size: nil,
+              maxlength: Code::BODY_LIMIT,
+              data: {
+                  check: :code
+              }
+          )
+        %>
+        <div class="check-result-error hidden" data-field="code"></div>
+      </dd>
+    <% end %>
   </dl>
 
   <ul class="flags">

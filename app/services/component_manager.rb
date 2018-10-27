@@ -29,6 +29,10 @@ class ComponentManager
     @entity.save!
   end
 
+  def settings
+    @entity.settings
+  end
+
   def parameters
     @entity.biovision_parameters.list_for_administration
   end

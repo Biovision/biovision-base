@@ -1,5 +1,12 @@
 class CreateCodes < ActiveRecord::Migration[5.1]
   def up
+    unless CodeType.table_exists?
+      create_table :code_types do |t|
+        t.string :slug, null: false
+        t.string :name, null: false
+      end
+    end
+
     unless Code.table_exists?
       create_table :codes do |t|
         t.timestamps
@@ -12,13 +19,28 @@ class CreateCodes < ActiveRecord::Migration[5.1]
         t.string :payload
       end
 
-      add_index :codes, [:body, :code_type_id, :quantity]
+      add_index :codes, %i[body code_type_id quantity]
     end
+
+    seed_items
   end
 
   def down
-    if Code.table_exists?
-      drop_table :codes
+    drop_table(:codes) if Code.table_exists?
+    drop_table(:code_types) if CodeType.table_exists?
+  end
+
+  private
+
+  def seed_items
+    items = {
+      confirmation: 'Подтверждение почты',
+      recovery: 'Сброс пароля',
+      invitation: 'Приглашение'
+    }
+
+    items.each do |slug, name|
+      CodeType.create(slug: slug, name: name)
     end
   end
 end

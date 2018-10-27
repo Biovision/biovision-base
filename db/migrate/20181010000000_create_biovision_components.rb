@@ -48,9 +48,12 @@ class CreateBiovisionComponents < ActiveRecord::Migration[5.2]
   def create_registration_component
     slug     = 'registration'
     settings = {
-      open: true,
-      invite_only: false,
-      confirm_email: false
+      open:          true,
+      invite_only:   false,
+      confirm_email: false,
+      use_invites:   false,
+      require_email: false,
+      invite_count:  5
     }
 
     BiovisionComponent.create!(slug: slug, settings: settings)

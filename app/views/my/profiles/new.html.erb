@@ -3,5 +3,13 @@
 <article class="my-profile-new">
   <h1><%= t('.heading') %></h1>
 
-  <%= render partial: 'my/profiles/new/form', locals: { entity: @entity } %>
+  <%=
+    render(
+        partial: 'my/profiles/new/form',
+        locals:  {
+            entity:            @entity,
+            component_handler: @handler
+        }
+    )
+  %>
 </article>
