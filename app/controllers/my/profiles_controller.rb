@@ -6,7 +6,7 @@ class My::ProfilesController < ApplicationController
 
   before_action :redirect_authorized_user, only: %i[new create]
   before_action :restrict_anonymous_access, except: %i[check new create]
-  before_action { @handler = ComponentManager.handler('registration') }
+  before_action :set_handler
 
   layout 'profile', only: %i[show edit]
 
@@ -123,5 +123,9 @@ class My::ProfilesController < ApplicationController
     cookies.delete 'return_path', domain: :all
 
     form_processed_ok(return_path)
+  end
+
+  def set_handler
+    @handler = Biovision::Components::BaseComponent.handler('registration')
   end
 end

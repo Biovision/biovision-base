@@ -47,6 +47,6 @@ class Admin::SettingsController < AdminController
   private
 
   def set_handler
-    @handler = ComponentManager.handler(params[:slug])
+    @handler = Biovision::Components::BaseComponent.handler(params[:slug])
   end
 end
