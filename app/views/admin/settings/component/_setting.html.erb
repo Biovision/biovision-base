@@ -8,6 +8,7 @@
     <%= label_tag(element_id, key_name) %>
     <%= number_field_tag(element_name, value, id: element_id) %>
   <% elsif [true, false].include?(value) %>
+    <%= hidden_field_tag(element_name, '0', id: nil) %>
     <%= check_box_tag(element_name, '1', value, id: element_id) %>
     <%= label_tag(element_id, key_name) %>
   <% else %>
