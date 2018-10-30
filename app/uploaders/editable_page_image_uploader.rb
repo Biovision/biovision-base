@@ -1,10 +1,8 @@
+# frozen_string_literal: true
+
+# Image uploader for editable pages
 class EditablePageImageUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
-  include CarrierWave::BombShelter
-
-  def max_pixel_dimensions
-    [4000, 4000]
-  end
 
   storage :file
 
@@ -37,6 +35,6 @@ class EditablePageImageUploader < CarrierWave::Uploader::Base
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
   def extension_whitelist
-    %w(jpg jpeg png)
+    %w[jpg jpeg png]
   end
 end

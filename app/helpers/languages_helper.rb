@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Helper for language operations
 module LanguagesHelper
   # @param [Language] entity
   def language_name(entity)

@@ -1,5 +1,15 @@
+# frozen_string_literal: true
+
+# Managing editable pages
 class EditablePagesController < AdminController
-  before_action :set_entity, only: [:edit, :update, :destroy]
+  before_action :set_entity, only: %i[edit update destroy]
+
+  # post /editable_pages/check
+  def check
+    @entity = EditablePage.instance_for_check(params[:entity_id], entity_parameters)
+
+    render 'shared/forms/check'
+  end
 
   # get /editable_pages/new
   def new

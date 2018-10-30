@@ -39,25 +39,29 @@
       <dd><%= @entity.url %></dd>
     <% end %>
 
-    <dt><%= t(:created_at) %></dt>
-    <dd><%= time_tag(@entity.created_at) %></dd>
+    <% unless @entity.nav_group.blank? %>
+      <dt><%= t('activerecord.attributes.editable_page.nav_group') %></dt>
+      <dd><%= @entity.nav_group %></dd>
+    <% end %>
 
-    <dt><%= t(:updated_at) %></dt>
-    <dd><%= time_tag(@entity.updated_at) %></dd>
+    <dt><%= t('activerecord.attributes.editable_page.body') %></dt>
+    <dd>
+      <div class="text">
+        <%= raw(@entity.body) %>
+      </div>
+    </dd>
 
-    <% unless @entity.title.blank? %>
-      <dt><%= t('activerecord.attributes.editable_page.title') %></dt>
-      <dd><%= @entity.title %></dd>
-    <% end %>
-    <% unless @entity.keywords.blank? %>
-      <dt><%= t('activerecord.attributes.editable_page.keywords') %></dt>
-      <dd><%= @entity.keywords %></dd>
-    <% end %>
-    <% unless @entity.description.blank? %>
-      <dt><%= t('activerecord.attributes.editable_page.description') %></dt>
-      <dd><%= @entity.description %></dd>
-    <% end %>
+    <%= render partial: 'shared/entity/meta_texts', locals: { entity: @entity } %>
+    <%= render partial: 'shared/entity/timestamps', locals: { entity: @entity } %>
   </dl>
 
-  <section><%= raw(@entity.body) %></section>
+  <%=
+    render(
+        partial: 'shared/admin/toggleable',
+        locals:  {
+            entity: @entity,
+            url:    toggle_admin_editable_page_path(id: @entity.id)
+        }
+    )
+  %>
 </article>

@@ -1,12 +1,20 @@
 <% model_name = entity.class.to_s.underscore %>
-<%= form_with(model: entity, html: { id: "#{model_name}-form" }) do |f| %>
+<%=
+  form_with(
+      model: entity,
+      html:  {
+          id:   "#{model_name}-form",
+          data: { check_url: check_editable_pages_path }
+      }
+  ) do |f|
+%>
   <%= render partial: 'shared/list_of_errors', locals: { entity: entity } %>
 
   <dl>
     <%= render partial: 'shared/forms/priority', locals: { f: f } %>
 
     <dt><%= f.label :language_id %></dt>
-    <dd><%= f.select :language_id, languages_for_select %></dd>
+    <dd><%= f.select :language_id, languages_for_select(false) %></dd>
 
     <dt><%= f.label :slug %></dt>
     <dd>
@@ -16,9 +24,13 @@
             id:        "#{model_name}_slug",
             size:      nil,
             maxlength: EditablePage::SLUG_LIMIT,
-            required:  true
+            required:  true,
+            data: {
+                check: :slug
+            }
         )
       %>
+      <div class="check-result-error hidden" data-field="slug"></div>
       <div class="guideline"><%= t('.guidelines.slug') %></div>
     </dd>
 
@@ -30,19 +42,41 @@
             id:          "#{model_name}_url",
             size:        nil,
             maxlength:   EditablePage::META_LIMIT,
-            placeholder: t('.placeholders.url')
+            placeholder: t('.placeholders.url'),
+            data: {
+                check: :url
+            }
         )
       %>
+      <div class="check-result-error hidden" data-field="url"></div>
       <div class="guideline"><%= t('.guidelines.url') %></div>
+    </dd>
+
+    <dt><%= f.label :nav_group %></dt>
+    <dd>
+      <%=
+        f.text_field(
+            :nav_group,
+            id:          "#{model_name}_nav_group",
+            size:        nil,
+            maxlength:   EditablePage::META_LIMIT,
+            placeholder: t('.placeholders.nav_group'),
+            data: {
+                check: :nav_group
+            }
+        )
+      %>
+      <div class="check-result-error hidden" data-field="nav_group"></div>
+      <div class="guideline"><%= t('.guidelines.nav_group') %></div>
     </dd>
 
     <dt><%= f.label :image %></dt>
     <dd>
       <figure class="preview" role="group" id="<%= model_name %>-image">
         <% if entity.image.blank? %>
-          <%= f.label :image, image_tag('biovision/base/placeholders/image.svg') %>
+          <%= f.label :image, image_tag('biovision/base/placeholders/16x9.svg', alt: '') %>
         <% else %>
-          <%= f.label :image, image_tag(entity.image.medium.url) %>
+          <%= f.label :image, image_tag(entity.image.medium.url, alt: '') %>
         <% end %>
         <figcaption>
           <%=
@@ -65,9 +99,13 @@
             :image_alt_text,
             id:        "#{model_name}_image_alt_text",
             size:      nil,
-            maxlength: EditablePage::META_LIMIT
+            maxlength: EditablePage::META_LIMIT,
+            data: {
+                check: :image_alt_text
+            }
         )
       %>
+      <div class="check-result-error hidden" data-field="image_alt_text"></div>
       <div class="guideline"><%= t('.guidelines.image_alt_text') %></div>
     </dd>
 
@@ -79,49 +117,14 @@
             id:        "#{model_name}_name",
             size:      nil,
             maxlength: EditablePage::NAME_LIMIT,
-            required:  true
+            required:  true,
+            data: {
+                check: :name
+            }
         )
       %>
+      <div class="check-result-error hidden" data-field="name"></div>
       <div class="guideline"><%= t('.guidelines.name') %></div>
-    </dd>
-
-    <dt><%= f.label :title %></dt>
-    <dd>
-      <%=
-        f.text_field(
-            :title,
-            id:        "#{model_name}_title",
-            size:      nil,
-            maxlength: EditablePage::META_LIMIT
-        )
-      %>
-      <div class="guideline"><%= t('.guidelines.title') %></div>
-    </dd>
-
-    <dt><%= f.label :keywords %></dt>
-    <dd>
-      <%=
-        f.text_field(
-            :keywords,
-            id:        "#{model_name}_keywords",
-            size:      nil,
-            maxlength: EditablePage::META_LIMIT
-        )
-      %>
-      <div class="guideline"><%= t('.guidelines.keywords') %></div>
-    </dd>
-
-    <dt><%= f.label :description %></dt>
-    <dd>
-      <%=
-        f.text_field(
-            :description,
-            id:        "#{model_name}_description",
-            size:      nil,
-            maxlength: EditablePage::META_LIMIT
-        )
-      %>
-      <div class="guideline"><%= t('.guidelines.description') %></div>
     </dd>
 
     <dt><%= f.label :body %></dt>
@@ -133,16 +136,24 @@
             cols:     80,
             rows:     25,
             required: true,
-            data:     { wysiwyg: 1 }
+            data:     {
+                wysiwyg: 1,
+                check: :body
+            }
         )
       %>
+      <div class="check-result-error hidden" data-field="body"></div>
       <div class="guideline"><%= t('.guidelines.body') %></div>
     </dd>
+
+    <%= render partial: 'shared/forms/meta_texts', locals: { f: f } %>
+    <%= render partial: 'shared/forms/entity_flags', locals: { f: f } %>
   </dl>
 
   <%= render 'shared/forms/state_container' %>
 
   <div class="buttons">
+    <%= hidden_field_tag :entity_id, entity.id %>
     <%= f.button t(:save), type: :submit, class: 'button-save' %>
   </div>
 <% end %>

@@ -1,30 +1,29 @@
 class CreateEditablePages < ActiveRecord::Migration[5.1]
   def up
-    unless EditablePage.table_exists?
-      create_table :editable_pages do |t|
-        t.timestamps
-        t.references :language, foreign_key: { on_update: :cascade, on_delete: :cascade }
-        t.integer :priority, limit: 2, default: 1, null: false
-        t.string :slug, null: false
-        t.string :name, null: false
-        t.string :nav_group
-        t.string :url
-        t.string :image
-        t.string :image_alt_text
-        t.string :title, default: '', null: false
-        t.string :keywords, default: '', null: false
-        t.string :description, default: '', null: false
-        t.text :body, default: '', null: false
-      end
+    return if EditablePage.table_exists?
 
-      create_pages
+    create_table :editable_pages do |t|
+      t.timestamps
+      t.references :language, foreign_key: { on_update: :cascade, on_delete: :cascade }
+      t.boolean :visible, default: true, null: false
+      t.integer :priority, limit: 2, default: 1, null: false
+      t.string :slug, null: false
+      t.string :name, null: false
+      t.string :nav_group
+      t.string :url
+      t.string :image
+      t.string :image_alt_text
+      t.string :meta_title, default: '', null: false
+      t.string :meta_keywords, default: '', null: false
+      t.string :meta_description, default: '', null: false
+      t.text :body, default: '', null: false
     end
+
+    create_pages
   end
 
   def down
-    if EditablePage.table_exists?
-      drop_table :editable_pages
-    end
+    drop_table :editable_pages if EditablePage.table_exists?
   end
 
   def create_pages

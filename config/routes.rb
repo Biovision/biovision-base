@@ -77,6 +77,7 @@ Rails.application.routes.draw do
       resources :editable_pages, only: %i[index show] do
         member do
           post 'priority', defaults: { format: :json }
+          post 'toggle', defaults: { format: :json }
         end
       end
       resources :editable_blocks, only: %i[index show] do
@@ -180,7 +181,11 @@ Rails.application.routes.draw do
 
     resources :agents, :browsers, except: %i[index show update destroy]
 
-    resources :editable_pages, except: %i[index show update destroy]
+    resources :editable_pages, except: %i[index show update destroy] do
+      collection do
+        post 'check', defaults: { format: :json }
+      end
+    end
     resources :editable_blocks, except: %i[index show update destroy] do
       collection do
         post 'check', defaults: { format: :json }

@@ -1,5 +1,9 @@
+# frozen_string_literal: true
+
+# Administrative part of editable pages management
 class Admin::EditablePagesController < AdminController
   include EntityPriority
+  include ToggleableEntity
 
   before_action :set_entity, except: [:index]
 
