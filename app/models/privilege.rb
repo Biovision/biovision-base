@@ -5,12 +5,12 @@ class Privilege < ApplicationRecord
   DESCRIPTION_LIMIT = 350
   NAME_LIMIT        = 250
   SLUG_LIMIT        = 250
-  PRIORITY_RANGE    = (1..32767)
+  PRIORITY_RANGE    = (1..32_767)
 
   toggleable :regional, :administrative
 
   belongs_to :parent, class_name: Privilege.to_s, optional: true
-  has_many :child_categories, class_name: Privilege.to_s, foreign_key: :parent_id
+  has_many :child_privileges, class_name: Privilege.to_s, foreign_key: :parent_id
   has_many :user_privileges, dependent: :destroy
   has_many :users, through: :user_privileges
   has_many :privilege_group_privileges, dependent: :destroy
@@ -23,9 +23,9 @@ class Privilege < ApplicationRecord
   before_validation { self.regional = true if parent&.regional? }
   before_validation :normalize_priority
 
-  before_save { self.children_cache.uniq! }
+  before_save { children_cache.uniq! }
   after_create :cache_parents!
-  after_save { parent.cache_children! unless parent.nil? }
+  after_save { parent&.cache_children! }
 
   validates_presence_of :name, :slug, :priority
   validates :name, uniqueness: { case_sensitive: false, scope: [:parent_id] }
@@ -90,14 +90,14 @@ class Privilege < ApplicationRecord
   end
 
   def cache_children!
-    child_categories.order('id asc').each do |child|
+    child_privileges.order('id asc').each do |child|
       self.children_cache += [child.id] + child.children_cache
     end
     save!
   end
 
   def can_be_deleted?
-    deletable? && child_categories.count < 1
+    deletable? && child_privileges.count < 1
   end
 
   # @param [User] user
@@ -105,6 +105,7 @@ class Privilege < ApplicationRecord
   def has_user?(user, region_ids = [])
     return false if user.nil?
     return true if user.super_user?
+
     result = user_in_non_regional_branch?(user)
 
     if regional? && region_ids.any? && !result

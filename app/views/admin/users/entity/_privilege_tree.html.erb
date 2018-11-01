@@ -7,7 +7,15 @@
               </li>
           <% else %>
               <li data-id="<%= privilege.id %>">
-                <%= render partial: 'admin/users/entity/privilege', locals: { privilege: privilege, user: user } %>
+                <%=
+                  render(
+                      partial: 'admin/users/entity/privilege',
+                      locals: {
+                          privilege: privilege,
+                          user: user
+                      }
+                  )
+                %>
               </li>
           <% end %>
       <% end %>

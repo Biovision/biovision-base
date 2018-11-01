@@ -15,7 +15,15 @@
   <section>
     <h2><%= t('.heading') %></h2>
 
-    <%= render partial: 'admin/users/entity/privilege_tree', locals: { privileges: Privilege.for_tree, user: @entity } %>
+    <%=
+      render(
+          partial: 'admin/users/entity/privilege_tree',
+          locals: {
+              privileges: Privilege.for_tree,
+              user: @entity
+          }
+      )
+    %>
   </section>
 </article>
 
