@@ -1,5 +1,7 @@
 <% unless entity.nil? %>
-  <% style = 'background-image: url("' + entity.image.large.url + '")' %>
+  <%
+    style = entity.image.blank? ? '' : %Q{background-image: url("#{entity.image.large.url}")}
+  %>
   <section
     id="editable-block-<%= entity.slug %>"
     style="<%= entity.image.blank? ? '' : style %>"
@@ -12,6 +14,7 @@
     <% if entity.editable_by?(current_user) %>
       <ul class="actions">
         <li><%= gear_icon(admin_editable_block_path(id: entity.id)) %></li>
+        <li><%= edit_icon(edit_editable_block_path(id: entity.id)) %></li>
       </ul>
     <% end %>
 
