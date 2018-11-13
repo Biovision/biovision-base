@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
 module Biovision
   module Base
+    # Useful methods and helpers for ApplicationController
     module BaseMethods
       extend ActiveSupport::Concern
 
@@ -33,7 +36,7 @@ module Biovision
       #
       # @return [User|nil]
       def current_user
-        @current_user ||= Token.user_by_token cookies['token'], true
+        @current_user ||= Token.user_by_token(cookies['token'], true)
       end
 
       # Get current language from locale
@@ -124,7 +127,10 @@ module Biovision
 
       # @return [Hash]
       def tracking_for_entity
-        { agent: agent, ip: request.env['HTTP_X_REAL_IP'] || request.remote_ip }
+        {
+          agent: agent,
+          ip: request.env['HTTP_X_REAL_IP'] || request.remote_ip
+        }
       end
 
       # @param [String] next_page

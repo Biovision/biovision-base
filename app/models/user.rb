@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# User
 class User < ApplicationRecord
   include Toggleable
 
@@ -6,19 +9,18 @@ class User < ApplicationRecord
   METRIC_AUTHENTICATION_FAILURE  = 'users.authentication.failure.hit'
   METRIC_AUTHENTICATION_EXTERNAL = 'users.authentication.external.hit'
 
-  PER_PAGE = 20
-
-  SLUG_LIMIT   = 250
   EMAIL_LIMIT  = 250
   NOTICE_LIMIT = 255
   PHONE_LIMIT  = 50
+  SLUG_LIMIT   = 250
 
-  EMAIL_PATTERN            = /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z0-9][-a-z0-9]+)\z/i
+  EMAIL_PATTERN = /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z0-9][-a-z0-9]+)\z/i.freeze
+
   SCREEN_NAME_LIMIT        = 30
-  SCREEN_NAME_PATTERN      = /\A[a-z0-9_]{1,30}\z/i
+  SCREEN_NAME_PATTERN      = /\A[a-z0-9_]{1,30}\z/i.freeze
   SCREEN_NAME_PATTERN_HTML = '^[a-zA-Z0-9_]{1,30}$'
 
-  toggleable %i(allow_login email_confirmed phone_confirmed allow_mail)
+  toggleable %i[allow_login email_confirmed phone_confirmed allow_mail]
 
   has_secure_password
 
@@ -36,7 +38,7 @@ class User < ApplicationRecord
   has_many :login_attempts, dependent: :delete_all
   has_many :user_languages, dependent: :delete_all
 
-  before_save :normalize_slug
+  before_save { self.slug = (native_slug? ? screen_name : slug).downcase }
   before_save :prepare_search_string
   before_save { self.referral_link = SecureRandom.alphanumeric(12) if referral_link.blank? }
 
@@ -55,12 +57,12 @@ class User < ApplicationRecord
   validates_length_of :notice, maximum: NOTICE_LIMIT
 
   scope :with_privilege, ->(privilege) { joins(:user_privileges).where(user_privileges: { privilege_id: privilege.branch_ids }) }
-  scope :with_privilege_ids, -> (privilege_ids) { joins(:user_privileges).where(user_privileges: { privilege_id: privilege_ids }) }
+  scope :with_privilege_ids, ->(privilege_ids) { joins(:user_privileges).where(user_privileges: { privilege_id: privilege_ids }) }
   scope :ordered_by_screen_name, -> { order('screen_name asc') }
   scope :bots, ->(flag) { where(bot: flag.to_i > 0) unless flag.blank? }
-  scope :email_like, ->(val) { where('email ilike ?', "%#{val}%") unless val.blank? }
-  scope :with_email, ->(email) { where('lower(email) = lower(?)', email) }
-  scope :screen_name_like, ->(val) { where('screen_name ilike ?', "%#{val}%") unless val.blank? }
+  scope :email_like, ->(v) { where('email ilike ?', "%#{v}%") unless v.blank? }
+  scope :with_email, ->(v) { where('lower(email) = lower(?)', v) }
+  scope :screen_name_like, ->(v) { where('screen_name ilike ?', "%#{v}%") unless v.blank? }
   scope :search, ->(q) { where('search_string like ?', "%#{q.downcase}%") unless q.blank? }
   scope :filtered, ->(f) { email_like(f[:email]).screen_name_like(f[:screen_name]) }
   scope :list_for_administration, -> { order('id desc') }
@@ -70,7 +72,7 @@ class User < ApplicationRecord
   # @param [Integer] page
   # @param [String] search_query
   def self.page_for_administration(page, search_query = '')
-    list_for_administration.search(search_query).page(page).per(PER_PAGE)
+    list_for_administration.search(search_query).page(page)
   end
 
   def self.profile_parameters
@@ -83,7 +85,7 @@ class User < ApplicationRecord
 
   # Параметры при регистрации
   def self.new_profile_parameters
-    profile_parameters + sensitive_parameters + %i(screen_name)
+    profile_parameters + sensitive_parameters + %i[screen_name]
   end
 
   # Параметры для администрирования
@@ -130,10 +132,6 @@ class User < ApplicationRecord
   end
 
   private
-
-  def normalize_slug
-    self.slug = (native_slug? ? screen_name : slug).downcase
-  end
 
   def prepare_search_string
     string = "#{slug} #{email} #{UserProfileHandler.search_string(self)}"

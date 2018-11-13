@@ -4,8 +4,8 @@
 class AuthenticationController < ApplicationController
   include Authentication
 
-  before_action :redirect_authenticated_user, except: [:new, :destroy]
-  before_action :set_foreign_site, only: [:auth_callback]
+  before_action :redirect_authenticated_user, except: %i[new destroy]
+  before_action :set_foreign_site, only: :auth_callback
 
   # get /login
   def new
@@ -13,7 +13,7 @@ class AuthenticationController < ApplicationController
 
   # post /login
   def create
-    @user    = User.find_by(slug: param_from_request(:login).downcase)
+    @user    = find_user
     @bouncer = UserBouncer.new(@user, tracking_for_entity)
     bounce_or_allow
   end
@@ -21,6 +21,8 @@ class AuthenticationController < ApplicationController
   # delete /logout
   def destroy
     deactivate_token if current_user
+
+    cleanup_after_destroy
     redirect_to root_path
   end
 
@@ -37,9 +39,8 @@ class AuthenticationController < ApplicationController
 
   def set_foreign_site
     @foreign_site = ForeignSite.with_slug(params[:provider]).first
-    if @foreign_site.nil?
-      handle_http_503('Cannot set foreign site')
-    end
+
+    handle_http_503('Cannot set foreign site') if @foreign_site.nil?
   end
 
   def bounce_or_allow
@@ -69,7 +70,25 @@ class AuthenticationController < ApplicationController
 
     respond_to do |format|
       format.json
+      format.js { render(js: "document.location.href = '#{@return_path}'") }
       format.html { redirect_to(@return_path) }
     end
+  end
+
+  def find_user
+    login = param_from_request(:login).downcase
+    user  = User.find_by(slug: login)
+
+    # Try to authenticate by email, if login does not match anything
+    if user.nil? && login.index('@').to_i.positive?
+      user = User.with_email(login).first
+    end
+
+    user
+  end
+
+  # Clean obsolete cookies, session parameters, etc.
+  def cleanup_after_destroy
+    # this method can be redefined in decorators
   end
 end
