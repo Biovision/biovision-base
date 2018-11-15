@@ -1,25 +1,19 @@
 <% if privileges.any? %>
-    <ul class="list-of-entities privileges">
-      <% privileges.each do |privilege| %>
-          <% if privilege.deleted? %>
-              <li class="deleted" data-id="<%= privilege.id %>">
-                <%= t(:deleted_entity) %>, id: <%= privilege.id %> [<%= privilege.name %>]
-              </li>
-          <% else %>
-              <li data-id="<%= privilege.id %>">
-                <%=
-                  render(
-                      partial: 'admin/users/entity/privilege',
-                      locals: {
-                          privilege: privilege,
-                          user: user
-                      }
-                  )
-                %>
-              </li>
-          <% end %>
-      <% end %>
-    </ul>
+  <ul class="list-of-entities privileges">
+    <% privileges.each do |privilege| %>
+      <li data-id="<%= privilege.id %>">
+        <%=
+          render(
+              partial: 'admin/users/entity/privilege',
+              locals:  {
+                  privilege: privilege,
+                  user:      user
+              }
+          )
+        %>
+      </li>
+    <% end %>
+  </ul>
 <% else %>
-    <%= render 'shared/nothing_found' %>
+  <%= render 'shared/nothing_found' %>
 <% end %>
