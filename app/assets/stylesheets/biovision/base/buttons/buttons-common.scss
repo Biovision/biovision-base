@@ -58,6 +58,18 @@ $button-destroy-text-b: $button-destroy-text-a !default;
     background: $bg-b;
     color: $text-b;
   }
+
+  &.inverted {
+    background: $bg-b;
+    color: $text-b;
+
+    &:active,
+    &:focus,
+    &:hover {
+      background: $bg-a;
+      color: $text-a;
+    }
+  }
 }
 
 @mixin border-button($border-a, $border-b) {
@@ -67,6 +79,16 @@ $button-destroy-text-b: $button-destroy-text-a !default;
   &:focus,
   &:hover {
     border-color: $border-b;
+  }
+
+  &.inverted {
+    border-color: $border-b;
+
+    &:active,
+    &:focus,
+    &:hover {
+      border-color: $border-a;
+    }
   }
 }
 
