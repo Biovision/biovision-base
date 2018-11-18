@@ -294,7 +294,7 @@ bundle binstub puma
 ```
 
 Также имеет смысл запустить `EDITOR=vim rails credentials:edit`, чтобы создать
-зашированный файл с ключом шифрования сессии.
+зашированный файл с ключом шифрования сессии. (чтобы выйти из `vim` с сохранением надо набрать `:wq`)
 
 Не забыть скопировать `.env` и `config/master.key` на сервер:
 `scp .env biovision:/var/www/example.com/shared`, 
