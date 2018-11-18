@@ -297,6 +297,7 @@ bundle binstub puma
 зашированный файл с ключом шифрования сессии. (чтобы выйти из `vim` с сохранением надо набрать `:wq`)
 
 Не забыть скопировать `.env` и `config/master.key` на сервер:
+
 `scp .env biovision:/var/www/example.com/shared`, 
 `scp config/master.key biovision:/var/www/example.com/shared/config`,
 
