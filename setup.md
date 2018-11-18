@@ -311,8 +311,9 @@ set :shared_dirs, fetch(:shared_dirs, []).push('public/uploads', 'tmp', 'log')
 set :shared_files, fetch(:shared_files, []).push('config/master.key', '.env')
 ```
 
-На серверной стороне нужно создать папку для пумы: 
-`mkdir -p /var/www/example.com/shared/tmp/puma`
+На серверной стороне нужно создать папку для пумы и файла с ключом шифрования: 
+`mkdir -p /var/www/example.com/shared/tmp/puma`,
+`mkdir -p /var/www/example.com/shared/config`.
 
 После этого локально запустить `mina setup`. Для нормальной работы нужно 
 не забыть скопировать на сервер `.env` и `config/master.key`.
