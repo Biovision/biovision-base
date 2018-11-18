@@ -54,7 +54,7 @@ group :development do
 end
 ```
 
-Заменить `sass-rails` на `sassc-rails` без версии
+Заменить `sass-rails` на `sassc-rails` без версии (на момент написания доки на уровне 13 строки)
 
 Добавления в `app/assets/application.js`
 ----------------------------------------
