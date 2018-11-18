@@ -296,11 +296,6 @@ bundle binstub puma
 Также имеет смысл запустить `EDITOR=vim rails credentials:edit`, чтобы создать
 зашированный файл с ключом шифрования сессии. (чтобы выйти из `vim` с сохранением надо набрать `:wq`)
 
-Не забыть скопировать `.env` и `config/master.key` на сервер:
-
-`scp .env biovision:/var/www/example.com/shared`, 
-`scp config/master.key biovision:/var/www/example.com/shared/config`,
-
 Настройка отгрузки через `mina`
 -------------------------------
 
@@ -321,6 +316,9 @@ set :shared_files, fetch(:shared_files, []).push('config/master.key', '.env')
 
 После этого локально запустить `mina setup`. Для нормальной работы нужно 
 не забыть скопировать на сервер `.env` и `config/master.key`.
+
+`scp .env biovision:/var/www/example.com/shared`, 
+`scp config/master.key biovision:/var/www/example.com/shared/config`,
 
 Дополнительно на серверной стороне
 ----------------------------------
