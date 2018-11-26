@@ -9,8 +9,8 @@ class CodeType < ApplicationRecord
   include RequiredUniqueName
   include RequiredUniqueSlug
 
-  SLUG_LIMIT = 20
   NAME_LIMIT = 100
+  SLUG_LIMIT = 20
 
   validates_length_of :name, maximum: NAME_LIMIT
   validates_length_of :slug, maximum: SLUG_LIMIT

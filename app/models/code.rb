@@ -6,16 +6,18 @@
 #   - agent_id [Agent], optional
 #   - body [String]
 #   - code_type_id [CodeType]
+#   - created_at [DateTime]
 #   - ip [Inet]
 #   - payload [String], optional
 #   - quantity [Integer]
+#   - updated_at [DateTime]
 #   - user_id [User], optional
 class Code < ApplicationRecord
   include HasOwner
 
   BODY_LIMIT     = 50
-  PAYLOAD_LIMIT  = 250
-  QUANTITY_RANGE = (0..32_767)
+  PAYLOAD_LIMIT  = 255
+  QUANTITY_RANGE = (0..32_767).freeze
 
   belongs_to :user, optional: true
   belongs_to :agent, optional: true

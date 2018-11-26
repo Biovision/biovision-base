@@ -9,10 +9,9 @@ class CodeManager::Invitation < CodeManager
 
   # @param [User] user
   def self.code_for_user(user)
-    code = code_type.codes.active.owned_by(user).first
-    if code.nil?
-      code = code_type.codes.create(user: user)
-    end
+    code = code_type.codes.active.find_by(user: user)
+    code = code_type.codes.create(user: user) if code.nil?
+
     code
   end
 

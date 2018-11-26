@@ -1,14 +1,17 @@
+# frozen_string_literal: true
+
+# Tables for code types and codes
 class CreateCodes < ActiveRecord::Migration[5.1]
   def up
     unless CodeType.table_exists?
-      create_table :code_types do |t|
+      create_table :code_types, comment: 'Types of codes' do |t|
         t.string :slug, null: false
         t.string :name, null: false
       end
     end
 
     unless Code.table_exists?
-      create_table :codes do |t|
+      create_table :codes, comment: 'Codes for users' do |t|
         t.timestamps
         t.references :code_type, null: false, foreign_key: { on_update: :cascade, on_delete: :cascade }
         t.references :user, foreign_key: { on_update: :cascade, on_delete: :cascade }
