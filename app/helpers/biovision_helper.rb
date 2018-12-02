@@ -89,4 +89,48 @@ module BiovisionHelper
   def lock_icons(entity, path)
     render partial: 'shared/actions/locks', locals: { path: path, entity: entity }
   end
+
+
+  # @param [SimpleImageUploader] uploader
+  # @param [String] alt_text
+  def simple_image_preview(uploader, alt_text = '')
+    return '' if uploader.blank?
+
+    image_tag(uploader.preview.url, alt: alt_text)
+  end
+
+  # @param [SimpleImageUploader] uploader
+  # @param [String] alt_text
+  def simple_image_small(uploader, alt_text = '')
+    return '' if uploader.blank?
+
+    versions = "#{uploader.medium.url} 2x"
+    image_tag(uploader.small.url, alt: alt_text, srcset: versions)
+  end
+
+  # @param [SimpleImageUploader] uploader
+  # @param [String] alt_text
+  def simple_image_medium(uploader, alt_text = '')
+    return '' if uploader.blank?
+
+    versions = "#{uploader.large.url} 2x"
+    image_tag(uploader.medium.url, alt: alt_text, srcset: versions)
+  end
+
+  # @param [SimpleImageUploader] uploader
+  # @param [String] alt_text
+  def simple_image_large(uploader, alt_text = '')
+    return '' if uploader.blank?
+
+    versions = "#{uploader.hd.url} 2x"
+    image_tag(uploader.large.url, alt: alt_text, srcset: versions)
+  end
+
+  # @param [SimpleImageUploader] uploader
+  # @param [String] alt_text
+  def simple_image_hd(uploader, alt_text = '')
+    return '' if uploader.blank?
+
+    image_tag(uploader.hd.url, alt: alt_text)
+  end
 end
