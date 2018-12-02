@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MediaSnapshotUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
   include CarrierWave::BombShelter
@@ -7,7 +9,9 @@ class MediaSnapshotUploader < CarrierWave::Uploader::Base
   # storage :fog
 
   def store_dir
-    "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id/10000.floor}/#{model.id/100.floor}/#{model.id}"
+    slug = "#{model.id / 10_000}/#{model.id / 100}/#{model.id}"
+
+    "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{slug}"
   end
 
   def default_url(*args)
@@ -23,7 +27,7 @@ class MediaSnapshotUploader < CarrierWave::Uploader::Base
   end
 
   def extension_whitelist
-    %w(jpg jpeg png)
+    %w[jpg jpeg png]
   end
 
   def filename

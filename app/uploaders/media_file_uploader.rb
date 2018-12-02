@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MediaFileUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
   include CarrierWave::BombShelter
@@ -6,10 +8,10 @@ class MediaFileUploader < CarrierWave::Uploader::Base
   storage :file
   # storage :fog
 
-  # Override the directory where uploaded files will be stored.
-  # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
-    "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id/10000.floor}/#{model.id/100.floor}/#{model.id}"
+    slug = "#{model.id / 10_000}/#{model.id / 100}/#{model.id}"
+
+    "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{slug}"
   end
 
   version :medium_2x do
@@ -21,7 +23,7 @@ class MediaFileUploader < CarrierWave::Uploader::Base
   end
 
   def extension_whitelist
-    %w(jpg jpeg gif png)
+    %w[jpg jpeg gif png]
   end
 
   def filename

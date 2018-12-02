@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AvatarUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
   include CarrierWave::BombShelter
@@ -9,7 +11,9 @@ class AvatarUploader < CarrierWave::Uploader::Base
   storage :file
 
   def store_dir
-    "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id/10000.floor}/#{model.id/100.floor}/#{model.id}"
+    slug = "#{model.id / 10_000}/#{model.id / 100}/#{model.id}"
+
+    "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{slug}"
   end
 
   def default_url
