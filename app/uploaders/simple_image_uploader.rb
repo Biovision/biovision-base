@@ -14,6 +14,10 @@ class SimpleImageUploader < CarrierWave::Uploader::Base
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{slug}"
   end
 
+  def default_url(*)
+    ActionController::Base.helpers.asset_path('biovision/base/placeholders/1x1.svg')
+  end
+
   version :hd do
     resize_to_fit(1920, 1920)
   end
