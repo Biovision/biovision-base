@@ -70,7 +70,7 @@
   <section>
     <h2><%= t('.children') %></h2>
 
-    <%= render partial: 'admin/privileges/list', locals: { collection: Privilege.for_tree(@entity.id) } %>
+    <%= render partial: 'shared/admin/list_with_priority', locals: { collection: Privilege.for_tree(@entity.id) } %>
   </section>
 
   <section>
