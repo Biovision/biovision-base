@@ -60,7 +60,7 @@ class UsersController < ApplicationController
 
   def entity_parameters
     parameters = params.require(:user).permit(User.entity_parameters)
-    parameters.merge(profile_parameters)
+    parameters.merge(data: @entity.data.merge(profile: profile_parameters))
   end
 
   def creation_parameters
@@ -71,7 +71,7 @@ class UsersController < ApplicationController
     if params.key?(:user_profile)
       permitted = UserProfileHandler.allowed_parameters
       dirty     = params.require(:user_profile).permit(permitted)
-      { profile_data: UserProfileHandler.clean_parameters(dirty) }
+      UserProfileHandler.clean_parameters(dirty)
     else
       {}
     end

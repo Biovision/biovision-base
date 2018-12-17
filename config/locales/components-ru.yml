@@ -1,11 +1,12 @@
 ru:
   activerecord:
     models:
+      biovision_component: "Компонент"
       biovision_parameter: "Параметр"
     attributes:
+      biovision_component:
+        slug: "Идентификатор"
       biovision_parameter:
-        description: "Описание"
-        name: "Название"
         slug: "Идентификатор"
         value: "Значение"
   admin:
@@ -24,8 +25,6 @@ ru:
         new_parameter:
           heading: "Новый параметр"
           guidelines:
-            description: "Более подробное описание для удобства"
-            name: "Название для удобства"
             slug: "Только латинские буквы, цифры, дефис и подчёркивание (кроме начала и конца)."
             value: "Произвольная строка"
       update:
@@ -34,6 +33,11 @@ ru:
     components:
       contact:
         name: "Контакты"
+        parameters:
+          feedback_receiver: "На этот адрес приходят сообщения из формы обратной связи"
+          email:             "Этот адрес отображается в контактной информации"
+          phone:             "Этот телефон отображается в контактной информации"
+          address:           "Этот адрес отображается в контактной информации"
       registration:
         name: "Регистрация"
         settings:

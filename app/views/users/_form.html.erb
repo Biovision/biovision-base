@@ -111,7 +111,7 @@
       </dd>
     <% end %>
 
-    <%= render partial: 'users/form/profile_data', locals: { data: entity.profile_data } %>
+    <%= render partial: 'users/form/profile_data', locals: { data: entity.data['profile'] || {} } %>
 
     <dt><%= f.label :notice %></dt>
     <dd>

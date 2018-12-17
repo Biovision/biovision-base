@@ -3,8 +3,8 @@ class AddProfileDataToUsers < ActiveRecord::Migration[5.1]
     unless column_exists? :users, :birthday
       add_column :users, :birthday, :date
     end
-    unless column_exists? :users, :profile_data
-      add_column :users, :profile_data, :json, null: false, default: {}
+    unless column_exists? :users, :data
+      add_column :users, :data, :json, null: false, default: { profile: {} }
     end
 
     copy_data if UserProfile.table_exists?
@@ -17,10 +17,10 @@ class AddProfileDataToUsers < ActiveRecord::Migration[5.1]
   private
 
   def copy_data
-    ignore = %w(id created_at updated_at user_id birthday)
+    ignore = %w[id created_at updated_at user_id birthday]
     UserProfile.order('user_id asc').each do |profile|
       data = {
-        profile_data: profile.attributes.reject { |a| ignore.include?(a) }
+        data: { profile: profile.attributes.reject { |a| ignore.include?(a) } }
       }
       if profile.attributes.key?('birthday')
         data[:birthday] = profile.birthday

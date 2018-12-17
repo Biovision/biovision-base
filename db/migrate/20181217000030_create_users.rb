@@ -1,0 +1,52 @@
+# frozen_string_literal: true
+
+# Tables for users
+class CreateUsers < ActiveRecord::Migration[5.1]
+  def up
+    create_users unless User.table_exists?
+  end
+
+  def down
+    drop_table :users if User.table_exists?
+  end
+
+  private
+
+  def create_users
+    create_table :users, comment: 'User' do |t|
+      t.timestamps
+      t.references :language, foreign_key: { on_update: :cascade, on_delete: :nullify }
+      t.references :agent, foreign_key: { on_update: :cascade, on_delete: :nullify }
+      t.inet :ip
+      t.integer :inviter_id
+      t.integer :native_id
+      t.integer :balance, default: 0, null: false
+      t.boolean :super_user, default: false, null: false
+      t.boolean :deleted, default: false, null: false
+      t.boolean :bot, default: false, null: false
+      t.boolean :allow_login, default: true, null: false
+      t.boolean :email_confirmed, default: false, null: false
+      t.boolean :phone_confirmed, default: false, null: false
+      t.boolean :allow_mail, default: true, null: false
+      t.boolean :foreign_slug, default: false, null: false
+      t.boolean :consent, default: false, null: false
+      t.datetime :last_seen
+      t.date :birthday
+      t.string :slug, null: false
+      t.string :screen_name, index: true, null: false
+      t.string :password_digest
+      t.string :email, index: true
+      t.string :phone
+      t.string :image
+      t.string :notice
+      t.string :search_string
+      t.string :referral_link, index: true
+      t.json :data, default: { profile: {} }, null: false
+    end
+
+    add_foreign_key :users, :users, column: :inviter_id, on_update: :cascade, on_delete: :nullify
+    add_foreign_key :users, :users, column: :native_id, on_update: :cascade, on_delete: :nullify
+
+    add_index :users, :slug, unique: true
+  end
+end

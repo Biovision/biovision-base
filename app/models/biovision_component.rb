@@ -2,9 +2,11 @@
 
 # Biovision component
 #
-# Fields:
+# Attributes:
+#   - created_at [DateTime]
 #   - settings [JSON]
 #   - slug [String]
+#   - updated_at [DateTime]
 class BiovisionComponent < ApplicationRecord
   include RequiredUniqueSlug
 

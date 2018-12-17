@@ -4,16 +4,14 @@
 #
 # Fields:
 #   - biovision_component_id [BiovisionComponent]
+#   - created_at [DateTime]
 #   - deletable [Boolean]
-#   - description [String], optional
-#   - name [String], optional
 #   - slug [String]
+#   - updated_at [DateTime]
 #   - value [String], optional
 class BiovisionParameter < ApplicationRecord
-  DESCRIPTION_LIMIT = 250
-  NAME_LIMIT        = 250
   SLUG_LIMIT        = 250
-  SLUG_PATTERN      = /\A[a-z][-a-z0-9_]+[a-z0-9]\z/i
+  SLUG_PATTERN      = /\A[a-z][-a-z0-9_]+[a-z0-9]\z/i.freeze
   SLUG_PATTERN_HTML = '^[a-zA-Z][-a-zA-Z0-9_]+[a-zA-Z0-9]$'
   VALUE_LIMIT       = 65_535
 
@@ -24,8 +22,6 @@ class BiovisionParameter < ApplicationRecord
   validates_uniqueness_of :slug, scope: [:biovision_component_id]
   validates_presence_of :slug
   validates_format_of :slug, with: SLUG_PATTERN
-  validates_length_of :description, maximum: DESCRIPTION_LIMIT
-  validates_length_of :name, maximum: NAME_LIMIT
   validates_length_of :slug, maximum: SLUG_LIMIT
   validates_length_of :value, maximum: VALUE_LIMIT
 
@@ -33,6 +29,6 @@ class BiovisionParameter < ApplicationRecord
   scope :list_for_administration, -> { ordered_by_slug }
 
   def self.entity_parameters
-    %i[description name slug value]
+    %i[slug value]
   end
 end

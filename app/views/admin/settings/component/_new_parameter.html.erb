@@ -54,46 +54,6 @@
         %>
         <div class="guideline"><%= t('.guidelines.value') %></div>
       </dd>
-
-      <dt>
-        <%=
-          f.label(:name, t('activerecord.attributes.biovision_parameter.name'))
-        %>
-      </dt>
-      <dd>
-        <%=
-          f.text_field(
-              :name,
-              value:     '',
-              size:      nil,
-              maxlength: BiovisionParameter::NAME_LIMIT,
-              data: {
-                  field: :name
-              }
-          )
-        %>
-        <div class="guideline"><%= t('.guidelines.name') %></div>
-      </dd>
-
-      <dt>
-        <%=
-          f.label(:description, t('activerecord.attributes.biovision_parameter.description'))
-        %>
-      </dt>
-      <dd>
-        <%=
-          f.text_field(
-              :description,
-              value:     '',
-              size:      nil,
-              maxlength: BiovisionParameter::DESCRIPTION_LIMIT,
-              data: {
-                  field: :description
-              }
-          )
-        %>
-        <div class="guideline"><%= t('.guidelines.description') %></div>
-      </dd>
     </dl>
     <div class="buttons">
       <%= button_tag(t(:save), type: :submit, class: 'button-save') %>

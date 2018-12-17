@@ -2,6 +2,7 @@
 
 # User
 class User < ApplicationRecord
+  include Checkable
   include Toggleable
 
   METRIC_REGISTRATION            = 'users.registration.hit'
@@ -112,14 +113,14 @@ class User < ApplicationRecord
   end
 
   def name_for_letter
-    profile_data['name'].blank? ? profile_name : profile_data['name']
+    data.dig('profile', 'name').blank? ? profile_name : data['profile']['name']
   end
 
   # @param [Boolean] include_patronymic
   def full_name(include_patronymic = false)
     result = [name_for_letter]
-    result << profile_data['patronymic'].to_s.strip if include_patronymic
-    result << profile_data['surname'].to_s.strip
+    result << data.dig('profile', 'patronymic').to_s.strip if include_patronymic
+    result << data.dig('profile', 'surname').to_s.strip
     result.compact.join(' ')
   end
 

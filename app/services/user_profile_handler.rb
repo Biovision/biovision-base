@@ -1,8 +1,8 @@
 class UserProfileHandler
-  GENDERS = { 0 => 'female', 1 => 'male' }
+  GENDERS = { 0 => 'female', 1 => 'male' }.freeze
 
   def self.allowed_parameters
-    %w(gender name patronymic surname about)
+    %w[gender name patronymic surname about]
   end
 
   # @param [Hash] input
@@ -23,6 +23,6 @@ class UserProfileHandler
 
   # @param [User] user
   def self.search_string(user)
-    "#{user.profile_data['surname']} #{user.profile_data['name']}"
+    "#{user.data.dig('profile', 'surname')} #{user.data.dig('profile', 'name')}"
   end
 end

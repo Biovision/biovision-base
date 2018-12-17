@@ -85,8 +85,9 @@ class My::ProfilesController < ApplicationController
     sensitive  = sensitive_parameters
     editable   = User.profile_parameters + sensitive
     parameters = params.require(:user).permit(editable)
+    new_data   = @entity.data.merge(profile: profile_parameters)
 
-    filter_parameters(parameters.merge(profile_parameters), sensitive)
+    filter_parameters(parameters.merge(data: new_data), sensitive)
   end
 
   def sensitive_parameters
@@ -100,7 +101,7 @@ class My::ProfilesController < ApplicationController
   def profile_parameters
     permitted = UserProfileHandler.allowed_parameters
     dirty     = params.require(:user_profile).permit(permitted)
-    { profile_data: UserProfileHandler.clean_parameters(dirty) }
+    UserProfileHandler.clean_parameters(dirty)
   end
 
   # @param [Hash] parameters

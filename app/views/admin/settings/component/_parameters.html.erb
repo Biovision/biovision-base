@@ -4,15 +4,12 @@
   <ul id="biovision-component-parameters" data-url="<%= admin_set_parameter_path(slug: handler.slug) %>">
     <% parameters.each do |parameter| %>
       <%
-        url = admin_parameter_path(slug: handler.slug, parameter_slug: parameter.slug)
         element_id = "parameter-#{parameter.id}"
+        description = t("biovision.components.#{parameter.biovision_component.slug}.parameters.#{parameter.slug}.description", default: '')
       %>
       <li>
         <div class="name">
           <%= label_tag(element_id, parameter.slug) %>
-          <% unless parameter.description.blank? %>
-            <span>(<%= parameter.name %>)</span>
-          <% end %>
         </div>
         <div class="value">
           <%= text_field_tag(:value, parameter.value, id: element_id) %>
@@ -28,21 +25,11 @@
                 }
             )
           %>
-          <% if parameter.deletable? %>
-            <%#=
-              button_tag(
-                  '',
-                  title:   t(:delete),
-                  type:    :button,
-                  class:   'delete',
-                  url:     url,
-                  confirm: t(:are_you_sure)
-              )
-            %>
-          <% end %>
         </div>
-        <% unless parameter.description.blank? %>
-          <div class="description"><%= parameter.description %></div>
+        <% unless description.blank? %>
+          <div class="description">
+            <%= description %>
+          </div>
         <% end %>
       </li>
     <% end %>

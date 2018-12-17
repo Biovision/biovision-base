@@ -65,9 +65,11 @@ class ForeignSite < ApplicationRecord
       screen_name: screen_name.blank? ? data[:name] : screen_name,
       password_digest: BCrypt::Engine.hash_secret(password, hash_salt),
       email_confirmed: true,
-      profile_data: {
-        name: data[:info][:first_name],
-        surname: data[:info][:last_name]
+      data: {
+        profile: {
+          name: data[:info][:first_name],
+          surname: data[:info][:last_name]
+        }
       }
     }.merge(tracking)
 
