@@ -1,33 +1,17 @@
 <div class="data">
   <div data-url="<%= privilege_admin_user_path(id: user.id, privilege_id: privilege.id) %>" class="entity">
-    <% if privilege.regional? && Gem.loaded_specs.key?('biovision-regions') %>
-        <span><%= privilege.name %></span>
-        <ul data-url="<%= regions_admin_privilege_path(id: privilege.id, user_id: user.id) %>" class="regions">
-          <% user.user_privileges.where(privilege: privilege).order('region_id asc').each do |link| %>
-              <li>
-                <% element_id = "user_privilege_#{privilege.id}_#{link.region_id}" %>
-                <%= check_box_tag element_id, 1, true, data: { region_id: link.region_id } %>
-                <%= label_tag element_id, link.region.long_name %>
-              </li>
-          <% end %>
-          <li>
-            <button class="add_regions" type="button"><%= t('.select_regions') %></button>
-          </li>
-        </ul>
-    <% else %>
-        <% element_id = "user_privilege_#{privilege.id}" %>
-        <%= check_box_tag element_id, 1, privilege.has_user?(user) %>
-        <%= label_tag element_id, privilege.name %>
-    <% end %>
+    <% element_id = "user_privilege_#{privilege.id}" %>
+    <%= check_box_tag element_id, 1, privilege.has_user?(user) %>
+    <%= label_tag element_id, privilege.name %>
     <% if privilege.child_privileges.any? %>
-        <%=
-          render(
-              partial: 'admin/users/entity/privilege_tree',
-              locals: {
-                  privileges: Privilege.for_tree(privilege.id), user: user
-              }
-          )
-        %>
+      <%=
+        render(
+            partial: 'admin/users/entity/privilege_tree',
+            locals:  {
+                privileges: Privilege.for_tree(privilege.id), user: user
+            }
+        )
+      %>
     <% end %>
   </div>
 </div>

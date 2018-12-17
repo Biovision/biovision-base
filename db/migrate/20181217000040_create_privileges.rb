@@ -24,10 +24,9 @@ class CreatePrivileges < ActiveRecord::Migration[5.1]
 
   # Create table for Privilege model
   def create_privileges
-    create_table :privileges do |t|
+    create_table :privileges, comment: 'Privilege' do |t|
       t.timestamps
       t.integer :parent_id
-      t.boolean :regional, default: false, null: false
       t.boolean :administrative, default: true, null: false
       t.boolean :deletable, default: true, null: false
       t.integer :priority, limit: 2, default: 1, null: false
@@ -46,9 +45,8 @@ class CreatePrivileges < ActiveRecord::Migration[5.1]
 
   # Create table for UserPrivilege model
   def create_user_privileges
-    create_table :user_privileges do |t|
+    create_table :user_privileges, comment: 'Privilege for user' do |t|
       t.timestamps
-      t.integer :region_id
       t.references :user, null: false, foreign_key: { on_update: :cascade, on_delete: :cascade }
       t.references :privilege, null: false, foreign_key: { on_update: :cascade, on_delete: :cascade }
     end
@@ -56,7 +54,7 @@ class CreatePrivileges < ActiveRecord::Migration[5.1]
 
   # Create table for PrivilegeGroup model
   def create_privilege_groups
-    create_table :privilege_groups do |t|
+    create_table :privilege_groups, comment: 'Privilege group' do |t|
       t.timestamps
       t.boolean :deletable, default: true, null: false
       t.string :name, null: false
@@ -69,7 +67,7 @@ class CreatePrivileges < ActiveRecord::Migration[5.1]
 
   # Create table for PrivilegeGroupPrivilege model
   def create_privilege_group_links
-    create_table :privilege_group_privileges do |t|
+    create_table :privilege_group_privileges, comment: 'Privilege in group' do |t|
       t.timestamps
       t.references :privilege_group, null: false, foreign_key: { on_update: :cascade, on_delete: :cascade }
       t.references :privilege, null: false, foreign_key: { on_update: :cascade, on_delete: :cascade }

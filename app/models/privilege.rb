@@ -5,9 +5,9 @@ class Privilege < ApplicationRecord
   DESCRIPTION_LIMIT = 350
   NAME_LIMIT        = 250
   SLUG_LIMIT        = 250
-  PRIORITY_RANGE    = (1..32_767)
+  PRIORITY_RANGE    = (1..32_767).freeze
 
-  toggleable :regional, :administrative
+  toggleable :administrative
 
   belongs_to :parent, class_name: Privilege.to_s, optional: true
   has_many :child_privileges, class_name: Privilege.to_s, foreign_key: :parent_id
@@ -20,7 +20,6 @@ class Privilege < ApplicationRecord
 
   before_validation { self.name = name.strip unless name.nil? }
   before_validation { self.slug = Canonizer.transliterate(name.to_s) if slug.blank? }
-  before_validation { self.regional = true if parent&.regional? }
   before_validation :normalize_priority
 
   before_save { children_cache.uniq! }
@@ -47,7 +46,7 @@ class Privilege < ApplicationRecord
   end
 
   def self.entity_parameters
-    %i[administrative description name priority regional slug]
+    %i[administrative description name priority slug]
   end
 
   def self.creation_parameters
@@ -106,12 +105,7 @@ class Privilege < ApplicationRecord
     return false if user.nil?
     return true if user.super_user?
 
-    result = user_in_non_regional_branch?(user)
-
-    if regional? && region_ids.any? && !result
-      result = user_in_regional_branch?(user, region_ids)
-    end
-    result
+    user_in_non_regional_branch?(user)
   end
 
   # @param [User] user
@@ -120,7 +114,6 @@ class Privilege < ApplicationRecord
     return if user.nil?
 
     criteria             = { privilege: self, user: user }
-    criteria[:region_id] = region_id if regional?
     UserPrivilege.create(criteria) unless UserPrivilege.exists?(criteria)
   end
 
@@ -130,7 +123,6 @@ class Privilege < ApplicationRecord
     return if user.nil?
 
     criteria             = { privilege: self, user: user }
-    criteria[:region_id] = region_id if regional?
     UserPrivilege.where(criteria).delete_all
   end
 
@@ -162,25 +154,9 @@ class Privilege < ApplicationRecord
 
   # @param [User] user
   def user_in_non_regional_branch?(user)
-    selected_ids = Privilege.where(regional: false, id: branch_ids).pluck(:id)
+    selected_ids = Privilege.where(id: branch_ids).pluck(:id)
     if selected_ids.any?
       UserPrivilege.exists?(privilege_id: selected_ids, user: user)
-    else
-      false
-    end
-  end
-
-  # @param [User] user
-  # @param [Array] region_ids
-  def user_in_regional_branch?(user, region_ids)
-    selected_ids = Privilege.where(regional: true, id: branch_ids).pluck(:id)
-    if selected_ids.any?
-      criteria = {
-        privilege_id: selected_ids,
-        region_id:    region_ids,
-        user:         user
-      }
-      UserPrivilege.exists?(criteria)
     else
       false
     end

@@ -110,7 +110,6 @@ sv:
         administrative: "Administrativ"
         parent_id: "Föräldrakategori"
         priority: "Sorteringsordning"
-        regional: "Regional"
         name: "Namn"
         slug: "Pollett"
         description: "Beskrivning"

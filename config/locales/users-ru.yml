@@ -111,7 +111,6 @@ ru:
         administrative: "Административная"
         parent_id: "Родительская категория"
         priority: "Порядок сортировки"
-        regional: "Региональная"
         name: "Название"
         slug: "Идентификатор"
         description: "Описание"
