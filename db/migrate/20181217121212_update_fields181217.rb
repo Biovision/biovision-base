@@ -13,6 +13,10 @@ class UpdateFields181217 < ActiveRecord::Migration[5.2]
         user.save!
       end
     end
+
+    unless column_exists?(:codes, :data)
+      add_column :codes, :data, :json, default: {}, null: false
+    end
   end
 
   def down

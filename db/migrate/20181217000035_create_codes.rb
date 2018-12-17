@@ -4,14 +4,14 @@
 class CreateCodes < ActiveRecord::Migration[5.1]
   def up
     unless CodeType.table_exists?
-      create_table :code_types, comment: 'Types of codes' do |t|
+      create_table :code_types, comment: 'Type of code' do |t|
         t.string :slug, null: false
         t.string :name, null: false
       end
     end
 
     unless Code.table_exists?
-      create_table :codes, comment: 'Codes for users' do |t|
+      create_table :codes, comment: 'Code for users' do |t|
         t.timestamps
         t.references :code_type, null: false, foreign_key: { on_update: :cascade, on_delete: :cascade }
         t.references :user, foreign_key: { on_update: :cascade, on_delete: :cascade }
@@ -20,6 +20,7 @@ class CreateCodes < ActiveRecord::Migration[5.1]
         t.integer :quantity, limit: 2, default: 1, null: false
         t.string :body, null: false
         t.string :payload
+        t.json :data, default: {}, null: false
       end
 
       add_index :codes, %i[body code_type_id quantity]
