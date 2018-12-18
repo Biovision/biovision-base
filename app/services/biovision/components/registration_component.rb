@@ -73,7 +73,7 @@ module Biovision
       def handle_codes
         if confirm_email?
           code = CodeManager::Confirmation.code_for_user(@user)
-          CodeSender.confirmation(code.id).deliver_later
+          CodeSender.email(code.id).deliver_later
         end
 
         if use_invites?
