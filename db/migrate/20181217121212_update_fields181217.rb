@@ -7,6 +7,10 @@ class UpdateFields181217 < ActiveRecord::Migration[5.2]
       add_reference :metrics, :biovision_component, foreign_key: { on_update: :cascade, on_delete: :cascade }
     end
 
+    unless column_exists?(:users, :data)
+      add_column :users, :data, :json, default: { profile: {} }, null: false
+    end
+
     if column_exists?(:users, :profile_data)
       User.order('id asc').each do |user|
         user.data['profile'] = user.profile_data
