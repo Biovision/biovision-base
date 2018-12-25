@@ -33,7 +33,6 @@ class EditablePagesController < AdminController
   # patch /editable_pages/:id
   def update
     if @entity.update(entity_parameters)
-      flash[:notice] = t('editable_pages.update.success')
       form_processed_ok(admin_editable_page_path(id: @entity.id))
     else
       form_processed_with_error(:edit)
@@ -56,9 +55,7 @@ class EditablePagesController < AdminController
 
   def set_entity
     @entity = EditablePage.find_by(id: params[:id])
-    if @entity.nil?
-      handle_http_404('Cannot find editable_page')
-    end
+    handle_http_404('Cannot find editable_page') if @entity.nil?
   end
 
   def entity_parameters

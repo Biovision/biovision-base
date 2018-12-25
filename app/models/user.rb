@@ -39,6 +39,8 @@ class User < ApplicationRecord
   has_many :login_attempts, dependent: :delete_all
   has_many :user_languages, dependent: :delete_all
 
+  after_initialize { self.uuid = SecureRandom.uuid if uuid.nil? }
+
   before_save { self.slug = (native_slug? ? screen_name : slug).downcase }
   before_save :prepare_search_string
   before_save { self.referral_link = SecureRandom.alphanumeric(12) if referral_link.blank? }
@@ -60,7 +62,7 @@ class User < ApplicationRecord
   scope :with_privilege, ->(privilege) { joins(:user_privileges).where(user_privileges: { privilege_id: privilege.branch_ids }) }
   scope :with_privilege_ids, ->(privilege_ids) { joins(:user_privileges).where(user_privileges: { privilege_id: privilege_ids }) }
   scope :ordered_by_screen_name, -> { order('screen_name asc') }
-  scope :bots, ->(flag) { where(bot: flag.to_i > 0) unless flag.blank? }
+  scope :bots, ->(flag) { where(bot: flag.to_i.positive?) unless flag.blank? }
   scope :email_like, ->(v) { where('email ilike ?', "%#{v}%") unless v.blank? }
   scope :with_email, ->(v) { where('lower(email) = lower(?)', v) }
   scope :screen_name_like, ->(v) { where('screen_name ilike ?', "%#{v}%") unless v.blank? }

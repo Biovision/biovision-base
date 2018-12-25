@@ -5,7 +5,7 @@ class Admin::EditablePagesController < AdminController
   include EntityPriority
   include ToggleableEntity
 
-  before_action :set_entity, except: [:index]
+  before_action :set_entity, except: :index
 
   # get /admin/editable_pages
   def index
@@ -24,8 +24,6 @@ class Admin::EditablePagesController < AdminController
 
   def set_entity
     @entity = EditablePage.find_by(id: params[:id])
-    if @entity.nil?
-      handle_http_404("Cannot find editable_page #{params[:id]}")
-    end
+    handle_http_404('Cannot find editable_page') if @entity.nil?
   end
 end

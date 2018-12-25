@@ -1,8 +1,7 @@
 class Metric < ApplicationRecord
   include RequiredUniqueName
 
-  DESCRIPTION_LIMIT = 250
-  PERIOD_RANGE      = (1..365)
+  PERIOD_RANGE = (1..365).freeze
 
   METRIC_HTTP_400 = 'errors.http.bad_request.hit'
   METRIC_HTTP_401 = 'errors.http.unauthorized.hit'
@@ -15,7 +14,6 @@ class Metric < ApplicationRecord
   has_many :metric_values, dependent: :destroy
 
   before_validation :normalize_period
-  validates_length_of :description, maximum: DESCRIPTION_LIMIT
 
   def self.page_for_administration
     order('name asc')

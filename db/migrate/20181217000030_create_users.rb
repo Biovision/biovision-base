@@ -24,6 +24,7 @@ class CreateUsers < ActiveRecord::Migration[5.1]
 
   def create_users
     create_table :users, comment: 'User' do |t|
+      t.uuid :uuid
       t.timestamps
       t.references :language, foreign_key: { on_update: :cascade, on_delete: :nullify }
       t.references :agent, foreign_key: { on_update: :cascade, on_delete: :nullify }
