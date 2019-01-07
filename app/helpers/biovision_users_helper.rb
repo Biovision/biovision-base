@@ -51,17 +51,25 @@ module BiovisionUsersHelper
 
   # @param [User] entity
   def profile_avatar(entity)
-    if entity.is_a?(User) && !entity.image.blank? && !entity.deleted?
-      user_image_profile(entity)
+    if entity&.image.blank? && entity.deleted?
+      image_tag('biovision/base/placeholders/user.svg', alt: '')
     else
-      image_tag('biovision/base/placeholders/user.svg')
+      user_image_profile(entity)
     end
   end
 
   # @param [User] entity
-  def user_image_tiny(entity)
-    versions = "#{entity.image.tiny_2x.url} 2x"
-    image_tag(entity.image.tiny.url, alt: entity.profile_name, srcset: versions)
+  # @param [Hash] options
+  def user_image_tiny(entity, options = {})
+    if entity&.image.blank? || entity.deleted?
+      image_tag('biovision/base/placeholders/user.svg', alt: '')
+    else
+      default_options = {
+        alt:    entity.profile_name,
+        srcset: "#{entity.image.tiny_2x.url} 2x"
+      }
+      image_tag(entity.image.tiny.url, default_options.merge(options))
+    end
   end
 
   # @param [User] entity
