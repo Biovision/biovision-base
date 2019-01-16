@@ -41,7 +41,7 @@ namespace :users do
   task dump: :environment do
     file_path = "#{Rails.root}/tmp/export/users.yml"
     media_dir = "#{Rails.root}/tmp/export/users"
-    ignored   = %w(id image ip agent_id follower_count followee_count comments_count)
+    ignored   = %w[id image ip agent_id data follower_count followee_count comments_count]
     Dir.mkdir(media_dir) unless Dir.exist?(media_dir)
     File.open(file_path, 'w') do |file|
       User.order('id asc').each do |entity|
@@ -60,6 +60,24 @@ namespace :users do
 
         file.puts "  agent: #{entity.agent.name.inspect}" unless entity.agent.nil?
         file.puts "  ip: #{entity.ip}" unless entity.ip.blank?
+
+        next if entity.data.blank?
+
+        file.puts '  data:'
+        entity.data.each do |data_key, data_values|
+          next if data_values.nil?
+
+          if data_values.is_a?(Enumerable)
+            file.puts "    #{data_key}:"
+            data_values.each do |k, v|
+              next if v.nil?
+
+              file.puts "      #{k}: #{v.inspect}"
+            end
+          else
+            file.puts "    #{data_key}: #{data_values.inspect}"
+          end
+        end
       end
       puts
     end
