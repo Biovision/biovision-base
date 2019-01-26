@@ -64,7 +64,12 @@ class UsersController < ApplicationController
   end
 
   def creation_parameters
-    entity_parameters.merge(tracking_for_entity).merge(consent: true)
+    parameters = params.require(:user).permit(User.entity_parameters)
+
+    parameters[:consent] = true
+    parameters[:data]    = { profile: profile_parameters }
+
+    parameters.merge(tracking_for_entity)
   end
 
   def profile_parameters
