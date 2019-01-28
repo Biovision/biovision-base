@@ -4,7 +4,7 @@ class UserPrivilege < ApplicationRecord
   belongs_to :user
   belongs_to :privilege, counter_cache: :users_count
 
-  validates_uniqueness_of :privilege_id, scope: [:user_id, :region_id]
+  validates_uniqueness_of :privilege_id, scope: [:user_id]
 
   # @param [User] user
   # @return [Array<Integer>]

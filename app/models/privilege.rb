@@ -113,7 +113,7 @@ class Privilege < ApplicationRecord
   def grant(user, region_id = nil)
     return if user.nil?
 
-    criteria             = { privilege: self, user: user }
+    criteria = { privilege: self, user: user }
     UserPrivilege.create(criteria) unless UserPrivilege.exists?(criteria)
   end
 
@@ -122,7 +122,7 @@ class Privilege < ApplicationRecord
   def revoke(user, region_id = nil)
     return if user.nil?
 
-    criteria             = { privilege: self, user: user }
+    criteria = { privilege: self, user: user }
     UserPrivilege.where(criteria).delete_all
   end
 
