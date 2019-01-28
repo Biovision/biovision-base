@@ -79,7 +79,7 @@ class Admin::UsersController < AdminController
   end
 
   def set_privilege
-    @privilege = Privilege.find_by(id: params[:privilege_id], deleted: false)
+    @privilege = Privilege.find_by(id: params[:privilege_id])
     if @privilege.nil?
       handle_http_404("Cannot use privilege #{params[:privilege_id]}")
     end
