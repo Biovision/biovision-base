@@ -58,6 +58,7 @@
       %>
     <% end %>
     <div>
+      <%= check_box_tag :agree, '1', false, class: 'visually-hidden', tabindex: -1 %>
       <%= f.check_box :consent, id: :feedback_request_consent, required: true %>
       <%= f.label :consent %>
     </div>
