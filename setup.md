@@ -87,6 +87,10 @@ end
 Нужно выставить уровень сообщения об ошибках в `:warn` 
 (`config.log_level = :warn` в районе `54` строки)
 
+В районе 74 строки заменить `config.i18n.fallbacks = true`
+на `config.i18n.fallbacks = [I18n.default_locale]`
+
+
 Актуализация `config/database.yml`
 ----------------------------------
 
@@ -157,7 +161,7 @@ end
 Добавления в `config/application_controller.rb`
 -----------------------------------------------
 
-Если не используются регионы, добавить это перед в начале класса.
+Если не используются регионы, добавить это в начале класса.
 
 ```ruby
   include Biovision::Base::PrivilegeMethods
