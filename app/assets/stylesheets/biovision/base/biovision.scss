@@ -1,26 +1,26 @@
-@supports (--css: vars) {
-  :root {
-    --font-size-xxxl: #{$font-size-xxxl};
-    --font-size-xxl: #{$font-size-xxl};
-    --font-size-xl: #{$font-size-xl};
-    --font-size-large: #{$font-size-large};
-    --font-size-increased: #{$font-size-increased};
-    --font-size-normal: #{$font-size-normal};
-    --font-size-decreased: #{$font-size-decreased};
-    --font-size-small: #{$font-size-small};
-    --font-size-xs: #{$font-size-xs};
+:root {
+  --font-size-xxxl: #{$font-size-xxxl};
+  --font-size-xxl: #{$font-size-xxl};
+  --font-size-xl: #{$font-size-xl};
+  --font-size-large: #{$font-size-large};
+  --font-size-increased: #{$font-size-increased};
+  --font-size-normal: #{$font-size-normal};
+  --font-size-decreased: #{$font-size-decreased};
+  --font-size-small: #{$font-size-small};
+  --font-size-xs: #{$font-size-xs};
 
-    --spacer-s: #{$spacer-s};
-    --spacer-xxs: calc(var(--spacer-s) / 4);
-    --spacer-xs: calc(var(--spacer-s) / 2);
-    --spacer-m: calc(var(--spacer-s) * 2);
-    --spacer-l: calc(var(--spacer-s) * 3);
-    --spacer-xl: calc(var(--spacer-s) * 4);
-    --spacer-xxl: calc(var(--spacer-s) * 6);
-  }
+  --spacer-s: #{$spacer-s};
+  --spacer-xxs: calc(var(--spacer-s) / 4);
+  --spacer-xs: calc(var(--spacer-s) / 2);
+  --spacer-m: calc(var(--spacer-s) * 2);
+  --spacer-l: calc(var(--spacer-s) * 3);
+  --spacer-xl: calc(var(--spacer-s) * 4);
+  --spacer-xxl: calc(var(--spacer-s) * 6);
 }
 
-* {
+*,
+::after,
+::before {
   box-sizing: border-box;
 }
 
@@ -57,11 +57,9 @@ h6 {
 }
 
 a {
-  &:link {
-    color: $link-color;
-    text-decoration: none;
-    transition: color .125s;
-  }
+  color: $link-color;
+  text-decoration: none;
+  transition: color .125s;
 
   &:visited {
     color: $link-color-visited;
@@ -189,7 +187,6 @@ ul.actions {
     .image {
       flex: none;
       margin: 0 $spacer-xs 0 0;
-      margin-right: var(--spacer-xs);
       text-align: center;
       width: 8rem;
 
@@ -253,7 +250,6 @@ ol.list-of-entities {
     content: attr(data-number) ":";
     display: inline-block;
     margin: 0 $spacer-xs 0 0;
-    margin-right: var(--spacer-xs);
     text-align: right;
     width: 2.4rem;
   }
@@ -267,6 +263,7 @@ ol.list-of-entities {
       padding: var(--spacer-xs);
 
       .image {
+        margin-right: var(--spacer-xs);
 
         img {
           max-height: 8rem;
@@ -294,6 +291,12 @@ ol.list-of-entities {
           margin-left: var(--spacer-s);
         }
       }
+    }
+  }
+
+  ol.list-of-entities {
+    > li[data-number]::before {
+      margin-right: var(--spacer-xs);
     }
   }
 }
@@ -343,14 +346,11 @@ form {
 
   dt {
     font: 500 $font-size-increased $font-family-main;
-    font-size: var(--font-size-increased);
 
     &:not(:first-of-type) {
       border-top: $border-secondary;
       margin: $spacer-xs 0 0 0;
-      margin-top: var(--spacer-xs);
       padding: $spacer-xxs 0 0 0;
-      padding-top: var(--spacer-xxs);
     }
   }
 
@@ -404,6 +404,15 @@ form {
 
     ul.flags {
       margin: var(--spacer-xs) 0;
+    }
+
+    dt {
+      font-size: var(--font-size-increased);
+
+      &:not(:first-of-type) {
+        margin-top: var(--spacer-xs);
+        padding-top: var(--spacer-xxs);
+      }
     }
   }
 }
