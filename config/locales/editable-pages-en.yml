@@ -88,9 +88,11 @@ en:
     new:
       title: "New editable page"
       heading: "New editable page"
+      nav_text: "Create"
     edit:
       title: "Editing editable page"
       heading: "Editing editable page"
+      nav_text: "Edit"
     update:
       success: "Editable page has been updated"
     destroy:

@@ -1,11 +1,11 @@
 <% content_for :meta_title, t('.title') %>
 <% content_for :breadcrumbs do %>
     <%= link_to(t('admin.editable_pages.nav_item.text'), admin_editable_pages_path) %>
-    <span><%= t(:create) %></span>
+    <span><%= t('.nav_text') %></span>
 <% end %>
 
 <article>
-  <h1><%= t('.title') %></h1>
+  <h1><%= t('.heading') %></h1>
 
   <ul class="actions">
     <li><%= back_icon(admin_editable_pages_path) %></li>

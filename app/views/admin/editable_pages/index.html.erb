@@ -10,5 +10,12 @@
     <li><%= create_icon(new_editable_page_path) %></li>
   </ul>
 
-  <%= render partial: 'shared/admin/list_with_priority', locals: { collection: @collection } %>
+  <%=
+    render(
+        partial: 'shared/admin/list_with_priority',
+        locals: {
+            collection: @collection
+        }
+    )
+  %>
 </article>

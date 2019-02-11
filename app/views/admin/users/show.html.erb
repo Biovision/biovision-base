@@ -115,6 +115,14 @@
   </dl>
 
   <% unless @entity.deleted? %>
-    <%= render partial: 'shared/admin/toggleable', locals: { entity: @entity, url: toggle_admin_user_path(@entity.id) } %>
+    <%=
+      render(
+          partial: 'shared/admin/toggleable',
+          locals: {
+              entity: @entity,
+              url: toggle_admin_user_path(id: @entity.id)
+          }
+      )
+    %>
   <% end %>
 </article>
