@@ -323,7 +323,17 @@ set :shared_files, fetch(:shared_files, []).push('config/master.key', '.env')
 не забыть скопировать на сервер `.env` и `config/master.key`.
 
 `scp .env biovision:/var/www/example.com/shared`, 
-`scp config/master.key biovision:/var/www/example.com/shared/config`,
+`scp config/master.key biovision:/var/www/example.com/shared/config`
+
+Важный момент для боевой версии касаемо `robots.txt`
+----------------------------------------------------
+
+В папке `sample/public` в файле `robots.txt` изначально стоит запрет индексации.
+Это нужно на время разработки, чтобы поисковые роботы не полезли раньше времени
+индексировать не готовый сайт.
+
+Перед тем, как запускать боевую версию нужно не забыть поменять `Disallow: /`
+на `Allow: /`.
 
 Дополнительно на серверной стороне
 ----------------------------------
