@@ -32,7 +32,8 @@ class FeedbackRequestsController < ApplicationController
   end
 
   def creation_parameters
-    parameters = params.require(:feedback_request).permit(FeedbackRequest.creation_parameters)
+    permitted = FeedbackRequest.creation_parameters
+    parameters = params.require(:feedback_request).permit(permitted)
     parameters.merge(tracking_for_entity)
   end
 end
