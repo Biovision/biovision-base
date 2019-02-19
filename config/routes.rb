@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   resources :agents, :browsers, only: %i[update destroy]
 
@@ -44,7 +46,7 @@ Rails.application.routes.draw do
       get 'contact' => :contact
     end
 
-    scope 'u/:slug', controller: :profiles, constraints: { slug: /[^\/]+/ } do
+    scope 'u/:slug', controller: :profiles, constraints: { slug: %r{[^/]+} } do
       get '/' => :show, as: :user_profile
     end
 
