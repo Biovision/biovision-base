@@ -1,66 +1,87 @@
 <%
-  form_id = 'feedback_request-form' unless local_assigns[:form_id]
-  entity = FeedbackRequest.new unless local_assigns[:entity]
+  prefix ||= 'feedback_request'
+  form_id ||= "#{prefix}-form"
+  entity ||= FeedbackRequest.new
 %>
-<%= form_with model: entity, html: { id: form_id } do |f| %>
+<%=
+  form_with(
+      model: entity,
+      html: {
+          id: form_id,
+          class: 'feedback_request-form'
+      }
+  ) do |f|
+%>
   <div class="fields state-1">
-    <%=
-      f.text_field(
-          :name,
-          size:        nil,
-          maxlength:   FeedbackRequest::NAME_LIMIT,
-          placeholder: t('activerecord.attributes.feedback_request.name'),
-          aria:        {
-              label: t('activerecord.attributes.feedback_request.name')
-          },
-          required:    true
-      )
-    %>
-    <% unless local_assigns[:hide_phone] %>
+    <div class="name">
       <%=
-        f.phone_field(
-            :phone,
-            size:        nil,
-            maxlength:   FeedbackRequest::PHONE_LIMIT,
-            placeholder: t('activerecord.attributes.feedback_request.phone'),
-            aria:        {
-                label: t('activerecord.attributes.feedback_request.phone')
+        f.text_field(
+            :name,
+            id: "#{prefix}_id",
+            size: nil,
+            maxlength: FeedbackRequest::NAME_LIMIT,
+            placeholder: t('activerecord.attributes.feedback_request.name'),
+            aria: {
+                label: t('activerecord.attributes.feedback_request.name')
             },
-            required:    true
+            required: true
         )
       %>
+    </div>
+    <% unless local_assigns[:hide_phone] %>
+      <div class="phone">
+        <%=
+          f.phone_field(
+              :phone,
+              id: "#{prefix}_phone",
+              size: nil,
+              maxlength: FeedbackRequest::PHONE_LIMIT,
+              placeholder: t('activerecord.attributes.feedback_request.phone'),
+              aria: {
+                  label: t('activerecord.attributes.feedback_request.phone')
+              },
+              required: true
+          )
+        %>
+      </div>
     <% end %>
     <% unless local_assigns[:hide_email] %>
-      <%=
-        f.email_field(
-            :email,
-            size:        nil,
-            maxlength:   FeedbackRequest::EMAIL_LIMIT,
-            placeholder: t('activerecord.attributes.feedback_request.email'),
-            aria:        {
-                label: t('activerecord.attributes.feedback_request.email')
-            },
-            required:    true
-        )
-      %>
+      <div class="email">
+        <%=
+          f.email_field(
+              :email,
+              id: "#{prefix}_email",
+              size: nil,
+              maxlength: FeedbackRequest::EMAIL_LIMIT,
+              placeholder: t('activerecord.attributes.feedback_request.email'),
+              aria: {
+                  label: t('activerecord.attributes.feedback_request.email')
+              },
+              required: true
+          )
+        %>
+      </div>
     <% end %>
     <% unless local_assigns[:hide_comment] %>
-      <%= f.text_area(
-              :comment,
-              cols:        20,
-              rows:        5,
-              maxlength:   FeedbackRequest::COMMENT_LIMIT,
-              placeholder: t('activerecord.attributes.feedback_request.comment'),
-              aria:        {
-                  label: t('activerecord.attributes.feedback_request.comment')
-              }
-          )
-      %>
+      <div class="comment">
+        <%= f.text_area(
+                :comment,
+                id: "#{prefix}_comment",
+                cols: 20,
+                rows: 5,
+                maxlength: FeedbackRequest::COMMENT_LIMIT,
+                placeholder: t('activerecord.attributes.feedback_request.comment'),
+                aria: {
+                    label: t('activerecord.attributes.feedback_request.comment')
+                }
+            )
+        %>
+      </div>
     <% end %>
-    <div>
+    <div class="consent">
       <%= check_box_tag :agree, '1', false, class: 'visually-hidden', tabindex: -1 %>
-      <%= f.check_box :consent, id: :feedback_request_consent, required: true %>
-      <%= f.label :consent %>
+      <%= f.check_box :consent, id: "#{prefix}_consent", required: true %>
+      <%= f.label :consent, for: "#{prefix}_consent" %>
     </div>
   </div>
   <div class="buttons state-1">
