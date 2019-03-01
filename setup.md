@@ -408,6 +408,8 @@ server {
   access_log /var/log/nginx/example.com-access.log combined;
   error_log /var/log/nginx/example.com-error.log notice;
 
+  client_max_body_size 32m;
+
   gzip on;
   gzip_types text/plain text/css application/json application/javascript image/svg+xml text/xml application/xml application/xml+rss;
 
