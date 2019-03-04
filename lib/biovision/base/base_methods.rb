@@ -88,6 +88,17 @@ module Biovision
         handle_http_error(message, metric || default_metric, view, status)
       end
 
+      # Handle HTTP error with status 403 without raising exception
+      #
+      # @param [String] message
+      # @param [String] metric
+      # @param [Symbol|String] view
+      def handle_http_403(message, metric = nil, view = :forbidden)
+        status         = :forbidden
+        default_metric = Metric::METRIC_HTTP_403
+        handle_http_error(message, metric || default_metric, view, status)
+      end
+
       # Handle HTTP error with status 503 without raising exception
       #
       # @param [String] message
