@@ -52,13 +52,14 @@ class CreateUsers < ActiveRecord::Migration[5.1]
       t.string :notice
       t.string :search_string
       t.string :referral_link, index: true
-      t.json :data, default: { profile: {} }, null: false
+      t.jsonb :data, default: { profile: {} }, null: false
     end
 
     add_foreign_key :users, :users, column: :inviter_id, on_update: :cascade, on_delete: :nullify
     add_foreign_key :users, :users, column: :native_id, on_update: :cascade, on_delete: :nullify
 
     add_index :users, :slug, unique: true
+    add_index :users, :data, using: :gin
   end
 
   def create_tokens

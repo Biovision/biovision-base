@@ -20,10 +20,11 @@ class CreateCodes < ActiveRecord::Migration[5.1]
         t.integer :quantity, limit: 2, default: 1, null: false
         t.string :body, null: false
         t.string :payload
-        t.json :data, default: {}, null: false
+        t.jsonb :data, default: {}, null: false
       end
 
       add_index :codes, %i[body code_type_id quantity]
+      add_index :codes, :data, using: :gin
     end
 
     seed_items

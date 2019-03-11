@@ -20,7 +20,7 @@ class CreateBiovisionComponents < ActiveRecord::Migration[5.2]
     create_table :biovision_components, comment: 'Biovision component' do |t|
       t.timestamps
       t.string :slug, null: false
-      t.json :settings, null: false, default: {}
+      t.jsonb :settings, null: false, default: {}
     end
 
     add_index :biovision_components, :slug, unique: true
