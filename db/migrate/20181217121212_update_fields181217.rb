@@ -8,7 +8,7 @@ class UpdateFields181217 < ActiveRecord::Migration[5.2]
     end
 
     unless column_exists?(:users, :data)
-      add_column :users, :data, :json, default: { profile: {} }, null: false
+      add_column :users, :data, :jsonb, default: { profile: {} }, null: false
     end
 
     if column_exists?(:users, :profile_data)
@@ -19,7 +19,7 @@ class UpdateFields181217 < ActiveRecord::Migration[5.2]
     end
 
     unless column_exists?(:codes, :data)
-      add_column :codes, :data, :json, default: {}, null: false
+      add_column :codes, :data, :jsonb, default: {}, null: false
     end
   end
 
