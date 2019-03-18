@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Helper methods for user handling
 module BiovisionUsersHelper
   def genders_for_select
     genders = [[t(:not_selected), '']]
@@ -6,7 +9,7 @@ module BiovisionUsersHelper
 
   # @param [Integer] gender_id
   def gender_name(gender_id)
-    prefix = 'activerecord.attributes.user_profile.genders.'
+    prefix = 'activerecord.attributes.user_profile.genders'
     if UserProfileHandler::GENDERS.key?(gender_id)
       t("#{prefix}.#{UserProfileHandler::GENDERS[gender_id]}")
     else
@@ -16,18 +19,22 @@ module BiovisionUsersHelper
 
   # @param [User] entity
   # @param [String] text
-  def user_link(entity, text = entity&.profile_name)
+  # @param [Hash] options
+  def user_link(entity, text = entity&.profile_name, options = {})
     return I18n.t(:anonymous) if entity.nil? || entity.deleted?
 
-    link_to(text, user_profile_path(slug: entity.screen_name), class: 'profile')
+    link_options = { class: 'profile' }.merge(options)
+    link_to(text, user_profile_path(slug: entity.screen_name), link_options)
   end
 
   # @param [User] entity
   # @param [String] text
-  def admin_user_link(entity, text = entity&.profile_name)
+  # @param [Hash] options
+  def admin_user_link(entity, text = entity&.profile_name, options = {})
     return I18n.t(:anonymous) if entity.nil?
 
-    link_to(text, admin_user_path(id: entity.id), class: 'profile')
+    link_options = { class: 'profile' }.merge(options)
+    link_to(text, admin_user_path(id: entity.id), link_options)
   end
 
   # @param [ForeignUser] entity
@@ -51,7 +58,7 @@ module BiovisionUsersHelper
 
   # @param [User] entity
   def profile_avatar(entity)
-    if entity&.image.blank? && entity.deleted?
+    if entity&.image.blank? || entity.deleted?
       image_tag('biovision/base/placeholders/user.svg', alt: '')
     else
       user_image_profile(entity)
@@ -65,7 +72,7 @@ module BiovisionUsersHelper
       image_tag('biovision/base/placeholders/user.svg', alt: '')
     else
       default_options = {
-        alt:    entity.profile_name,
+        alt: entity.profile_name,
         srcset: "#{entity.image.tiny_2x.url} 2x"
       }
       image_tag(entity.image.tiny.url, default_options.merge(options))
@@ -73,27 +80,51 @@ module BiovisionUsersHelper
   end
 
   # @param [User] entity
-  def user_image_preview(entity)
-    versions = "#{entity.image.preview_2x.url} 2x"
-    image_tag(entity.image.preview.url, alt: entity.profile_name, srcset: versions)
+  # @param [Hash] options
+  def user_image_preview(entity, options = {})
+    if entity&.image.blank? || entity.deleted?
+      image_tag('biovision/base/placeholders/user.svg', alt: '')
+    else
+      default_options = {
+        alt: entity.profile_name,
+        srcset: "#{entity.image.preview_2x.url} 2x"
+      }
+      image_tag(entity.image.preview.url, default_options.merge(options))
+    end
   end
 
   # @param [User] entity
-  def user_image_profile(entity)
-    versions = "#{entity.image.big.url} 2x"
-    image_tag(entity.image.profile.url, alt: entity.profile_name, srcset: versions)
+  # @param [Hash] options
+  def user_image_profile(entity, options = {})
+    if entity&.image.blank? || entity.deleted?
+      image_tag('biovision/base/placeholders/user.svg', alt: '')
+    else
+      default_options = {
+        alt: entity.profile_name,
+        srcset: "#{entity.image.big.url} 2x"
+      }
+      image_tag(entity.image.profile.url, default_options.merge(options))
+    end
   end
 
   # @param [User] entity
-  def user_image_big(entity)
-    versions = "#{entity.image.big_2x.url} 2x"
-    image_tag(entity.image.big.url, alt: entity.profile_name, srcset: versions)
+  # @param [Hash] options
+  def user_image_big(entity, options = {})
+    if entity&.image.blank? || entity.deleted?
+      image_tag('biovision/base/placeholders/user.svg', alt: '')
+    else
+      default_options = {
+        alt: entity.profile_name,
+        srcset: "#{entity.image.big_2x.url} 2x"
+      }
+      image_tag(entity.image.big.url, default_options.merge(options))
+    end
   end
 
   # @param [ForeignSite] foreign_site
   def foreign_login_link(foreign_site)
     image = "biovision/base/icons/foreign/#{foreign_site.slug}.svg"
-    path  = "/auth/#{foreign_site.slug}"
+    path = "/auth/#{foreign_site.slug}"
     link_to(image_tag(image, alt: foreign_site.name), path)
   end
 end
