@@ -32,6 +32,7 @@ const Biovision = {
      * @param [onFailure]
      */
     new_ajax_request: function (method, url, onSuccess, onFailure) {
+        console.log("Biovision.new_ajax_request is deprecated; user Biovision.newAjaxRequest instead");
         return Biovision.newAjaxRequest(method, url, onSuccess, onFailure);
     },
     /**
@@ -55,9 +56,7 @@ const Biovision = {
                 (onFailure || Biovision.handleAjaxFailure).call(this);
             }
         });
-        request.addEventListener('error', function () {
-            console.log('AJAX error:', this);
-        });
+        request.addEventListener("error", Biovision.handleAjaxFailure);
 
         request.open(method.toUpperCase(), url);
         request.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
@@ -77,6 +76,7 @@ const Biovision = {
      * @param response
      */
     handle_ajax_failure: function (response) {
+        console.log("Biovision.handle_ajax_failure is deprecated; use Biovision.handleAjaxFailure instead");
         console.log('AJAX failed', this);
         if (response.hasOwnProperty('responseJSON')) {
             console.log(response['responseJSON']);
@@ -86,9 +86,11 @@ const Biovision = {
     },
     /**
      * Handle failed AJAX request
+     *
+     * @type {Function}
      */
     handleAjaxFailure: function () {
-        console.log('AJAX failed', this.responseText);
+        console.log('AJAX failed', this);
     },
     /**
      * Показать список ошибок после обработки формы
@@ -772,6 +774,7 @@ Biovision.components.hidingPopups = {
      * Handle click
      *
      * @param {Event} event
+     * @type {Function}
      */
     handler: function (event) {
         const component = Biovision.components.hidingPopups;
@@ -813,6 +816,11 @@ Biovision.components.componentEditor = {
             this.initialized = true;
         }
     },
+    /**
+     *
+     * @param element
+     * @type {Function}
+     */
     apply: function (element) {
         const component = Biovision.components.componentEditor;
         const button = element.parentNode.querySelector('button');
@@ -839,8 +847,17 @@ Biovision.components.componentEditor = {
             button.disabled = false;
         }
     },
+    /**
+     *
+     * @param {Event} event
+     * @type {Function}
+     */
     handleClick: function (event) {
         const component = Biovision.components.componentEditor;
+        /**
+         *
+         * @type {HTMLButtonElement}
+         */
         const button = event.target;
         const li = button.closest('li');
         const input = li.querySelector('input');
@@ -1105,153 +1122,3 @@ document.addEventListener('ajax:beforeSend', function (e) {
 
     e.detail[1].data = newFormData
 });
-
-/*
- *************
- * Polyfills *
- *************
- */
-
-/**
- * Element.matches()
- *
- * IE 9+
- *
- * @see https://developer.mozilla.org/en-US/docs/Web/API/Element/matches
- */
-if (!Element.prototype.matches) {
-    Element.prototype.matches =
-        Element.prototype.msMatchesSelector ||
-        Element.prototype.webkitMatchesSelector;
-}
-
-/**
- * Element.closest()
- *
- * IE 9+
- *
- * @see https://developer.mozilla.org/en-US/docs/Web/API/Element/closest
- */
-if (!Element.prototype.closest) {
-    Element.prototype.closest = function (s) {
-        let el = this;
-        let ancestor = this;
-
-        if (!document.documentElement.contains(el)) {
-            return null;
-        }
-        do {
-            if (ancestor.matches(s)) {
-                return ancestor;
-            }
-            ancestor = ancestor.parentElement;
-        } while (ancestor !== null);
-
-        return null;
-    };
-}
-
-/**
- * ParentNode.prepend()
- *
- * IE
- *
- * @see https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/prepend
- * @see https://github.com/jserz/js_piece/blob/master/DOM/ParentNode/prepend()/prepend().md
- */
-(function (arr) {
-    arr.forEach(function (item) {
-        if (item.hasOwnProperty('prepend')) {
-            return;
-        }
-        Object.defineProperty(item, 'prepend', {
-            configurable: true,
-            enumerable: true,
-            writable: true,
-            value: function prepend() {
-                let argArr = Array.prototype.slice.call(arguments),
-                    docFrag = document.createDocumentFragment();
-
-                argArr.forEach(function (argItem) {
-                    let isNode = argItem instanceof Node;
-                    docFrag.appendChild(isNode ? argItem : document.createTextNode(String(argItem)));
-                });
-
-                this.insertBefore(docFrag, this.firstChild);
-            }
-        });
-    });
-})([Element.prototype, Document.prototype, DocumentFragment.prototype]);
-
-/**
- * ParentNode.append()
- *
- * IE 9+
- *
- * @see https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/append
- * @see https://github.com/jserz/js_piece/blob/master/DOM/ParentNode/append()/append().md
- */
-(function (arr) {
-    arr.forEach(function (item) {
-        if (item.hasOwnProperty('append')) {
-            return;
-        }
-        Object.defineProperty(item, 'append', {
-            configurable: true,
-            enumerable: true,
-            writable: true,
-            value: function append() {
-                let argArr = Array.prototype.slice.call(arguments),
-                    docFrag = document.createDocumentFragment();
-
-                argArr.forEach(function (argItem) {
-                    let isNode = argItem instanceof Node;
-                    docFrag.appendChild(isNode ? argItem : document.createTextNode(String(argItem)));
-                });
-
-                this.appendChild(docFrag);
-            }
-        });
-    });
-})([Element.prototype, Document.prototype, DocumentFragment.prototype]);
-
-/**
- * ChildNode.remove()
- *
- * IE 9+
- *
- * @see https://developer.mozilla.org/en-US/docs/Web/API/ChildNode/remove
- */
-(function (arr) {
-    arr.forEach(function (item) {
-        if (item.hasOwnProperty('remove')) {
-            return;
-        }
-        Object.defineProperty(item, 'remove', {
-            configurable: true,
-            enumerable: true,
-            writable: true,
-            value: function remove() {
-                if (this.parentNode !== null) {
-                    this.parentNode.removeChild(this);
-                }
-            }
-        });
-    });
-})([Element.prototype, CharacterData.prototype, DocumentType.prototype]);
-
-/**
- * NodeList.forEach()
- *
- * ES5
- *
- * @see https://developer.mozilla.org/en-US/docs/Web/API/NodeList/forEach
- */
-if (window.NodeList && !NodeList.prototype.forEach) {
-    NodeList.prototype.forEach = function (callback, thisArg) {
-        thisArg = thisArg || window;
-        for (let i = 0; i < this.length; i++) {
-            callback.call(thisArg, this[i], i, this);
-        }
-    };
-}

@@ -66,8 +66,9 @@ end
 Это добавляется перед `//= require tree .`
 
 ```js
+//= require biovision/base/polyfills
 //= require biovision/base/biovision
-//= require biovision/base/biovision-sliders
+//= require biovision/base/components/carousel
 ```
 
 Если нужна поддержка jQuery, то добавить ещё и это, не забыв раскомментировать
@@ -98,7 +99,7 @@ end
 Актуализация `config/database.yml`
 ----------------------------------
 
-В файле database.yml нужно поменять названия баз данных на актуальные:
+В файле `database.yml` нужно поменять названия баз данных на актуальные:
 
 ```yaml
 default: &default
@@ -280,7 +281,7 @@ end
       from: 'example.com <webmaster@example.com>',
       reply_to: 'info@example.com'
   }
-  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  config.action_mailer.default_url_options = { :host => '0.0.0.0:3000' }
 ```
 
 Дополнения в `config/puma.rb`
@@ -321,7 +322,8 @@ bundle binstub puma
 ```
 
 Также имеет смысл запустить `EDITOR=vim rails credentials:edit`, чтобы создать
-зашированный файл с ключом шифрования сессии. (чтобы выйти из `vim` с сохранением надо набрать `:wq`)
+зашированный файл с ключом шифрования сессии (чтобы выйти из `vim` 
+с сохранением, надо набрать `:wq`)
 
 Настройка отгрузки через `mina`
 -------------------------------
