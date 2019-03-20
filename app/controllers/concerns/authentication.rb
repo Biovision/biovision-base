@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Adds methods for user authentication
 module Authentication
   extend ActiveSupport::Concern
 
@@ -18,17 +21,17 @@ module Authentication
   end
 
   def deactivate_token
-    token = Token.find_by token: cookies['token'].split(':').last
-    token.update active: false
+    token = Token.find_by(token: cookies['token'].split(':').last)
+    token&.update(active: false)
     pop_token
   end
 
   def pop_token
     if cookies['pt']
       cookies['token'] = {
-        value:    cookies['pt'],
-        expires:  1.year.from_now,
-        domain:   :all,
+        value: cookies['pt'],
+        expires: 1.year.from_now,
+        domain: :all,
         httponly: true
       }
       cookies.delete 'pt', domain: :all

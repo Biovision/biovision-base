@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Adds method for toggling entity flags
 module ToggleableEntity
   extend ActiveSupport::Concern
 
@@ -23,10 +26,6 @@ module ToggleableEntity
   end
 
   def entity_is_locked?
-    if @entity.respond_to?(:locked?)
-      @entity.locked?
-    else
-      false
-    end
+    @entity.respond_to?(:locked?) ? @entity.locked? : false
   end
 end

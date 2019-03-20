@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Adds action for removing entity image in column "image"
 module RemovableImage
   extend ActiveSupport::Concern
 
@@ -24,10 +27,6 @@ module RemovableImage
   end
 
   def entity_image_is_locked?
-    if @entity.respond_to?(:locked?)
-      @entity.locked?
-    else
-      false
-    end
+    @entity.respond_to?(:locked?) ? @entity.locked? : false
   end
 end

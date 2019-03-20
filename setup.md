@@ -170,6 +170,10 @@ end
     post :priority, on: :member, defaults: { format: :json }
   end
 
+  concern :removable_image do
+    delete :image, action: :destroy_image, on: :member, defaults: { format: :json }
+  end
+
   concern :lock do
     member do
       put :lock, defaults: { format: :json }

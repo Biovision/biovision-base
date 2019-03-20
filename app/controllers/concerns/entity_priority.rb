@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Adds method for changing entity priority
 module EntityPriority
   extend ActiveSupport::Concern
 

@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Adds methods for locking and unlocking entity
 module LockableEntity
   extend ActiveSupport::Concern
 
@@ -16,8 +19,8 @@ module LockableEntity
   protected
 
   def check_entity_lock
-    if @entity.locked?
-      render json: { errors: { locked: @entity.locked } }, status: :forbidden
-    end
+    return unless @entity.locked?
+
+    render json: { errors: { locked: @entity.locked? } }, status: :forbidden
   end
 end
