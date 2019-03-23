@@ -5,7 +5,8 @@ Biovision::Base
 
 Используйте на свой страх и риск без каких-либо гарантий работоспособности.
 
-Описание необходимых и рекомендуемых действий находится в `setup.md`
+Описание необходимых и рекомендуемых действий находится 
+в [setup.md](https://github.com/Biovision/biovision-base/blob/master/setup.md)
 
 Очистка устаревших сессий
 -------------------------
@@ -85,31 +86,14 @@ Biovision::Base
    который проверяется.
    
 4. Рядом с элементом нужно добавить `div` с атрибутом `data-field` и таким же
-   значением, а также классом `check-result-error hidden`.
+   значением, а также классом `check-result-error`.
    
 Пример — [app/views/my/profiles/new/_form.html.erb](https://github.com/Biovision/biovision-base/blob/master/app/views/my/profiles/new/_form.html.erb),
 [app/controllers/users_controller.rb#check](https://github.com/Biovision/biovision-base/blob/master/app/controllers/users_controller.rb#L8),
 [app/views/users/check.jbuilder](https://github.com/Biovision/biovision-base/blob/master/app/views/users/check.jbuilder)
 
-## Installation
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'biovision-base'
-```
-
-And then execute:
-```bash
-$ bundle
-```
-
-Or install it yourself as:
-```bash
-$ gem install biovision-base
-```
-
 ## Contributing
-Contribution directions go here.
+Fork, update, make pull request.
 
 ## License
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).

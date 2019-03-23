@@ -221,7 +221,7 @@ Biovision.components.filePreview = {
                 const reader = new FileReader();
 
                 reader.onload = function (event) {
-                    target.setAttribute('src', event.target.result);
+                    target.setAttribute('src', event.target["result"]);
                 };
 
                 reader.readAsDataURL(input.files[0]);
@@ -322,7 +322,6 @@ Biovision.components.instantCheck = {
                     if (response.meta.valid) {
                         form.querySelectorAll('[data-field]').forEach(function (field) {
                             field.innerHTML = '';
-                            field.classList.add('hidden');
                         });
                     } else {
                         const key = element.getAttribute('data-check');
@@ -335,7 +334,7 @@ Biovision.components.instantCheck = {
                                 container.innerHTML = errors[key].join('; ');
                                 container.classList.remove('hidden');
                             } else {
-                                container.classList.add('hidden');
+                                container.innerHTML = '';
                             }
                         }
                     }
@@ -849,7 +848,7 @@ Biovision.components.componentEditor = {
     },
     /**
      *
-     * @param {Event} event
+     * @param {MouseEvent} event
      * @type {Function}
      */
     handleClick: function (event) {
