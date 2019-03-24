@@ -1,7 +1,7 @@
 <div class="data">
   <div><%= entity.name %></div>
   <div class="info">
-    <%= entity.phone %>
+    <%= entity.phone %><br/>
     <%= entity.email %>
   </div>
   <div class="secondary info">
@@ -11,6 +11,14 @@
   <% unless entity.comment.blank? %>
     <div class="secondary info">
       <%= simple_format entity.comment %>
+    </div>
+  <% end %>
+  <% unless entity.data.empty? %>
+    <div class="secondary info">
+      <%= t('activerecord.attributes.feedback_request.data') %>:
+      <% entity.data.each do |k, v| %>
+        <div><dfn><%= k %></dfn><%= v %></div>
+      <% end %>
     </div>
   <% end %>
 

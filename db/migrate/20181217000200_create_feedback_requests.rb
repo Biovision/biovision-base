@@ -17,6 +17,7 @@ class CreateFeedbackRequests < ActiveRecord::Migration[5.1]
       t.string :phone
       t.string :image
       t.text :comment
+      t.jsonb :data, default: {}, null: false
     end
   end
 

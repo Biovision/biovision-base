@@ -6,6 +6,7 @@ ru:
       feedback_request:
         comment: "Комментарий"
         consent: "Согласие на обработку персональных данных"
+        data: "Дополнительные данные"
         email: "Почта"
         image: "Картинка"
         language: "Язык"
