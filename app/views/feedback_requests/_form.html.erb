@@ -79,7 +79,7 @@
       </div>
     <% end %>
     <div class="consent">
-      <%= check_box_tag :agree, '1', false, class: 'visually-hidden', tabindex: -1 %>
+      <%= check_box_tag :agree, '1', false, class: 'visually-hidden', id: nil, tabindex: -1 %>
       <%= f.check_box :consent, id: "#{prefix}_consent", required: true %>
       <%= f.label :consent, for: "#{prefix}_consent" %>
     </div>

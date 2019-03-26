@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   resources :editable_blocks, only: %i[update destroy]
   resources :editable_pages, only: %i[update destroy]
+  resources :simple_blocks, only: %i[update destroy]
   resources :stored_values, only: %i[update destroy]
 
   resources :users, only: %i[update destroy]
@@ -81,6 +82,9 @@ Rails.application.routes.draw do
           post 'priority', defaults: { format: :json }
           post 'toggle', defaults: { format: :json }
         end
+      end
+      resources :simple_blocks, only: %i[index show] do
+        post 'toggle', on: :member, defaults: { format: :json }
       end
       resources :editable_blocks, only: %i[index show] do
         member do
@@ -192,6 +196,9 @@ Rails.application.routes.draw do
       collection do
         post 'check', defaults: { format: :json }
       end
+    end
+    resources :simple_blocks, only: %i[new create edit] do
+      post 'check', on: :collection, defaults: { format: :json }
     end
     resources :stored_values, except: %i[index show update destroy]
 

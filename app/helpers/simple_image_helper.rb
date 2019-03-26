@@ -10,7 +10,7 @@ module SimpleImageHelper
     default = {
       alt: entity.respond_to?(:image_alt_text) ? entity.image_alt_text : ''
     }
-    image_tag(entity.image.preview.url, default.merge(options))
+    image_tag(entity.image.preview_url, default.merge(options))
   end
 
   # @param [ApplicationRecord] entity
@@ -20,9 +20,10 @@ module SimpleImageHelper
 
     default = {
       alt: entity.respond_to?(:image_alt_text) ? entity.image_alt_text : '',
-      srcset: "#{entity.image.medium.url} 2x"
     }
-    image_tag(entity.image.small.url, default.merge(options))
+    default[:srcset] = "#{entity.image.medium.url} 2x" if entity.image.raster?
+
+    image_tag(entity.image.small_url, default.merge(options))
   end
 
   # @param [ApplicationRecord] entity
@@ -32,9 +33,10 @@ module SimpleImageHelper
 
     default = {
       alt: entity.respond_to?(:image_alt_text) ? entity.image_alt_text : '',
-      srcset: "#{entity.image.large.url} 2x"
     }
-    image_tag(entity.image.medium.url, default.merge(options))
+    default[:srcset] = "#{entity.image.large.url} 2x" if entity.image.raster?
+
+    image_tag(entity.image.medium_url, default.merge(options))
   end
 
   # @param [ApplicationRecord] entity
@@ -44,9 +46,10 @@ module SimpleImageHelper
 
     default = {
       alt: entity.respond_to?(:image_alt_text) ? entity.image_alt_text : '',
-      srcset: "#{entity.image.hd.url} 2x"
     }
-    image_tag(entity.image.large.url, default.merge(options))
+    default[:srcset] = "#{entity.image.hd.url} 2x" if entity.image.raster?
+
+    image_tag(entity.image.large_url, default.merge(options))
   end
 
   # @param [ApplicationRecord] entity
@@ -57,6 +60,7 @@ module SimpleImageHelper
     default = {
       alt: entity.respond_to?(:image_alt_text) ? entity.image_alt_text : ''
     }
-    image_tag(entity.image.hd.url, default.merge(options))
+
+    image_tag(entity.image.hd_url, default.merge(options))
   end
 end

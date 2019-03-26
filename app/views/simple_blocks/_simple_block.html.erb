@@ -1,0 +1,26 @@
+<%
+  style = ''
+  if simple_block.background_image? && !simple_block.image.blank?
+    style = %(background-image: url('#{simple_block.image.hd_url}'))
+  end
+%>
+<section class="simple-block simple-block__<%= simple_block.slug %>" style="<%= style %>">
+  <div class="wrapper">
+    <% unless simple_block.image.blank? || simple_block.background_image? %>
+      <figure>
+        <%= simple_image_hd(simple_block) %>
+      </figure>
+    <% end %>
+
+    <div class="text">
+      <%= raw(simple_block.body) %>
+    </div>
+  </div>
+
+  <% if current_user_has_privilege?(:content_manager) %>
+    <ul class="actions">
+      <li><%= gear_icon(admin_simple_block_path(id: simple_block.id)) %></li>
+      <li><%= edit_icon(edit_simple_block_path(id: simple_block.id)) %></li>
+    </ul>
+  <% end %>
+</section>

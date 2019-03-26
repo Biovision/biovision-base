@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Administrative part of editable pages management
+# Administrative part of editable_pages management
 class Admin::EditablePagesController < AdminController
   include EntityPriority
   include ToggleableEntity

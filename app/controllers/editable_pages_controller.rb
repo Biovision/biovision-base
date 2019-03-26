@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Managing editable pages
+# Managing editable_pages
 class EditablePagesController < AdminController
   before_action :set_entity, only: %i[edit update destroy]
 
@@ -41,9 +41,8 @@ class EditablePagesController < AdminController
 
   # delete /editable_pages/:id
   def destroy
-    if @entity.destroy
-      flash[:notice] = t('editable_pages.destroy.success')
-    end
+    flash[:notice] = t('editable_pages.destroy.success') if @entity.destroy
+
     redirect_to(admin_editable_pages_path)
   end
 

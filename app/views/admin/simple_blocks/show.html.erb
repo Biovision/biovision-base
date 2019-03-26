@@ -1,0 +1,51 @@
+<% content_for :meta_title, t('.title', slug: @entity.slug) %>
+<% content_for :breadcrumbs do %>
+  <%= link_to(t('admin.simple_blocks.nav_item.text'), admin_simple_blocks_path) %>
+  <span><%= @entity.name %></span>
+<% end %>
+
+<article>
+  <h1><%= @entity.slug %></h1>
+
+  <ul class="actions">
+    <li><%= back_icon(admin_simple_blocks_path) %></li>
+    <li><%= edit_icon(edit_simple_block_path(id: @entity.id)) %></li>
+  </ul>
+
+  <dl>
+    <% unless @entity.image.blank? %>
+      <dt><%= t('activerecord.attributes.simple_block.image') %></dt>
+      <dd>
+        <figure role="group" class="preview">
+          <%= simple_image_medium(@entity) %>
+          <figcaption><%= @entity.image_alt_text %></figcaption>
+        </figure>
+      </dd>
+    <% end %>
+
+    <dt><%= t('activerecord.attributes.simple_block.slug') %></dt>
+    <dd><%= @entity.slug %></dd>
+
+    <dt><%= t('activerecord.attributes.simple_block.name') %></dt>
+    <dd><%= @entity.name %></dd>
+
+    <dt><%= t('activerecord.attributes.simple_block.body') %></dt>
+    <dd>
+      <div class="text">
+        <%= raw(@entity.body) %>
+      </div>
+    </dd>
+
+    <%= render partial: 'shared/entity/timestamps', locals: { entity: @entity } %>
+  </dl>
+
+  <%=
+    render(
+        partial: 'shared/admin/toggleable',
+        locals:  {
+            entity: @entity,
+            url:    toggle_admin_simple_block_path(id: @entity.id)
+        }
+    )
+  %>
+</article>

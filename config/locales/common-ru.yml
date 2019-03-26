@@ -16,6 +16,7 @@ ru:
     messages:
       extension_blacklist_error: "имеет недопустимое расширение файла"
       extension_whitelist_error: "имеет недопустимое расширение файла"
+      mini_magick_processing_error: "не может быть обработан"
     error:
       bad_request:
         title: "Плохой запрос"

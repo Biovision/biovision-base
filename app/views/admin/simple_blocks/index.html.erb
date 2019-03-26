@@ -1,0 +1,21 @@
+<% content_for :meta_title, t('.title') %>
+<% content_for :breadcrumbs do %>
+    <span><%= t('admin.simple_blocks.nav_item.text') %></span>
+<% end %>
+
+<article>
+  <h1><%= t('.heading') %></h1>
+  <ul class="actions">
+    <li><%= back_icon(admin_path) %></li>
+    <li><%= create_icon(new_simple_block_path) %></li>
+  </ul>
+
+  <%=
+    render(
+        partial: 'shared/admin/list',
+        locals: {
+            collection: @collection
+        }
+    )
+  %>
+</article>
