@@ -1,8 +1,13 @@
+# frozen_string_literal: true
+
+# Mailer for user-related things
 class UserMailer < ApplicationMailer
   # @param [Integer] user_id
   def login_attempt(user_id)
     @user = User.find_by(id: user_id)
 
-    mail to: @user.email unless @user&.email.blank?
+    return if @user.nil? || @user.email.blank?
+
+    mail to: @user.email
   end
 end

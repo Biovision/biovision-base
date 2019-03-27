@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Mailer for sending feedback requests
 class FeedbackMailer < ApplicationMailer
   # @param [Integer] id
   def new_feedback_request(id)
