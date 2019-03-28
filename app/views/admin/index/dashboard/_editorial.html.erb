@@ -1,6 +1,6 @@
 <% if current_user_has_privilege?(:content_manager) %>
   <nav>
-    <div class="heading"><%= t('.heading') %></div>
+    <h3><%= t('.heading') %></h3>
     <ul>
       <li><%= render 'admin/editable_pages/nav_item' %></li>
       <li><%= render 'admin/simple_blocks/nav_item' %></li>
