@@ -24,7 +24,7 @@ Rails.application.routes.draw do
 
   resources :link_blocks, :link_block_items, only: %i[update destroy]
 
-  scope '(:locale)', constraints: { locale: /[a-ln-z][a-z]|m[a-xz]/ } do
+  scope '(:locale)', constraints: { locale: /ru|en|sv|cn/ } do
     # Handling errors
     match '/400' => 'errors#bad_request', via: :all
     match '/401' => 'errors#unauthorized', via: :all
