@@ -18,8 +18,8 @@ class User < ApplicationRecord
   EMAIL_PATTERN = /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z0-9][-a-z0-9]+)\z/i.freeze
 
   SCREEN_NAME_LIMIT        = 30
-  SCREEN_NAME_PATTERN      = /\A[a-z0-9_]{1,30}\z/i.freeze
-  SCREEN_NAME_PATTERN_HTML = '^[a-zA-Z0-9_]{1,30}$'
+  SCREEN_NAME_PATTERN      = /\A[-a-z0-9_]{1,30}\z/i.freeze
+  SCREEN_NAME_PATTERN_HTML = '^[-a-zA-Z0-9_]{1,30}$'
 
   toggleable %i[allow_login email_confirmed phone_confirmed allow_mail]
 
