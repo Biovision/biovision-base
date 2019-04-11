@@ -8,7 +8,7 @@ class My::ProfilesController < ApplicationController
   before_action :restrict_anonymous_access, except: %i[check new create]
   before_action :set_handler
 
-  layout 'profile', only: %i[show edit]
+  # layout 'profile', only: %i[show edit]
 
   # post /my/profile/check
   def check
