@@ -1,0 +1,39 @@
+[Unit]
+Description=Puma HTTP Forking Server for example.com
+After=network.target
+
+[Service]
+# Background process configuration (use with --daemon in ExecStart)
+Type=forking
+
+# Preferably configure a non-privileged user
+User=developer
+
+# The path to the puma application root
+WorkingDirectory=/var/www/example.com/current
+
+# The command to start Puma
+ExecStart=/home/developer/.rbenv/shims/bundle exec puma -C /var/www/example.com/current/config/puma.rb --daemon
+
+# The command to stop Puma
+ExecStop=/home/developer/.rbenv/shims/bundle exec pumactl -S /var/www/example.com/shared/tmp/puma/state stop
+
+# Path to PID file so that systemd knows which is the master process
+PIDFile=/var/www/example.com/shared/tmp/puma/pid
+
+# Should systemd restart puma?
+# Use "no" (the default) to ensure no interference when using
+# stop/start/restart via `pumactl`.  The "on-failure" setting might
+# work better for this purpose, but you must test it.
+# Use "always" if only `systemctl` is used for start/stop/restart, and
+# reconsider if you actually need the forking config.
+Restart=no
+
+# `puma_ctl restart` wouldn't work without this. It's because `pumactl`
+# changes PID on restart and systemd stops the service afterwards
+# because of the PID change. This option prevents stopping after PID
+# change.
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
