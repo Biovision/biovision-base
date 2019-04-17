@@ -8,6 +8,7 @@ Type=forking
 
 # Preferably configure a non-privileged user
 User=developer
+Environment=RAILS_ENV=production
 
 # The path to the puma application root
 WorkingDirectory=/var/www/example.com/current
