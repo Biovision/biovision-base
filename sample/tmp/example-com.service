@@ -22,6 +22,8 @@ ExecStop=/home/developer/.rbenv/shims/bundle exec pumactl -S /var/www/example.co
 # Path to PID file so that systemd knows which is the master process
 PIDFile=/var/www/example.com/shared/tmp/puma/pid
 
+TimeoutSec=30
+
 # Should systemd restart puma?
 # Use "no" (the default) to ensure no interference when using
 # stop/start/restart via `pumactl`.  The "on-failure" setting might
