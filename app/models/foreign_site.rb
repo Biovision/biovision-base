@@ -1,3 +1,11 @@
+# frozen_string_literal: true
+
+# Model for foreign site for external authentication
+#
+# Attributes:
+#   foreign_users_count [Integer]
+#   name [String]
+#   slug [String]
 class ForeignSite < ApplicationRecord
   include RequiredUniqueName
   include RequiredUniqueSlug
@@ -10,9 +18,7 @@ class ForeignSite < ApplicationRecord
   validates_length_of :name, maximum: NAME_LIMIT
   validates_length_of :slug, maximum: SLUG_LIMIT
 
-  def self.page_for_administration
-    ordered_by_name
-  end
+  scope :list_for_administration, -> { ordered_by_name }
 
   # @param [Hash] data
   # @param [Hash] tracking
