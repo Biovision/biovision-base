@@ -11,9 +11,9 @@
           <%=
             f.file_field(
                 :image,
-                id:     "#{model_name}_image",
+                id: "#{model_name}_image",
                 accept: 'image/jpeg,image/png',
-                data:   { image: "#{model_name}-image" }
+                data: { image: "#{model_name}-image" }
             )
           %>
         </figcaption>
@@ -25,14 +25,14 @@
       <%=
         f.text_field(
             :screen_name,
-            id:        "#{model_name}_screen_name",
+            id: "#{model_name}_screen_name",
             maxlength: User::SCREEN_NAME_LIMIT,
-            pattern:   User::SCREEN_NAME_PATTERN_HTML,
-            title:     t('.guidelines.screen_name'),
-            required:  true
+            required: true
         )
       %>
-      <div class="guideline"><%= t('.guidelines.screen_name') %></div>
+      <% unless entity.foreign_slug? %>
+        <div class="guideline"><%= t('.guidelines.screen_name') %></div>
+      <% end %>
     </dd>
 
     <dt><%= f.label :email %></dt>
@@ -40,10 +40,10 @@
       <%=
         f.email_field(
             :email,
-            id:        "#{model_name}_email",
-            size:      nil,
+            id: "#{model_name}_email",
+            size: nil,
             maxlength: User::EMAIL_LIMIT,
-            readonly:  entity.super_user?
+            readonly: entity.super_user?
         )
       %>
     </dd>
@@ -53,10 +53,10 @@
       <%=
         f.phone_field(
             :phone,
-            id:        "#{model_name}_phone",
-            size:      15,
+            id: "#{model_name}_phone",
+            size: 15,
             maxlength: User::PHONE_LIMIT,
-            readonly:  entity.super_user?
+            readonly: entity.super_user?
         )
       %>
     </dd>
@@ -77,7 +77,7 @@
       <%=
         f.date_field(
             :birthday,
-            id:   "#{model_name}_birthday",
+            id: "#{model_name}_birthday",
             size: 10
         )
       %>
@@ -89,10 +89,10 @@
         <%=
           f.text_field(
               :password,
-              id:        "#{model_name}_password",
-              size:      nil,
+              id: "#{model_name}_password",
+              size: nil,
               maxlength: 70,
-              required:  entity.id.nil?
+              required: entity.id.nil?
           )
         %>
       </dd>
@@ -102,10 +102,10 @@
         <%=
           f.text_field(
               :password_confirmation,
-              id:        "#{model_name}_password_confirmation",
-              size:      nil,
+              id: "#{model_name}_password_confirmation",
+              size: nil,
               maxlength: 70,
-              required:  entity.id.nil?
+              required: entity.id.nil?
           )
         %>
       </dd>
@@ -118,8 +118,8 @@
       <%=
         f.text_field(
             :notice,
-            id:        "#{model_name}_notice",
-            size:      nil,
+            id: "#{model_name}_notice",
+            size: nil,
             maxlength: User::NOTICE_LIMIT
         )
       %>
