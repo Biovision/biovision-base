@@ -12,7 +12,7 @@
   <ul class="actions">
     <li><%= back_icon(admin_users_path) %></li>
     <% unless @entity.deleted? %>
-      <li><%= world_icon(user_profile_path(slug: @entity.screen_name)) %></li>
+      <li><%= world_icon(user_profile_path(slug: @entity.slug)) %></li>
       <li><%= edit_icon(edit_user_path(id: @entity.id)) %></li>
     <% end %>
   </ul>
