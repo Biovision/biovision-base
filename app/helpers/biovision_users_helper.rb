@@ -24,7 +24,7 @@ module BiovisionUsersHelper
     return I18n.t(:anonymous) if entity.nil? || entity.deleted?
 
     link_options = { class: 'profile' }.merge(options)
-    link_to(text, user_profile_path(slug: entity.screen_name), link_options)
+    link_to(text, user_profile_path(slug: entity.slug), link_options)
   end
 
   # @param [User] entity
