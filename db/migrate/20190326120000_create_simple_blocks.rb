@@ -26,6 +26,12 @@ class CreateSimpleBlocks < ActiveRecord::Migration[5.2]
   private
 
   def seed_default_blocks
-    SimpleBlock.create(slug: 'counters', name: 'Счётчики для сайта')
+    data = [
+      ['counters', 'Счётчики для сайта']
+    ]
+
+    data.each do |row|
+      SimpleBlock.create(slug: row[0], name: row[1])
+    end
   end
 end

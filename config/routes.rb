@@ -1,6 +1,29 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  concern :check do
+    post :check, on: :collection, defaults: { format: :json }
+  end
+
+  concern :toggle do
+    post :toggle, on: :member, defaults: { format: :json }
+  end
+
+  concern :priority do
+    post :priority, on: :member, defaults: { format: :json }
+  end
+
+  concern :removable_image do
+    delete :image, action: :destroy_image, on: :member, defaults: { format: :json }
+  end
+
+  concern :lock do
+    member do
+      put :lock, defaults: { format: :json }
+      delete :lock, action: :unlock, defaults: { format: :json }
+    end
+  end
+
   resources :agents, :browsers, only: %i[update destroy]
 
   resources :editable_blocks, only: %i[update destroy]
@@ -62,35 +85,14 @@ Rails.application.routes.draw do
         delete ':slug/:parameter_slug' => :delete_parameter, as: :parameter
       end
 
-      resources :agents, :browsers, only: %i[index show] do
-        member do
-          post 'toggle', defaults: { format: :json }
-          put 'lock', defaults: { format: :json }
-          delete 'lock', action: :unlock, defaults: { format: :json }
-        end
-      end
+      resources :agents, :browsers, only: %i[index show], concerns: %i[lock toggle]
 
       resources :codes, only: %i[index show]
-      resources :tokens, only: %i[index show] do
-        member do
-          post 'toggle', defaults: { format: :json }
-        end
-      end
+      resources :tokens, only: %i[index show], concerns: :toggle
 
-      resources :editable_pages, only: %i[index show] do
-        member do
-          post 'priority', defaults: { format: :json }
-          post 'toggle', defaults: { format: :json }
-        end
-      end
-      resources :simple_blocks, only: %i[index show] do
-        post 'toggle', on: :member, defaults: { format: :json }
-      end
-      resources :editable_blocks, only: %i[index show] do
-        member do
-          post 'toggle', defaults: { format: :json }
-        end
-      end
+      resources :editable_pages, only: %i[index show], concerns: %i[priority toggle]
+      resources :simple_blocks, only: %i[index show], concerns: :toggle
+      resources :editable_blocks, only: %i[index show], concerns: :toggle
       resources :stored_values, only: %i[index show]
 
       resources :metrics, only: %i[index show] do
@@ -99,28 +101,20 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :privileges, only: %i[index show] do
-        collection do
-          post 'check'
-        end
+      resources :privileges, only: %i[index show], concerns: %i[priority toggle] do
         member do
-          post 'priority', defaults: { format: :json }
-          post 'toggle', defaults: { format: :json }
           get 'users'
           get 'regions', defaults: { format: :json }
         end
       end
       resources :privilege_groups, only: %i[index show] do
-        collection do
-          post 'check'
-        end
         member do
           put 'privileges/:privilege_id' => :add_privilege, as: :privilege, defaults: { format: :json }
           delete 'privileges/:privilege_id' => :remove_privilege, defaults: { format: :json }
         end
       end
 
-      resources :users, only: %i[index show] do
+      resources :users, only: %i[index show], concerns: :toggle do
         collection do
           get 'search', defaults: { format: :json }
         end
@@ -130,7 +124,6 @@ Rails.application.routes.draw do
           get 'privileges'
           put 'privileges/:privilege_id' => :grant_privilege, as: :privilege
           delete 'privileges/:privilege_id' => :revoke_privilege
-          post 'toggle', defaults: { format: :json }
           post 'authenticate'
         end
       end
@@ -144,75 +137,33 @@ Rails.application.routes.draw do
           get 'files'
         end
       end
-      resources :media_files, only: %i[index show] do
-        member do
-          put 'lock', defaults: { format: :json }
-          delete 'lock', action: :unlock, defaults: { format: :json }
-        end
-      end
+      resources :media_files, only: %i[index show], concerns: :lock
 
-      resources :feedback_requests, only: :index do
-        member do
-          post 'toggle', defaults: { format: :json }
-        end
-      end
+      resources :feedback_requests, only: :index, concerns: :toggle
 
-      resources :link_blocks, only: %i[index show] do
-        member do
-          post 'toggle', defaults: { format: :json }
-        end
-      end
-      resources :link_block_items, only: :show do
-        member do
-          post 'toggle', defaults: { format: :json }
-          post 'priority', defaults: { format: :json }
-        end
-      end
+      resources :link_blocks, only: %i[index show], concerns: :toggle
+      resources :link_block_items, only: :show, concerns: %i[priority toggle]
     end
 
     namespace :my do
       get '/' => 'index#index'
 
-      resource :profile, except: :destroy do
-        post 'check'
-      end
+      resource :profile, except: :destroy, concerns: :check
       resource :confirmation, :recovery, only: %i[show create update]
-      resources :tokens, only: :index do
-        member do
-          post 'toggle', defaults: { format: :json }
-        end
-      end
+      resources :tokens, only: :index, concerns: :toggle
       resources :login_attempts, only: :index
     end
 
     resources :agents, :browsers, except: %i[index show update destroy]
 
-    resources :editable_pages, except: %i[index show update destroy] do
-      collection do
-        post 'check', defaults: { format: :json }
-      end
-    end
-    resources :editable_blocks, except: %i[index show update destroy] do
-      collection do
-        post 'check', defaults: { format: :json }
-      end
-    end
-    resources :simple_blocks, only: %i[new create edit] do
-      post 'check', on: :collection, defaults: { format: :json }
-    end
+    resources :editable_pages, except: %i[index show update destroy], concerns: :check
+    resources :editable_blocks, except: %i[index show update destroy], concerns: :check
+    resources :simple_blocks, only: %i[new create edit], concerns: :check
     resources :stored_values, except: %i[index show update destroy]
 
-    resources :link_blocks, :link_block_items, except: %i[index show update destroy] do
-      collection do
-        post 'check', defaults: { format: :json }
-      end
-    end
+    resources :link_blocks, :link_block_items, except: %i[index show update destroy], concerns: :check
 
-    resources :users, except: %i[index show update destroy] do
-      collection do
-        post 'check', defaults: { format: :json }
-      end
-    end
+    resources :users, except: %i[index show update destroy], concerns: :check
     resources :tokens, :codes, except: %i[index show update destroy]
 
     resources :metrics, only: :edit

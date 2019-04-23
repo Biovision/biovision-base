@@ -130,6 +130,16 @@ production:
 Rails.application.config.assets.precompile << %w[admin.scss biovision/base/**/*]
 ```
 
+Добавления в `config/application.rb`
+------------------------------------
+
+Это добавляется в блок конфигурирования. Без этой настройки часовой пояс будет
+задан как UTC.
+
+```ruby
+  config.time_zone = 'Moscow'
+```
+
 Добавления в `spec/rails_helper.rb` (`$ rails generate rspec:install`)
 ----------------------------------------------------------------------
 

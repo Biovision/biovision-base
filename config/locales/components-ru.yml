@@ -6,9 +6,6 @@ ru:
     attributes:
       biovision_component:
         slug: "Идентификатор"
-      biovision_parameter:
-        slug: "Идентификатор"
-        value: "Значение"
   admin:
     settings:
       index:
@@ -27,6 +24,8 @@ ru:
           guidelines:
             slug: "Только латинские буквы, цифры, дефис и подчёркивание (кроме начала и конца)."
             value: "Произвольная строка"
+          slug: "Параметр"
+          value: "Значение"
       update:
         success: "Настройки компонента обновлены"
   biovision:

@@ -36,43 +36,6 @@ module Biovision
         @component.settings
       end
 
-      def parameters
-        @component.biovision_parameters.list_for_administration
-      end
-
-      # Get instance of BiovisionParameter with given slug
-      #
-      # @param [String] slug
-      def parameter(slug)
-        @component.biovision_parameters.find_by(slug: slug)
-      end
-
-      # Create or update parameter values
-      #
-      # @param [String] slug
-      # @param [String] value
-      # @param [String] name
-      # @param [String] description
-      def set_parameter(slug, value, name = '', description = '')
-        @component[slug] = value
-
-        item = parameter(slug)
-        item.update(name: name, description: description) if item.deletable?
-
-        item
-      end
-
-      # Delete parameter with given slug (if it is deletable)
-      #
-      # @param [String] slug
-      def delete_parameter(slug)
-        item = parameter(slug)
-
-        return unless item&.deletable?
-
-        item.destroy
-      end
-
       # Receive parameter value with default
       #
       # Returns value of component's parameter or default value 
@@ -82,7 +45,7 @@ module Biovision
       # @param [String] default
       # @return [String]
       def receive(key, default = '')
-        @component.receive!(key, default)
+        @component.get(key, default)
       end
 
       # Receive parameter value or nil
@@ -90,9 +53,9 @@ module Biovision
       # Returns value of component's parameter of nil when it's not found
       #
       # @param [String] key
-      # @return [String|nil]
+      # @return [String]
       def [](key)
-        @component.receive(key)
+        @component.get(key)
       end
 
       # Set parameter

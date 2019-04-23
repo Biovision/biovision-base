@@ -15,31 +15,26 @@ class Admin::SettingsController < AdminController
 
   # patch /admin/settings/:slug
   def update
-    new_settings      = params.dig(:component, :settings).permit!
+    new_settings = params.dig(:component, :settings).permit!
     @handler.settings = new_settings.to_h
-    flash[:notice]    = t('admin.settings.update.success')
+    flash[:notice] = t('admin.settings.update.success')
     redirect_to(admin_component_path(slug: params[:slug]))
   end
 
   # put /admin/settings/:slug/parameter
   def set_parameter
-    slug        = param_from_request(:key, :slug).downcase
-    value       = param_from_request(:key, :value)
-    name        = param_from_request(:key, :name)
-    description = param_from_request(:key, :description)
+    slug = param_from_request(:key, :slug).downcase
+    value = param_from_request(:key, :value)
 
-    if name.blank? && description.blank?
-      @handler[slug] = value
-    else
-      @handler.set_parameter(slug, value, name, description)
-    end
+    @handler[slug] = value
 
     head :no_content
   end
 
   # delete /admin/settings/:slug/:parameter_slug
   def delete_parameter
-    @handler.delete_parameter(params[:parameter_slug])
+    @handler.component.parameters.delete(params[:parameter_slug])
+    @handler.component.save
 
     head :no_content
   end
