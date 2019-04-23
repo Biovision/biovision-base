@@ -2,17 +2,17 @@
   <h2><%= t('.heading') %></h2>
 
   <ul id="biovision-component-parameters" data-url="<%= admin_set_parameter_path(slug: handler.slug) %>">
-    <% parameters.each do |parameter| %>
+    <% parameters.each do |parameter, value| %>
       <%
-        element_id = "parameter-#{parameter.id}"
-        description = t("biovision.components.#{parameter.biovision_component.slug}.parameters.#{parameter.slug}.description", default: '')
+        element_id = "parameter-#{parameter}"
+        description = t("biovision.components.#{handler.component.slug}.parameters.#{parameter}.description", default: '')
       %>
       <li>
         <div class="name">
-          <%= label_tag(element_id, parameter.slug) %>
+          <%= label_tag(element_id, parameter) %>
         </div>
         <div class="value">
-          <%= text_field_tag(:value, parameter.value, id: element_id) %>
+          <%= text_field_tag(:value, value, id: element_id) %>
           <%=
             button_tag(
                 '',
@@ -21,7 +21,7 @@
                 class: 'apply',
                 disabled: true,
                 data: {
-                    slug: parameter.slug
+                    slug: parameter
                 }
             )
           %>
