@@ -51,6 +51,16 @@
 
     <dt><%= f.label :body %></dt>
     <dd>
+      <div class="wysiwyg-button-container">
+        <button
+          type="button"
+          class="js-wysiwyg-toggle button-action"
+          data-element="<%= model_name %>_body"
+          data-upload-url="/media_files/ckeditor"
+        >
+          WYSIWYG
+        </button>
+      </div>
       <%=
         f.text_area(
             :body,
@@ -118,3 +128,5 @@
     <%= f.button t(:save), type: :submit, class: 'button-save' %>
   </div>
 <% end %>
+
+<%= render 'shared/forms/toggle_wysiwyg' %>

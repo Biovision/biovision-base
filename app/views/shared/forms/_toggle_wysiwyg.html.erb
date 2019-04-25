@@ -1,0 +1,24 @@
+<script src="https://cdn.ckeditor.com/ckeditor5/12.0.0/classic/ckeditor.js"></script>
+<script>
+    "use strict";
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll("button.js-wysiwyg-toggle").forEach(function (button) {
+            button.addEventListener("click", function (event) {
+                const button = event.target;
+                button.classList.add("hidden");
+                const editor = document.getElementById(button.getAttribute("data-element"));
+                editor.required = false;
+                ClassicEditor
+                    .create(editor, {
+                        image: {
+                            toolbar: ['imageTextAlternative']
+                        },
+                        ckfinder: {
+                            uploadUrl: editor.getAttribute('data-upload-url')
+                        }
+                    })
+                    .catch(error => console.error(error));
+            });
+        });
+    });
+</script>
