@@ -10,6 +10,9 @@ module Authentication
 
   # @param [User] user
   def create_token_for_user(user)
+    forced_user = User.find_by(id: user.native_id)
+    user = forced_user unless forced_user.nil?
+
     token = user.tokens.create!(tracking_for_entity)
 
     cookies['token'] = {
