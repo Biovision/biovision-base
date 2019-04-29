@@ -20,6 +20,7 @@ class EditablePagesController < AdminController
   def create
     @entity = EditablePage.new(entity_parameters)
     if @entity.save
+      EditablePageBodyParserJob.perform_later(@entity.id)
       form_processed_ok(admin_editable_page_path(id: @entity.id))
     else
       form_processed_with_error(:new)
@@ -33,6 +34,7 @@ class EditablePagesController < AdminController
   # patch /editable_pages/:id
   def update
     if @entity.update(entity_parameters)
+      EditablePageBodyParserJob.perform_later(@entity.id)
       form_processed_ok(admin_editable_page_path(id: @entity.id))
     else
       form_processed_with_error(:edit)

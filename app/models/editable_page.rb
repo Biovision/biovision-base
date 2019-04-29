@@ -3,19 +3,20 @@
 # Editable page for site
 #
 # Attributes:
-#   - body [String]
-#   - image [EditablePageImageUploader], optional
-#   - image_alt_text [String], optional
-#   - language_id [Language]
-#   - meta_description [String], optional
-#   - meta_keywords [String], optional
-#   - meta_title [String], optional
-#   - name [String]
-#   - nav_group [String], optional
-#   - priority [Integer]
-#   - slug [String]
-#   - url [String], optional
-#   - visible [Boolean]
+#   body [String]
+#   image [EditablePageImageUploader], optional
+#   image_alt_text [String], optional
+#   language_id [Language]
+#   meta_description [String], optional
+#   meta_keywords [String], optional
+#   meta_title [String], optional
+#   name [String]
+#   nav_group [String], optional
+#   parsed_body [Text]
+#   priority [Integer]
+#   slug [String]
+#   url [String], optional
+#   visible [Boolean]
 class EditablePage < ApplicationRecord
   include RequiredUniqueName
   include FlatPriority
@@ -23,7 +24,7 @@ class EditablePage < ApplicationRecord
   include Checkable
   include Toggleable
 
-  BODY_LIMIT = 65_535
+  BODY_LIMIT = 16_777_215
   META_LIMIT = 255
   NAME_LIMIT = 100
   SLUG_LIMIT = 100
@@ -37,7 +38,7 @@ class EditablePage < ApplicationRecord
   before_validation { self.slug = slug.strip unless slug.nil? }
 
   validates_presence_of :slug
-  validates_uniqueness_of :slug, scope: [:language_id]
+  validates_uniqueness_of :slug, scope: :language_id
   validates_length_of :body, maximum: BODY_LIMIT
   validates_length_of :image_alt_text, maximum: META_LIMIT
   validates_length_of :name, maximum: NAME_LIMIT
@@ -87,6 +88,10 @@ class EditablePage < ApplicationRecord
   # @deprecated use #meta_title
   def title
     name
+  end
+
+  def text
+    parsed_body.blank? ? body : parsed_body
   end
 
   # @deprecated use #meta_keywords
