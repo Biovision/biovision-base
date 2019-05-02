@@ -25,7 +25,7 @@ class BiovisionComponent < ApplicationRecord
   # @param [String] slug
   # @param [String] default_value
   def get(slug, default_value = '')
-    parameters.fetch(slug.to_s) || default_value
+    parameters.fetch(slug.to_s) { default_value }
   end
 
   # @param [String] slug
