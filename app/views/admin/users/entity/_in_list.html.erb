@@ -9,6 +9,9 @@
   <div class="info">
     <%= entity.screen_name %>
   </div>
+  <div class="info">
+    UUID: <%= entity.uuid %>
+  </div>
   <% unless entity.email.blank? %>
     <div class="info">
       <%= t('activerecord.attributes.user.email') %>: <%= entity.email %>
