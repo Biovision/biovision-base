@@ -31,7 +31,7 @@ class EditablePage < ApplicationRecord
 
   toggleable :visible
 
-  mount_uploader :image, EditablePageImageUploader
+  mount_uploader :image, SimpleImageUploader
 
   belongs_to :language, optional: true
 

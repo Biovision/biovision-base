@@ -25,7 +25,7 @@
       <dt><%= t('activerecord.attributes.editable_page.image') %></dt>
       <dd>
         <figure role="group" class="preview">
-          <%= editable_page_image_medium(@entity) %>
+          <%= simple_image_medium(@entity) %>
           <figcaption><%= @entity.image_alt_text %></figcaption>
         </figure>
       </dd>

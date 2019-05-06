@@ -76,14 +76,14 @@
         <% if entity.image.blank? %>
           <%= f.label :image, image_tag('biovision/base/placeholders/16x9.svg', alt: '') %>
         <% else %>
-          <%= f.label :image, image_tag(entity.image.medium.url, alt: '') %>
+          <%= f.label :image, image_tag(entity.image.medium_url, alt: '') %>
         <% end %>
         <figcaption>
           <%=
             f.file_field(
                 :image,
                 id:     "#{model_name}_image",
-                accept: 'image/jpeg,image/png',
+                accept: 'image/jpeg,image/png,image/svg+xml',
                 data:   { image: "#{model_name}-image" }
             )
           %>
