@@ -426,12 +426,18 @@ form {
 }
 
 .visually-hidden {
-  height: .1rem;
+  border: none;
+  clip: rect(0 0 0 0);
+  height: auto;
   left: -10000rem;
+  margin: 0;
   opacity: .05;
   overflow: hidden;
+  padding: 0;
+  pointer-events: none;
   position: absolute;
-  width: .1rem;
+  white-space: nowrap;
+  width: 1px;
 }
 
 .proportional-container {
@@ -488,6 +494,16 @@ input.control:not(:checked) + * {
   > * {
     height: 100%;
     object-fit: cover;
+    width: 100%;
+  }
+}
+
+.containing {
+  overflow: hidden;
+
+  > * {
+    height: 100%;
+    object-fit: contain;
     width: 100%;
   }
 }

@@ -1,0 +1,15 @@
+.js-biovision-carousel {
+  .carousel-container {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .carousel-item {
+    flex: none;
+    margin: 0;
+    padding: 0;
+    transition: .125s;
+  }
+}

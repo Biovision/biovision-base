@@ -1,6 +1,8 @@
 <% if content_for? :breadcrumbs %>
-    <nav class="breadcrumbs">
+  <nav class="breadcrumbs">
+    <div>
       <%= link_to(t('admin.index.index.heading'), admin_path) %>
       <%= yield :breadcrumbs %>
-    </nav>
+    </div>
+  </nav>
 <% end %>
