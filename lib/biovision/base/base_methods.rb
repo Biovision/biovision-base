@@ -159,6 +159,16 @@ module Biovision
           format.html { render(view_to_render, status: :bad_request) }
         end
       end
+
+      # @param [Class] klass
+      # @param [Hash] options
+      def component_restriction(klass, options = {})
+        return if klass.allow?(current_user, options)
+
+        error = "User #{current_user&.id} has no privileges in #{klass}"
+
+        handle_http_401(error)
+      end
     end
   end
 end

@@ -26,6 +26,20 @@ module Biovision
         handler_class.new(entity)
       end
 
+      def self.default_privilege_name
+        self.class.to_s.demodulize.underscore.gsub('component', 'manager')
+      end
+
+      # @param [User] user
+      # @param [Hash] options
+      def self.allow?(user, options = {})
+        return false if user.nil?
+
+        privilege = options[:privilege] || default_privilege_name
+
+        UserPrivilege.user_has_privilege?(user, privilege)
+      end
+
       # @param [Hash] data
       def settings=(data)
         @component.settings.merge!(normalize_settings(data))
