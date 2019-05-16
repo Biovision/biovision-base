@@ -16,10 +16,45 @@ const Biovision = {
             });
         }
 
-        for (let component in this.components) {
-            if (this.components.hasOwnProperty(component)) {
-                if (this.components[component].hasOwnProperty('init')) {
-                    this.components[component].init();
+        for (let componentName in this.components) {
+            if (this.components.hasOwnProperty(componentName)) {
+                const component = this.components[componentName];
+                if (component.hasOwnProperty('init')) {
+                    component.init();
+                }
+
+                if (component.hasOwnProperty("autoInitComponents")) {
+                    if (component.autoInitComponents) {
+                        this.initChildComponents(component);
+                    }
+                }
+            }
+        }
+    },
+    /**
+     * Init child components of given component
+     *
+     * @type {function}
+     * @param {Object} parent
+     */
+    initChildComponents: function (parent) {
+        if (!parent.hasOwnProperty("components")) {
+            return;
+        }
+
+        for (let componentName in parent.components) {
+            if (parent.components.hasOwnProperty(componentName)) {
+                const child = parent.components[componentName];
+
+                if (child.hasOwnProperty("init")) {
+                    let initialized = false;
+                    if (child.hasOwnProperty("initialized")) {
+                        initialized = child.initialized;
+                    }
+
+                    if (!initialized) {
+                        child.init();
+                    }
                 }
             }
         }
@@ -32,7 +67,7 @@ const Biovision = {
      * @param [onFailure]
      */
     new_ajax_request: function (method, url, onSuccess, onFailure) {
-        console.log("Biovision.new_ajax_request is deprecated; user Biovision.newAjaxRequest instead");
+        console.log("Biovision.new_ajax_request is deprecated; use Biovision.newAjaxRequest instead");
         return Biovision.newAjaxRequest(method, url, onSuccess, onFailure);
     },
     /**
@@ -405,7 +440,7 @@ Biovision.components.transliterator = {
             'у': 'u', 'ф': 'f', 'х': 'kh', 'ц': 'c', 'ч': 'ch',
             'ш': 'sh', 'щ': 'shh', 'ъ': '', 'ы': 'y', 'ь': '',
             'э': 'e', 'ю': 'yu', 'я': 'ya',
-            'å': 'ao', 'ä': 'ae', 'ö': 'oe', 'é': 'e'
+            'å': 'aa', 'ä': 'ae', 'ö': 'oe', 'é': 'e'
         };
         let string = input.toLowerCase();
 
