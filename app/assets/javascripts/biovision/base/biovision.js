@@ -99,10 +99,20 @@ const Biovision = {
 
         return request;
     },
+    /**
+     * Initialize new AJAX request with JSON content-type and accept headers
+     *
+     * @param {string} method
+     * @param {string} url
+     * @param {function} onSuccess
+     * @param {function} onFailure
+     * @returns {XMLHttpRequest}
+     */
     jsonAjaxRequest: function (method, url, onSuccess, onFailure) {
         const request = Biovision.newAjaxRequest(method, url, onSuccess, onFailure);
 
-        request.setRequestHeader('Content-Type', 'application/json');
+        request.setRequestHeader("Content-Type", "application/json");
+        request.setRequestHeader("Accept", "application/json");
 
         return request;
     },
