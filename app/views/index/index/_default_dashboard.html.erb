@@ -1,2 +1,4 @@
 <%= render 'index/index/custom_dashboard' %>
-<%= render 'index/dashboard/biovision_post' if Gem.loaded_specs.key?('biovision-post') %>
+<% %w[post partners].each do |component| %>
+  <%= render "index/dashboard/biovision_#{component}" if Gem.loaded_specs.key?("biovision-#{component}") %>
+<% end %>

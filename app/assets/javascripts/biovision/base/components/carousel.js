@@ -49,7 +49,9 @@ Biovision.components.carousel = {
         }
         if (element.hasAttribute("data-timeout")) {
             slider["timeout"] = parseInt(element.getAttribute("data-timeout"));
-            slider["timeout_handler"] = window.setInterval(component.nextItem, slider["timeout"], slider);
+            if (slider["timeout"] > 0) {
+                slider["timeout_handler"] = window.setInterval(component.nextItem, slider["timeout"], slider);
+            }
         }
         if (slider["prevButton"]) {
             slider["prevButton"].addEventListener("click", component.clickedPrev);
