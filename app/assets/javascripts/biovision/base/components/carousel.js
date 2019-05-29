@@ -168,19 +168,21 @@ Biovision.components.carousel = {
      */
     newOffset: function (slider) {
         const firstSlide = slider.container.querySelector(".carousel-item:first-of-type");
-        const rightMargin = window.getComputedStyle(firstSlide).marginRight;
-        const slideWidth = firstSlide.offsetWidth + parseInt(rightMargin);
-        let newMargin = -(slideWidth * slider.current);
-        const slidesLength = slideWidth * slider.items.length;
-        const maxOffset = slidesLength - slider.container.offsetWidth;
-        const delta = newMargin + maxOffset;
+        if (firstSlide) {
+            const rightMargin = window.getComputedStyle(firstSlide).marginRight;
+            const slideWidth = firstSlide.offsetWidth + parseInt(rightMargin);
+            let newMargin = -(slideWidth * slider.current);
+            const slidesLength = slideWidth * slider.items.length;
+            const maxOffset = slidesLength - slider.container.offsetWidth;
+            const delta = newMargin + maxOffset;
 
-        if (delta < 0) {
-            newMargin -= delta;
-            slider["current"] = slider["maxItem"];
+            if (delta < 0) {
+                newMargin -= delta;
+                slider["current"] = slider["maxItem"];
+            }
+
+            firstSlide.style.marginLeft = String(newMargin) + "px";
         }
-
-        firstSlide.style.marginLeft = String(newMargin) + "px";
     },
     /**
      * Determine maximum item number so that right margin remains minimal
@@ -189,10 +191,12 @@ Biovision.components.carousel = {
      */
     setMaxItem: function (slider) {
         const firstSlide = slider.container.querySelector(".carousel-item:first-of-type");
-        const rightMargin = window.getComputedStyle(firstSlide).marginRight;
-        const slideWidth = firstSlide.offsetWidth + parseInt(rightMargin);
-        const maxCount = slider.container.offsetWidth / slideWidth;
-        slider["maxItem"] = slider.items.length - Math.floor(maxCount);
+        if (firstSlide) {
+            const rightMargin = window.getComputedStyle(firstSlide).marginRight;
+            const slideWidth = firstSlide.offsetWidth + parseInt(rightMargin);
+            const maxCount = slider.container.offsetWidth / slideWidth;
+            slider["maxItem"] = slider.items.length - Math.floor(maxCount);
+        }
     },
     /**
      * Handler for start of swipe
