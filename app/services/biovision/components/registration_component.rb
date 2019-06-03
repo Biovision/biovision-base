@@ -7,7 +7,8 @@ module Biovision
       # @param [Hash] parameters
       # @param [Code] code
       def handle(parameters, code)
-        @user    = User.new(parameters)
+        @user = User.new(parameters)
+        set_email_as_login if email_as_login?
         @manager = CodeManager::Invitation.new(code)
 
         use_invites? ? use_code : persist_user
@@ -31,8 +32,12 @@ module Biovision
         @component.settings['confirm_email']
       end
 
+      def email_as_login?
+        @component.settings['email_as_login']
+      end
+
       def require_email?
-        @component.settings['require_email']
+        @component.settings['require_email'] || email_as_login?
       end
 
       protected
@@ -41,7 +46,10 @@ module Biovision
       # @return [Hash]
       def normalize_settings(data)
         result = {}
-        flags  = %w[open invite_only use_invites confirm_email require_email]
+        flags = %w[
+          open invite_only use_invites confirm_email email_as_login
+          require_email
+        ]
         flags.each { |f| result[f] = data[f].to_i == 1 }
         numbers = %w[invite_count]
         numbers.each { |f| result[f] = data[f].to_i }
@@ -88,10 +96,16 @@ module Biovision
 
         parameters = {
           code_type: CodeManager::Invitation.code_type,
-          user:      @user,
-          quantity:  quantity,
+          user: @user,
+          quantity: quantity,
         }
         Code.create(parameters)
+      end
+
+      def set_email_as_login
+        @user.foreign_slug = true
+        @user.screen_name = @user.email
+        @user.slug = @user.email
       end
     end
   end

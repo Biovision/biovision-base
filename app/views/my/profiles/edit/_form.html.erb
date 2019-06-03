@@ -1,9 +1,10 @@
 <%=
   form_with(
-      url:       my_profile_path,
-      method:    :patch,
+      url: my_profile_path,
+      method: :patch,
       multipart: true,
-      id:        'user-form'
+      id: 'user-form',
+      class: 'profile-form'
   ) do
 %>
   <%= render partial: 'shared/list_of_errors', locals: { entity: entity } %>
@@ -27,7 +28,7 @@
               file_field_tag(
                   'user[image]',
                   accept: 'image/jpeg,image/png',
-                  data:   { image: 'user-image' }
+                  data: { image: 'user-image' }
               )
             %>
           </figcaption>
@@ -85,9 +86,9 @@
           email_field_tag(
               'user[email]',
               entity.email,
-              size:      nil,
+              size: nil,
               maxlength: User::EMAIL_LIMIT,
-              required:  true
+              required: true
           )
         %>
       </dd>
@@ -100,7 +101,7 @@
           telephone_field_tag(
               'user[phone]',
               entity.phone,
-              size:      nil,
+              size: nil,
               maxlength: User::PHONE_LIMIT
           )
         %>

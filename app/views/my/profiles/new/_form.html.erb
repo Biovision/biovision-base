@@ -1,33 +1,57 @@
-<% model_name = entity.class.to_s.underscore %>
+<%
+  component_handler ||= Biovision::Components::BaseComponent.handler('registration')
+  model_name = entity.class.to_s.underscore
+%>
 <%=
   form_with(
       model: entity,
       scope: model_name,
-      url:   my_profile_path,
+      url: my_profile_path,
       class: 'new-my-profile',
-      id:    "#{model_name}-form",
-      data:  { check_url: check_my_profile_path }
+      id: "#{model_name}-form",
+      data: { check_url: check_my_profile_path }
   ) do |f|
 %>
   <%= render partial: 'shared/list_of_errors', locals: { entity: entity } %>
   <dl>
+    <% unless component_handler.email_as_login? %>
+      <dt>
+        <%= f.label :screen_name, t('activerecord.attributes.user.screen_name') %>
+      </dt>
+      <dd>
+        <%=
+          f.text_field(
+              :screen_name,
+              id: "#{model_name}_screen_name",
+              required: true,
+              maxlength: User::SCREEN_NAME_LIMIT,
+              pattern: User::SCREEN_NAME_PATTERN_HTML,
+              title: t('.guidelines.screen_name'),
+              data: { check: :screen_name }
+          )
+        %>
+        <div class="check-result-error" data-field="screen_name"></div>
+        <div class="guideline"><%= t('.guidelines.screen_name') %></div>
+      </dd>
+    <% end %>
     <dt>
-      <%= f.label :screen_name, t('activerecord.attributes.user.screen_name') %>
+      <%= f.label :email, t('activerecord.attributes.user.email') %>
     </dt>
     <dd>
       <%=
-        f.text_field(
-            :screen_name,
-            id:        "#{model_name}_screen_name",
-            required:  true,
-            maxlength: User::SCREEN_NAME_LIMIT,
-            pattern:   User::SCREEN_NAME_PATTERN_HTML,
-            title:     t('.guidelines.screen_name'),
-            data:      { check: :screen_name }
+        f.email_field(
+            :email,
+            id: "#{model_name}_email",
+            size: nil,
+            maxlength: User::EMAIL_LIMIT,
+            required: component_handler.require_email?,
+            data: { check: :email }
         )
       %>
-      <div class="check-result-error hidden" data-field="screen_name"></div>
-      <div class="guideline"><%= t('.guidelines.screen_name') %></div>
+      <div class="check-result-error" data-field="email"></div>
+      <% unless component_handler.email_as_login? %>
+        <div class="guideline"><%= t('.guidelines.email') %></div>
+      <% end %>
     </dd>
 
     <dt>
@@ -37,14 +61,14 @@
       <%=
         f.password_field(
             :password,
-            id:        "#{model_name}_password",
-            required:  true,
-            size:      nil,
+            id: "#{model_name}_password",
+            required: true,
+            size: nil,
             maxlength: 70,
-            data:      { check: :password }
+            data: { check: :password }
         )
       %>
-      <div class="check-result-error hidden" data-field="password"></div>
+      <div class="check-result-error" data-field="password"></div>
       <div class="guideline"><%= t('.guidelines.password') %></div>
     </dd>
 
@@ -55,36 +79,18 @@
       <%=
         f.password_field(
             :password_confirmation,
-            id:        "#{model_name}_password_confirmation",
-            required:  true,
-            size:      nil,
+            id: "#{model_name}_password_confirmation",
+            required: true,
+            size: nil,
             maxlength: 70,
-            data:      { check: :password_confirmation }
+            data: { check: :password_confirmation }
         )
       %>
-      <div class="check-result-error hidden" data-field="password_confirmation"></div>
+      <div class="check-result-error" data-field="password_confirmation"></div>
       <div class="guideline"><%= t('.guidelines.password_confirmation') %></div>
     </dd>
 
-    <dt>
-      <%= f.label :email, t('activerecord.attributes.user.email') %>
-    </dt>
-    <dd>
-      <%=
-        f.email_field(
-            :email,
-            id:        "#{model_name}_email",
-            size:      nil,
-            maxlength: User::EMAIL_LIMIT,
-            required:  local_assigns[:component_handler] && component_handler.require_email?,
-            data:      { check: :email }
-        )
-      %>
-      <div class="check-result-error hidden" data-field="email"></div>
-      <div class="guideline"><%= t('.guidelines.email') %></div>
-    </dd>
-
-    <% if local_assigns[:component_handler] && component_handler.use_invites? %>
+    <% if component_handler.use_invites? %>
       <dt>
         <%= label_tag :code, t('.invitation_code') %>
       </dt>
@@ -101,7 +107,7 @@
               }
           )
         %>
-        <div class="check-result-error hidden" data-field="code"></div>
+        <div class="check-result-error" data-field="code"></div>
       </dd>
     <% end %>
   </dl>

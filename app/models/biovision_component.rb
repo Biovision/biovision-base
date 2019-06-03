@@ -42,9 +42,9 @@ class BiovisionComponent < ApplicationRecord
   end
 
   # @param [String] slug
-  # @param [String] value
+  # @param value
   def []=(slug, value)
-    parameters[slug.to_s] = value.to_s
+    parameters[slug.to_s] = value
     save!
   end
 end
