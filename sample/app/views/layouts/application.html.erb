@@ -10,8 +10,10 @@
   <meta name="format-detection" content="telephone=no"/>
   <%= yield :alternate_links %>
   <%= render 'shared/meta_texts' %>
+  <%= raw SimpleBlock['head_counters_js'] %>
 </head>
 <body>
+<%= raw SimpleBlock['head_counters_no_js'] %>
 <%= render 'layouts/application/header' %>
 
 <main id="main">
@@ -22,6 +24,6 @@
 </main>
 
 <%= render 'layouts/application/footer' %>
-<%= raw(SimpleBlock['counters']) %>
+<%= raw SimpleBlock['counters'] %>
 </body>
 </html>

@@ -27,7 +27,9 @@ class CreateSimpleBlocks < ActiveRecord::Migration[5.2]
 
   def seed_default_blocks
     data = [
-      ['counters', 'Счётчики для сайта']
+      ['counters', 'Счётчики для сайта'],
+      ['head_counters_js', 'Счётчики для head с поддержкой JS'],
+      ['head_counters_no_js', 'Счётчики для head без JS']
     ]
 
     data.each do |row|
