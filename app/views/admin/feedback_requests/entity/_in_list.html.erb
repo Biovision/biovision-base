@@ -1,6 +1,9 @@
 <div class="data">
   <div><%= entity.name %></div>
   <div class="info">
+    <% unless entity.user.blank? %>
+      <%= admin_user_link(entity.user) %><br/>
+    <% end %>
     <%= entity.phone %><br/>
     <%= entity.email %>
   </div>
@@ -22,5 +25,13 @@
     </div>
   <% end %>
 
-  <%= render partial: 'shared/admin/toggleable', locals: { entity: entity, url: toggle_admin_feedback_request_path(id: entity.id) } %>
+  <%=
+    render(
+        partial: 'shared/admin/toggleable',
+        locals: {
+            entity: entity,
+            url: toggle_admin_feedback_request_path(id: entity.id)
+        }
+    )
+  %>
 </div>

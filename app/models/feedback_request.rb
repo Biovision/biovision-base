@@ -1,14 +1,35 @@
+# frozen_string_literal: true
+
+# Feedback request
+#
+# Attributes:
+#   agent_id [Agent], optional
+#   comment [text]
+#   consent [boolean]
+#   created_at [DateTime]
+#   data [jsonb]
+#   email [string], optional
+#   image [string], optional
+#   ip [inet], optional
+#   language_id [Language], optional
+#   name [string], optional
+#   phone [string], optional
+#   processed [boolean]
+#   updated_at [DateTime]
+#   user_id [User], optional
 class FeedbackRequest < ApplicationRecord
   include Toggleable
 
-  NAME_LIMIT    = 100
-  EMAIL_LIMIT   = 250
-  PHONE_LIMIT   = 30
   COMMENT_LIMIT = 5000
+  EMAIL_LIMIT   = 250
+  EMAIL_PATTERN = /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z0-9][-a-z0-9]+)\z/i.freeze
+  NAME_LIMIT    = 100
+  PHONE_LIMIT   = 30
 
   toggleable :processed
 
   belongs_to :language, optional: true
+  belongs_to :user, optional: true
   belongs_to :agent, optional: true
 
   validates_acceptance_of :consent
@@ -16,7 +37,7 @@ class FeedbackRequest < ApplicationRecord
   validates_length_of :phone, maximum: PHONE_LIMIT
   validates_length_of :comment, maximum: COMMENT_LIMIT
   validates_length_of :email, maximum: EMAIL_LIMIT
-  validates_format_of :email, with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z0-9][-a-z0-9]+)\z/i, allow_blank: true
+  validates_format_of :email, with: EMAIL_PATTERN, allow_blank: true
 
   scope :recent, -> { order('id desc') }
   scope :unprocessed, -> { where(processed: false) }
@@ -28,6 +49,6 @@ class FeedbackRequest < ApplicationRecord
   end
 
   def self.creation_parameters
-    %i(comment consent email name phone)
+    %i[comment consent email name phone]
   end
 end

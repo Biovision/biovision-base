@@ -8,6 +8,7 @@ class CreateFeedbackRequests < ActiveRecord::Migration[5.1]
     create_table :feedback_requests, comment: 'Feedback request' do |t|
       t.timestamps
       t.references :language, foreign_key: { on_update: :cascade, on_delete: :nullify }
+      t.references :user, foreign_key: { on_update: :cascade, on_delete: :cascade }
       t.references :agent, foreign_key: { on_update: :cascade, on_delete: :nullify }
       t.inet :ip
       t.boolean :processed, default: false, null: false
