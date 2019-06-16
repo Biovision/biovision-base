@@ -68,7 +68,15 @@
     <dt><%= t('activerecord.attributes.user.balance') %></dt>
     <dd><%= @entity.balance %></dd>
 
-    <%= render partial: 'admin/users/entity/profile', locals: { data: @entity.data['profile'] } %>
+    <%=
+      render(
+          partial: 'admin/users/entity/profile',
+          locals: {
+              data: @entity.data['profile'],
+              entity: @entity
+          }
+      )
+    %>
 
     <% unless @entity.ip.blank? %>
       <dt><%= t('activerecord.attributes.user.ip') %></dt>

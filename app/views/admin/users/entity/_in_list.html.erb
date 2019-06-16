@@ -44,6 +44,14 @@
       <% end %>
     </div>
   <% end %>
+  <%=
+    render(
+        partial: 'admin/users/entity/in_list/additional_data',
+        locals: {
+            entity: entity
+        }
+    )
+  %>
 
   <%=
     render(
