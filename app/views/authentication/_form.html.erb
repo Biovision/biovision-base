@@ -1,3 +1,4 @@
+<% component = Biovision::Components::BaseComponent.handler(:registration) %>
 <%= form_with url: login_path, local: true, html: { class: 'login' } do %>
   <div class="fields">
     <div>
@@ -11,6 +12,8 @@
   </div>
   <div class="actions">
     <%= button_tag t('.log_in'), type: 'submit', class: 'button-action' %>
-    <%= link_to t('my.profiles.new.title'), new_my_profile_path, class: 'button-nav' %>
+    <% if component.settings['open'] %>
+      <%= link_to t('my.profiles.new.title'), new_my_profile_path, class: 'button-nav' %>
+    <% end %>
   </div>
 <% end %>
