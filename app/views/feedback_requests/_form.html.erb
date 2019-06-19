@@ -2,6 +2,7 @@
   prefix ||= 'feedback_request'
   form_id ||= "#{prefix}-form"
   entity ||= FeedbackRequest.new
+  required_fields ||= %i[name phone email comment]
 %>
 <%=
   form_with(
@@ -13,7 +14,7 @@
   ) do |f|
 %>
   <div class="fields state-1">
-    <div class="name">
+    <div class="name <%= required_fields.include?(:name) ? 'required' : '' %>">
       <%=
         f.text_field(
             :name,
@@ -24,12 +25,13 @@
             aria: {
                 label: t('activerecord.attributes.feedback_request.name')
             },
-            required: true
+            required: required_fields.include?(:name)
         )
       %>
+      <span class="icon"></span>
     </div>
     <% unless local_assigns[:hide_phone] %>
-      <div class="phone">
+      <div class="phone <%= required_fields.include?(:phone) ? 'required' : '' %>">
         <%=
           f.phone_field(
               :phone,
@@ -40,13 +42,14 @@
               aria: {
                   label: t('activerecord.attributes.feedback_request.phone')
               },
-              required: true
+              required: required_fields.include?(:phone)
           )
         %>
+        <span class="icon"></span>
       </div>
     <% end %>
     <% unless local_assigns[:hide_email] %>
-      <div class="email">
+      <div class="email <%= required_fields.include?(:email) ? 'required' : '' %>">
         <%=
           f.email_field(
               :email,
@@ -57,13 +60,14 @@
               aria: {
                   label: t('activerecord.attributes.feedback_request.email')
               },
-              required: true
+              required: required_fields.include?(:email)
           )
         %>
+        <span class="icon"></span>
       </div>
     <% end %>
     <% unless local_assigns[:hide_comment] %>
-      <div class="comment">
+      <div class="comment <%= required_fields.include?(:comment) ? 'required' : '' %>">
         <%= f.text_area(
                 :comment,
                 id: "#{prefix}_comment",
@@ -73,9 +77,16 @@
                 placeholder: t('activerecord.attributes.feedback_request.comment'),
                 aria: {
                     label: t('activerecord.attributes.feedback_request.comment')
-                }
+                },
+                class: 'auto-expand',
+                data: {
+                    min_rows: 5,
+                    max_rows: 20
+                },
+                required: required_fields.include?(:comment)
             )
         %>
+        <span class="icon"></span>
       </div>
     <% end %>
     <div class="consent">
