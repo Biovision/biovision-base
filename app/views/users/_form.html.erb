@@ -111,7 +111,15 @@
       </dd>
     <% end %>
 
-    <%= render partial: 'users/form/profile_data', locals: { data: entity.data['profile'] || {} } %>
+    <%=
+      render(
+          partial: 'users/form/profile_data',
+          locals: {
+              data: entity.data['profile'].to_h,
+              entity: entity
+          }
+      )
+    %>
 
     <dt><%= f.label :notice %></dt>
     <dd>
