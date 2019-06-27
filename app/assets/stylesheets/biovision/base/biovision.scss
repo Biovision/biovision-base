@@ -10,6 +10,7 @@
   --font-size-xs: #{$font-size-xs};
 
   --spacer-s: #{$spacer-s};
+  --spacer-xxxs: .2rem;
   --spacer-xxs: calc(var(--spacer-s) / 4);
   --spacer-xs: calc(var(--spacer-s) / 2);
   --spacer-m: calc(var(--spacer-s) * 2);

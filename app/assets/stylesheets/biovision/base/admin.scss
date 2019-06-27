@@ -259,42 +259,6 @@ nav.breadcrumbs {
   }
 }
 
-.entity-links {
-  margin: 0;
-  padding: 0;
-
-  li {
-    list-style: none;
-    margin: 0;
-    padding: var(--spacer-xxs);
-    position: relative;
-  }
-
-  label {
-    cursor: pointer;
-    display: inline-block;
-    padding: var(--spacer-xxxs) var(--spacer-s);
-    transition: .125s;
-  }
-
-  input[type=checkbox] {
-    &:not(:checked) + label {
-      background: #fafafa;
-      color: $text-color-secondary;
-    }
-
-    &:checked + label {
-      background: rgb(200, 255, 200);
-      box-shadow: 0 0 .3rem .1rem rgba(0, 127, 0, .25);
-    }
-
-    &:disabled + label {
-      opacity: .5;
-      filter: grayscale(75%);
-    }
-  }
-}
-
 .ck-content {
   ul {
     padding-left: var(--spacer-m);
