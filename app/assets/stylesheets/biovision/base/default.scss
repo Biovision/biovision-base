@@ -12,6 +12,7 @@ $font-size-small: 1.1rem !default;
 $font-size-xs: 1rem !default;
 
 $spacer-s: 1.6rem !default;
+$spacer-xxxs: #{$spacer-s / 8} !default;
 $spacer-xxs: #{$spacer-s / 4} !default;
 $spacer-xs: #{$spacer-s / 2} !default;
 $spacer-m: #{$spacer-s * 2} !default;

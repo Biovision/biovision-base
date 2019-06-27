@@ -301,6 +301,54 @@ ol.list-of-entities {
   }
 }
 
+.entity-links {
+  margin: 0;
+  padding: 0;
+
+  li {
+    list-style: none;
+    margin: 0;
+    padding: $spacer-xxs;
+    position: relative;
+  }
+
+  label {
+    cursor: pointer;
+    display: inline-block;
+    padding: $spacer-xxxs $spacer-s;
+    transition: .125s;
+  }
+
+  input[type=checkbox] {
+    &:not(:checked) + label {
+      background: #fafafa;
+      color: $text-color-secondary;
+    }
+
+    &:checked + label {
+      background: rgb(200, 255, 200);
+      box-shadow: 0 0 .3rem .1rem rgba(0, 127, 0, .25);
+    }
+
+    &:disabled + label {
+      opacity: .5;
+      filter: grayscale(75%);
+    }
+  }
+}
+
+@supports (--css: vars) {
+  .entity-links {
+    li {
+      padding: var(--spacer-xxs);
+    }
+
+    label {
+      padding: var(--spacer-xxxs) var(--spacer-s);
+    }
+  }
+}
+
 .breadcrumbs {
   a {
     background: image_url('biovision/base/icons/breadcrumb.svg') no-repeat bottom .1rem right / .6rem 1.2rem;
