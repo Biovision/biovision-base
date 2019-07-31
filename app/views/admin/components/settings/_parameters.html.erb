@@ -1,0 +1,20 @@
+<section
+  id="biovision-component-parameters"
+  data-url="<%= admin_component_parameters_path(slug: handler.slug) %>"
+>
+  <h2><%= t('.heading') %></h2>
+
+  <dl>
+    <% parameters.each do |parameter, value| %>
+      <% element_id = "parameter-#{parameter}" %>
+      <div>
+        <dt><%= label_tag(element_id, parameter) %></dt>
+        <dd>
+          <%=
+            text_field_tag(parameter, value, autocomplete: :off, id: element_id)
+          %>
+        </dd>
+      </div>
+    <% end %>
+  </dl>
+</section>

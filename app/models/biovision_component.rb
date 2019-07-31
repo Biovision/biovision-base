@@ -15,6 +15,10 @@ class BiovisionComponent < ApplicationRecord
   SLUG_PATTERN_HTML = '^[a-zA-Z][-a-zA-Z0-9_]+[a-zA-Z0-9]$'
   VALUE_LIMIT       = 65_535
 
+  has_many :biovision_component_users, dependent: :delete_all
+
+  scope :list_for_administration, -> { ordered_by_slug }
+
   # Find component by slug
   #
   # @param [String] slug
@@ -46,5 +50,13 @@ class BiovisionComponent < ApplicationRecord
   def []=(slug, value)
     parameters[slug.to_s] = value
     save!
+  end
+
+  # @param [User] user
+  def visible_to?(user)
+    return false if user.nil?
+    return true if user.super_user?
+
+    biovision_component_users.where(user: user).exists?
   end
 end

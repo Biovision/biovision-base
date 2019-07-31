@@ -1,4 +1,4 @@
-<% component = Biovision::Components::BaseComponent.handler(:registration) %>
+<% component = Biovision::Components::BaseComponent.handler(:registration, current_user) %>
 <%= form_with url: login_path, local: true, html: { class: 'login' } do %>
   <div class="fields">
     <div>

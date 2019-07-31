@@ -11,14 +11,14 @@
   </ul>
 
   <ul class="biovision-components-list">
-    <% @collection.each do |slug| %>
+    <% @collection.each do |component| %>
       <li>
-        <% name = t("biovision.components.#{slug}.name", default: slug) %>
+        <% name = t("biovision.components.#{component.slug}.name", default: component.slug) %>
         <%=
           link_to(
-              "#{slug}: #{name}",
-              admin_component_path(slug: slug),
-              class: slug
+              "#{component.slug}: #{name}",
+              admin_component_path(slug: component.slug),
+              class: component.slug
           )
         %>
       </li>

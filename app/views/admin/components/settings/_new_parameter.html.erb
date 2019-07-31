@@ -1,0 +1,46 @@
+<section
+  id="biovision-component-new-parameter"
+  data-url="<%= admin_component_parameters_path(slug: handler.slug) %>"
+>
+  <h2><%= t('.heading') %></h2>
+
+  <dl>
+    <div>
+      <dt><%= label_tag(:new_parameter_slug, t('.parameter_slug')) %></dt>
+      <dd>
+        <%=
+          text_field_tag(
+              :slug,
+              '',
+              autocomplete: :off,
+              id: :new_parameter_slug,
+              maxlength: 50,
+              pattern: BiovisionComponent::SLUG_PATTERN_HTML,
+              required: true,
+              size: nil
+          )
+        %>
+        <div class="guideline"><%= t('.guidelines.slug') %></div>
+      </dd>
+    </div>
+
+    <div>
+      <dt><%= label_tag(:new_parameter_value, t('.parameter_value')) %></dt>
+      <dd>
+        <%=
+          text_field_tag(
+              :value,
+              '',
+              autocomplete: :off,
+              id: :new_parameter_value,
+              maxlength: 255,
+              size: nil
+          )
+        %>
+        <div class="guideline"><%= t('.guidelines.value') %></div>
+      </dd>
+    </div>
+  </dl>
+
+  <%= button_tag(t(:save), class: 'button-save', type: :button) %>
+</section>

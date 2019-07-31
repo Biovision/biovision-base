@@ -1,9 +1,18 @@
-<section>
-  <ul class="biovision-components">
-    <% if current_user_has_privilege?(:administrator) %>
-      <li class="settings-general">
-        <%= link_to(t('admin.settings.index.nav_text'), admin_settings_path) %>
-      </li>
-    <% end %>
-  </ul>
+<section class="biovision-components-index">
+  <% collection.each do |component| %>
+    <%
+      handler = Biovision::Components::BaseComponent.handler(component, current_user)
+      next unless handler.allow?
+    %>
+    <section class="<%= component.slug %>">
+      <h2><%= handler.name %></h2>
+
+      <%=
+        render(
+            partial: 'admin/components/entity/links',
+            locals: { handler: handler }
+        )
+      %>
+    </section>
+  <% end %>
 </section>

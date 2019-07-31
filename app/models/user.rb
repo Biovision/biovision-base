@@ -5,7 +5,6 @@ class User < ApplicationRecord
   include Checkable
   include Toggleable
 
-  METRIC_REGISTRATION            = 'users.registration.hit'
   METRIC_AUTHENTICATION_SUCCESS  = 'users.authentication.success.hit'
   METRIC_AUTHENTICATION_FAILURE  = 'users.authentication.failure.hit'
   METRIC_AUTHENTICATION_EXTERNAL = 'users.authentication.external.hit'
@@ -118,7 +117,7 @@ class User < ApplicationRecord
     data.dig('profile', 'name').blank? ? profile_name : data['profile']['name']
   end
 
-  # @param [Boolean] include_patronymic
+  # @param [TrueClass|FalseClass] include_patronymic
   def full_name(include_patronymic = false)
     result = [name_for_letter]
     result << data.dig('profile', 'patronymic').to_s.strip if include_patronymic

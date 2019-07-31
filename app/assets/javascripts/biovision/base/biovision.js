@@ -841,151 +841,111 @@ Biovision.components.hidingPopups = {
     }
 };
 
-Biovision.components.componentEditor = {
+Biovision.components.componentParameters = {
     initialized: false,
-    /**
-     * @type {HTMLElement}
-     */
-    list: undefined,
+    container: undefined,
     url: undefined,
+    list: undefined,
     elements: [],
-    values: {},
     init: function () {
-        this.list = document.getElementById('biovision-component-parameters');
-        if (this.list) {
-            const component = this;
-            this.url = this.list.getAttribute('data-url');
-            this.list.querySelectorAll('input[type="text"]').forEach(component.apply);
-
+        this.container = document.getElementById("biovision-component-parameters");
+        if (this.container) {
+            this.url = this.container.getAttribute("data-url");
+            this.list = this.container.querySelector("dl");
+            this.list.querySelectorAll("input").forEach(this.apply);
             this.initialized = true;
         }
     },
     /**
      *
-     * @param element
+     * @param {HTMLElement} element
      * @type {Function}
      */
     apply: function (element) {
-        const component = Biovision.components.componentEditor;
-        const button = element.parentNode.querySelector('button');
-
-        component.values[element.getAttribute('id')] = element.value;
-
+        const component = Biovision.components.componentParameters;
         component.elements.push(element);
-        element.addEventListener('change', component.handleChange);
-        element.addEventListener('keyup', component.keyUp);
-        button.addEventListener('click', component.handleClick);
+        element.addEventListener("change", component.change);
     },
-    handleChange: function (event) {
+    change: function (event) {
+        const component = Biovision.components.componentParameters;
         const element = event.target;
-        const button = element.parentNode.querySelector('button');
-
-        button.disabled = false;
-    },
-    keyUp: function (event) {
-        const component = Biovision.components.componentEditor;
-        const element = event.target;
-        const button = element.parentNode.querySelector('button');
-
-        if (component.values[element.getAttribute('id')] !== element.value) {
-            button.disabled = false;
-        }
-    },
-    /**
-     *
-     * @param {MouseEvent} event
-     * @type {Function}
-     */
-    handleClick: function (event) {
-        const component = Biovision.components.componentEditor;
-        /**
-         *
-         * @type {HTMLButtonElement}
-         */
-        const button = event.target;
-        const li = button.closest('li');
-        const input = li.querySelector('input');
         const data = {
             "key": {
-                "slug": button.getAttribute('data-slug'),
-                "value": input.value
+                "slug": element.name,
+                "value": element.value
             }
         };
-
-        const request = Biovision.jsonAjaxRequest('put', component.url, function () {
-            component.values[input.getAttribute('id')] = input.value;
+        const request = Biovision.jsonAjaxRequest("patch", component.url, function () {
+            element.disabled = false;
+            element.classList.add("updated");
+        }, function () {
+            element.disabled = false;
+            element.classList.add("failed");
         });
 
-        button.disabled = true;
+        element.classList.remove("updated", "failed");
+        element.disabled = true;
         request.send(JSON.stringify(data));
     },
     add: function (data) {
-        if (this.initialized) {
-            const li = document.createElement('li');
-            const name = document.createElement('div');
-            const value = document.createElement('div');
-            const input = document.createElement('input');
-
-            name.classList.add('name');
-            name.innerHTML = "<label>" + data["slug"] + "</label>\n<span>(" + data["name"] + ")</span>";
-
-            value.classList.add('value');
-            input.value = data["value"];
-            value.appendChild(input);
-
-            li.appendChild(name);
-            li.appendChild(value);
-
-            if (data["description"]) {
-                const desc = document.createElement('div');
-                desc.classList.add('description');
-                desc.innerHTML = data["description"];
-
-                li.appendChild(desc);
-            }
-
-            this.list.appendChild(li);
-        } else {
-            console.log('componentEditor is not initialized');
-        }
+        const div = document.createElement("div");
+        const dt = document.createElement("dt");
+        const label = document.createElement("label");
+        const elementId = "parameter-" + data["slug"];
+        label.setAttribute("for", elementId);
+        label.innerHTML = data["slug"];
+        dt.append(label);
+        const dd = document.createElement("dd");
+        const input = document.createElement("input");
+        input.setAttribute("id", elementId);
+        input.setAttribute("name", data["slug"]);
+        input.value = data["value"];
+        dd.append(input);
+        this.apply(input);
+        div.append(dt);
+        div.append(dd);
+        this.list.append(div);
     }
 };
 
-Biovision.components.newParameterForm = {
+Biovision.components.newComponentParameter = {
     initialized: false,
-    element: undefined,
+    container: undefined,
+    url: undefined,
+    button: undefined,
     init: function () {
-        this.element = document.getElementById('new-biovision-parameter-form');
-        if (this.element) {
+        this.container = document.getElementById("biovision-component-new-parameter");
+        if (this.container) {
             const component = this;
-
-            this.element.addEventListener('submit', component.handler);
+            this.url = this.container.getAttribute("data-url");
+            this.button = this.container.querySelector("button");
+            this.button.addEventListener("click", component.click);
             this.initialized = true;
         }
     },
-    handler: function (event) {
-        event.preventDefault();
-
-        const form = event.target;
-        const url = form.getAttribute('action');
+    click: function () {
+        const component = Biovision.components.newComponentParameter;
         const data = {"key": {}};
-        form.querySelectorAll('input[data-field]').forEach(function (input) {
-            data["key"][input.getAttribute('data-field')] = input.value;
+        let dataPresent = true;
+        component.container.querySelectorAll("input").forEach(function (input) {
+            dataPresent &= input.value.length > 0;
+            data.key[input.name] = input.value;
         });
 
-        const request = Biovision.jsonAjaxRequest('put', url, function () {
-            Biovision.components.newParameterForm.clear();
-            Biovision.components.componentEditor.add(data["key"]);
-        });
+        if (dataPresent) {
+            const request = Biovision.jsonAjaxRequest("patch", component.url, function () {
+                component.container.querySelectorAll("input").forEach(function (input) {
+                    input.value = '';
+                });
+                Biovision.components.componentParameters.add(data["key"]);
+                component.button.disabled = false;
+            }, function () {
+                component.button.disabled = false;
+            });
 
-        request.send(JSON.stringify(data));
-    },
-    clear: function () {
-        const component = Biovision.components.newParameterForm;
-
-        component.element.querySelectorAll('input').forEach(function (input) {
-            input.value = '';
-        });
+            component.button.disabled = true;
+            request.send(JSON.stringify(data));
+        }
     }
 };
 

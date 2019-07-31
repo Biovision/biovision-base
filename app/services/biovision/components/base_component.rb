@@ -4,26 +4,36 @@ module Biovision
   module Components
     # Base biovision component
     class BaseComponent
-      attr_reader :component, :slug, :name
+      attr_reader :component, :slug, :name, :user
 
       # @param [BiovisionComponent] component
-      def initialize(component)
+      # @param [User] user
+      def initialize(component, user = nil)
         @component = component
-        @slug      = component.slug
+        @slug = component&.slug || 'base'
+        self.user = user
 
         @name = I18n.t("biovision.components.#{@slug}.name", default: @slug)
       end
 
       # Receive component-specific handler by component slug
       #
-      # @param [String] slug
+      # @param [String|BiovisionComponent] input
+      # @param [User] user
       # @return [BaseComponent]
-      def self.handler(slug)
-        entity = BiovisionComponent.find_by!(slug: slug)
+      def self.handler(input, user = nil)
+        if input.is_a?(BiovisionComponent)
+          handler_class(input.slug).new(input, user)
+        else
+          entity = BiovisionComponent.find_by!(slug: input)
+          handler_class(input).new(entity, user)
+        end
+      end
 
-        handler_name  = "biovision/components/#{slug}_component".classify
-        handler_class = handler_name.safe_constantize || BaseComponent
-        handler_class.new(entity)
+      # @param [String] slug
+      def self.handler_class(slug)
+        handler_name = "biovision/components/#{slug}_component".classify
+        handler_name.safe_constantize || BaseComponent
       end
 
       def self.default_privilege_name
@@ -40,6 +50,30 @@ module Biovision
         UserPrivilege.user_has_privilege?(user, privilege)
       end
 
+      # @param [User] user
+      def user=(user)
+        @user = user
+
+        criteria = {
+          biovision_component: @component,
+          user: user
+        }
+
+        @role = BiovisionComponentUser.find_by(criteria)
+      end
+
+      # @param [Hash] options
+      def allow?(options = {})
+        return false if user.nil?
+        return true if user.super_user? || @role&.administrator?
+
+        if options.key?(:action)
+          @role.data[options[:action].to_s]
+        else
+          !@role.nil?
+        end
+      end
+
       # @param [Hash] data
       def settings=(data)
         @component.settings.merge!(normalize_settings(data))
@@ -52,7 +86,7 @@ module Biovision
 
       # Receive parameter value with default
       #
-      # Returns value of component's parameter or default value 
+      # Returns value of component's parameter or default value
       # when it's not found
       #
       # @param [String] key
@@ -77,7 +111,23 @@ module Biovision
       # @param [String] key
       # @param [String] value
       def []=(key, value)
-        @component[key] = value
+        @component[key] = value unless key.blank?
+      end
+
+      # @param [String] name
+      # @param [Integer] quantity
+      def register_metric(name, quantity = 1)
+        metric = Metric.find_by(name: name)
+        if metric.nil?
+          attributes = {
+            biovision_component: @component,
+            name: name,
+            incremental: !name.end_with?('.hit')
+          }
+          metric = Metric.create(attributes)
+        end
+
+        metric << quantity
       end
 
       protected

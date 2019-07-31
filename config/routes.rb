@@ -77,12 +77,14 @@ Rails.application.routes.draw do
     namespace :admin do
       get '/' => 'index#index'
 
-      scope :settings, controller: :settings do
-        get '/' => :index, as: :settings
-        get ':slug' => :show, as: :component
-        patch ':slug' => :update
-        put ':slug/parameter' => :set_parameter, as: :set_parameter
-        delete ':slug/:parameter_slug' => :delete_parameter, as: :parameter
+      scope :components, controller: :components do
+        get '/' => :index, as: :components
+        scope ':slug' do
+          get '/' => :show, as: :component
+          get 'settings' => :settings, as: :component_settings
+          patch 'settings' => :update_settings, as: nil
+          patch 'parameters' => :update_parameter, as: :component_parameters
+        end
       end
 
       resources :agents, :browsers, only: %i[index show], concerns: %i[lock toggle]

@@ -4,7 +4,7 @@
 
     <%=
       form_with(
-          url:    admin_component_path(slug: handler.slug),
+          url:    admin_component_settings_path(slug: handler.slug),
           method: :patch,
           local:  true
       ) do
@@ -13,7 +13,7 @@
         <% settings.each do |key, value| %>
           <%=
             render(
-                partial: 'admin/settings/component/setting',
+                partial: 'admin/components/settings/setting',
                 locals: {
                     slug: handler.slug,
                     key: key,

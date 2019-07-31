@@ -1,6 +1,23 @@
+# frozen_string_literal: true
+
+# Metric
+# 
+# Attributes:
+#   biovision_component_id [BiovisionComponent], optional
+#   created_at [DateTime]
+#   default_period [integer]
+#   incremental [boolean]
+#   name [string]
+#   previous_value [integer]
+#   start_with_zero [boolean]
+#   show_on_dashboard [boolean]
+#   updated_at [DateTime]
+#   value [integer]
 class Metric < ApplicationRecord
   include RequiredUniqueName
+  include Toggleable
 
+  NAME_LIMIT = 255
   PERIOD_RANGE = (1..365).freeze
 
   METRIC_HTTP_400 = 'errors.http.bad_request.hit'
@@ -11,9 +28,15 @@ class Metric < ApplicationRecord
   METRIC_HTTP_500 = 'errors.http.internal_server_error.hit'
   METRIC_HTTP_503 = 'errors.http.service_unavailable.hit'
 
+  toggleable :start_with_zero, :show_on_dashboard
+
+  belongs_to :biovision_component, optional: true
   has_many :metric_values, dependent: :destroy
 
   before_validation :normalize_period
+  validates_length_of :name, maximum: NAME_LIMIT
+
+  scope :list_for_administration, -> { ordered_by_name }
 
   def self.page_for_administration
     order('name asc')
@@ -26,11 +49,23 @@ class Metric < ApplicationRecord
   # @param [String] name
   # @param [Integer] quantity
   def self.register(name, quantity = 1)
-    instance = Metric.find_by(name: name) || create(name: name, incremental: !(name =~ /\.hit\z/).nil?)
-    instance.metric_values.create(time: Time.now, quantity: quantity)
-    value = instance.incremental? ? instance.metric_values.sum(:quantity) : quantity
+    instance = Metric.find_by(name: name)
+    if instance.nil?
+      instance = create(name: name, incremental: !name.end_with?('.hit'))
+    end
 
-    instance.update(value: value, previous_value: instance.value)
+    instance << quantity
+  end
+
+  def quantity
+    metric_values.sum(:quantity)
+  end
+
+  # @param [Integer] input
+  def <<(input)
+    metric_values.create(time: Time.now, quantity: input)
+
+    update(value: incremental? ? quantity : input, previous_value: value)
   end
 
   # @param [Integer] period

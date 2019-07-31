@@ -1,0 +1,18 @@
+<nav class="biovision-component-nav">
+  <% if handler.allow?(action: 'settings') %>
+    <%=
+      link_to(
+          t('admin.components.settings.nav_text'),
+          admin_component_settings_path(slug: handler.slug),
+          class: 'settings'
+      )
+    %>
+  <% end %>
+
+  <% prefix = 'admin/components/links/' %>
+  <% if lookup_context.exists?("#{prefix}_#{handler.slug}") %>
+    <ul class="biovision-component-links">
+      <%= render "#{prefix}#{handler.slug}" %>
+    </ul>
+  <% end %>
+</nav>

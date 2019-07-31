@@ -1,0 +1,42 @@
+<% content_for :meta_title, t('.title', slug: @handler.slug) %>
+<% content_for :breadcrumbs do %>
+  <%= link_to(t('admin.components.index.nav_text'), admin_components_path) %>
+  <%= admin_biovision_component_link(@handler.component, @handler.name) %>
+  <span><%= t('.nav_text') %></span>
+<% end %>
+
+<article>
+  <h1><%= @handler.name %></h1>
+
+  <ul class="actions">
+    <li><%= back_icon(admin_components_path) %></li>
+    <li><%= return_icon(admin_component_path(slug: @handler.slug)) %></li>
+  </ul>
+
+  <%=
+    render(
+        partial: 'admin/components/settings/settings',
+        locals: {
+            handler: @handler,
+            settings: @handler.component.settings
+        }
+    )
+  %>
+
+  <%=
+    render(
+        partial: 'admin/components/settings/parameters',
+        locals: {
+            handler: @handler,
+            parameters: @handler.component.parameters
+        }
+    )
+  %>
+
+  <%=
+    render(
+        partial: 'admin/components/settings/new_parameter',
+        locals: { handler: @handler }
+    )
+  %>
+</article>

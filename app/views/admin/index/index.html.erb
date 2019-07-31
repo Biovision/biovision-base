@@ -3,7 +3,14 @@
 <article>
   <h1><%= t('.heading') %></h1>
 
-  <%= render 'admin/index/components' %>
+  <%=
+    render(
+        partial: 'admin/index/components',
+        locals: {
+            collection: BiovisionComponent.list_for_administration
+        }
+    )
+  %>
 
   <div class="dashboard">
     <%= render 'admin/index/biovision_base' %>

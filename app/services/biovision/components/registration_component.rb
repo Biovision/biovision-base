@@ -4,6 +4,8 @@ module Biovision
   module Components
     # Handler for registration component
     class RegistrationComponent < BaseComponent
+      METRIC_NEW_USER = 'registration.new_user.hit'
+
       # @param [Hash] parameters
       # @param [Code] code
       def handle(parameters, code)
@@ -60,7 +62,7 @@ module Biovision
       def persist_user
         return unless @user.save
 
-        Metric.register(User::METRIC_REGISTRATION)
+        register_metric(METRIC_NEW_USER)
 
         handle_codes
       end
@@ -84,10 +86,10 @@ module Biovision
           CodeSender.email(code.id).deliver_later
         end
 
-        if use_invites?
-          @manager.activate(@user) if @manager.code_is_valid?
-          create_invitations(settings['invite_count'].to_i)
-        end
+        return unless use_invites?
+
+        @manager.activate(@user) if @manager.code_is_valid?
+        create_invitations(settings['invite_count'].to_i)
       end
 
       # @param [Integer] quantity
@@ -97,7 +99,7 @@ module Biovision
         parameters = {
           code_type: CodeManager::Invitation.code_type,
           user: @user,
-          quantity: quantity,
+          quantity: quantity
         }
         Code.create(parameters)
       end

@@ -1,11 +1,11 @@
-ru:
+en:
   activerecord:
     models:
-      biovision_component: "Компонент"
-      biovision_parameter: "Параметр"
+      biovision_component: "Component"
+      biovision_parameter: "Parameter"
     attributes:
       biovision_component:
-        slug: "Идентификатор"
+        slug: "Slug"
   admin:
     components:
       index:
@@ -14,22 +14,6 @@ ru:
         heading: "Компоненты"
       show:
         title: "Компонент %{slug}"
-      settings:
-        nav_text: "Настройки"
-        title: "Настройки компонента «%{slug}»"
-        settings:
-          heading: "Настройки"
-        parameters:
-          heading: "Параметры"
-        new_parameter:
-          heading: "Добавить параметр"
-          parameter_slug: "Идентификатор"
-          parameter_value: "Значение"
-          guidelines:
-            slug: "Только латинские буквы, цифры, дефис и подчёркивание (кроме начала и конца)."
-            value: "Произвольная строка"
-      update_settings:
-        success: "Настройки компонента успешно изменены"
   biovision:
     components:
       contact:
@@ -49,4 +33,4 @@ ru:
           open: "Открыта"
           require_email: "Электронная почта обязательна при регистрации"
           use_invites: "Использовать приглашения"
-        invalid_code: "указан неверно"
+        invalid_code: "is invalid"

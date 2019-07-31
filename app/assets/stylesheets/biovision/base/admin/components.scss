@@ -4,113 +4,31 @@ $text-color-secondary: #777 !default;
   margin: var(--spacer-s) 0;
   padding: 0;
 
-  li {
-    list-style: none;
-    margin: 0 0 var(--spacer-m);
-  }
-
   label {
     font-size: var(--font-size-increased);
     font-weight: 400;
-
-    + span {
-      color: $text-color-secondary;
-    }
   }
 
-  .name {
-    input {
-      width: 100%;
-    }
+  input {
+    border: .1rem solid #aaa;
+    margin: 0;
+    padding: var(--spacer-xxs);
+    transition: .125s;
   }
 
-  .value {
-    align-items: center;
-    display: flex;
-    margin: var(--spacer-xxs) 0;
-
-    input {
-      flex: 1;
-    }
-
-    button {
-      --shadow-color: rgba(0, 0, 0, .25);
-
-      background: no-repeat center / contain;
-      border: none;
-      border-radius: .2rem;
-      box-shadow: 0 0 .4rem var(--shadow-color);
-      cursor: pointer;
-      display: inline-block;
-      flex: none;
-      height: 2.4rem;
-      margin: 0 var(--spacer-xxs);
-      transition: .25s;
-      width: 2.4rem;
-
-      &:active,
-      &:hover {
-        --shadow-color: rgba(0, 0, 0, .75);
-      }
-
-      &:disabled {
-        cursor: default;
-        filter: grayscale(1);
-      }
-    }
-
-    .apply {
-      background-color: rgba(97, 228, 64, .125);
-      background-image: image_url('biovision/base/icons/apply.svg');
-    }
-
-    .delete {
-      background-color: rgba(228, 97, 64, .125);
-      background-image: image_url('biovision/base/icons/destroy.svg');
-    }
+  :disabled {
+    background-color: transparent;
+    border-color: transparent;
   }
 
-  .description {
-    font-size: var(--font-size-decreased);
-    margin: var(--spacer-xxs) 0 0;
-  }
-}
-
-.biovision-components {
-  align-items: center;
-  display: flex;
-  flex-wrap: wrap;
-  margin: 0;
-  padding: 0;
-
-  li {
-    list-style: none;
-    margin: var(--spacer-xs);
-    padding: 0;
+  .updated {
+    background-color: rgba(0, 127, 0, .125);
+    border-color: rgb(0, 127, 0);
   }
 
-  a {
-    --shadow-color: rgba(0, 0, 0, .25);
-
-    background: no-repeat center top var(--spacer-s);
-    border-radius: .4rem;
-    box-shadow: 0 0 .4rem var(--shadow-color);
-    display: inline-block;
-    padding: calc(var(--spacer-m) + 16rem) 0 var(--spacer-s);
-    text-align: center;
-    width: calc(var(--spacer-s) + 16rem);
-
-    &:active,
-    &:focus,
-    &:hover {
-      --shadow-color: rgba(0, 0, 0, .75);
-    }
-  }
-
-  .settings-general {
-    a {
-      background-image: image_url('biovision/base/icons/settings.svg');
-    }
+  .failed {
+    background-color: rgba(127, 0, 0, .125);
+    border-color: rgb(127, 0, 0);
   }
 }
 
@@ -137,5 +55,54 @@ $text-color-secondary: #777 !default;
 
   .registration {
     background-image: image_url('biovision/base/icons/components/registration.svg');
+  }
+}
+
+.biovision-components-index {
+  h2 {
+    background: no-repeat center left / 2.4rem 2.4rem;
+    padding-left: 3rem;
+  }
+
+  .contact {
+    h2 {
+      background-image: image_url('biovision/base/icons/components/contact.svg');
+    }
+  }
+
+  .registration {
+    h2 {
+      background-image: image_url('biovision/base/icons/components/registration.svg');
+    }
+  }
+}
+
+.biovision-component-nav {
+  margin: var(--spacer-s);
+
+  .settings {
+    background: image_url('biovision/base/icons/settings.svg') no-repeat center left / 2rem 2rem;
+    display: inline-block;
+    margin: 0 0 var(--spacer-xs);
+    padding-left: 2.4rem;
+  }
+
+  ul {
+    box-shadow: $block-shadow;
+    margin: var(--spacer-xxs);
+    max-width: 64rem;
+    padding: 0;
+  }
+
+  li {
+    background: $row-background-odd;
+    list-style: none;
+    margin: 0;
+    padding: var(--spacer-xs);
+    position: relative;
+
+    &:nth-last-of-type(even) {
+      background: $row-background-even;
+    }
   }
 }
