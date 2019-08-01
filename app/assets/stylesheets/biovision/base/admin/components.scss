@@ -1,4 +1,7 @@
 $text-color-secondary: #777 !default;
+$block-shadow: .2rem .2rem .4rem .2rem rgba(0, 0, 0, .125) !default;
+$row-background-even: hsl(0, 0%, 95%) !default;
+$row-background-odd: hsl(0, 0%, 98%) !default;
 
 #biovision-component-parameters {
   margin: var(--spacer-s) 0;
@@ -56,6 +59,14 @@ $text-color-secondary: #777 !default;
   .registration {
     background-image: image_url('biovision/base/icons/components/registration.svg');
   }
+
+  .users {
+    background-image: image_url('biovision/base/icons/components/users.svg');
+  }
+
+  .content {
+    background-image: image_url('biovision/base/icons/components/content.svg');
+  }
 }
 
 .biovision-components-index {
@@ -73,6 +84,18 @@ $text-color-secondary: #777 !default;
   .registration {
     h2 {
       background-image: image_url('biovision/base/icons/components/registration.svg');
+    }
+  }
+
+  .users {
+    h2 {
+      background-image: image_url('biovision/base/icons/components/users.svg');
+    }
+  }
+
+  .content {
+    h2 {
+      background-image: image_url('biovision/base/icons/components/content.svg');
     }
   }
 }

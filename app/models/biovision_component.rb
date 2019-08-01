@@ -3,10 +3,11 @@
 # Biovision component
 #
 # Attributes:
-#   - created_at [DateTime]
-#   - settings [JSON]
-#   - slug [String]
-#   - updated_at [DateTime]
+#   created_at [DateTime]
+#   parameters [JSON]
+#   settings [JSON]
+#   slug [String]
+#   updated_at [DateTime]
 class BiovisionComponent < ApplicationRecord
   include RequiredUniqueSlug
 
@@ -58,5 +59,9 @@ class BiovisionComponent < ApplicationRecord
     return true if user.super_user?
 
     biovision_component_users.where(user: user).exists?
+  end
+
+  def name
+    I18n.t("biovision.components.#{slug}.name", default: slug)
   end
 end

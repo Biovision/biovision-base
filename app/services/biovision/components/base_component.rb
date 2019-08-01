@@ -62,6 +62,10 @@ module Biovision
         @role = BiovisionComponentUser.find_by(criteria)
       end
 
+      def use_parameters?
+        true
+      end
+
       # @param [Hash] options
       def allow?(options = {})
         return false if user.nil?

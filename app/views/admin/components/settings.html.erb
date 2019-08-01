@@ -23,20 +23,22 @@
     )
   %>
 
-  <%=
-    render(
-        partial: 'admin/components/settings/parameters',
-        locals: {
-            handler: @handler,
-            parameters: @handler.component.parameters
-        }
-    )
-  %>
+  <% if @handler.use_parameters? %>
+    <%=
+      render(
+          partial: 'admin/components/settings/parameters',
+          locals: {
+              handler: @handler,
+              parameters: @handler.component.parameters
+          }
+      )
+    %>
 
-  <%=
-    render(
-        partial: 'admin/components/settings/new_parameter',
-        locals: { handler: @handler }
-    )
-  %>
+    <%=
+      render(
+          partial: 'admin/components/settings/new_parameter',
+          locals: { handler: @handler }
+      )
+    %>
+  <% end %>
 </article>

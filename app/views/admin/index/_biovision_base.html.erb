@@ -1,8 +1,3 @@
-<%#= render 'admin/index/dashboard/settings' %>
-<%#= render 'admin/index/dashboard/biovision_track' %>
-<%= render 'admin/index/dashboard/biovision_user' %>
-<%= render 'admin/index/dashboard/editorial' %>
-<%= render 'admin/index/dashboard/biovision_links' if LinkBlock.table_exists? && LinkBlock.any? %>
 <% %w[partners post vote poll comment testimonials].each do |part| %>
   <%= render "admin/index/dashboard/biovision_#{part}" if Gem.loaded_specs.key?("biovision-#{part}") %>
 <% end %>

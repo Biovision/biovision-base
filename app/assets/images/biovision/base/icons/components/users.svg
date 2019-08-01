@@ -1,0 +1,21 @@
+<svg version="1.1" viewBox="0 0 24 24" width="24px" height="24px" xmlns="http://www.w3.org/2000/svg">
+  <title>Users</title>
+  <defs>
+    <style type="text/css">
+      .a { stroke-width: 1; stroke: #aaa; fill: #eee; }
+      .b { stroke-width: 1.5; stroke: #333; fill: #777; }
+    </style>
+  </defs>
+  <g class="a">
+    <ellipse cx="6.5" cy="7" rx="2" ry="3.2"/>
+    <path d="M1,16 Q6.5,8 12,16 z" stroke-linejoin="round"/>
+  </g>
+  <g class="a">
+    <ellipse cx="18.5" cy="7" rx="2" ry="3.2"/>
+    <path d="M13,16 Q18.5,8 23,16 z" stroke-linejoin="round"/>
+  </g>
+  <g class="b">
+    <ellipse cx="12.5" cy="10" rx="3.5" ry="4.5"/>
+    <path d="M3,22 Q12,11 22,22 z" stroke-linejoin="round"/>
+  </g>
+</svg>

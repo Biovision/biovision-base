@@ -28,7 +28,8 @@ class CreateBiovisionComponents < ActiveRecord::Migration[5.2]
   def seed_items
     create_registration_component
     create_contact_component
-
+    create_users_component
+    create_content_component
   end
 
   def create_registration_component
@@ -46,12 +47,23 @@ class CreateBiovisionComponents < ActiveRecord::Migration[5.2]
 
   def create_contact_component
     parameters = {
-      feedback_receiver: 'info@example.com',
       email: 'info@example.com',
       phone: '',
       address: ''
     }
 
-    BiovisionComponent.create!(slug: 'contact', parameters: parameters)
+    settings = {
+      feedback_receiver: 'info@example.com'
+    }
+
+    BiovisionComponent.create!(slug: 'contact', parameters: parameters, settings: settings)
+  end
+
+  def create_users_component
+    BiovisionComponent.create!(slug: 'users')
+  end
+
+  def create_content_component
+    BiovisionComponent.create!(slug: 'content')
   end
 end

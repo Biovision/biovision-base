@@ -6,7 +6,7 @@ class FeedbackMailer < ApplicationMailer
   def new_feedback_request(id)
     @entity = FeedbackRequest.find_by(id: id)
 
-    receiver = BiovisionComponent['contact'].receive('feedback_receiver')
+    receiver = BiovisionComponent['contact'].settings['feedback_receiver']
 
     mail to: receiver unless @entity.nil? || receiver.blank?
   end
