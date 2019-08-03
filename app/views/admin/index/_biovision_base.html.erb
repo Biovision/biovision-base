@@ -1,3 +1,0 @@
-<% %w[partners post vote poll comment testimonials].each do |part| %>
-  <%= render "admin/index/dashboard/biovision_#{part}" if Gem.loaded_specs.key?("biovision-#{part}") %>
-<% end %>
