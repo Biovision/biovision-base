@@ -5,7 +5,7 @@ module Checkable
   extend ActiveSupport::Concern
 
   included do
-    # @param [Integer] id
+    # @param id
     # @param [Hash] parameters
     def self.instance_for_check(id, parameters)
       if id.blank?
