@@ -9,7 +9,8 @@ class SimpleImageUploader < CarrierWave::Uploader::Base
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
-    slug = "#{model.id / 1000}/#{model.id}"
+    id = model&.id.to_i
+    slug = "#{id / 1000}/#{id}"
 
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{slug}"
   end
@@ -42,6 +43,19 @@ class SimpleImageUploader < CarrierWave::Uploader::Base
   # For images you might use something like this:
   def extension_whitelist
     %w[jpg jpeg png svg svgz]
+  end
+
+  # Text for image alt attribute
+  #
+  # @param [String] default
+  # @return [String]
+  def alt_text(default = '')
+    method_name = "#{mounted_as}_alt_text".to_sym
+    if model.respond_to?(method_name)
+      model.send(method_name)
+    else
+      default
+    end
   end
 
   # @param [SanitizedFile]

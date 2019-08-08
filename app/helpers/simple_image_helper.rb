@@ -2,65 +2,85 @@
 
 # Helper methods for displaying versions for SimpleImageUploader
 module SimpleImageHelper
-  # @param [ApplicationRecord] entity
+  # Preview (160x160) version of simple image
+  #
+  # @param [ApplicationRecord|SimpleImageUploader] entity
   # @param [Hash] options
   def simple_image_preview(entity, options = {})
-    return '' if entity.image.blank?
+    image = entity.is_a?(SimpleImageUploader) ? entity : entity.image
+
+    return '' if image.blank?
 
     default = {
-      alt: entity.respond_to?(:image_alt_text) ? entity.image_alt_text : ''
+      alt: image.alt_text
     }
-    image_tag(entity.image.preview_url, default.merge(options))
+    image_tag(image.preview_url, default.merge(options))
   end
 
-  # @param [ApplicationRecord] entity
+  # Small (320x320) version of simple image
+  #
+  # @param [ApplicationRecord|SimpleImageUploader] entity
   # @param [Hash] options
   def simple_image_small(entity, options = {})
-    return '' if entity.image.blank?
+    image = entity.is_a?(SimpleImageUploader) ? entity : entity.image
+
+    return '' if image.blank?
 
     default = {
-      alt: entity.respond_to?(:image_alt_text) ? entity.image_alt_text : '',
+      alt: image.alt_text
     }
-    default[:srcset] = "#{entity.image.medium.url} 2x" if entity.image.raster?
+    default[:srcset] = "#{image.medium.url} 2x" if image.raster?
 
-    image_tag(entity.image.small_url, default.merge(options))
+    image_tag(image.small_url, default.merge(options))
   end
 
-  # @param [ApplicationRecord] entity
+  # Medium (640x640) version of simple image
+  #
+  # @param [ApplicationRecord|SimpleImageUploader] entity
   # @param [Hash] options
   def simple_image_medium(entity, options = {})
-    return '' if entity.image.blank?
+    image = entity.is_a?(SimpleImageUploader) ? entity : entity.image
+
+    return '' if image.blank?
 
     default = {
-      alt: entity.respond_to?(:image_alt_text) ? entity.image_alt_text : '',
+      alt: image.alt_text
     }
-    default[:srcset] = "#{entity.image.large.url} 2x" if entity.image.raster?
+    default[:srcset] = "#{image.large.url} 2x" if image.raster?
 
-    image_tag(entity.image.medium_url, default.merge(options))
+    image_tag(image.medium_url, default.merge(options))
   end
 
-  # @param [ApplicationRecord] entity
+  # Large (1280x1280) version of simple image
+  #
+  # @param [ApplicationRecord|SimpleImageUploader] entity
   # @param [Hash] options
   def simple_image_large(entity, options = {})
-    return '' if entity.image.blank?
+    image = entity.is_a?(SimpleImageUploader) ? entity : entity.image
+
+    return '' if image.blank?
 
     default = {
-      alt: entity.respond_to?(:image_alt_text) ? entity.image_alt_text : '',
+      alt: image.alt_text
     }
-    default[:srcset] = "#{entity.image.hd.url} 2x" if entity.image.raster?
+    default[:srcset] = "#{image.hd.url} 2x" if image.raster?
 
-    image_tag(entity.image.large_url, default.merge(options))
+    image_tag(image.large_url, default.merge(options))
   end
 
-  # @param [ApplicationRecord] entity
+  # HD (1920x1920) version of simple image
+  #
+  # @param [ApplicationRecord|SimpleImageUploader] entity
   # @param [Hash] options
   def simple_image_hd(entity, options = {})
-    return '' if entity.image.blank?
+    image = entity.is_a?(SimpleImageUploader) ? entity : entity.image
+
+    return '' if image.blank?
 
     default = {
-      alt: entity.respond_to?(:image_alt_text) ? entity.image_alt_text : ''
+      alt: image.alt_text
     }
 
-    image_tag(entity.image.hd_url, default.merge(options))
+    image_tag(image.hd_url, default.merge(options))
   end
 end
