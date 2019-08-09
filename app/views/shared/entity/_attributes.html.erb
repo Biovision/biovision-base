@@ -1,0 +1,4 @@
+<% attributes.reject { |_, v| v.blank? }.each do |attribute, value| %>
+  <dt><%= t("#{prefix}.#{attribute}") %></dt>
+  <dd><%= value %></dd>
+<% end %>
