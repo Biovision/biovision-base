@@ -9,9 +9,10 @@ module Biovision
       included do
         before_action :set_locale
 
+        helper_method :agent, :visitor_slug
+        helper_method :component_handler
         helper_method :current_page, :param_from_request
         helper_method :current_user, :current_language
-        helper_method :agent, :visitor_slug
       end
 
       # Get current page number from request
@@ -168,6 +169,14 @@ module Biovision
         error = "User #{current_user&.id} has no privileges in #{klass}"
 
         handle_http_401(error)
+      end
+
+      def component_slug
+        nil
+      end
+
+      def component_handler
+        @component_handler ||= Biovision::Components::BaseComponent.handler(component_slug, current_user)
       end
     end
   end

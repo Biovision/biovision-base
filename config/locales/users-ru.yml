@@ -321,8 +321,9 @@ ru:
   my:
     index:
       index:
-        title: "Личный кабинет"
         heading: "Личный кабинет"
+        nav_text: "Личный кабинет"
+        title: "Личный кабинет"
     recoveries:
       create:
         impossible: "Сброс пароля для этого пользователя недоступен"
