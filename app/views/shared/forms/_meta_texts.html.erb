@@ -1,51 +1,57 @@
 <% model_name = f.object.class.to_s.underscore %>
-<dt><%= f.label :meta_title %></dt>
-<dd>
-  <%=
-    f.text_field(
-        :meta_title,
-        id:        "#{model_name}_meta_title",
-        size:      nil,
-        maxlength: 250,
-        data:      {
-            check: :meta_title
-        }
-    )
-  %>
-  <div class="check-result-error" data-field="meta_title"></div>
-  <div class="guideline"><%= t('.guidelines.meta_title') %></div>
-</dd>
+<div>
+  <dt><%= f.label :meta_title %></dt>
+  <dd>
+    <%=
+      f.text_field(
+          :meta_title,
+          id:        "#{model_name}_meta_title",
+          size:      nil,
+          maxlength: 250,
+          data:      {
+              check: :meta_title
+          }
+      )
+    %>
+    <div class="check-result-error" data-field="meta_title"></div>
+    <div class="guideline"><%= t('.guidelines.meta_title') %></div>
+  </dd>
+</div>
 
-<dt><%= f.label :meta_description %></dt>
-<dd>
-  <%=
-    f.text_field(
-        :meta_description,
-        id:        "#{model_name}_meta_description",
-        size:      nil,
-        maxlength: 500,
-        data:      {
-            check: :meta_description
-        }
-    )
-  %>
-  <div class="check-result-error" data-field="meta_description"></div>
-  <div class="guideline"><%= t('.guidelines.meta_description') %></div>
-</dd>
+<div>
+  <dt><%= f.label :meta_description %></dt>
+  <dd>
+    <%=
+      f.text_field(
+          :meta_description,
+          id:        "#{model_name}_meta_description",
+          size:      nil,
+          maxlength: 500,
+          data:      {
+              check: :meta_description
+          }
+      )
+    %>
+    <div class="check-result-error" data-field="meta_description"></div>
+    <div class="guideline"><%= t('.guidelines.meta_description') %></div>
+  </dd>
+</div>
 
-<dt><%= f.label :meta_keywords %></dt>
-<dd>
-  <%=
-    f.text_field(
-        :meta_keywords,
-        id:        "#{model_name}_meta_keywords",
-        size:      nil,
-        maxlength: 250,
-        data:      {
-            check: :meta_keywords
-        }
-    )
-  %>
-  <div class="check-result-error" data-field="meta_keywords"></div>
-  <div class="guideline"><%= t('.guidelines.meta_keywords') %></div>
-</dd>
+<div>
+  <dt><%= f.label :meta_keywords %></dt>
+  <dd>
+    <%=
+      f.text_field(
+          :meta_keywords,
+          id:        "#{model_name}_meta_keywords",
+          size:      nil,
+          maxlength: 250,
+          data:      {
+              check: :meta_keywords
+          }
+      )
+    %>
+    <div class="check-result-error" data-field="meta_keywords"></div>
+    <div class="guideline"><%= t('.guidelines.meta_keywords') %></div>
+  </dd>
+</div>

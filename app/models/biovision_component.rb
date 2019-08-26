@@ -5,11 +5,13 @@
 # Attributes:
 #   created_at [DateTime]
 #   parameters [JSON]
+#   priority [Integer]
 #   settings [JSON]
 #   slug [String]
 #   updated_at [DateTime]
 class BiovisionComponent < ApplicationRecord
   include RequiredUniqueSlug
+  include FlatPriority
 
   SLUG_LIMIT        = 250
   SLUG_PATTERN      = /\A[a-z][-a-z0-9_]+[a-z0-9]\z/i.freeze
@@ -18,7 +20,7 @@ class BiovisionComponent < ApplicationRecord
 
   has_many :biovision_component_users, dependent: :delete_all
 
-  scope :list_for_administration, -> { ordered_by_slug }
+  scope :list_for_administration, -> { ordered_by_priority }
 
   # Find component by slug
   #

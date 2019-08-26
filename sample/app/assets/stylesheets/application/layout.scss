@@ -1,0 +1,11 @@
+:focus {
+  outline: none;
+}
+
+.content-wrapper {
+  margin: 0 auto;
+  max-width: $content-width;
+}
+
+@import "header";
+@import "footer";

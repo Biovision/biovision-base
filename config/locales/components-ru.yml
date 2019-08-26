@@ -5,6 +5,7 @@ ru:
       biovision_parameter: "Параметр"
     attributes:
       biovision_component:
+        priority: "Порядок сортировки"
         slug: "Идентификатор"
   admin:
     components:
