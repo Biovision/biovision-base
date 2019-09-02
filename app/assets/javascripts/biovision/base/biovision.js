@@ -189,6 +189,16 @@ const Biovision = {
         } else {
             console.log('Cannot find element with id ' + formId)
         }
+    },
+    execute: function (name, context) {
+        const args = Array.prototype.slice.call(arguments, 2);
+        const namespaces = name.split(".");
+        const func = namespaces.pop();
+        for(let i = 0; i < namespaces.length; i++) {
+            context = context[namespaces[i]];
+        }
+
+        return context[func].apply(context, args);
     }
 };
 
@@ -775,6 +785,125 @@ Biovision.components.userSearch = {
     }
 };
 
+Biovision.components.adminUserSearch = {
+    initialized: false,
+    selector: ".js-admin-user-search",
+    url: undefined,
+    button: undefined,
+    input: undefined,
+    resultsContainer: undefined,
+    callbackName: undefined,
+    init: function () {
+        const container = document.querySelector(this.selector);
+        if (container) {
+            const component = this;
+            this.url = container.getAttribute("data-url");
+            this.button = container.querySelector("button");
+            this.input = container.querySelector("input");
+            this.resultsContainer = container.querySelector("select");
+            this.callbackName = container.getAttribute("data-callback");
+
+            this.input.addEventListener("input", component.changeInput);
+            this.button.addEventListener("click", component.clickButton);
+            this.resultsContainer.addEventListener("change", component.changeSelect);
+            this.initialized = true;
+        }
+    },
+    changeInput: function (event) {
+        const component = Biovision.components.adminUserSearch;
+        const input = event.target;
+        component.button.disabled = input.value.length < 1;
+    },
+    clickButton: function (event) {
+        const component = Biovision.components.adminUserSearch;
+        const url = component.url + "?q=" + encodeURIComponent(component.input.value);
+        Biovision.jsonAjaxRequest("get", url, component.showResults).send();
+    },
+    changeSelect: function (event) {
+        const component = Biovision.components.adminUserSearch;
+        const select = event.target;
+        const option = select.options[select.selectedIndex];
+        const id = parseInt(option.value);
+
+        if (id > 0 && component.callbackName) {
+            Biovision.execute(component.callbackName, window, id);
+            option.disabled = true;
+        }
+    },
+    showResults: function () {
+        const component = Biovision.components.adminUserSearch;
+        const response = JSON.parse(this.responseText);
+        component.resultsContainer.innerHTML = "";
+
+        const option = document.createElement("option");
+        option.innerHTML = response["meta"]["count"];
+        option.value = "";
+        component.resultsContainer.append(option);
+
+        if (response.hasOwnProperty("data")) {
+            response.data.forEach(function (item) {
+                const option = document.createElement("option");
+                option.setAttribute("value", item.id);
+                option.innerHTML = item["attributes"]["slug"] + " (" + item["meta"]["name"] + ")";
+
+                component.resultsContainer.append(option);
+            });
+        }
+    }
+};
+
+Biovision.components.userPrivilege = {
+    initialized: false,
+    selector: ".js-component-added-users",
+    list: undefined,
+    url: undefined,
+    init: function () {
+        this.list = document.querySelector(this.selector);
+        if (this.list) {
+            this.url = this.list.getAttribute("data-url");
+            this.initialized = true;
+        }
+    },
+    addUser: function (id) {
+        const component = Biovision.components.userPrivilege;
+        if (component.url) {
+            const data = {
+                "user_id": id
+            };
+            const request = Biovision.jsonAjaxRequest("patch", component.url, component.processAddResponse);
+
+            request.send(JSON.stringify(data));
+        } else {
+            console.log("URL is not set for userPrivilege component")
+        }
+    },
+    processAddResponse: function () {
+        const component = Biovision.components.userPrivilege;
+        if (component.list) {
+            const response = JSON.parse(this.responseText);
+            if (response.hasOwnProperty("data")) {
+                const data = response["data"];
+                const li = document.createElement("li");
+                const user = data["relationships"]["user"]["data"];
+                const div = document.createElement("div");
+                div.innerHTML = user["attributes"]["screen_name"] + " (" + user["meta"]["full_name"] + ")";
+                li.append(div);
+
+                const linkData = data["attributes"]["data"];
+                if (Object.keys(linkData).length > 0) {
+                    const details = document.createElement("div");
+                    details.innerHTML = JSON.stringify(linkData);
+                    li.append(details);
+                }
+
+                component.list.append(li);
+            }
+        } else {
+            console.log("List is not defined for userPrivilege component");
+        }
+    }
+};
+
 /**
  * Hide popups when clicking outside
  *
@@ -948,6 +1077,8 @@ Biovision.components.newComponentParameter = {
         }
     }
 };
+
+window.Biovision = Biovision;
 
 document.addEventListener('DOMContentLoaded', function () {
     Biovision.init();

@@ -1,0 +1,23 @@
+<section>
+  <h2><%= t('.heading') %></h2>
+
+  <% if collection.any? %>
+    <ul class="list-of-entities">
+      <% collection.each do |entity| %>
+        <li data-id="<%= entity.id %>">
+          <%=
+            render(
+                partial: 'admin/components/privileges/component_user',
+                locals: {
+                    handler: handler,
+                    entity: entity
+                }
+            )
+          %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <%= render 'shared/nothing_found' %>
+  <% end %>
+</section>

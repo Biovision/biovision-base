@@ -44,6 +44,50 @@ class Admin::ComponentsController < AdminController
     head :no_content
   end
 
+  # get /admin/components/:slug/privileges
+  def privileges
+  end
+
+  # patch /admin/components/:slug/privileges
+  def update_privileges
+    user = User.find_by(id: params[:user_id])
+
+    handle_http_404('Cannot find user') if user.nil?
+
+    @entity = @handler.update_privileges(user)
+  end
+
+  # put /admin/components/:slug/administrators/:user_id
+  def add_administrator
+    @handler.component.add_administrator(User.find_by(id: params[:user_id]))
+
+    head :no_content
+  end
+
+  # put /admin/components/:slug/administrators/:user_id
+  def remove_administrator
+    @handler.component.remove_administrator(User.find_by(id: params[:user_id]))
+
+    head :no_content
+  end
+
+
+  # put /admin/components/:slug/users/:user_id/privileges/:privilege_slug
+  def add_privilege
+    user = User.find_by(id: params[:user_id])
+    @handler.component.add_privilege(user, params[:privilege_slug])
+
+    head :no_content
+  end
+
+  # put /admin/components/:slug/users/:user_id/privileges/:privilege_slug
+  def remove_privilege
+    user = User.find_by(id: params[:user_id])
+    @handler.component.remove_privilege(user, params[:privilege_slug])
+
+    head :no_content
+  end
+
   private
 
   def set_handler

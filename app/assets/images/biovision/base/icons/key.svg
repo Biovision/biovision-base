@@ -1,0 +1,16 @@
+<svg version="1.1" viewBox="0 0 24 24" width="24px" height="24px" xmlns="http://www.w3.org/2000/svg">
+  <title>Key</title>
+  <defs>
+    <style type="text/css">
+      * { stroke: #ada33d; stroke-width: 1.5; }
+      line { stroke-linecap: round; }
+    </style>
+  </defs>
+  <g>
+    <circle cx="4" cy="20" r="3" fill="none"/>
+    <line x1="6" y1="18" x2="20" y2="4"/>
+    <line x1="19" y1="5" x2="21" y2="7"/>
+    <line x1="17" y1="7" x2="20" y2="10"/>
+    <line x1="14" y1="8" x2="16" y2="10"/>
+  </g>
+</svg>

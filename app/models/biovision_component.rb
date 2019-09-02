@@ -66,4 +66,47 @@ class BiovisionComponent < ApplicationRecord
   def name
     I18n.t("biovision.components.#{slug}.name", default: slug)
   end
+
+  def privileges
+    biovision_component_users.recent
+  end
+
+  # @param [User] user
+  def add_administrator(user)
+    link = biovision_component_users.find_by(user: user)
+
+    return if link.nil?
+
+    link.update(administrator: true)
+  end
+
+  # @param [User] user
+  def remove_administrator(user)
+    link = biovision_component_users.find_by(user: user)
+
+    return if link.nil?
+
+    link.update(administrator: false)
+  end
+
+  # @param [User] user
+  # @param [String|Symbol] privilege_slug
+  def add_privilege(user, privilege_slug)
+    return if user.nil?
+
+    link = biovision_component_users.find_or_create_by(user: user)
+    link.data[privilege_slug.to_s] = true
+    link.save
+  end
+
+  # @param [User] user
+  # @param [String|Symbol] privilege_slug
+  def remove_privilege(user, privilege_slug)
+    link = biovision_component_users.find_by(user: user)
+
+    return if link.nil?
+
+    link.data[privilege_slug.to_s] = false
+    link.save
+  end
 end

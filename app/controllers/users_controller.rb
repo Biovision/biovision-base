@@ -39,7 +39,7 @@ class UsersController < ApplicationController
 
   # delete /users/:id
   def destroy
-    if @entity.update(deleted: true)
+    if @entity.destroy #update(deleted: true)
       flash[:notice] = t('users.destroy.success')
     end
     redirect_to admin_users_path

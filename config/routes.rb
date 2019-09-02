@@ -84,6 +84,12 @@ Rails.application.routes.draw do
           get 'settings' => :settings, as: :component_settings
           patch 'settings' => :update_settings, as: nil
           patch 'parameters' => :update_parameter, as: :component_parameters
+          get 'privileges' => :privileges, as: :component_privileges
+          patch 'privileges' => :update_privileges, as: nil
+          put 'administrators/:user_id' => :add_administrator, as: :component_administrators
+          delete 'administrators/:user_id' => :remove_administrator, as: nil
+          put 'users/:user_id/privileges/:privilege_slug' => :add_privilege, as: :component_privilege
+          delete 'users/:user_id/privileges/:privilege_slug' => :remove_privilege, as: nil
         end
       end
 

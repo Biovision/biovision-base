@@ -105,7 +105,14 @@ $row-background-odd: hsl(0, 0%, 98%) !default;
 
   .settings {
     background: image_url('biovision/base/icons/settings.svg') no-repeat center left / 2rem 2rem;
-    display: inline-block;
+    display: block;
+    margin: 0 0 var(--spacer-xs);
+    padding-left: 2.4rem;
+  }
+
+  .privileges {
+    background: image_url('biovision/base/icons/key.svg') no-repeat center left / 2rem 2rem;
+    display: block;
     margin: 0 0 var(--spacer-xs);
     padding-left: 2.4rem;
   }
@@ -127,5 +134,36 @@ $row-background-odd: hsl(0, 0%, 98%) !default;
     &:nth-last-of-type(even) {
       background: $row-background-even;
     }
+  }
+}
+
+.js-admin-user-search {
+  select {
+    &:empty {
+      display: none;
+    }
+  }
+}
+
+.js-component-added-users {
+  list-style: none;
+  margin: var(--spacer-s) 0;
+  padding: 0;
+
+  &::before {
+    content: attr(aria-label);
+    display: block;
+    font: 400 var(--font-size-increased) $font-family-heading;
+    transition: .25s;
+  }
+
+  &:empty::before {
+    opacity: 0;
+  }
+
+  li {
+    box-shadow: 0 0 .4rem rgba(0, 0, 0, .25);
+    margin: var(--spacer-xs) 0;
+    padding: var(--spacer-xs);
   }
 }

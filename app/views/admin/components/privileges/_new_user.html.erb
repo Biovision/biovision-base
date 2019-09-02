@@ -1,0 +1,15 @@
+<section>
+  <h2><%= t('.heading') %></h2>
+
+  <div class="js-admin-user-search" data-url="<%= search_admin_users_path %>" data-callback="Biovision.components.userPrivilege.addUser">
+    <%= search_field_tag('user_search', '', id: nil, size: 24) %>
+    <%= button_tag t(:find), disabled: true, type: :button %>
+    <select class="results"></select>
+  </div>
+
+  <ul
+    class="js-component-added-users"
+    data-url="<%= admin_component_privileges_path(slug: handler.slug) %>"
+    aria-label="<%= t('.added_users') %>"
+  ></ul>
+</section>

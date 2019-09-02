@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Adds list of toggleable attributes to model
 #
 # @author Maxim Khan-Magomedov <maxim.km@gmail.com>
@@ -10,17 +12,19 @@ module Toggleable
     # @param [String, Symbol] attribute
     # @return [Hash]
     def toggle_parameter(attribute)
-      return unless self::toggleable_attributes.include? attribute.to_sym
+      return unless toggleable_attributes.include? attribute.to_sym
+
       toggle! attribute
       { attribute => self[attribute] }
     end
   end
 
+  # Additional class methods
   module ClassMethods
 
     private
 
-    # @param [Array<Symbol, String>] attributes
+    # @param [Array<Symbol>] attributes
     def toggleable(*attributes)
       cattr_accessor :toggleable_attributes
       self.toggleable_attributes = attributes.flatten

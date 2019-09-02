@@ -4,7 +4,7 @@ module Biovision
   module Components
     # Base biovision component
     class BaseComponent
-      attr_reader :component, :slug, :name, :user
+      attr_reader :component, :slug, :name, :user, :role
 
       # @param [BiovisionComponent] component
       # @param [User] user
@@ -66,10 +66,16 @@ module Biovision
         true
       end
 
+      def administrator?
+        return false if user.nil?
+
+        user.super_user? || @role&.administrator?
+      end
+
       # @param [Hash] options
       def allow?(options = {})
         return false if user.nil?
-        return true if user.super_user? || @role&.administrator?
+        return true if administrator?
 
         if options.key?(:action)
           @role.data[options[:action].to_s]
@@ -132,6 +138,20 @@ module Biovision
         end
 
         metric << quantity
+      end
+
+      # @param [User] user
+      # @param [Hash] data
+      def update_privileges(user, data = nil)
+        criteria = {
+          user: user,
+          biovision_component: @component
+        }
+        link = BiovisionComponentUser.find_or_create_by(criteria)
+
+        link&.update(data: data) unless data.nil?
+
+        link
       end
 
       protected

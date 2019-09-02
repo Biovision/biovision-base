@@ -1,0 +1,42 @@
+<div class="image">
+  <%= profile_avatar(entity.user) %>
+</div>
+<div class="data">
+  <div><%= admin_user_link(entity.user) %></div>
+  <div>
+    <ul class="entity-links">
+      <li>
+        <% element_id = "component_administrator_#{entity.user_id}" %>
+        <%=
+          check_box_tag(
+              'user_id',
+              entity.user_id,
+              entity.administrator?,
+              data: {
+                  url: admin_component_administrators_path(slug: handler.slug, user_id: entity.user_id)
+              },
+              id: element_id
+          )
+        %>
+        <%= label_tag(element_id, t('activerecord.attributes.biovision_component_user.administrator')) %>
+      </li>
+      <% if handler.use_parameters? || handler.component.settings.any? %>
+        <li>
+          <% element_id = "component_privilege_settings" %>
+          <%=
+            check_box_tag(
+                'user_id',
+                entity.user_id,
+                entity.data['settings'],
+                data: {
+                    url: admin_component_privilege_path(slug: handler.slug, user_id: entity.user_id, privilege_slug: 'settings')
+                },
+                id: element_id
+            )
+          %>
+          <%= label_tag(element_id, t('activerecord.attributes.biovision_component_user.privileges.settings')) %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>

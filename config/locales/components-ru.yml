@@ -7,12 +7,24 @@ ru:
       biovision_component:
         priority: "Порядок сортировки"
         slug: "Идентификатор"
+      biovision_component_user:
+        administrator: "Администратор компонента"
+        privileges:
+          settings: "Управление настройками"
   admin:
     components:
       index:
         title: "Компоненты"
         nav_text: "Компоненты"
         heading: "Компоненты"
+      privileges:
+        nav_text: "Привилегии"
+        title: "Настройки компонента «%{slug}»"
+        users:
+          heading: "Пользователи"
+        new_user:
+          heading: "Добавить пользователя"
+          added_users: "Добавленные пользователи"
       show:
         title: "Компонент %{slug}"
       settings:
