@@ -2,6 +2,7 @@ $text-color-secondary: #777 !default;
 $block-shadow: .2rem .2rem .4rem .2rem rgba(0, 0, 0, .125) !default;
 $row-background-even: hsl(0, 0%, 95%) !default;
 $row-background-odd: hsl(0, 0%, 98%) !default;
+$font-family-heading: serif !default;
 
 #biovision-component-parameters {
   margin: var(--spacer-s) 0;
