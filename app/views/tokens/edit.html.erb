@@ -1,8 +1,9 @@
 <% content_for :meta_title, t('.title') %>
 <% content_for :breadcrumbs do %>
-    <%= link_to t('admin.tokens.nav_item.text'), admin_tokens_path %>
-    <%= admin_token_link(@entity) %>
-    <span><%= t(:edit) %></span>
+  <%= admin_biovision_component_link(component_handler.component) %>
+  <%= link_to t('admin.tokens.nav_item.text'), admin_tokens_path %>
+  <%= admin_token_link(@entity) %>
+  <span><%= t(:edit) %></span>
 <% end %>
 
 <article>

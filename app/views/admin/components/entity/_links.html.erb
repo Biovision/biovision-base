@@ -24,7 +24,12 @@
   <% prefix = 'admin/components/links/' %>
   <% if lookup_context.exists?("#{prefix}_#{handler.slug}") %>
     <ul class="biovision-component-links">
-      <%= render "#{prefix}#{handler.slug}" %>
+      <%=
+        render(
+            partial: "#{prefix}#{handler.slug}",
+            locals: { handler: handler }
+        )
+      %>
     </ul>
   <% end %>
 </nav>

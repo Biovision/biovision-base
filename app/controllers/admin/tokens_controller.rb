@@ -1,7 +1,10 @@
+# frozen_string_literal: true
+
+# Handling user tokens
 class Admin::TokensController < AdminController
   include ToggleableEntity
 
-  before_action :set_entity, except: [:index]
+  before_action :set_entity, except: :index
 
   # get /admin/tokens
   def index
@@ -15,14 +18,17 @@ class Admin::TokensController < AdminController
 
   protected
 
+  def component_slug
+    Biovision::Components::UsersComponent::SLUG
+  end
+
   def restrict_access
-    require_privilege :administrator
+    error = 'Managing tokens is not allowed'
+    handle_http_401(error) unless component_handler.administrator?
   end
 
   def set_entity
     @entity = Token.find_by(id: params[:id])
-    if @entity.nil?
-      handle_http_404('Cannot find token')
-    end
+    handle_http_404('Cannot find token') if @entity.nil?
   end
 end

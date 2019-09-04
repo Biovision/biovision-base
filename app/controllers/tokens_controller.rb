@@ -39,8 +39,13 @@ class TokensController < AdminController
 
   protected
 
+  def component_slug
+    Biovision::Components::UsersComponent::SLUG
+  end
+
   def restrict_access
-    require_privilege :administrator
+    error = 'Managing tokens is not allowed'
+    handle_http_401(error) unless component_handler.administrator?
   end
 
   def set_entity
