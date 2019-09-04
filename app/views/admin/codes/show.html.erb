@@ -1,7 +1,8 @@
 <% content_for :meta_title, t('.title', body: @entity.body) %>
 <% content_for :breadcrumbs do %>
-    <%= link_to(t('admin.codes.nav_item.text'), admin_codes_path) %>
-    <span><%= @entity.body %></span>
+  <%= admin_biovision_component_link(component_handler.component) %>
+  <%= link_to(t('admin.codes.nav_item.text'), admin_codes_path) %>
+  <span><%= @entity.body %></span>
 <% end %>
 
 <article>
@@ -29,17 +30,17 @@
     </dd>
 
     <% unless @entity.updated_at.nil? %>
-        <dt><%= t(:updated_at) %></dt>
-        <dd>
-          <%= time_tag(@entity.updated_at) %>
-        </dd>
+      <dt><%= t(:updated_at) %></dt>
+      <dd>
+        <%= time_tag(@entity.updated_at) %>
+      </dd>
     <% end %>
 
     <% unless @entity.payload.blank? %>
-        <dt><%= t('activerecord.attributes.code.payload') %></dt>
-        <dd>
-          <%= @entity.payload %>
-        </dd>
+      <dt><%= t('activerecord.attributes.code.payload') %></dt>
+      <dd>
+        <%= @entity.payload %>
+      </dd>
     <% end %>
 
     <dt><%= t('activerecord.attributes.code.quantity') %></dt>
@@ -47,5 +48,6 @@
       <%= t(:code_activation_count, count: @entity.quantity) %>
     </dd>
   </dl>
+
   <%= render partial: 'shared/track', locals: { item: @entity } %>
 </article>

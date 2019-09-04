@@ -767,8 +767,8 @@ Biovision.components.userSearch = {
             const response = JSON.parse(this.responseText);
             const results = container.querySelector('.results');
 
-            if (response.hasOwnProperty('data')) {
-                results.innerHTML = response['data']['html'];
+            if (response.hasOwnProperty('meta')) {
+                results.innerHTML = response['meta']['html'];
 
                 results.querySelectorAll('li').forEach(function (li) {
                     li.addEventListener('click', function (event) {

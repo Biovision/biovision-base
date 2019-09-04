@@ -1,6 +1,7 @@
 <% content_for :meta_title, t('.title', page: current_page) %>
 <% content_for :breadcrumbs do %>
-    <span><%= t('admin.codes.nav_item.text') %></span>
+  <%= admin_biovision_component_link(component_handler.component) %>
+  <span><%= t('admin.codes.nav_item.text') %></span>
 <% end %>
 
 <article>

@@ -25,7 +25,7 @@ module Biovision
         if input.is_a?(BiovisionComponent)
           handler_class(input.slug).new(input, user)
         else
-          entity = BiovisionComponent.find_by!(slug: input)
+          entity = BiovisionComponent.find_by(slug: input)
           handler_class(input).new(entity, user)
         end
       end

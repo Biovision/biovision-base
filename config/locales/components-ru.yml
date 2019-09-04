@@ -68,3 +68,7 @@ ru:
         invalid_code: "указан неверно"
       users:
         name: "Пользователи"
+        privileges:
+          edit: "Редактирование"
+          manage_codes: "Управление кодами"
+          view: "Просмотр"

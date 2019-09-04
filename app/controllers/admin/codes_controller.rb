@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Handling user codes
 class Admin::CodesController < AdminController
   before_action :set_entity, except: [:index]
 
@@ -12,8 +15,13 @@ class Admin::CodesController < AdminController
 
   protected
 
+  def component_slug
+    Biovision::Components::UsersComponent::SLUG
+  end
+
   def restrict_access
-    require_privilege :administrator
+    error = 'Managing codes is not allowed'
+    handle_http_401(error) unless component_handler.allow?('manage_codes')
   end
 
   def set_entity
