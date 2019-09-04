@@ -1,5 +1,6 @@
 <% content_for :meta_title, t('.title', name: @entity.profile_name) %>
 <% content_for :breadcrumbs do %>
+  <%= admin_biovision_component_link(component_handler.component) %>
   <%= link_to(t('admin.users.nav_item.text'), admin_users_path) %>
   <span><%= @entity.profile_name %></span>
 <% end %>
@@ -13,22 +14,27 @@
     <li><%= back_icon(admin_users_path) %></li>
     <% unless @entity.deleted? %>
       <li><%= world_icon(user_profile_path(slug: @entity.slug)) %></li>
-      <li><%= edit_icon(edit_user_path(id: @entity.id)) %></li>
+      <% if component_handler.allow?('edit') %>
+        <li><%= edit_icon(edit_user_path(id: @entity.id)) %></li>
+      <% end %>
     <% end %>
   </ul>
 
   <nav>
-    <%= link_to(t('.privileges'), privileges_admin_user_path(id: @entity.id), class: 'button-nav') %>
-    <%= link_to(t('admin.tokens.index.heading'), tokens_admin_user_path(id: @entity.id), class: 'button-nav') %>
-    <%= link_to(t('admin.codes.index.heading'), codes_admin_user_path(id: @entity.id), class: 'button-nav') %>
+    <% if component_handler.administrator? %>
+      <%= link_to(t('admin.tokens.index.heading'), tokens_admin_user_path(id: @entity.id), class: 'button-nav') %>
+    <% end %>
+    <% if component_handler.allow?('manage_codes') %>
+      <%= link_to(t('admin.codes.index.heading'), codes_admin_user_path(id: @entity.id), class: 'button-nav') %>
+    <% end %>
     <%= render partial: 'admin/users/entity/custom_nav', locals: { entity: @entity } %>
-    <% unless @entity == current_user %>
+    <% if current_user.super_user? && @entity != current_user %>
       <%=
         link_to(
             t('.authenticate'),
             authenticate_admin_user_path(id: @entity.id),
             method: :post,
-            class:  'button-action'
+            class: 'button-action'
         )
       %>
     <% end %>

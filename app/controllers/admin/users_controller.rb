@@ -1,8 +1,11 @@
+# frozen_string_literal: true
+
+# Handling users
 class Admin::UsersController < AdminController
   include Authentication
   include ToggleableEntity
 
-  before_action :set_entity, except: [:index, :search]
+  before_action :set_entity, except: %i[index search]
   before_action :set_privilege, only: [:grant_privilege, :revoke_privilege]
 
   # get /admin/users
@@ -67,15 +70,18 @@ class Admin::UsersController < AdminController
 
   protected
 
+  def component_slug
+    Biovision::Components::UsersComponent::SLUG
+  end
+
   def restrict_access
-    require_privilege :administrator
+    error = 'Managing users is not allowed'
+    handle_http_401(error) unless component_handler.allow?('view', 'edit')
   end
 
   def set_entity
     @entity = User.find_by(id: params[:id])
-    if @entity.nil?
-      handle_http_404('Cannot find user')
-    end
+    handle_http_404('Cannot find user') if @entity.nil?
   end
 
   def set_privilege

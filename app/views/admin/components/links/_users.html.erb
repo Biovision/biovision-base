@@ -1,4 +1,4 @@
-<% if handler.allow?('view') || handler.allow?('edit') %>
+<% if handler.allow?('view', 'edit') %>
   <li><%= render 'admin/users/nav_item' %></li>
   <li><%= render 'admin/foreign_users/nav_item' %></li>
 <% end %>

@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Handling foreign users
 class Admin::ForeignUsersController < AdminController
   before_action :set_entity, except: :index
 
@@ -12,14 +15,17 @@ class Admin::ForeignUsersController < AdminController
 
   protected
 
+  def component_slug
+    Biovision::Components::UsersComponent::SLUG
+  end
+
   def restrict_access
-    require_privilege :administrator
+    error = 'Managing foreign users is not allowed'
+    handle_http_401(error) unless component_handler.allow?('view', 'edit')
   end
 
   def set_entity
     @entity = ForeignUser.find_by(id: params[:id])
-    if @entity.nil?
-      handle_http_404('Cannot find foreign_user')
-    end
+    handle_http_404('Cannot find foreign_user') if @entity.nil?
   end
 end

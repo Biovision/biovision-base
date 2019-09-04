@@ -1,5 +1,6 @@
 <% content_for :meta_title, t('.title', slug: @entity.long_slug) %>
 <% content_for :breadcrumbs do %>
+  <%= admin_biovision_component_link(component_handler.component) %>
   <%= link_to(t('admin.foreign_users.nav_item.text'), admin_foreign_users_path) %>
   <span><%= @entity.long_slug %></span>
 <% end %>

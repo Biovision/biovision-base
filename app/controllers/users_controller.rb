@@ -1,6 +1,9 @@
+# frozen_string_literal: true
+
+# Managing users
 class UsersController < ApplicationController
-  before_action :restrict_access, except: [:check]
-  before_action :set_entity, only: [:edit, :update, :destroy]
+  before_action :restrict_access, except: :check
+  before_action :set_entity, only: %i[edit update destroy]
 
   layout 'admin', except: :check
 
@@ -39,23 +42,25 @@ class UsersController < ApplicationController
 
   # delete /users/:id
   def destroy
-    if @entity.destroy #update(deleted: true)
-      flash[:notice] = t('users.destroy.success')
-    end
+    flash[:notice] = t('users.destroy.success') if @entity.destroy #update(deleted: true)
+
     redirect_to admin_users_path
   end
 
   protected
 
+  def component_slug
+    Biovision::Components::UsersComponent::SLUG
+  end
+
   def restrict_access
-    require_privilege :administrator
+    error = 'Managing users is not allowed'
+    handle_http_401(error) unless component_handler.allow?('view', 'edit')
   end
 
   def set_entity
     @entity = User.find_by(id: params[:id])
-    if @entity.nil?
-      handle_http_404('Cannot find user')
-    end
+    handle_http_404('Cannot find user') if @entity.nil?
   end
 
   def entity_parameters

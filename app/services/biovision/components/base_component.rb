@@ -79,13 +79,21 @@ module Biovision
         user.super_user? || @role&.administrator?
       end
 
-      # @param [String] privilege_name
-      def allow?(privilege_name = '')
+      # @param [String|Array] privilege_names
+      def allow?(*privilege_names)
         return false if user.nil?
-        return true if administrator?
+        return true if administrator? || privilege_names.blank?
         return false if @role.nil?
 
-        privilege_name.blank? ? true : @role.data[privilege_name.to_s]
+        privilege_names.flatten.each { |slug| return true if privilege?(slug) }
+        false
+      end
+
+      # @param [String] privilege_name
+      def privilege?(privilege_name)
+        return false if @role.nil?
+
+        @role.data[privilege_name.to_s]
       end
 
       # @param [Hash] data
