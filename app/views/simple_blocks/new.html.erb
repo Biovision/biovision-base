@@ -1,7 +1,8 @@
 <% content_for :meta_title, t('.title') %>
 <% content_for :breadcrumbs do %>
-    <%= link_to(t('admin.simple_blocks.nav_item.text'), admin_simple_blocks_path) %>
-    <span><%= t('.nav_text') %></span>
+  <%= admin_biovision_component_link(component_handler.component) %>
+  <%= link_to(t('admin.simple_blocks.nav_item.text'), admin_simple_blocks_path) %>
+  <span><%= t('.nav_text') %></span>
 <% end %>
 
 <article>

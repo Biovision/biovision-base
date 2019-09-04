@@ -8,8 +8,6 @@ class CreatePrivileges < ActiveRecord::Migration[5.1]
     create_user_privileges unless UserPrivilege.table_exists?
     create_privilege_groups unless PrivilegeGroup.table_exists?
     create_privilege_group_links unless PrivilegeGroupPrivilege.table_exists?
-
-    seed_privileges
   end
 
   # Drop tables
@@ -73,71 +71,6 @@ class CreatePrivileges < ActiveRecord::Migration[5.1]
       t.references :privilege_group, null: false, foreign_key: { on_update: :cascade, on_delete: :cascade }
       t.references :privilege, null: false, foreign_key: { on_update: :cascade, on_delete: :cascade }
       t.boolean :deletable, default: true, null: false
-    end
-  end
-
-  # Create initial privileges and groups
-  def seed_privileges
-    groups = {
-      administrators:   {
-        name:        'Администраторы',
-        description: 'Административная группа',
-        privileges:  {
-          administrator: ['Администратор', 'Может управлять пользователями и привилегиями.']
-        }
-      },
-      analysts:         {
-        name:        'Аналитики',
-        description: 'Группа аналитиков различных метрик сайта',
-        privileges:  {
-          mertics_manager: ['Аналитик метрик', 'Может просматривать метрики.']
-        }
-      },
-      moderators:       {
-        name:        'Модераторы',
-        description: 'Отвечает за пользовательский контент и блокировку пользователей',
-        privileges:  {
-          moderator: ['Модератор', 'Управляет блокировками пользователей и следит за пользовательским контентом.']
-        }
-      },
-      content_managers: {
-        name:        'Контент-менеджеры',
-        description: 'Отвечают за наполнение информационных разделов',
-        privileges:  {
-          content_manager: ['Контент-менеджер', 'Редактирует информационные разделы.']
-        }
-      },
-      feedback_managers: {
-        name: 'Менеджеры обратной связи',
-        description: 'Отвечают за обратную связь с пользователями',
-        privileges: {
-          feedback_manager: ['Менеджер обратной связи', 'Обрабатывает обращения через формы обратной связи.']
-        }
-      }
-    }
-
-    groups.each do |slug, data|
-      privilege_group = PrivilegeGroup.create!(
-        slug:        slug,
-        name:        data[:name],
-        description: data[:description],
-        deletable:   false
-      )
-
-      data[:privileges].each do |privilege_slug, privilege_data|
-        privilege = Privilege.create!(
-          slug:        privilege_slug,
-          name:        privilege_data[0],
-          description: privilege_data[1],
-          deletable:   false
-        )
-
-        PrivilegeGroupPrivilege.create!(
-          privilege:       privilege,
-          privilege_group: privilege_group,
-          deletable:       false
-        )
-      end
     end
   end
 end

@@ -4,6 +4,8 @@ module Biovision
   module Components
     # Component for feedback
     class ContactComponent < BaseComponent
+      SLUG = 'contact'
+
       def self.privilege_names
         %w[feedback_manager]
       end

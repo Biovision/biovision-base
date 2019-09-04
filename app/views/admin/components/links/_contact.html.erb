@@ -1,1 +1,3 @@
-<li><%= render 'admin/feedback_requests/nav_item' %></li>
+<% if handler.allow?('feedback_manager') %>
+  <li><%= render 'admin/feedback_requests/nav_item' %></li>
+<% end %>

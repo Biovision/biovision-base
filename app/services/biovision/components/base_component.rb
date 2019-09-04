@@ -41,10 +41,6 @@ module Biovision
         []
       end
 
-      def self.default_privilege_name
-        self.class.to_s.demodulize.underscore.gsub('component', 'manager')
-      end
-
       # @param [User] user
       # @param [String] privilege_name
       def self.allow?(user, privilege_name = '')

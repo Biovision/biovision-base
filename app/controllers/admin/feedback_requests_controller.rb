@@ -1,7 +1,10 @@
+# frozen_string_literal: true
+
+# Handling feedback requests
 class Admin::FeedbackRequestsController < AdminController
   include ToggleableEntity
 
-  before_action :set_entity, except: [:index]
+  before_action :set_entity, except: :index
 
   # get /admin/feedback_requests
   def index
@@ -10,8 +13,13 @@ class Admin::FeedbackRequestsController < AdminController
 
   private
 
+  def component_slug
+    Biovision::Components::ContactComponent::SLUG
+  end
+
   def restrict_access
-    require_privilege :feedback_manager
+    error = 'Managing feedback requests is not allowed'
+    handle_http_401(error) unless component_handler.allow?('feedback_manager')
   end
 
   def set_entity

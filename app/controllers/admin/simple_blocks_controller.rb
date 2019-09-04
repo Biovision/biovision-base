@@ -17,8 +17,13 @@ class Admin::SimpleBlocksController < AdminController
 
   private
 
+  def component_slug
+    Biovision::Components::ContentComponent::SLUG
+  end
+
   def restrict_access
-    require_privilege :content_manager
+    error = 'Managing content is not allowed'
+    handle_http_401(error) unless component_handler.allow?('content_manager')
   end
 
   def set_entity
