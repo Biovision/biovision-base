@@ -162,9 +162,9 @@ module Biovision
       end
 
       # @param [Class] klass
-      # @param [Hash] options
-      def component_restriction(klass, options = {})
-        return if klass.allow?(current_user, options)
+      # @param [String] privilege_name
+      def component_restriction(klass, privilege_name)
+        return if klass.allow?(current_user, privilege_name)
 
         error = "User #{current_user&.id} has no privileges in #{klass}"
 

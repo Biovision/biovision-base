@@ -4,8 +4,8 @@ module Biovision
   module Components
     # Component for feedback
     class ContactComponent < BaseComponent
-      def allow?(options = {})
-        UserPrivilege.user_has_privilege?(user, :feedback_manager)
+      def self.privilege_names
+        %w[feedback_manager]
       end
 
       protected

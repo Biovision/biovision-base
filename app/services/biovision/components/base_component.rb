@@ -36,18 +36,25 @@ module Biovision
         handler_name.safe_constantize || BaseComponent
       end
 
+      # Privilege names for using in biovision_component_user.data
+      def self.privilege_names
+        []
+      end
+
       def self.default_privilege_name
         self.class.to_s.demodulize.underscore.gsub('component', 'manager')
       end
 
       # @param [User] user
-      # @param [Hash] options
-      def self.allow?(user, options = {})
+      # @param [String] privilege_name
+      def self.allow?(user, privilege_name = '')
         return false if user.nil?
+        return true if user.super_user?
 
-        privilege = options[:privilege] || default_privilege_name
+        slug = self.class.to_s.demodulize.underscore.gsub('component', '')
+        component = BiovisionComponent.find_by(slug: slug)
 
-        UserPrivilege.user_has_privilege?(user, privilege)
+        self.class.new(component, user).allow?(privilege_name)
       end
 
       # @param [User] user
@@ -72,16 +79,13 @@ module Biovision
         user.super_user? || @role&.administrator?
       end
 
-      # @param [Hash] options
-      def allow?(options = {})
+      # @param [String] privilege_name
+      def allow?(privilege_name = '')
         return false if user.nil?
         return true if administrator?
+        return false if @role.nil?
 
-        if options.key?(:action)
-          @role.data[options[:action].to_s]
-        else
-          !@role.nil?
-        end
+        privilege_name.blank? ? true : @role.data[privilege_name.to_s]
       end
 
       # @param [Hash] data

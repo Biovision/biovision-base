@@ -7,8 +7,8 @@ class AdminController < ApplicationController
   protected
 
   def restrict_access
-    return if UserPrivilege.user_has_any_privilege?(current_user)
+    error = "User #{current_user&.id} has no privileges"
 
-    handle_http_401("User #{current_user&.id} has no privileges")
+    handle_http_401(error) unless component_handler.allow?
   end
 end

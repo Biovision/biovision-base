@@ -29,12 +29,37 @@
                 entity.user_id,
                 entity.data['settings'],
                 data: {
-                    url: admin_component_privilege_path(slug: handler.slug, user_id: entity.user_id, privilege_slug: 'settings')
+                    url: admin_component_privilege_path(
+                        slug: handler.slug,
+                        user_id: entity.user_id,
+                        privilege_slug: 'settings'
+                    )
                 },
                 id: element_id
             )
           %>
           <%= label_tag(element_id, t('activerecord.attributes.biovision_component_user.privileges.settings')) %>
+        </li>
+      <% end %>
+      <% handler.class.privilege_names.each do |privilege_slug| %>
+        <li>
+          <% element_id = "component_privilege_#{privilege_slug}" %>
+          <%=
+            check_box_tag(
+                'user_id',
+                entity.user_id,
+                entity.data[privilege_slug],
+                data: {
+                    url: admin_component_privilege_path(
+                        slug: handler.slug,
+                        user_id: entity.user_id,
+                        privilege_slug: privilege_slug
+                    )
+                },
+                id: element_id
+            )
+          %>
+          <%= label_tag(element_id, t("biovision.components.#{handler.slug}.privileges.#{privilege_slug}", default: privilege_slug)) %>
         </li>
       <% end %>
     </ul>

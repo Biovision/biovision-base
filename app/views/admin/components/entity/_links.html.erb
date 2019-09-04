@@ -1,5 +1,5 @@
 <nav class="biovision-component-nav">
-  <% if handler.allow?(action: 'settings') %>
+  <% if handler.allow?('settings') %>
     <% if handler.use_parameters? || handler.component.settings.any? %>
       <%=
         link_to(

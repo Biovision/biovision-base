@@ -49,8 +49,12 @@ ru:
         name: "Контакты"
         settings:
           feedback_receiver: "Адрес для сообщений через форму обратной связи"
+        privileges:
+          feedback_manager: "Менеджер обратной связи"
       content:
         name: "Контент"
+        privileges:
+          content_manager: "Контент-менеджер"
       registration:
         name: "Регистрация"
         settings:
