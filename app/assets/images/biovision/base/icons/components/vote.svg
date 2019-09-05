@@ -1,0 +1,14 @@
+<svg version="1.1" viewBox="0 0 24 24" width="24px" height="24px" xmlns="http://www.w3.org/2000/svg">
+  <title>Votes</title>
+  <defs>
+    <style type="text/css">
+      polyline { stroke-width: 1; stroke-linejoin: round; }
+      .upvote { fill: #77cc77; stroke: #337733; }
+      .downvote { fill: #cc7777; stroke: #773333; }
+    </style>
+  </defs>
+  <g>
+    <polyline class="downvote" points="17,6 17,16 21,16 15,22 9,16 13.25,16 13.25,6 17,6 17,8"/>
+    <polyline class="upvote" points="7,18 7,8 3,8 9,2 15,8 10.75,8 10.75,18 7,18 7,16"/>
+  </g>
+</svg>

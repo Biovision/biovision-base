@@ -68,6 +68,14 @@ $font-family-heading: serif !default;
   .content {
     background-image: image_url('biovision/base/icons/components/content.svg');
   }
+
+  .comments {
+    background-image: image_url('biovision/base/icons/components/comment.svg');
+  }
+
+  .vote {
+    background-image: image_url('biovision/base/icons/components/vote.svg');
+  }
 }
 
 .biovision-components-index {
@@ -97,6 +105,18 @@ $font-family-heading: serif !default;
   .content {
     h2 {
       background-image: image_url('biovision/base/icons/components/content.svg');
+    }
+  }
+
+  .comments {
+    h2 {
+      background-image: image_url('biovision/base/icons/components/comment.svg');
+    }
+  }
+
+  .vote {
+    h2 {
+      background-image: image_url('biovision/base/icons/components/vote.svg');
     }
   }
 }
