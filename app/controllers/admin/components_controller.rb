@@ -23,7 +23,7 @@ class Admin::ComponentsController < AdminController
 
   # patch /admin/components/:slug/settings
   def update_settings
-    if @handler.allow('settings')
+    if @handler.allow?('settings')
       new_settings = params.dig(:component, :settings).permit!
       @handler.settings = new_settings.to_h
       flash[:notice] = t('admin.components.update_settings.success')
