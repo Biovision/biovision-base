@@ -35,7 +35,7 @@ class Admin::ComponentsController < AdminController
 
   # patch /admin/components/:slug/parameters
   def update_parameter
-    if @handler.allow('settings')
+    if @handler.allow?('settings')
       slug = param_from_request(:key, :slug).downcase
       value = param_from_request(:key, :value)
 
@@ -47,7 +47,7 @@ class Admin::ComponentsController < AdminController
 
   # delete /admin/components/:slug/parameters/:parameter_slug
   def delete_parameter
-    if @handler.allow('settings')
+    if @handler.allow?('settings')
       @handler.component.parameters.delete(params[:parameter_slug])
       @handler.component.save
     end
