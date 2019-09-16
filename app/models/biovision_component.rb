@@ -29,6 +29,11 @@ class BiovisionComponent < ApplicationRecord
     find_by(slug: slug)
   end
 
+  # @param [User] user
+  def self.administrative?(user)
+    BiovisionComponentUser.owned_by(user).any?
+  end
+
   # @param [String] slug
   # @param [String] default_value
   def get(slug, default_value = '')

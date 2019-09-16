@@ -1,16 +1,19 @@
 <% if collection.any? %>
-    <ol class="list-of-entities">
-      <% collection.each do |entity| %>
-          <li data-id="<%= entity.id %>" data-number="<%= entity.priority %>">
-            <%=
-              render(
-                  partial: "admin/#{entity.class.table_name}/entity/in_list",
-                  locals: { entity: entity }
-              )
-            %>
-          </li>
-      <% end %>
-    </ol>
+  <ol class="list-of-entities">
+    <% collection.each do |entity| %>
+      <li data-id="<%= entity.id %>" data-number="<%= entity.priority %>">
+        <%=
+          render(
+              partial: "admin/#{entity.class.table_name}/entity/in_list",
+              locals: {
+                  entity: entity,
+                  handler: local_assigns[:handler]
+              }
+          )
+        %>
+      </li>
+    <% end %>
+  </ol>
 <% else %>
-    <%= render 'shared/nothing_found' %>
+  <%= render 'shared/nothing_found' %>
 <% end %>
