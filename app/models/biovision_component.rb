@@ -31,6 +31,9 @@ class BiovisionComponent < ApplicationRecord
 
   # @param [User] user
   def self.administrative?(user)
+    return false if user.nil?
+    return true if user.super_user?
+
     BiovisionComponentUser.owned_by(user).any?
   end
 
