@@ -1,0 +1,22 @@
+<% element_id = "component_privilege_#{slug}_#{entity.user_id}" %>
+<%=
+  check_box_tag(
+      'user_id',
+      entity.user_id,
+      entity.data[slug],
+      data: {
+          url: admin_component_privilege_path(
+              privilege_slug: slug,
+              slug: handler.slug,
+              user_id: entity.user_id
+          )
+      },
+      id: element_id
+  )
+%>
+<%=
+  label_tag(
+      element_id,
+      t("biovision.components.#{handler.slug}.privileges.#{slug}", default: slug)
+  )
+%>
