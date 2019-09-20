@@ -565,7 +565,7 @@ Biovision.components.autoExpand = {
         }
         const styles = getComputedStyle(this);
         const ratio = styles.getPropertyValue('line-height').replace('px', '');
-        const minRows = this.getAttribute('data-min-rows') | 0;
+        const minRows = this.hasAttribute("data-min-rows") ? parseInt(this.getAttribute("data-min-rows")) : 5;
         const maxRows = this.hasAttribute('data-max-rows') ? parseInt(this.getAttribute('data-max-rows')) : 25;
         const rows = Math.ceil((this.scrollHeight - this.baseScrollHeight) / ratio);
 

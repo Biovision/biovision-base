@@ -25,6 +25,6 @@ class CreateLanguages < ActiveRecord::Migration[5.1]
 
   def seed_items
     Language.create!(code: 'ru', slug: 'russian')
-    Language.create!(code: 'en', slug: 'english')
+    Language.create!(code: 'en', slug: 'english', active: false)
   end
 end
