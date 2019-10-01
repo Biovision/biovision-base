@@ -24,6 +24,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'carrierwave-bombshelter', '~> 0.2'
   s.add_dependency 'kaminari', '~> 1.1'
   s.add_dependency 'mini_magick', '~> 4.9', '>= 4.9.5'
+  s.add_dependency 'rest-client', '~> 2.1'
 
   s.add_development_dependency 'database_cleaner'
   s.add_development_dependency 'factory_bot_rails'

@@ -190,6 +190,8 @@ Rails.application.routes.draw do
 
     resources :feedback_requests, only: :create
 
+    get 'oembed' => 'oembed#code'
+
     get ':slug' => 'fallback#show', constraints: { slug: /.+/ }
   end
 end

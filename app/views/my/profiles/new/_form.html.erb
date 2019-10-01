@@ -22,12 +22,12 @@
         <%=
           f.text_field(
               :screen_name,
+              data: { check: :screen_name },
               id: "#{model_name}_screen_name",
-              required: true,
               maxlength: User::SCREEN_NAME_LIMIT,
               pattern: User::SCREEN_NAME_PATTERN_HTML,
+              required: true,
               title: t('.guidelines.screen_name'),
-              data: { check: :screen_name }
           )
         %>
         <div class="check-result-error" data-field="screen_name"></div>

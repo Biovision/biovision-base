@@ -1,0 +1,52 @@
+.js-biovision-carousel {
+  position: relative;
+
+  > button {
+    -webkit-backdrop-filter: blur(.5rem) grayscale(.75);
+    backdrop-filter: blur(.5rem) grayscale(.75);
+    background: rgba(255, 255, 255, .5) no-repeat center / auto 1.6rem;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 0 .4rem rgba(0, 0, 0, .25);
+    cursor: pointer;
+    display: inline-block;
+    height: 3.2rem;
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    transition: .25s;
+    width: 3.2rem;
+    z-index: 2;
+
+    &:active,
+    &:focus,
+    &:hover {
+      box-shadow: 0 0 .4rem rgba(0, 0, 0, .75);
+    }
+  }
+
+  .prev {
+    background-image: image_url('biovision/base/icons/slider/arrow-left.svg');
+    left: var(--spacer-xxs);
+  }
+
+  .next {
+    background-image: image_url('biovision/base/icons/slider/arrow-right.svg');
+    right: var(--spacer-xxs);
+  }
+}
+
+.carousel-container {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+}
+
+.carousel-item {
+  flex: none;
+  margin: 0;
+  padding: 0;
+  transition: .25s;
+}

@@ -24,5 +24,6 @@ module Biovision
     require 'carrierwave'
     require 'mini_magick'
     require 'carrierwave-bombshelter'
+    require 'rest-client'
   end
 end
