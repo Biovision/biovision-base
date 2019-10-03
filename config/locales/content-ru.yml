@@ -1,0 +1,25 @@
+ru:
+  activerecord:
+    models:
+      simple_image: "Простое изображение"
+      simple_image_tag: "Метка простого изображения"
+      simple_image_tag_image: "Метка у простого изображения"
+    attributes:
+      simple_image:
+        biovision_component: "Компонент"
+        biovision_component_id: "Компонент"
+        caption: "Название"
+        image: "Картинка"
+        image_alt_text: "Альтернативный текст для картинки"
+        source_link: "Ссылка на источник"
+        source_name: "Название источника"
+        user: "Пользователь"
+        user_id: "Пользователь"
+        uuid: "UUID"
+      simple_image_tag:
+        name: "Название"
+        simple_images_count: "Количество картинок"
+      simple_image_tag_image:
+        simple_image: "Картинка"
+        simple_image_tag: "Метка картинки"
+        simple_image_tag_id: "Метка картинки"

@@ -19,6 +19,7 @@ class BiovisionComponent < ApplicationRecord
   VALUE_LIMIT       = 65_535
 
   has_many :biovision_component_users, dependent: :delete_all
+  has_many :simple_images, dependent: :destroy
 
   scope :list_for_administration, -> { ordered_by_priority }
 
