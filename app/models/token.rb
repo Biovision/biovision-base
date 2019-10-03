@@ -66,7 +66,9 @@ class Token < ApplicationRecord
 
   # @param [User] user
   def editable_by?(user)
-    owned_by?(user) || UserPrivilege.user_has_privilege?(user, :administrator)
+    return true if owned_by?(user)
+
+    Biovision::Components::UsersComponent.allow?(user, 'edit')
   end
 
   def cookie_pair

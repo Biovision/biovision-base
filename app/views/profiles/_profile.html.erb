@@ -1,7 +1,7 @@
 <article class="user">
   <h1><%= user.screen_name %></h1>
 
-  <% if current_user_has_privilege?(:administrator) %>
+  <% if component_handler&.allow?('edit') %>
       <ul class="actions">
         <li><%= gear_icon(admin_user_path(id: user.id)) %></li>
       </ul>

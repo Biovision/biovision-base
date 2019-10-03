@@ -13,6 +13,10 @@ class ProfilesController < ApplicationController
 
   private
 
+  def component_slug
+    Biovision::Components::UsersComponent::SLUG
+  end
+
   def set_entity
     @entity = User.find_by(slug: params[:slug].downcase, deleted: false)
     if @entity.nil?
