@@ -1,41 +1,55 @@
-<article class="user">
-  <h1><%= user.screen_name %></h1>
+<article class="user-profile">
+  <div class="content-wrapper">
+    <h1><%= user.screen_name %></h1>
 
-  <% if component_handler&.allow?('edit') %>
+    <% if component_handler&.allow?('edit') %>
       <ul class="actions">
         <li><%= gear_icon(admin_user_path(id: user.id)) %></li>
       </ul>
-  <% end %>
+    <% end %>
 
-  <% if current_user == user %>
+    <% if current_user == user %>
       <nav>
         <%= link_to t(:edit), edit_my_profile_path, class: 'button-action' %>
       </nav>
-  <% end %>
+    <% end %>
 
-  <figure>
-    <%= profile_avatar(user) %>
-    <figcaption><%= user.profile_name %></figcaption>
-  </figure>
+    <figure>
+      <div class="image">
+        <%= profile_avatar(user) %>
+      </div>
+      <figcaption><%= user.profile_name %></figcaption>
+    </figure>
 
-  <dl>
-    <dt><%= t('.registration_date') %></dt>
-    <dd><%= time_tag user.created_at %></dd>
-    <% unless user.last_seen.blank? %>
-        <dt><%= t('activerecord.attributes.user.last_seen') %></dt>
-        <dd><%= time_tag user.last_seen %></dd>
-    <% end %>
-    <% unless user.data.dig('profile', 'name').blank? %>
-        <dt><%= t('activerecord.attributes.user_profile.name') %></dt>
-        <dd><%= user.full_name %></dd>
-    <% end %>
-    <% if current_user == user && !user.email.blank? %>
-        <dt><%= t('activerecord.attributes.user.email') %></dt>
-        <dd><%= user.email %></dd>
-    <% end %>
-    <% unless user.data.dig('profile', 'gender').blank? %>
-        <dt><%= t('activerecord.attributes.user_profile.gender') %></dt>
-        <dd><%= gender_name(user.data.dig('profile', 'gender')) %></dd>
-    <% end %>
-  </dl>
+    <dl>
+      <div>
+        <dt><%= t('.registration_date') %></dt>
+        <dd><%= time_tag user.created_at %></dd>
+      </div>
+      <% unless user.last_seen.blank? %>
+        <div>
+          <dt><%= t('activerecord.attributes.user.last_seen') %></dt>
+          <dd><%= time_tag user.last_seen %></dd>
+        </div>
+      <% end %>
+      <% unless user.data.dig('profile', 'name').blank? %>
+        <div>
+          <dt><%= t('activerecord.attributes.user_profile.name') %></dt>
+          <dd><%= user.full_name %></dd>
+        </div>
+      <% end %>
+      <% if current_user == user && !user.email.blank? %>
+        <div>
+          <dt><%= t('activerecord.attributes.user.email') %></dt>
+          <dd><%= user.email %></dd>
+        </div>
+      <% end %>
+      <% unless user.data.dig('profile', 'gender').blank? %>
+        <div>
+          <dt><%= t('activerecord.attributes.user_profile.gender') %></dt>
+          <dd><%= gender_name(user.data.dig('profile', 'gender')) %></dd>
+        </div>
+      <% end %>
+    </dl>
+  </div>
 </article>

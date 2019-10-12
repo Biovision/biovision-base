@@ -1,15 +1,17 @@
 <% content_for :meta_title, t('.title') %>
 
 <article class="my-profile-new">
-  <h1><%= t('.heading') %></h1>
+  <div class="content-wrapper">
+    <h1><%= t('.heading') %></h1>
 
-  <%=
-    render(
-        partial: 'my/profiles/new/form',
-        locals:  {
-            entity:            @entity,
-            component_handler: @handler
-        }
-    )
-  %>
+    <%=
+      render(
+          partial: 'my/profiles/new/form',
+          locals:  {
+              entity:            @entity,
+              component_handler: @handler
+          }
+      )
+    %>
+  </div>
 </article>

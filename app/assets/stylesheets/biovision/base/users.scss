@@ -108,12 +108,12 @@ form.login {
   }
 }
 
-article.user {
+.user-profile {
   figure {
     max-width: 32rem;
 
     figcaption {
-      font-size: $font-size-large;
+      font-size: var(--font-size-large);
       text-align: center;
     }
   }

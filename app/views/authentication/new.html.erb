@@ -1,9 +1,11 @@
 <% content_for :meta_title, t('.title') %>
 
 <article class="authentication">
-  <h1><%= t('.title') %></h1>
+  <div class="content-wrapper">
+    <h1><%= t('.title') %></h1>
 
-  <%= render 'form' %>
+    <%= render 'form' %>
 
-  <p><%= link_to t('my.recoveries.show.title'), my_recovery_path, class: 'button-nav' %></p>
+    <p><%= link_to t('my.recoveries.show.title'), my_recovery_path, class: 'button-nav' %></p>
+  </div>
 </article>

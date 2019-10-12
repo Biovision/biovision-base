@@ -5,9 +5,11 @@
 <% end %>
 
 <article class="profile-content">
-  <h1><%= t('.heading') %></h1>
+  <div class="content-wrapper">
+    <h1><%= t('.heading') %></h1>
 
-  <%= paginate @collection %>
-  <%= render partial: 'list', locals: { collection: @collection } %>
-  <%= paginate @collection %>
+    <%= paginate @collection %>
+    <%= render partial: 'list', locals: { collection: @collection } %>
+    <%= paginate @collection %>
+  </div>
 </article>

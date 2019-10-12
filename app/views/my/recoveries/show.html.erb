@@ -1,11 +1,12 @@
 <% content_for :meta_title, t('.title') %>
 
 <article class="my-recovery">
-  <h1><%= t('.title') %></h1>
+  <div class="content-wrapper">
+    <h1><%= t('.title') %></h1>
 
-  <section>
-    <h2><%= t('.got_code') %></h2>
-    <%= form_with url: my_recovery_path, method: :patch, local: true do %>
+    <section>
+      <h2><%= t('.got_code') %></h2>
+      <%= form_with url: my_recovery_path, method: :patch, local: true do %>
         <dl>
           <dt>
             <%= label_tag :code, t('activerecord.attributes.code.body') %>
@@ -32,12 +33,12 @@
         <div>
           <%= button_tag t('.update_password'), type: :submit %>
         </div>
-    <% end %>
-  </section>
+      <% end %>
+    </section>
 
-  <section>
-    <h2><%= t('.no_code') %></h2>
-    <%= form_with url: my_recovery_path, method: :post, local: true do %>
+    <section>
+      <h2><%= t('.no_code') %></h2>
+      <%= form_with url: my_recovery_path, method: :post, local: true do %>
         <dl>
           <dt><%= label_tag :email, t('activerecord.attributes.user.email') %></dt>
           <dd><%= email_field_tag :email, param_from_request(:email), required: true %></dd>
@@ -45,6 +46,7 @@
         <div>
           <%= button_tag t('.receive_code'), type: :submit %>
         </div>
-    <% end %>
-  </section>
+      <% end %>
+    </section>
+  </div>
 </article>

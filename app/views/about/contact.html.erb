@@ -11,14 +11,16 @@
 <% end %>
 
 <article class="editable-page">
-  <% unless @editable_page.nil? %>
-    <%=
-      render(
-          partial: 'editable_pages/entity/content',
-          locals: { entity: @editable_page }
-      )
-    %>
-  <% end %>
+  <div class="content-wrapper">
+    <% unless @editable_page.nil? %>
+      <%=
+        render(
+            partial: 'editable_pages/entity/content',
+            locals: { entity: @editable_page }
+        )
+      %>
+    <% end %>
 
-  <%= render partial: 'feedback_requests/form' %>
+    <%= render partial: 'feedback_requests/form' %>
+  </div>
 </article>
