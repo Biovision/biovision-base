@@ -12,7 +12,6 @@
 #   meta_title [String], optional
 #   name [String]
 #   nav_group [String], optional
-#   parsed_body [Text]
 #   priority [Integer]
 #   slug [String]
 #   url [String], optional
@@ -91,7 +90,7 @@ class EditablePage < ApplicationRecord
   end
 
   def text
-    parsed_body.blank? ? body : parsed_body
+    body
   end
 
   # @deprecated use #meta_keywords

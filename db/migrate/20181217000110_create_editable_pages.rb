@@ -28,7 +28,6 @@ class CreateEditablePages < ActiveRecord::Migration[5.1]
       t.string :meta_keywords, default: '', null: false
       t.string :meta_description, default: '', null: false
       t.text :body, default: '', null: false
-      t.text :parsed_body
     end
 
     seed_pages
