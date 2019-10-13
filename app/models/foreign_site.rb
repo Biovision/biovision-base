@@ -68,7 +68,7 @@ class ForeignSite < ApplicationRecord
       consent: true,
       slug: "#{slug}-#{data[:uid]}",
       email: data[:info][:email],
-      screen_name: screen_name.blank? ? data[:name] : screen_name,
+      screen_name: "#{slug}:" + (screen_name.blank? ? data[:name] : screen_name),
       password_digest: BCrypt::Engine.hash_secret(password, hash_salt),
       email_confirmed: true,
       data: {

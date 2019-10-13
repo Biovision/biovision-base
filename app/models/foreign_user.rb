@@ -1,3 +1,18 @@
+# frozen_string_literal: true
+
+# Foreign user
+# 
+# Attributes:
+#   agent_id [Agent], optional
+#   created_at [DateTime]
+#   data [text]
+#   email [string]
+#   foreign_site_id [ForeignSite]
+#   ip [inet], optional
+#   name [string]
+#   slug [string]
+#   updated_at [DateTime]
+#   user_id [User]
 class ForeignUser < ApplicationRecord
   include HasOwner
 
@@ -26,6 +41,6 @@ class ForeignUser < ApplicationRecord
     self.slug  = slug[0..255] unless slug.nil?
     self.name  = name[0..255] unless name.nil?
     self.email = email[0..255] unless email.nil?
-    self.data  = data[0..65535] unless data.nil?
+    self.data  = data[0..65_535] unless data.nil?
   end
 end
