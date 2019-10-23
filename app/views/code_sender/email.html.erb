@@ -1,0 +1,8 @@
+<h1>Здравствуйте, <%= @code.user.name_for_letter %></h1>
+
+<p>Спасибо за регистрацию на нашем сайте.</p>
+
+<p>
+  Для подтверждения вашего адреса электронной почты зайдите на страницу
+  <%= link_to(my_confirmation_url(code: @code.body, instant: 1), my_confirmation_url) %>.
+</p>

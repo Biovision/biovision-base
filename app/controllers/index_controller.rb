@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Controller for frontpage and sitemap
 class IndexController < ApplicationController
   # get /
   def index
@@ -9,6 +12,7 @@ class IndexController < ApplicationController
 
   def check_referral_link
     return if cookies['r']
+
     cookies['r'] = {
       value: param_from_request(:rl),
       expires: 1.year.from_now,
