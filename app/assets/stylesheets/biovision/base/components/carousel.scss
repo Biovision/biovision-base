@@ -16,11 +16,12 @@
     transform: translate(0, -50%);
     transition: .25s;
     width: 3.2rem;
-    z-index: 2;
+    z-index: 4;
 
     &:active,
     &:focus,
     &:hover {
+      background-color: rgba(255, 255, 255, .75);
       box-shadow: 0 0 .4rem rgba(0, 0, 0, .75);
     }
   }

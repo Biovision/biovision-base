@@ -1,4 +1,4 @@
 <svg version="1.1" viewBox="0 0 12 36" width="12px" height="36px" xmlns="http://www.w3.org/2000/svg">
   <title>Right arrow (wide)</title>
-  <polyline points="2,2 10,18 2,34" stroke="#777" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <polyline points="2,2 10,18 2,34" stroke="#333" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
