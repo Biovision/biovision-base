@@ -29,22 +29,24 @@ $button-destroy-border-b: $button-destroy-border-a !default;
 $button-destroy-text-a: $button-action-text-a !default;
 $button-destroy-text-b: $button-destroy-text-a !default;
 
-[class|=button],
-[class|=button]:link,
-[class|=button]:visited {
-  border: .1rem solid transparent;
-  box-sizing: border-box;
-  cursor: pointer;
-  display: inline-block;
-  font: #{$font-size-normal}/1.5 $font-family-main;
-  font-size: var(--font-size-normal, #{$font-size-normal});
-  padding: 0 1.2rem;
-  text-decoration: none;
-  transition: .125s;
+[class|=button] {
+  &,
+  &:link,
+  &:visited {
+    border: .1rem solid transparent;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: inline-block;
+    font: #{$font-size-normal}/1.5 $font-family-main;
+    font-size: var(--font-size-normal, #{$font-size-normal});
+    padding: 0 1.2rem;
+    text-decoration: none;
+    transition: .125s;
 
-  &:disabled {
-    cursor: default;
-    filter: grayscale(75%);
+    &:disabled {
+      cursor: default;
+      filter: grayscale(75%);
+    }
   }
 }
 
@@ -92,27 +94,43 @@ $button-destroy-text-b: $button-destroy-text-a !default;
   }
 }
 
-.button-action,
-.button-action:link,
-.button-action:visited {
-  @include button($button-action-bg-a, $button-action-text-a, $button-action-bg-b, $button-action-text-b);
+.button-action {
+  &,
+  &:link,
+  &:visited {
+    @include button($button-action-bg-a, $button-action-text-a, $button-action-bg-b, $button-action-text-b);
+  }
 }
 
-.button-nav,
-.button-nav:link,
-.button-nav:visited {
-  @include button($button-nav-bg-a, $button-nav-text-a, $button-nav-bg-b, $button-nav-text-b);
-  @include border-button($button-nav-border-a, $button-nav-border-b);
+.button-primary {
+  &,
+  &:link,
+  &:visited {
+    @include button($button-action-bg-a, $button-action-text-a, $button-action-bg-b, $button-action-text-b);
+  }
 }
 
-.button-save,
-.button-save:link,
-.button-save:visited {
-  @include button($button-save-bg-a, $button-save-text-a, $button-save-bg-b, $button-save-text-b);
+.button-nav {
+  &,
+  &:link,
+  &:visited {
+    @include button($button-nav-bg-a, $button-nav-text-a, $button-nav-bg-b, $button-nav-text-b);
+    @include border-button($button-nav-border-a, $button-nav-border-b);
+  }
 }
 
-.button-destroy,
-.button-destroy:link,
-.button-destroy:visited {
-  @include button($button-destroy-bg-a, $button-destroy-text-a, $button-destroy-bg-b, $button-destroy-text-b);
+.button-save {
+  &,
+  &:link,
+  &:visited {
+    @include button($button-save-bg-a, $button-save-text-a, $button-save-bg-b, $button-save-text-b);
+  }
+}
+
+.button-destroy {
+  &,
+  &:link,
+  &:visited {
+    @include button($button-destroy-bg-a, $button-destroy-text-a, $button-destroy-bg-b, $button-destroy-text-b);
+  }
 }

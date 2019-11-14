@@ -3,6 +3,7 @@
   form_id ||= "#{prefix}-form"
   entity ||= FeedbackRequest.new
   required_fields ||= %i[name phone email comment]
+  visible_fields ||= %i[name phone email comment]
 %>
 <%=
   form_with(
@@ -14,23 +15,25 @@
   ) do |f|
 %>
   <div class="fields state-1">
-    <div class="name <%= required_fields.include?(:name) ? 'required' : '' %>">
-      <%=
-        f.text_field(
-            :name,
-            id: "#{prefix}_name",
-            size: nil,
-            maxlength: FeedbackRequest::NAME_LIMIT,
-            placeholder: t('activerecord.attributes.feedback_request.name'),
-            aria: {
-                label: t('activerecord.attributes.feedback_request.name')
-            },
-            required: required_fields.include?(:name)
-        )
-      %>
-      <span class="icon"></span>
-    </div>
-    <% unless local_assigns[:hide_phone] %>
+    <% if visible_fields.include?(:name) %>
+      <div class="name <%= required_fields.include?(:name) ? 'required' : '' %>">
+        <%=
+          f.text_field(
+              :name,
+              id: "#{prefix}_name",
+              size: nil,
+              maxlength: FeedbackRequest::NAME_LIMIT,
+              placeholder: t('activerecord.attributes.feedback_request.name'),
+              aria: {
+                  label: t('activerecord.attributes.feedback_request.name')
+              },
+              required: required_fields.include?(:name)
+          )
+        %>
+        <span class="icon"></span>
+      </div>
+    <% end %>
+    <% if visible_fields.include?(:phone) && !local_assigns[:hide_phone] %>
       <div class="phone <%= required_fields.include?(:phone) ? 'required' : '' %>">
         <%=
           f.phone_field(
@@ -48,7 +51,7 @@
         <span class="icon"></span>
       </div>
     <% end %>
-    <% unless local_assigns[:hide_email] %>
+    <% if visible_fields.include?(:email) && !local_assigns[:hide_email] %>
       <div class="email <%= required_fields.include?(:email) ? 'required' : '' %>">
         <%=
           f.email_field(
@@ -66,7 +69,7 @@
         <span class="icon"></span>
       </div>
     <% end %>
-    <% unless local_assigns[:hide_comment] %>
+    <% if visible_fields.include?(:comment) && !local_assigns[:hide_comment] %>
       <div class="comment <%= required_fields.include?(:comment) ? 'required' : '' %>">
         <%= f.text_area(
                 :comment,
@@ -89,15 +92,15 @@
         <span class="icon"></span>
       </div>
     <% end %>
-    <div class="consent">
-      <%= check_box_tag :agree, '1', false, class: 'visually-hidden', id: nil, tabindex: -1 %>
-      <%= f.check_box :consent, id: "#{prefix}_consent", required: true %>
-      <%= f.label :consent, for: "#{prefix}_consent" %>
-    </div>
+  </div>
+  <div class="consent state-1">
+    <%= check_box_tag :agree, '1', false, class: 'visually-hidden', id: nil, tabindex: -1 %>
+    <%= f.check_box :consent, id: "#{prefix}_consent", required: true %>
+    <%= f.label :consent, for: "#{prefix}_consent" %>
   </div>
   <div class="buttons state-1">
     <%= hidden_field_tag 'form_id', form_id %>
-    <%= button_tag(t(:submit), type: :submit, class: 'button-primary') %>
+    <%= button_tag(t(:submit), class: 'button-primary') %>
   </div>
 
   <div class="result hidden state-2"><%= t('.result') %></div>
