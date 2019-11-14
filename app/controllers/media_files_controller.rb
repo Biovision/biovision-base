@@ -55,21 +55,18 @@ class MediaFilesController < ApplicationController
 
   def ckeditor
     parameters = {
-      file:          params[:upload],
-      snapshot:      params[:upload],
-      name:          params[:upload].original_filename,
-      original_name: params[:upload].original_filename,
+      image: params[:upload],
     }.merge(owner_for_entity(true))
 
-    @entity = MediaFile.create!(parameters)
+    @entity = SimpleImage.create!(parameters)
 
     if params[:CKEditorFuncNum]
       render layout: false
     else
       render json: {
         uploaded: 1,
-        fileName: File.basename(@entity.name),
-        url:      @entity.file.medium_2x.url
+        fileName: File.basename(@entity.image.path),
+        url: @entity.image.medium_url
       }
     end
   end
@@ -129,7 +126,7 @@ class MediaFilesController < ApplicationController
 
   def medium_image_parameters
     default_name = { name: "image-#{Time.now.strftime('%F-%H-%M-%S')}" }
-    parameters   = params.require(:media_file).permit(:file)
+    parameters = params.require(:media_file).permit(:file)
 
     parameters.merge(default_name).merge(owner_for_entity(true))
   end
