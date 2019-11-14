@@ -1,14 +1,20 @@
 <% unless entity.meta_title.blank? %>
-  <dt><%= t('.meta_title') %></dt>
-  <dd><%= entity.meta_title %></dd>
+  <div>
+    <dt><%= t('.meta_title') %></dt>
+    <dd><%= entity.meta_title %></dd>
+  </div>
 <% end %>
 
 <% unless entity.meta_description.blank? %>
-  <dt><%= t('.meta_description') %></dt>
-  <dd><%= entity.meta_description %></dd>
+  <div>
+    <dt><%= t('.meta_description') %></dt>
+    <dd><%= entity.meta_description %></dd>
+  </div>
 <% end %>
 
 <% unless entity.meta_keywords.blank? %>
-  <dt><%= t('.meta_keywords') %></dt>
-  <dd><%= entity.meta_keywords %></dd>
+  <div>
+    <dt><%= t('.meta_keywords') %></dt>
+    <dd><%= entity.meta_keywords %></dd>
+  </div>
 <% end %>
