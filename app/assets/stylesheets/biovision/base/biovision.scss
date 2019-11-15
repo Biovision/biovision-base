@@ -61,10 +61,6 @@ a {
   text-decoration: none;
   transition: color .125s;
 
-  &:visited {
-    color: $link-color-visited;
-  }
-
   &:active,
   &:focus,
   &:hover {

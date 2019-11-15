@@ -1,12 +1,8 @@
 <% content_for :meta_title, t('.title') %>
 
-<article class="user-profile">
+<article class="profile-content user-profile">
   <div class="content-wrapper">
     <h1><%= current_user.profile_name %></h1>
-
-    <ul class="actions">
-      <li><%= world_icon(my_profile_path, t(:view)) %></li>
-    </ul>
 
     <%= render partial: 'my/profiles/edit/form', locals: { entity: current_user } %>
   </div>

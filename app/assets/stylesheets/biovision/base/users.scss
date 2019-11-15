@@ -111,15 +111,15 @@ form.login {
 .user-profile {
   figure {
     max-width: 32rem;
+    text-align: center;
+  }
 
-    figcaption {
-      font-size: var(--font-size-large);
-      text-align: center;
-    }
+  figcaption {
+    padding: var(--spacer-xs) 0;
   }
 
   form {
-    max-width: 40rem;
+    max-width: 48rem;
   }
 
   dl {

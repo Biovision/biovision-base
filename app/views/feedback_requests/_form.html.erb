@@ -20,14 +20,15 @@
         <%=
           f.text_field(
               :name,
-              id: "#{prefix}_name",
-              size: nil,
-              maxlength: FeedbackRequest::NAME_LIMIT,
-              placeholder: t('activerecord.attributes.feedback_request.name'),
               aria: {
                   label: t('activerecord.attributes.feedback_request.name')
               },
-              required: required_fields.include?(:name)
+              class: 'input-text',
+              id: "#{prefix}_name",
+              maxlength: FeedbackRequest::NAME_LIMIT,
+              placeholder: t('activerecord.attributes.feedback_request.name'),
+              required: required_fields.include?(:name),
+              size: nil
           )
         %>
         <span class="icon"></span>
@@ -38,14 +39,15 @@
         <%=
           f.phone_field(
               :phone,
-              id: "#{prefix}_phone",
-              size: nil,
-              maxlength: FeedbackRequest::PHONE_LIMIT,
-              placeholder: t('activerecord.attributes.feedback_request.phone'),
               aria: {
                   label: t('activerecord.attributes.feedback_request.phone')
               },
-              required: required_fields.include?(:phone)
+              class: 'input-text',
+              id: "#{prefix}_phone",
+              maxlength: FeedbackRequest::PHONE_LIMIT,
+              placeholder: t('activerecord.attributes.feedback_request.phone'),
+              required: required_fields.include?(:phone),
+              size: nil
           )
         %>
         <span class="icon"></span>
@@ -56,14 +58,15 @@
         <%=
           f.email_field(
               :email,
-              id: "#{prefix}_email",
-              size: nil,
-              maxlength: FeedbackRequest::EMAIL_LIMIT,
-              placeholder: t('activerecord.attributes.feedback_request.email'),
               aria: {
                   label: t('activerecord.attributes.feedback_request.email')
               },
-              required: required_fields.include?(:email)
+              class: 'input-text',
+              id: "#{prefix}_email",
+              maxlength: FeedbackRequest::EMAIL_LIMIT,
+              placeholder: t('activerecord.attributes.feedback_request.email'),
+              required: required_fields.include?(:email),
+              size: nil
           )
         %>
         <span class="icon"></span>
@@ -71,23 +74,24 @@
     <% end %>
     <% if visible_fields.include?(:comment) && !local_assigns[:hide_comment] %>
       <div class="comment <%= required_fields.include?(:comment) ? 'required' : '' %>">
-        <%= f.text_area(
-                :comment,
-                id: "#{prefix}_comment",
-                cols: 20,
-                rows: 5,
-                maxlength: FeedbackRequest::COMMENT_LIMIT,
-                placeholder: t('activerecord.attributes.feedback_request.comment'),
-                aria: {
-                    label: t('activerecord.attributes.feedback_request.comment')
-                },
-                class: 'auto-expand',
-                data: {
-                    min_rows: 5,
-                    max_rows: 20
-                },
-                required: required_fields.include?(:comment)
-            )
+        <%=
+          f.text_area(
+              :comment,
+              aria: {
+                  label: t('activerecord.attributes.feedback_request.comment')
+              },
+              class: 'auto-expand input-text',
+              cols: 20,
+              data: {
+                  max_rows: 20,
+                  min_rows: 5
+              },
+              id: "#{prefix}_comment",
+              maxlength: FeedbackRequest::COMMENT_LIMIT,
+              placeholder: t('activerecord.attributes.feedback_request.comment'),
+              required: required_fields.include?(:comment),
+              rows: 5
+          )
         %>
         <span class="icon"></span>
       </div>
@@ -95,7 +99,7 @@
   </div>
   <div class="consent state-1">
     <%= check_box_tag :agree, '1', false, class: 'visually-hidden', id: nil, tabindex: -1 %>
-    <%= f.check_box :consent, id: "#{prefix}_consent", required: true %>
+    <%= f.check_box :consent, class: 'input-flag', id: "#{prefix}_consent", required: true %>
     <%= f.label :consent, for: "#{prefix}_consent" %>
   </div>
   <div class="buttons state-1">
