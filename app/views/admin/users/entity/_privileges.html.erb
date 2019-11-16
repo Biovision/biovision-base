@@ -1,0 +1,13 @@
+<section class="user-privileges">
+  <h3><%= handler.component.name %></h3>
+
+  <%=
+    render(
+        partial: 'admin/components/privileges/links',
+        locals: {
+            entity: handler.component.biovision_component_users.find_or_initialize_by(user: entity),
+            handler: handler
+        }
+    )
+  %>
+</section>

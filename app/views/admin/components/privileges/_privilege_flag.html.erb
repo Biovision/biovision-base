@@ -17,6 +17,12 @@
 <%=
   label_tag(
       element_id,
-      t("biovision.components.#{handler.slug}.privileges.#{slug}", default: slug)
+      t(
+          "biovision.components.#{handler.slug}.privileges.#{slug}",
+          default: [
+              "biovision.components.common.privileges.#{slug}".to_sym,
+              slug
+          ]
+      )
   )
 %>

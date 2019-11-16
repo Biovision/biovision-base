@@ -45,6 +45,9 @@ ru:
         success: "Настройки компонента успешно изменены"
   biovision:
     components:
+      common:
+        privileges:
+          settings: "Управление настройками"
       contact:
         name: "Контакты"
         settings:

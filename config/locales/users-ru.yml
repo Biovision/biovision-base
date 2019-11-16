@@ -159,6 +159,7 @@ ru:
       privileges:
         title: "Привилегии пользователя %{user}"
         heading: "Привилегии пользователя"
+        nav_text: "Привилегии"
       filter:
         search: "Искать"
       entity:

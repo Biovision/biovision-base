@@ -1,8 +1,8 @@
 <% content_for :meta_title, t('.title', user: @entity.profile_name) %>
 <% content_for :breadcrumbs do %>
-    <%= link_to(t('admin.users.nav_item.text'), admin_users_path) %>
-    <%= admin_user_link(@entity) %>
-    <span><%= t('.heading') %></span>
+  <%= link_to(t('admin.users.nav_item.text'), admin_users_path) %>
+  <%= admin_user_link(@entity) %>
+  <span><%= t('.heading') %></span>
 <% end %>
 
 <article>
@@ -15,79 +15,20 @@
   <section>
     <h2><%= t('.heading') %></h2>
 
-    <%=
-      render(
-          partial: 'admin/users/entity/privilege_tree',
-          locals: {
-              privileges: Privilege.for_tree,
-              user: @entity
-          }
-      )
-    %>
+    <% BiovisionComponent.list_for_administration.each do |component| %>
+      <%
+        handler = Biovision::Components::BaseComponent.handler(component, current_user)
+        next unless handler.administrator?
+      %>
+      <%=
+        render(
+            partial: 'admin/users/entity/privileges',
+            locals: {
+                handler: handler,
+                entity: @entity
+            }
+        )
+      %>
+    <% end %>
   </section>
 </article>
-
-<script>
-    'use strict';
-
-    document.addEventListener('DOMContentLoaded', function () {
-        document.querySelectorAll('ul.privileges input[type=checkbox]').forEach(function (element) {
-            element.addEventListener('click', function () {
-                if (this.offsetParent !== null) {
-                    const url = this.closest('div.entity').getAttribute('data-url');
-                    const method = this.checked ? 'put' : 'delete';
-                    const region_id = this.getAttribute('data-region-id');
-                    const data = region_id > 0 ? {region_id: region_id} : {};
-                    const request = Biovision.newAjaxRequest(method, url);
-
-                    request.setRequestHeader("Content-Type", "application/json");
-                    request.send(JSON.stringify(data));
-                }
-            });
-        });
-
-        document.addEventListener('click', function (event) {
-            const element = event.target;
-
-            if (element.matches('button.add_regions')) {
-                const container = element.closest('ul');
-                const url = container.getAttribute('data-url');
-                const request = Biovision.newAjaxRequest('GET', url, function () {
-                    const response = JSON.parse(this.responseText);
-                    const li = element.closest('li');
-
-                    if (response.hasOwnProperty('data')) {
-                        response.data.forEach(function (data) {
-                            if (data.hasOwnProperty('meta')) {
-                                const item = document.createElement('li');
-
-                                item.innerHTML = data.meta.html_chunk;
-
-                                container.appendChild(item);
-                            }
-                        });
-                    }
-                    li.parentNode.removeChild(li);
-                });
-
-                request.send();
-            }
-
-            if (element.matches('input[type=checkbox].privilege-adder')) {
-                const url = element.closest('div.entity').getAttribute('data-url');
-                const li = element.closest('li');
-                const data = {region_id: element.value};
-                const list = li.querySelector('ul.regions');
-
-                const request = Biovision.newAjaxRequest('put', url, function() {
-                    if (list) {
-                        list.parentNode.removeChild(list);
-                    }
-                });
-
-                request.setRequestHeader("Content-Type", "application/json");
-                request.send(JSON.stringify(data));
-            }
-        });
-    });
-</script>

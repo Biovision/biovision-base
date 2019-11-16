@@ -21,6 +21,7 @@
   </ul>
 
   <nav>
+    <%= link_to(t('admin.users.privileges.nav_text'), privileges_admin_user_path, class: 'button-nav') %>
     <% if component_handler.administrator? %>
       <%= link_to(t('admin.tokens.index.heading'), tokens_admin_user_path(id: @entity.id), class: 'button-nav') %>
     <% end %>
