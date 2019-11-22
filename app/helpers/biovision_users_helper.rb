@@ -10,8 +10,9 @@ module BiovisionUsersHelper
   # @param [Integer] gender_id
   def gender_name(gender_id)
     prefix = 'activerecord.attributes.user_profile.genders'
-    if UserProfileHandler::GENDERS.key?(gender_id)
-      t("#{prefix}.#{UserProfileHandler::GENDERS[gender_id]}")
+    gender_key = gender_id.blank? ? '' : gender_id.to_i
+    if UserProfileHandler::GENDERS.key?(gender_key)
+      t("#{prefix}.#{UserProfileHandler::GENDERS[gender_key]}")
     else
       t(:not_selected)
     end
