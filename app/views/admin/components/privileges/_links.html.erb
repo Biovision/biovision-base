@@ -1,6 +1,6 @@
 <ul class="entity-links">
   <li>
-    <% element_id = "component_administrator_#{entity.user_id}" %>
+    <% element_id = "component_administrator_#{handler.slug}_#{entity.user_id}" %>
     <%=
       check_box_tag(
           'user_id',
@@ -14,21 +14,11 @@
     %>
     <%= label_tag(element_id, t('activerecord.attributes.biovision_component_user.administrator')) %>
   </li>
-  <% if handler.use_parameters? || handler.component.settings.any? %>
-    <li>
-      <%=
-        render(
-            partial: 'admin/components/privileges/privilege_flag',
-            locals: {
-                entity: entity,
-                handler: handler,
-                slug: 'settings'
-            }
-        )
-      %>
-    </li>
-  <% end %>
-  <% handler.class.privilege_names.each do |privilege_slug| %>
+  <%
+    privilege_names = handler.class.privilege_names
+    privilege_names.unshift('settings') if handler.use_settings?
+  %>
+  <% privilege_names.each do |privilege_slug| %>
     <li>
       <%=
         render(

@@ -18,7 +18,9 @@ class CreateBiovisionComponentUsers < ActiveRecord::Migration[5.2]
       t.references :user, null: false, foreign_key: { on_update: :cascade, on_delete: :cascade }
       t.timestamps
       t.boolean :administrator, default: false, null: false
-      t.jsonb :data, default: {}, null: false
+      t.jsonb :data, default: { privileges: [], settings: {} }, null: false
     end
+
+    add_index :biovision_component_users, :data, using: :gin
   end
 end

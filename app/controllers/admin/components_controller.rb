@@ -79,7 +79,8 @@ class Admin::ComponentsController < AdminController
   # put /admin/components/:slug/administrators/:user_id
   def add_administrator
     if @handler.administrator?
-      @handler.component.add_administrator(User.find_by(id: params[:user_id]))
+      @handler.user = User.find_by(id: params[:user_id])
+      @handler.privilege_handler.administrator!
     end
 
     head :no_content
@@ -88,7 +89,8 @@ class Admin::ComponentsController < AdminController
   # put /admin/components/:slug/administrators/:user_id
   def remove_administrator
     if @handler.administrator?
-      @handler.component.remove_administrator(User.find_by(id: params[:user_id]))
+      @handler.user = User.find_by(id: params[:user_id])
+      @handler.privilege_handler.not_administrator!
     end
 
     head :no_content
@@ -97,8 +99,8 @@ class Admin::ComponentsController < AdminController
   # put /admin/components/:slug/users/:user_id/privileges/:privilege_slug
   def add_privilege
     if @handler.administrator?
-      user = User.find_by(id: params[:user_id])
-      @handler.component.add_privilege(user, params[:privilege_slug])
+      @handler.user = User.find_by(id: params[:user_id])
+      @handler.privilege_handler.add_privilege(params[:privilege_slug])
     end
 
     head :no_content
@@ -107,8 +109,8 @@ class Admin::ComponentsController < AdminController
   # put /admin/components/:slug/users/:user_id/privileges/:privilege_slug
   def remove_privilege
     if @handler.administrator?
-      user = User.find_by(id: params[:user_id])
-      @handler.component.remove_privilege(user, params[:privilege_slug])
+      @handler.user = User.find_by(id: params[:user_id])
+      @handler.privilege_handler.remove_privilege(params[:privilege_slug])
     end
 
     head :no_content

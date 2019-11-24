@@ -4,7 +4,7 @@ module Biovision
   module Components
     # Base biovision component
     class BaseComponent
-      attr_reader :component, :slug, :name, :user, :role
+      attr_reader :component, :slug, :name, :user, :user_link
 
       # @param [BiovisionComponent] component
       # @param [User] user
@@ -62,17 +62,21 @@ module Biovision
           user: user
         }
 
-        @role = BiovisionComponentUser.find_by(criteria)
+        @user_link = BiovisionComponentUser.find_by(criteria)
       end
 
       def use_parameters?
         true
       end
 
+      def use_settings?
+        use_parameters? || @component.settings.any?
+      end
+
       def administrator?
         return false if user.nil?
 
-        user.super_user? || @role&.administrator?
+        user.super_user? || @user_link&.administrator?
       end
 
       # @param [String|Array] privileges
@@ -80,7 +84,7 @@ module Biovision
         return false if user.nil?
         return true if administrator?
         return true if component.nil? && privileges.blank?
-        return false if @role.nil?
+        return false if @user_link.nil?
 
         result = privileges.blank?
         privileges.flatten.each { |slug| result |= privilege?(slug) }
@@ -89,9 +93,7 @@ module Biovision
 
       # @param [String] privilege_name
       def privilege?(privilege_name)
-        return false if @role.nil?
-
-        @role.data[privilege_name.to_s]
+        privilege_handler.privilege?(privilege_name)
       end
 
       # @param [Hash] data
@@ -150,18 +152,17 @@ module Biovision
         metric << quantity
       end
 
+      def privilege_handler
+        @privilege_handler ||= PrivilegeHandler.new(self)
+      end
+
       # @param [User] user
-      # @param [Hash] data
-      def update_privileges(user, data = nil)
+      def update_privileges(user)
         criteria = {
           user: user,
           biovision_component: @component
         }
-        link = BiovisionComponentUser.find_or_create_by(criteria)
-
-        link&.update(data: data) unless data.nil?
-
-        link
+        BiovisionComponentUser.find_or_create_by(criteria)
       end
 
       protected

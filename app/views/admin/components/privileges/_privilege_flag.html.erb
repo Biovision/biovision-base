@@ -3,7 +3,7 @@
   check_box_tag(
       'user_id',
       entity.user_id,
-      entity.data[slug],
+      Array(entity.data['privileges']).include?(slug),
       data: {
           url: admin_component_privilege_path(
               privilege_slug: slug,
