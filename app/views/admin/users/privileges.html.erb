@@ -19,16 +19,32 @@
       <%
         handler = Biovision::Components::BaseComponent.handler(component, current_user)
         next unless handler.administrator?
+        context_handler = handler.clone
+        context_handler.user = @entity
       %>
       <%=
         render(
             partial: 'admin/users/entity/privileges',
             locals: {
-                handler: handler,
-                entity: @entity
+                entity: @entity,
+                handler: handler
             }
         )
       %>
-    <% end %>
+      <% prefix = 'admin/components/user_settings/' %>
+      <% if lookup_context.exists?("#{prefix}_#{handler.slug}") %>
+        <section class="biovision-component-user-settings">
+          <%=
+            render(
+                partial: "#{prefix}#{handler.slug}",
+                locals: {
+                    handler: context_handler,
+                    user: @entity
+                }
+            )
+          %>
+        </section>
+      <% end %>
+  <% end %>
   </section>
 </article>

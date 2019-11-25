@@ -69,7 +69,7 @@ class Admin::ComponentsController < AdminController
       if user.nil?
         handle_http_404('Cannot find user') if user.nil?
       else
-        @entity = @handler.update_privileges(user)
+        @entity = @handler.user_link!(true)
       end
     else
       handle_http_401('Updating privileges is not allowed')

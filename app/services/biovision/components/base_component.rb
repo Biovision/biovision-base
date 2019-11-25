@@ -57,12 +57,19 @@ module Biovision
       def user=(user)
         @user = user
 
-        criteria = {
-          biovision_component: @component,
-          user: user
-        }
+        criteria = { biovision_component: @component, user: user }
 
         @user_link = BiovisionComponentUser.find_by(criteria)
+      end
+
+      def user_link!(force_create = false)
+        if @user_link.nil?
+          criteria = { biovision_component: @component, user: user }
+          @user_link = BiovisionComponentUser.new(criteria)
+          @user_link.save if force_create
+        end
+
+        @user_link
       end
 
       def use_parameters?
@@ -154,15 +161,6 @@ module Biovision
 
       def privilege_handler
         @privilege_handler ||= PrivilegeHandler.new(self)
-      end
-
-      # @param [User] user
-      def update_privileges(user)
-        criteria = {
-          user: user,
-          biovision_component: @component
-        }
-        BiovisionComponentUser.find_or_create_by(criteria)
       end
 
       protected

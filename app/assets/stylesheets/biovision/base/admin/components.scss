@@ -3,6 +3,7 @@ $block-shadow: .2rem .2rem .4rem .2rem rgba(0, 0, 0, .125) !default;
 $row-background-even: hsl(0, 0%, 95%) !default;
 $row-background-odd: hsl(0, 0%, 98%) !default;
 $font-family-heading: serif !default;
+$border-secondary: .1rem solid #777 !default;
 
 #biovision-component-parameters {
   margin: var(--spacer-s) 0;
@@ -191,4 +192,23 @@ $font-family-heading: serif !default;
 
 .user-privileges {
   margin: var(--spacer-s) 0 0 var(--spacer-s);
+
+  h3 {
+    font-size: var(--font-size-large);
+  }
+}
+
+.biovision-component-user-settings {
+  border-bottom: $border-secondary;
+  margin: var(--spacer-s) 0 0 var(--spacer-m);
+  padding: var(--spacer-s) 0 var(--spacer-m) (--spacer-m);
+
+  h4 {
+    font-size: var(--font-size-increased);
+  }
+
+  h5 {
+    font-size: var(--font-size-increased);
+    font-weight: 400;
+  }
 }

@@ -19,23 +19,10 @@ module Biovision
         privileges.include?(slug)
       end
 
-      def user_link!
-        link = @component.user_link
-        if link.nil?
-          criteria = {
-            user: @component.user,
-            biovision_component: @component.component
-          }
-          link = BiovisionComponentUser.new(criteria)
-        end
-
-        link
-      end
-
       def administrator!
         return if @component.user.nil?
 
-        link = user_link!
+        link = @component.user_link!
         link.administrator = true
         link.save
       end
@@ -50,7 +37,7 @@ module Biovision
       def privileges=(new_privileges)
         return if @component.user.nil?
 
-        link = user_link!
+        link = @component.user_link!
         link.data['privileges'] = Array(new_privileges).uniq
         link.save
       end
@@ -59,7 +46,7 @@ module Biovision
       def settings=(new_settings)
         return if @component.user.nil?
 
-        link = user_link!
+        link = @component.user_link!
         link.data['settings'] = new_settings
         link.save
       end
@@ -68,7 +55,7 @@ module Biovision
       def add_privilege(slug)
         return if @component.user.nil?
 
-        link = user_link!
+        link = @component.user_link!
         link.data['privileges'] ||= []
         link.data['privileges'] += [slug.to_s]
         link.data['privileges'].uniq!
