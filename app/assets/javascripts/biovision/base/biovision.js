@@ -34,7 +34,7 @@ const Biovision = {
     /**
      * Init child components of given component
      *
-     * @type {function}
+     * @type {Function}
      * @param {Object} parent
      */
     initChildComponents: function (parent) {

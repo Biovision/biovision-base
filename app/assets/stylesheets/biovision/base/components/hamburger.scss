@@ -1,0 +1,56 @@
+$hamburger-color: #000 !default;
+
+.morphing-hamburger {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  height: 3.2rem;
+  padding: .4rem;
+  width: 3.2rem;
+
+  span {
+    background: $hamburger-color;
+    border-radius: .2rem;
+    display: block;
+    height: .4rem;
+    margin: 0 auto;
+    transition: .5s;
+    transform-origin: center;
+    width: 2.4rem;
+  }
+
+  .b {
+    transform: translate(0, .6rem);
+  }
+}
+
+.hamburger-morpher {
+  &:not(:checked) {
+    ~ .morphing-hamburger {
+      .a {
+        transform: translate(0, .2rem);
+      }
+
+      .c {
+        transform: translate(0, 1rem);
+      }
+    }
+  }
+
+  &:checked {
+    ~ .morphing-hamburger {
+      .a {
+        transform: translate(0, 1rem) rotate(-45deg);
+      }
+
+      .b {
+        width: .2rem;
+      }
+
+      .c {
+        transform: translate(0, .2rem) rotate(45deg);
+      }
+    }
+  }
+}
