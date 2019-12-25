@@ -9,6 +9,10 @@ module Biovision
       def self.privilege_names
         %w[content_manager]
       end
+
+      def use_parameters?
+        true
+      end
     end
   end
 end

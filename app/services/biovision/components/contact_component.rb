@@ -10,6 +10,10 @@ module Biovision
         %w[feedback_manager]
       end
 
+      def use_parameters?
+        true
+      end
+
       protected
 
       # @param [Hash] data

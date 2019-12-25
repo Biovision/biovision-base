@@ -42,10 +42,6 @@ module Biovision
         @component.settings['require_email'] || email_as_login?
       end
 
-      def use_parameters?
-        false
-      end
-
       protected
 
       # @param [Hash] data

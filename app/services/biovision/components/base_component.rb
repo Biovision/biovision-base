@@ -73,7 +73,7 @@ module Biovision
       end
 
       def use_parameters?
-        true
+        false
       end
 
       def use_settings?
