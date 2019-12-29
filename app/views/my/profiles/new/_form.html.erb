@@ -1,5 +1,5 @@
 <%
-  component_handler ||= Biovision::Components::BaseComponent.handler('registration')
+  component_handler ||= Biovision::Components::RegistrationComponent[nil]
   model_name = entity.class.to_s.underscore
 %>
 <%=

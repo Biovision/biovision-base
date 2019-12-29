@@ -2,8 +2,6 @@ class Token < ApplicationRecord
   include HasOwner
   include Toggleable
 
-  PER_PAGE = 25
-
   toggleable :active
 
   has_secure_token
@@ -19,21 +17,21 @@ class Token < ApplicationRecord
 
   # @param [Integer] page
   def self.page_for_administration(page, filter = {})
-    filtered(filter).recent.page(page).per(PER_PAGE)
+    filtered(filter).recent.page(page)
   end
 
   # @param [User] user
   # @param [Integer] page
   def self.page_for_owner(user, page)
-    owned_by(user).recent.page(page).per(PER_PAGE)
+    owned_by(user).recent.page(page)
   end
 
   def self.entity_parameters
-    %i(active)
+    %i[active]
   end
 
   def self.creation_parameters
-    entity_parameters + %i(user_id)
+    entity_parameters + %i[user_id]
   end
 
   # @param [String] input
@@ -45,6 +43,7 @@ class Token < ApplicationRecord
   # @param [Boolean] touch_user
   def self.user_by_token(input, touch_user = false)
     return if input.blank?
+
     pair = input.split(':')
     user_by_pair(pair[0], pair[1], touch_user)
   end
@@ -55,6 +54,7 @@ class Token < ApplicationRecord
   def self.user_by_pair(user_id, token, touch_user = false)
     instance = find_by(user_id: user_id, token: token, active: true)
     return if instance.nil?
+
     instance.update_columns(last_used: Time.now)
     instance.user.update_columns(last_seen: Time.now) if touch_user
     instance.user
@@ -68,7 +68,7 @@ class Token < ApplicationRecord
   def editable_by?(user)
     return true if owned_by?(user)
 
-    Biovision::Components::UsersComponent.allow?(user, 'edit')
+    Biovision::Components::UsersComponent[user].allow?('edit')
   end
 
   def cookie_pair

@@ -22,12 +22,22 @@ module Biovision
       # @param [User] user
       # @return [BaseComponent]
       def self.handler(input, user = nil)
-        if input.is_a?(BiovisionComponent)
-          handler_class(input.slug).new(input, user)
-        else
-          entity = BiovisionComponent.find_by(slug: input)
-          handler_class(input).new(entity, user)
-        end
+        type = input.is_a?(String) ? input : input.slug
+        handler_class(type)[user]
+      end
+
+      def self.slug
+        (to_s + '::SLUG').safe_constantize || to_s.demodulize.underscore.gsub('_component', '')
+      end
+
+      # Receive component-specific handler by class name for component.
+      # Class must have defined constant SLUG for this to work.
+      #
+      # e.g.: Biovision::Components::RegistrationComponent[user]
+      #
+      # @param [User] user
+      def self.[](user = nil)
+        new(BiovisionComponent[slug], user)
       end
 
       # @param [String] slug
@@ -43,14 +53,12 @@ module Biovision
 
       # @param [User] user
       # @param [String] privilege_name
+      # @deprecated use instance method via self[user].allow?(privilege_name)
       def self.allow?(user, privilege_name = '')
         return false if user.nil?
         return true if user.super_user?
 
-        slug = self.class.to_s.demodulize.underscore.gsub('component', '')
-        component = BiovisionComponent.find_by(slug: slug)
-
-        self.class.new(component, user).allow?(privilege_name)
+        self[user].allow?(privilege_name)
       end
 
       # @param [User] user
@@ -89,8 +97,7 @@ module Biovision
       # @param [String|Array] privileges
       def allow?(*privileges)
         return false if user.nil?
-        return true if administrator?
-        return true if component.nil? && privileges.blank?
+        return true if administrator? || (component.nil? && privileges.blank?)
         return false if @user_link.nil?
 
         result = privileges.blank?

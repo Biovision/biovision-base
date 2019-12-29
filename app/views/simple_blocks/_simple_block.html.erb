@@ -17,7 +17,7 @@
     </div>
   </div>
 
-  <% if Biovision::Components::ContentComponent.allow?(current_user, 'content_manager') %>
+  <% if Biovision::Components::ContentComponent[current_user].allow?('content_manager') %>
     <ul class="actions">
       <li><%= gear_icon(admin_simple_block_path(id: simple_block.id)) %></li>
       <li><%= edit_icon(edit_simple_block_path(id: simple_block.id)) %></li>

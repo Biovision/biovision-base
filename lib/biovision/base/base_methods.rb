@@ -164,19 +164,29 @@ module Biovision
       # @param [Class] klass
       # @param [String] privilege_name
       def component_restriction(klass, privilege_name)
-        return if klass.allow?(current_user, privilege_name)
+        return if klass[current_user].allow?(privilege_name)
 
         error = "User #{current_user&.id} has no privileges in #{klass}"
 
         handle_http_401(error)
       end
 
+      # @deprecated use #component_class instead
       def component_slug
         nil
       end
 
+      def component_class
+        nil
+      end
+
+      # @deprecated receive handler via #component_class
+      def legacy_handler
+        Biovision::Components::BaseComponent.handler(component_slug, current_user)
+      end
+
       def component_handler
-        @component_handler ||= Biovision::Components::BaseComponent.handler(component_slug, current_user)
+        @component_handler ||= component_class.nil? ? legacy_handler : component_class[current_user]
       end
     end
   end

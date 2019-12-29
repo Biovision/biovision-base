@@ -127,6 +127,6 @@ class My::ProfilesController < ApplicationController
   end
 
   def set_handler
-    @handler = Biovision::Components::BaseComponent.handler('registration')
+    @handler = Biovision::Components::RegistrationComponent[nil]
   end
 end
