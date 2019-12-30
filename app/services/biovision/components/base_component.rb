@@ -22,7 +22,7 @@ module Biovision
       # @param [User] user
       # @return [BaseComponent]
       def self.handler(input, user = nil)
-        type = input.is_a?(String) ? input : input.slug
+        type = input.is_a?(String) ? input : input&.slug
         handler_class(type)[user]
       end
 
