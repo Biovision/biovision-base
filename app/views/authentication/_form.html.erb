@@ -3,11 +3,25 @@
   <div class="fields">
     <div>
       <%= label_tag :login, t('.login') %>
-      <%= text_field_tag :login, '', required: true, size: 18 %>
+      <%=
+        text_field_tag(
+            :login,
+            '',
+            class: 'input-text',
+            required: true
+        )
+      %>
     </div>
     <div>
       <%= label_tag :password, t('activerecord.attributes.user.password') %>
-      <%= password_field_tag :password, '', required: true, size: 18 %>
+      <%=
+        password_field_tag(
+            :password,
+            '',
+            class: 'input-text',
+            required: true
+        )
+      %>
     </div>
   </div>
   <div class="actions">

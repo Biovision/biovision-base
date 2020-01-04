@@ -13,102 +13,117 @@
   ) do |f|
 %>
   <%= render partial: 'shared/list_of_errors', locals: { entity: entity } %>
-  <dl>
+  <dl class="fields">
     <% unless component_handler.email_as_login? %>
+      <div>
+        <dt>
+          <%= f.label :screen_name, t('activerecord.attributes.user.screen_name') %>
+        </dt>
+        <dd>
+          <%=
+            f.text_field(
+                :screen_name,
+                class: 'input-text',
+                data: { check: :screen_name },
+                id: "#{model_name}_screen_name",
+                maxlength: User::SCREEN_NAME_LIMIT,
+                pattern: User::SCREEN_NAME_PATTERN_HTML,
+                required: true,
+                title: t('.guidelines.screen_name'),
+            )
+          %>
+          <div class="check-result-error" data-field="screen_name"></div>
+          <div class="guideline"><%= t('.guidelines.screen_name') %></div>
+        </dd>
+
+      </div>
+    <% end %>
+
+    <div>
       <dt>
-        <%= f.label :screen_name, t('activerecord.attributes.user.screen_name') %>
+        <%= f.label :email, t('activerecord.attributes.user.email') %>
       </dt>
       <dd>
         <%=
-          f.text_field(
-              :screen_name,
-              data: { check: :screen_name },
-              id: "#{model_name}_screen_name",
-              maxlength: User::SCREEN_NAME_LIMIT,
-              pattern: User::SCREEN_NAME_PATTERN_HTML,
-              required: true,
-              title: t('.guidelines.screen_name'),
+          f.email_field(
+              :email,
+              class: 'input-text',
+              data: { check: :email },
+              id: "#{model_name}_email",
+              maxlength: User::EMAIL_LIMIT,
+              required: component_handler.require_email?,
+              size: nil
           )
         %>
-        <div class="check-result-error" data-field="screen_name"></div>
-        <div class="guideline"><%= t('.guidelines.screen_name') %></div>
+        <div class="check-result-error" data-field="email"></div>
+        <% unless component_handler.email_as_login? %>
+          <div class="guideline"><%= t('.guidelines.email') %></div>
+        <% end %>
       </dd>
-    <% end %>
-    <dt>
-      <%= f.label :email, t('activerecord.attributes.user.email') %>
-    </dt>
-    <dd>
-      <%=
-        f.email_field(
-            :email,
-            id: "#{model_name}_email",
-            size: nil,
-            maxlength: User::EMAIL_LIMIT,
-            required: component_handler.require_email?,
-            data: { check: :email }
-        )
-      %>
-      <div class="check-result-error" data-field="email"></div>
-      <% unless component_handler.email_as_login? %>
-        <div class="guideline"><%= t('.guidelines.email') %></div>
-      <% end %>
-    </dd>
+    </div>
 
-    <dt>
-      <%= f.label :password, t('activerecord.attributes.user.password') %>
-    </dt>
-    <dd>
-      <%=
-        f.password_field(
-            :password,
-            id: "#{model_name}_password",
-            required: true,
-            size: nil,
-            maxlength: 70,
-            data: { check: :password }
-        )
-      %>
-      <div class="check-result-error" data-field="password"></div>
-      <div class="guideline"><%= t('.guidelines.password') %></div>
-    </dd>
+    <div>
+      <dt>
+        <%= f.label :password, t('activerecord.attributes.user.password') %>
+      </dt>
+      <dd>
+        <%=
+          f.password_field(
+              :password,
+              class: 'input-text',
+              data: { check: :password },
+              id: "#{model_name}_password",
+              maxlength: 70,
+              required: true,
+              size: nil
+          )
+        %>
+        <div class="check-result-error" data-field="password"></div>
+        <div class="guideline"><%= t('.guidelines.password') %></div>
+      </dd>
+    </div>
 
-    <dt>
-      <%= f.label :password_confirmation, t('activerecord.attributes.user.password_confirmation') %>
-    </dt>
-    <dd>
-      <%=
-        f.password_field(
-            :password_confirmation,
-            id: "#{model_name}_password_confirmation",
-            required: true,
-            size: nil,
-            maxlength: 70,
-            data: { check: :password_confirmation }
-        )
-      %>
-      <div class="check-result-error" data-field="password_confirmation"></div>
-      <div class="guideline"><%= t('.guidelines.password_confirmation') %></div>
-    </dd>
+    <div>
+      <dt>
+        <%= f.label :password_confirmation, t('activerecord.attributes.user.password_confirmation') %>
+      </dt>
+      <dd>
+        <%=
+          f.password_field(
+              :password_confirmation,
+              class: 'input-text',
+              data: { check: :password_confirmation },
+              id: "#{model_name}_password_confirmation",
+              maxlength: 70,
+              required: true,
+              size: nil
+          )
+        %>
+        <div class="check-result-error" data-field="password_confirmation"></div>
+        <div class="guideline"><%= t('.guidelines.password_confirmation') %></div>
+      </dd>
+    </div>
 
     <% if component_handler.use_invites? %>
-      <dt>
-        <%= label_tag :code, t('.invitation_code') %>
-      </dt>
-      <dd>
-        <%=
-          text_field_tag(
-              :code,
-              param_from_request(:code),
-              required: component_handler.invite_only?,
-              size: nil,
-              maxlength: Code::BODY_LIMIT,
-              data: {
-                  check: :code
-              }
-          )
-        %>
-        <div class="check-result-error" data-field="code"></div>
-      </dd>
+      <div>
+        <dt>
+          <%= label_tag :code, t('.invitation_code') %>
+        </dt>
+        <dd>
+          <%=
+            text_field_tag(
+                :code,
+                param_from_request(:code),
+                class: 'input-text',
+                data: { check: :code },
+                maxlength: Code::BODY_LIMIT,
+                required: component_handler.invite_only?,
+                size: nil
+            )
+          %>
+          <div class="check-result-error" data-field="code"></div>
+        </dd>
+      </div>
     <% end %>
   </dl>
 

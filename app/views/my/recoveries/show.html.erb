@@ -7,31 +7,72 @@
     <section>
       <h2><%= t('.got_code') %></h2>
       <%= form_with url: my_recovery_path, method: :patch, local: true do %>
-        <dl>
-          <dt>
-            <%= label_tag :code, t('activerecord.attributes.code.body') %>
-          </dt>
-          <dd>
-            <%= text_field_tag :code, param_from_request(:code), required: true, size: 25 %>
-          </dd>
+        <dl class="fields">
+          <div>
+            <dt>
+              <%= label_tag :code, t('activerecord.attributes.code.body') %>
+            </dt>
+            <dd>
+              <%=
+                text_field_tag(
+                    :code,
+                    param_from_request(:code),
+                    class: 'input-text',
+                    required: true
+                )
+              %>
+            </dd>
+          </div>
 
-          <dt>
-            <%= label_tag :user_password, t('activerecord.attributes.user.password') %>
-          </dt>
-          <dd>
-            <%= password_field_tag 'user[password]', '', required: true, size: 25 %>
-          </dd>
+          <div>
+            <dt>
+              <%=
+                label_tag(
+                    :user_password,
+                    t('activerecord.attributes.user.password')
+                )
+              %>
+            </dt>
+            <dd>
+              <%=
+                password_field_tag(
+                    'user[password]',
+                    '',
+                    class: 'input-text',
+                    maxlength: 70,
+                    required: true,
+                    size: nil
+                )
+              %>
+            </dd>
+          </div>
 
-          <dt>
-            <%= label_tag :user_password_confirmation, t('activerecord.attributes.user.password_confirmation') %>
-          </dt>
-          <dd>
-            <%= password_field_tag 'user[password_confirmation]', '', required: true, size: 25 %>
-          </dd>
+          <div>
+            <dt>
+              <%=
+                label_tag(
+                    :user_password_confirmation,
+                    t('activerecord.attributes.user.password_confirmation')
+                )
+              %>
+            </dt>
+            <dd>
+              <%=
+                password_field_tag(
+                    'user[password_confirmation]',
+                    '',
+                    class: 'input-text',
+                    maxlength: 70,
+                    required: true,
+                    size: nil
+                )
+              %>
+            </dd>
+          </div>
         </dl>
 
-        <div>
-          <%= button_tag t('.update_password'), type: :submit %>
+        <div class="buttons">
+          <%= button_tag t('.update_password'), class: 'button-primary' %>
         </div>
       <% end %>
     </section>
@@ -39,12 +80,25 @@
     <section>
       <h2><%= t('.no_code') %></h2>
       <%= form_with url: my_recovery_path, method: :post, local: true do %>
-        <dl>
-          <dt><%= label_tag :email, t('activerecord.attributes.user.email') %></dt>
-          <dd><%= email_field_tag :email, param_from_request(:email), required: true %></dd>
+        <dl class="fields">
+          <div>
+            <dt>
+              <%= label_tag :email, t('activerecord.attributes.user.email') %>
+            </dt>
+            <dd>
+              <%=
+                email_field_tag(
+                    :email,
+                    param_from_request(:email),
+                    class: 'input-text',
+                    required: true
+                )
+              %>
+            </dd>
+          </div>
         </dl>
-        <div>
-          <%= button_tag t('.receive_code'), type: :submit %>
+        <div class="buttons">
+          <%= button_tag t('.receive_code'), class: 'button-primary' %>
         </div>
       <% end %>
     </section>
