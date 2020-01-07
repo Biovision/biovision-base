@@ -6,6 +6,15 @@ ru:
       language:
         slug: "Идентификатор"
         code: "Код"
+  attributes:
+    created_at: "Время создания"
+    language: "Язык"
+    language_id: "Язык"
+    priority: "Порядок сортировки"
+    updated_at: "Время обновления"
+    uuid: "UUID"
+    slug: "Идентификатор"
+    visible: "Показывать"
   error_count:
     zero: "ошибок нет"
     one: "%{count} ошибка"

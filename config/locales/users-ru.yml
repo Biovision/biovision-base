@@ -17,6 +17,9 @@ ru:
     few: "%{count} года"
     many: "%{count} лет"
     other: "%{count} лет"
+  attributes:
+    user: "Пользователь"
+    user_id: "Пользователь"
   invalid_code: "Недействительный код"
   could_not_log_in: "Не удалось выполнить вход"
   logout: "Выйти"
