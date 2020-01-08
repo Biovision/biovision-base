@@ -14,6 +14,10 @@
   }
 }
 
+.message-box-info {
+  @include message-box(#eef, image_url('biovision/base/icons/info.svg'), #004, #dde);
+}
+
 .message-box-notice {
   @include message-box(#efe, image_url('biovision/base/icons/notice.svg'), #040, #ded);
 }
