@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Mixin for adding required unique slug constrain
+# Mixin for adding required unique slug constraint
 module RequiredUniqueSlug
   extend ActiveSupport::Concern
 
