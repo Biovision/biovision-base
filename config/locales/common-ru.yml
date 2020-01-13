@@ -10,9 +10,13 @@ ru:
     created_at: "Время создания"
     language: "Язык"
     language_id: "Язык"
+    meta_description: "Описание для метатэга"
+    meta_keywords: "Ключевые слова для метатэга"
+    meta_title: "Заголовок окна"
     priority: "Порядок сортировки"
     updated_at: "Время обновления"
     uuid: "UUID"
+    simple_image: "Картинка"
     slug: "Идентификатор"
     visible: "Показывать"
   error_count:
