@@ -110,3 +110,16 @@ form {
     width: 100%;
   }
 }
+
+#cookie-info {
+  -webkit-backdrop-filter: blur(.5rem);
+  backdrop-filter: blur(.5rem);
+  background: rgba(255, 255, 255, .9);
+  bottom: 0;
+  font-size: var(--font-size-decreased);
+  left: 0;
+  padding: var(--spacer-xs);
+  position: fixed;
+  right: 0;
+  z-index: 10;
+}

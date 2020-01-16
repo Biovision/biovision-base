@@ -1078,6 +1078,29 @@ Biovision.components.newComponentParameter = {
     }
 };
 
+Biovision.components.cookieNotifier = {
+    initialized: false,
+    selector: "cookie-info",
+    container: undefined,
+    button: undefined,
+    init: function () {
+        this.container = document.getElementById(this.selector);
+        if (this.container) {
+            const handler = this.handler;
+            this.button = this.container.querySelector("button");
+            this.button.addEventListener("click", handler);
+            this.initialized = true;
+        }
+    },
+    handler: function () {
+        const component = Biovision.components.cookieNotifier;
+        const date = new Date();
+        date.setTime(date.getTime() + 31536000);
+        document.cookie = "f=1;path=/;expires=" + date.toUTCString();
+        component.container.remove();
+    }
+};
+
 window.Biovision = Biovision;
 
 document.addEventListener('DOMContentLoaded', function () {

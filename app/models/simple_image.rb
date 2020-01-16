@@ -19,6 +19,7 @@
 class SimpleImage < ApplicationRecord
   include Checkable
   include HasOwner
+  include HasUuid
 
   META_LIMIT = 255
 
@@ -30,8 +31,7 @@ class SimpleImage < ApplicationRecord
   has_many :simple_image_tag_images, dependent: :destroy
   has_many :simple_image_tags, through: :simple_image_tag_images
 
-  after_initialize { self.uuid = SecureRandom.uuid if uuid.nil? }
-
+  validates_presence_of :image
   validates_length_of :caption, maximum: META_LIMIT
   validates_length_of :image_alt_text, maximum: META_LIMIT
   validates_length_of :source_link, maximum: META_LIMIT

@@ -1,8 +1,8 @@
-<% prefix = "activerecord.attributes.#{entity.class.to_s.underscore}" %>
+<% prefix = "activerecord.attributes.#{entity.class.to_s.underscore}"%>
 <div class="toggleable" data-url="<%= url %>">
   <% entity.class.toggleable_attributes.each do |flag| %>
   <span class="<%= entity.attributes[flag.to_s] ? 'active' : 'inactive' %>" data-flag="<%= flag %>">
-    <%= t("#{prefix}.#{flag}", default: flag) %>
+    <%= t("#{prefix}.#{flag}", default: ["activerecord.attributes.#{flag}".to_sym, flag]) %>
   </span>
   <% end %>
 </div>

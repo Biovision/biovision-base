@@ -122,6 +122,10 @@ en:
           meta_title: "Maximum 250 characters"
           meta_description: "30 to 50 words, maximum 500 characters."
           meta_keywords: "Maximum 250 characters."
+    cookie_notification:
+      accept: "Accept"
+      this_site_uses_cookies: "This site uses cookies. By using our site, you acknowledge that you have read and understand our privacy policy and terms of service."
+      learn_more: "Learn more"
   admin:
     index:
       index:

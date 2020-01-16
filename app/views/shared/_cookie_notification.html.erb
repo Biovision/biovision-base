@@ -1,0 +1,11 @@
+<aside id="cookie-info">
+  <div class="content-wrapper">
+    <div class="text">
+      <%= t('.this_site_uses_cookies') %>
+      <%= t('.learn_more') %>:
+      <%= link_to(t('about.privacy.nav_text'), privacy_path) %>,
+      <%= link_to(t('about.tos.nav_text'), tos_path) %>.
+    </div>
+    <%= button_tag(t('.accept'), class: 'button-primary', type: :button) %>
+  </div>
+</aside>
