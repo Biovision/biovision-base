@@ -1,4 +1,5 @@
 @import "shared";
+@import "biovision/base/themes/simple-layout";
 
 :focus {
   outline: none;
@@ -9,5 +10,6 @@
   max-width: $content-width;
 }
 
+@import "application/components";
 @import "header";
 @import "footer";

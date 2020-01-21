@@ -95,6 +95,13 @@ end
 В районе 74 строки заменить `config.i18n.fallbacks = true`
 на `config.i18n.fallbacks = [I18n.default_locale]`
 
+Изменения в `app/mailers/application_mailer.rb`
+-----------------------------------------------
+
+Нужно удалить строку с отправителем по умолчанию 
+(`default from: 'from@example.com'`), иначе при отправке писем в бою будет
+ошибка с неправильным отправителем, независимо от того, что написано
+в конфигурации в `production.rb`.
 
 Актуализация `config/database.yml`
 ----------------------------------
@@ -219,18 +226,18 @@ end
 ```ruby
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-      address: 'smtp.mail.ru',
-      port: 465,
-      tls: true,
-      domain: 'example.com',
-      user_name: 'webmaster@example.com',
-      password: ENV['MAIL_PASSWORD'],
-      authentication: :login,
-      enable_starttls_auto: true
+    address: 'smtp.mail.ru',
+    port: 465,
+    tls: true,
+    domain: 'example.com',
+    user_name: 'webmaster@example.com',
+    password: ENV['MAIL_PASSWORD'],
+    authentication: :login,
+    enable_starttls_auto: true
   }
   config.action_mailer.default_options = {
-      from: 'example.com <webmaster@example.com>',
-      reply_to: 'support@example.com'
+    from: 'example.com <webmaster@example.com>',
+    reply_to: 'support@example.com'
   }
   config.action_mailer.default_url_options = { host: 'example.com' }
 ```
@@ -240,17 +247,17 @@ end
 ```ruby
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-      address: 'smtp.gmail.com',
-      port: 587,
-      domain: 'example.com',
-      user_name: 'webmaster@example.com',
-      password: ENV['MAIL_PASSWORD'],
-      authentication: :plain,
-      enable_starttls_auto: true
+    address: 'smtp.gmail.com',
+    port: 587,
+    domain: 'example.com',
+    user_name: 'webmaster@example.com',
+    password: ENV['MAIL_PASSWORD'],
+    authentication: :plain,
+    enable_starttls_auto: true
   }
   config.action_mailer.default_options = {
-      from: 'example.com <webmaster@example.com>',
-      reply_to: 'support@example.com'
+    from: 'example.com <webmaster@example.com>',
+    reply_to: 'support@example.com'
   }
   config.action_mailer.default_url_options = { host: 'example.com' }
 ```
@@ -269,8 +276,8 @@ end
     enable_starttls_auto: true
   }
   config.action_mailer.default_options = {
-      from: 'example.com <webmaster@example.com>',
-      reply_to: 'info@example.com'
+    from: 'example.com <webmaster@example.com>',
+    reply_to: 'info@example.com'
   }
   config.action_mailer.default_url_options = { host: 'example.com' }
 ```
@@ -280,10 +287,10 @@ end
 
 ```ruby
   config.action_mailer.default_options = {
-      from: 'example.com <webmaster@example.com>',
-      reply_to: 'info@example.com'
+    from: 'example.com <webmaster@example.com>',
+    reply_to: 'info@example.com'
   }
-  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  config.action_mailer.default_url_options = { host: 'localhost:3000' }
 ```
 
 Дополнения в `config/environments/development.rb`
@@ -292,10 +299,10 @@ end
 ```ruby
   config.action_mailer.delivery_method = :test
   config.action_mailer.default_options = {
-      from: 'example.com <webmaster@example.com>',
-      reply_to: 'info@example.com'
+    from: 'example.com <webmaster@example.com>',
+    reply_to: 'info@example.com'
   }
-  config.action_mailer.default_url_options = { :host => '0.0.0.0:3000' }
+  config.action_mailer.default_url_options = { host: 'localhost:3000' }
 ```
 
 Дополнения в `config/puma.rb`
