@@ -2,7 +2,7 @@
 <div class="toggleable" data-url="<%= url %>">
   <% entity.class.toggleable_attributes.each do |flag| %>
   <span class="<%= entity.attributes[flag.to_s] ? 'active' : 'inactive' %>" data-flag="<%= flag %>">
-    <%= t("#{prefix}.#{flag}", default: ["attributes.#{flag}".to_sym, flag]) %>
+    <%= t("#{prefix}.#{flag}", default: ["attributes.#{flag}".to_sym, flag.to_s]) %>
   </span>
   <% end %>
 </div>

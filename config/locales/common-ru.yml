@@ -8,6 +8,9 @@ ru:
         code: "Код"
   attributes:
     created_at: "Время создания"
+    description: "Описание"
+    image: "Изображение"
+    image_alt_text: "Альтернативный текст для изображения"
     language: "Язык"
     language_id: "Язык"
     meta_description: "Описание для метатэга"

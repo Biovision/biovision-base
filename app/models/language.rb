@@ -25,4 +25,9 @@ class Language < ApplicationRecord
   validates_uniqueness_of :slug
 
   scope :active, -> { where(active: true) }
+
+  # @param [String|Symbol] code
+  def self.[](code)
+    find_by(code: code)
+  end
 end

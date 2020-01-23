@@ -1,6 +1,8 @@
 <% attributes.reject { |_, v| v.blank? }.each do |attribute, value| %>
   <div>
-    <dt><%= t("#{prefix}.#{attribute}") %></dt>
+    <dt>
+      <%= t("#{prefix}.#{attribute}", default: ["attributes.#{attribute}"]) %>
+    </dt>
     <dd><%= value %></dd>
   </div>
 <% end %>

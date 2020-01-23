@@ -1,13 +1,13 @@
 <% unless entity.created_at.nil? %>
   <div>
-    <dt><%= t(:created_at) %></dt>
+    <dt><%= t('attributes.created_at') %></dt>
     <dd><%= time_tag(entity.created_at) %></dd>
   </div>
 <% end %>
 
 <% unless entity.updated_at.nil? %>
   <div>
-    <dt><%= t(:updated_at) %></dt>
+    <dt><%= t('attributes.updated_at') %></dt>
     <dd><%= time_tag(entity.updated_at) %></dd>
   </div>
 <% end %>

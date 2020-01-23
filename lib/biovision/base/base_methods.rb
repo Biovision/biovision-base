@@ -44,12 +44,12 @@ module Biovision
       #
       # @return [Language]
       def current_language
-        @current_language ||= Language.find_by(code: locale)
+        @current_language ||= Language[locale]
       end
 
       # @return [Agent]
       def agent
-        @agent ||= Agent.named(request.user_agent || 'n/a')
+        @agent ||= Agent[request.user_agent || 'n/a']
       end
 
       # @return [String]
@@ -163,6 +163,7 @@ module Biovision
 
       # @param [Class] klass
       # @param [String] privilege_name
+      # @deprecated use #component_class instead
       def component_restriction(klass, privilege_name)
         return if klass[current_user].allow?(privilege_name)
 

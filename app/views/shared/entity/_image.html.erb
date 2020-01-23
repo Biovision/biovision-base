@@ -1,0 +1,13 @@
+<% unless entity.image.blank? %>
+  <div>
+    <dt><%= t('attributes.image') %></dt>
+    <dd>
+      <figure role="group" class="preview">
+        <%= link_to(simple_image_medium(entity), entity.image.url) %>
+        <% if entity.respond_to?(:image_alt_text) %>
+          <figcaption><%= entity.image_alt_text %></figcaption>
+        <% end %>
+      </figure>
+    </dd>
+  </div>
+<% end %>
