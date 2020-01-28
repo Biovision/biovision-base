@@ -1095,7 +1095,7 @@ Biovision.components.cookieNotifier = {
     handler: function () {
         const component = Biovision.components.cookieNotifier;
         const date = new Date();
-        date.setTime(date.getTime() + 31536000);
+        date.setTime(date.getTime() + 31536000000);
         document.cookie = "f=1;path=/;expires=" + date.toUTCString();
         component.container.remove();
     }
