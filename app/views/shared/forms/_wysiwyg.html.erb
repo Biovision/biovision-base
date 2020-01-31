@@ -3,6 +3,11 @@
     'use strict';
     document.addEventListener('DOMContentLoaded', function () {
         document.querySelectorAll('form [data-wysiwyg]').forEach(function (editor) {
+            let uploadUrl = "/media_files/ckeditor";
+            if (editor.hasAttribute("data-upload-url")) {
+                uploadUrl = editor.getAttribute("data-upload-url");
+            }
+
             editor.required = false;
             ClassicEditor
                 .create(editor, {
@@ -10,7 +15,7 @@
                         toolbar: ['imageTextAlternative']
                     },
                     ckfinder: {
-                        uploadUrl: '/media_files/ckeditor'
+                        uploadUrl: uploadUrl
                     }
                 })
                 .catch(error => console.error(error));
