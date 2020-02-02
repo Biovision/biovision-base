@@ -3,6 +3,7 @@ ru:
     models:
       biovision_component: "Компонент"
       biovision_parameter: "Параметр"
+      notification: "Уведомление"
     attributes:
       biovision_component:
         priority: "Порядок сортировки"
@@ -11,6 +12,9 @@ ru:
         administrator: "Администратор компонента"
         privileges:
           settings: "Управление настройками"
+  attributes:
+    biovision_component: "Компонент"
+    biovision_component_id: "Компонент"
   admin:
     components:
       index:
