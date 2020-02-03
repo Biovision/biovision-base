@@ -1,0 +1,21 @@
+ru:
+  activerecord:
+    models:
+      user_ban: "Игнорирование пользователя"
+      user_message: "Сообщение пользователя"
+      user_subscription: "Подписка на пользователя"
+    attributes:
+      user_ban:
+        other_user: "Другой пользователь"
+        other_user_id: "Другой пользователь"
+      user_message:
+        body: "Текст сообщения"
+        sender: "Отправитель"
+        sender_deleted: "Отправитель удалил"
+        read: "Прочитано получателем"
+        receiver: "Получатель"
+        receiver_deleted: "Получатель удалил"
+      user_subscription:
+        followee: "На кого подписаны"
+        followee_id: "На кого подписаны"
+        follower: "Кто подписан"

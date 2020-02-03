@@ -26,10 +26,8 @@ Rails.application.routes.draw do
 
   resources :agents, :browsers, only: %i[update destroy]
 
-  resources :editable_blocks, only: %i[update destroy]
   resources :editable_pages, only: %i[update destroy]
   resources :simple_blocks, only: %i[update destroy]
-  resources :stored_values, only: %i[update destroy]
 
   resources :users, only: %i[update destroy]
   resources :foreign_users, only: :destroy
@@ -37,15 +35,10 @@ Rails.application.routes.draw do
 
   resources :metrics, only: :update
 
-  resources :privileges, only: %i[update destroy]
-  resources :privilege_groups, only: %i[update destroy]
-
   resources :media_folders, only: %i[update destroy]
   resources :media_files, only: %i[update destroy]
 
   resources :feedback_requests, only: :destroy
-
-  resources :link_blocks, :link_block_items, only: %i[update destroy]
 
   scope '(:locale)', constraints: { locale: /ru|en|sv|cn/ } do
     # Handling errors
@@ -72,6 +65,10 @@ Rails.application.routes.draw do
 
     scope 'u/:slug', controller: :profiles, constraints: { slug: %r{[^/]+} } do
       get '/' => :show, as: :user_profile
+      put 'follow' => :follow, as: :follow_user
+      delete 'follow' => :unfollow, as: nil
+      put 'ban' => :ban, as: :ban_user
+      delete 'ban' => :unban, as: nil
     end
 
     namespace :admin do
@@ -100,25 +97,10 @@ Rails.application.routes.draw do
 
       resources :editable_pages, only: %i[index show], concerns: %i[priority toggle]
       resources :simple_blocks, only: %i[index show], concerns: :toggle
-      resources :editable_blocks, only: %i[index show], concerns: :toggle
-      resources :stored_values, only: %i[index show]
 
       resources :metrics, only: %i[index show] do
         member do
           get 'data', defaults: { format: :json }
-        end
-      end
-
-      resources :privileges, only: %i[index show], concerns: %i[priority toggle] do
-        member do
-          get 'users'
-          get 'regions', defaults: { format: :json }
-        end
-      end
-      resources :privilege_groups, only: %i[index show] do
-        member do
-          put 'privileges/:privilege_id' => :add_privilege, as: :privilege, defaults: { format: :json }
-          delete 'privileges/:privilege_id' => :remove_privilege, defaults: { format: :json }
         end
       end
 
@@ -148,9 +130,6 @@ Rails.application.routes.draw do
       resources :media_files, only: %i[index show], concerns: :lock
 
       resources :feedback_requests, only: :index, concerns: :toggle
-
-      resources :link_blocks, only: %i[index show], concerns: :toggle
-      resources :link_block_items, only: :show, concerns: %i[priority toggle]
     end
 
     namespace :my do
@@ -165,19 +144,12 @@ Rails.application.routes.draw do
     resources :agents, :browsers, except: %i[index show update destroy]
 
     resources :editable_pages, except: %i[index show update destroy], concerns: :check
-    resources :editable_blocks, except: %i[index show update destroy], concerns: :check
     resources :simple_blocks, only: %i[new create edit], concerns: :check
-    resources :stored_values, except: %i[index show update destroy]
-
-    resources :link_blocks, :link_block_items, except: %i[index show update destroy], concerns: :check
 
     resources :users, except: %i[index show update destroy], concerns: :check
     resources :tokens, :codes, except: %i[index show update destroy]
 
     resources :metrics, only: :edit
-
-    resources :privileges, except: %i[index show update destroy]
-    resources :privilege_groups, except: %i[index show update destroy]
 
     resources :media_folders, except: %i[index show update destroy]
     resources :media_files, except: %i[index show update destroy] do
