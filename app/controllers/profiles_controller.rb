@@ -51,7 +51,7 @@ class ProfilesController < ApplicationController
   end
 
   def set_socialization
-    @socialization = Biovision::Components::BaseComponent[current_user]
+    @socialization = Biovision::Components::SocializationComponent[current_user]
   end
 
   def set_entity
