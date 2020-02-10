@@ -14,6 +14,7 @@
     <% @collection.each do |component| %>
       <%
         handler = Biovision::Components::BaseComponent.handler(component, current_user)
+        next if handler.component.nil?
         next unless handler.allow?
       %>
       <li>
