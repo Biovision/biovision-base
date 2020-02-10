@@ -13,8 +13,8 @@ class ForeignUsersController < AdminController
 
   private
 
-  def component_slug
-    Biovision::Components::UsersComponent::SLUG
+  def component_class
+    Biovision::Components::UsersComponent
   end
 
   def restrict_access

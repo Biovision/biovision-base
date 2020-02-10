@@ -13,8 +13,8 @@ class Admin::FeedbackRequestsController < AdminController
 
   private
 
-  def component_slug
-    Biovision::Components::ContactComponent::SLUG
+  def component_class
+    Biovision::Components::ContactComponent
   end
 
   def restrict_access

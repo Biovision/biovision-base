@@ -48,8 +48,8 @@ class SimpleBlocksController < AdminController
 
   protected
 
-  def component_slug
-    Biovision::Components::ContentComponent::SLUG
+  def component_class
+    Biovision::Components::ContentComponent
   end
 
   def restrict_access
