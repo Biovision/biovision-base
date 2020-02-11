@@ -2,6 +2,6 @@
 
 module Biovision
   module Base
-    VERSION = '0.45.200211.0'
+    VERSION = '0.45.200211.1'
   end
 end

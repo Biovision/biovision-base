@@ -160,6 +160,8 @@ Socialization.components.messageSender = {
             } else {
                 component.loader.remove();
             }
+        } else {
+            component.loader.remove();
         }
     }
 };
