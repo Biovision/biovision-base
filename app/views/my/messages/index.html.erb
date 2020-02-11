@@ -1,0 +1,14 @@
+<% content_for :meta_title, t('.title') %>
+
+<article>
+  <div class="content-wrapper">
+    <h1><%= t('.heading') %></h1>
+
+    <%=
+      render(
+          partial: 'my/messages/interlocutors',
+          locals: { collection: @collection }
+      )
+    %>
+  </div>
+</article>

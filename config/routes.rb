@@ -40,6 +40,8 @@ Rails.application.routes.draw do
 
   resources :feedback_requests, only: :destroy
 
+  resources :user_messages, only: %i[update destroy]
+
   scope '(:locale)', constraints: { locale: /ru|en|sv|cn/ } do
     # Handling errors
     match '/400' => 'errors#bad_request', via: :all
@@ -130,6 +132,8 @@ Rails.application.routes.draw do
       resources :media_files, only: %i[index show], concerns: :lock
 
       resources :feedback_requests, only: :index, concerns: :toggle
+
+      resources :user_messages, only: %i[index show]
     end
 
     namespace :my do
@@ -139,6 +143,12 @@ Rails.application.routes.draw do
       resource :confirmation, :recovery, only: %i[show create update]
       resources :tokens, only: :index, concerns: :toggle
       resources :login_attempts, only: :index
+      resources :messages, only: :index do
+        collection do
+          get ':slug' => :user, as: :user, constraints: { slug: %r{[^/]+} }
+          post ':slug' => :create, as: nil, constraints: { slug: %r{[^/]+} }
+        end
+      end
     end
 
     resources :agents, :browsers, except: %i[index show update destroy]

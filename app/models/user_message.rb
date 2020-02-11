@@ -3,9 +3,11 @@
 # Message from user to user
 # 
 # Attributes:
+#   agent_id [Agent], optional
 #   body [text]
 #   created_at [DateTime]
 #   data [jsonb]
+#   ip [inet]
 #   read [boolean]
 #   receiver_deleted [boolean]
 #   receiver_id [integer]
@@ -18,6 +20,7 @@ class UserMessage < ApplicationRecord
 
   BODY_LIMIT = 5000
 
+  belongs_to :agent, optional: true
   belongs_to :sender, class_name: User.to_s
   belongs_to :receiver, class_name: User.to_s
 

@@ -1,0 +1,32 @@
+<% content_for :meta_title, t('.title', user: @other_user.profile_name) %>
+
+<article>
+  <div class="content-wrapper">
+    <h1><%= @other_user.profile_name %></h1>
+
+    <div class="messages-list" id="user_messages" data-url="<%= url_for %>">
+      <div class="loader">
+        <button type="button" class="user_messages-loader" data-url="<%= url_for %>">Ещё</button>
+      </div>
+      <ul class="user_messages-list"></ul>
+      <div class="actions">
+        <%= label_tag(:user_message_body, t('activerecord.attributes.user_message.body')) %>
+        <%=
+          text_area_tag(
+              'user_message[body]',
+              '',
+              class: 'auto-expand input-text',
+              data: {
+                  max_rows: 20,
+                  min_rows: 3
+              },
+              maxlength: UserMessage::BODY_LIMIT,
+              required: true,
+              rows: 3
+          )
+        %>
+        <%= button_tag(t(:submit), class: 'button-primary', disabled: true, type: :button) %>
+      </div>
+    </div>
+  </div>
+</article>

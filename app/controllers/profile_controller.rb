@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Controllers for logged-in users only
 class ProfileController < ApplicationController
   before_action :restrict_access
 

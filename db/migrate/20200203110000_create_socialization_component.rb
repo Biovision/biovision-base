@@ -37,6 +37,8 @@ class CreateSocializationComponent < ActiveRecord::Migration[5.2]
       t.uuid :uuid, null: false
       t.integer :sender_id, null: false
       t.integer :receiver_id, null: false
+      t.references :agent
+      t.inet :ip
       t.timestamps
       t.boolean :read, default: false, null: false
       t.boolean :sender_deleted, default: false, null: false

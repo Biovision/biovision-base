@@ -36,6 +36,24 @@ module Biovision
         UserSubscription.where(follower: user, followee: followee).destroy_all
       end
 
+      def interlocutors
+        ids = UserMessage[user].pluck(:sender_id, :receiver_id)
+        User.where(id: ids.flatten.uniq - [user.id])
+      end
+
+      # @param [User] other_user
+      # @param [Integer] page
+      def messages(other_user, page = 1)
+        id1 = user.id
+        id2 = other_user.id
+        clauses = [
+          "(sender_id = #{id1} and receiver_id = #{id2})",
+          "(sender_id = #{id2} and receiver_id = #{id1})"
+        ]
+        criteria = clauses.join(' or ')
+        UserMessage.where(criteria).recent.page(page)
+      end
+
       protected
 
       # @param [Hash] data

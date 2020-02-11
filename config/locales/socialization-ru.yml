@@ -19,3 +19,11 @@ ru:
         followee: "На кого подписаны"
         followee_id: "На кого подписаны"
         follower: "Кто подписан"
+  my:
+    messages:
+      index:
+        heading: "Мои сообщения"
+        nav_text: "Сообщения"
+        title: "Мои сообщения"
+      user:
+        title: "%{user}: переписка"

@@ -1,0 +1,11 @@
+<% if collection.any? %>
+  <ul class="messages-user-list">
+    <% collection.each do |entity| %>
+      <li>
+        <%= my_messages_link(entity) %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <%= render 'shared/nothing_found' %>
+<% end %>
