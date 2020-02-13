@@ -34,7 +34,7 @@ class My::NotificationsController < ProfileController
   private
 
   def set_entity
-    @entity = Notification.owned_by(current_user).find_by(params[:id])
+    @entity = Notification.owned_by(current_user).find_by(id: params[:id])
     handle_http_404('Cannot find notification') if @entity.nil?
   end
 end

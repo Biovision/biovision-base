@@ -1,0 +1,41 @@
+<% if collection.any? %>
+  <ul class="notifications-list">
+    <% collection.each do |entity| %>
+      <%
+        notifier = Biovision::Notifiers::BaseNotifier[entity]
+        view_name = notifier.view
+        next if view_name.nil?
+      %>
+      <li
+        class="<%= entity.read? ? '' : 'unread' %>"
+        data-url="<%= read_my_notification_path(id: entity.id) %>"
+        data-id="<%= entity.id %>"
+      >
+        <div class="info">
+          <%=
+            render(
+                partial: view_name,
+                locals: { notification: entity, entity: notifier.entity }
+            )
+          %>
+        </div>
+        <%= time_tag(entity.created_at, time_ago_in_words(entity.created_at)) %>
+        <div class="actions">
+          <%=
+            button_tag(
+                '',
+                class: 'destroy-button',
+                data: {
+                    url: my_notification_path(id: entity.id)
+                },
+                title: t(:delete),
+                type: :button
+            )
+          %>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <div class="message-box-info"><%= t('.no_notifications') %></div>
+<% end %>

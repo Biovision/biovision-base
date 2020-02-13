@@ -79,3 +79,11 @@ ru:
           edit: "Редактирование"
           manage_codes: "Управление кодами"
           view: "Просмотр"
+  my:
+    notifications:
+      index:
+        heading: "Уведомления"
+        nav_text: "Уведомления"
+        title: "Мои уведомления, страница %{page}"
+      list:
+        no_notifications: "Уведомлений нет"
