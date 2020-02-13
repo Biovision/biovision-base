@@ -28,6 +28,8 @@ module Biovision
       # @param [User] followee
       def follow(followee)
         UserSubscription.create(follower: user, followee: followee)
+        notifier.new_follower(user.id)
+
         unban(followee)
       end
 
@@ -63,6 +65,11 @@ module Biovision
         flags.each { |f| result[f] = data[f].to_i == 1 }
 
         result
+      end
+
+      # @param [User] user
+      def notifier(user)
+        Biovision::Notifiers::SocializationNotifier[user]
       end
     end
   end

@@ -29,6 +29,8 @@ class UserMessage < ApplicationRecord
 
   scope :recent, -> { order('id desc') }
   scope :unread, -> { where(read: false) }
+  scope :sent_by, ->(v) { where(sender_id: v.id) }
+  scope :received_by, ->(v) { where(receiver_id: v.id) }
 
   # @param [User] user
   def self.[](user)

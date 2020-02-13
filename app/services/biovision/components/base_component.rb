@@ -27,7 +27,7 @@ module Biovision
       end
 
       def self.slug
-        (to_s + '::SLUG').safe_constantize || to_s.demodulize.underscore.gsub('_component', '')
+        to_s.demodulize.underscore.gsub('_component', '')
       end
 
       # Receive component-specific handler by class name for component.

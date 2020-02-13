@@ -7,6 +7,7 @@ class My::MessagesController < ProfileController
   # get /my/messages
   def index
     @collection = component_handler.interlocutors
+    @count = UserMessage.received_by(current_user).unread.count
   end
 
   # get /my/messages/:slug
@@ -15,6 +16,7 @@ class My::MessagesController < ProfileController
       format.html
       format.json do
         @collection = component_handler.messages(@other_user, current_page)
+        UserMessage.sent_by(@other_user).received_by(current_user).update_all(read: true)
         render
       end
     end
@@ -24,6 +26,8 @@ class My::MessagesController < ProfileController
   def create
     @entity = UserMessage.new(creation_parameters)
     if @entity.save
+      notifier = Biovision::Notifiers::SocializationNotifier.new(@entity.receiver)
+      notifier.new_message(@entity.sender_id)
       render 'show'
     else
       render 'shared/forms/check'

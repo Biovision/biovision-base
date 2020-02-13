@@ -27,3 +27,9 @@ ru:
         title: "Мои сообщения"
       user:
         title: "%{user}: переписка"
+    notifications:
+      socialization:
+        message:
+          text: "Сообщение от пользователя %{user}"
+        follower:
+          text: "На вас подписался пользователь %{user}"

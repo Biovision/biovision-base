@@ -166,4 +166,32 @@ Socialization.components.messageSender = {
     }
 };
 
+Socialization.components.messageCounter = {
+    initialized: false,
+    selector: "unread-message-count",
+    container: undefined,
+    init: function () {
+        this.container = document.getElementById(this.selector);
+        if (this.container && this.container.hasAttribute("data-url")) {
+            this.process();
+        }
+        this.initialized = true;
+    },
+    process: function () {
+        const url = this.container.getAttribute("data-url");
+        const container = this.container;
+        const request = Biovision.jsonAjaxRequest("get", url, function () {
+            const response = JSON.parse(this.responseText);
+            if (response.hasOwnProperty("meta")) {
+                const messageCount = parseInt(response["meta"]["count"]);
+                if (messageCount > 0) {
+                    container.innerHTML = messageCount;
+                }
+            }
+        });
+
+        request.send();
+    }
+};
+
 Biovision.components.socialization = Socialization;

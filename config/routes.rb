@@ -149,6 +149,10 @@ Rails.application.routes.draw do
           post ':slug' => :create, as: nil, constraints: { slug: %r{[^/]+} }
         end
       end
+      resources :notifications, only: %i[index destroy] do
+        put 'read', on: :member
+        get 'count', on: :collection
+      end
     end
 
     resources :agents, :browsers, except: %i[index show update destroy]
