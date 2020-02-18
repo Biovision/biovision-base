@@ -47,6 +47,14 @@ ru:
             value: "Произвольная строка"
       update_settings:
         success: "Настройки компонента успешно изменены"
+      new_image:
+        title: "Загрузка новой картинки"
+        heading: "Загрузка новой картинки"
+        use_ajax: "Картинки загружаются через AJAX."
+      images:
+        title: "Картинки компонента %{component}, страница %{page}"
+        nav_text: "Картинки"
+        heading: "Картинки"
   biovision:
     components:
       common:

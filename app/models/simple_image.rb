@@ -11,6 +11,7 @@
 #   image [SimpleImageUploader]
 #   image_alt_text [string], optional
 #   ip [inet], optional
+#   object_count [Integer]
 #   source_link [string], optional
 #   source_name [string], optional
 #   updated_at [DateTime]
@@ -37,9 +38,14 @@ class SimpleImage < ApplicationRecord
   validates_length_of :source_link, maximum: META_LIMIT
   validates_length_of :source_name, maximum: META_LIMIT
 
+  scope :in_component, ->(v) { where(biovision_component: v) }
   scope :list_for_administration, -> { order('image asc') }
 
   def self.entity_parameters
     %i[caption image image_alt_text source_link source_name]
+  end
+
+  def name
+    File.basename(image.path)
   end
 end

@@ -7,6 +7,8 @@ module SimpleImageHelper
   # @param [ApplicationRecord|SimpleImageUploader] entity
   # @param [Hash] options
   def simple_image_preview(entity, options = {})
+    return '' if entity.nil?
+
     image = entity.is_a?(SimpleImageUploader) ? entity : entity.image
 
     return '' if image.blank?
@@ -22,6 +24,8 @@ module SimpleImageHelper
   # @param [ApplicationRecord|SimpleImageUploader] entity
   # @param [Hash] options
   def simple_image_small(entity, options = {})
+    return '' if entity.nil?
+
     image = entity.is_a?(SimpleImageUploader) ? entity : entity.image
 
     return '' if image.blank?
@@ -39,6 +43,8 @@ module SimpleImageHelper
   # @param [ApplicationRecord|SimpleImageUploader] entity
   # @param [Hash] options
   def simple_image_medium(entity, options = {})
+    return '' if entity.nil?
+
     image = entity.is_a?(SimpleImageUploader) ? entity : entity.image
 
     return '' if image.blank?
@@ -56,6 +62,8 @@ module SimpleImageHelper
   # @param [ApplicationRecord|SimpleImageUploader] entity
   # @param [Hash] options
   def simple_image_large(entity, options = {})
+    return '' if entity.nil?
+
     image = entity.is_a?(SimpleImageUploader) ? entity : entity.image
 
     return '' if image.blank?
@@ -73,6 +81,8 @@ module SimpleImageHelper
   # @param [ApplicationRecord|SimpleImageUploader] entity
   # @param [Hash] options
   def simple_image_hd(entity, options = {})
+    return '' if entity.nil?
+
     image = entity.is_a?(SimpleImageUploader) ? entity : entity.image
 
     return '' if image.blank?

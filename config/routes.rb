@@ -89,6 +89,9 @@ Rails.application.routes.draw do
           delete 'administrators/:user_id' => :remove_administrator, as: nil
           put 'users/:user_id/privileges/:privilege_slug' => :add_privilege, as: :component_privilege
           delete 'users/:user_id/privileges/:privilege_slug' => :remove_privilege, as: nil
+          get 'images' => :images, as: :component_images
+          post 'images' => :create_image, as: nil
+          post 'ckeditor'
         end
       end
 

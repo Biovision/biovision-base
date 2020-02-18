@@ -1,0 +1,10 @@
+<% unless entity.simple_image.nil? %>
+  <%=
+    render(
+        partial: 'shared/entity/image',
+        locals: {
+            entity: entity.simple_image
+        }
+    )
+  %>
+<% end %>

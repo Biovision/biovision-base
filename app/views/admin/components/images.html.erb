@@ -1,0 +1,18 @@
+<% content_for :meta_title, t('.title', component: @handler.component.slug, page: current_page) %>
+<% content_for :breadcrumbs do %>
+  <%= admin_biovision_component_link(@handler.component) %>
+  <span><%= t('.nav_text') %></span>
+<% end %>
+
+<article>
+  <h1><%= t('.heading') %></h1>
+
+  <%= paginate @collection %>
+  <%=
+    render(
+        partial: 'shared/admin/list',
+        locals: { collection: @collection }
+    )
+  %>
+  <%= paginate @collection %>
+</article>

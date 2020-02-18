@@ -20,6 +20,7 @@ ru:
     updated_at: "Время обновления"
     uuid: "UUID"
     simple_image: "Картинка"
+    simple_image_id: "Картинка"
     slug: "Идентификатор"
     visible: "Показывать"
   error_count:

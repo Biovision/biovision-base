@@ -3,6 +3,7 @@
 # Handling components
 class Admin::ComponentsController < AdminController
   before_action :set_handler, except: :index
+  skip_before_action :verify_authenticity_token, only: :ckeditor
 
   # get /admin/components
   def index
@@ -116,6 +117,41 @@ class Admin::ComponentsController < AdminController
     head :no_content
   end
 
+  # get /admin/components/:slug/images
+  def images
+    list = SimpleImage.in_component(@handler.component).list_for_administration
+    @collection = @handler.allow? ? list.page(current_page) : []
+  end
+
+  def create_image
+    if @handler.allow?
+      @entity = @handler.component.simple_images.new(image_parameters)
+      if @entity.save
+        render 'image', formats: :json
+      else
+        form_processed_with_error(:new_image)
+      end
+    else
+      handle_http_401('Uploading images is not allowed for current user')
+    end
+  end
+
+  # post /admin/components/:slug/ckeditor
+  def ckeditor
+    parameters = {
+      image: params[:upload],
+      biovision_component: @handler.component
+    }.merge(owner_for_entity(true))
+
+    @entity = SimpleImage.create!(parameters)
+
+    render json: {
+      uploaded: 1,
+      fileName: File.basename(@entity.image.path),
+      url: @entity.image.medium_url
+    }
+  end
+
   private
 
   def set_handler
@@ -128,5 +164,11 @@ class Admin::ComponentsController < AdminController
 
     links_exist = BiovisionComponentUser.where(user: current_user).exists?
     handle_http_401('User has no component privileges') unless links_exist
+  end
+
+  def image_parameters
+    permitted = SimpleImage.entity_parameters
+    params.require(:simple_image).permit(permitted)
+    permitter.merge(owner_for_entity(true))
   end
 end

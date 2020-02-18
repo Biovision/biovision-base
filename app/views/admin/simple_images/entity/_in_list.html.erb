@@ -1,0 +1,20 @@
+<figure class="image">
+  <%= simple_image_preview(entity) %>
+</figure>
+<div class="data">
+  <div><%= entity.name %></div>
+  <% unless entity.caption.blank? %>
+    <div class="info"><%= entity.caption %></div>
+  <% end %>
+  <div class="secondary info">
+    <%= t('attributes.created_at') %>: <%= time_tag(entity.created_at) %><br/>
+    <% if entity.updated_at > entity.created_at %>
+      <%= t('attributes.updated_at') %>: <%= time_tag(entity.updated_at) %>
+    <% end %>
+  </div>
+  <% unless entity.user.nil? %>
+    <div class="secondary info">
+      <%= t('attributes.user') %> <%= admin_user_link(entity.user) %>
+    </div>
+  <% end %>
+</div>

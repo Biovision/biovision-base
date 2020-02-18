@@ -24,6 +24,7 @@ class CreateSimpleImages < ActiveRecord::Migration[5.2]
       t.inet :ip
       t.uuid :uuid, null: false
       t.timestamps
+      t.integer :object_count, default: 0, null: false
       t.string :image
       t.string :image_alt_text
       t.string :caption
@@ -31,6 +32,8 @@ class CreateSimpleImages < ActiveRecord::Migration[5.2]
       t.string :source_link
       t.jsonb :data, default: {}, null: false
     end
+
+    add_index :simple_images, :uuid, unique: true
   end
 
   def create_simple_image_tags
