@@ -3,6 +3,7 @@
 # User
 class User < ApplicationRecord
   include Checkable
+  include HasUuid
   include Toggleable
 
   METRIC_AUTHENTICATION_SUCCESS  = 'users.authentication.success.hit'
@@ -37,8 +38,6 @@ class User < ApplicationRecord
   has_many :foreign_users, dependent: :delete_all
   has_many :login_attempts, dependent: :delete_all
   has_many :user_languages, dependent: :delete_all
-
-  after_initialize { self.uuid = SecureRandom.uuid if uuid.nil? }
 
   before_save { self.slug = (native_slug? ? screen_name : slug).downcase }
   before_save :prepare_search_string

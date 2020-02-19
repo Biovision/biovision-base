@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Uploader for user avatars
 class AvatarUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
   include CarrierWave::BombShelter
@@ -57,6 +58,6 @@ class AvatarUploader < CarrierWave::Uploader::Base
   end
 
   def extension_white_list
-    %w(jpg jpeg png)
+    %w[jpg jpeg png]
   end
 end

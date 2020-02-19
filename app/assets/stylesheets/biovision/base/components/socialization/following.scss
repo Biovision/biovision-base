@@ -1,0 +1,49 @@
+.user-social-list {
+  --avatar-shadow: 0 0 .3rem rgba(0, 0, 0, .25), .2rem .2rem .2rem rgba(0, 0, 0, .5);
+
+  list-style: none;
+  margin: var(--spacer-s) auto;
+  padding: 0;
+
+  li {
+    align-items: center;
+    border-bottom: var(--border-secondary);
+    display: grid;
+    grid-template-columns: 6.4rem auto;
+    grid-gap: var(--spacer-xs);
+    grid-template-rows: auto auto;
+    margin: 0 0 var(--spacer-s);
+    padding: var(--spacer-xs);
+  }
+
+  .image {
+    border-radius: 50%;
+    box-shadow: var(--avatar-shadow);
+    height: 6.4rem;
+    grid-column: 1;
+    grid-row: 1/-1;
+    overflow: hidden;
+    width: 6.4rem;
+  }
+
+  img {
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+  }
+
+  .link {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  a {
+    display: inline-block;
+    padding: var(--spacer-xxs) 0;
+  }
+
+  time {
+    color: var(--text-color-secondary);
+    font-size: var(--font-size-decreased);
+  }
+}

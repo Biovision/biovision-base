@@ -17,6 +17,10 @@
   --spacer-l: calc(var(--spacer-s) * 3);
   --spacer-xl: calc(var(--spacer-s) * 4);
   --spacer-xxl: calc(var(--spacer-s) * 6);
+
+  --text-color-secondary: #{$text-color-secondary};
+
+  --border-secondary: #{$border-secondary};
 }
 
 *,

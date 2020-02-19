@@ -33,3 +33,14 @@ ru:
           text: "Сообщение от пользователя %{user}"
         follower:
           text: "На вас подписался пользователь %{user}"
+    social:
+      followees:
+        heading: "Мои подписки"
+        nav_text: "Подписки"
+        title: "Мои подписки, страница %{page}"
+        no_followees: "Вы пока ни на кого не подписались"
+      followers:
+        heading: "Мои подписчики"
+        nav_text: "Подписчики"
+        title: "Мои подписчики, страница %{page}"
+        no_followers: "На вас пока никто не подписался"

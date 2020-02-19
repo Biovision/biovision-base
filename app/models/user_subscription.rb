@@ -16,6 +16,10 @@ class UserSubscription < ApplicationRecord
   after_create :follow_impact
   after_destroy :unfollow_impact
 
+  scope :recent, -> { order('id desc') }
+  scope :followers, ->(u) { where(followee: u).recent }
+  scope :followees, ->(u) { where(follower: u).recent }
+
   private
 
   def follow_impact

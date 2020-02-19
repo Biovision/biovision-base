@@ -156,6 +156,9 @@ Rails.application.routes.draw do
         put 'read', on: :member
         get 'count', on: :collection
       end
+
+      get 'followers' => 'social#followers'
+      get 'followees' => 'social#followees'
     end
 
     resources :agents, :browsers, except: %i[index show update destroy]

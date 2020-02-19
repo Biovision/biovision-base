@@ -1,0 +1,37 @@
+<% content_for :meta_title, t('.title', page: current_page) %>
+<% content_for :breadcrumbs do %>
+  <%= link_to(t('my.index.index.nav_text'), my_path) %>
+  <span><%= t('.nav_text') %></span>
+<% end %>
+
+<article>
+  <div class="content-wrapper">
+    <h1><%= t('.heading') %></h1>
+
+    <nav class="nav-sections">
+      <%= link_to(t('my.social.followees.nav_text'), my_followees_path, class: 'button-nav') %>
+    </nav>
+
+    <% if @collection.any? %>
+      <%= paginate @collection %>
+      <ul class="user-social-list">
+        <% @collection.each do |link| %>
+          <li>
+            <%=
+              render(
+                  partial: 'my/social/list_item',
+                  locals: {
+                      user: link.follower,
+                      timestamp: link.created_at
+                  }
+              )
+            %>
+          </li>
+        <% end %>
+      </ul>
+      <%= paginate @collection %>
+    <% else %>
+      <div class="message-box-info"><%= t('.no_followers') %></div>
+    <% end %>
+  </div>
+</article>
