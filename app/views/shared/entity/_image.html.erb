@@ -1,13 +1,31 @@
 <% unless entity.image.blank? %>
+  <% figure_id = "#{entity.class.table_name}-image" %>
   <div>
     <dt><%= t('attributes.image') %></dt>
     <dd>
-      <figure role="group" class="preview">
+      <figure role="group" class="preview" id="<%= figure_id %>">
         <%= link_to(simple_image_medium(entity), entity.image.url) %>
         <% if entity.respond_to?(:image_alt_text) %>
           <figcaption><%= entity.image_alt_text %></figcaption>
         <% end %>
       </figure>
+      <% if local_assigns[:image_removal_url] %>
+        <div>
+          <%=
+            button_tag(
+                t('.remove_image'),
+                class: 'button-destroy js-image-remover',
+                data: {
+                    url: image_removal_url,
+                    text: t(:are_you_sure),
+                    blank_url: image_path('biovision/base/placeholders/1x1.svg'),
+                    container: figure_id
+                },
+                type: :button
+            )
+          %>
+        </div>
+      <% end %>
     </dd>
   </div>
 <% end %>
