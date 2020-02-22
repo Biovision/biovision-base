@@ -12,4 +12,8 @@ module HasSimpleImage
   def image
     simple_image
   end
+
+  def remove_image!
+    self.simple_image_id = nil
+  end
 end

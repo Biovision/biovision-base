@@ -40,7 +40,8 @@ Biovision.components.carousel = {
             "prevButton": element.querySelector("button.prev"),
             "nextButton": element.querySelector("button.next"),
             "current": 0,
-            "touchData": {"x": null, "y": null}
+            "touchData": {"x": null, "y": null},
+            "lastSlide": 0
         };
         if (element.hasAttribute("data-type")) {
             slider["type"] = element.getAttribute("data-type");
@@ -50,7 +51,7 @@ Biovision.components.carousel = {
         if (element.hasAttribute("data-timeout")) {
             slider["timeout"] = parseInt(element.getAttribute("data-timeout"));
             if (slider["timeout"] > 0) {
-                slider["timeout_handler"] = window.setInterval(component.nextItem, slider["timeout"], slider);
+                slider["timeout_handler"] = window.setInterval(component.autoSlide, slider["timeout"], slider);
             }
         }
         if (slider["prevButton"]) {
@@ -120,6 +121,19 @@ Biovision.components.carousel = {
         }
     },
     /**
+     * Check if it's time to move to next slide in auto-interval
+     *
+     * @param {Object} slider
+     */
+    autoSlide: function (slider) {
+        const component = Biovision.components.carousel;
+        const delta = Date.now() - slider["lastSlide"];
+        // Adding 5% uncertainty to timeout for delays between calls
+        if (delta >= slider["timeout"] * 0.95) {
+            component.nextItem(slider);
+        }
+    },
+    /**
      * Slide to next item
      *
      * @param {Object} slider
@@ -131,6 +145,7 @@ Biovision.components.carousel = {
         if (slider["current"] > slider["maxItem"]) {
             slider["current"] = 0;
         }
+        slider["lastSlide"] = Date.now();
 
         component.rearrange(slider);
     },
