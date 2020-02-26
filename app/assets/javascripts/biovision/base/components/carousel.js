@@ -41,7 +41,8 @@ Biovision.components.carousel = {
             "nextButton": element.querySelector("button.next"),
             "current": 0,
             "touchData": {"x": null, "y": null},
-            "lastSlide": 0
+            "lastSlide": 0,
+            "ready": false
         };
         if (element.hasAttribute("data-type")) {
             slider["type"] = element.getAttribute("data-type");
@@ -60,6 +61,7 @@ Biovision.components.carousel = {
         if (slider["nextButton"]) {
             slider["nextButton"].addEventListener("click", component.clickedNext);
         }
+        slider["transition"] = parseFloat(getComputedStyle(slider["items"][0]).transitionDuration) * 1000;
         slider["maxItem"] = slider["items"].length - 1;
         element.addEventListener("touchstart", component.touchStart, false);
         element.addEventListener("touchend", component.touchEnd, false);
@@ -81,10 +83,14 @@ Biovision.components.carousel = {
                 component.setMaxItem(slider);
                 component.newOffset(slider);
                 break;
+            case "offset-cycle":
+                component.processCycle(slider);
+                break;
             default:
                 console.log("Unknown carousel type: " + slider["type"]);
                 component.newOffset(slider);
         }
+        slider["ready"] = true;
     },
     /**
      * Handler for clicking "Previous" button
@@ -198,6 +204,39 @@ Biovision.components.carousel = {
 
             firstSlide.style.marginLeft = String(newMargin) + "px";
         }
+    },
+    processCycle: function (slider) {
+        if (slider["ready"]) {
+            if (slider["current"] === 1) {
+                this.newOffset(slider);
+                window.setTimeout(this.offsetLeft, slider["transition"], slider);
+            } else {
+                this.offsetRight(slider);
+            }
+
+            slider["current"] = 0;
+        }
+    },
+    offsetLeft: function (slider) {
+        const list = slider["container"];
+        const element = list.querySelector(".carousel-item:first-of-type");
+        list.append(element);
+        element.style.setProperty("margin-left", 0);
+    },
+    offsetRight: function (slider) {
+        const list = slider["container"];
+        const element = list.querySelector(".carousel-item:last-of-type");
+        const styles = getComputedStyle(element);
+        const clear = function() {
+            element.style.marginLeft = null;
+        };
+        element.style.transitionDuration = 0;
+        const rightMargin = styles.marginRight;
+        const slideWidth = element.offsetWidth + parseInt(rightMargin);
+        element.style.marginLeft = String(-slideWidth) + "px";
+        list.prepend(element);
+        element.style.transitionDuration = null;
+        window.setTimeout(clear, 50);
     },
     /**
      * Determine maximum item number so that right margin remains minimal
