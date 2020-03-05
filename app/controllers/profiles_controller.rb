@@ -2,7 +2,7 @@
 
 # Public user interaction
 class ProfilesController < ApplicationController
-  before_action :restrict_anonymous_access, except: %i[show followers followees]
+  before_action :restrict_anonymous_access, only: %i[ban follow unban unfollow]
   before_action :set_socialization, only: %i[ban follow unban unfollow]
   before_action :set_entity
 
