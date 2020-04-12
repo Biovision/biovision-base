@@ -9,6 +9,9 @@
   --font-size-small: #{$font-size-small};
   --font-size-xs: #{$font-size-xs};
 
+  --font-family-main: #{$font-family-main};
+  --font-family-heading: #{$font-family-heading};
+
   --spacer-s: #{$spacer-s};
   --spacer-xxxs: .2rem;
   --spacer-xxs: calc(var(--spacer-s) / 4);
@@ -18,9 +21,25 @@
   --spacer-xl: calc(var(--spacer-s) * 4);
   --spacer-xxl: calc(var(--spacer-s) * 6);
 
+  --text-color-primary: #{$text-color-primary};
   --text-color-secondary: #{$text-color-secondary};
+  --text-color-heading: #{$text-color-heading};
 
+  --text-color-inverted-primary: #{$text-color-inverted-primary};
+  --text-color-inverted-secondary: #{$text-color-inverted-secondary};
+  --text-color-inverted-heading: #{$text-color-inverted-heading};
+
+  --border-color-primary: #{$border-color-primary};
+  --border-color-secondary: #{$border-color-secondary};
+  --border-primary: #{$border-primary};
   --border-secondary: #{$border-secondary};
+
+  --block-shadow: #{$block-shadow};
+
+  --link-color: #{$link-color};
+  --link-color-visited: #{$link-color-visited};
+  --link-color-active: #{$link-color-active};
+  --link-color-hover: #{$link-color-hover};
 }
 
 *,
@@ -65,11 +84,27 @@ a {
   text-decoration: none;
   transition: color .125s;
 
-  &:active,
-  &:focus,
   &:hover {
     color: $link-color-hover;
     text-decoration: underline;
+  }
+
+  &:active {
+    color: $link-color-active;
+  }
+}
+
+@supports (--css: vars) {
+  a {
+    color: var(--link-color);
+
+    &:hover {
+      color: var(--link-color-hover);
+    }
+
+    &:active {
+      color: var(--link-color-active);
+    }
   }
 }
 
