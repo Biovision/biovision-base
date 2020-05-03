@@ -107,7 +107,7 @@ class My::ProfilesController < ApplicationController
   # @param [Hash] parameters
   # @param [Hash] sensitive
   def filter_parameters(parameters, sensitive)
-    sensitive.each { |sp| parameters.except! sp if sp.blank? }
+    sensitive.each { |sp| parameters.except! sp if params[sp].blank? }
     if parameters.key?(:email) && parameters[:email] != current_user.email
       parameters[:email_confirmed] = false
     end

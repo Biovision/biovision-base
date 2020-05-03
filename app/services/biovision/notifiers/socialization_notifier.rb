@@ -12,6 +12,8 @@ module Biovision
         case data['type']
         when TYPE_MESSAGE, TYPE_FOLLOWER
           User.find_by(id: data['id'])
+        else
+          nil
         end
       end
 

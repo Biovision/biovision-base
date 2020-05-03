@@ -56,7 +56,7 @@ module Biovision
       def check_and_notify(id, type)
         return if check_chain(id, type).exists?
 
-        notify(id: id, type: type)
+        notify({id: id, type: type})
       end
 
       # @param [Integer] id
