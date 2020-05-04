@@ -114,19 +114,6 @@
         </ul>
       </dd>
     <% end %>
-
-    <% if @entity.user_privileges.any? %>
-      <dt><%= t('.privileges') %></dt>
-      <dd>
-        <ol>
-          <% @entity.user_privileges.order('privilege_id').each do |link| %>
-            <li>
-              <%= link.privilege.name %>
-            </li>
-          <% end %>
-        </ol>
-      </dd>
-    <% end %>
   </dl>
 
   <% unless @entity.deleted? %>
