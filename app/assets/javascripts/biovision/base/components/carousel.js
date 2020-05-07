@@ -42,7 +42,8 @@ Biovision.components.carousel = {
             "current": 0,
             "touchData": {"x": null, "y": null},
             "lastSlide": 0,
-            "ready": false
+            "ready": false,
+            "minWidth": 0
         };
         if (element.hasAttribute("data-type")) {
             slider["type"] = element.getAttribute("data-type");
@@ -54,6 +55,9 @@ Biovision.components.carousel = {
             if (slider["timeout"] > 0) {
                 slider["timeout_handler"] = window.setInterval(component.autoSlide, slider["timeout"], slider);
             }
+        }
+        if (element.hasAttribute("data-min-width")) {
+            slider.minWidth = parseInt(element.getAttribute("data-min-width"));
         }
         if (slider["prevButton"]) {
             slider["prevButton"].addEventListener("click", component.clickedPrev);
@@ -145,15 +149,17 @@ Biovision.components.carousel = {
      * @param {Object} slider
      */
     nextItem: function (slider) {
-        const component = Biovision.components.carousel;
+        if (window.innerWidth >= slider.minWidth) {
+            const component = Biovision.components.carousel;
 
-        slider["current"]++;
-        if (slider["current"] > slider["maxItem"]) {
-            slider["current"] = 0;
+            slider["current"]++;
+            if (slider["current"] > slider["maxItem"]) {
+                slider["current"] = 0;
+            }
+            slider["lastSlide"] = Date.now();
+
+            component.rearrange(slider);
         }
-        slider["lastSlide"] = Date.now();
-
-        component.rearrange(slider);
     },
     /**
      * Slide to previous item
@@ -161,13 +167,15 @@ Biovision.components.carousel = {
      * @param {Object} slider
      */
     prevItem: function (slider) {
-        const component = Biovision.components.carousel;
-        slider["current"]--;
-        if (slider["current"] < 0) {
-            slider["current"] = slider["maxItem"];
-        }
+        if (window.innerWidth >= slider.minWidth) {
+            const component = Biovision.components.carousel;
+            slider["current"]--;
+            if (slider["current"] < 0) {
+                slider["current"] = slider["maxItem"];
+            }
 
-        component.rearrange(slider);
+            component.rearrange(slider);
+        }
     },
     /**
      * Mark new item as current
