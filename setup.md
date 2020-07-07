@@ -19,7 +19,7 @@
 ```
 
 ПОСЛЕ добавления в `.gitignore`
--------------------------
+-------------------------------
 
 Далее, первым делом надо из папки sample в корне проекта biovision-base 
 скопировать файлы в корень своего проекта (прямо поверх того, что там уже есть).
@@ -37,7 +37,6 @@
 
 ```ruby
 gem 'dotenv-rails'
-# gem 'jquery-rails' # Раскомментировать, если нужна поддержка jQuery
 
 gem 'autoprefixer-rails', group: :production
 
@@ -55,25 +54,17 @@ group :development do
 end
 ```
 
-Заменить `sass-rails` на `sassc-rails` без версии (на момент написания доки 
-на уровне 13 строки)
+После запуска `bundle`
+----------------------
 
-Добавления в `app/assets/application.js`
-----------------------------------------
-
-Это добавляется перед `//= require tree .`
-
-```js
-//= require biovision/base/polyfills
-//= require biovision/base/biovision
-//= require biovision/base/components/carousel
+```bash
+yarn add @biovision/biovision
 ```
 
-Если нужна поддержка jQuery, то добавить ещё и это, не забыв раскомментировать
-`gem 'jquery-rails'` в `Gemfile`:
+Нужно добавить в `app/assets/config/manifest.js`:
 
 ```js
-//= require jquery3
+//= link biovision_base_manifest
 ```
 
 Изменения в `config/environments/production.rb`
@@ -82,16 +73,8 @@ end
 Нужно раскомментировать строку `config.require_master_key = true` (на момент
 написания это `19` строка).
 
-Если при развёртывании не компилируется JS, нужно заменить строку
-`config.assets.js_compressor = :uglifier` на 
-`config.assets.js_compressor = Uglifier.new(harmony: true)` 
-(в районе `26` строки).
-
 Нужно выставить уровень сообщения об ошибках в `:warn` 
 (`config.log_level = :warn` в районе `54` строки)
-
-В районе 74 строки заменить `config.i18n.fallbacks = true`
-на `config.i18n.fallbacks = [I18n.default_locale]`
 
 Изменения в `app/mailers/application_mailer.rb`
 -----------------------------------------------
@@ -126,13 +109,6 @@ production:
   username: example # Поменять на актуального пользователя
   password: <%= ENV['DATABASE_PASSWORD'] %>
   host: localhost  
-```
-
-Добавления в `config/initializers/assets.rb`
---------------------------------------------
-
-```ruby
-Rails.application.config.assets.precompile << %w[admin.scss biovision/base/**/*]
 ```
 
 Добавления в `config/application.rb`
@@ -204,7 +180,7 @@ end
 Добавления в `config/application_controller.rb`
 -----------------------------------------------
 
-Если не используются регионы, добавить это в начале класса.
+Добавить это в начале класса.
 
 ```ruby
   include Biovision::Base::PrivilegeMethods
@@ -213,8 +189,6 @@ end
     params.key?(:locale) ? { locale: I18n.locale } : {}
   end
 ```
-
-Если регионы используются, добавить вместо этого строку из модуля регионов.
 
 Дополнения в `config/environments/production.rb`
 ------------------------------------------------
@@ -316,7 +290,6 @@ if ENV['RAILS_ENV'] == 'production'
   logs_dir    = "#{shared_path}/log"
 
   state_path "#{shared_path}/tmp/puma/state"
-  pidfile "#{shared_path}/tmp/puma/pid"
   bind "unix://#{shared_path}/tmp/puma.sock"
   stdout_redirect "#{logs_dir}/stdout.log", "#{logs_dir}/stderr.log", true
   

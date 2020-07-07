@@ -10,7 +10,7 @@ class SimpleImageUploader < CarrierWave::Uploader::Base
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
     id = model&.id.to_i
-    slug = "#{id / 1000}/#{id}"
+    slug = model.respond_to?(:image_slug) ? model.image_slug : "#{id / 1000}/#{id}"
 
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{slug}"
   end
