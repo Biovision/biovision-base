@@ -89,7 +89,7 @@ class OembedReceiver
   end
 
   def url_for_vimeo
-    "https://vimeo.com/api/oembed.json?url=#{CGI.escape(@url)}"
+    "https://vimeo.com/api/oembed.json?url=#{CGI.escape(@url)}&responsive=true"
   end
 
   def default_url
