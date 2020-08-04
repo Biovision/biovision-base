@@ -52,6 +52,8 @@ class OembedReceiver
 
   def url_for_host
     case @host
+    when 'www.vimeo.com', 'vimeo.com'
+      url_for_vimeo
     when 'www.youtube.com', 'youtube.com', 'youtu.be'
       url_for_youtube
     when 'twitter.com', 'www.twitter.com'
@@ -84,6 +86,10 @@ class OembedReceiver
 
   def url_for_instagram
     "https://api.instagram.com/oembed?url=#{CGI.escape(@url)}"
+  end
+
+  def url_for_vimeo
+    "https://vimeo.com/api/oembed.json?url=#{CGI.escape(@url)}"
   end
 
   def default_url
