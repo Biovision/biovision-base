@@ -3,7 +3,7 @@
 # Handling components
 class Admin::ComponentsController < AdminController
   before_action :set_handler, except: :index
-  skip_before_action :verify_authenticity_token, only: %i[ckeditor create_image]
+  skip_before_action :verify_authenticity_token, only: %i[ckeditor]
 
   # get /admin/components
   def index
@@ -148,7 +148,7 @@ class Admin::ComponentsController < AdminController
     render json: {
       uploaded: 1,
       fileName: File.basename(@entity.image.path),
-      url: @entity.image.medium_url
+      url: @entity.image.hd_url
     }
   end
 

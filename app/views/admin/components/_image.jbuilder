@@ -7,6 +7,7 @@ json.data do
   json.meta do
     json.url do
       json.medium entity.image.medium_url
+      json.hd entity.image.hd_url
     end
   end
 end
