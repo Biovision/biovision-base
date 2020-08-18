@@ -3,7 +3,7 @@
 # Handling components
 class Admin::ComponentsController < AdminController
   before_action :set_handler, except: :index
-  skip_before_action :verify_authenticity_token, only: :ckeditor
+  skip_before_action :verify_authenticity_token, only: %i[ckeditor create_image]
 
   # get /admin/components
   def index
