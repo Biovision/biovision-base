@@ -5,8 +5,8 @@ module TreeStructure
   extend ActiveSupport::Concern
 
   included do
-    belongs_to :parent, class_name: self.class.to_s, optional: true
-    has_many :child_items, class_name: self.class.to_s, foreign_key: :parent_id, dependent: :destroy
+    belongs_to :parent, class_name: name, optional: true
+    has_many :child_items, class_name: name, foreign_key: :parent_id, dependent: :destroy
 
     before_save { children_cache.uniq! }
     after_create :cache_parents!

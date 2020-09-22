@@ -7,6 +7,7 @@ ru:
         slug: "Идентификатор"
         code: "Код"
   attributes:
+    children_cache: "Кеш дочек"
     created_at: "Время создания"
     description: "Описание"
     image: "Изображение"
@@ -16,6 +17,7 @@ ru:
     meta_description: "Описание для метатэга"
     meta_keywords: "Ключевые слова для метатэга"
     meta_title: "Заголовок окна"
+    parents_cache: "Кеш родителей"
     priority: "Порядок сортировки"
     updated_at: "Время обновления"
     uuid: "UUID"
