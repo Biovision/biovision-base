@@ -1,3 +1,4 @@
+# @deprecated use simple blocks
 class EditableBlock < ApplicationRecord
   include Checkable
   include Toggleable
@@ -44,6 +45,6 @@ class EditableBlock < ApplicationRecord
 
   # @param [User] user
   def editable_by?(user)
-    UserPrivilege.user_has_privilege?(user, :content_manager)
+    user&.super_user?
   end
 end

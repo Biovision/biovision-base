@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# @deprecated use component handlers
 class UserPrivilege < ApplicationRecord
   include HasOwner
 

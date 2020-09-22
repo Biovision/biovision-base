@@ -1,3 +1,4 @@
+# @deprecated Do not use
 class MediaFolder < ApplicationRecord
   include HasOwner
 
@@ -81,7 +82,7 @@ class MediaFolder < ApplicationRecord
 
   # @param [User] user
   def editable_by?(user)
-    owned_by?(user) || UserPrivilege.user_has_privilege?(user, :chief_editor)
+    owned_by?(user) || user&.super_user?
   end
 
   def cache_parents!

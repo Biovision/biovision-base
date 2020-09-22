@@ -9,7 +9,6 @@ RSpec.describe Admin::BrowsersController, type: :controller do
 
   describe 'get show' do
     before :each do
-      allow(subject).to receive(:require_privilege)
       allow(Agent).to receive(:page_for_administration)
       get :show, params: { id: entity.id }
     end

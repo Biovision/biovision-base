@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.shared_examples_for 'index_entities_without_required_privileges' do
   describe 'get index' do
     before :each do
-      allow(subject).to receive(:require_privilege)
+      # allow(subject).to receive(:require_privilege)
       allow(entity.class).to receive(:page_for_visitors).and_call_original
       get :index
     end

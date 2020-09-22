@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.shared_examples_for 'new_entity_with_required_privilege' do
   describe 'get new' do
     before :each do
-      allow(subject).to receive(:require_privilege)
+      # allow(subject).to receive(:require_privilege)
       get :new
     end
 

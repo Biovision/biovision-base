@@ -14,7 +14,7 @@ RSpec.describe MetricsController, type: :controller do
 
   describe 'patch update' do
     before :each do
-      allow(subject).to receive(:require_privilege)
+      # allow(subject).to receive(:require_privilege)
       allow(entity.class).to receive(:find_by).and_return(entity)
     end
 

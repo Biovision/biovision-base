@@ -6,7 +6,6 @@ class Admin::UsersController < AdminController
   include ToggleableEntity
 
   before_action :set_entity, except: %i[index search]
-  before_action :set_privilege, only: [:grant_privilege, :revoke_privilege]
 
   # get /admin/users
   def index
@@ -34,16 +33,12 @@ class Admin::UsersController < AdminController
 
   # put /admin/users/:id/privileges/:privilege_id
   def grant_privilege
-    @privilege.grant(@entity, params[:region_id])
-
-    render json: { data: { user_privilege_ids: @entity.user_privilege_ids } }
+    head :gone
   end
 
   # delete /admin/users/:id/privileges/:privilege_id
   def revoke_privilege
-    @privilege.revoke(@entity, params[:region_id])
-
-    render json: { data: { user_privilege_ids: @entity.user_privilege_ids } }
+    head :gone
   end
 
   # get /admin/users/search
@@ -82,12 +77,5 @@ class Admin::UsersController < AdminController
   def set_entity
     @entity = User.find_by(id: params[:id])
     handle_http_404('Cannot find user') if @entity.nil?
-  end
-
-  def set_privilege
-    @privilege = Privilege.find_by(id: params[:privilege_id])
-    if @privilege.nil?
-      handle_http_404("Cannot use privilege #{params[:privilege_id]}")
-    end
   end
 end

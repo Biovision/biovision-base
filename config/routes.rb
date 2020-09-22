@@ -24,19 +24,12 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :agents, :browsers, only: %i[update destroy]
-
   resources :editable_pages, only: %i[update destroy]
   resources :simple_blocks, only: %i[update destroy]
 
   resources :users, only: %i[update destroy]
   resources :foreign_users, only: :destroy
   resources :tokens, :codes, only: %i[update destroy]
-
-  resources :metrics, only: :update
-
-  resources :media_folders, only: %i[update destroy]
-  resources :media_files, only: %i[update destroy]
 
   resources :feedback_requests, only: :destroy
 
@@ -95,19 +88,11 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :agents, :browsers, only: %i[index show], concerns: %i[lock toggle]
-
       resources :codes, only: %i[index show]
       resources :tokens, only: %i[index show], concerns: :toggle
 
       resources :editable_pages, only: %i[index show], concerns: %i[priority toggle]
       resources :simple_blocks, only: %i[index show], concerns: :toggle
-
-      resources :metrics, only: %i[index show] do
-        member do
-          get 'data', defaults: { format: :json }
-        end
-      end
 
       resources :users, only: %i[index show], concerns: :toggle do
         collection do
@@ -126,13 +111,6 @@ Rails.application.routes.draw do
       resources :foreign_users, only: %i[index show]
 
       resources :login_attempts, only: :index
-
-      resources :media_folders, only: %i[index show] do
-        member do
-          get 'files'
-        end
-      end
-      resources :media_files, only: %i[index show], concerns: :lock
 
       resources :feedback_requests, only: :index, concerns: :toggle
 
@@ -161,24 +139,11 @@ Rails.application.routes.draw do
       get 'followees' => 'social#followees'
     end
 
-    resources :agents, :browsers, except: %i[index show update destroy]
-
     resources :editable_pages, except: %i[index show update destroy], concerns: :check
     resources :simple_blocks, only: %i[new create edit], concerns: :check
 
     resources :users, except: %i[index show update destroy], concerns: :check
     resources :tokens, :codes, except: %i[index show update destroy]
-
-    resources :metrics, only: :edit
-
-    resources :media_folders, except: %i[index show update destroy]
-    resources :media_files, except: %i[index show update destroy] do
-      collection do
-        post :ckeditor
-        post :medium, defaults: { format: :json }
-        post :medium_jquery, defaults: { format: :json }
-      end
-    end
 
     resources :feedback_requests, only: :create
 

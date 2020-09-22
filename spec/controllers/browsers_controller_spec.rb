@@ -12,7 +12,6 @@ RSpec.describe BrowsersController, type: :controller do
   let(:path_after_destroy) { admin_browsers_path }
 
   before :each do
-    allow(subject).to receive(:require_privilege)
     allow(entity.class).to receive(:find_by).and_return(entity)
   end
 

@@ -1,3 +1,4 @@
+# @deprecated use component handlers
 class Privilege < ApplicationRecord
   include Checkable
   include Toggleable

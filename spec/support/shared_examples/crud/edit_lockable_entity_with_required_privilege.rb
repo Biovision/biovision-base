@@ -5,7 +5,7 @@ RSpec.shared_examples_for 'edit_lockable_entity_with_required_privilege' do
     let(:action) { -> { get :edit, params: { id: entity.id } } }
 
     before :each do
-      allow(subject).to receive(:require_privilege)
+      # allow(subject).to receive(:require_privilege)
       allow(entity.class).to receive(:find_by).and_return(entity)
     end
 

@@ -105,6 +105,6 @@ class EditablePage < ApplicationRecord
 
   # @param [User] user
   def editable_by?(user)
-    UserPrivilege.user_has_privilege?(user, :content_manager)
+    Biovision::Components::ContentComponent[user].allow?
   end
 end

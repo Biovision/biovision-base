@@ -16,10 +16,6 @@ class MetricsController < AdminController
 
   private
 
-  def restrict_access
-    require_privilege :metrics_manager
-  end
-
   def set_entity
     @entity = Metric.find_by(id: params[:id])
     if @entity.nil?

@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# @depreceted use component handlers instead
 class PrivilegeGroup < ApplicationRecord
   include Checkable
   include RequiredUniqueSlug

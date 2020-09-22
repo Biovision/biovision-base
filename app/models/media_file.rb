@@ -1,3 +1,4 @@
+# @deprecated Do not use
 class MediaFile < ApplicationRecord
   include HasOwner
 
@@ -42,6 +43,6 @@ class MediaFile < ApplicationRecord
 
   # @param [User] user
   def editable_by?(user)
-    !locked && owned_by?(user) || UserPrivilege.user_has_privilege?(user, :chief_editor)
+    !locked && owned_by?(user) || user&.super_user?
   end
 end

@@ -183,8 +183,6 @@ end
 Добавить это в начале класса.
 
 ```ruby
-  include Biovision::Base::PrivilegeMethods
-
   def default_url_options
     params.key?(:locale) ? { locale: I18n.locale } : {}
   end

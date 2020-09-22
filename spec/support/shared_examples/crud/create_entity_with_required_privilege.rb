@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.shared_examples_for 'create_entity_with_required_privilege' do
   describe 'post create' do
     before :each do
-      allow(subject).to receive(:require_privilege)
+      # allow(subject).to receive(:require_privilege)
     end
 
     context 'when parameters are valid' do
