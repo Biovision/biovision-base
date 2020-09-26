@@ -8,9 +8,9 @@ module HasSimpleImage
     belongs_to :simple_image, optional: true, counter_cache: :object_count
   end
 
-  # @return [SimpleImage]
+  # @return [SimpleImageUploader]
   def image
-    simple_image
+    simple_image&.image
   end
 
   def remove_image!
