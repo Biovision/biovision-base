@@ -1,0 +1,119 @@
+.js-simple-image-upload {
+  .current-image {
+    display: block;
+    position: relative;
+
+    &::after {
+      bottom: 0;
+      content: '\A';
+      display: block;
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      transition: .25s;
+      z-index: 3;
+    }
+  }
+
+  .buttons {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .progress::after {
+    --progress: 0;
+
+    -webkit-backdrop-filter: blur(.5rem);
+    backdrop-filter: blur(.5rem);
+    background: conic-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) var(--progress), rgba(0, 0, 0, .75) var(--progress), rgba(0, 0, 0, .75));
+  }
+
+  .container:not(:empty) {
+    border-bottom: var(--border-secondary);
+    padding: var(--spacer-s) 0;
+
+    input {
+      display: block;
+      margin-bottom: var(--spacer-xxs);
+    }
+  }
+
+  nav {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    padding: var(--spacer-xxs);
+
+    button {
+      align-items: center;
+      background: no-repeat center;
+      border: none;
+      border-radius: 50%;
+      box-shadow: 0 0 .4rem rgba(0, 0, 0, .25);
+      display: flex;
+      height: 2.4rem;
+      justify-content: center;
+      margin: 0;
+      padding: 0;
+      transition: .25s;
+      width: 2.4rem;
+
+      &::after {
+        color: var(--text-color-primary);
+        display: block;
+        font-size: var(--font-size-decreased);
+        line-height: 1;
+      }
+
+      &:not([data-url]) {
+        opacity: 0;
+      }
+
+      &:focus,
+      &:hover {
+        box-shadow: 0 0 .4rem rgba(0, 0, 0, .5);
+      }
+    }
+
+    .first::after {
+      content: '<<';
+    }
+
+    .prev::after {
+      content: '<';
+    }
+
+    .next::after {
+      content: '>';
+    }
+
+    .last::after {
+      content: '>>';
+    }
+  }
+
+  input[type="file"] {
+    &:not(.changed) {
+      ~ button {
+        display: none;
+      }
+    }
+  }
+
+  .list-of-entities {
+    .data {
+      > div:first-of-type {
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+
+    .image {
+      img {
+        cursor: pointer;
+      }
+    }
+  }
+}

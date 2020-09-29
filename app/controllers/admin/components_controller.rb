@@ -120,7 +120,7 @@ class Admin::ComponentsController < AdminController
   # get /admin/components/:slug/images
   def images
     list = SimpleImage.in_component(@handler.component).list_for_administration
-    @collection = @handler.allow? ? list.page(current_page) : []
+    @collection = @handler.allow? ? list.page(current_page).per(10) : []
   end
 
   def create_image
@@ -168,7 +168,7 @@ class Admin::ComponentsController < AdminController
 
   def image_parameters
     permitted = SimpleImage.entity_parameters
-    params.require(:simple_image).permit(permitted)
-    permitter.merge(owner_for_entity(true))
+    parameters = params.require(:simple_image).permit(permitted)
+    parameters.merge(owner_for_entity(true))
   end
 end

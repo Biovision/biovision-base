@@ -31,6 +31,12 @@ ru:
     few: "%{count} ошибки"
     many: "%{count} ошибок"
     other: "%{count} ошибок"
+  object_count:
+    zero: "объектов нет"
+    one: "%{count} объект"
+    few: "%{count} объекта"
+    many: "%{count} объектов"
+    other: "%{count} объектов"
   errors:
     messages:
       extension_blacklist_error: "имеет недопустимое расширение файла"

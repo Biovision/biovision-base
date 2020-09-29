@@ -1,3 +1,1 @@
-json.data do
-  json.partial! 'image', locals: { entity: @entity }
-end
+json.partial! 'image', locals: { entity: @entity }

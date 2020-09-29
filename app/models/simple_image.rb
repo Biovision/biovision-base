@@ -49,6 +49,10 @@ class SimpleImage < ApplicationRecord
     File.basename(image.path)
   end
 
+  def file_size
+    File.size(image.path)
+  end
+
   def image_slug
     "#{uuid[0..2]}/#{uuid[3..5]}/#{uuid}"
   end

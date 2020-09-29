@@ -10,113 +10,121 @@
 %>
   <%= render partial: 'shared/list_of_errors', locals: { entity: entity } %>
 
-  <dl>
-    <dt><%= f.label :slug %></dt>
-    <dd>
-      <%=
-        f.text_field(
-            :slug,
-            id: "#{model_name}_slug",
-            size: nil,
-            maxlength: SimpleBlock::SLUG_LIMIT,
-            pattern: SimpleBlock::SLUG_PATTERN_HTML,
-            title: t('.guidelines.slug'),
-            required: true,
-            data: {
-                check: :slug
-            }
-        )
-      %>
-      <div class="check-result-error" data-field="slug"></div>
-      <div class="guideline"><%= t('.guidelines.slug') %></div>
-    </dd>
+  <dl class="form-fields">
+    <div>
+      <dt><%= f.label :slug %></dt>
+      <dd>
+        <%=
+          f.text_field(
+              :slug,
+              class: 'input-text',
+              data: { check: :slug },
+              maxlength: SimpleBlock::SLUG_LIMIT,
+              pattern: SimpleBlock::SLUG_PATTERN_HTML,
+              required: true,
+              size: nil,
+              title: t('.guidelines.slug')
+          )
+        %>
+        <div class="check-result-error" data-field="slug"></div>
+        <div class="guideline"><%= t('.guidelines.slug') %></div>
+      </dd>
+    </div>
 
-    <dt><%= f.label :name %></dt>
-    <dd>
-      <%=
-        f.text_field(
-            :name,
-            id: "#{model_name}_name",
-            size: nil,
-            maxlength: SimpleBlock::NAME_LIMIT,
-            required: true,
-            data: {
-                check: :name
-            }
-        )
-      %>
-      <div class="check-result-error" data-field="name"></div>
-      <div class="guideline"><%= t('.guidelines.name') %></div>
-    </dd>
+    <div>
+      <dt><%= f.label :name %></dt>
+      <dd>
+        <%=
+          f.text_field(
+              :name,
+              class: 'input-text',
+              data: {
+                  check: :name
+              },
+              maxlength: SimpleBlock::NAME_LIMIT,
+              required: true,
+              size: nil
+          )
+        %>
+        <div class="check-result-error" data-field="name"></div>
+        <div class="guideline"><%= t('.guidelines.name') %></div>
+      </dd>
+    </div>
 
-    <dt><%= f.label :body %></dt>
-    <dd>
-      <div class="wysiwyg-button-container">
-        <button
-          type="button"
-          class="js-wysiwyg-toggle button-action"
-          data-element="<%= model_name %>_body"
-          data-upload-url="/media_files/ckeditor"
-        >
-          WYSIWYG
-        </button>
-      </div>
-      <%=
-        f.text_area(
-            :body,
-            id: "#{model_name}_body",
-            cols: 80,
-            rows: 3,
-            class: 'auto-expand',
-            data: {
-                check: :body,
-                min_rows: 3,
-                max_rows: 40
-            }
-        )
-      %>
-      <div class="check-result-error" data-field="body"></div>
-      <div class="guideline"><%= t('.guidelines.body') %></div>
-    </dd>
+    <div>
+      <dt><%= f.label :body %></dt>
+      <dd>
+        <div class="wysiwyg-button-container">
+          <button
+            type="button"
+            class="js-wysiwyg-toggle button-action"
+            data-element="<%= model_name %>_body"
+            data-upload-url="/media_files/ckeditor"
+          >
+            WYSIWYG
+          </button>
+        </div>
+        <%=
+          f.text_area(
+              :body,
+              id: "#{model_name}_body",
+              cols: 80,
+              rows: 3,
+              class: 'auto-expand',
+              data: {
+                  check: :body,
+                  min_rows: 3,
+                  max_rows: 40
+              }
+          )
+        %>
+        <div class="check-result-error" data-field="body"></div>
+        <div class="guideline"><%= t('.guidelines.body') %></div>
+      </dd>
+    </div>
 
-    <dt><%= f.label :image %></dt>
-    <dd>
-      <figure class="preview" role="group" id="<%= model_name %>-image">
-        <% if entity.image.blank? %>
-          <%= f.label :image, image_tag('biovision/base/placeholders/16x9.svg', alt: '') %>
-        <% else %>
-          <%= f.label :image, image_tag(entity.image.medium_url, alt: '') %>
-        <% end %>
-        <figcaption>
-          <%=
-            f.file_field(
-                :image,
-                id: "#{model_name}_image",
-                accept: 'image/jpeg,image/png,image/svg+xml',
-                data: { image: "#{model_name}-image" }
-            )
-          %>
-        </figcaption>
-      </figure>
-      <div class="guideline"><%= t('.guidelines.image') %></div>
-    </dd>
+    <div>
+      <dt><%= f.label :image %></dt>
+      <dd>
+        <figure class="preview" role="group" id="<%= model_name %>-image">
+          <% if entity.image.blank? %>
+            <%= f.label :image, image_tag('biovision/base/placeholders/16x9.svg', alt: '') %>
+          <% else %>
+            <%= f.label :image, image_tag(entity.image.medium_url, alt: '') %>
+          <% end %>
+          <figcaption>
+            <%=
+              f.file_field(
+                  :image,
+                  id: "#{model_name}_image",
+                  accept: 'image/jpeg,image/png,image/svg+xml',
+                  data: { image: "#{model_name}-image" }
+              )
+            %>
+          </figcaption>
+        </figure>
+        <div class="guideline"><%= t('.guidelines.image') %></div>
+      </dd>
+    </div>
 
-    <dt><%= f.label :image_alt_text %></dt>
-    <dd>
-      <%=
-        f.text_field(
-            :image_alt_text,
-            id: "#{model_name}_image_alt_text",
-            size: nil,
-            maxlength: SimpleBlock::META_LIMIT,
-            data: {
-                check: :image_alt_text
-            }
-        )
-      %>
-      <div class="check-result-error" data-field="image_alt_text"></div>
-      <div class="guideline"><%= t('.guidelines.image_alt_text') %></div>
-    </dd>
+    <div>
+      <dt><%= f.label :image_alt_text %></dt>
+      <dd>
+        <%=
+          f.text_field(
+              :image_alt_text,
+              id: "#{model_name}_image_alt_text",
+              size: nil,
+              maxlength: SimpleBlock::META_LIMIT,
+              data: {
+                  check: :image_alt_text
+              }
+          )
+        %>
+        <div class="check-result-error" data-field="image_alt_text"></div>
+        <div class="guideline"><%= t('.guidelines.image_alt_text') %></div>
+      </dd>
+    </div>
 
     <%= render partial: 'shared/forms/entity_flags', locals: { f: f } %>
   </dl>
@@ -125,7 +133,7 @@
 
   <div class="buttons">
     <%= hidden_field_tag :entity_id, entity.id %>
-    <%= f.button t(:save), type: :submit, class: 'button-save' %>
+    <%= f.button t(:save), class: 'button-save' %>
   </div>
 <% end %>
 

@@ -95,3 +95,8 @@ ru:
         title: "Мои уведомления, страница %{page}"
       list:
         no_notifications: "Уведомлений нет"
+  shared:
+    forms:
+      simple_image:
+        guideline: "Картинка в формате SVG, JPG или PNG размером в пределах 1280×1280."
+        upload: "Загрузить"
