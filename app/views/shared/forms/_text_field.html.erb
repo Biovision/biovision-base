@@ -10,14 +10,15 @@
       required: validators.select { |v| v.kind == :presence }.any?,
       size: nil
   }
+  guide_key = "#{model.table_name}.form.guidelines.#{field}"
 %>
 <div>
   <dt><%= f.label field %></dt>
   <dd>
     <%= f.text_field(field, options) %>
     <div class="check-result-error" data-field="<%= field %>"></div>
-    <% if local_assigns[:guide] %>
-      <div class="guideline"><%= guide %></div>
+    <% if I18n.exists?(guide_key) %>
+      <div class="guideline"><%= t(guide_key) %></div>
     <% end %>
   </dd>
 </div>

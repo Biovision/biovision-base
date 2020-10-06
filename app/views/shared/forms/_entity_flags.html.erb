@@ -1,14 +1,10 @@
-<%
-  entity = f.object
-  model_name = entity.class.to_s.underscore
-%>
 <div>
   <dt><%= t(:flags) %></dt>
   <dd>
     <ul class="flags">
-      <% entity.class.toggleable_attributes.each do |flag| %>
+      <% f.object.class.toggleable_attributes.each do |flag| %>
         <li>
-          <%= f.check_box flag, id: "#{model_name}_#{flag}" %>
+          <%= f.check_box flag %>
           <%= f.label flag %>
         </li>
       <% end %>

@@ -1,0 +1,9 @@
+<% list.each do |attribute| %>
+  <% next if entity.attributes[attribute].blank? %>
+  <div>
+    <dt>
+      <%= entity.class.human_attribute_name(attribute) %>
+    </dt>
+    <dd><%= entity.attributes[attribute] %></dd>
+  </div>
+<% end %>
