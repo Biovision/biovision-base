@@ -1,6 +1,6 @@
+<% use_pagination = local_assigns[:paginate] && collection.respond_to?(:current_page) %>
+<%= paginate collection if use_pagination %>
 <% if collection.any? %>
-  <% use_pagination = local_assigns[:paginate] && collection.respond_to?(:current_page) %>
-  <%= paginate collection if use_pagination %>
   <ul class="list-of-entities">
     <% collection.each do |entity| %>
       <li data-id="<%= entity.id %>">

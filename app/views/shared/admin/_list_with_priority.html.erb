@@ -1,3 +1,5 @@
+<% use_pagination = local_assigns[:paginate] && collection.respond_to?(:current_page) %>
+<%= paginate collection if use_pagination %>
 <% if collection.any? %>
   <ol class="list-of-entities">
     <% collection.each do |entity| %>
@@ -14,6 +16,7 @@
       </li>
     <% end %>
   </ol>
+  <%= paginate collection if use_pagination %>
 <% else %>
   <%= render 'shared/nothing_found' %>
 <% end %>

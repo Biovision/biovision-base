@@ -1,0 +1,11 @@
+<%
+  model = entity.class
+  url = "/admin/#{model.table_name}/#{entity.id}/toggle"
+%>
+<div class="toggleable" data-url="<%= url %>">
+  <% model.toggleable_attributes.each do |flag| %>
+  <span class="<%= entity.attributes[flag.to_s] ? 'active' : 'inactive' %>" data-flag="<%= flag %>">
+    <%= model.human_attribute_name(flag) %>
+  </span>
+  <% end %>
+</div>

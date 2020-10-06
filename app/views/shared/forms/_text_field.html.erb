@@ -1,0 +1,23 @@
+<%
+  model = f.object.class
+  validators = model.validators_on(field)
+  length_options = validators.select { |v| v.kind == :length }.first&.options.to_h
+  options = {
+      class: 'input-text',
+      data: { check: field }.merge(local_assigns[:data].to_h),
+      manlength: length_options[:maximum],
+      minlength: length_options[:minimum],
+      required: validators.select { |v| v.kind == :presence }.any?,
+      size: nil
+  }
+%>
+<div>
+  <dt><%= f.label field %></dt>
+  <dd>
+    <%= f.text_field(field, options) %>
+    <div class="check-result-error" data-field="<%= field %>"></div>
+    <% if local_assigns[:guide] %>
+      <div class="guideline"><%= guide %></div>
+    <% end %>
+  </dd>
+</div>

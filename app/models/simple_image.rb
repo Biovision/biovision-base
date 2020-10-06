@@ -39,6 +39,9 @@ class SimpleImage < ApplicationRecord
   validates_length_of :source_name, maximum: META_LIMIT
 
   scope :in_component, ->(v) { where(biovision_component: v) }
+  scope :file_name_like, ->(v) { where('image ilike ?', "%#{v}%") unless v.blank? }
+  scope :caption_like, ->(v) { where('caption ilike ?', "%#{v}%") unless v.blank? }
+  scope :filtered, ->(f) { file_name_like(f[:name]).caption_like(f[:caption]) }
   scope :list_for_administration, -> { order('image asc') }
 
   def self.entity_parameters

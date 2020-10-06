@@ -3,6 +3,7 @@
   model_name = entity.class.to_s.underscore
   img = entity.simple_image
   src = img&.image.blank? ? 'biovision/base/placeholders/3x2.svg' : img.image.medium_url
+  handler_url ||= admin_component_images_path(slug: component_handler.class.slug)
 %>
 <div>
   <dt><%= f.label :simple_image_id %></dt>

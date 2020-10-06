@@ -119,8 +119,9 @@ class Admin::ComponentsController < AdminController
 
   # get /admin/components/:slug/images
   def images
+    filters = params[:filter] || Hash.new
     list = SimpleImage.in_component(@handler.component).list_for_administration
-    @collection = @handler.allow? ? list.page(current_page).per(10) : []
+    @collection = @handler.allow? ? list.filtered(filters).page(current_page).per(10) : []
   end
 
   def create_image

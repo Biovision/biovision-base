@@ -1,0 +1,5 @@
+<% url = "/admin/#{entity.class.table_name}/#{entity.id}/priority" %>
+<li class="priority-changer" data-url="<%= url %>">
+  <button data-delta="-1" type="button">&uarr;</button>
+  <button data-delta="1" type="button">&darr;</button>
+</li>
