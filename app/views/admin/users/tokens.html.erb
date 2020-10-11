@@ -2,7 +2,7 @@
 <% content_for :breadcrumbs do %>
   <%= admin_biovision_component_link(component_handler.component) %>
   <%= link_to(t('admin.users.nav_item.text'), admin_users_path) %>
-  <%= admin_user_link(@entity) %>
+  <%= admin_entity_link(@entity) %>
   <span><%= t('.heading') %></span>
 <% end %>
 

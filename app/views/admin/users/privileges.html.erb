@@ -1,7 +1,7 @@
 <% content_for :meta_title, t('.title', user: @entity.profile_name) %>
 <% content_for :breadcrumbs do %>
   <%= link_to(t('admin.users.nav_item.text'), admin_users_path) %>
-  <%= admin_user_link(@entity) %>
+  <%= admin_entity_link(@entity) %>
   <span><%= t('.heading') %></span>
 <% end %>
 

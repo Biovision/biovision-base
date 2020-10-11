@@ -31,6 +31,7 @@ module BiovisionUsersHelper
   # @param [User] entity
   # @param [String] text
   # @param [Hash] options
+  # @deprecated use #admin_entity_link
   def admin_user_link(entity, text = entity&.profile_name, options = {})
     return I18n.t(:anonymous) if entity.nil?
 
@@ -45,7 +46,7 @@ module BiovisionUsersHelper
   end
 
   # @param [User] entity
-  # @deprecated use #admin_user_link
+  # @deprecated use #admin_entity_link
   def editor_user_link(entity)
     return t(:anonymous) if entity.nil?
 

@@ -2,7 +2,7 @@
   <%= profile_avatar(entity.user) unless entity.user.nil? %>
 </div>
 <div class="data">
-  <div><%= admin_user_link(entity.user) %></div>
+  <div><%= admin_entity_link(entity.user) %></div>
   <div class="info"><%= time_tag(entity.created_at) %></div>
   <div class="secondary info">
     <!-- <%= entity.password %> -->

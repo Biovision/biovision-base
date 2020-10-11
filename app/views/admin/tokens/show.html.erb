@@ -16,7 +16,7 @@
 
   <dl>
     <dt><%= t('activerecord.attributes.token.user') %></dt>
-    <dd><%= admin_user_link(@entity.user) %></dd>
+    <dd><%= admin_entity_link(@entity.user) %></dd>
 
     <% unless @entity.last_used.nil? %>
         <dt><%= t('activerecord.attributes.token.last_used') %></dt>

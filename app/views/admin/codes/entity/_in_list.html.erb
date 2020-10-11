@@ -6,7 +6,7 @@
     <%= entity.code_type.name %>
     <%= admin_entity_link(entity) %>
   </div>
-  <div class="info"><%= admin_user_link(entity.user) %></div>
+  <div class="info"><%= admin_entity_link(entity.user) %></div>
   <div class="secondary info">
     <div><%= t(:created_at) %>: <%= time_tag(entity.created_at) %></div>
     <div><%= t(:code_activation_count, count: entity.quantity) %></div>

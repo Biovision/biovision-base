@@ -2,7 +2,7 @@
   <%= user_image_preview(entity) %>
 </div>
 <div class="data">
-  <div><%= admin_user_link(entity) %></div>
+  <div><%= admin_entity_link(entity) %></div>
   <% unless entity.notice.blank? %>
     <div><%= entity.notice %></div>
   <% end %>
@@ -33,7 +33,7 @@
   <% unless entity.inviter_id.nil? %>
     <div class="secondary info">
       <%= t('activerecord.attributes.user.inviter') %>:
-      <%= admin_user_link(entity.inviter) %>
+      <%= admin_entity_link(entity.inviter) %>
     </div>
   <% end %>
   <% if entity.foreign_users.any? %>

@@ -28,7 +28,7 @@
     <dd><%= @entity.slug %></dd>
 
     <dt><%= t('activerecord.attributes.foreign_user.user') %></dt>
-    <dd><%= admin_user_link(@entity.user) %></dd>
+    <dd><%= admin_entity_link(@entity.user) %></dd>
 
     <% unless @entity.name.blank? %>
       <dt><%= t('activerecord.attributes.foreign_user.name') %></dt>

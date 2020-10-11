@@ -2,7 +2,7 @@
   <div><%= entity.name %></div>
   <div class="info">
     <% unless entity.user.blank? %>
-      <%= admin_user_link(entity.user) %><br/>
+      <%= admin_entity_link(entity.user) %><br/>
     <% end %>
     <%= entity.phone %><br/>
     <%= entity.email %>
