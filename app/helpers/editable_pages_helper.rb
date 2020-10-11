@@ -3,23 +3,6 @@
 # Helper methods for handling editable pages and blocks
 module EditablePagesHelper
   # @param [EditablePage] entity
-  def admin_editable_page_link(entity)
-    link_to(entity.name, admin_editable_page_path(id: entity.id))
-  end
-
-  # @param [SimpleBlock] entity
-  # @param [String] text
-  # @param [Hash] options
-  def admin_simple_block_link(entity, text = entity.slug, options = {})
-    link_to(text, admin_simple_block_path(id: entity.id), options)
-  end
-
-  # @param [EditableBlock] entity
-  def admin_editable_block_link(entity)
-    link_to(entity.name, admin_editable_block_path(id: entity.id))
-  end
-
-  # @param [EditablePage] entity
   def editable_page_image_preview(entity)
     return '' if entity.image.blank?
 

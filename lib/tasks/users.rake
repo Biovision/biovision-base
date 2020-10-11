@@ -22,7 +22,7 @@ namespace :users do
             end
           end
           if data.key?('agent')
-            entity.agent = Agent.named(data['agent'])
+            entity.agent = Agent[data['agent']]
           end
           entity.save!
 

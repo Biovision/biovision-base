@@ -2,7 +2,7 @@
 <% content_for :breadcrumbs do %>
   <%= admin_biovision_component_link(component_handler.component) %>
   <%= link_to(t('admin.simple_blocks.nav_item.text'), admin_simple_blocks_path) %>
-  <%= admin_simple_block_link(@entity) %>
+  <%= admin_entity_link(@entity) %>
   <span><%= t('.nav_text') %></span>
 <% end %>
 

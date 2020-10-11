@@ -6,6 +6,8 @@ module BiovisionHelper
   # @param [String] text
   # @param [Hash] options
   def admin_entity_link(entity, text = nil, options = {})
+    return '∅' if entity.nil?
+
     if text.nil?
       text = entity.respond_to?(:text_for_link) ? entity.text_for_link : entity.id
     end

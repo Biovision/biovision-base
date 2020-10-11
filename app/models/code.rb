@@ -57,6 +57,10 @@ class Code < ApplicationRecord
     quantity.positive?
   end
 
+  def text_for_link
+    body
+  end
+
   private
 
   def generate_body

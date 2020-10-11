@@ -63,4 +63,8 @@ class SimpleBlock < ApplicationRecord
   def self.[](slug)
     SimpleBlock.visible.find_by(slug: slug)&.body.to_s
   end
+
+  def text_for_link
+    slug
+  end
 end

@@ -47,4 +47,8 @@ class EditableBlock < ApplicationRecord
   def editable_by?(user)
     user&.super_user?
   end
+
+  def text_for_link
+    name
+  end
 end

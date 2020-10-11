@@ -57,4 +57,8 @@ class Agent < ApplicationRecord
   def self.named(name)
     Agent[name]
   end
+
+  def text_for_link
+    name
+  end
 end

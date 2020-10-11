@@ -93,6 +93,10 @@ class EditablePage < ApplicationRecord
     body
   end
 
+  def text_for_link
+    name
+  end
+
   # @deprecated use #meta_keywords
   def keywords
     meta_keywords

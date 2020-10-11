@@ -17,6 +17,10 @@ class Browser < ApplicationRecord
   end
 
   def self.entity_parameters
-    %i(name mobile bot active)
+    %i[name mobile bot active]
+  end
+
+  def text_for_link
+    name
   end
 end

@@ -14,7 +14,7 @@ namespace :codes do
           entity.assign_attributes(attributes)
 
           if data.key?('agent')
-            entity.agent = Agent.named(data['agent'])
+            entity.agent = Agent[data['agent']]
           end
           entity.save!
 

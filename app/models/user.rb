@@ -130,6 +130,10 @@ class User < ApplicationRecord
     !foreign_slug?
   end
 
+  def text_for_link
+    profile_name
+  end
+
   private
 
   def prepare_search_string
