@@ -1,0 +1,16 @@
+<% unless entity.parents_cache.blank? %>
+  <div>
+    <dt>
+      <%= entity.class.human_attribute_name(:parents_cache) %>
+    </dt>
+    <dd><%= entity.parents_cache %></dd>
+  </div>
+<% end %>
+<% unless entity.children_cache.blank? %>
+  <div>
+    <dt>
+      <%= entity.class.human_attribute_name(:children_cache) %>
+    </dt>
+    <dd><%= entity.children_cache.join(', ') %></dd>
+  </div>
+<% end %>

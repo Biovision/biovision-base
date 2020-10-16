@@ -1,0 +1,18 @@
+<% table_name = @entity.class.table_name%>
+<% content_for :meta_title, t("#{controller_name}.edit.title") %>
+<% content_for :breadcrumbs do %>
+  <%= admin_biovision_component_link(component_handler.component) %>
+  <%= link_to(t("admin.#{table_name}.nav_item.text"), "/admin/#{table_name}") %>
+  <%= admin_entity_link(@entity) %>
+  <span><%= t('.nav_text') %></span>
+<% end %>
+
+<article>
+  <h1><%= t("#{controller_name}.edit.heading") %></h1>
+
+  <ul class="actions">
+    <li class="danger"><%= destroy_icon(@entity) %></li>
+  </ul>
+
+  <%= render partial: "#{controller_name}/form", locals: { entity: @entity } %>
+</article>

@@ -4,6 +4,10 @@
 module CreateAndModifyEntities
   extend ActiveSupport::Concern
 
+  included do
+    before_action :set_entity, only: %i[edit update destroy]
+  end
+
   def model_class
     @model_class ||= controller_name.classify.constantize
   end
@@ -26,6 +30,7 @@ module CreateAndModifyEntities
   # get /[table_name]/new
   def new
     @entity = model_class.new
+    render 'shared/entity/new'
   end
 
   # post /[table_name]
@@ -40,6 +45,7 @@ module CreateAndModifyEntities
 
   # get /[table_name]/:id/edit
   def edit
+    render 'shared/entity/edit'
   end
 
   # patch /[table_name]/:id

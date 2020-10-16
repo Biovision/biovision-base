@@ -4,6 +4,10 @@
 module ListAndShowEntities
   extend ActiveSupport::Concern
 
+  included do
+    before_action :set_entity, only: %i[show]
+  end
+
   # Define in controllers
   def model_class
     @model_class ||= controller_name.classify.constantize

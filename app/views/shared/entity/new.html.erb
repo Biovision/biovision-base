@@ -1,0 +1,13 @@
+<% table_name = @entity.class.table_name %>
+<% content_for :meta_title, t("#{controller_name}.new.title") %>
+<% content_for :breadcrumbs do %>
+  <%= admin_biovision_component_link(component_handler.component) %>
+  <%= link_to(t("admin.#{table_name}.nav_item.text"), "/admin/#{table_name}") %>
+  <span><%= t('.nav_text') %></span>
+<% end %>
+
+<article>
+  <h1><%= t("#{controller_name}.new.heading") %></h1>
+
+  <%= render partial: "#{controller_name}/form", locals: { entity: @entity } %>
+</article>

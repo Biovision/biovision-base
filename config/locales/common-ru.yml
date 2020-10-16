@@ -129,6 +129,10 @@ ru:
       truncate: "…"
   shared:
     entity:
+      edit:
+        nav_text: "Редактировать"
+      new:
+        nav_text: "Создать"
       meta_texts:
         meta_title: "Текст для заголовка окна"
         meta_description: "Описание для метатэга"
