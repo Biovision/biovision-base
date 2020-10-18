@@ -131,8 +131,10 @@ ru:
     entity:
       edit:
         nav_text: "Редактировать"
+        title: "Редактировать %{model}"
       new:
         nav_text: "Создать"
+        title: "Создать %{model}"
       meta_texts:
         meta_title: "Текст для заголовка окна"
         meta_description: "Описание для метатэга"
