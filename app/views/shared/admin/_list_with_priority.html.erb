@@ -1,4 +1,4 @@
-<% use_pagination = local_assigns[:paginate] && collection.respond_to?(:current_page) %>
+<% use_pagination = collection.respond_to?(:current_page) %>
 <%= paginate collection if use_pagination %>
 <% if collection.any? %>
   <ol class="list-of-entities">

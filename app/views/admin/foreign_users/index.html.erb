@@ -11,7 +11,5 @@
     <li><%= back_icon(admin_path) %></li>
   </ul>
 
-  <%= paginate @collection %>
   <%= render partial: 'shared/admin/list', locals: { collection: @collection } %>
-  <%= paginate @collection %>
 </article>

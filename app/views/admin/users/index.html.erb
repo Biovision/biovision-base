@@ -14,7 +14,5 @@
 
   <%= render partial: 'filter' %>
 
-  <%= paginate @collection %>
   <%= render partial: 'list', locals: { collection: @collection } %>
-  <%= paginate @collection %>
 </article>

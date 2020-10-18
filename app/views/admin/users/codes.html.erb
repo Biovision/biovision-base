@@ -13,9 +13,7 @@
     <li><%= return_icon(admin_user_path(id: @entity.id)) %></li>
   </ul>
 
-  <%= paginate @collection %>
   <%= render partial: 'shared/admin/list', locals: { collection: @collection } %>
-  <%= paginate @collection %>
 
   <section>
     <h2><%= t('codes.new.title') %></h2>
