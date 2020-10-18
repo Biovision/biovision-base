@@ -1,9 +1,9 @@
 <% list.each do |attribute| %>
-  <% next if entity.attributes[attribute].blank? %>
+  <% next if entity.attributes[attribute.to_s].blank? %>
   <div>
     <dt>
       <%= entity.class.human_attribute_name(attribute) %>
     </dt>
-    <dd><%= entity.attributes[attribute] %></dd>
+    <dd><%= entity.attributes[attribute.to_s] %></dd>
   </div>
 <% end %>

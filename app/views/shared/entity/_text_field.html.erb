@@ -1,0 +1,6 @@
+<% unless entity.attributes[field.to_s].blank? %>
+  <div>
+    <dt><%= entity.class.human_attribute_name(field) %></dt>
+    <dd><%= entity.attributes[field.to_s] %></dd>
+  </div>
+<% end %>

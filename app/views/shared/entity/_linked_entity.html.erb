@@ -1,0 +1,6 @@
+<% unless entity.nil? %>
+  <div>
+    <dt><%= entity.class.model_name.human %></dt>
+    <dd><%= admin_entity_link(entity) %></dd>
+  </div>
+<% end %>
