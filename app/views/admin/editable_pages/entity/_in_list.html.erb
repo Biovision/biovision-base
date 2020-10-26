@@ -1,6 +1,4 @@
-<div class="image">
-  <%= simple_image_preview(entity) %>
-</div>
+<figure class="image"><%= simple_image_preview(entity) %></figure>
 <div class="data">
   <div><%= admin_entity_link(entity) %></div>
   <div class="info">
@@ -24,28 +22,13 @@
     </div>
   <% end %>
 
-  <%=
-    render(
-        partial: 'shared/admin/toggleable',
-        locals:  {
-            entity: entity,
-            url:    toggle_admin_editable_page_path(id: entity.id)
-        }
-    )
-  %>
+  <%= render(partial: 'shared/admin/toggle', locals: { entity: entity }) %>
 
   <ul class="actions">
     <li><%= edit_icon(edit_editable_page_path(id: entity.id)) %></li>
     <% unless entity.url.blank? %>
       <li><%= world_icon(entity.url, t(:view_as_visitor), locale: entity.language&.code) %></li>
     <% end %>
-    <%=
-      render(
-          partial: 'shared/actions/priority_changer',
-          locals:  {
-              path: priority_admin_editable_page_path(id: entity.id)
-          }
-      )
-    %>
+    <%= render(partial: 'shared/admin/priority', locals: { entity: entity }) %>
   </ul>
 </div>

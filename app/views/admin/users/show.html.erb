@@ -5,6 +5,7 @@
   <span><%= @entity.profile_name %></span>
 <% end %>
 
+<% model = @entity.class %>
 <article>
   <h1><%= @entity.screen_name %></h1>
   <% if @entity.deleted? %>
@@ -48,32 +49,29 @@
     </figcaption>
   </figure>
 
-  <dl>
-    <% unless @entity.notice.blank? %>
-      <dt><%= t('activerecord.attributes.user.notice') %></dt>
-      <dd><%= @entity.notice %></dd>
-    <% end %>
-
-    <dt><%= t('activerecord.attributes.user.screen_name') %></dt>
-    <dd><%= @entity.screen_name %></dd>
+  <dl class="fields">
+    <% render partial: 'shared/entity/text_fields', locals: { entity: @entity, list: %w[notice screen_name] } %>
 
     <% unless @entity.inviter_id.nil? %>
-      <dt><%= t('activerecord.attributes.user.inviter') %></dt>
-      <dd><%= admin_entity_link(@entity.inviter) %></dd>
+      <div>
+        <dt><%= model.human_attribute_name(:inviter) %></dt>
+        <dd><%= admin_entity_link(@entity.inviter) %></dd>
+      </div>
     <% end %>
 
     <% unless @entity.email.blank? %>
-      <dt><%= t('activerecord.attributes.user.email') %></dt>
-      <dd><%= link_to @entity.email, "mailto:#{@entity.email}" %></dd>
+      <div>
+        <dt><%= model.human_attribute_name(:email) %></dt>
+        <dd><%= link_to @entity.email, "mailto:#{@entity.email}" %></dd>
+      </div>
     <% end %>
 
     <% unless @entity.phone.blank? %>
-      <dt><%= t('activerecord.attributes.user.phone') %></dt>
-      <dd><%= link_to @entity.phone, "tel:#{@entity.phone}" %></dd>
+      <div>
+        <dt><%= model.human_attribute_name(:phone) %></dt>
+        <dd><%= link_to @entity.phone, "tel:#{@entity.phone}" %></dd>
+      </div>
     <% end %>
-
-    <dt><%= t('activerecord.attributes.user.balance') %></dt>
-    <dd><%= @entity.balance %></dd>
 
     <%=
       render(
@@ -85,23 +83,19 @@
       )
     %>
 
-    <% unless @entity.ip.blank? %>
-      <dt><%= t('activerecord.attributes.user.ip') %></dt>
-      <dd><%= @entity.ip %></dd>
-    <% end %>
+    <%= render partial: 'shared/entity/text_field', locals: { entity: @entity, field: :ip } %>
+    <%= render partial: 'shared/entity/timestamps', locals: { entity: @entity } %>
 
-    <dt><%= t(:created_at) %></dt>
-    <dd><%= time_tag @entity.created_at %></dd>
-
-    <dt><%= t(:updated_at) %></dt>
-    <dd><%= time_tag @entity.updated_at %></dd>
-
-    <dt><%= t('activerecord.attributes.user.referral_link') %></dt>
-    <dd><%= root_url(rl: @entity.referral_link) %></dd>
+    <div>
+      <dt><%= model.human_attribute_name(:referral_link) %></dt>
+      <dd><%= root_url(rl: @entity.referral_link) %></dd>
+    </div>
 
     <% unless @entity.last_seen.blank? %>
-      <dt><%= t('activerecord.attributes.user.last_seen') %></dt>
-      <dd><%= time_tag @entity.last_seen %></dd>
+      <div>
+        <dt><%= model.human_attribute_name(:last_seen) %></dt>
+        <dd><%= time_tag @entity.last_seen %></dd>
+      </div>
     <% end %>
 
     <% if @entity.foreign_users.any? %>
@@ -109,22 +103,32 @@
       <dd>
         <ul>
           <% @entity.foreign_users.each do |foreign_user| %>
-            <li><%= admin_foreign_user_link(foreign_user) %></li>
+            <li><%= admin_entity_link(foreign_user) %></li>
           <% end %>
         </ul>
       </dd>
     <% end %>
   </dl>
 
-  <% unless @entity.deleted? %>
-    <%=
-      render(
-          partial: 'shared/admin/toggleable',
-          locals: {
-              entity: @entity,
-              url: toggle_admin_user_path(id: @entity.id)
-          }
-      )
-    %>
+  <%=
+    render(
+        partial: 'shared/admin/toggle',
+        locals: { entity: @entity }
+    )
+  %>
+
+  <% prefix = 'admin/users/entity/components/' %>
+  <% BiovisionComponent.list_for_administration.each do |component| %>
+    <% if lookup_context.exists?("#{prefix}_#{component.slug}") %>
+      <section>
+        <h2><%= component.name %></h2>
+        <%=
+          render(
+              partial: "#{prefix}#{component.slug}",
+              locals: { user: @entity }
+          )
+        %>
+      </section>
+    <% end %>
   <% end %>
 </article>

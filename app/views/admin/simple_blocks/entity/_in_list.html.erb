@@ -1,21 +1,11 @@
-<div class="image">
-  <%= simple_image_preview(entity) %>
-</div>
+<figure class="image"><%= simple_image_preview(entity) %></figure>
 <div class="data">
   <div><%= admin_entity_link(entity) %></div>
   <div class="info">
     <%= entity.name %>
   </div>
 
-  <%=
-    render(
-        partial: 'shared/admin/toggleable',
-        locals:  {
-            entity: entity,
-            url:    toggle_admin_simple_block_path(id: entity.id)
-        }
-    )
-  %>
+  <%= render(partial: 'shared/admin/toggle', locals: { entity: entity }) %>
 
   <ul class="actions">
     <li><%= edit_icon(edit_simple_block_path(id: entity.id)) %></li>

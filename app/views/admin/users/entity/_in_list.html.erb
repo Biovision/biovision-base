@@ -1,6 +1,4 @@
-<div class="image">
-  <%= user_image_preview(entity) %>
-</div>
+<figure class="image"><%= user_image_preview(entity) %></figure>
 <div class="data">
   <div><%= admin_entity_link(entity) %></div>
   <% unless entity.notice.blank? %>
@@ -17,10 +15,6 @@
       <%= t('activerecord.attributes.user.email') %>: <%= entity.email %>
     </div>
   <% end %>
-  <div class="info">
-    <%= t('activerecord.attributes.user.balance') %>:
-    <%= entity.balance %>
-  </div>
   <div class="secondary info">
     <div><%= t(:created_at) %>: <%= time_tag entity.created_at %></div>
     <% unless entity.last_seen.nil? %>
@@ -40,28 +34,18 @@
     <div class="secondary info">
       <%= t('.foreign_users') %>:
       <% entity.foreign_users.each do |foreign_user| %>
-        <%= admin_foreign_user_link(foreign_user) %><br/>
+        <%= admin_entity_link(foreign_user) %><br/>
       <% end %>
     </div>
   <% end %>
   <%=
     render(
         partial: 'admin/users/entity/in_list/additional_data',
-        locals: {
-            entity: entity
-        }
+        locals: { entity: entity }
     )
   %>
 
-  <%=
-    render(
-        partial: 'shared/admin/toggleable',
-        locals:  {
-            entity: entity,
-            url:    toggle_admin_user_path(id: entity.id)
-        }
-    )
-  %>
+  <%= render(partial: 'shared/admin/toggle', locals: { entity: entity }) %>
 
   <ul class="actions">
     <li><%= edit_icon(edit_user_path(id: entity.id)) %></li>

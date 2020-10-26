@@ -74,4 +74,8 @@ class Token < ApplicationRecord
   def cookie_pair
     "#{user_id}:#{token}"
   end
+
+  def text_for_link
+    name
+  end
 end

@@ -2,7 +2,7 @@
 <% content_for :breadcrumbs do %>
   <%= admin_biovision_component_link(component_handler.component) %>
   <%= link_to t('admin.tokens.nav_item.text'), admin_tokens_path %>
-  <%= admin_token_link(@entity) %>
+  <%= admin_entity_link(@entity) %>
   <span><%= t(:edit) %></span>
 <% end %>
 

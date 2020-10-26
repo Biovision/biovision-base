@@ -35,6 +35,10 @@ class ForeignUser < ApplicationRecord
     "#{foreign_site.slug}-#{slug}"
   end
 
+  def text_for_link
+    long_slug
+  end
+
   private
 
   def trim_fields

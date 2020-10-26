@@ -1,8 +1,6 @@
-<div class="image">
-  <%= profile_avatar(entity.user) %>
-</div>
+<figure class="image"><%= profile_avatar(entity.user) %></figure>
 <div class="data">
-  <div><%= admin_token_link(entity) %></div>
+  <div><%= admin_entity_link(entity) %></div>
   <div class="info">
     <% unless entity.last_used.nil? %>
         <div>
@@ -17,7 +15,7 @@
         <div class="truncate"><%= entity.agent.name %></div>
     <% end %>
   </div>
-  <%= render partial: 'shared/admin/toggleable', locals: { entity: entity, url: toggle_admin_token_path(id: entity.id) } %>
+  <%= render(partial: 'shared/admin/toggle', locals: { entity: entity }) %>
 
   <ul class="actions">
     <li><%= edit_icon edit_token_path(id: entity.id) %></li>

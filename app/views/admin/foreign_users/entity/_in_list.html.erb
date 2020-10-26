@@ -1,8 +1,6 @@
-<div class="image">
-  <%= user_image_preview(entity.user) %>
-</div>
+<figure class="image"><%= user_image_preview(entity.user) %></figure>
 <div class="data">
-  <div><%= admin_foreign_user_link(entity) %></div>
+  <div><%= admin_entity_link(entity) %></div>
   <div class="info">
     <%= admin_entity_link(entity.user) %>: <%= entity.name %>
   </div>
