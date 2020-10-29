@@ -15,12 +15,7 @@ module Authentication
 
     token = user.tokens.create!(tracking_for_entity)
 
-    cookies['token'] = {
-      value: token.cookie_pair,
-      expires: 1.year.from_now,
-      domain: :all,
-      httponly: true
-    }
+    self.token_cookie = token.cookie_pair
   end
 
   def deactivate_token
@@ -31,15 +26,19 @@ module Authentication
 
   def pop_token
     if cookies['pt']
-      cookies['token'] = {
-        value: cookies['pt'],
-        expires: 1.year.from_now,
-        domain: :all,
-        httponly: true
-      }
+      self.token_cookie = cookies['pt']
       cookies.delete 'pt', domain: :all
     else
       cookies.delete 'token', domain: :all
     end
+  end
+
+  def token_cookie=(value)
+    cookies['token'] = {
+      value: value,
+      expires: 1.year.from_now,
+      domain: :all,
+      httponly: true
+    }
   end
 end

@@ -4,6 +4,10 @@
 module LockableEntity
   extend ActiveSupport::Concern
 
+  included do
+    before_action :set_entity, only: %i[lock unlock]
+  end
+
   def lock
     @entity.update!(locked: true)
 

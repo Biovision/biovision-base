@@ -1,8 +1,6 @@
 class My::TokensController < ProfileController
   include ToggleableEntity
 
-  before_action :set_entity, except: [:index]
-
   # get /my
   def index
     @collection = Token.page_for_owner(current_user, current_page)

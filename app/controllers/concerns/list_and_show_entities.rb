@@ -5,7 +5,7 @@ module ListAndShowEntities
   extend ActiveSupport::Concern
 
   included do
-    before_action :set_entity, only: %i[show]
+    before_action :set_entity, only: :show
   end
 
   # Define in controllers
