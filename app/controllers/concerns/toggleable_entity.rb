@@ -4,10 +4,6 @@
 module ToggleableEntity
   extend ActiveSupport::Concern
 
-  included do
-    before_action :set_entity, only: :toggle
-  end
-
   # Toggle entity flag when allowed
   def toggle
     if entity_is_locked?

@@ -4,7 +4,7 @@
 class Admin::TokensController < AdminController
   include ToggleableEntity
 
-  before_action :set_entity, only: :show
+  before_action :set_entity, except: :index
 
   # get /admin/tokens
   def index

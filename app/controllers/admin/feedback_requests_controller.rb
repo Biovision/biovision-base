@@ -4,6 +4,8 @@
 class Admin::FeedbackRequestsController < AdminController
   include ToggleableEntity
 
+  before_action :set_entity, except: :index
+
   # get /admin/feedback_requests
   def index
     @collection = FeedbackRequest.page_for_administration(current_page)

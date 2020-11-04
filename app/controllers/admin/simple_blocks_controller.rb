@@ -5,6 +5,8 @@ class Admin::SimpleBlocksController < AdminController
   include ToggleableEntity
   include ListAndShowEntities
 
+  before_action :set_entity, except: :index
+
   private
 
   def component_class

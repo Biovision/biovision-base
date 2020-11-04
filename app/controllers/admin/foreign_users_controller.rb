@@ -4,6 +4,8 @@
 class Admin::ForeignUsersController < AdminController
   include ListAndShowEntities
 
+  before_action :set_entity, except: :index
+
   protected
 
   def component_class

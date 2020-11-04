@@ -4,10 +4,6 @@
 module RemovableImage
   extend ActiveSupport::Concern
 
-  included do
-    before_action :set_entity, only: :destroy_image
-  end
-
   # Remove entity image when allowed
   def destroy_image
     if entity_image_is_locked?
