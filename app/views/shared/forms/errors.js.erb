@@ -2,4 +2,4 @@
 model_name = @entity.class.to_s.underscore
 list = @entity.errors.full_messages.map { |m| "'#{j(m)}'" }
 %>
-Biovision.showListOfErrors('<%= model_name %>', [<%= raw(list.join(',')) %>]);
+Biovision.components.forms.showErrors('<%= model_name %>', [<%= raw(list.join(',')) %>]);

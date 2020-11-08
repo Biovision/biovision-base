@@ -1,0 +1,23 @@
+<%
+  model = f.object.class
+  validators = model.validators_on(field)
+  range_option = validators.select { |v| v.kind == :inclusion }.first&.options.to_h
+  options = {
+      class: 'input-text',
+      data: { check: field }.merge(local_assigns[:data].to_h),
+      in: range_option[:in],
+      required: validators.select { |v| v.kind == :presence }.any?,
+      size: nil
+  }.merge(local_assigns[:options].to_h)
+  guide_key = "#{model.table_name}.form.guidelines.#{field}"
+%>
+<div>
+  <dt><%= f.label field %></dt>
+  <dd>
+    <%= f.number_field(field, options.merge(local_assigns[:options].to_h)) %>
+    <div class="check-result-error" data-field="<%= field %>"></div>
+    <% if I18n.exists?(guide_key) %>
+      <div class="guideline"><%= t(guide_key) %></div>
+    <% end %>
+  </dd>
+</div>

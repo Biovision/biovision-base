@@ -32,7 +32,7 @@ module CreateAndModifyEntities
   # post /[table_name]
   def create
     @entity = model_class.new(creation_parameters)
-    if @entity.save
+    if @entity.save!
       form_processed_ok(path_after_save)
     else
       form_processed_with_error(:new)
