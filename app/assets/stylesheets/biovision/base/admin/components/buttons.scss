@@ -1,0 +1,79 @@
+$button-color-primary: hsl(210, 75%, 50%) !default;
+$button-color-primary-hover: hsl(230, 75%, 50%) !default;
+$button-color-secondary: hsl(30, 75%, 50%) !default;
+$button-color-save: hsl(120, 25%, 55%) !default;
+$button-color-save-hover: hsl(120, 25%, 25%) !default;
+
+.button {
+  --button-color-primary: #{$button-color-primary};
+  --button-color-primary-hover: #{$button-color-primary-hover};
+  --button-color-secondary: #{$button-color-secondary};
+  --button-color-save: #{$button-color-save};
+  --button-color-save-hover: #{$button-color-save-hover};
+
+  border: .1rem solid;
+  border-radius: .4rem;
+  cursor: pointer;
+  font-family: var(--font-family-main);
+  font-size: inherit;
+  display: inline-block;
+  margin: 0;
+  padding: var(--spacer-xxs) var(--spacer-xs);
+  text-align: center;
+  text-decoration: none;
+  transition: .25s;
+
+  &:focus,
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.button-primary {
+  --link-color: var(--text-color-inverted-primary);
+  --link-color-active: var(--link-color);
+  --link-color-hover: var(--link-color);
+
+  background: var(--button-color-primary);
+  border-color: var(--button-color-primary);
+  color: var(--text-color-inverted-primary);
+
+  &:focus,
+  &:hover {
+    background-color: var(--button-color-primary-hover);
+  }
+}
+
+.button-ghost {
+  background: transparent;
+  color: var(--button-color-primary);
+
+  &:focus,
+  &:hover {
+    background-color: var(--button-color-primary);
+    color: var(--text-color-inverted-primary);
+  }
+}
+
+.button-secondary {
+  background-color: #fff;
+  border-color: var(--button-color-secondary);
+  color: var(--button-color-secondary);
+
+  &:focus,
+  &:hover {
+    background-color: var(--button-color-secondary);
+    color: var(--text-color-inverted-primary);
+  }
+}
+
+.button-save {
+  background-color: var(--button-color-save);
+  border-color: var(--button-color-save);
+  color: var(--text-color-inverted-primary);
+
+  &:focus,
+  &:hover {
+    background-color: var(--button-color-save-hover);
+  }
+}

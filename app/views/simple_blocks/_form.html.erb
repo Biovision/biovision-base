@@ -57,7 +57,7 @@
         <div class="wysiwyg-button-container">
           <button
             type="button"
-            class="js-wysiwyg-toggle button-action"
+            class="js-wysiwyg-toggle button button-primary"
             data-element="<%= model_name %>_body"
             data-upload-url="/media_files/ckeditor"
           >
@@ -133,7 +133,7 @@
 
   <div class="buttons">
     <%= hidden_field_tag :entity_id, entity.id %>
-    <%= f.button t(:save), class: 'button-save' %>
+    <%= f.button t(:save), class: 'button button-save' %>
   </div>
 <% end %>
 

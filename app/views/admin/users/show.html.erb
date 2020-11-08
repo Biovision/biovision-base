@@ -22,12 +22,12 @@
   </ul>
 
   <nav>
-    <%= link_to(t('admin.users.privileges.nav_text'), privileges_admin_user_path, class: 'button-nav') %>
+    <%= link_to(t('admin.users.privileges.nav_text'), privileges_admin_user_path, class: 'button button-ghost') %>
     <% if component_handler.administrator? %>
-      <%= link_to(t('admin.tokens.index.heading'), tokens_admin_user_path(id: @entity.id), class: 'button-nav') %>
+      <%= link_to(t('admin.tokens.index.heading'), tokens_admin_user_path(id: @entity.id), class: 'button button-ghost') %>
     <% end %>
     <% if component_handler.allow?('manage_codes') %>
-      <%= link_to(t('admin.codes.index.heading'), codes_admin_user_path(id: @entity.id), class: 'button-nav') %>
+      <%= link_to(t('admin.codes.index.heading'), codes_admin_user_path(id: @entity.id), class: 'button button-ghost') %>
     <% end %>
     <%= render partial: 'admin/users/entity/custom_nav', locals: { entity: @entity } %>
     <% if current_user.super_user? && @entity != current_user %>
@@ -36,7 +36,7 @@
             t('.authenticate'),
             authenticate_admin_user_path(id: @entity.id),
             method: :post,
-            class: 'button-action'
+            class: 'button button-primary'
         )
       %>
     <% end %>

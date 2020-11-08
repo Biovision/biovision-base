@@ -99,4 +99,11 @@ ru:
     forms:
       simple_image:
         guideline: "Картинка в формате SVG, JPG или PNG размером в пределах 1280×1280."
-        upload: "Загрузить"
+        load_image:
+          upload: "Загрузить"
+          cancel: "Отменить"
+          new_image: "Новая картинка"
+        new_image: "Загрузить"
+        select: "Выбрать"
+        browse:
+          filter: "Фильтр по названию или имени файла"

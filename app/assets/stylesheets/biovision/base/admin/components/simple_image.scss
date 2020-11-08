@@ -1,7 +1,12 @@
 .js-simple-image-upload {
+  max-width: 64rem;
+
   .current-image {
     display: block;
     position: relative;
+    height: 20rem;
+    margin: 0 auto;
+    width: 30rem;
 
     &::after {
       bottom: 0;
@@ -14,12 +19,19 @@
       transition: .25s;
       z-index: 3;
     }
+
+    img {
+      height: 100%;
+      object-fit: contain;
+      width: 100%;
+    }
   }
 
   .buttons {
     align-items: center;
     display: flex;
     justify-content: space-between;
+    margin: var(--spacer-xs) auto 0;
   }
 
   .progress::after {
@@ -52,22 +64,19 @@
       border: none;
       border-radius: 50%;
       box-shadow: 0 0 .4rem rgba(0, 0, 0, .25);
+      color: var(--text-color-primary);
       display: flex;
+      font-size: var(--font-size-decreased);
       height: 2.4rem;
       justify-content: center;
-      margin: 0;
+      line-height: 1;
+      margin: 0 var(--spacer-xxs);
       padding: 0;
       transition: .25s;
       width: 2.4rem;
 
-      &::after {
-        color: var(--text-color-primary);
-        display: block;
-        font-size: var(--font-size-decreased);
-        line-height: 1;
-      }
-
-      &:not([data-url]) {
+      &:not([data-url]),
+      &[data-url=""] {
         opacity: 0;
       }
 
@@ -75,22 +84,6 @@
       &:hover {
         box-shadow: 0 0 .4rem rgba(0, 0, 0, .5);
       }
-    }
-
-    .first::after {
-      content: '<<';
-    }
-
-    .prev::after {
-      content: '<';
-    }
-
-    .next::after {
-      content: '>';
-    }
-
-    .last::after {
-      content: '>>';
     }
   }
 

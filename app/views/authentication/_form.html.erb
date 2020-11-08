@@ -33,9 +33,9 @@
     </div>
   </div>
   <div class="actions">
-    <%= button_tag t('.log_in'), class: 'button-action' %>
+    <%= button_tag t('.log_in'), class: 'button button-primary' %>
     <% if component.settings['open'] %>
-      <%= link_to t('my.profiles.new.title'), new_my_profile_path, class: 'button-nav' %>
+      <%= link_to t('my.profiles.new.title'), new_my_profile_path, class: 'button button-ghost' %>
     <% end %>
   </div>
 <% end %>

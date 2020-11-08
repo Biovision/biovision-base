@@ -1,0 +1,38 @@
+<div class="load-image hidden">
+  <label class="floating-label">
+    <%=
+      file_field_tag(
+          nil,
+          accept: 'image/jpeg,image/png,image/svg+xml',
+          class: 'input-text'
+      )
+    %>
+    <span><%= t('.new_image') %></span>
+  </label>
+  <% %i[image_alt_text caption source_link source_name].each do |field| %>
+    <label class="floating-label">
+      <% text = SimpleImage.human_attribute_name(field) %>
+      <%=
+        text_field_tag(
+            nil,
+            '',
+            class: 'input-text',
+            data: { name: field },
+            placeholder: text
+        )
+      %>
+      <span><%= text %></span>
+    </label>
+  <% end %>
+  <div class="buttons">
+    <%=
+      button_tag(
+          t('.upload'),
+          class: 'button button-primary upload',
+          name: nil,
+          type: :button
+      )
+    %>
+<!--    <button type="button" class="button button-ghost cancel"><%#= t('.cancel') %></button>-->
+  </div>
+</div>

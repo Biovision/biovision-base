@@ -7,48 +7,33 @@
 %>
 <div>
   <dt><%= f.label :simple_image_id %></dt>
-  <dd class="js-simple-image-upload">
-    <figure class="preview" role="group" id="<%= model_name %>-image">
-      <%=
-        label_tag(
-            "#{model_name}_image",
-            image_tag(src, alt: ''),
-            class: 'current-image'
-        )
-      %>
-      <figcaption class="js-change">
+  <dd>
+    <div class="js-simple-image-upload simple-image-upload">
+      <figure class="image-preview" id="<%= model_name %>-image">
+        <%=
+          label_tag(
+              "#{model_name}_image",
+              image_tag(src, alt: ''),
+              class: 'current-image'
+          )
+        %>
+        <figcaption>
+          <div class="guideline"><%= t('.guideline') %></div>
+        </figcaption>
+      </figure>
+      <div class="js-change" data-url="<%= handler_url %>">
         <div class="buttons">
-          <%=
-            button_tag(
-                'Загрузить',
-                class: 'button button-ghost js-new-image',
-                data: {
-                    url: handler_url,
-                    image: "#{model_name}-image"
-                },
-                type: 'button'
-            )
-          %>
-          <%=
-            button_tag(
-                'Выбрать',
-                class: 'button button-ghost js-select-image',
-                data: { url: handler_url },
-                type: 'button'
-            )
-          %>
+          <button class="button button-ghost js-new-image" type="button">
+            <%= t('.new_image') %>
+          </button>
+          <button class="button button-ghost js-select-image" type="button">
+            <%= t('.select') %>
+          </button>
         </div>
-        <div
-          class="container"
-          data-text="<%= t('.upload') %>"
-          data-caption="<%= t('activerecord.attributes.simple_image.caption') %>"
-          data-image-alt-text="<%= t('attributes.image_alt_text') %>"
-          data-source-link="<%= t('activerecord.attributes.simple_image.source_link') %>"
-          data-source-name="<%= t('activerecord.attributes.simple_image.source_name') %>"
-        ></div>
-      </figcaption>
-    </figure>
-    <div class="guideline"><%= t('.guideline') %></div>
-    <%= f.hidden_field(:simple_image_id) %>
+        <%= render 'shared/forms/simple_image/browse' %>
+        <%= render 'shared/forms/simple_image/load_image' %>
+      </div>
+      <%= f.hidden_field(:simple_image_id) %>
+    </div>
   </dd>
 </div>
