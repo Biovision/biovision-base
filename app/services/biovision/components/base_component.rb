@@ -7,7 +7,7 @@ module Biovision
       attr_reader :component, :slug, :name, :user, :user_link
 
       # @param [BiovisionComponent] component
-      # @param [User] user
+      # @param [User|nil] user
       def initialize(component, user = nil)
         @component = component
         @slug = component&.slug || 'base'
@@ -27,7 +27,7 @@ module Biovision
       end
 
       def self.slug
-        to_s.demodulize.underscore.gsub('_component', '')
+        to_s.demodulize.to_s.underscore.gsub('_component', '')
       end
 
       # Receive component-specific handler by class name for component.
@@ -35,7 +35,7 @@ module Biovision
       #
       # e.g.: Biovision::Components::RegistrationComponent[user]
       #
-      # @param [User] user
+      # @param [User|nil] user
       def self.[](user = nil)
         new(BiovisionComponent[slug], user)
       end
@@ -49,6 +49,10 @@ module Biovision
       # Privilege names for using in biovision_component_user.data
       def self.privilege_names
         []
+      end
+
+      def self.setting_steps
+        {}
       end
 
       # @param [User] user
