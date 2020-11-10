@@ -35,6 +35,7 @@ class EditablePage < ApplicationRecord
   belongs_to :language, optional: true
 
   before_validation { self.slug = slug.strip unless slug.nil? }
+  before_validation { self.language = Language.active.first }
 
   validates_presence_of :slug
   validates_uniqueness_of :slug, scope: :language_id
@@ -54,20 +55,9 @@ class EditablePage < ApplicationRecord
   scope :list_for_administration, -> { ordered_by_priority }
   scope :list_for_visitors, -> { visible.ordered_by_priority }
 
-  def self.page_for_administration
-    ordered_by_slug
-  end
-
   def self.entity_parameters
     data = %i[body image image_alt_text language_id name nav_group slug url]
     data + meta_text_fields
-  end
-
-  # @param [String] slug
-  # @param [String] language_code
-  # @deprecated use #localized_page
-  def self.find_localized(slug, language_code)
-    localized_page(slug, language_code)
   end
 
   # @param [String] slug
@@ -78,10 +68,13 @@ class EditablePage < ApplicationRecord
   end
 
   # @param [String] url
-  # @param [String] language_code
-  def self.fallback_page(url, language_code)
-    language = Language.find_by(code: language_code)
-    find_by(url: url, language: language) || find_by(url: url)
+  def self.fallback_page(url)
+    find_by(url: url)
+  end
+
+  # @param [String] slug
+  def self.[](slug)
+    find_by(slug: slug)
   end
 
   # @deprecated use #meta_title

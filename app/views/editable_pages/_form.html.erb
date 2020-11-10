@@ -13,9 +13,6 @@
   <dl>
     <%= render partial: 'shared/forms/priority', locals: { f: f } %>
 
-    <dt><%= f.label :language_id %></dt>
-    <dd><%= f.select :language_id, languages_for_select(false) %></dd>
-
     <dt><%= f.label :slug %></dt>
     <dd>
       <%=
@@ -52,6 +49,7 @@
       <div class="guideline"><%= t('.guidelines.url') %></div>
     </dd>
 
+    <!--
     <dt><%= f.label :nav_group %></dt>
     <dd>
       <%=
@@ -69,6 +67,7 @@
       <div class="check-result-error" data-field="nav_group"></div>
       <div class="guideline"><%= t('.guidelines.nav_group') %></div>
     </dd>
+    -->
 
     <dt><%= f.label :image %></dt>
     <dd>
@@ -138,7 +137,8 @@
             required: true,
             data:     {
                 wysiwyg: 1,
-                check: :body
+                check: :body,
+                upload_url: admin_ckeditor_path(slug: Biovision::Components::ContentComponent.slug)
             }
         )
       %>

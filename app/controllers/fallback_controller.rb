@@ -8,7 +8,7 @@ class FallbackController < ApplicationController
   def show
     url = params[:slug]
 
-    @editable_page = EditablePage.fallback_page("/#{url}", locale)
+    @editable_page = EditablePage.fallback_page("/#{url}")
     if @editable_page.nil?
       handle_http_404("Cannot find fallback page for url /#{url}")
     end

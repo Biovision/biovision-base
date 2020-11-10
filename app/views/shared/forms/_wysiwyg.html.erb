@@ -1,23 +1,19 @@
-<script src="https://cdn.ckeditor.com/ckeditor5/12.0.0/classic/ckeditor.js"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/23.1.0/classic/ckeditor.js"></script>
 <script>
     'use strict';
     document.addEventListener('DOMContentLoaded', function () {
         document.querySelectorAll('form [data-wysiwyg]').forEach(function (editor) {
-            let uploadUrl = "/media_files/ckeditor";
-            if (editor.hasAttribute("data-upload-url")) {
-                uploadUrl = editor.getAttribute("data-upload-url");
+            const options = {
+                image: {toolbar: ['imageTextAlternative']}
             }
-
+            if (editor.hasAttribute("data-upload-url")) {
+                options.ckfinder = {
+                    uploadUrl: editor.getAttribute("data-upload-url")
+                }
+            }
             editor.required = false;
             ClassicEditor
-                .create(editor, {
-                    image: {
-                        toolbar: ['imageTextAlternative']
-                    },
-                    ckfinder: {
-                        uploadUrl: uploadUrl
-                    }
-                })
+                .create(editor, options)
                 .catch(error => console.error(error));
         });
     });
