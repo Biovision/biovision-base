@@ -148,35 +148,6 @@ article {
     }
   }
 
-  dt {
-    border-top: $border-secondary;
-    font: 400 var(--font-size-increased) $font-family-main;
-    margin: var(--spacer-xs) 0 0;
-    padding: var(--spacer-xxs) 0;
-  }
-
-  dd {
-    margin: .2rem 0;
-    padding: 0;
-    position: relative;
-
-    input,
-    textarea {
-      font-size: var(--font-size-normal);
-      min-width: 1ch;
-    }
-
-    input:not([type=checkbox]):not([type=radio]):not([size]):not([type=date]):not([max]):not([min]),
-    textarea {
-      width: 100%;
-    }
-
-    input,
-    textarea {
-      max-width: 100%;
-    }
-  }
-
   > nav {
     margin: var(--spacer-s) 0;
   }
