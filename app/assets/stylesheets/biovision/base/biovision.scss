@@ -1,3 +1,5 @@
+@import "default";
+
 :root {
   --font-size-xxxl: #{$font-size-xxxl};
   --font-size-xxl: #{$font-size-xxl};
@@ -40,6 +42,9 @@
   --link-color-visited: #{$link-color-visited};
   --link-color-active: #{$link-color-active};
   --link-color-hover: #{$link-color-hover};
+
+  --input-border: #{$input-border};
+  --input-border-focus: #{$input-border-focus};
 }
 
 *,
