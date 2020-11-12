@@ -1,0 +1,112 @@
+form {
+  margin: 0;
+  padding: 0;
+
+  .guideline {
+    color: var(--text-color-secondary);
+    font-size: var(--font-size-decreased);
+    margin: 0;
+
+    &::before {
+      content: '\261E';
+      margin-right: var(--spacer-xxs);
+    }
+  }
+
+  .check-result-error {
+    color: #f00;
+
+    &::before {
+      content: '\261D';
+      margin-right: var(--spacer-xxs);
+    }
+
+    &:empty {
+      display: none;
+    }
+  }
+
+  ul {
+    list-style: none;
+    margin: 0 auto;
+    padding: 0;
+  }
+
+  li {
+    margin: 0;
+    padding: 0;
+    position: relative;
+  }
+
+  input {
+    font-size: inherit;
+  }
+
+  .flags {
+    margin: var(--spacer-xs) 0;
+  }
+}
+
+.fields {
+  margin: 0;
+  padding: 0;
+
+  > div {
+    margin: 0 0 var(--spacer-xs);
+    padding: var(--spacer-xs);
+
+    &:not(:last-of-type) {
+      border-bottom: var(--border-secondary);
+    }
+  }
+
+  dt {
+    font: 500 var(--font-size-increased) var(--font-family-main);
+  }
+
+  dd {
+    margin: 0;
+    padding: var(--spacer-xxs) 0;
+  }
+
+  input:not([type=radio]):not([type=checkbox]):not([size]),
+  textarea {
+    width: 100%;
+  }
+}
+
+.input-text {
+  border: .1rem solid var(--input-border);
+  border-radius: var(--spacer-xxs);
+  font-size: var(--font-size-normal);
+  margin: 0;
+  padding: var(--spacer-xxs) var(--spacer-xs);
+
+  &:focus {
+    border-color: var(--input-border-focus);
+    box-shadow: .1rem .1rem .2rem var(--input-border-focus);
+    outline: none;
+  }
+}
+
+.floating-label {
+  display: block;
+  padding: 1.4rem 0 0 0;
+  position: relative;
+
+  span {
+    top: 1.2rem;
+    font-size: 1rem;
+    left: .4rem;
+    line-height: 1;
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    transition: .25s;
+  }
+
+  input:not(:placeholder-shown) + span {
+    opacity: 1;
+    top: .2rem;
+  }
+}

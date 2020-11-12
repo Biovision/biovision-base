@@ -1,0 +1,124 @@
+$button-primary-bg: hsl(210, 75%, 50%) !default;
+$button-primary-bg-hover: hsl(230, 75%, 50%) !default;
+$button-primary-color: #fff !default;
+$button-primary-color-hover: #fff !default;
+$button-ghost-bg: transparent !default;
+$button-ghost-bg-hover: hsl(230, 75%, 50%) !default;
+$button-ghost-color: hsl(230, 75%, 50%) !default;
+$button-ghost-color-hover: #fff !default;
+$button-secondary-bg: #fff !default;
+$button-secondary-bg-hover: hsl(30, 75%, 50%) !default;
+$button-secondary-color: hsl(30, 75%, 50%) !default;
+$button-secondary-color-hover: #fff !default;
+$button-save-bg: hsl(120, 25%, 55%) !default;
+$button-save-bg-hover: hsl(120, 25%, 25%) !default;
+$button-save-color: #fff !default;
+$button-save-color-hover: #fff !default;
+$button-danger-bg: hsl(0, 50%, 55%) !default;
+$button-danger-bg-hover: hsl(00, 25%, 50%) !default;
+$button-danger-color: #fff !default;
+$button-danger-color-hover: #fff !default;
+
+:root {
+  --button-primary-bg: #{$button-primary-bg};
+  --button-primary-bg-hover: #{$button-primary-bg-hover};
+  --button-primary-color: #{$button-primary-color};
+  --button-primary-color-hover: #{$button-primary-color-hover};
+  --button-ghost-bg: #{$button-ghost-bg};
+  --button-ghost-bg-hover: #{$button-ghost-bg-hover};
+  --button-ghost-color: #{$button-ghost-color};
+  --button-ghost-color-hover: #{$button-ghost-color-hover};
+  --button-secondary-bg: #{$button-secondary-bg};
+  --button-secondary-bg-hover: #{$button-secondary-bg-hover};
+  --button-secondary-color: #{$button-secondary-color};
+  --button-secondary-color-hover: #{$button-secondary-color-hover};
+  --button-save-bg: #{$button-save-bg};
+  --button-save-bg-hover: #{$button-save-bg-hover};
+  --button-save-color: #{$button-save-color};
+  --button-save-color-hover: #{$button-save-color-hover};
+  --button-danger-bg: #{$button-danger-bg};
+  --button-danger-bg-hover: #{$button-danger-bg-hover};
+  --button-danger-color: #{$button-danger-color};
+  --button-danger-color-hover: #{$button-danger-color-hover};
+}
+
+.button {
+  border: .1rem solid;
+  border-radius: .4rem;
+  cursor: pointer;
+  font-family: var(--font-family-main);
+  font-size: inherit;
+  display: inline-block;
+  margin: 0;
+  padding: var(--spacer-xxs) var(--spacer-xs);
+  text-align: center;
+  text-decoration: none;
+  transition: .25s;
+
+  &:focus,
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.button-primary {
+  background: var(--button-primary-bg);
+  border-color: var(--button-primary-bg);
+  color: var(--button-primary-color);
+
+  &:focus,
+  &:hover {
+    background: var(--button-primary-bg-hover);
+    border-color: var(--button-primary-bg-hover);
+    color: var(--button-primary-color-hover);
+  }
+}
+
+.button-secondary {
+  background: var(--button-secondary-bg);
+  color: var(--button-secondary-color);
+
+  &:focus,
+  &:hover {
+    background: var(--button-secondary-bg-hover);
+    border-color: var(--button-secondary-bg-hover);
+    color: var(--button-secondary-color-hover);
+  }
+}
+
+.button-ghost {
+  background: var(--button-ghost-bg);
+  border-color: var(--button-ghost-color);
+  color: var(--button-ghost-color);
+
+  &:focus,
+  &:hover {
+    background: var(--button-ghost-bg-hover);
+    border-color: var(--button-ghost-bg-hover);
+    color: var(--button-ghost-color-hover);
+  }
+}
+
+.button-save {
+  background: var(--button-save-bg);
+  border-color: var(--button-save-bg);
+  color: var(--button-save-color);
+
+  &:focus,
+  &:hover {
+    background: var(--button-save-bg-hover);
+    color: var(--button-save-color-hover);
+  }
+}
+
+.button-danger {
+  background: var(--button-danger-bg);
+  border-color: var(--button-danger-bg);
+  color: var(--button-danger-color);
+
+  &:focus,
+  &:hover {
+    background: var(--button-danger-bg-hover);
+    color: var(--button-danger-color-hover);
+  }
+}
