@@ -9,15 +9,11 @@
 <article>
   <h1><%= t('admin.codes.index.heading') %></h1>
 
-  <ul class="actions">
-    <li><%= return_icon(admin_user_path(id: @entity.id)) %></li>
-  </ul>
-
   <%= render partial: 'shared/admin/list', locals: { collection: @collection } %>
 
   <section>
     <h2><%= t('codes.new.title') %></h2>
 
-    <%= render partial: 'codes/form', locals: { entity: @entity.codes.new } %>
+    <%= render partial: 'admin/codes/form', locals: { entity: @entity.codes.new } %>
   </section>
 </article>

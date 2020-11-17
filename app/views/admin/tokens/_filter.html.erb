@@ -12,6 +12,6 @@
 
       <%= render partial: 'shared/filter/flag', locals: { title: t('activerecord.attributes.token.active'), name: :active, state: filter[:active] } %>
 
-      <div class="button"><%= button_tag t(:submit), type: :submit, name: '' %></div>
+      <div class="button"><%= button_tag t(:submit), name: nil %></div>
     </fieldset>
 <% end %>

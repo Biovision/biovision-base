@@ -7,16 +7,13 @@
 <article>
   <h1><%= t('.heading') %></h1>
   <ul class="actions">
-    <li><%= back_icon(admin_path) %></li>
-    <li><%= create_icon(new_editable_page_path) %></li>
+    <li><%= create_icon(new_admin_editable_page_path) %></li>
   </ul>
 
   <%=
     render(
         partial: 'shared/admin/list_with_priority',
-        locals: {
-            collection: @collection
-        }
+        locals: { collection: @collection }
     )
   %>
 </article>

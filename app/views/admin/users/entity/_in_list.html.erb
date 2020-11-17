@@ -48,7 +48,7 @@
   <%= render(partial: 'shared/admin/toggle', locals: { entity: entity }) %>
 
   <ul class="actions">
-    <li><%= edit_icon(edit_user_path(id: entity.id)) %></li>
+    <li><%= edit_icon(entity) %></li>
     <li><%= world_icon(user_profile_path(slug: entity.screen_name)) %></li>
   </ul>
 </div>

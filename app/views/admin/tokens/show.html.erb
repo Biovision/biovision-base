@@ -9,35 +9,15 @@
   <h1><%= @entity.token %></h1>
 
   <ul class="actions">
-    <li><%= return_icon(admin_tokens_path) %></li>
-    <li><%= edit_icon(edit_token_path(id: @entity.id)) %></li>
+    <li><%= edit_icon(@entity) %></li>
     <li class="danger"><%= destroy_icon(@entity) %></li>
   </ul>
 
-  <dl>
-    <dt><%= t('activerecord.attributes.token.user') %></dt>
-    <dd><%= admin_entity_link(@entity.user) %></dd>
-
-    <% unless @entity.last_used.nil? %>
-        <dt><%= t('activerecord.attributes.token.last_used') %></dt>
-        <dd><%= time_tag @entity.last_used %></dd>
-    <% end %>
-
-    <dt><%= t(:created_at) %></dt>
-    <dd><%= time_tag @entity.created_at %></dd>
-
-    <dt><%= t(:updated_at) %></dt>
-    <dd><%= time_tag @entity.updated_at %></dd>
-
-    <% unless @entity.ip.blank? %>
-        <dt><%= t('tracking.ip') %></dt>
-        <dd><%= @entity.ip %></dd>
-    <% end %>
-
-    <% unless @entity.agent.blank? %>
-        <dt><%= t('tracking.agent') %></dt>
-        <dd><%= @entity.agent.name %></dd>
-    <% end %>
+  <dl class="fields">
+    <%= render partial: 'shared/entity/linked_entity', locals: { entity: @entity.user } %>
+    <%= render partial: 'shared/entity/time_field', locals: { entity: @entity, field: :last_used } %>
+    <%= render partial: 'shared/entity/timestamps', locals: { entity: @entity } %>
+    <%= render partial: 'shared/entity/track', locals: { entity: @entity } %>
   </dl>
 
   <%= render(partial: 'shared/admin/toggle', locals: { entity: @entity }) %>

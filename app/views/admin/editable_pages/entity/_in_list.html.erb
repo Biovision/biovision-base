@@ -25,9 +25,9 @@
   <%= render(partial: 'shared/admin/toggle', locals: { entity: entity }) %>
 
   <ul class="actions">
-    <li><%= edit_icon(edit_editable_page_path(id: entity.id)) %></li>
+    <li><%= edit_icon(entity) %></li>
     <% unless entity.url.blank? %>
-      <li><%= world_icon(entity.url, t(:view_as_visitor), locale: entity.language&.code) %></li>
+      <li><%= world_icon(entity) %></li>
     <% end %>
     <%= render(partial: 'shared/admin/priority', locals: { entity: entity }) %>
   </ul>

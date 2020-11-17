@@ -9,7 +9,6 @@
   <h1><%= @entity.long_slug %></h1>
 
   <ul class="actions">
-    <li><%= back_icon(admin_foreign_users_path) %></li>
     <li class="danger"><%= destroy_icon(@entity) %></li>
   </ul>
 
@@ -20,44 +19,54 @@
     </figcaption>
   </figure>
 
-  <dl>
-    <dt><%= t('activerecord.attributes.foreign_user.foreign_site') %></dt>
-    <dd><%= @entity.foreign_site.name %></dd>
+  <dl class="fields">
+    <div>
+      <dt><%= @entity.class.human_attribute_name(:foreign_site) %></dt>
+      <dd><%= @entity.foreign_site.name %></dd>
+    </div>
 
-    <dt><%= t('activerecord.attributes.foreign_user.slug') %></dt>
-    <dd><%= @entity.slug %></dd>
+    <%= render partial: 'shared/entity/slug', locals: { entity: @entity } %>
 
-    <dt><%= t('activerecord.attributes.foreign_user.user') %></dt>
-    <dd><%= admin_entity_link(@entity.user) %></dd>
+    <div>
+      <dt><%= @entity.class.human_attribute_name(:user) %></dt>
+      <dd><%= admin_entity_link(@entity.user) %></dd>
+    </div>
 
-    <% unless @entity.name.blank? %>
-      <dt><%= t('activerecord.attributes.foreign_user.name') %></dt>
-      <dd><%= @entity.name %></dd>
-    <% end %>
+    <%= render partial: 'shared/entity/text_field', locals: { entity: @entity, field: :name } %>
 
     <% unless @entity.email.blank? %>
-      <dt><%= t('activerecord.attributes.foreign_user.email') %></dt>
-      <dd><%= link_to @entity.email, "mailto:#{@entity.email}" %></dd>
+      <div>
+        <dt><%= @entity.class.human_attribute_name(:email) %></dt>
+        <dd><%= link_to @entity.email, "mailto:#{@entity.email}" %></dd>
+      </div>
     <% end %>
 
     <% unless @entity.ip.blank? %>
-      <dt><%= t('activerecord.attributes.foreign_user.ip') %></dt>
-      <dd><%= @entity.ip %></dd>
+      <div>
+        <dt><%= @entity.class.human_attribute_name(:ip) %></dt>
+        <dd><%= @entity.ip %></dd>
+      </div>
     <% end %>
 
     <% unless @entity.agent.blank? %>
-      <dt><%= t('activerecord.attributes.foreign_user.agent') %></dt>
-      <dd><%= @entity.agent.name %></dd>
+      <div>
+        <dt><%= @entity.class.human_attribute_name(:agent) %></dt>
+        <dd><%= @entity.agent.name %></dd>
+      </div>
     <% end %>
 
-    <dt><%= t(:created_at) %></dt>
-    <dd><%= time_tag @entity.created_at %></dd>
+    <div>
+      <dt><%= t(:created_at) %></dt>
+      <dd><%= time_tag @entity.created_at %></dd>
+    </div>
 
-    <dt><%= t('activerecord.attributes.foreign_user.data') %></dt>
-    <dd>
-      <% JSON.parse(@entity.data).each do |k, v| %>
-        <%= "#{k}: #{v}" %><br/>
-      <% end %>
-    </dd>
+    <div>
+      <dt><%= @entity.class.human_attribute_name(:data) %></dt>
+      <dd>
+        <% JSON.parse(@entity.data).each do |k, v| %>
+          <%= "#{k}: #{v}" %><br/>
+        <% end %>
+      </dd>
+    </div>
   </dl>
 </article>

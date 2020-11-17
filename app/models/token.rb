@@ -1,4 +1,5 @@
 class Token < ApplicationRecord
+  include Checkable
   include HasOwner
   include Toggleable
 

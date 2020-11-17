@@ -13,6 +13,7 @@
 #   - updated_at [DateTime]
 #   - user_id [User], optional
 class Code < ApplicationRecord
+  include Checkable
   include HasOwner
 
   BODY_LIMIT     = 50

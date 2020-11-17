@@ -1,0 +1,46 @@
+<%
+  # smelly WIP
+  model = f.object.class
+  type ||= model.type_for_attribute(field).type
+  validators = model.validators_on(field)
+  length_options = validators.select { |v| v.kind == :length }.first&.options.to_h
+  range_option = validators.select { |v| v.kind == :inclusion }.first&.options.to_h
+  options = {
+      class: 'input-text',
+      data: { check: field }.merge(local_assigns[:data].to_h),
+      maxlength: length_options[:maximum],
+      minlength: length_options[:minimum],
+      required: validators.select { |v| v.kind == :presence }.any?,
+      size: nil
+  }
+  guide_key = "#{controller_path.gsub('/', '.')}.form.guidelines.#{field}"
+%>
+<div>
+  <dt><%= f.label field %></dt>
+  <dd>
+    <% case type %>
+    <% when :number %>
+      <%= f.number_field(field, options.merge(in: range_option[:in]).merge(local_assigns[:options].to_h)) %>
+    <% when :float %>
+      <%= f.number_field(field, options.merge(step: :any, in: range_option[:in]).merge(local_assigns[:options].to_h)) %>
+    <% when :text %>
+      <%= f.text_area(field, options.merge(rows: 20, cols: 80).merge(local_assigns[:options].to_h)) %>
+    <% when :date %>
+      <%= f.date_field(field, options.merge(local_assigns[:options].to_h)) %>
+    <% when :datetime %>
+      <%= f.datetime_field(field, options.merge(local_assigns[:options].to_h)) %>
+    <% when :url %>
+      <%= f.url_field(field, options.merge(local_assigns[:options].to_h)) %>
+    <% when :email %>
+      <%= f.email_field(field, options.merge(local_assigns[:options].to_h)) %>
+    <% when :phone %>
+      <%= f.phone_field(field, options.merge(local_assigns[:options].to_h)) %>
+    <% else %>
+      <%= f.text_field(field, options.merge(local_assigns[:options].to_h)) %>
+    <% end %>
+    <div class="check-result-error" data-field="<%= field %>"></div>
+    <% if I18n.exists?(guide_key) %>
+      <div class="guideline"><%= t(guide_key) %></div>
+    <% end %>
+  </dd>
+</div>

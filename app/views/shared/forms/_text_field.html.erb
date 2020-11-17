@@ -1,16 +1,15 @@
 <%
-  model = f.object.class
-  validators = model.validators_on(field)
+  validators = f.object.class.validators_on(field)
   length_options = validators.select { |v| v.kind == :length }.first&.options.to_h
   options = {
       class: 'input-text',
       data: { check: field }.merge(local_assigns[:data].to_h),
-      manlength: length_options[:maximum],
+      maxlength: length_options[:maximum],
       minlength: length_options[:minimum],
       required: validators.select { |v| v.kind == :presence }.any?,
       size: nil
   }
-  guide_key = "#{model.table_name}.form.guidelines.#{field}"
+  guide_key = "#{controller_path.gsub('/', '.')}.form.guidelines.#{field}"
 %>
 <div>
   <dt><%= f.label field %></dt>

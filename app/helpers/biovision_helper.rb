@@ -16,6 +16,25 @@ module BiovisionHelper
     link_to(text, href, options)
   end
 
+  # @param [ApplicationRecord] entity
+  # @param [String] text
+  # @param [Hash] options
+  def entity_link(entity, text = nil, options = {})
+    return '' if entity.nil?
+
+    if text.nil?
+      text = entity.respond_to?(:text_for_link) ? entity.text_for_link : entity.id
+    end
+
+    href = if entity.respond_to?(:world_url)
+             entity.world_url
+           else
+             "/#{entity.class.table_name}/#{entity.id}"
+           end
+
+    link_to(text, href, options)
+  end
+
   # @param [Integer] year
   # @param [Integer] month
   def title_for_archive(year, month)
@@ -29,17 +48,22 @@ module BiovisionHelper
     end
   end
 
-  # @param [String] path
+  # @param [String|ApplicationRecord] path
   # @param [String] title
   # @param [Hash] options
   def world_icon(path, title = t(:view_as_visitor), options = {})
+    if path.is_a? ApplicationRecord
+      table_name = path.class.table_name
+      path = path.respond_to?(:world_url) ? path.world_url : "/#{table_name}/#{path.id}"
+    end
     icon_with_link('biovision/base/icons/world.svg', path, title, options)
   end
 
-  # @param [String] path
+  # @param [String|ApplicationRecord] path
   # @param [String] title
   # @param [Hash] options
   def gear_icon(path, title = t(:view_as_administrator), options = {})
+    path = "/admin/#{path.class.table_name}/#{path.id}" if path.is_a? ApplicationRecord
     icon_with_link('biovision/base/icons/gear.svg', path, title, options)
   end
 
@@ -64,31 +88,23 @@ module BiovisionHelper
     icon_with_link('biovision/base/icons/return.svg', path, title, options)
   end
 
-  # @param [String] path
+  # @param [String|ApplicationRecord] path
   # @param [String] title
   # @param [Hash] options
   def edit_icon(path, title = t(:edit), options = {})
+    path = "/admin/#{path.class.table_name}/#{path.id}/edit" if path.is_a? ApplicationRecord
     icon_with_link('biovision/base/icons/edit.svg', path, title, options)
   end
 
-  # @param [ApplicationRecord] entity
+  # @param [String|ApplicationRecord] path
   # @param [String] title
   # @param [Hash] options
-  def destroy_icon(entity, title = t(:delete), options = {})
+  def destroy_icon(path, title = t(:delete), options = {})
+    path = "/admin/#{path.class.table_name}/#{path.id}" if path.is_a? ApplicationRecord
     default = {
+      class: 'danger',
       method: :delete,
-      data:   { confirm: t(:are_you_sure), tootik: title, tootik_conf: 'danger' }
-    }
-    icon_with_link('biovision/base/icons/destroy.svg', entity, title, default.merge(options))
-  end
-
-  # @param [String] path
-  # @param [String] title
-  # @param [Hash] options
-  def destroy_path_icon(path, title = t(:delete), options = {})
-    default = {
-      method: :delete,
-      data:   { confirm: t(:are_you_sure), tootik: title, tootik_conf: 'danger' }
+      data: { confirm: t(:are_you_sure), tootik: title, tootik_conf: 'danger' }
     }
     icon_with_link('biovision/base/icons/destroy.svg', path, title, default.merge(options))
   end

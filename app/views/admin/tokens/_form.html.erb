@@ -1,0 +1,32 @@
+<%= form_with(Biovision::Components::BaseComponent.form_options(entity)) do |f| %>
+  <%= render partial: 'shared/list_of_errors', locals: { entity: entity } %>
+
+  <dl class="fields">
+    <% if entity.id.blank? %>
+      <div>
+        <dt><%= f.label :user_id %></dt>
+        <dd>
+          <%=
+            f.number_field(
+                :user_id,
+                in: User.ids_range
+            )
+          %>
+          <%= render partial: 'admin/users/search', locals: { target_id: 'token_user_id' } %>
+        </dd>
+      </div>
+    <% else %>
+      <%= render partial: 'shared/entity/linked_entity', locals: { entity: entity.user } %>
+      <%= render partial: 'shared/entity/text_field', locals: { entity: entity, field: :token } %>
+    <% end %>
+
+    <%= render partial: 'shared/forms/entity_flags', locals: { f: f } %>
+  </dl>
+
+  <%= render 'shared/forms/state_container' %>
+
+  <div class="buttons">
+    <%= hidden_field_tag :entity_id, entity.id %>
+    <%= f.button t(:save), class: 'button button-save' %>
+  </div>
+<% end %>

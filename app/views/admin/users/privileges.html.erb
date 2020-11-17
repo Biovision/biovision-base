@@ -8,10 +8,6 @@
 <article>
   <h1><%= @entity.profile_name %></h1>
 
-  <ul class="actions">
-    <li><%= return_icon(admin_user_path(id: @entity.id)) %></li>
-  </ul>
-
   <section>
     <h2><%= t('.heading') %></h2>
 
@@ -19,6 +15,7 @@
       <%
         handler = Biovision::Components::BaseComponent.handler(component, current_user)
         next unless handler.administrator?
+
         context_handler = handler.clone
         context_handler.user = @entity
       %>

@@ -104,4 +104,8 @@ class EditablePage < ApplicationRecord
   def editable_by?(user)
     Biovision::Components::ContentComponent[user].allow?
   end
+
+  def world_url
+    url.blank? ? '/' : url
+  end
 end

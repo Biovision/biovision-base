@@ -9,14 +9,13 @@
   <h1><%= @entity.name %></h1>
 
   <ul class="actions">
-    <li><%= back_icon(admin_editable_pages_path) %></li>
     <% unless @entity.url.blank? %>
-      <li><%= world_icon(@entity.url, t(:view_as_visitor), locale: @entity.language&.code) %></li>
+      <li><%= world_icon(@entity) %></li>
     <% end %>
-    <li><%= edit_icon(edit_editable_page_path(id: @entity.id)) %></li>
+    <li><%= edit_icon(@entity) %></li>
   </ul>
 
-  <dl>
+  <dl class="fields">
     <% unless @entity.language.nil? %>
       <dt><%= t('activerecord.attributes.editable_page.language') %></dt>
       <dd><%= language_name(@entity.language) %></dd>

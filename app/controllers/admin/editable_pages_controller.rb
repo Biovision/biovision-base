@@ -3,10 +3,11 @@
 # Administrative part of editable_pages management
 class Admin::EditablePagesController < AdminController
   include ListAndShowEntities
+  include CreateAndModifyEntities
   include EntityPriority
   include ToggleableEntity
 
-  before_action :set_entity, except: :index
+  before_action :set_entity, except: %i[check create index new]
 
   private
 

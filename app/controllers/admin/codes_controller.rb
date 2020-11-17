@@ -3,8 +3,9 @@
 # Handling user codes
 class Admin::CodesController < AdminController
   include ListAndShowEntities
+  include CreateAndModifyEntities
 
-  before_action :set_entity, except: :index
+  before_action :set_entity, except: %i[check create index new]
 
   protected
 

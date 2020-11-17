@@ -1,21 +1,17 @@
 <%
-  table_name = @entity.class.table_name
-  model_name = @entity.class.model_name.human
-  content_for :meta_title, t("#{controller_name}.edit.title", default: :'.title', model: model_name)
+  prefix = controller_path.gsub('/', '.')
+  default_title = "#{@entity.class.model_name.human}: #{t('.nav_text')}"
 %>
+<% content_for :meta_title, t("#{prefix}.edit.title", default: default_title) %>
 <% content_for :breadcrumbs do %>
   <%= admin_biovision_component_link(component_handler.component) %>
-  <%= link_to(t("admin.#{table_name}.nav_item.text"), "/admin/#{table_name}") %>
+  <%= link_to(t("#{prefix}.nav_item.text"), "/#{controller_path}") %>
   <%= admin_entity_link(@entity) %>
   <span><%= t('.nav_text') %></span>
 <% end %>
 
 <article>
-  <h1><%= t("#{controller_name}.edit.heading", default: :'.title', model: model_name) %></h1>
+  <h1><%= t("#{prefix}.edit.heading", default: default_title) %></h1>
 
-  <ul class="actions">
-    <li class="danger"><%= destroy_icon(@entity) %></li>
-  </ul>
-
-  <%= render partial: "#{controller_name}/form", locals: { entity: @entity } %>
+  <%= render partial: "#{controller_path}/form", locals: { entity: @entity } %>
 </article>

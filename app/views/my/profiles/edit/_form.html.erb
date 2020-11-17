@@ -11,7 +11,7 @@
   <section>
     <h2><%= t('.common_parameters') %></h2>
 
-    <dl>
+    <dl class="fields">
       <div>
         <dt>
           <%= t('activerecord.attributes.user.image') %>
@@ -90,7 +90,7 @@
 
     <div class="guideline"><%= t('.sensitive_parameters_notice') %></div>
 
-    <dl>
+    <dl class="fields">
       <div>
         <dt>
           <%= label_tag :password, t('.current_password') %>
@@ -135,7 +135,7 @@
     </dl>
 
     <div class="guideline"><%= t('.leave_blank_if_necessary') %></div>
-    <dl>
+    <dl class="fields">
       <div>
         <dt>
           <%= label_tag :profile_password, t('.new_password') %>

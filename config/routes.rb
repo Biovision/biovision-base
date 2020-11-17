@@ -17,19 +17,10 @@ Rails.application.routes.draw do
     delete :image, action: :destroy_image, on: :member, defaults: { format: :json }
   end
 
-  concern :lock do
-    member do
-      put :lock, defaults: { format: :json }
-      delete :lock, action: :unlock, defaults: { format: :json }
-    end
-  end
-
-  resources :editable_pages, only: %i[update destroy]
   resources :simple_blocks, only: %i[update destroy]
 
   resources :users, only: %i[update destroy]
-  resources :foreign_users, only: :destroy
-  resources :tokens, :codes, only: %i[update destroy]
+  resources :tokens, only: %i[update destroy]
 
   resources :feedback_requests, only: :destroy
 
@@ -88,13 +79,13 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :codes, only: %i[index show]
-      resources :tokens, only: %i[index show], concerns: :toggle
+      resources :codes, concerns: :check
+      resources :tokens, concerns: %i[check toggle]
 
-      resources :editable_pages, only: %i[index show], concerns: %i[priority toggle]
-      resources :simple_blocks, only: %i[index show], concerns: :toggle
+      resources :editable_pages, concerns: %i[check priority toggle]
+      resources :simple_blocks, concerns: %i[check toggle]
 
-      resources :users, only: %i[index show], concerns: :toggle do
+      resources :users, concerns: %i[check toggle] do
         collection do
           get 'search', defaults: { format: :json }
         end
@@ -108,7 +99,7 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :foreign_users, only: %i[index show]
+      resources :foreign_users, only: %i[destroy index show]
 
       resources :login_attempts, only: :index
 
@@ -138,12 +129,6 @@ Rails.application.routes.draw do
       get 'followers' => 'social#followers'
       get 'followees' => 'social#followees'
     end
-
-    resources :editable_pages, except: %i[index show update destroy], concerns: :check
-    resources :simple_blocks, only: %i[new create edit], concerns: :check
-
-    resources :users, except: %i[index show update destroy], concerns: :check
-    resources :tokens, :codes, except: %i[index show update destroy]
 
     resources :feedback_requests, only: :create
 

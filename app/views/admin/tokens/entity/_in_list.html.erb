@@ -3,21 +3,22 @@
   <div><%= admin_entity_link(entity) %></div>
   <div class="info">
     <% unless entity.last_used.nil? %>
-        <div>
-          <%= t('activerecord.attributes.token.last_used') %>
-          <%= time_tag entity.last_used %>
-        </div>
+      <div>
+        <%= t('activerecord.attributes.token.last_used') %>
+        <%= time_tag entity.last_used %>
+      </div>
     <% end %>
   </div>
   <div class="secondary info">
     <div><%= entity.ip %></div>
     <% unless entity.agent.blank? %>
-        <div class="truncate"><%= entity.agent.name %></div>
+      <div class="truncate"><%= entity.agent.name %></div>
     <% end %>
   </div>
   <%= render(partial: 'shared/admin/toggle', locals: { entity: entity }) %>
 
   <ul class="actions">
-    <li><%= edit_icon edit_token_path(id: entity.id) %></li>
+    <li><%= edit_icon entity %></li>
+    <li><%= destroy_icon entity %></li>
   </ul>
 </div>

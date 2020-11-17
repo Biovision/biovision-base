@@ -142,6 +142,8 @@ ru:
         title: "Внешние пользователи, страница %{page}"
       show:
         title: "Внешний пользователь %{slug}"
+      destroy:
+        success: "Сторонний пользователь успешно удалён"
     users:
       nav_item:
         text: "Пользователи"
@@ -168,6 +170,20 @@ ru:
       entity:
         in_list:
           foreign_users: "Внешние пользователи"
+      create:
+        success: "Пользователь успешно создан"
+      update:
+        success: "Пользователь успешно изменён"
+      destroy:
+        success: "Пользователь успешно удалён"
+      edit:
+        title: "Редактирование пользователя"
+        heading: "Редактирование пользователя"
+      new:
+        title: "Добавить пользователя"
+        heading: "Добавить пользователя"
+      user:
+        account_data: "Данные аккаунта"
     tokens:
       nav_item:
         text: "Жетоны доступа (сессии пользователей)"
@@ -177,6 +193,14 @@ ru:
         heading: "Жетоны доступа (сессии пользователей)"
       show:
         title: "Жетон №%{id}"
+      update:
+        success: "Жетон успешно обновлён"
+      destroy:
+        success: "Жетон успешно удалён"
+      new:
+        title: "Добавить жетон"
+      edit:
+        title: "Редактирование жетона"
     codes:
       nav_item:
         text: "Коды"
@@ -186,33 +210,14 @@ ru:
         heading: "Коды"
       show:
         title: "Код «%{body}»"
-    privileges:
-      nav_item:
-        text: "Привилегии пользователей"
-        description: "Управление привилегиями пользователей"
-      index:
-        title: "Привилегии"
-        heading: "Привилегии пользователей"
-      show:
-        title: "Привилегия «%{name}»"
-        children: "Дочерние привилегии"
-        add_child: "Добавить дочернюю привилегию"
-      users:
-        title: "Пользователи с привилегией «%{privilege}», страница %{page}"
-        heading: "Пользователи с привилегией"
-      entity:
-        groups:
-          heading: "Группы привилегий"
-    privilege_groups:
-      nav_item:
-        text: "Группы привилегий"
-        description: "Управление группами привилегий"
-      index:
-        title: "Группы привилегий"
-        heading: "Группы привилегий"
-      show:
-        title: "Группа привилегий «%{name}»"
-        privileges: "Привилегии"
+      update:
+        success: "Код успешно обновлён"
+      destroy:
+        success: "Код успешно удалён"
+      edit:
+        title: "Редактирование кода"
+      new:
+        title: "Новый код"
     login_attempts:
       index:
         title: "Попытки входа, страница %{page}"
@@ -235,23 +240,6 @@ ru:
       log_in: "Войти"
       login: "Логин"
   users:
-    create:
-      success: "Пользователь успешно создан"
-    update:
-      success: "Пользователь успешно изменён"
-    destroy:
-      success: "Пользователь успешно удалён"
-    edit:
-      title: "Редактирование пользователя"
-      heading: "Редактирование пользователя"
-    new:
-      title: "Добавить пользователя"
-      heading: "Добавить пользователя"
-    user:
-      account_data: "Данные аккаунта"
-    index:
-      title: "Пользователи сайта, страница %{page}"
-      heading: "Пользователи сайта"
     form:
       guidelines:
         notice: "Заметка для себя и других администраторов"
@@ -260,24 +248,7 @@ ru:
     profile:
       user_info: "Информация о пользователе"
       registration_date: "Дата регистрации"
-  tokens:
-    update:
-      success: "Жетон успешно обновлён"
-    destroy:
-      success: "Жетон успешно удалён"
-    new:
-      title: "Добавить жетон"
-    edit:
-      title: "Редактирование жетона"
   codes:
-    update:
-      success: "Код успешно обновлён"
-    destroy:
-      success: "Код успешно удалён"
-    edit:
-      title: "Редактирование кода"
-    new:
-      title: "Новый код"
     form:
       guidelines:
         body: "Максимум 50 символов. Должен быть уникальным."
@@ -287,41 +258,6 @@ ru:
       subject: "Подтверждение адреса электронной почты"
     password:
       subject: "Сброс пароля"
-  privileges:
-    new:
-      title: "Новая привилегия"
-    edit:
-      title: "Редактирование привилегии"
-      forbidden: "Редактирование этой привилегии запрещено"
-    update:
-      success: "Привилегия успешно изменена"
-    destroy:
-      success: "Привилегия успешно удалена"
-    form:
-      guidelines:
-        name: "До 250 символов."
-        slug: "Используется в коде для определения наличия привилегии. До 250 символов."
-        description: "Краткое пояснение сути привилегии. До 350 символов."
-      placeholders:
-        slug: "administrator"
-  privilege_groups:
-    new:
-      title: "Новая группа привилегий"
-      heading: "Новая группа привилегий"
-    edit:
-      title: "Редактирование группы привилегий"
-      heading: "Редактирование группы привилегий"
-    update:
-      success: "Группа успешно изменена"
-    destroy:
-      success: "Группа успешно удалена"
-    form:
-      guidelines:
-        slug: "Используется в коде для пользователей."
-        description: "Краткое пояснение сути группы. До 350 символов."
-      placeholders:
-        name: "Редакторы"
-        slug: "editors"
   my:
     index:
       index:
@@ -416,6 +352,3 @@ ru:
       greeting: "Здравствуйте, %{name}"
       message: "Кто-то бесуспешно пытается войти от вашего имени. В целях безопасности возможность входа заблокирована на 15 минут."
       you_can_recover_password: "Если это вы забыли свой пароль, его можно восстановить по этой ссылке"
-  foreign_users:
-    destroy:
-      success: "Сторонний пользователь успешно удалён"

@@ -8,6 +8,6 @@
   <%= render(partial: 'shared/admin/toggle', locals: { entity: entity }) %>
 
   <ul class="actions">
-    <li><%= edit_icon(edit_simple_block_path(id: entity.id)) %></li>
+    <li><%= edit_icon(entity) %></li>
   </ul>
 </div>

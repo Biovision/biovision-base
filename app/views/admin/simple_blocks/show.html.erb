@@ -9,33 +9,33 @@
   <h1><%= @entity.slug %></h1>
 
   <ul class="actions">
-    <li><%= back_icon(admin_simple_blocks_path) %></li>
-    <li><%= edit_icon(edit_simple_block_path(id: @entity.id)) %></li>
+    <li><%= edit_icon(@entity) %></li>
+    <li><%= destroy_icon(@entity) %></li>
   </ul>
 
-  <dl>
+  <dl class="fields">
     <% unless @entity.image.blank? %>
-      <dt><%= t('activerecord.attributes.simple_block.image') %></dt>
-      <dd>
-        <figure role="group" class="preview">
-          <%= simple_image_medium(@entity) %>
-          <figcaption><%= @entity.image_alt_text %></figcaption>
-        </figure>
-      </dd>
+      <div>
+        <dt><%= t('activerecord.attributes.simple_block.image') %></dt>
+        <dd>
+          <figure role="group" class="preview">
+            <%= simple_image_medium(@entity) %>
+            <figcaption><%= @entity.image_alt_text %></figcaption>
+          </figure>
+        </dd>
+      </div>
     <% end %>
 
-    <dt><%= t('activerecord.attributes.simple_block.slug') %></dt>
-    <dd><%= @entity.slug %></dd>
+    <%= render partial: 'shared/entity/text_fields', locals: { entity: @entity, list: %w[slug name]} %>
 
-    <dt><%= t('activerecord.attributes.simple_block.name') %></dt>
-    <dd><%= @entity.name %></dd>
-
-    <dt><%= t('activerecord.attributes.simple_block.body') %></dt>
-    <dd>
-      <div class="text">
-        <%= @entity.body %>
-      </div>
-    </dd>
+    <div>
+      <dt><%= t('activerecord.attributes.simple_block.body') %></dt>
+      <dd>
+        <div class="text">
+          <%= @entity.body %>
+        </div>
+      </dd>
+    </div>
 
     <%= render partial: 'shared/entity/timestamps', locals: { entity: @entity } %>
   </dl>

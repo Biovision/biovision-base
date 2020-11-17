@@ -1,0 +1,81 @@
+<% model_name = entity.class.to_s.underscore %>
+<%= form_with(Biovision::Components::BaseComponent.form_options(entity)) do |f| %>
+  <%= render partial: 'shared/list_of_errors', locals: { entity: entity } %>
+
+  <dl class="fields">
+    <%=
+      render(
+          partial: 'shared/forms/text_field',
+          locals: {
+              f: f,
+              field: :slug,
+              options: { pattern: SimpleBlock::SLUG_PATTERN_HTML }
+          }
+      )
+    %>
+
+    <%= render partial: 'shared/forms/text_field', locals: { f: f, field: :name } %>
+
+    <div>
+      <dt><%= f.label :body %></dt>
+      <dd>
+        <div class="wysiwyg-button-container">
+          <button
+            type="button"
+            class="js-wysiwyg-toggle button button-primary"
+            data-element="<%= model_name %>_body"
+            data-upload-url="/media_files/ckeditor"
+          >
+            WYSIWYG
+          </button>
+        </div>
+        <%=
+          f.text_area(
+              :body,
+              cols: 80,
+              data: { check: :body },
+              rows: 10
+          )
+        %>
+        <div class="check-result-error" data-field="body"></div>
+        <div class="guideline"><%= t('simple_blocks.form.guidelines.body') %></div>
+      </dd>
+    </div>
+
+    <div>
+      <dt><%= f.label :image %></dt>
+      <dd>
+        <figure class="preview" role="group" id="<%= model_name %>-image">
+          <% if entity.image.blank? %>
+            <%= f.label :image, image_tag('biovision/base/placeholders/16x9.svg', alt: '') %>
+          <% else %>
+            <%= f.label :image, image_tag(entity.image.medium_url, alt: '') %>
+          <% end %>
+          <figcaption>
+            <%=
+              f.file_field(
+                  :image,
+                  id: "#{model_name}_image",
+                  accept: 'image/jpeg,image/png,image/svg+xml',
+                  data: { image: "#{model_name}-image" }
+              )
+            %>
+          </figcaption>
+        </figure>
+        <div class="guideline"><%= t('simple_blocks.form.guidelines.image') %></div>
+      </dd>
+    </div>
+
+    <%= render partial: 'shared/forms/text_field', locals: { f: f, field: :image_alt_text } %>
+    <%= render partial: 'shared/forms/entity_flags', locals: { f: f } %>
+  </dl>
+
+  <%= render 'shared/forms/state_container' %>
+
+  <div class="buttons">
+    <%= hidden_field_tag :entity_id, entity.id %>
+    <%= f.button t(:save), class: 'button button-save' %>
+  </div>
+<% end %>
+
+<%= render 'shared/forms/toggle_wysiwyg' %>

@@ -5,7 +5,7 @@
   options = {
       class: 'input-text',
       data: { check: field }.merge(local_assigns[:data].to_h),
-      manlength: length_options[:maximum],
+      maxlength: length_options[:maximum],
       minlength: length_options[:minimum],
       required: validators.select { |v| v.kind == :presence }.any?,
       rows: 20,

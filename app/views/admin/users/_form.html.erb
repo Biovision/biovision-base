@@ -1,0 +1,123 @@
+<% model_name = entity.class.to_s.underscore %>
+<%= form_with(Biovision::Components::BaseComponent.form_options(entity)) do |f| %>
+  <%= render partial: 'shared/list_of_errors', locals: { entity: entity } %>
+
+  <dl class="fields">
+    <div>
+      <dt><%= f.label :image %></dt>
+      <dd>
+        <figure id="<%= model_name %>-image" role="group" class="preview">
+          <%= f.label(:image, image_tag(entity.image.profile.url)) %>
+          <figcaption>
+            <%=
+              f.file_field(
+                  :image,
+                  id: "#{model_name}_image",
+                  accept: 'image/jpeg,image/png',
+                  data: { image: "#{model_name}-image" }
+              )
+            %>
+          </figcaption>
+        </figure>
+      </dd>
+    </div>
+
+    <%= render partial: 'shared/forms/text_field', locals: { f: f, field: :screen_name } %>
+
+    <div>
+      <dt><%= f.label :email %></dt>
+      <dd>
+        <%=
+          f.email_field(
+              :email,
+              class: 'input-text',
+              maxlength: User::EMAIL_LIMIT,
+              readonly: entity.super_user?,
+              size: nil
+          )
+        %>
+      </dd>
+    </div>
+
+    <div>
+      <dt><%= f.label :phone %></dt>
+      <dd>
+        <%=
+          f.phone_field(
+              :phone,
+              class: 'input-text',
+              maxlength: User::PHONE_LIMIT,
+              readonly: entity.super_user?,
+              size: 15
+          )
+        %>
+      </dd>
+    </div>
+
+    <div>
+      <dt><%= f.label :birthday %></dt>
+      <dd>
+        <%=
+          f.date_field(
+              :birthday,
+              class: 'input-text',
+              size: 10
+          )
+        %>
+      </dd>
+    </div>
+
+    <% if entity.id.blank? || !entity.super_user? %>
+      <div>
+        <dt><%= f.label :password %></dt>
+        <dd>
+          <%=
+            f.text_field(
+                :password,
+                class: 'input-text',
+                maxlength: 70,
+                required: entity.id.nil?,
+                size: nil
+            )
+          %>
+        </dd>
+      </div>
+
+      <div>
+        <dt><%= f.label :password_confirmation %></dt>
+        <dd>
+          <%=
+            f.text_field(
+                :password_confirmation,
+                class: 'input-text',
+                maxlength: 70,
+                required: entity.id.nil?,
+                size: nil
+            )
+          %>
+        </dd>
+      </div>
+    <% end %>
+
+    <%=
+      render(
+          partial: 'admin/users/form/profile_data',
+          locals: {
+              data: entity.data['profile'].to_h,
+              entity: entity
+          }
+      )
+    %>
+
+    <%= render partial: 'shared/forms/text_field', locals: { f: f, field: :notice } %>
+    <%= render partial: 'shared/forms/entity_flags', locals: { f: f } %>
+  </dl>
+
+  <%= render 'shared/forms/state_container' %>
+
+  <div class="buttons">
+    <%= hidden_field_tag :entity_id, entity.id %>
+    <%= f.hidden_field :consent if entity.id.nil? %>
+    <%= f.button t(:save), class: 'button button-save' %>
+  </div>
+<% end %>

@@ -9,44 +9,28 @@
   <h1><%= @entity.body %></h1>
 
   <ul class="actions">
-    <li><%= back_icon(admin_codes_path) %></li>
-    <li><%= edit_icon(edit_code_path(id: @entity.id)) %></li>
+    <li><%= edit_icon(@entity) %></li>
+    <li><%= destroy_icon(@entity) %></li>
   </ul>
 
-  <dl>
-    <dt><%= t('activerecord.attributes.code.category') %></dt>
-    <dd>
-      <%= @entity.code_type.name %>
-    </dd>
-
-    <dt><%= t('activerecord.attributes.code.user') %></dt>
-    <dd>
-      <%= admin_entity_link @entity.user %>
-    </dd>
-
-    <dt><%= t(:created_at) %></dt>
-    <dd>
-      <%= time_tag(@entity.created_at) %>
-    </dd>
-
-    <% unless @entity.updated_at.nil? %>
-      <dt><%= t(:updated_at) %></dt>
+  <dl class="fields">
+    <div>
+      <dt><%= @entity.class.human_attribute_name(:code_type) %></dt>
       <dd>
-        <%= time_tag(@entity.updated_at) %>
+        <%= @entity.code_type.name %>
       </dd>
-    <% end %>
+    </div>
 
-    <% unless @entity.payload.blank? %>
-      <dt><%= t('activerecord.attributes.code.payload') %></dt>
+    <%= render partial: 'shared/entity/linked_entity', locals: { entity: @entity.user } %>
+    <%= render partial: 'shared/entity/timestamps', locals: { entity: @entity } %>
+    <%= render partial: 'shared/entity/text_field', locals: { entity: @entity, field: :payload } %>
+
+    <div>
+      <dt><%= @entity.class.human_attribute_name(:quantity) %></dt>
       <dd>
-        <%= @entity.payload %>
+        <%= t(:code_activation_count, count: @entity.quantity) %>
       </dd>
-    <% end %>
-
-    <dt><%= t('activerecord.attributes.code.quantity') %></dt>
-    <dd>
-      <%= t(:code_activation_count, count: @entity.quantity) %>
-    </dd>
+    </div>
   </dl>
 
   <%= render partial: 'shared/track', locals: { item: @entity } %>

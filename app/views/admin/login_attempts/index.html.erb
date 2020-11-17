@@ -7,9 +7,5 @@
 <article>
   <h1><%= t('.heading') %></h1>
 
-  <ul class="actions">
-    <li><%= back_icon(admin_path) %></li>
-  </ul>
-
   <%= render partial: 'shared/admin/list', locals: { collection: @collection } %>
 </article>

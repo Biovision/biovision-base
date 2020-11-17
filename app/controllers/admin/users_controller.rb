@@ -4,8 +4,9 @@
 class Admin::UsersController < AdminController
   include Authentication
   include ToggleableEntity
+  include CreateAndModifyEntities
 
-  before_action :set_entity, except: %i[index search]
+  before_action :set_entity, except: %i[check create index new search]
 
   # get /admin/users
   def index
@@ -77,5 +78,29 @@ class Admin::UsersController < AdminController
   def set_entity
     @entity = User.find_by(id: params[:id])
     handle_http_404('Cannot find user') if @entity.nil?
+  end
+
+  def entity_parameters
+    parameters = params.require(:user).permit(User.entity_parameters)
+    parameters.merge(data: @entity&.data.to_h.merge(profile: profile_parameters))
+  end
+
+  def creation_parameters
+    parameters = params.require(:user).permit(User.entity_parameters)
+
+    parameters[:consent] = true
+    parameters[:data]    = { profile: profile_parameters }
+
+    parameters.merge(tracking_for_entity)
+  end
+
+  def profile_parameters
+    if params.key?(:user_profile)
+      permitted = UserProfileHandler.allowed_parameters
+      dirty     = params.require(:user_profile).permit(permitted)
+      UserProfileHandler.clean_parameters(dirty)
+    else
+      {}
+    end
   end
 end

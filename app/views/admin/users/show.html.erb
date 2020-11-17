@@ -16,7 +16,7 @@
     <% unless @entity.deleted? %>
       <li><%= world_icon(user_profile_path(slug: @entity.slug)) %></li>
       <% if component_handler.allow?('edit') %>
-        <li><%= edit_icon(edit_user_path(id: @entity.id)) %></li>
+        <li><%= edit_icon(@entity) %></li>
       <% end %>
     <% end %>
   </ul>

@@ -4,8 +4,9 @@
 class Admin::SimpleBlocksController < AdminController
   include ToggleableEntity
   include ListAndShowEntities
+  include CreateAndModifyEntities
 
-  before_action :set_entity, except: :index
+  before_action :set_entity, except: %i[check create index new]
 
   private
 

@@ -1,6 +1,6 @@
-<div class="image">
+<figure class="image">
   <%= profile_avatar(entity.user) unless entity.user.nil? %>
-</div>
+</figure>
 <div class="data">
   <div>
     <%= entity.code_type.name %>
@@ -19,6 +19,6 @@
   </div>
 
   <ul class="actions">
-    <li><%= edit_icon edit_code_path(id: entity.id) %></li>
+    <li><%= edit_icon(entity) %></li>
   </ul>
 </div>

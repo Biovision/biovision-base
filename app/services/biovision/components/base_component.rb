@@ -31,7 +31,6 @@ module Biovision
       end
 
       # Receive component-specific handler by class name for component.
-      # Class must have defined constant SLUG for this to work.
       #
       # e.g.: Biovision::Components::RegistrationComponent[user]
       #
@@ -53,6 +52,20 @@ module Biovision
 
       def self.setting_steps
         {}
+      end
+
+      # @param [ApplicationRecord] entity
+      def self.form_options(entity)
+        table_name = entity.class.table_name
+        {
+          model: entity,
+          url: "/admin/#{table_name}/#{entity.id}",
+          method: entity.id.nil? ? :post : :patch,
+          html: {
+            id: "#{entity.class.to_s.underscore}-form",
+            data: { check_url: "/admin/#{table_name}/check" },
+          }
+        }
       end
 
       # @param [User] user

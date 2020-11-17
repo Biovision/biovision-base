@@ -1,0 +1,13 @@
+<% unless entity.ip.blank? %>
+  <div>
+    <dt><%= t('tracking.ip') %></dt>
+    <dd><%= entity.ip %></dd>
+  </div>
+<% end %>
+
+<% unless entity.agent.blank? %>
+  <div>
+    <dt><%= t('tracking.agent') %></dt>
+    <dd><%= entity.agent.name %></dd>
+  </div>
+<% end %>

@@ -11,16 +11,18 @@
       <section id="confirmation-container">
         <h2><%= t('.got_code') %></h2>
         <%= form_with url: my_confirmation_path, method: :patch, local: true do %>
-          <dl>
-            <dt>
-              <%= label_tag :code, t('activerecord.attributes.code.body') %>
-            </dt>
-            <dd>
-              <%= text_field_tag :code, param_from_request(:code), required: true %>
-            </dd>
+          <dl class="fields">
+            <div>
+              <dt>
+                <%= label_tag :code, t('activerecord.attributes.code.body') %>
+              </dt>
+              <dd>
+                <%= text_field_tag :code, param_from_request(:code), class: 'input-text', required: true %>
+              </dd>
+            </div>
           </dl>
           <div>
-            <%= button_tag t('.confirm'), type: :submit %>
+            <%= button_tag t('.confirm') %>
           </div>
         <% end %>
       </section>
@@ -40,7 +42,7 @@
           <h2><%= t('.no_code') %></h2>
           <%= form_with url: my_confirmation_path, method: :post, local: true do %>
             <div>
-              <%= button_tag t('.send_code'), type: :submit %>
+              <%= button_tag t('.send_code') %>
             </div>
           <% end %>
         </section>

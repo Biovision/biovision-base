@@ -1,0 +1,64 @@
+<div>
+  <dt>
+    <%= label_tag :user_profile_name, t('activerecord.attributes.user_profile.name') %>
+  </dt>
+  <dd>
+    <%=
+      text_field_tag(
+          'user_profile[name]',
+          data['name'],
+          class: 'input-text',
+          maxlength: 50,
+          size: nil
+      )
+    %>
+  </dd>
+</div>
+
+<div>
+  <dt>
+    <%= label_tag :user_profile_patronymic, t('activerecord.attributes.user_profile.patronymic') %>
+  </dt>
+  <dd>
+    <%=
+      text_field_tag(
+          'user_profile[patronymic]',
+          data['patronymic'],
+          class: 'input-text',
+          maxlength: 50,
+          size: nil
+      )
+    %>
+  </dd>
+</div>
+
+<div>
+  <dt>
+    <%= label_tag :user_profile_surname, t('activerecord.attributes.user_profile.surname') %>
+  </dt>
+  <dd>
+    <%=
+      text_field_tag(
+          'user_profile[surname]',
+          data['surname'],
+          class: 'input-text',
+          maxlength: 50,
+          size: nil
+      )
+    %>
+  </dd>
+</div>
+
+<div>
+  <dt>
+    <%= label_tag :user_profile_gender, t('activerecord.attributes.user_profile.gender') %>
+  </dt>
+  <dd>
+    <%=
+      select_tag(
+          'user_profile[gender]',
+          options_for_select(genders_for_select, data['gender'])
+      )
+    %>
+  </dd>
+</div>

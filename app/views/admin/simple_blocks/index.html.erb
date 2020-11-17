@@ -7,16 +7,13 @@
 <article>
   <h1><%= t('.heading') %></h1>
   <ul class="actions">
-    <li><%= back_icon(admin_path) %></li>
-    <li><%= create_icon(new_simple_block_path) %></li>
+    <li><%= create_icon(new_admin_simple_block_path) %></li>
   </ul>
 
   <%=
     render(
         partial: 'shared/admin/list',
-        locals: {
-            collection: @collection
-        }
+        locals: { collection: @collection }
     )
   %>
 </article>

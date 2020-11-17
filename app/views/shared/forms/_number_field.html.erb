@@ -1,6 +1,5 @@
 <%
-  model = f.object.class
-  validators = model.validators_on(field)
+  validators = f.object.class.validators_on(field)
   range_option = validators.select { |v| v.kind == :inclusion }.first&.options.to_h
   options = {
       class: 'input-text',
@@ -8,8 +7,8 @@
       in: range_option[:in],
       required: validators.select { |v| v.kind == :presence }.any?,
       size: nil
-  }.merge(local_assigns[:options].to_h)
-  guide_key = "#{model.table_name}.form.guidelines.#{field}"
+  }
+  guide_key = "#{controller_path.gsub('/', '.')}.form.guidelines.#{field}"
 %>
 <div>
   <dt><%= f.label field %></dt>
