@@ -69,7 +69,7 @@ form {
     padding: var(--spacer-xxs) 0;
   }
 
-  input:not([type=radio]):not([type=checkbox]):not([size]),
+  input:not([type=radio]):not([type=checkbox]):not([type=number]):not([size]),
   textarea {
     width: 100%;
   }

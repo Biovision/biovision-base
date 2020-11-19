@@ -19,7 +19,7 @@
   <dt><%= f.label field %></dt>
   <dd>
     <% case type %>
-    <% when :number %>
+    <% when :integer %>
       <%= f.number_field(field, options.merge(in: range_option[:in]).merge(local_assigns[:options].to_h)) %>
     <% when :float %>
       <%= f.number_field(field, options.merge(step: :any, in: range_option[:in]).merge(local_assigns[:options].to_h)) %>

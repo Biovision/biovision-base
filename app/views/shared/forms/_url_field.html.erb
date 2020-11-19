@@ -1,0 +1,23 @@
+<%
+  validators = f.object.class.validators_on(field)
+  length_options = validators.select { |v| v.kind == :length }.first&.options.to_h
+  options = {
+      class: 'input-text',
+      data: { check: field }.merge(local_assigns[:data].to_h),
+      maxlength: length_options[:maximum],
+      minlength: length_options[:minimum],
+      required: validators.select { |v| v.kind == :presence }.any?,
+      size: nil
+  }
+  guide_key = "#{controller_path.gsub('/', '.')}.form.guidelines.#{field}"
+%>
+<div>
+  <dt><%= f.label field %></dt>
+  <dd>
+    <%= f.url_field(field, options.merge(local_assigns[:options].to_h)) %>
+    <div class="check-result-error" data-field="<%= field %>"></div>
+    <% if I18n.exists?(guide_key) %>
+      <div class="guideline"><%= t(guide_key) %></div>
+    <% end %>
+  </dd>
+</div>
